@@ -80,7 +80,7 @@ public class CursoController implements Serializable {
         auditoriaCtrl.getSelected().setNuevoValor(nuevo);
         auditoriaCtrl.getSelected().setOperacion(operacion);
         auditoriaCtrl.getSelected().setTabla("Curso");
-        //auditoriaCtrl.ObtenerCorreo();
+        auditoriaCtrl.ObtenerCorreo();
         Date date = new Date();
         long time = date.getTime();
         Timestamp ts = new Timestamp(time);

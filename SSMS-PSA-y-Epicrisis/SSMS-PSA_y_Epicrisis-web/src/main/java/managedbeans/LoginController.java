@@ -6,10 +6,11 @@
 package managedbeans;
 
 import entities.Usuario;
+import java.io.Serializable;
 import java.security.MessageDigest;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -21,8 +22,8 @@ import javax.servlet.http.HttpServletRequest;
  * @author obi
  */
 @Named(value = "loginController")
-@RequestScoped
-public class LoginController {
+@SessionScoped
+public class LoginController implements Serializable{
 
     private String correo;
     private String password;
