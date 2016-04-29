@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="16" failures="0" name="entities.UsuarioTest" time="0.252" errors="0" skipped="0">
+<testsuite tests="16" failures="0" name="entities.UsuarioTest" time="0.591" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_45\jre\bin"/>
@@ -61,20 +61,20 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="entities.UsuarioTest" name="testSetPassword" time="0.237"/>
-  <testcase classname="entities.UsuarioTest" name="testGetPassword" time="0"/>
-  <testcase classname="entities.UsuarioTest" name="testGetCurso" time="0"/>
-  <testcase classname="entities.UsuarioTest" name="testGetId" time="0"/>
-  <testcase classname="entities.UsuarioTest" name="testSetId" time="0"/>
-  <testcase classname="entities.UsuarioTest" name="testCambiarPassword" time="0"/>
-  <testcase classname="entities.UsuarioTest" name="testToString" time="0"/>
-  <testcase classname="entities.UsuarioTest" name="testSetCorreo" time="0"/>
-  <testcase classname="entities.UsuarioTest" name="testHashCode" time="0"/>
-  <testcase classname="entities.UsuarioTest" name="testGetCorreo" time="0"/>
-  <testcase classname="entities.UsuarioTest" name="testSetNombre" time="0"/>
-  <testcase classname="entities.UsuarioTest" name="testEquals" time="0.015"/>
-  <testcase classname="entities.UsuarioTest" name="testGetNombre" time="0"/>
-  <testcase classname="entities.UsuarioTest" name="testGetRol" time="0"/>
-  <testcase classname="entities.UsuarioTest" name="testSetRol" time="0"/>
+  <testcase classname="entities.UsuarioTest" name="testSetPassword" time="0.563"/>
+  <testcase classname="entities.UsuarioTest" name="testGetPassword" time="0.002"/>
+  <testcase classname="entities.UsuarioTest" name="testGetCurso" time="0.001"/>
+  <testcase classname="entities.UsuarioTest" name="testGetId" time="0.001"/>
+  <testcase classname="entities.UsuarioTest" name="testSetId" time="0.001"/>
+  <testcase classname="entities.UsuarioTest" name="testCambiarPassword" time="0.002"/>
+  <testcase classname="entities.UsuarioTest" name="testToString" time="0.001"/>
+  <testcase classname="entities.UsuarioTest" name="testSetCorreo" time="0.001"/>
+  <testcase classname="entities.UsuarioTest" name="testHashCode" time="0.001"/>
+  <testcase classname="entities.UsuarioTest" name="testGetCorreo" time="0.001"/>
+  <testcase classname="entities.UsuarioTest" name="testSetNombre" time="0.001"/>
+  <testcase classname="entities.UsuarioTest" name="testEquals" time="0.001"/>
+  <testcase classname="entities.UsuarioTest" name="testGetNombre" time="0.003"/>
+  <testcase classname="entities.UsuarioTest" name="testGetRol" time="0.001"/>
+  <testcase classname="entities.UsuarioTest" name="testSetRol" time="0.001"/>
   <testcase classname="entities.UsuarioTest" name="testSetCurso" time="0"/>
 </testsuite>
