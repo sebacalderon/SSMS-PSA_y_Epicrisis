@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>Tutorial_mysql</artifactId>
+        <artifactId>SSMS-PSA_y_Epicrisis</artifactId>
         <groupId>cl.diinf</groupId>
         <version>1.0</version>
     </parent>
@@ -43,13 +43,13 @@
     <dependencies>
         <dependency>
             <groupId>cl.diinf</groupId>
-            <artifactId>Tutorial_mysql-ejb</artifactId>
+            <artifactId>SSMS-PSA_y_Epicrisis-ejb</artifactId>
             <version>1.0</version>
             <type>ejb</type>
         </dependency>
         <dependency>
             <groupId>cl.diinf</groupId>
-            <artifactId>Tutorial_mysql-web</artifactId>
+            <artifactId>SSMS-PSA_y_Epicrisis-web</artifactId>
             <version>1.0</version>
             <type>war</type>
         </dependency>
