@@ -145,8 +145,8 @@ public class AuditoriaTest {
     public void testSetNuevoValor() {
         System.out.println("setNuevoValor");
         String nuevoValor = "";
-        Auditoria instance = new Auditoria();
         instance.setNuevoValor(nuevoValor);
+        assertNotNull(instance.getNuevoValor());
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
@@ -157,8 +157,7 @@ public class AuditoriaTest {
     @Test
     public void testGetFecha() {
         System.out.println("getFecha");
-        Auditoria instance = new Auditoria();
-        Timestamp expResult = null;
+        Timestamp expResult = Timestamp.valueOf("2007-09-23 01:00:00");
         Timestamp result = instance.getFecha();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -172,8 +171,8 @@ public class AuditoriaTest {
     public void testSetFecha() {
         System.out.println("setFecha");
         Timestamp fecha = null;
-        Auditoria instance = new Auditoria();
-        instance.setFecha(fecha);
+        instance.setFecha(Timestamp.valueOf("2007-09-23 01:00:00"));
+        assertNotNull(instance.getFecha());
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
@@ -184,8 +183,7 @@ public class AuditoriaTest {
     @Test
     public void testGetCorreo() {
         System.out.println("getCorreo");
-        Auditoria instance = new Auditoria();
-        String expResult = null;
+        String expResult = "correo";
         String result = instance.getCorreo();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -199,8 +197,8 @@ public class AuditoriaTest {
     public void testSetCorreo() {
         System.out.println("setCorreo");
         String correo = "";
-        Auditoria instance = new Auditoria();
         instance.setCorreo(correo);
+        assertNotNull(instance.getCorreo());
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
@@ -211,8 +209,7 @@ public class AuditoriaTest {
     @Test
     public void testGetId() {
         System.out.println("getId");
-        Auditoria instance = new Auditoria();
-        Long expResult = null;
+        Long expResult = Long.MIN_VALUE;
         Long result = instance.getId();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -225,9 +222,9 @@ public class AuditoriaTest {
     @Test
     public void testSetId() {
         System.out.println("setId");
-        Long id = null;
-        Auditoria instance = new Auditoria();
+        Long id = Long.MAX_VALUE;
         instance.setId(id);
+        assertNotNull(instance.getId());
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
@@ -238,8 +235,7 @@ public class AuditoriaTest {
     @Test
     public void testHashCode() {
         System.out.println("hashCode");
-        Auditoria instance = new Auditoria();
-        int expResult = 0;
+        int expResult = -2147483648;
         int result = instance.hashCode();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -253,7 +249,6 @@ public class AuditoriaTest {
     public void testEquals() {
         System.out.println("equals");
         Object object = null;
-        Auditoria instance = new Auditoria();
         boolean expResult = false;
         boolean result = instance.equals(object);
         assertEquals(expResult, result);
