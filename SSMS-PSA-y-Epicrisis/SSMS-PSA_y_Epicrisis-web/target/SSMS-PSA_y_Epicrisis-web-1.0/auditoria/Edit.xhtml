@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AuditoriaEditDlg" widgetVar="AuditoriaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditAuditoriaTitle}">
+            <h:form id="AuditoriaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{auditoriaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditAuditoriaLabel_tabla}" for="tabla" />
+                        <p:inputText id="tabla" value="#{auditoriaController.selected.tabla}" title="#{bundle.EditAuditoriaTitle_tabla}" />
+                        <p:outputLabel value="#{bundle.EditAuditoriaLabel_operacion}" for="operacion" />
+                        <p:inputText id="operacion" value="#{auditoriaController.selected.operacion}" title="#{bundle.EditAuditoriaTitle_operacion}" />
+                        <p:outputLabel value="#{bundle.EditAuditoriaLabel_antiguoValor}" for="antiguoValor" />
+                        <p:inputText id="antiguoValor" value="#{auditoriaController.selected.antiguoValor}" title="#{bundle.EditAuditoriaTitle_antiguoValor}" />
+                        <p:outputLabel value="#{bundle.EditAuditoriaLabel_nuevoValor}" for="nuevoValor" />
+                        <p:inputText id="nuevoValor" value="#{auditoriaController.selected.nuevoValor}" title="#{bundle.EditAuditoriaTitle_nuevoValor}" />
+                        <p:outputLabel value="#{bundle.EditAuditoriaLabel_fecha}" for="fecha" />
+                        <p:inputText id="fecha" value="#{auditoriaController.selected.fecha}" title="#{bundle.EditAuditoriaTitle_fecha}" />
+                        <p:outputLabel value="#{bundle.EditAuditoriaLabel_correo}" for="correo" />
+                        <p:inputText id="correo" value="#{auditoriaController.selected.correo}" title="#{bundle.EditAuditoriaTitle_correo}" />
+                        <p:outputLabel value="#{bundle.EditAuditoriaLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{auditoriaController.selected.id}" title="#{bundle.EditAuditoriaTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{auditoriaController.update}" value="#{bundle.Save}" update="display,:AuditoriaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AuditoriaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AuditoriaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

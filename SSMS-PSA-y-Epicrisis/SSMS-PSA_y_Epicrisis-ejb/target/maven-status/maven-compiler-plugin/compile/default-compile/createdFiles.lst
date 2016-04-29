@@ -1,0 +1,13 @@
+sessionbeans\AbstractFacade.class
+entities\Curso_.class
+entities\Auditoria.class
+entities\Usuario_.class
+entities\Curso.class
+sessionbeans\AuditoriaFacade.class
+sessionbeans\CursoFacade.class
+sessionbeans\UsuarioFacade.class
+sessionbeans\UsuarioFacadeLocal.class
+sessionbeans\CursoFacadeLocal.class
+sessionbeans\AuditoriaFacadeLocal.class
+entities\Usuario.class
+entities\Auditoria_.class

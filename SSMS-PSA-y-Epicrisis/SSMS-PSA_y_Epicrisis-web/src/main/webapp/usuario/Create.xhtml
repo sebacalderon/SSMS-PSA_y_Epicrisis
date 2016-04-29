@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition>
+
+        <p:dialog id="UsuarioCreateDlg" widgetVar="UsuarioCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUsuarioTitle}">
+            <h:form id="UsuarioCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
+                        
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{usuarioController.selected.nombre}" title="#{bundle.CreateUsuarioTitle_nombre}" />
+                        
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_correo}" for="correo" />
+                        <p:inputText id="correo" value="#{usuarioController.selected.correo}" title="#{bundle.CreateUsuarioTitle_correo}" />
+                        
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_password}" for="password" />
+                        <p:password id="password" value="#{usuarioController.selected.password}" title="#{bundle.CreateUsuarioTitle_password}" />
+                        
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_rol}" for="rol" />
+                        <p:selectOneMenu id="rol" value="#{usuarioController.selected.rol}" style="width:150px">
+                            <f:selectItem itemLabel="Seleccione un rol" itemValue="" noSelectionOption="true" />
+                            <f:selectItem itemLabel="Rol 1" itemValue="Rol 1" noSelectionOption="false" />
+                            <f:selectItem itemLabel="Rol 2" itemValue="Rol 2" noSelectionOption="false" />
+                            <f:selectItem itemLabel="Rol 3" itemValue="Rol 3" noSelectionOption="false" />
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel for="curso" value="Curso: " />
+                        <p:selectOneMenu id="curso" value="#{usuarioController.selected.curso}">
+                            <f:selectItem itemLabel="Seleccione un curso" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{cursoController.items}" var="curso" itemLabel="#{curso.nombre}" itemValue="#{curso}"/>
+                        </p:selectOneMenu>
+                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{usuarioController.create}" value="#{bundle.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsuarioCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UsuarioCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
