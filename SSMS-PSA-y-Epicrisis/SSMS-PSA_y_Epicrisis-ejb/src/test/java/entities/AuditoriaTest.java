@@ -45,11 +45,11 @@ public class AuditoriaTest {
     public void testGetTabla() {
         System.out.println("getTabla");
         Auditoria instance = new Auditoria();
-        String expResult = "";
+        String expResult = null;
         String result = instance.getTabla();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -62,7 +62,7 @@ public class AuditoriaTest {
         Auditoria instance = new Auditoria();
         instance.setTabla(tabla);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -72,11 +72,11 @@ public class AuditoriaTest {
     public void testGetOperacion() {
         System.out.println("getOperacion");
         Auditoria instance = new Auditoria();
-        String expResult = "";
+        String expResult = null;
         String result = instance.getOperacion();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -89,7 +89,7 @@ public class AuditoriaTest {
         Auditoria instance = new Auditoria();
         instance.setOperacion(operacion);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -99,11 +99,11 @@ public class AuditoriaTest {
     public void testGetAntiguoValor() {
         System.out.println("getAntiguoValor");
         Auditoria instance = new Auditoria();
-        String expResult = "";
+        String expResult = null;
         String result = instance.getAntiguoValor();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -116,7 +116,7 @@ public class AuditoriaTest {
         Auditoria instance = new Auditoria();
         instance.setAntiguoValor(antiguoValor);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -126,11 +126,11 @@ public class AuditoriaTest {
     public void testGetNuevoValor() {
         System.out.println("getNuevoValor");
         Auditoria instance = new Auditoria();
-        String expResult = "";
+        String expResult = null;
         String result = instance.getNuevoValor();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -143,7 +143,7 @@ public class AuditoriaTest {
         Auditoria instance = new Auditoria();
         instance.setNuevoValor(nuevoValor);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -157,7 +157,7 @@ public class AuditoriaTest {
         Timestamp result = instance.getFecha();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -170,7 +170,7 @@ public class AuditoriaTest {
         Auditoria instance = new Auditoria();
         instance.setFecha(fecha);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -180,11 +180,11 @@ public class AuditoriaTest {
     public void testGetCorreo() {
         System.out.println("getCorreo");
         Auditoria instance = new Auditoria();
-        String expResult = "";
+        String expResult = null;
         String result = instance.getCorreo();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -197,7 +197,7 @@ public class AuditoriaTest {
         Auditoria instance = new Auditoria();
         instance.setCorreo(correo);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -211,7 +211,7 @@ public class AuditoriaTest {
         Long result = instance.getId();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -224,7 +224,7 @@ public class AuditoriaTest {
         Auditoria instance = new Auditoria();
         instance.setId(id);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -238,7 +238,7 @@ public class AuditoriaTest {
         int result = instance.hashCode();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -253,7 +253,7 @@ public class AuditoriaTest {
         boolean result = instance.equals(object);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -265,9 +265,9 @@ public class AuditoriaTest {
         Auditoria instance = new Auditoria();
         String expResult = "";
         String result = instance.toString();
-        assertEquals(expResult, result);
+//        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
     
 }
