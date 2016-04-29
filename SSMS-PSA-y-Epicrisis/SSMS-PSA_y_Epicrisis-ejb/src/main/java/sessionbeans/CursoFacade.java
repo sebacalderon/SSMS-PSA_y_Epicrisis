@@ -17,7 +17,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class CursoFacade extends AbstractFacade<Curso> implements CursoFacadeLocal {
 
-    @PersistenceContext(unitName = "cl.diinf_Tutorial-ejb_ejb_1.0PU")
+    @PersistenceContext(unitName = "cl.diinf_SSMS-PSA_y_Epicrisis-ejb_ejb_1.0PU")
     private EntityManager em;
 
     @Override

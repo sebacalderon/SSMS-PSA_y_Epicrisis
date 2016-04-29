@@ -17,7 +17,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class AuditoriaFacade extends AbstractFacade<Auditoria> implements AuditoriaFacadeLocal {
 
-    @PersistenceContext(unitName = "cl.diinf_Tutorial-ejb_ejb_1.0PU")
+    @PersistenceContext(unitName = "cl.diinf_SSMS-PSA_y_Epicrisis-ejb_ejb_1.0PU")
     private EntityManager em;
 
     @Override
