@@ -98,7 +98,6 @@ public class UsuarioController implements Serializable {
         antiguovalor.setCorreo(selected.getCorreo());
         antiguovalor.setPassword(selected.getPassword());
         antiguovalor.setRol(selected.getRol());
-        antiguovalor.setCurso(selected.getCurso());
     }
     
     public void auditoria(String antiguo, String nuevo, String operacion) {
@@ -121,7 +120,7 @@ public class UsuarioController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
         }
         String nuevo;
-        nuevo = " ( Nombre: " + selected.getNombre() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+ " , Carrera: " + selected.getCurso().getNombre() + " )";
+        nuevo = " ( Nombre: " + selected.getNombre() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+ " )";
         auditoria("No existía", nuevo, "Crear");
     }
 
@@ -139,14 +138,14 @@ public class UsuarioController implements Serializable {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
         String antiguo;
         String nuevo;
-        antiguo = " ( Nombre: " + antiguovalor.getNombre() + " , Correo: " + antiguovalor.getCorreo() + " , Contraseña: " + antiguovalor.getPassword() + " , Rol: " + antiguovalor.getRol()+ " , Carrera: " + antiguovalor.getCurso().getNombre() + " )";
-        nuevo = " ( Nombre: " + selected.getNombre() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+ " , Carrera: " + selected.getCurso().getNombre() + " )";
+        antiguo = " ( Nombre: " + antiguovalor.getNombre() + " , Correo: " + antiguovalor.getCorreo() + " , Contraseña: " + antiguovalor.getPassword() + " , Rol: " + antiguovalor.getRol() + " )";
+        nuevo = " ( Nombre: " + selected.getNombre() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+ " )";
         auditoria(antiguo, nuevo, "Editar");
     }
 
     public void destroy() {
         String antiguo;
-        antiguo = " ( Nombre: " + selected.getNombre() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+ " , Carrera: " + selected.getCurso().getNombre() + " )";
+        antiguo = " ( Nombre: " + selected.getNombre() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+ " )";
         auditoria(antiguo, "No existe", "Eliminar");
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("UsuarioDeleted"));
         if (!JsfUtil.isValidationFailed()) {

@@ -135,7 +135,7 @@ public class LoginController implements Serializable{
         return verify;
     }
     
-        private String sha256(String base){
+    private String sha256(String base){
         try{
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(base.getBytes("UTF-8"));
@@ -151,4 +151,35 @@ public class LoginController implements Serializable{
             throw new RuntimeException(e);
         }
     }
+    
+    public boolean esPSA(){
+        if(usuarioLogueado.getRol().equals("Funcionario PSA")||
+           usuarioLogueado.getRol().equals("Gestor PSA")||
+           usuarioLogueado.getRol().equals("Funcionario PSA y Epicrisis")||
+           usuarioLogueado.getRol().equals("Gestor PSA y Epicrisis")){
+            return true;
+        }else {
+            return false;
+        }
+    }
+    
+    public boolean esAdministrador(){
+        if(usuarioLogueado.getRol().equals("Administrador")){
+            return true;
+        }else {
+            return false;
+        }
+    }
+    
+    public boolean esEpicrisis(){
+        if(usuarioLogueado.getRol().equals("Funcionario Epicrisis")||
+           usuarioLogueado.getRol().equals("Gestor Epicrsis")||
+           usuarioLogueado.getRol().equals("Funcionario PSA y Epicrisis")||
+           usuarioLogueado.getRol().equals("Gestor PSA y Epicrisis")){
+            return true;
+        }else {
+            return false;
+        }
+    }
+    
 }

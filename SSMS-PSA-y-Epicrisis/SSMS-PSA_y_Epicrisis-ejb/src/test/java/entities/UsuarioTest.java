@@ -19,7 +19,6 @@ import static org.mockito.Mockito.mock;
  */
 public class UsuarioTest {
     private Usuario usuario;
-    private Curso curso;
     public UsuarioTest() {
     }
     
@@ -34,9 +33,7 @@ public class UsuarioTest {
     @Before
     public void setUp() {
         usuario = new Usuario();
-        curso = mock(Curso.class);
         usuario.setCorreo("correo");
-        usuario.setCurso(curso);
         usuario.setId(Long.MIN_VALUE);
         usuario.setNombre("nombre");
         usuario.setPassword("");
@@ -47,28 +44,6 @@ public class UsuarioTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of getCurso method, of class Usuario.
-     */
-    @Test
-    public void testGetCurso() {
-        System.out.println("getCurso");
-        Curso expResult = curso;
-        Curso result = usuario.getCurso();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-    }
-
-    /**
-     * Test of setCurso method, of class Usuario.
-     */
-    @Test
-    public void testSetCurso() {
-        System.out.println("setCurso");
-        usuario.setCurso(curso);
-        assertNotNull(usuario.getCurso());
-        // TODO review the generated test code and remove the default call to fail.
-    }
 
     /**
      * Test of getRol method, of class Usuario.

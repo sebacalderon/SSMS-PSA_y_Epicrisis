@@ -39,14 +39,30 @@
     </login-config>
     <security-role>
         <description/>
-        <role-name>Rol 1</role-name>
+        <role-name>Funcionario PSA</role-name>
     </security-role>
     <security-role>
         <description/>
-        <role-name>Rol 2</role-name>
+        <role-name>Funcionario Epicrisis</role-name>
     </security-role>
     <security-role>
         <description/>
-        <role-name>Rol 3</role-name>
+        <role-name>Gestor PSA</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>Gestor Epicrisis</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>Funcionario PSA y Epicrisis</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>Gestir PSA y Epicrisis</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>Administrador</role-name>
     </security-role>
 </web-app>

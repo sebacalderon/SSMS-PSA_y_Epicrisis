@@ -44,28 +44,15 @@ public class Usuario implements Serializable {
     @Column(name="rol_usuario")
     private String rol;
     
-    @ManyToOne
-    @JoinColumn(name = "curso_usuario")
-    private Curso curso;
-    
     public Usuario(Usuario usuario){
         this.id = usuario.id;
         this.correo= usuario.correo;
-        this.curso= usuario.curso;
         this.nombre= usuario.nombre;
         this.password= usuario.password;
         this.rol = usuario.rol;
     }
     
     public Usuario(){
-    }
-    
-    public Curso getCurso() {
-        return curso;
-    }
-
-    public void setCurso(Curso curso) {
-        this.curso = curso;
     }
     
     public String getRol() {
