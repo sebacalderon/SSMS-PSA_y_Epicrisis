@@ -39,30 +39,14 @@
     </login-config>
     <security-role>
         <description/>
-        <role-name>Funcionario PSA</role-name>
+        <role-name>Funcionario CESFAM</role-name>
     </security-role>
     <security-role>
         <description/>
-        <role-name>Funcionario Epicrisis</role-name>
+        <role-name>Empleado Municipal</role-name>
     </security-role>
     <security-role>
         <description/>
-        <role-name>Gestor PSA</role-name>
-    </security-role>
-    <security-role>
-        <description/>
-        <role-name>Gestor Epicrisis</role-name>
-    </security-role>
-    <security-role>
-        <description/>
-        <role-name>Funcionario PSA y Epicrisis</role-name>
-    </security-role>
-    <security-role>
-        <description/>
-        <role-name>Gestir PSA y Epicrisis</role-name>
-    </security-role>
-    <security-role>
-        <description/>
-        <role-name>Administrador</role-name>
+        <role-name>Super Usuario</role-name>
     </security-role>
 </web-app>

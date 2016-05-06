@@ -27,13 +27,9 @@
                         <p:outputLabel value="#{bundle.EditUsuarioLabel_rol}" for="rol" />
                         <p:selectOneMenu id="rol" value="#{usuarioController.selected.rol}" style="width:150px">
                             <f:selectItem itemLabel="Seleccione un rol ..." itemValue="" noSelectionOption="true" />
-                            <f:selectItem itemLabel="Funcionario PSA" itemValue="Funcionario PSA" noSelectionOption="false" />
-                            <f:selectItem itemLabel="Funcionario Epicrisis" itemValue="Funcionario Epicrisis" noSelectionOption="false" />
-                            <f:selectItem itemLabel="Funcionario PSA y Epicrisis" itemValue="Funcionario PSA y Epicrisis" noSelectionOption="false" />
-                            <f:selectItem itemLabel="Gestor PSA" itemValue="Gestor PSA" noSelectionOption="false" />
-                            <f:selectItem itemLabel="Gestor Epicrisis" itemValue="Gestor Epicrisis" noSelectionOption="false" />
-                            <f:selectItem itemLabel="Gestor PSA y Epicrisis" itemValue="Gestor PSA y Epicrisis" noSelectionOption="false" />
-                            <f:selectItem itemLabel="Administrador" itemValue="Administrador" noSelectionOption="false" />
+                            <f:selectItem itemLabel="Funcionario CESFAM" itemValue="Funcionario CESFAM" noSelectionOption="false" />
+                            <f:selectItem itemLabel="Empleado Municipal" itemValue="Empleado Municipal" noSelectionOption="false" />
+                            <f:selectItem itemLabel="Super Usuario" itemValue="Super Usuario" noSelectionOption="false" />
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{usuarioController.update}" value="#{bundle.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UsuarioEditDialog');"/>

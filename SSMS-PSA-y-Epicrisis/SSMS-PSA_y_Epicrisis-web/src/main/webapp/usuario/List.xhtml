@@ -25,8 +25,8 @@
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton desactivateButton activateButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton desactivateButton activateButton"/>
 
                         <p:column>
                             <f:facet name="header">
@@ -46,23 +46,26 @@
                             </f:facet>
                             <h:outputText value="#{item.correo}"/>
                         </p:column>
-                        <p:column style = "min-width:400px">
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_password}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.password}"/>
-                        </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsuarioTitle_rol}"/>
                             </f:facet>
                             <h:outputText value="#{item.rol}"/>
                         </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUsuarioTitle_activo}"/>
+                            </f:facet>
+                            <h:outputText value="Habilitado" rendered="#{item.habilitado}"/>
+                            <h:outputText value="Deshabilitado" rendered="#{not item.habilitado}"/>
+                        </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{usuarioController.prepareCreate}" update=":UsuarioCreateForm" oncomplete="PF('UsuarioCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":UsuarioViewForm" oncomplete="PF('UsuarioViewDialog').show()" disabled="#{empty usuarioController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":UsuarioEditForm" oncomplete="PF('UsuarioEditDialog').show()" disabled="#{empty usuarioController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{usuarioController.destroy}" update=":growl,datalist" disabled="#{empty usuarioController.selected}"/>
+                            <p:commandButton id="desactivateButton" icon="ui-icon-cancel"  value="#{bundle.Delete}" actionListener="#{usuarioController.desactivar}" update=":growl,datalist"  disabled="#{not usuarioController.selected.isHabilitado() or usuarioController.selected.correo.equals(loginController.getUsuarioLogueado().correo)}"/>
+                            <p:commandButton id="activateButton" icon="ui-icon-check"  value="#{bundle.Activate}" actionListener="#{usuarioController.activar}" update=":growl,datalist"  disabled="#{usuarioController.selected.isHabilitado()}"/>
+
                         </f:facet>
                     </p:dataTable>
                 </b:panel>

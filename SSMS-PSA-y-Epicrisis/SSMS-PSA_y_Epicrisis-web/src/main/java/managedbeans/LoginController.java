@@ -82,6 +82,9 @@ public class LoginController implements Serializable{
             if (usuario == null) {
                 context.addMessage(null, new FacesMessage("El usuario no existe"));
                 return "/faces/index.xhtml";
+            }else if(!usuario.isHabilitado()){
+                context.addMessage(null, new FacesMessage("El usuario está deshabilitado"));
+                return "/faces/index.xhtml";
             }else{
                 if (request.getRemoteUser() == null) {
                     try {
@@ -152,34 +155,16 @@ public class LoginController implements Serializable{
         }
     }
     
-    public boolean esPSA(){
-        if(usuarioLogueado.getRol().equals("Funcionario PSA")||
-           usuarioLogueado.getRol().equals("Gestor PSA")||
-           usuarioLogueado.getRol().equals("Funcionario PSA y Epicrisis")||
-           usuarioLogueado.getRol().equals("Gestor PSA y Epicrisis")){
-            return true;
-        }else {
-            return false;
-        }
+    public boolean esEmpleadoMunicipal(){
+        return usuarioLogueado.getRol().equals("Empleado Municipal");
     }
     
-    public boolean esAdministrador(){
-        if(usuarioLogueado.getRol().equals("Administrador")){
-            return true;
-        }else {
-            return false;
-        }
+    public boolean esFuncionario(){
+        return usuarioLogueado.getRol().equals("Funcionario CESFAM");
     }
     
-    public boolean esEpicrisis(){
-        if(usuarioLogueado.getRol().equals("Funcionario Epicrisis")||
-           usuarioLogueado.getRol().equals("Gestor Epicrsis")||
-           usuarioLogueado.getRol().equals("Funcionario PSA y Epicrisis")||
-           usuarioLogueado.getRol().equals("Gestor PSA y Epicrisis")){
-            return true;
-        }else {
-            return false;
-        }
+    public boolean esSuperUsuario(){
+        return usuarioLogueado.getRol().equals("Super Usuario");
     }
     
 }

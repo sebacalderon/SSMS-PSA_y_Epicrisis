@@ -41,8 +41,12 @@ public class Usuario implements Serializable {
     @Column(name="nombre_usuario")
     private String nombre;
 
+    @NotNull(message="Debe ingresar un rol")
     @Column(name="rol_usuario")
     private String rol;
+    
+    @Column(name="habilitado_usuario")
+    private boolean habilitado;
     
     public Usuario(Usuario usuario){
         this.id = usuario.id;
@@ -50,10 +54,20 @@ public class Usuario implements Serializable {
         this.nombre= usuario.nombre;
         this.password= usuario.password;
         this.rol = usuario.rol;
+        this.habilitado=true;
     }
-    
+
     public Usuario(){
     }
+
+    public boolean isHabilitado() {
+        return habilitado;
+    }
+
+    public void setHabilitado(boolean habilitado) {
+        this.habilitado = habilitado;
+    }
+    
     
     public String getRol() {
         return rol;
