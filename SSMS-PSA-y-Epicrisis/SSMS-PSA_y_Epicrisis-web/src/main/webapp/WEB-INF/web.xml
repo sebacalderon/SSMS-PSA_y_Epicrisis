@@ -39,14 +39,14 @@
     </login-config>
     <security-role>
         <description/>
-        <role-name>Rol 1</role-name>
+        <role-name>Funcionario CESFAM</role-name>
     </security-role>
     <security-role>
         <description/>
-        <role-name>Rol 2</role-name>
+        <role-name>Empleado Municipal</role-name>
     </security-role>
     <security-role>
         <description/>
-        <role-name>Rol 3</role-name>
+        <role-name>Super Usuario</role-name>
     </security-role>
 </web-app>

@@ -6,10 +6,11 @@
 package managedbeans;
 
 import entities.Usuario;
+import java.io.Serializable;
 import java.security.MessageDigest;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -21,8 +22,8 @@ import javax.servlet.http.HttpServletRequest;
  * @author obi
  */
 @Named(value = "loginController")
-@RequestScoped
-public class LoginController {
+@SessionScoped
+public class LoginController implements Serializable{
 
     private String correo;
     private String password;
@@ -81,6 +82,9 @@ public class LoginController {
             if (usuario == null) {
                 context.addMessage(null, new FacesMessage("El usuario no existe"));
                 return "/faces/index.xhtml";
+            }else if(!usuario.isHabilitado()){
+                context.addMessage(null, new FacesMessage("El usuario está deshabilitado"));
+                return "/faces/index.xhtml";
             }else{
                 if (request.getRemoteUser() == null) {
                     try {
@@ -134,7 +138,7 @@ public class LoginController {
         return verify;
     }
     
-        private String sha256(String base){
+    private String sha256(String base){
         try{
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(base.getBytes("UTF-8"));
@@ -150,4 +154,17 @@ public class LoginController {
             throw new RuntimeException(e);
         }
     }
+    
+    public boolean esEmpleadoMunicipal(){
+        return usuarioLogueado.getRol().equals("Empleado Municipal");
+    }
+    
+    public boolean esFuncionario(){
+        return usuarioLogueado.getRol().equals("Funcionario CESFAM");
+    }
+    
+    public boolean esSuperUsuario(){
+        return usuarioLogueado.getRol().equals("Super Usuario");
+    }
+    
 }

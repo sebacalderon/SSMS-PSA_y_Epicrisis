@@ -25,18 +25,12 @@
                         
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_rol}" for="rol" />
                         <p:selectOneMenu id="rol" value="#{usuarioController.selected.rol}" style="width:150px">
-                            <f:selectItem itemLabel="Seleccione un rol" itemValue="" noSelectionOption="true" />
-                            <f:selectItem itemLabel="Rol 1" itemValue="Rol 1" noSelectionOption="false" />
-                            <f:selectItem itemLabel="Rol 2" itemValue="Rol 2" noSelectionOption="false" />
-                            <f:selectItem itemLabel="Rol 3" itemValue="Rol 3" noSelectionOption="false" />
+                            <f:selectItem itemLabel="Seleccione un rol ..." itemValue="" noSelectionOption="true" />
+                            <f:selectItem itemLabel="Funcionario CESFAM" itemValue="Funcionario CESFAM" noSelectionOption="false" />
+                            <f:selectItem itemLabel="Empleado Municipal" itemValue="Empleado Municipal" noSelectionOption="false" />
+                            <f:selectItem itemLabel="Super Usuario" itemValue="Super Usuario" noSelectionOption="false" />
                         </p:selectOneMenu>
-                        
-                        <p:outputLabel for="curso" value="Curso: " />
-                        <p:selectOneMenu id="curso" value="#{usuarioController.selected.curso}">
-                            <f:selectItem itemLabel="Seleccione un curso" itemValue="" noSelectionOption="true" />
-                            <f:selectItems value="#{cursoController.items}" var="curso" itemLabel="#{curso.nombre}" itemValue="#{curso}"/>
-                        </p:selectOneMenu>
-                        
+
                     </p:panelGrid>
                     <p:commandButton actionListener="#{usuarioController.create}" value="#{bundle.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsuarioCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="UsuarioCreateDialog.hide()"/>

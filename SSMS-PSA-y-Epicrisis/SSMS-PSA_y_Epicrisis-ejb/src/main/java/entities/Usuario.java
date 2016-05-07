@@ -41,32 +41,33 @@ public class Usuario implements Serializable {
     @Column(name="nombre_usuario")
     private String nombre;
 
+    @NotNull(message="Debe ingresar un rol")
     @Column(name="rol_usuario")
     private String rol;
     
-    @ManyToOne
-    @JoinColumn(name = "curso_usuario")
-    private Curso curso;
+    @Column(name="habilitado_usuario")
+    private boolean habilitado;
     
     public Usuario(Usuario usuario){
         this.id = usuario.id;
         this.correo= usuario.correo;
-        this.curso= usuario.curso;
         this.nombre= usuario.nombre;
         this.password= usuario.password;
         this.rol = usuario.rol;
-    }
-    
-    public Usuario(){
-    }
-    
-    public Curso getCurso() {
-        return curso;
+        this.habilitado=true;
     }
 
-    public void setCurso(Curso curso) {
-        this.curso = curso;
+    public Usuario(){
     }
+
+    public boolean isHabilitado() {
+        return habilitado;
+    }
+
+    public void setHabilitado(boolean habilitado) {
+        this.habilitado = habilitado;
+    }
+    
     
     public String getRol() {
         return rol;

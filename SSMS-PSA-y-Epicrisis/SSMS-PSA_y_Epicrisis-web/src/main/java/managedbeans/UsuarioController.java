@@ -98,8 +98,8 @@ public class UsuarioController implements Serializable {
         antiguovalor.setCorreo(selected.getCorreo());
         antiguovalor.setPassword(selected.getPassword());
         antiguovalor.setRol(selected.getRol());
-        antiguovalor.setCurso(selected.getCurso());
     }
+    
     
     public void auditoria(String antiguo, String nuevo, String operacion) {
         auditoriaCtrl.prepareCreate();
@@ -107,7 +107,7 @@ public class UsuarioController implements Serializable {
         auditoriaCtrl.getSelected().setNuevoValor(nuevo);
         auditoriaCtrl.getSelected().setOperacion(operacion);
         auditoriaCtrl.getSelected().setTabla("Usuario");
-        //auditoriaCtrl.ObtenerCorreo();
+        auditoriaCtrl.ObtenerCorreo();
         Date date = new Date();
         long time = date.getTime();
         Timestamp ts = new Timestamp(time);
@@ -116,12 +116,13 @@ public class UsuarioController implements Serializable {
     }
     
     public void create() {
+        selected.setHabilitado(true);
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
         String nuevo;
-        nuevo = " ( Nombre: " + selected.getNombre() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+ " , Carrera: " + selected.getCurso().getNombre() + " )";
+        nuevo = " ( Nombre: " + selected.getNombre() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+", Activo: "+selected.isHabilitado()+ " )";
         auditoria("No existía", nuevo, "Crear");
     }
 
@@ -139,22 +140,37 @@ public class UsuarioController implements Serializable {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
         String antiguo;
         String nuevo;
-        antiguo = " ( Nombre: " + antiguovalor.getNombre() + " , Correo: " + antiguovalor.getCorreo() + " , Contraseña: " + antiguovalor.getPassword() + " , Rol: " + antiguovalor.getRol()+ " , Carrera: " + antiguovalor.getCurso().getNombre() + " )";
-        nuevo = " ( Nombre: " + selected.getNombre() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+ " , Carrera: " + selected.getCurso().getNombre() + " )";
+        antiguo = " ( Nombre: " + antiguovalor.getNombre() + " , Correo: " + antiguovalor.getCorreo() + " , Contraseña: " + antiguovalor.getPassword() + " , Rol: " + antiguovalor.getRol() +", Activo: "+selected.isHabilitado()+ " )";
+        nuevo = " ( Nombre: " + selected.getNombre() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+", Activo: "+selected.isHabilitado()+ " )";
         auditoria(antiguo, nuevo, "Editar");
     }
 
-    public void destroy() {
-        String antiguo;
-        antiguo = " ( Nombre: " + selected.getNombre() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+ " , Carrera: " + selected.getCurso().getNombre() + " )";
-        auditoria(antiguo, "No existe", "Eliminar");
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("UsuarioDeleted"));
+    public void desactivar() {
+        String antiguo,nuevo;
+        nuevo = " ( Nombre: " + selected.getNombre() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+", Activo: "+selected.isHabilitado()+ " )";
+        selected.setHabilitado(false);
+        antiguo = " ( Nombre: " + selected.getNombre() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+", Activo: "+selected.isHabilitado()+ " )";
+        auditoria(antiguo, nuevo, "Desactivar");
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
+    public void activar() {
+        String antiguo,nuevo;
+        nuevo = " ( Nombre: " + selected.getNombre() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+", Activo: "+selected.isHabilitado()+ " )";
+        selected.setHabilitado(true);
+        antiguo = " ( Nombre: " + selected.getNombre() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+", Activo: "+selected.isHabilitado()+ " )";
+        auditoria(antiguo, nuevo, "Activar");
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
+        if (!JsfUtil.isValidationFailed()) {
+            selected = null; // Remove selection
+            items = null;    // Invalidate list of items to trigger re-query.
+        }
+    }
+    
     public Usuario findByCorreo(String correo) {
         getAllItems();//todos los items
         for (Usuario item : todos) {//para cada item de Preingreso de la bd
