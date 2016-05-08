@@ -54,8 +54,17 @@
                     </b:column>
                 </b:row>
             </h:form>
-        <br/>
-        
+            <br/>
+            
+            <!--
+            <h:form id="CRAFTListForm">
+                <p:commandButton id="createButton" icon="ui-icon-plus"   value="CRAFT" actionListener="#!{cRAFTController.prepareCreate}" update=":CRAFTCreateForm" oncomplete="PF('CRAFTCreateDialog').show()"/>
+                <p:dataTable id="datalist" value="#!{cRAFTController}">
+                </p:dataTable>
+            </h:form>
+            <ui:include src="/cRAFT/Create.xhtml"/>
+            -->
+            <td><b:button look="link" value="VER CRAFT" outcome="cRAFT/List.xhtml"/></td>
         </ui:define>
     </ui:composition>
 </html>
