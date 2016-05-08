@@ -24,14 +24,11 @@ public class cesfam implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_cesfam")
+    @Column(name="codigo_cesfam")
     private Long id;
     
-    @Column(name="codigo_cesfam")
-    private String codigo_establecimiento;
-    
     @ManyToOne
-    @JoinColumn(name="comun_cesfam")
+    @JoinColumn(name="comuna_cesfam")
     private comuna comuna;
     
     @Column(name="nombre_tipo_cesfam")
@@ -39,14 +36,6 @@ public class cesfam implements Serializable {
     
     @Column(name="nombre_cesfam")
     private String nombre;
-
-    public String getCodigo_establecimiento() {
-        return codigo_establecimiento;
-    }
-
-    public void setCodigo_establecimiento(String codigo_establecimiento) {
-        this.codigo_establecimiento = codigo_establecimiento;
-    }
 
     public comuna getComuna() {
         return comuna;

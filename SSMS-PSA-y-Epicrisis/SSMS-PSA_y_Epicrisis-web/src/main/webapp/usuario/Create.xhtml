@@ -15,7 +15,7 @@
                     <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
                         
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{usuarioController.selected.nombre}" title="#{bundle.CreateUsuarioTitle_nombre}" />
+                        <p:inputText id="nombre" value="#{usuarioController.selected.nombres}" title="#{bundle.CreateUsuarioTitle_nombre}" />
                         
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_correo}" for="correo" />
                         <p:inputText id="correo" value="#{usuarioController.selected.correo}" title="#{bundle.CreateUsuarioTitle_correo}" />

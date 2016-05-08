@@ -23,6 +23,7 @@ public class pueblo_originario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="codigo_pueblo_originario")
     private Long id;
 
     @NotNull

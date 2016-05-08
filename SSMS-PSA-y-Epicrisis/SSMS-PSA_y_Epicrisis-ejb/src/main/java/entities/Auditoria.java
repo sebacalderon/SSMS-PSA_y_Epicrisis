@@ -23,7 +23,7 @@ public class Auditoria implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_audi")
+    @Column(name="codigo_audi")
     private Long id;
     @Column(name="tabla_audi")
     private String tabla;
