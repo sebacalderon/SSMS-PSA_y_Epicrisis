@@ -139,7 +139,7 @@ public class UsuarioTest {
     public void testGetNombre() {
         System.out.println("getNombre");
         String expResult = "nombre";
-        String result = usuario.getNombre();
+        String result = usuario.getNombres();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -152,7 +152,7 @@ public class UsuarioTest {
         System.out.println("setNombre");
         String nombre = "nombre2";
         usuario.setNombre(nombre);
-        assertNotNull(usuario.getNombre());
+        assertNotNull(usuario.getNombres());
         // TODO review the generated test code and remove the default call to fail.
     }
 

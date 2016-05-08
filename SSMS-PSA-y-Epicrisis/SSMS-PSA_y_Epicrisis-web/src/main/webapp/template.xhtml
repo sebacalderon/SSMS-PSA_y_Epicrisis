@@ -31,8 +31,8 @@
                             <b:navLink value="Cambio de contraseña" outcome="/welcomePrimefaces" />
                         </b:dropMenu>
                         <b:dropMenu value="#{bundle.seccion2}">
-                            <b:navLink value="Ficha CLAP" outcome="/template.xhtml" />
-                            <b:navLink value="Ingresar usuario sin FONASA" outcome="/template.xhtml" />
+                            <b:navLink value="Ingresar ficha CLAP" outcome="/template.xhtml" />
+                            <b:navLink value="Ingresar usuario sin FONASA" outcome="/paciente/List.xhtml" />
                             <b:navLink value="Formulario de Actividades de intervención" outcome="/template.xhtml" />
                         </b:dropMenu>
                         <b:navLink value="#{bundle.seccion3}" outcome="/welcomePrimefaces" rendered="#{loginController.esFuncionario()}" />

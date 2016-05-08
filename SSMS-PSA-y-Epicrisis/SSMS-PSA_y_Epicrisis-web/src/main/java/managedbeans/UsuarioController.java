@@ -94,7 +94,7 @@ public class UsuarioController implements Serializable {
 
     public void prepareUpdate() {
         antiguovalor = new Usuario();
-        antiguovalor.setNombre(selected.getNombre());
+        antiguovalor.setNombre(selected.getNombres());
         antiguovalor.setCorreo(selected.getCorreo());
         antiguovalor.setPassword(selected.getPassword());
         antiguovalor.setRol(selected.getRol());
@@ -122,7 +122,7 @@ public class UsuarioController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
         }
         String nuevo;
-        nuevo = " ( Nombre: " + selected.getNombre() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+", Activo: "+selected.isHabilitado()+ " )";
+        nuevo = " ( Nombre: " + selected.getNombres() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+", Activo: "+selected.isHabilitado()+ " )";
         auditoria("No existía", nuevo, "Crear");
     }
 
@@ -140,16 +140,16 @@ public class UsuarioController implements Serializable {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
         String antiguo;
         String nuevo;
-        antiguo = " ( Nombre: " + antiguovalor.getNombre() + " , Correo: " + antiguovalor.getCorreo() + " , Contraseña: " + antiguovalor.getPassword() + " , Rol: " + antiguovalor.getRol() +", Activo: "+selected.isHabilitado()+ " )";
-        nuevo = " ( Nombre: " + selected.getNombre() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+", Activo: "+selected.isHabilitado()+ " )";
+        antiguo = " ( Nombre: " + antiguovalor.getNombres() + " , Correo: " + antiguovalor.getCorreo() + " , Contraseña: " + antiguovalor.getPassword() + " , Rol: " + antiguovalor.getRol() +", Activo: "+selected.isHabilitado()+ " )";
+        nuevo = " ( Nombre: " + selected.getNombres() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+", Activo: "+selected.isHabilitado()+ " )";
         auditoria(antiguo, nuevo, "Editar");
     }
 
     public void desactivar() {
         String antiguo,nuevo;
-        nuevo = " ( Nombre: " + selected.getNombre() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+", Activo: "+selected.isHabilitado()+ " )";
+        nuevo = " ( Nombre: " + selected.getNombres() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+", Activo: "+selected.isHabilitado()+ " )";
         selected.setHabilitado(false);
-        antiguo = " ( Nombre: " + selected.getNombre() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+", Activo: "+selected.isHabilitado()+ " )";
+        antiguo = " ( Nombre: " + selected.getNombres() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+", Activo: "+selected.isHabilitado()+ " )";
         auditoria(antiguo, nuevo, "Desactivar");
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioDeleted"));
         if (!JsfUtil.isValidationFailed()) {
@@ -160,9 +160,9 @@ public class UsuarioController implements Serializable {
 
     public void activar() {
         String antiguo,nuevo;
-        nuevo = " ( Nombre: " + selected.getNombre() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+", Activo: "+selected.isHabilitado()+ " )";
+        nuevo = " ( Nombre: " + selected.getNombres() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+", Activo: "+selected.isHabilitado()+ " )";
         selected.setHabilitado(true);
-        antiguo = " ( Nombre: " + selected.getNombre() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+", Activo: "+selected.isHabilitado()+ " )";
+        antiguo = " ( Nombre: " + selected.getNombres() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+", Activo: "+selected.isHabilitado()+ " )";
         auditoria(antiguo, nuevo, "Activar");
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
         if (!JsfUtil.isValidationFailed()) {

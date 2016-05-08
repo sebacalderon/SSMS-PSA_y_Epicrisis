@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="pacienteEditDlg" widgetVar="pacienteEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditpacienteTitle}">
+            <h:form id="pacienteEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pacienteController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditpacienteLabel_nombre_social}" for="nombre_social" />
+                        <p:inputText id="nombre_social" value="#{pacienteController.selected.nombre_social}" title="#{bundle.EditpacienteTitle_nombre_social}" />
+                        <p:outputLabel value="#{bundle.EditpacienteLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{pacienteController.selected.id}" title="#{bundle.EditpacienteTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditpacienteLabel_nacionalidad}" for="nacionalidad" />
+                        <p:selectOneMenu id="nacionalidad" value="#{pacienteController.selected.nacionalidad}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{nacionalidadController.itemsAvailableSelectOne}"
+                                           var="nacionalidadItem"
+                                           itemValue="#{nacionalidadItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditpacienteLabel_RUN}" for="RUN" />
+                        <p:inputText id="RUN" value="#{pacienteController.selected.RUN}" title="#{bundle.EditpacienteTitle_RUN}" />
+                        <p:outputLabel value="#{bundle.EditpacienteLabel_DV}" for="DV" />
+                        <p:inputText id="DV" value="#{pacienteController.selected.DV}" title="#{bundle.EditpacienteTitle_DV}" />
+                        <p:outputLabel value="#{bundle.EditpacienteLabel_nombres}" for="nombres" />
+                        <p:inputText id="nombres" value="#{pacienteController.selected.nombres}" title="#{bundle.EditpacienteTitle_nombres}" />
+                        <p:outputLabel value="#{bundle.EditpacienteLabel_primer_apellido}" for="primer_apellido" />
+                        <p:inputText id="primer_apellido" value="#{pacienteController.selected.primer_apellido}" title="#{bundle.EditpacienteTitle_primer_apellido}" />
+                        <p:outputLabel value="#{bundle.EditpacienteLabel_segundo_apellido}" for="segundo_apellido" />
+                        <p:inputText id="segundo_apellido" value="#{pacienteController.selected.segundo_apellido}" title="#{bundle.EditpacienteTitle_segundo_apellido}" />
+                        <p:outputLabel value="#{bundle.EditpacienteLabel_sexo}" for="sexo" />
+                        <p:inputText id="sexo" value="#{pacienteController.selected.sexo}" title="#{bundle.EditpacienteTitle_sexo}" />
+                        <p:outputLabel value="#{bundle.EditpacienteLabel_fecha_nacimiento}" for="fecha_nacimiento" />
+                        <p:inputText id="fecha_nacimiento" value="#{pacienteController.selected.fecha_nacimiento}" title="#{bundle.EditpacienteTitle_fecha_nacimiento}" />
+                        <p:outputLabel value="#{bundle.EditpacienteLabel_region_residencia}" for="region_residencia" />
+                        <p:selectOneMenu id="region_residencia" value="#{pacienteController.selected.region_residencia}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{regionController.itemsAvailableSelectOne}"
+                                           var="region_residenciaItem"
+                                           itemValue="#{region_residenciaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditpacienteLabel_comuna_residencia}" for="comuna_residencia" />
+                        <p:selectOneMenu id="comuna_residencia" value="#{pacienteController.selected.comuna_residencia}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{comunaController.itemsAvailableSelectOne}"
+                                           var="comuna_residenciaItem"
+                                           itemValue="#{comuna_residenciaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditpacienteLabel_calle_direccion}" for="calle_direccion" />
+                        <p:inputText id="calle_direccion" value="#{pacienteController.selected.calle_direccion}" title="#{bundle.EditpacienteTitle_calle_direccion}" />
+                        <p:outputLabel value="#{bundle.EditpacienteLabel_numero_direccion}" for="numero_direccion" />
+                        <p:inputText id="numero_direccion" value="#{pacienteController.selected.numero_direccion}" title="#{bundle.EditpacienteTitle_numero_direccion}" />
+                        <p:outputLabel value="#{bundle.EditpacienteLabel_resto_direccion}" for="resto_direccion" />
+                        <p:inputText id="resto_direccion" value="#{pacienteController.selected.resto_direccion}" title="#{bundle.EditpacienteTitle_resto_direccion}" />
+                        <p:outputLabel value="#{bundle.EditpacienteLabel_telefono_fijo}" for="telefono_fijo" />
+                        <p:inputText id="telefono_fijo" value="#{pacienteController.selected.telefono_fijo}" title="#{bundle.EditpacienteTitle_telefono_fijo}" />
+                        <p:outputLabel value="#{bundle.EditpacienteLabel_teléfono_movil}" for="teléfono_movil" />
+                        <p:inputText id="teléfono_movil" value="#{pacienteController.selected.teléfono_movil}" title="#{bundle.EditpacienteTitle_teléfono_movil}" />
+                        <p:outputLabel value="#{bundle.EditpacienteLabel_programa_social}" for="programa_social" />
+                        <p:selectOneMenu id="programa_social" value="#{pacienteController.selected.programa_social}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{ley_socialController.itemsAvailableSelectOne}"
+                                           var="programa_socialItem"
+                                           itemValue="#{programa_socialItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditpacienteLabel_prevision}" for="prevision" />
+                        <p:selectOneMenu id="prevision" value="#{pacienteController.selected.prevision}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{previsionController.itemsAvailableSelectOne}"
+                                           var="previsionItem"
+                                           itemValue="#{previsionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditpacienteLabel_estado_conyugal}" for="estado_conyugal" />
+                        <p:selectOneMenu id="estado_conyugal" value="#{pacienteController.selected.estado_conyugal}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{estado_civilController.itemsAvailableSelectOne}"
+                                           var="estado_conyugalItem"
+                                           itemValue="#{estado_conyugalItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditpacienteLabel_grupo_fonasa}" for="grupo_fonasa" />
+                        <p:inputText id="grupo_fonasa" value="#{pacienteController.selected.grupo_fonasa}" title="#{bundle.EditpacienteTitle_grupo_fonasa}" />
+                        <p:outputLabel value="#{bundle.EditpacienteLabel_pueblo_originario}" for="pueblo_originario" />
+                        <p:selectOneMenu id="pueblo_originario" value="#{pacienteController.selected.pueblo_originario}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{pueblo_originarioController.itemsAvailableSelectOne}"
+                                           var="pueblo_originarioItem"
+                                           itemValue="#{pueblo_originarioItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditpacienteLabel_cesfam}" for="cesfam" />
+                        <p:selectOneMenu id="cesfam" value="#{pacienteController.selected.cesfam}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{cesfamController.itemsAvailableSelectOne}"
+                                           var="cesfamItem"
+                                           itemValue="#{cesfamItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditpacienteLabel_correo}" for="correo" />
+                        <p:inputText id="correo" value="#{pacienteController.selected.correo}" title="#{bundle.EditpacienteTitle_correo}" />
+                        <p:outputLabel value="#{bundle.EditpacienteLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{pacienteController.selected.estado}" title="#{bundle.EditpacienteTitle_estado}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{pacienteController.update}" value="#{bundle.Save}" update="display,:pacienteListForm:datalist,:growl" oncomplete="handleSubmit(args, 'pacienteEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="pacienteEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

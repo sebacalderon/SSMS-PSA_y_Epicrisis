@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListpacienteTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="pacienteListForm">
+                <p:panel header="#{bundle.ListpacienteTitle}">
+                    <p:dataTable id="datalist" value="#{pacienteController.items}" var="item"
+                                 selectionMode="single" selection="#{pacienteController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_nombre_social}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombre_social}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_nacionalidad}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nacionalidad}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_RUN}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.RUN}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_DV}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.DV}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_nombres}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombres}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_primer_apellido}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.primer_apellido}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_segundo_apellido}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.segundo_apellido}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_sexo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.sexo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_fecha_nacimiento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fecha_nacimiento}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_region_residencia}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.region_residencia}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_comuna_residencia}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.comuna_residencia}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_calle_direccion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.calle_direccion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_numero_direccion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.numero_direccion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_resto_direccion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.resto_direccion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_telefono_fijo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.telefono_fijo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_teléfono_movil}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.teléfono_movil}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_programa_social}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.programa_social}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_prevision}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.prevision}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_estado_conyugal}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.estado_conyugal}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_grupo_fonasa}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.grupo_fonasa}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_pueblo_originario}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.pueblo_originario}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_cesfam}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cesfam}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_correo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.correo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_estado}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.estado}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{pacienteController.prepareCreate}" update=":pacienteCreateForm" oncomplete="PF('pacienteCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":pacienteViewForm" oncomplete="PF('pacienteViewDialog').show()" disabled="#{empty pacienteController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":pacienteEditForm" oncomplete="PF('pacienteEditDialog').show()" disabled="#{empty pacienteController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{pacienteController.destroy}" update=":growl,datalist" disabled="#{empty pacienteController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>
