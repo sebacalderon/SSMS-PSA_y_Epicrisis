@@ -33,46 +33,40 @@
                             <f:ajax event="valueChange"  listener="#{crafftController.serviceChangeA(crafftController.selected.a3)}" immediate="true" render="display"></f:ajax>
                         </p:selectOneMenu>
 
-                        <p:outputLabel value="#{bundle.CreateCrafftTitle_B1}" for="A1" style="width:350px"/>
+                        <p:outputLabel value="#{bundle.CreateCrafftTitle_B1}" for="B1" style="width:350px"/>
                         <p:selectOneMenu id="B1" value="#{crafftController.selected.b1}" style="width:50px">
                             <f:selectItem itemValue="#{true}" itemLabel="Si"/>
                             <f:selectItem itemValue="#{false}" itemLabel="No" />
-                            <f:ajax event="valueChange"  listener="#{crafftController.serviceChangeB(crafftController.selected.b1)}" immediate="true"></f:ajax>
                         </p:selectOneMenu>
                         
                         <p:outputLabel value="#{bundle.CreateCrafftTitle_B2}" for="B2" style="width:350px" rendered="#{crafftController.puntajeA != 0}"/>
                         <p:selectOneMenu id="B2" value="#{crafftController.selected.b2}" style="width:50px" rendered="#{crafftController.puntajeA != 0}">
                             <f:selectItem itemValue="#{true}" itemLabel="Si"/>
                             <f:selectItem itemValue="#{false}" itemLabel="No" />
-                            <f:ajax event="valueChange"  listener="#{crafftController.serviceChangeB(crafftController.selected.b2)}" immediate="true"></f:ajax>
                         </p:selectOneMenu>
                         
                         <p:outputLabel value="#{bundle.CreateCrafftTitle_B3}" for="B3" style="width:350px" rendered="#{crafftController.puntajeA != 0}"/>
                         <p:selectOneMenu id="B3" value="#{crafftController.selected.b3}" style="width:50px" rendered="#{crafftController.puntajeA != 0}">
                             <f:selectItem itemValue="#{true}" itemLabel="Si"/>
                             <f:selectItem itemValue="#{false}" itemLabel="No" />
-                            <f:ajax event="valueChange"  listener="#{crafftController.serviceChangeB(crafftController.selected.b3)}" immediate="true"></f:ajax>
                         </p:selectOneMenu>
                         
                         <p:outputLabel value="#{bundle.CreateCrafftTitle_B4}" for="B4" style="width:350px" rendered="#{crafftController.puntajeA != 0}"/>
                         <p:selectOneMenu id="B4" value="#{crafftController.selected.b4}" style="width:50px" rendered="#{crafftController.puntajeA != 0}">
                             <f:selectItem itemValue="#{true}" itemLabel="Si"/>
                             <f:selectItem itemValue="#{false}" itemLabel="No" />
-                            <f:ajax event="valueChange"  listener="#{crafftController.serviceChangeB(crafftController.selected.b4)}" immediate="true"></f:ajax>
                         </p:selectOneMenu>
                         
                         <p:outputLabel value="#{bundle.CreateCrafftTitle_B5}" for="B5" style="width:350px" rendered="#{crafftController.puntajeA != 0}"/>
                         <p:selectOneMenu id="B5" value="#{crafftController.selected.b5}" style="width:50px" rendered="#{crafftController.puntajeA != 0}">
                             <f:selectItem itemValue="#{true}" itemLabel="Si"/>
                             <f:selectItem itemValue="#{false}" itemLabel="No" />
-                            <f:ajax event="valueChange"  listener="#{crafftController.serviceChangeB(crafftController.selected.b5)}" immediate="true"></f:ajax>
                         </p:selectOneMenu>
                         
                         <p:outputLabel value="#{bundle.CreateCrafftTitle_B6}" for="B6" style="width:350px" rendered="#{crafftController.puntajeA != 0}"/>
                         <p:selectOneMenu id="B6" value="#{crafftController.selected.b6}" style="width:50px" rendered="#{crafftController.puntajeA != 0}">
                             <f:selectItem itemValue="#{true}" itemLabel="Si"/>
                             <f:selectItem itemValue="#{false}" itemLabel="No" />
-                            <f:ajax event="valueChange"  listener="#{crafftController.serviceChangeB(crafftController.selected.b6)}" immediate="true"></f:ajax>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{crafftController.create}" value="#{bundle.Save}" update="display,:CrafftListForm:datalist,:growl" oncomplete="handleSubmit(args,'CrafftCreateDialog');"/>
