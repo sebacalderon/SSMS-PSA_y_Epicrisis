@@ -38,6 +38,14 @@ public class pueblo_originario implements Serializable {
         this.id = id;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;

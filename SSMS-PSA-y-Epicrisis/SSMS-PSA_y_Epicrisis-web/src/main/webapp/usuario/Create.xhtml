@@ -12,16 +12,31 @@
         <p:dialog id="UsuarioCreateDlg" widgetVar="UsuarioCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUsuarioTitle}">
             <h:form id="UsuarioCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
+                    <p:panelGrid columns="3" rendered="#{usuarioController.selected != null}">
                         
-                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{usuarioController.selected.nombres}" title="#{bundle.CreateUsuarioTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_nombre}"  for="nombre" />
+                        <p:inputText id="nombre" value="#{usuarioController.selected.nombres}" title="#{bundle.CreateUsuarioTitle_nombre}" required="true" maxlength="50" />
+                        <p:separator/>
+                        
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_primer_apellido}" for="primer_apellido" />
+                        <p:inputText id="primer_apellido" value="#{usuarioController.selected.primer_apellido}" title="#{bundle.CreateUsuarioTitle_primer_apellido}" maxlength="30" required="true" />
+                        <p:separator/>
+                        
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_segundo_apellido}" for="segundo_apellido" />
+                        <p:inputText id="segundo_apellido" value="#{usuarioController.selected.segundo_apellido}" title="#{bundle.CreateUsuarioTitle_segundo_apellido}" maxlength="30" required="true" />
+                        <br/>
+                        
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_RUN}" for="run" />
+                        <p:inputMask id="run" value="#{usuarioController.selected.RUN}" title="#{bundle.CreateUsuarioTitle_RUN}" mask="99.999.999" required="true"/>
+                        <p:inputText id="dv" value="#{usuarioController.selected.DV}" title="#{bundle.CreateUsuarioTitle_DV}" maxlength="1" required="true" style="max-width: 20px;"/>   
                         
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_correo}" for="correo" />
-                        <p:inputText id="correo" value="#{usuarioController.selected.correo}" title="#{bundle.CreateUsuarioTitle_correo}" />
+                        <p:inputText id="correo" value="#{usuarioController.selected.correo}" title="#{bundle.CreateUsuarioTitle_correo}" required="true" />
+                        <p:separator/>
                         
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_password}" for="password" />
-                        <p:password id="password" value="#{usuarioController.selected.password}" title="#{bundle.CreateUsuarioTitle_password}" />
+                        <p:password id="password" value="#{usuarioController.selected.password}" title="#{bundle.CreateUsuarioTitle_password}" required="true" />
+                        <p:separator/>
                         
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_rol}" for="rol" />
                         <p:selectOneMenu id="rol" value="#{usuarioController.selected.rol}" style="width:150px">
@@ -30,7 +45,8 @@
                             <f:selectItem itemLabel="Empleado Municipal" itemValue="Empleado Municipal" noSelectionOption="false" />
                             <f:selectItem itemLabel="Super Usuario" itemValue="Super Usuario" noSelectionOption="false" />
                         </p:selectOneMenu>
-
+                        <p:separator/>
+                        
                     </p:panelGrid>
                     <p:commandButton actionListener="#{usuarioController.create}" value="#{bundle.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsuarioCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="UsuarioCreateDialog.hide()"/>

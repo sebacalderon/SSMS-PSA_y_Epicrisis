@@ -1,9 +1,9 @@
 package managedbeans;
 
-import entities.paciente;
+import entities.comuna;
 import managedbeans.util.JsfUtil;
 import managedbeans.util.JsfUtil.PersistAction;
-import sessionbeans.pacienteFacadeLocal;
+import sessionbeans.comunaFacadeLocal;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,23 +19,23 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("pacienteController")
+@Named("comunaController")
 @SessionScoped
-public class pacienteController implements Serializable {
+public class comunaController implements Serializable {
 
     @EJB
-    private sessionbeans.pacienteFacadeLocal ejbFacade;
-    private List<paciente> items = null;
-    private paciente selected;
+    private sessionbeans.comunaFacadeLocal ejbFacade;
+    private List<comuna> items = null;
+    private comuna selected;
 
-    public pacienteController() {
+    public comunaController() {
     }
 
-    public paciente getSelected() {
+    public comuna getSelected() {
         return selected;
     }
 
-    public void setSelected(paciente selected) {
+    public void setSelected(comuna selected) {
         this.selected = selected;
     }
 
@@ -45,44 +45,36 @@ public class pacienteController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private pacienteFacadeLocal getFacade() {
+    private comunaFacadeLocal getFacade() {
         return ejbFacade;
     }
 
-    public boolean esFONASA(){
-        if(selected.getPrevision()!=null){
-            return selected.getPrevision().getNombre().equals("FONASA");
-        }
-        return false;
-    }
-    
-    public paciente prepareCreate() {
-        selected = new paciente();
+    public comuna prepareCreate() {
+        selected = new comuna();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        selected.setEstado("Ingresado");
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("pacienteCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("comunaCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("comunaUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("pacienteDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("comunaDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<paciente> getItems() {
+    public List<comuna> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -117,31 +109,29 @@ public class pacienteController implements Serializable {
         }
     }
 
-    public paciente getpaciente(java.lang.Long id) {
+    public comuna getcomuna(java.lang.Long id) {
         return getFacade().find(id);
     }
 
-    public List<paciente> getItemsAvailableSelectMany() {
+    public List<comuna> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<paciente> getItemsAvailableSelectOne() {
+    public List<comuna> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    
-    
-    @FacesConverter(forClass = paciente.class)
-    public static class pacienteControllerConverter implements Converter {
+    @FacesConverter(forClass = comuna.class)
+    public static class comunaControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            pacienteController controller = (pacienteController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "pacienteController");
-            return controller.getpaciente(getKey(value));
+            comunaController controller = (comunaController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "comunaController");
+            return controller.getcomuna(getKey(value));
         }
 
         java.lang.Long getKey(String value) {
@@ -161,11 +151,11 @@ public class pacienteController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof paciente) {
-                paciente o = (paciente) object;
+            if (object instanceof comuna) {
+                comuna o = (comuna) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), paciente.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), comuna.class.getName()});
                 return null;
             }
         }

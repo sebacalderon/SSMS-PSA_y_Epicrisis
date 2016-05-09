@@ -6,7 +6,7 @@
 package entities;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 /**
  *
@@ -68,7 +69,7 @@ public class paciente implements Serializable {
     
     @NotNull(message="Debe ingresar una fecha de nacimiento")
     @Column(name="fecha_nacimiento_paciente")
-    private java.sql.Timestamp fecha_nacimiento;
+    private java.sql.Date fecha_nacimiento;
     
     @NotNull(message="Debe ingresar un run")
     @Column(name="run_paciente",length=8)
@@ -95,7 +96,11 @@ public class paciente implements Serializable {
     @ManyToOne
     @JoinColumn(name="programa_social_paciente")
     private ley_social programa_social;
-
+    
+    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
+            + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
+            + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+            message = "Debe ser un mail valido")
     @NotNull(message="Debe ingresar un correo de contacto")
     @Column(name="correo_paciente")
     private String correo;
@@ -196,12 +201,12 @@ public class paciente implements Serializable {
         this.sexo = sexo;
     }
 
-    public Timestamp getFecha_nacimiento() {
+    public Date getFecha_nacimiento() {
         return fecha_nacimiento;
     }
 
-    public void setFecha_nacimiento(Timestamp fecha_nacimiento) {
-        this.fecha_nacimiento = fecha_nacimiento;
+    public void setFecha_nacimiento(Date fecha_nacimiento) {
+        this.fecha_nacimiento =fecha_nacimiento;
     }
 
     public region getRegion_residencia() {

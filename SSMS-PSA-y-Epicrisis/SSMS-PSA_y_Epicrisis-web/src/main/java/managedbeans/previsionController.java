@@ -1,9 +1,9 @@
 package managedbeans;
 
-import entities.paciente;
+import entities.prevision;
 import managedbeans.util.JsfUtil;
 import managedbeans.util.JsfUtil.PersistAction;
-import sessionbeans.pacienteFacadeLocal;
+import sessionbeans.previsionFacadeLocal;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,23 +19,23 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("pacienteController")
+@Named("previsionController")
 @SessionScoped
-public class pacienteController implements Serializable {
+public class previsionController implements Serializable {
 
     @EJB
-    private sessionbeans.pacienteFacadeLocal ejbFacade;
-    private List<paciente> items = null;
-    private paciente selected;
+    private sessionbeans.previsionFacadeLocal ejbFacade;
+    private List<prevision> items = null;
+    private prevision selected;
 
-    public pacienteController() {
+    public previsionController() {
     }
 
-    public paciente getSelected() {
+    public prevision getSelected() {
         return selected;
     }
 
-    public void setSelected(paciente selected) {
+    public void setSelected(prevision selected) {
         this.selected = selected;
     }
 
@@ -45,44 +45,36 @@ public class pacienteController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private pacienteFacadeLocal getFacade() {
+    private previsionFacadeLocal getFacade() {
         return ejbFacade;
     }
 
-    public boolean esFONASA(){
-        if(selected.getPrevision()!=null){
-            return selected.getPrevision().getNombre().equals("FONASA");
-        }
-        return false;
-    }
-    
-    public paciente prepareCreate() {
-        selected = new paciente();
+    public prevision prepareCreate() {
+        selected = new prevision();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        selected.setEstado("Ingresado");
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("pacienteCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("previsionCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("previsionUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("pacienteDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("previsionDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<paciente> getItems() {
+    public List<prevision> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -117,31 +109,29 @@ public class pacienteController implements Serializable {
         }
     }
 
-    public paciente getpaciente(java.lang.Long id) {
+    public prevision getprevision(java.lang.Long id) {
         return getFacade().find(id);
     }
 
-    public List<paciente> getItemsAvailableSelectMany() {
+    public List<prevision> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<paciente> getItemsAvailableSelectOne() {
+    public List<prevision> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    
-    
-    @FacesConverter(forClass = paciente.class)
-    public static class pacienteControllerConverter implements Converter {
+    @FacesConverter(forClass = prevision.class)
+    public static class previsionControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            pacienteController controller = (pacienteController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "pacienteController");
-            return controller.getpaciente(getKey(value));
+            previsionController controller = (previsionController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "previsionController");
+            return controller.getprevision(getKey(value));
         }
 
         java.lang.Long getKey(String value) {
@@ -161,11 +151,11 @@ public class pacienteController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof paciente) {
-                paciente o = (paciente) object;
+            if (object instanceof prevision) {
+                prevision o = (prevision) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), paciente.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), prevision.class.getName()});
                 return null;
             }
         }

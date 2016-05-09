@@ -12,17 +12,22 @@
             <h:form id="UsuarioEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditUsuarioLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{usuarioController.selected.nombres}" title="#{bundle.EditUsuarioTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.EditUsuarioLabel_nombre}" for="nombres" />
+                        <p:inputText id="nombres" value="#{usuarioController.selected.nombres}" title="#{bundle.EditUsuarioTitle_nombre}" />
                         
+                        <p:outputLabel value="#{bundle.EditUsuarioLabel_primer_apellido}" for="primer_apellido" />
+                        <p:inputText id="primer_apellido" value="#{usuarioController.selected.primer_apellido}" title="#{bundle.EditUsuarioTitle_primer_apellido}" />
+
+                        <p:outputLabel value="#{bundle.EditUsuarioLabel_segundo_apellido}" for="segundo_apellido" />
+                        <p:inputText id="segundo_apellido" value="#{usuarioController.selected.segundo_apellido}" title="#{bundle.EditUsuarioTitle_segundo_apellido}" />
+
+                        <p:outputLabel value="#{bundle.EditUsuarioLabel_RUN}" for="run" />
+                        <p:inputText id="run" value="#{usuarioController.selected.RUN}" title="#{bundle.EditUsuarioTitle_RUN}" />
+
+                        <p:inputText id="dv" value="#{usuarioController.selected.DV}" title="#{bundle.EditUsuarioTitle_DV}" />
+
                         <p:outputLabel value="#{bundle.EditUsuarioLabel_correo}" for="correo" />
                         <p:inputText id="correo" value="#{usuarioController.selected.correo}" title="#{bundle.EditUsuarioTitle_correo}" />
-                        
-                        <p:outputLabel value="Contraseña actual:" for="old-password" />
-                        <p:password id="old-password" value="#{usuarioController.old_password}" title="#{bundle.EditUsuarioTitle_password}" />
-
-                        <p:outputLabel value="Nueva contraseña:" for="new-password" />
-                        <p:password id="new-password" value="#{usuarioController.new_password}" title="#{bundle.EditUsuarioTitle_password}" />
 
                         <p:outputLabel value="#{bundle.EditUsuarioLabel_rol}" for="rol" />
                         <p:selectOneMenu id="rol" value="#{usuarioController.selected.rol}" style="width:150px">

@@ -1,9 +1,9 @@
 package managedbeans;
 
-import entities.paciente;
+import entities.ley_social;
 import managedbeans.util.JsfUtil;
 import managedbeans.util.JsfUtil.PersistAction;
-import sessionbeans.pacienteFacadeLocal;
+import sessionbeans.ley_socialFacadeLocal;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,23 +19,23 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("pacienteController")
+@Named("ley_socialController")
 @SessionScoped
-public class pacienteController implements Serializable {
+public class ley_socialController implements Serializable {
 
     @EJB
-    private sessionbeans.pacienteFacadeLocal ejbFacade;
-    private List<paciente> items = null;
-    private paciente selected;
+    private sessionbeans.ley_socialFacadeLocal ejbFacade;
+    private List<ley_social> items = null;
+    private ley_social selected;
 
-    public pacienteController() {
+    public ley_socialController() {
     }
 
-    public paciente getSelected() {
+    public ley_social getSelected() {
         return selected;
     }
 
-    public void setSelected(paciente selected) {
+    public void setSelected(ley_social selected) {
         this.selected = selected;
     }
 
@@ -45,44 +45,36 @@ public class pacienteController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private pacienteFacadeLocal getFacade() {
+    private ley_socialFacadeLocal getFacade() {
         return ejbFacade;
     }
 
-    public boolean esFONASA(){
-        if(selected.getPrevision()!=null){
-            return selected.getPrevision().getNombre().equals("FONASA");
-        }
-        return false;
-    }
-    
-    public paciente prepareCreate() {
-        selected = new paciente();
+    public ley_social prepareCreate() {
+        selected = new ley_social();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        selected.setEstado("Ingresado");
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("pacienteCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ley_socialCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ley_socialUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("pacienteDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("ley_socialDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<paciente> getItems() {
+    public List<ley_social> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -117,31 +109,29 @@ public class pacienteController implements Serializable {
         }
     }
 
-    public paciente getpaciente(java.lang.Long id) {
+    public ley_social getley_social(java.lang.Long id) {
         return getFacade().find(id);
     }
 
-    public List<paciente> getItemsAvailableSelectMany() {
+    public List<ley_social> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<paciente> getItemsAvailableSelectOne() {
+    public List<ley_social> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    
-    
-    @FacesConverter(forClass = paciente.class)
-    public static class pacienteControllerConverter implements Converter {
+    @FacesConverter(forClass = ley_social.class)
+    public static class ley_socialControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            pacienteController controller = (pacienteController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "pacienteController");
-            return controller.getpaciente(getKey(value));
+            ley_socialController controller = (ley_socialController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "ley_socialController");
+            return controller.getley_social(getKey(value));
         }
 
         java.lang.Long getKey(String value) {
@@ -161,11 +151,11 @@ public class pacienteController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof paciente) {
-                paciente o = (paciente) object;
+            if (object instanceof ley_social) {
+                ley_social o = (ley_social) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), paciente.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), ley_social.class.getName()});
                 return null;
             }
         }

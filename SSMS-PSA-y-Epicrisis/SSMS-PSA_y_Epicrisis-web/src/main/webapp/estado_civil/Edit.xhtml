@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="estado_civilEditDlg" widgetVar="estado_civilEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.Editestado_civilTitle}">
+            <h:form id="estado_civilEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{estado_civilController.selected != null}">
+                        <p:outputLabel value="#{bundle.Editestado_civilLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{estado_civilController.selected.id}" title="#{bundle.Editestado_civilTitle_id}" />
+                        <p:outputLabel value="#{bundle.Editestado_civilLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{estado_civilController.selected.nombre}" title="#{bundle.Editestado_civilTitle_nombre}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{estado_civilController.update}" value="#{bundle.Save}" update="display,:estado_civilListForm:datalist,:growl" oncomplete="handleSubmit(args, 'estado_civilEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="estado_civilEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

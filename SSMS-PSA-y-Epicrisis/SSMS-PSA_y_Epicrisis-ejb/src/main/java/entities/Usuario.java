@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 /**
  *
@@ -53,8 +54,12 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "cesfam_usuario")
     private cesfam cesfam;
     
+    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
+        + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
+        + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+        message = "Debe ser un mail valido")
     @NotNull(message="Debe ingresar un correo")
-    @Column(name="correo_usuario")
+    @Column(name="correo_usuario", unique = true)
     private String correo;
     
     @NotNull(message="Debe ingresar una contraseña")
