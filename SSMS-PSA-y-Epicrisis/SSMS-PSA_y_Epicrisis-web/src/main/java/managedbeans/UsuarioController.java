@@ -65,8 +65,15 @@ public class UsuarioController implements Serializable {
     public void setNew_password(String new_password) {
         this.new_password = new_password;
     }
-    
 
+    public Usuario getAntiguovalor() {
+        return antiguovalor;
+    }
+
+    public void setAntiguovalor(Usuario antiguovalor) {
+        this.antiguovalor = antiguovalor;
+    }
+    
 
     public Usuario getSelected() {
         return selected;
