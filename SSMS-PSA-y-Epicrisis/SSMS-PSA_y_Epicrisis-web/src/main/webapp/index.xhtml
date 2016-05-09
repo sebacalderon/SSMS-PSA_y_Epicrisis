@@ -55,16 +55,6 @@
                 </b:row>
             </h:form>
             <br/>
-            
-
-            <h:form id="CrafftListForm">
-                <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{crafftController.prepareCreate}" update=":CrafftCreateForm" oncomplete="PF('CrafftCreateDialog').show()"/>
-                <p:dataTable id="datalist" value="#{crafftController}">
-                </p:dataTable>
-            </h:form>
-            <ui:include src="/crafft/Create.xhtml"/>
- 
-            <td><b:button look="link" value="VER CRAFT" outcome="crafft/List.xhtml"/></td>
         </ui:define>
     </ui:composition>
 </html>
