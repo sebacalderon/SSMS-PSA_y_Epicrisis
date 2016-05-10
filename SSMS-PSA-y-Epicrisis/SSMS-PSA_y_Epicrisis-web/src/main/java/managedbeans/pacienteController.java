@@ -1,11 +1,13 @@
 package managedbeans;
 
 import entities.paciente;
+import entities.prevision;
 import managedbeans.util.JsfUtil;
 import managedbeans.util.JsfUtil.PersistAction;
 import sessionbeans.pacienteFacadeLocal;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -28,6 +30,7 @@ public class pacienteController implements Serializable {
     private List<paciente> items = null;
     private paciente selected;
 
+    
     public pacienteController() {
     }
 
@@ -49,12 +52,6 @@ public class pacienteController implements Serializable {
         return ejbFacade;
     }
 
-    public boolean esFONASA(){
-        if(selected.getPrevision()!=null){
-            return selected.getPrevision().getNombre().equals("FONASA");
-        }
-        return false;
-    }
     
     public paciente prepareCreate() {
         selected = new paciente();
@@ -62,12 +59,13 @@ public class pacienteController implements Serializable {
         return selected;
     }
 
-    public void create() {
+    public String create() {
         selected.setEstado("Ingresado");
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("pacienteCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        return "/faces/paciente/List.xhtml";
     }
 
     public void update() {

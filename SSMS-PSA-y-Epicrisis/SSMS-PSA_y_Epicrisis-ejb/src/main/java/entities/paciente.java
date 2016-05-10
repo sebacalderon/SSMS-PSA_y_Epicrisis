@@ -6,7 +6,7 @@
 package entities;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -65,14 +67,15 @@ public class paciente implements Serializable {
     private String numero_direccion;
     
     @Column(name="resto_direccion_paciente",length = 50)
-    private String resto_direccion;    
+    private String resto_direccion;
     
+    @Temporal(TemporalType.DATE)
     @NotNull(message="Debe ingresar una fecha de nacimiento")
     @Column(name="fecha_nacimiento_paciente")
-    private java.sql.Date fecha_nacimiento;
+    private java.util.Date fecha_nacimiento;
     
     @NotNull(message="Debe ingresar un run")
-    @Column(name="run_paciente",length=8)
+    @Column(name="run_paciente",length=8,unique=true)
     private int RUN;
     
     @NotNull(message="Debe ingresar un dígito verificador")

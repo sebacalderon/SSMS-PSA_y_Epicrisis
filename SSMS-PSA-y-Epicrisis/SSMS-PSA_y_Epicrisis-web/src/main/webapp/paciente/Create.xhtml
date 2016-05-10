@@ -43,8 +43,7 @@
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_resto_direccion}" for="resto_direccion" />
                         <p:inputText id="resto_direccion" value="#{pacienteController.selected.resto_direccion}" title="#{bundle.CreatepacienteTitle_resto_direccion}" maxlength="50" />
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_fecha_nacimiento}" for="fecha_nacimiento" />
-                        <p:calendar  id="fecha_nacimiento" value="#{pacienteController.selected.fecha_nacimiento}" title="#{bundle.CreatepacienteTitle_fecha_nacimiento}" required="true">
-                            <f:convertDateTime type="date"  dateStyle="short" pattern="dd/MM/yyyy" />
+                        <p:calendar  id="fecha_nacimiento" value="#{pacienteController.selected.fecha_nacimiento}" title="#{bundle.CreatepacienteTitle_fecha_nacimiento}" pattern="dd/MM/yyyy" navigator="true" required="true">
                         </p:calendar>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_RUN}" for="RUN" />    
                         <p:column>
@@ -79,7 +78,7 @@
                             <f:selectItems value="#{previsionController.items}" var="prevision" itemLabel="#{prevision.nombre}" itemValue="#{prevision}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_grupo_fonasa}" for="grupo_fonasa" />
-                        <p:selectOneMenu id="grupo_fonasa" value="#{pacienteController.selected.grupo_fonasa}" disabled="#{pacienteController.esFONASA()}">
+                        <p:selectOneMenu id="grupo_fonasa" value="#{pacienteController.selected.grupo_fonasa}">
                             <f:selectItem itemLabel="Seleccione un opción" itemValue="" noSelectionOption="true" />
                             <f:selectItem itemLabel="A" itemValue="1" noSelectionOption="false" />
                             <f:selectItem itemLabel="B" itemValue="2" noSelectionOption="false" />
@@ -102,11 +101,10 @@
                             <f:selectItems value="#{pueblo_originarioController.items}" var="pueblo_originario" itemLabel="#{pueblo_originario.nombre}" itemValue="#{pueblo_originario}"/>
                         </p:selectOneMenu>
                         <f:facet name="footer">
-                            <p:commandButton actionListener="#{pacienteController.create}" value="#{bundle.Save}" update="display,:growl" onclick="/paciente/List?faces-redirect=true"/>
+                            <p:commandButton actionListener="#{pacienteController.create}" value="#{bundle.Save}" update="display,:growl"/>
                             <p:button  value="#{bundle.Cancel}" outcome="/paciente/List" />
                         </f:facet>
                     </p:panelGrid>
-
                 </h:panelGroup>
             </h:form>
         </b:panel>
