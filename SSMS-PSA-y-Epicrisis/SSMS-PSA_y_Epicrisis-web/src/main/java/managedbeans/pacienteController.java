@@ -6,6 +6,7 @@ import managedbeans.util.JsfUtil.PersistAction;
 import sessionbeans.pacienteFacadeLocal;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -27,7 +28,7 @@ public class pacienteController implements Serializable {
     private sessionbeans.pacienteFacadeLocal ejbFacade;
     private List<paciente> items = null;
     private paciente selected;
-
+    
     public pacienteController() {
     }
 
@@ -36,8 +37,8 @@ public class pacienteController implements Serializable {
     }
 
     public void setSelected(paciente selected) {
-        this.selected = selected;
-    }
+        this.selected = selected; 
+   }
 
     protected void setEmbeddableKeys() {
     }
@@ -102,7 +103,7 @@ public class pacienteController implements Serializable {
             } catch (EJBException ex) {
                 String msg = "";
                 Throwable cause = ex.getCause();
-                if (cause != null) {
+                    if (cause != null) {
                     msg = cause.getLocalizedMessage();
                 }
                 if (msg.length() > 0) {
@@ -171,5 +172,5 @@ public class pacienteController implements Serializable {
         }
 
     }
-
+    
 }
