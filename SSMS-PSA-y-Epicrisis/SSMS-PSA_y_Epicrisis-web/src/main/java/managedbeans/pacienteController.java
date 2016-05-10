@@ -67,6 +67,10 @@ public class pacienteController implements Serializable {
 
     public String create() {
         selected.setEstado("Ingresado");
+        System.out.println("Comuna Residencia: "+selected.getComuna_residencia());
+        System.out.println("Nacionalidad: "+selected.getNacionalidad());
+        System.out.println("Prevision: "+selected.getPrevision());
+        System.out.println("Beneficiario de FONASA: "+selected.getGrupo_fonasa());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("pacienteCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.

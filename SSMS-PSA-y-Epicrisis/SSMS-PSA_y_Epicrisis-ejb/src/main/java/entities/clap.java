@@ -141,8 +141,8 @@ public class clap implements Serializable {
     @Column(name="numero_consulta_clap")
     private Long numero_consulta;
     
-    @Temporal(TemporalType.DATE)
     @NotNull
+    @Temporal(TemporalType.DATE)
     @Column(name="fecha_consulta_clap")
     private java.util.Date fecha_consulta;
 

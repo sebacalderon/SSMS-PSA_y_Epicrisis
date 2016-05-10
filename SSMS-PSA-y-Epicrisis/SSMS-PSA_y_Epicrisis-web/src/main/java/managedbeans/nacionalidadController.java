@@ -174,14 +174,14 @@ public class nacionalidadController implements Serializable {
 
     }
     
-    public List<String> completeNacionalidad(String query) {
-        List<String> results = new ArrayList<String>();
+    public List<nacionalidad> completeNacionalidad(String query) {
+        List<nacionalidad> results = new ArrayList<nacionalidad>();
         getItems();
         for(int i = 0; i < getItems().size(); i++) {
             if (items.get(i).getNombre().toUpperCase().contains(query.toUpperCase())) {
-                results.add(items.get(i).getNombre());
+                results.add(items.get(i));
             }
-        }   
+        }
         return results;
     }
 }

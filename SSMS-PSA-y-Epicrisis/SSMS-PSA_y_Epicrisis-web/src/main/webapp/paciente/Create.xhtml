@@ -32,7 +32,7 @@
                             <f:selectItems value="#{regionController.items}" var="region" itemLabel="#{region.nombre}" itemValue="#{region}" />
                         </p:selectOneMenu>                      
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_comuna_residencia}" for="comuna_residencia" />
-                        <p:autoComplete id="comuna_residencia" forceSelection="true" value="#{comunaController.comuna}" completeMethod="#{comunaController.completeComuna}" />
+                        <p:autoComplete id="comuna_residencia" forceSelection="true" value="#{comunaController.comuna}" completeMethod="#{comunaController.completeComuna}" required="true" />
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_calle_direccion}" for="calle_direccion" />
                         <p:inputText id="calle_direccion" value="#{pacienteController.selected.calle_direccion}" title="#{bundle.CreatepacienteTitle_calle_direccion}" maxlength="50" required="true" />
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_numero_direccion}" for="numero_direccion" />
@@ -74,7 +74,7 @@
                         <p:selectOneMenu id="prevision" value="#{pacienteController.selected.prevision}"  required="true">
                             <f:selectItem itemLabel="Seleccione un opción" itemValue="" noSelectionOption="true" />
                             <f:selectItems value="#{previsionController.items}" var="prevision" itemLabel="#{prevision.nombre}" itemValue="#{prevision}"/>
-                            <f:ajax event="valueChange" immediate="true" render="display" ></f:ajax>
+                            <f:ajax event="valueChange" immediate="true" render="grupo_fonasa" ></f:ajax>
                         </p:selectOneMenu>
                         
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_grupo_fonasa}" for="grupo_fonasa" />
@@ -87,7 +87,7 @@
                         </p:selectOneMenu>
                         
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_nacionalidad}" for="nacionalidad" />
-                        <p:autoComplete id="nacionalidad" forceSelection="true" value="#{nacionalidadController.nacionalidad}" completeMethod="#{nacionalidadController.completeNacionalidad}" />
+                        <p:autoComplete id="nacionalidad" forceSelection="true" value="#{nacionalidadController.nacionalidad}" completeMethod="#{nacionalidadController.completeNacionalidad}" required="true" />
 
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_estado_conyugal}" for="estado_conyugal" />
                         <p:selectOneMenu id="estado_conyugal" value="#{pacienteController.selected.estado_conyugal}" >
@@ -101,7 +101,7 @@
                         </p:selectOneMenu>                        
 
                         <f:facet name="footer">
-                            <p:commandButton actionListener="#{pacienteController.create}" value="#{bundle.Save}" update="display,:growl"/>
+                            <p:commandButton actionListener="#{pacienteController.create}" value="#{bundle.Save}"  onclick="/paciente/List?faces-redirect=true"/>
                             <p:button  value="#{bundle.Cancel}" outcome="/paciente/List" />
                         </f:facet>
                     </p:panelGrid>

@@ -44,17 +44,16 @@ public class paciente implements Serializable {
     @Column(name="segundo_apellido_paciente",length=30)
     private String segundo_apellido;
     
-    @NotNull(message="Debe ingresar un nombre social o apodo")
     @Column(name="nombre_social_paciente")
     private String nombre_social;
     
-    @ManyToOne
     @NotNull(message="Debe ingresar una región de residencia")    
+    @ManyToOne
     @JoinColumn(name="region_residencia_paciente")
     private region region_residencia;
     
-    @ManyToOne
     @NotNull(message="Debe ingresar una comuna de residencia")
+    @ManyToOne
     @JoinColumn(name="comuna_residencia_paciente")
     private comuna comuna_residencia;
     
@@ -69,8 +68,8 @@ public class paciente implements Serializable {
     @Column(name="resto_direccion_paciente",length = 50)
     private String resto_direccion;
     
-    @Temporal(TemporalType.DATE)
     @NotNull(message="Debe ingresar una fecha de nacimiento")
+    @Temporal(TemporalType.DATE)
     @Column(name="fecha_nacimiento_paciente")
     private java.util.Date fecha_nacimiento;
     
@@ -94,22 +93,18 @@ public class paciente implements Serializable {
     
     @NotNull(message="Debe ingresar un sexo")
     @Column(name="sexo_usuario")
-    private int sexo;    
+    private int sexo;
     
     @ManyToOne
     @JoinColumn(name="programa_social_paciente")
     private ley_social programa_social;
     
-    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
-            + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
-            + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
-            message = "Debe ser un mail valido")
     @NotNull(message="Debe ingresar un correo de contacto")
     @Column(name="correo_paciente")
     private String correo;
     
-    @ManyToOne
     @NotNull(message="Debe ingresar un tipo de previsión")
+    @ManyToOne
     @JoinColumn(name="prevision_paciente")
     private prevision prevision;
     
@@ -135,7 +130,7 @@ public class paciente implements Serializable {
     public String getNombre_social() {
         return nombre_social;
     }
-
+    
     public void setNombre_social(String nombre_social) {
         this.nombre_social = nombre_social;
     }
