@@ -6,6 +6,7 @@ import managedbeans.util.JsfUtil.PersistAction;
 import sessionbeans.nacionalidadFacadeLocal;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -28,6 +29,17 @@ public class nacionalidadController implements Serializable {
     private List<nacionalidad> items = null;
     private nacionalidad selected;
 
+    private String nacionalidad;
+
+    public String getNacionalidad() {
+        return nacionalidad;
+    }
+
+    public void setNacionalidad(String nacionalidad) {
+        this.nacionalidad = nacionalidad;
+    }
+    
+    
     public nacionalidadController() {
     }
 
@@ -161,5 +173,15 @@ public class nacionalidadController implements Serializable {
         }
 
     }
-
+    
+    public List<String> completeNacionalidad(String query) {
+        List<String> results = new ArrayList<String>();
+        getItems();
+        for(int i = 0; i < getItems().size(); i++) {
+            if (items.get(i).getNombre().toUpperCase().contains(query.toUpperCase())) {
+                results.add(items.get(i).getNombre());
+            }
+        }   
+        return results;
+    }
 }

@@ -6,6 +6,7 @@ import managedbeans.util.JsfUtil.PersistAction;
 import sessionbeans.comunaFacadeLocal;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -25,8 +26,19 @@ public class comunaController implements Serializable {
 
     @EJB
     private sessionbeans.comunaFacadeLocal ejbFacade;
-    private List<comuna> items = null;
+    List<comuna> items = null;
     private comuna selected;
+    
+    private String comuna;
+
+    public String getComuna() {
+        return comuna;
+    }
+
+    public void setComuna(String comuna) {
+        this.comuna = comuna;
+    }
+
 
     public comunaController() {
     }
@@ -160,6 +172,17 @@ public class comunaController implements Serializable {
             }
         }
 
+    }
+    
+    public List<String> completeComuna(String query) {
+        List<String> results = new ArrayList<String>();
+        getItems();
+        for(int i = 0; i < getItems().size(); i++) {
+            if (items.get(i).getNombre().toUpperCase().contains(query.toUpperCase())) {
+                results.add(items.get(i).getNombre());
+            }
+        }   
+        return results;
     }
 
 }
