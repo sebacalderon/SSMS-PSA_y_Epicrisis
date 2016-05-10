@@ -38,7 +38,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListpacienteTitle_nacionalidad}"/>
                             </f:facet>
-                            <h:outputText value="#{item.nacionalidad}"/>
+                            <h:outputText value="#{item.nacionalidad.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -50,7 +50,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListpacienteTitle_fecha_nacimiento}"/>
                             </f:facet>
-                            <h:outputText value="#{item.fecha_nacimiento}"/>
+                            <h:outputText value="#{item.fecha_nacimiento.day}/#{item.fecha_nacimiento.month}/#{item.fecha_nacimiento.year}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

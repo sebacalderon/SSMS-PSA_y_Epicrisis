@@ -29,6 +29,77 @@
         <param-name>BootsFaces_THEME</param-name>
         <param-value>cerulean</param-value>
     </context-param>
+    <security-constraint>
+        <display-name>SuperUsuarioConstrain</display-name>
+        <web-resource-collection>
+            <web-resource-name>Usuarios</web-resource-name>
+            <description/>
+            <url-pattern>/faces/usuario/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>Auditoria</web-resource-name>
+            <description/>
+            <url-pattern>/faces/auditoria/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>CESFAM</web-resource-name>
+            <description/>
+            <url-pattern>/faces/cesfam/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>Comuna</web-resource-name>
+            <description/>
+            <url-pattern>/faces/comuna/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>Ley Social</web-resource-name>
+            <description/>
+            <url-pattern>/faces/ley_social/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>Estado civil</web-resource-name>
+            <description/>
+            <url-pattern>/faces/estado_civil/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>Nacionalidad</web-resource-name>
+            <description/>
+            <url-pattern>/faces/nacionalidad/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>Prevision</web-resource-name>
+            <description/>
+            <url-pattern>/faces/prevision/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>Pueblo Originario</web-resource-name>
+            <description/>
+            <url-pattern>/faces/pueblo_originario/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>Region</web-resource-name>
+            <description/>
+            <url-pattern>/faces/region/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>Super Usuario</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>UsuarioLogueadoConstrain</display-name>
+        <web-resource-collection>
+            <web-resource-name>Pacientes</web-resource-name>
+            <description/>
+            <url-pattern>/faces/paciente/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>Funcionario CESFAM</role-name>
+            <role-name>Empleado Municipal</role-name>
+            <role-name>Super Usuario</role-name>
+        </auth-constraint>
+    </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>SSMSRealm</realm-name>

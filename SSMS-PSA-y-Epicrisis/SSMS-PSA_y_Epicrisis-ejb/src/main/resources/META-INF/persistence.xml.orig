@@ -4,13 +4,8 @@
     <jta-data-source>jdbc/SSMS</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-<<<<<<< HEAD
-      <property name="javax.persistence.schema-generation.database.action" value="create"/>
-      <!--<property name="javax.persistence.sql-load-script-source" value="META-INF/poblado.sql"/>-->
-=======
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
       <property name="javax.persistence.sql-load-script-source" value="META-INF/poblado.sql"/>
->>>>>>> origin/master
     </properties>
   </persistence-unit>
 </persistence>
