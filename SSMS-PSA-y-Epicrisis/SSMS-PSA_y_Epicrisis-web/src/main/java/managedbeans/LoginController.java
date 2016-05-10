@@ -128,7 +128,7 @@ public class LoginController implements Serializable{
              if(request.getRemoteUser() == null){//si el usuario no esta logueado
                  verify=false;//retorna falso
              }
-             else{//sino esta logueado y retorna verdadero
+             else{//sino, esta logueado y retorna verdadero
                  verify=true;
              }
              
@@ -166,5 +166,4 @@ public class LoginController implements Serializable{
     public boolean esSuperUsuario(){
         return usuarioLogueado.getRol().equals("Super Usuario");
     }
-    
 }

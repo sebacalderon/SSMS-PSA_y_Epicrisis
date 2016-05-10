@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CrafftCreateDlg" widgetVar="CrafftCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCrafftTitle}">
+            <h:form id="CrafftCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{crafftController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCrafftTitle_A1}" for="A1" style="width:350px" />
+                        <p:selectOneMenu id="A1" value="#{crafftController.selected.a1}" style="width:50px">
+                            <f:selectItem itemValue="#{true}" itemLabel="Si"/>
+                            <f:selectItem itemValue="#{false}" itemLabel="No" />
+                            <f:ajax event="valueChange"  listener="#{crafftController.serviceChangeA(crafftController.selected.a1)}" immediate="true" render="display" ></f:ajax>
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundle.CreateCrafftTitle_A2}" for="A2" style="width:350px"/>
+                        <p:selectOneMenu id="A2" value="#{crafftController.selected.a2}" style="width:50px">
+                            <f:selectItem itemValue="#{true}" itemLabel="Si"/>
+                            <f:selectItem itemValue="#{false}" itemLabel="No" />
+                            <f:ajax event="valueChange"  listener="#{crafftController.serviceChangeA(crafftController.selected.a2)}" immediate="true" render="display"></f:ajax>
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundle.CreateCrafftTitle_A3}" for="A3" style="width:350px"/>
+                        <p:selectOneMenu id="A3" value="#{crafftController.selected.a3}" style="width:50px">
+                            <f:selectItem itemValue="#{true}" itemLabel="Si"/>
+                            <f:selectItem itemValue="#{false}" itemLabel="No" />
+                            <f:ajax event="valueChange"  listener="#{crafftController.serviceChangeA(crafftController.selected.a3)}" immediate="true" render="display"></f:ajax>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="#{bundle.CreateCrafftTitle_B1}" for="B1" style="width:350px"/>
+                        <p:selectOneMenu id="B1" value="#{crafftController.selected.b1}" style="width:50px">
+                            <f:selectItem itemValue="#{true}" itemLabel="Si"/>
+                            <f:selectItem itemValue="#{false}" itemLabel="No" />
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundle.CreateCrafftTitle_B2}" for="B2" style="width:350px" rendered="#{crafftController.puntajeA != 0}"/>
+                        <p:selectOneMenu id="B2" value="#{crafftController.selected.b2}" style="width:50px" rendered="#{crafftController.puntajeA != 0}">
+                            <f:selectItem itemValue="#{true}" itemLabel="Si"/>
+                            <f:selectItem itemValue="#{false}" itemLabel="No" />
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundle.CreateCrafftTitle_B3}" for="B3" style="width:350px" rendered="#{crafftController.puntajeA != 0}"/>
+                        <p:selectOneMenu id="B3" value="#{crafftController.selected.b3}" style="width:50px" rendered="#{crafftController.puntajeA != 0}">
+                            <f:selectItem itemValue="#{true}" itemLabel="Si"/>
+                            <f:selectItem itemValue="#{false}" itemLabel="No" />
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundle.CreateCrafftTitle_B4}" for="B4" style="width:350px" rendered="#{crafftController.puntajeA != 0}"/>
+                        <p:selectOneMenu id="B4" value="#{crafftController.selected.b4}" style="width:50px" rendered="#{crafftController.puntajeA != 0}">
+                            <f:selectItem itemValue="#{true}" itemLabel="Si"/>
+                            <f:selectItem itemValue="#{false}" itemLabel="No" />
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundle.CreateCrafftTitle_B5}" for="B5" style="width:350px" rendered="#{crafftController.puntajeA != 0}"/>
+                        <p:selectOneMenu id="B5" value="#{crafftController.selected.b5}" style="width:50px" rendered="#{crafftController.puntajeA != 0}">
+                            <f:selectItem itemValue="#{true}" itemLabel="Si"/>
+                            <f:selectItem itemValue="#{false}" itemLabel="No" />
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundle.CreateCrafftTitle_B6}" for="B6" style="width:350px" rendered="#{crafftController.puntajeA != 0}"/>
+                        <p:selectOneMenu id="B6" value="#{crafftController.selected.b6}" style="width:50px" rendered="#{crafftController.puntajeA != 0}">
+                            <f:selectItem itemValue="#{true}" itemLabel="Si"/>
+                            <f:selectItem itemValue="#{false}" itemLabel="No" />
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{crafftController.create}" value="#{bundle.Save}" update="display,:CrafftListForm:datalist,:growl" oncomplete="handleSubmit(args,'CrafftCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CrafftCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

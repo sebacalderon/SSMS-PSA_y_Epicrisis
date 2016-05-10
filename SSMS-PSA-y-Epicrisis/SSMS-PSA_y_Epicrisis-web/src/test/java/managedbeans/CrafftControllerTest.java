@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
+package managedbeans;
 
+import managedbeans.CrafftController;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -14,11 +15,12 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author calde
+ * @author Seba
  */
-public class UsuarioTest {
-    private Usuario usuario;
-    public UsuarioTest() {
+public class CrafftControllerTest {
+    CrafftController instance;
+    
+    public CrafftControllerTest() {
     }
     
     @BeforeClass
@@ -31,26 +33,23 @@ public class UsuarioTest {
     
     @Before
     public void setUp() {
-        usuario = new Usuario();
-        usuario.setPassword("");
+        instance = new CrafftController();
+        instance.setPuntajeA(0);
     }
     
     @After
     public void tearDown() {
     }
-
+    
     /**
-     * Test of cambiarPassword method, of class Usuario.
+     * Test of serviceChangeA method, of class CrafftController.
      */
     @Test
-    public void testCambiarPassword() {
-        System.out.println("cambiarPassword");
-        String old_password = "";
-        String new_password = "1";
-        boolean expResult = true;
-        boolean result = usuario.cambiarPassword(old_password, new_password);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
+    public void testServiceChangeA() {
+        System.out.println("serviceChangeA");
+        boolean resp = false;
+        instance.serviceChangeA(resp);
+        assertEquals(1, instance.getPuntajeA());
     }
     
 }

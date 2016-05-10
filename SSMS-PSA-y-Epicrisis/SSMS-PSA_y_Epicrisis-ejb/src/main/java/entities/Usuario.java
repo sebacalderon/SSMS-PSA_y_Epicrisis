@@ -213,7 +213,7 @@ public class Usuario implements Serializable {
         return "entities.Usuario[ id=" + id + " ]";
     }
     
-    private String sha256(String base){
+    public String sha256(String base){
         try{
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(base.getBytes("UTF-8"));

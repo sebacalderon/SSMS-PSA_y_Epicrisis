@@ -1,13 +1,11 @@
 package managedbeans;
 
-import entities.paciente;
-import entities.prevision;
+import entities.Crafft;
 import managedbeans.util.JsfUtil;
 import managedbeans.util.JsfUtil.PersistAction;
-import sessionbeans.pacienteFacadeLocal;
+import sessionbeans.CrafftFacadeLocal;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -21,24 +19,33 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("pacienteController")
+@Named("crafftController")
 @SessionScoped
-public class pacienteController implements Serializable {
+public class CrafftController implements Serializable {
 
     @EJB
-    private sessionbeans.pacienteFacadeLocal ejbFacade;
-    private List<paciente> items = null;
-    private paciente selected;
+    private sessionbeans.CrafftFacadeLocal ejbFacade;
+    private List<Crafft> items = null;
+    private Crafft selected;
+    private int puntajeA;
+    private int puntajeB;
 
-    
-    public pacienteController() {
+    public int getPuntajeA() {
+        return puntajeA;
     }
 
-    public paciente getSelected() {
+    public void setPuntajeA(int puntajeA) {
+        this.puntajeA = puntajeA;
+    }
+
+    public CrafftController() {
+    }
+
+    public Crafft getSelected() {
         return selected;
     }
 
-    public void setSelected(paciente selected) {
+    public void setSelected(Crafft selected) {
         this.selected = selected;
     }
 
@@ -48,45 +55,38 @@ public class pacienteController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private pacienteFacadeLocal getFacade() {
+    private CrafftFacadeLocal getFacade() {
         return ejbFacade;
     }
 
-    public boolean esFONASA(){
-        if(selected.getPrevision()!=null){
-            return selected.getPrevision().getNombre().equals("FONASA");
-        }
-        return false;
-    }
-    
-    public paciente prepareCreate() {
-        selected = new paciente();
+    public Crafft prepareCreate() {
+        puntajeA = 0;
+        puntajeB = 0;
+        selected = new Crafft();
         initializeEmbeddableKey();
         return selected;
     }
 
-    public String create() {
-        selected.setEstado("Ingresado");
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("pacienteCreated"));
+    public void create() {
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("CrafftCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
-        return "/faces/paciente/List.xhtml";
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("CrafftUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("pacienteDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("CrafftDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<paciente> getItems() {
+    public List<Crafft> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -121,31 +121,29 @@ public class pacienteController implements Serializable {
         }
     }
 
-    public paciente getpaciente(java.lang.Long id) {
+    public Crafft getCrafft(java.lang.Long id) {
         return getFacade().find(id);
     }
 
-    public List<paciente> getItemsAvailableSelectMany() {
+    public List<Crafft> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<paciente> getItemsAvailableSelectOne() {
+    public List<Crafft> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    
-    
-    @FacesConverter(forClass = paciente.class)
-    public static class pacienteControllerConverter implements Converter {
+    @FacesConverter(forClass = Crafft.class)
+    public static class CrafftControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            pacienteController controller = (pacienteController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "pacienteController");
-            return controller.getpaciente(getKey(value));
+            CrafftController controller = (CrafftController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "crafftController");
+            return controller.getCrafft(getKey(value));
         }
 
         java.lang.Long getKey(String value) {
@@ -165,15 +163,24 @@ public class pacienteController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof paciente) {
-                paciente o = (paciente) object;
+            if (object instanceof Crafft) {
+                Crafft o = (Crafft) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), paciente.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Crafft.class.getName()});
                 return null;
             }
         }
-
     }
-
+    public void serviceChangeA(boolean resp){
+        System.out.println("Change A to: " + !resp);
+       if (resp) {
+            if (puntajeA>=1) {
+                puntajeA-=1;
+            }
+        }else{
+             puntajeA+=1;
+        }
+        System.out.println("Puntaje A = " + puntajeA);
+    }
 }
