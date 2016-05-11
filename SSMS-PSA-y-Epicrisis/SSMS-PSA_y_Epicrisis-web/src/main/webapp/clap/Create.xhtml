@@ -17,6 +17,104 @@
         <b:panel id="clapCreateDlg" title="#{bundle.CreateclapTitle}">
             <h:form id="clapCreateForm">
                     <p:panelGrid columns="4" rendered="#{clapController.selected != null}">
+                        <p:column colspan="4">
+                            <p:separator title="Ficha personal del paciente" />
+                        </p:column>
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_nombres}" for="nombres" />
+                        <p:inputText id="nombres" value="#{pacienteController.selected.nombres}" title="#{bundle.CreatepacienteTitle_nombres}" maxlength="50" required="true" />
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_primer_apellido}" for="primer_apellido" />
+                        <p:inputText id="primer_apellido" value="#{pacienteController.selected.primer_apellido}" title="#{bundle.CreatepacienteTitle_primer_apellido}" maxlength="30" required="true" />
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_segundo_apellido}" for="segundo_apellido" />
+                        <p:inputText id="segundo_apellido" value="#{pacienteController.selected.segundo_apellido}" title="#{bundle.CreatepacienteTitle_segundo_apellido}" maxlength="30" required="true" />
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_nombre_social}" for="nombre_social" />
+                        <p:inputText id="nombre_social" value="#{pacienteController.selected.nombre_social}" title="#{bundle.CreatepacienteTitle_nombre_social}" />
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_region_residencia}" for="region_residencia" />
+                        <p:selectOneMenu id="region_residencia" value="#{pacienteController.selected.region_residencia}" required="true" >
+                            <f:selectItem itemLabel="Seleccione una región" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{regionController.items}" var="region" itemLabel="#{region.nombre}" itemValue="#{region}" />
+                        </p:selectOneMenu>                      
+     
+                          
+                        
+                        
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_comuna_residencia}" for="comuna_residencia" />
+                        <p:autoComplete id="comuna_residencia" value="#{pacienteController.selected.comuna_residencia}" completeMethod="#{comunaController.completeComuna}"
+                        var="comuna" itemLabel="#{comuna.nombre}" itemValue="#{comuna}" converter="entityConverter" forceSelection="true" />
+                        
+                                              
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_calle_direccion}" for="calle_direccion" />
+                        <p:inputText id="calle_direccion" value="#{pacienteController.selected.calle_direccion}" title="#{bundle.CreatepacienteTitle_calle_direccion}" maxlength="50" required="true" />
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_numero_direccion}" for="numero_direccion" />
+                        <p:inputText id="numero_direccion" value="#{pacienteController.selected.numero_direccion}" title="#{bundle.CreatepacienteTitle_numero_direccion}" maxlength="8" required="true"/>
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_resto_direccion}" for="resto_direccion" />
+                        <p:inputText id="resto_direccion" value="#{pacienteController.selected.resto_direccion}" title="#{bundle.CreatepacienteTitle_resto_direccion}" maxlength="50" />
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_fecha_nacimiento}" for="fecha_nacimiento" />
+                        <p:calendar  id="fecha_nacimiento" value="#{pacienteController.selected.fecha_nacimiento}" title="#{bundle.CreatepacienteTitle_fecha_nacimiento}" pattern="dd/MM/yyyy" navigator="true" required="true">
+                        </p:calendar>
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_RUN}" for="RUN" />    
+                        <p:column>
+                            <p:inputText id="RUN" value="#{pacienteController.selected.RUN}" title="#{bundle.CreatepacienteTitle_RUN}" required="true" /> -
+                            <p:inputText id="DV" value="#{pacienteController.selected.DV}" title="#{bundle.CreatepacienteTitle_DV}" maxlength="1" style="max-width: 20px;" required="true" />
+                        </p:column>
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_cesfam}" for="cesfam" />
+                        <p:selectOneMenu id="cesfam" value="#{pacienteController.selected.cesfam}" >
+                            <f:selectItem itemLabel="Seleccione un CESFAM" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{cesfamController.items}" var="cesfam" itemLabel="#{cesfam.nombre}" itemValue="#{cesfam}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_telefono_fijo}" for="telefono_fijo" />
+                        <p:inputMask id="telefono_fijo" value="#{pacienteController.selected.telefono_fijo}" title="#{bundle.CreatepacienteTitle_telefono_fijo}" maxlength="12" mask="(99) 999-9999" />
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_teléfono_movil}" for="teléfono_movil" />
+                        <p:inputMask id="teléfono_movil" value="#{pacienteController.selected.teléfono_movil}" title="#{bundle.CreatepacienteTitle_teléfono_movil}" maxlength="12" mask="(+56) 9999-9999" />
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_correo}" for="correo" />
+                        <p:inputText id="correo" value="#{pacienteController.selected.correo}" title="#{bundle.CreatepacienteTitle_correo}" required="true" />
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_sexo}" for="sexo" />
+                        <p:selectOneMenu id="sexo" value="#{pacienteController.selected.sexo}" required="true" >
+                            <f:selectItem itemLabel="Seleccione una opción" itemValue="" noSelectionOption="true" />
+                            <f:selectItem itemLabel="Hombre" itemValue="1" noSelectionOption="false" />
+                            <f:selectItem itemLabel="Mujer" itemValue="2" noSelectionOption="false" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_programa_social}" for="programa_social"  />
+                        <p:selectOneMenu id="programa_social" value="#{pacienteController.selected.programa_social}" >
+                            <f:selectItem itemLabel="Seleccione un programa social" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{ley_socialController.items}" var="ley_social" itemLabel="#{ley_social.nombre}" itemValue="#{ley_social}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_prevision}" for="prevision" />
+                        
+                        <p:selectOneMenu id="prevision" value="#{pacienteController.selected.prevision}"  required="true">
+                            <f:selectItem itemLabel="Seleccione un opción" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{previsionController.items}" var="prevision" itemLabel="#{prevision.nombre}" itemValue="#{prevision}"/>
+                            <f:ajax event="valueChange" immediate="true" render="grupo_fonasa" ></f:ajax>
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_grupo_fonasa}" for="grupo_fonasa" />
+                        <p:selectOneMenu id="grupo_fonasa" value="#{pacienteController.selected.grupo_fonasa}" disabled="#{!pacienteController.esFONASA()}">
+                            <f:selectItem itemLabel="Seleccione un opción" itemValue="" noSelectionOption="true" />
+                            <f:selectItem itemLabel="A" itemValue="1" noSelectionOption="false" />
+                            <f:selectItem itemLabel="B" itemValue="2" noSelectionOption="false" />
+                            <f:selectItem itemLabel="C" itemValue="3" noSelectionOption="false" />
+                            <f:selectItem itemLabel="D" itemValue="4" noSelectionOption="false" />
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_nacionalidad}" for="nacionalidad" />
+                        <p:autoComplete id="nacionalidad" value="#{pacienteController.selected.nacionalidad}" completeMethod="#{nacionalidadController.completeNacionalidad}"
+                        var="nacionalidad" itemLabel="#{nacionalidad.nombre}" itemValue="#{nacionalidad}" converter="entityConverter" forceSelection="true" />
+                        
+                        
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_estado_conyugal}" for="estado_conyugal" />
+                        <p:selectOneMenu id="estado_conyugal" value="#{pacienteController.selected.estado_conyugal}" >
+                            <f:selectItem itemLabel="Seleccione un opción" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{estado_civilController.items}" var="estado_civil" itemLabel="#{estado_civil.nombre}" itemValue="#{estado_civil}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_pueblo_originario}" for="pueblo_originario" />
+                        <p:selectOneMenu id="pueblo_originario" value="#{pacienteController.selected.pueblo_originario}" >
+                            <f:selectItem itemLabel="Seleccione un pueblo originario" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{pueblo_originarioController.items}" var="pueblo_originario" itemLabel="#{pueblo_originario.nombre}" itemValue="#{pueblo_originario}"/>
+                        </p:selectOneMenu>
+                        
+                        <p:column colspan="4">
+                            <p:separator title="Informacion de la consulta" />
+                        </p:column>
+                        
                         <p:outputLabel value="#{bundle.CreateclapLabel_numero_consulta}" for="numero_consulta" />
                         <p:inputText id="numero_consulta" value="#{clapController.selected.numero_consulta}" title="#{bundle.CreateclapTitle_numero_consulta}" />
                         <p:outputLabel value="#{bundle.CreateclapLabel_fecha_consulta}" for="fecha_consulta" />
@@ -257,84 +355,9 @@
                         <p:inputText id="riesgo_nutricional" value="#{clapController.selected.riesgo_nutricional}" title="#{bundle.CreateclapTitle_riesgo_nutricional}" />
                         <p:outputLabel value="#{bundle.CreateclapLabel_riesgo_social}" for="riesgo_social" />
                         <p:inputText id="riesgo_social" value="#{clapController.selected.riesgo_social}" title="#{bundle.CreateclapTitle_riesgo_social}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_nombre_social}" for="nombre_social" />
-                        <p:inputText id="nombre_social" value="#{clapController.selected.nombre_social}" title="#{bundle.CreateclapTitle_nombre_social}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_nacionalidad}" for="nacionalidad" />
-                        <p:selectOneMenu id="nacionalidad" value="#{clapController.selected.nacionalidad}" >
-                            <f:selectItems value="#{nacionalidadController.itemsAvailableSelectOne}"
-                                           var="nacionalidadItem"
-                                           itemValue="#{nacionalidadItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateclapLabel_RUN}" for="RUN" />
-                        <p:inputText id="RUN" value="#{clapController.selected.RUN}" title="#{bundle.CreateclapTitle_RUN}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_DV}" for="DV" />
-                        <p:inputText id="DV" value="#{clapController.selected.DV}" title="#{bundle.CreateclapTitle_DV}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_nombres}" for="nombres" />
-                        <p:inputText id="nombres" value="#{clapController.selected.nombres}" title="#{bundle.CreateclapTitle_nombres}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_primer_apellido}" for="primer_apellido" />
-                        <p:inputText id="primer_apellido" value="#{clapController.selected.primer_apellido}" title="#{bundle.CreateclapTitle_primer_apellido}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_segundo_apellido}" for="segundo_apellido" />
-                        <p:inputText id="segundo_apellido" value="#{clapController.selected.segundo_apellido}" title="#{bundle.CreateclapTitle_segundo_apellido}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_sexo}" for="sexo" />
-                        <p:inputText id="sexo" value="#{clapController.selected.sexo}" title="#{bundle.CreateclapTitle_sexo}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_fecha_nacimiento}" for="fecha_nacimiento" />
-                        <p:calendar id="fecha_nacimiento" pattern="MM/dd/yyyy" value="#{clapController.selected.fecha_nacimiento}" title="#{bundle.EditclapTitle_fecha_nacimiento}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.CreateclapLabel_region_residencia}" for="region_residencia" />
-                        <p:selectOneMenu id="region_residencia" value="#{clapController.selected.region_residencia}" >
-                            <f:selectItems value="#{regionController.itemsAvailableSelectOne}"
-                                           var="region_residenciaItem"
-                                           itemValue="#{region_residenciaItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateclapLabel_comuna_residencia}" for="comuna_residencia" />
-                        <p:selectOneMenu id="comuna_residencia" value="#{clapController.selected.comuna_residencia}" >
-                            <f:selectItems value="#{comunaController.itemsAvailableSelectOne}"
-                                           var="comuna_residenciaItem"
-                                           itemValue="#{comuna_residenciaItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateclapLabel_calle_direccion}" for="calle_direccion" />
-                        <p:inputText id="calle_direccion" value="#{clapController.selected.calle_direccion}" title="#{bundle.CreateclapTitle_calle_direccion}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_numero_direccion}" for="numero_direccion" />
-                        <p:inputText id="numero_direccion" value="#{clapController.selected.numero_direccion}" title="#{bundle.CreateclapTitle_numero_direccion}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_resto_direccion}" for="resto_direccion" />
-                        <p:inputText id="resto_direccion" value="#{clapController.selected.resto_direccion}" title="#{bundle.CreateclapTitle_resto_direccion}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_telefono_fijo}" for="telefono_fijo" />
-                        <p:inputText id="telefono_fijo" value="#{clapController.selected.telefono_fijo}" title="#{bundle.CreateclapTitle_telefono_fijo}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_teléfono_movil}" for="teléfono_movil" />
-                        <p:inputText id="teléfono_movil" value="#{clapController.selected.teléfono_movil}" title="#{bundle.CreateclapTitle_teléfono_movil}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_programa_social}" for="programa_social" />
-                        <p:selectOneMenu id="programa_social" value="#{clapController.selected.programa_social}" >
-                            <f:selectItems value="#{ley_socialController.itemsAvailableSelectOne}"
-                                           var="programa_socialItem"
-                                           itemValue="#{programa_socialItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateclapLabel_prevision}" for="prevision" />
-                        <p:selectOneMenu id="prevision" value="#{clapController.selected.prevision}" >
-                            <f:selectItems value="#{previsionController.itemsAvailableSelectOne}"
-                                           var="previsionItem"
-                                           itemValue="#{previsionItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateclapLabel_estado_conyugal}" for="estado_conyugal" />
-                        <p:selectOneMenu id="estado_conyugal" value="#{clapController.selected.estado_conyugal}" >
-                            <f:selectItems value="#{estado_civilController.itemsAvailableSelectOne}"
-                                           var="estado_conyugalItem"
-                                           itemValue="#{estado_conyugalItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateclapLabel_grupo_fonasa}" for="grupo_fonasa" />
-                        <p:inputText id="grupo_fonasa" value="#{clapController.selected.grupo_fonasa}" title="#{bundle.CreateclapTitle_grupo_fonasa}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_pueblo_originario}" for="pueblo_originario" />
-                        <p:selectOneMenu id="pueblo_originario" value="#{clapController.selected.pueblo_originario}" >
-                            <f:selectItems value="#{pueblo_originarioController.itemsAvailableSelectOne}"
-                                           var="pueblo_originarioItem"
-                                           itemValue="#{pueblo_originarioItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateclapLabel_cesfam}" for="cesfam" />
-                        <p:selectOneMenu id="cesfam" value="#{clapController.selected.cesfam}" >
-                            <f:selectItems value="#{cesfamController.itemsAvailableSelectOne}"
-                                           var="cesfamItem"
-                                           itemValue="#{cesfamItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateclapLabel_correo}" for="correo" />
-                        <p:inputText id="correo" value="#{clapController.selected.correo}" title="#{bundle.CreateclapTitle_correo}" />
+
+
+                        
                         <f:facet name="footer">
                              <p:commandButton actionListener="#{clapController.create}" value="#{bundle.Save}" onclick="/clap/List?faces-redirect=true"/>
                              <p:button  value="#{bundle.Cancel}" outcome="/clap/List" />
