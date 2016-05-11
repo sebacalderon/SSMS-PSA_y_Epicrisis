@@ -89,7 +89,7 @@ public class paciente implements Serializable {
     private String telefono_fijo;
     
     @Column(name="telefono_movil_paciente")
-    private String telefono_movil;  
+    private String telefono_movil;
     
     @NotNull(message="Debe ingresar un sexo")
     @Column(name="sexo_usuario")
@@ -255,12 +255,12 @@ public class paciente implements Serializable {
         this.telefono_fijo = telefono_fijo;
     }
 
-    public String getTeléfono_movil() {
+    public String getTelefono_movil() {
         return telefono_movil;
     }
 
-    public void setTeléfono_movil(String teléfono_movil) {
-        this.telefono_movil = teléfono_movil;
+    public void setTelefono_movil(String telefono_movil) {
+        this.telefono_movil = telefono_movil;
     }
 
     public ley_social getPrograma_social() {

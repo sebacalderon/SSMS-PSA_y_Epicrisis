@@ -59,8 +59,8 @@
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_telefono_fijo}" for="telefono_fijo" />
                         <p:inputMask id="telefono_fijo" value="#{pacienteController.selected.telefono_fijo}" title="#{bundle.CreatepacienteTitle_telefono_fijo}" mask="(99) 999-9999" />
                         
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_teléfono_movil}" for="teléfono_movil" />
-                        <p:inputMask id="teléfono_movil" value="#{pacienteController.selected.telefono_movil}" title="#{bundle.CreatepacienteTitle_teléfono_movil}" mask="(+569) 9999-9999" />
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_teléfono_movil}" for="telefono_movil" />
+                        <p:inputMask id="telefono_movil" value="#{pacienteController.selected.telefono_movil}" title="#{bundle.CreatepacienteTitle_teléfono_movil}" mask="(+569) 9999-9999" />
                         
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_correo}" for="correo" />
                         <p:inputText id="correo" value="#{pacienteController.selected.correo}" title="#{bundle.CreatepacienteTitle_correo}" required="true" />
@@ -109,7 +109,7 @@
                         </p:selectOneMenu>                        
 
                         <f:facet name="footer">
-                            <p:commandButton actionListener="#{pacienteController.create}" value="#{bundle.Save}"  onclick="/paciente/List?faces-redirect=true"/>
+                            <p:commandButton action="#{pacienteController.create}" value="#{bundle.Save}"/>
                             <p:button  value="#{bundle.Cancel}" outcome="/paciente/List" />
                         </f:facet>
                     </p:panelGrid>
