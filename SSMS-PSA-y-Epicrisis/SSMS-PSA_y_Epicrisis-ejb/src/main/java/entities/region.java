@@ -6,11 +6,14 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -27,6 +30,17 @@ public class region implements Serializable {
 
     @Column(name="nombre_region")
     private String nombre;
+   
+    @OneToMany(mappedBy = "region", fetch = FetchType.LAZY)
+    private List<comuna> comunas;
+    
+    public List<comuna> getComunas() {
+        return comunas;
+    }
+ 
+    public void setComunas(List<comuna> comunas) {
+        this.comunas = comunas;
+    }
     
     public Long getId() {
         return id;
@@ -43,8 +57,6 @@ public class region implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    
     
     @Override
     public int hashCode() {

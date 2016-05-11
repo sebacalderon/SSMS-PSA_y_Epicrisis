@@ -180,7 +180,7 @@ public class nacionalidadController implements Serializable {
          
         for (int i = 0; i < allNacionalidades.size(); i++) {
             nacionalidad Nacionalidad = allNacionalidades.get(i);
-            if(Nacionalidad.getNombre().toLowerCase().startsWith(query)) {
+            if(Nacionalidad.getNombre().toLowerCase().startsWith(query.toLowerCase())) {
                 filteredNacionalidades.add(Nacionalidad);
             }
         }

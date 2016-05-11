@@ -28,17 +28,14 @@
                         <p:inputText id="nombre_social" value="#{pacienteController.selected.nombre_social}" title="#{bundle.CreatepacienteTitle_nombre_social}" />
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_region_residencia}" for="region_residencia" />
                         <p:selectOneMenu id="region_residencia" value="#{pacienteController.selected.region_residencia}" required="true" >
-                            <f:selectItem itemLabel="Seleccione una región" itemValue="" noSelectionOption="true" />
+                            <f:selectItem itemLabel="Seleccione una región" itemValue="#{null}" noSelectionOption="true" />
                             <f:selectItems value="#{regionController.items}" var="region" itemLabel="#{region.nombre}" itemValue="#{region}" />
+                            <f:ajax event="valueChange" immediate="true" render="comuna_residencia" ></f:ajax>
                         </p:selectOneMenu>                      
-     
-                          
-                        
-                        
+    
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_comuna_residencia}" for="comuna_residencia" />
-                        <p:autoComplete id="comuna_residencia" value="#{pacienteController.selected.comuna_residencia}" completeMethod="#{comunaController.completeComuna}"
-                        var="comuna" itemLabel="#{comuna.nombre}" itemValue="#{comuna}" converter="entityConverter" forceSelection="true" />
-                        
+                        <p:autoComplete id="comuna_residencia" value="#{pacienteController.selected.comuna_residencia}" completeMethod="#{pacienteController.completeComuna}"
+                                        var="comuna" itemLabel="#{comuna.nombre}" itemValue="#{comuna}" converter="entityConverter" forceSelection="true" disabled="#{!pacienteController.regionSelected()}" required="true"/>       
                                               
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_calle_direccion}" for="calle_direccion" />
                         <p:inputText id="calle_direccion" value="#{pacienteController.selected.calle_direccion}" title="#{bundle.CreatepacienteTitle_calle_direccion}" maxlength="50" required="true" />
@@ -60,9 +57,11 @@
                             <f:selectItems value="#{cesfamController.items}" var="cesfam" itemLabel="#{cesfam.nombre}" itemValue="#{cesfam}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_telefono_fijo}" for="telefono_fijo" />
-                        <p:inputMask id="telefono_fijo" value="#{pacienteController.selected.telefono_fijo}" title="#{bundle.CreatepacienteTitle_telefono_fijo}" maxlength="12" mask="(99) 999-9999" />
+                        <p:inputMask id="telefono_fijo" value="#{pacienteController.selected.telefono_fijo}" title="#{bundle.CreatepacienteTitle_telefono_fijo}" mask="(99) 999-9999" />
+                        
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_teléfono_movil}" for="teléfono_movil" />
-                        <p:inputMask id="teléfono_movil" value="#{pacienteController.selected.teléfono_movil}" title="#{bundle.CreatepacienteTitle_teléfono_movil}" maxlength="12" mask="(+56) 9999-9999" />
+                        <p:inputMask id="teléfono_movil" value="#{pacienteController.selected.telefono_movil}" title="#{bundle.CreatepacienteTitle_teléfono_movil}" mask="(+569) 9999-9999" />
+                        
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_correo}" for="correo" />
                         <p:inputText id="correo" value="#{pacienteController.selected.correo}" title="#{bundle.CreatepacienteTitle_correo}" required="true" />
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_sexo}" for="sexo" />
@@ -95,7 +94,7 @@
                         
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_nacionalidad}" for="nacionalidad" />
                         <p:autoComplete id="nacionalidad" value="#{pacienteController.selected.nacionalidad}" completeMethod="#{nacionalidadController.completeNacionalidad}"
-                        var="nacionalidad" itemLabel="#{nacionalidad.nombre}" itemValue="#{nacionalidad}" converter="entityConverter" forceSelection="true" />
+                        var="nacionalidad" itemLabel="#{nacionalidad.nombre}" itemValue="#{nacionalidad}" converter="entityConverter" forceSelection="true" required="true"/>
                         
                         
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_estado_conyugal}" for="estado_conyugal" />

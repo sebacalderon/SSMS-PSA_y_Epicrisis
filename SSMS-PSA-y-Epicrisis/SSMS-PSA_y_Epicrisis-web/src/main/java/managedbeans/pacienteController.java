@@ -1,15 +1,19 @@
 package managedbeans;
 
+import entities.comuna;
 import entities.paciente;
 import entities.prevision;
+import entities.region;
 import managedbeans.util.JsfUtil;
 import managedbeans.util.JsfUtil.PersistAction;
 import sessionbeans.pacienteFacadeLocal;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -59,18 +63,37 @@ public class pacienteController implements Serializable {
         return false;
     }
     
+    public boolean regionSelected(){
+        if(selected.getRegion_residencia()!=null){
+            return true;
+        }
+        return false;
+    }
+    
     public paciente prepareCreate() {
         selected = new paciente();
         initializeEmbeddableKey();
+        selected.setNombres("Sebastian");
+        selected.setPrimer_apellido("Calderon");
+        selected.setSegundo_apellido("Diaz");
+        selected.setCalle_direccion("sadas");
+        selected.setNumero_direccion("123");
+        selected.setFecha_nacimiento(new java.util.Date());
+        selected.setRUN(18293486);
+        selected.setDV("0");
+        selected.setCorreo("sebastian@algo.com");
+        selected.setSexo(1);
         return selected;
     }
 
     public String create() {
         selected.setEstado("Ingresado");
         System.out.println("Comuna Residencia: "+selected.getComuna_residencia());
+        System.out.println("Region: "+selected.getRegion_residencia().getComunas());
         System.out.println("Nacionalidad: "+selected.getNacionalidad());
         System.out.println("Prevision: "+selected.getPrevision());
         System.out.println("Beneficiario de FONASA: "+selected.getGrupo_fonasa());
+        System.out.println("Movil: "+selected.getTeléfono_movil());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("pacienteCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -178,6 +201,20 @@ public class pacienteController implements Serializable {
             }
         }
 
+    }
+    
+    public List<comuna> completeComuna(String query) {
+        List<comuna> allComunas = selected.getRegion_residencia().getComunas();
+        List<comuna> filteredComunas = new ArrayList<comuna>();
+         
+        for (int i = 0; i < allComunas.size(); i++) {
+            comuna Comuna = allComunas.get(i);
+            if(Comuna.getNombre().toLowerCase().startsWith(query.toLowerCase())) {
+                filteredComunas.add(Comuna);
+            }
+        }
+         
+        return filteredComunas;
     }
     
 }

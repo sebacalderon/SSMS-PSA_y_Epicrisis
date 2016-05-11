@@ -8,6 +8,7 @@ package entities;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,9 +27,9 @@ public class comuna implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="codigo_comuna")
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name="region_comuna")
+    
+    @JoinColumn(name = "region_comuna", referencedColumnName = "codigo_region")
+    @ManyToOne(fetch = FetchType.LAZY)
     private region region;
     
     @Column(name="nombre_comuna")
