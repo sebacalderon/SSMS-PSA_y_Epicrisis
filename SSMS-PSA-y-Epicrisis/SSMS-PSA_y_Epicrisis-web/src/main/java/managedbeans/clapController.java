@@ -108,6 +108,13 @@ public class clapController implements Serializable {
             }
         }
     }
+    
+    public boolean esFONASA(){
+        if(selected.getPrevision()!=null){
+            return selected.getPrevision().getNombre().equals("FONASA");
+        }
+        return false;
+    }
 
     public int calculoEdad(java.util.Date fecha_nacimiento){
         int edad=0;

@@ -174,15 +174,18 @@ public class comunaController implements Serializable {
 
     }
     
-    public List<String> completeComuna(String query) {
-        List<String> results = new ArrayList<String>();
-        getItems();
-        for(int i = 0; i < getItems().size(); i++) {
-            if (items.get(i).getNombre().toUpperCase().contains(query.toUpperCase())) {
-                results.add(items.get(i).getNombre());
+    public List<comuna> completeComuna(String query) {
+        List<comuna> allComunas = getItems();
+        List<comuna> filteredComunas = new ArrayList<comuna>();
+         
+        for (int i = 0; i < allComunas.size(); i++) {
+            comuna Comuna = allComunas.get(i);
+            if(Comuna.getNombre().toLowerCase().startsWith(query)) {
+                filteredComunas.add(Comuna);
             }
-        }   
-        return results;
+        }
+         
+        return filteredComunas;
     }
 
 }

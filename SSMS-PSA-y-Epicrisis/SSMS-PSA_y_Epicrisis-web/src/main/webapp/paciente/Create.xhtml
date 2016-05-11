@@ -31,8 +31,15 @@
                             <f:selectItem itemLabel="Seleccione una región" itemValue="" noSelectionOption="true" />
                             <f:selectItems value="#{regionController.items}" var="region" itemLabel="#{region.nombre}" itemValue="#{region}" />
                         </p:selectOneMenu>                      
+     
+                          
+                        
+                        
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_comuna_residencia}" for="comuna_residencia" />
-                        <p:autoComplete id="comuna_residencia" forceSelection="true" value="#{comunaController.comuna}" completeMethod="#{comunaController.completeComuna}" required="true" />
+                        <p:autoComplete id="comuna_residencia" value="#{pacienteController.selected.comuna_residencia}" completeMethod="#{comunaController.completeComuna}"
+                        var="comuna" itemLabel="#{comuna.nombre}" itemValue="#{comuna}" converter="entityConverter" forceSelection="true" />
+                        
+                                              
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_calle_direccion}" for="calle_direccion" />
                         <p:inputText id="calle_direccion" value="#{pacienteController.selected.calle_direccion}" title="#{bundle.CreatepacienteTitle_calle_direccion}" maxlength="50" required="true" />
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_numero_direccion}" for="numero_direccion" />
@@ -87,8 +94,10 @@
                         </p:selectOneMenu>
                         
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_nacionalidad}" for="nacionalidad" />
-                        <p:autoComplete id="nacionalidad" forceSelection="true" value="#{nacionalidadController.nacionalidad}" completeMethod="#{nacionalidadController.completeNacionalidad}" required="true" />
-
+                        <p:autoComplete id="nacionalidad" value="#{pacienteController.selected.nacionalidad}" completeMethod="#{nacionalidadController.completeNacionalidad}"
+                        var="nacionalidad" itemLabel="#{nacionalidad.nombre}" itemValue="#{nacionalidad}" converter="entityConverter" forceSelection="true" />
+                        
+                        
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_estado_conyugal}" for="estado_conyugal" />
                         <p:selectOneMenu id="estado_conyugal" value="#{pacienteController.selected.estado_conyugal}" >
                             <f:selectItem itemLabel="Seleccione un opción" itemValue="" noSelectionOption="true" />

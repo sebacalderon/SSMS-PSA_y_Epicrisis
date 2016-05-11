@@ -16,354 +16,700 @@
         <ui:define name="body">
         <b:panel id="clapCreateDlg" title="#{bundle.CreateclapTitle}">
             <h:form id="clapCreateForm">
-                    <p:panelGrid columns="4" rendered="#{clapController.selected != null}">
-                        <p:column colspan="4">
-                            <p:separator title="Ficha personal del paciente" />
-                        </p:column>
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_nombres}" for="nombres" />
-                        <p:inputText id="nombres" value="#{pacienteController.selected.nombres}" title="#{bundle.CreatepacienteTitle_nombres}" maxlength="50" required="true" />
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_primer_apellido}" for="primer_apellido" />
-                        <p:inputText id="primer_apellido" value="#{pacienteController.selected.primer_apellido}" title="#{bundle.CreatepacienteTitle_primer_apellido}" maxlength="30" required="true" />
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_segundo_apellido}" for="segundo_apellido" />
-                        <p:inputText id="segundo_apellido" value="#{pacienteController.selected.segundo_apellido}" title="#{bundle.CreatepacienteTitle_segundo_apellido}" maxlength="30" required="true" />
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_nombre_social}" for="nombre_social" />
-                        <p:inputText id="nombre_social" value="#{pacienteController.selected.nombre_social}" title="#{bundle.CreatepacienteTitle_nombre_social}" />
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_region_residencia}" for="region_residencia" />
-                        <p:selectOneMenu id="region_residencia" value="#{pacienteController.selected.region_residencia}" required="true" >
-                            <f:selectItem itemLabel="Seleccione una región" itemValue="" noSelectionOption="true" />
-                            <f:selectItems value="#{regionController.items}" var="region" itemLabel="#{region.nombre}" itemValue="#{region}" />
-                        </p:selectOneMenu>                      
-     
-                          
-                        
-                        
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_comuna_residencia}" for="comuna_residencia" />
-                        <p:autoComplete id="comuna_residencia" value="#{pacienteController.selected.comuna_residencia}" completeMethod="#{comunaController.completeComuna}"
-                        var="comuna" itemLabel="#{comuna.nombre}" itemValue="#{comuna}" converter="entityConverter" forceSelection="true" />
-                        
-                                              
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_calle_direccion}" for="calle_direccion" />
-                        <p:inputText id="calle_direccion" value="#{pacienteController.selected.calle_direccion}" title="#{bundle.CreatepacienteTitle_calle_direccion}" maxlength="50" required="true" />
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_numero_direccion}" for="numero_direccion" />
-                        <p:inputText id="numero_direccion" value="#{pacienteController.selected.numero_direccion}" title="#{bundle.CreatepacienteTitle_numero_direccion}" maxlength="8" required="true"/>
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_resto_direccion}" for="resto_direccion" />
-                        <p:inputText id="resto_direccion" value="#{pacienteController.selected.resto_direccion}" title="#{bundle.CreatepacienteTitle_resto_direccion}" maxlength="50" />
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_fecha_nacimiento}" for="fecha_nacimiento" />
-                        <p:calendar  id="fecha_nacimiento" value="#{pacienteController.selected.fecha_nacimiento}" title="#{bundle.CreatepacienteTitle_fecha_nacimiento}" pattern="dd/MM/yyyy" navigator="true" required="true">
-                        </p:calendar>
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_RUN}" for="RUN" />    
-                        <p:column>
-                            <p:inputText id="RUN" value="#{pacienteController.selected.RUN}" title="#{bundle.CreatepacienteTitle_RUN}" required="true" /> -
-                            <p:inputText id="DV" value="#{pacienteController.selected.DV}" title="#{bundle.CreatepacienteTitle_DV}" maxlength="1" style="max-width: 20px;" required="true" />
-                        </p:column>
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_cesfam}" for="cesfam" />
-                        <p:selectOneMenu id="cesfam" value="#{pacienteController.selected.cesfam}" >
-                            <f:selectItem itemLabel="Seleccione un CESFAM" itemValue="" noSelectionOption="true" />
-                            <f:selectItems value="#{cesfamController.items}" var="cesfam" itemLabel="#{cesfam.nombre}" itemValue="#{cesfam}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_telefono_fijo}" for="telefono_fijo" />
-                        <p:inputMask id="telefono_fijo" value="#{pacienteController.selected.telefono_fijo}" title="#{bundle.CreatepacienteTitle_telefono_fijo}" maxlength="12" mask="(99) 999-9999" />
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_teléfono_movil}" for="teléfono_movil" />
-                        <p:inputMask id="teléfono_movil" value="#{pacienteController.selected.teléfono_movil}" title="#{bundle.CreatepacienteTitle_teléfono_movil}" maxlength="12" mask="(+56) 9999-9999" />
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_correo}" for="correo" />
-                        <p:inputText id="correo" value="#{pacienteController.selected.correo}" title="#{bundle.CreatepacienteTitle_correo}" required="true" />
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_sexo}" for="sexo" />
-                        <p:selectOneMenu id="sexo" value="#{pacienteController.selected.sexo}" required="true" >
-                            <f:selectItem itemLabel="Seleccione una opción" itemValue="" noSelectionOption="true" />
-                            <f:selectItem itemLabel="Hombre" itemValue="1" noSelectionOption="false" />
-                            <f:selectItem itemLabel="Mujer" itemValue="2" noSelectionOption="false" />
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_programa_social}" for="programa_social"  />
-                        <p:selectOneMenu id="programa_social" value="#{pacienteController.selected.programa_social}" >
-                            <f:selectItem itemLabel="Seleccione un programa social" itemValue="" noSelectionOption="true" />
-                            <f:selectItems value="#{ley_socialController.items}" var="ley_social" itemLabel="#{ley_social.nombre}" itemValue="#{ley_social}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_prevision}" for="prevision" />
-                        
-                        <p:selectOneMenu id="prevision" value="#{pacienteController.selected.prevision}"  required="true">
-                            <f:selectItem itemLabel="Seleccione un opción" itemValue="" noSelectionOption="true" />
-                            <f:selectItems value="#{previsionController.items}" var="prevision" itemLabel="#{prevision.nombre}" itemValue="#{prevision}"/>
-                            <f:ajax event="valueChange" immediate="true" render="grupo_fonasa" ></f:ajax>
-                        </p:selectOneMenu>
-                        
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_grupo_fonasa}" for="grupo_fonasa" />
-                        <p:selectOneMenu id="grupo_fonasa" value="#{pacienteController.selected.grupo_fonasa}" disabled="#{!pacienteController.esFONASA()}">
-                            <f:selectItem itemLabel="Seleccione un opción" itemValue="" noSelectionOption="true" />
-                            <f:selectItem itemLabel="A" itemValue="1" noSelectionOption="false" />
-                            <f:selectItem itemLabel="B" itemValue="2" noSelectionOption="false" />
-                            <f:selectItem itemLabel="C" itemValue="3" noSelectionOption="false" />
-                            <f:selectItem itemLabel="D" itemValue="4" noSelectionOption="false" />
-                        </p:selectOneMenu>
-                        
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_nacionalidad}" for="nacionalidad" />
-                        <p:autoComplete id="nacionalidad" value="#{pacienteController.selected.nacionalidad}" completeMethod="#{nacionalidadController.completeNacionalidad}"
-                        var="nacionalidad" itemLabel="#{nacionalidad.nombre}" itemValue="#{nacionalidad}" converter="entityConverter" forceSelection="true" />
-                        
-                        
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_estado_conyugal}" for="estado_conyugal" />
-                        <p:selectOneMenu id="estado_conyugal" value="#{pacienteController.selected.estado_conyugal}" >
-                            <f:selectItem itemLabel="Seleccione un opción" itemValue="" noSelectionOption="true" />
-                            <f:selectItems value="#{estado_civilController.items}" var="estado_civil" itemLabel="#{estado_civil.nombre}" itemValue="#{estado_civil}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_pueblo_originario}" for="pueblo_originario" />
-                        <p:selectOneMenu id="pueblo_originario" value="#{pacienteController.selected.pueblo_originario}" >
-                            <f:selectItem itemLabel="Seleccione un pueblo originario" itemValue="" noSelectionOption="true" />
-                            <f:selectItems value="#{pueblo_originarioController.items}" var="pueblo_originario" itemLabel="#{pueblo_originario.nombre}" itemValue="#{pueblo_originario}"/>
-                        </p:selectOneMenu>
-                        
-                        <p:column colspan="4">
-                            <p:separator title="Informacion de la consulta" />
-                        </p:column>
-                        
+                <p:row>
+                    <h1 align="center">Ficha personal del paciente</h1>
+                    <p:separator/>
+                </p:row>
+                <p:panelGrid columns="4" rendered="#{clapController.selected != null}">
+                    <p:outputLabel value="#{bundle.CreatepacienteLabel_nombres}" for="nombres" />
+                    <p:inputText id="nombres" value="#{clapController.selected.nombres}" title="#{bundle.CreatepacienteTitle_nombres}" maxlength="50" required="true" />
+                    <p:outputLabel value="#{bundle.CreatepacienteLabel_primer_apellido}" for="primer_apellido" />
+                    <p:inputText id="primer_apellido" value="#{clapController.selected.primer_apellido}" title="#{bundle.CreatepacienteTitle_primer_apellido}" maxlength="30" required="true" />
+                    <p:outputLabel value="#{bundle.CreatepacienteLabel_segundo_apellido}" for="segundo_apellido" />
+                    <p:inputText id="segundo_apellido" value="#{clapController.selected.segundo_apellido}" title="#{bundle.CreatepacienteTitle_segundo_apellido}" maxlength="30" required="true" />
+                    <p:outputLabel value="#{bundle.CreatepacienteLabel_nombre_social}" for="nombre_social" />
+                    <p:inputText id="nombre_social" value="#{clapController.selected.nombre_social}" title="#{bundle.CreatepacienteTitle_nombre_social}" />
+                    <p:outputLabel value="#{bundle.CreatepacienteLabel_region_residencia}" for="region_residencia" />
+                    <p:selectOneMenu id="region_residencia" value="#{clapController.selected.region_residencia}" required="true" >
+                        <f:selectItem itemLabel="Seleccione una región" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{regionController.items}" var="region" itemLabel="#{region.nombre}" itemValue="#{region}" />
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="#{bundle.CreatepacienteLabel_comuna_residencia}" for="comuna_residencia" />
+                    <p:autoComplete id="comuna_residencia" value="#{clapController.selected.comuna_residencia}" completeMethod="#{comunaController.completeComuna}"
+                    var="comuna" itemLabel="#{comuna.nombre}" itemValue="#{comuna}" converter="entityConverter" forceSelection="true" />
+
+
+                    <p:outputLabel value="#{bundle.CreatepacienteLabel_calle_direccion}" for="calle_direccion" />
+                    <p:inputText id="calle_direccion" value="#{clapController.selected.calle_direccion}" title="#{bundle.CreatepacienteTitle_calle_direccion}" maxlength="50" required="true" />
+                    <p:outputLabel value="#{bundle.CreatepacienteLabel_numero_direccion}" for="numero_direccion" />
+                    <p:inputText id="numero_direccion" value="#{clapController.selected.numero_direccion}" title="#{bundle.CreatepacienteTitle_numero_direccion}" maxlength="8" required="true"/>
+                    <p:outputLabel value="#{bundle.CreatepacienteLabel_resto_direccion}" for="resto_direccion" />
+                    <p:inputText id="resto_direccion" value="#{clapController.selected.resto_direccion}" title="#{bundle.CreatepacienteTitle_resto_direccion}" maxlength="50" />
+                    <p:outputLabel value="#{bundle.CreatepacienteLabel_fecha_nacimiento}" for="fecha_nacimiento" />
+                    <p:calendar  id="fecha_nacimiento" value="#{clapController.selected.fecha_nacimiento}" title="#{bundle.CreatepacienteTitle_fecha_nacimiento}" pattern="dd/MM/yyyy" navigator="true" required="true">
+                    </p:calendar>
+                    <p:outputLabel value="#{bundle.CreatepacienteLabel_RUN}" for="RUN" />    
+                    <p:column>
+                        <p:inputText id="RUN" value="#{clapController.selected.RUN}" title="#{bundle.CreatepacienteTitle_RUN}" required="true" /> -
+                        <p:inputText id="DV" value="#{clapController.selected.DV}" title="#{bundle.CreatepacienteTitle_DV}" maxlength="1" style="max-width: 20px;" required="true" />
+                    </p:column>
+                    <p:outputLabel value="#{bundle.CreatepacienteLabel_cesfam}" for="cesfam" />
+                    <p:selectOneMenu id="cesfam" value="#{clapController.selected.cesfam}" >
+                        <f:selectItem itemLabel="Seleccione un CESFAM" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{cesfamController.items}" var="cesfam" itemLabel="#{cesfam.nombre}" itemValue="#{cesfam}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="#{bundle.CreatepacienteLabel_telefono_fijo}" for="telefono_fijo" />
+                    <p:inputMask id="telefono_fijo" value="#{clapController.selected.telefono_fijo}" title="#{bundle.CreatepacienteTitle_telefono_fijo}" maxlength="12" mask="(99) 999-9999" />
+                    <p:outputLabel value="#{bundle.CreatepacienteLabel_teléfono_movil}" for="telefono_movil" />
+                    <p:inputMask id="telefono_movil" value="#{clapController.selected.telefono_movil}" title="#{bundle.CreatepacienteTitle_teléfono_movil}" maxlength="12" mask="(+56) 9999-9999" />
+                    <p:outputLabel value="#{bundle.CreatepacienteLabel_correo}" for="correo" />
+                    <p:inputText id="correo" value="#{clapController.selected.correo}" title="#{bundle.CreatepacienteTitle_correo}" required="true" />
+                    <p:outputLabel value="#{bundle.CreatepacienteLabel_sexo}" for="sexo" />
+                    <p:selectOneMenu id="sexo" value="#{clapController.selected.sexo}" required="true" >
+                        <f:selectItem itemLabel="Seleccione una opción" itemValue="" noSelectionOption="true" />
+                        <f:selectItem itemLabel="Hombre" itemValue="1" noSelectionOption="false" />
+                        <f:selectItem itemLabel="Mujer" itemValue="2" noSelectionOption="false" />
+                    </p:selectOneMenu>
+                    <p:outputLabel value="#{bundle.CreatepacienteLabel_programa_social}" for="programa_social"  />
+                    <p:selectOneMenu id="programa_social" value="#{clapController.selected.programa_social}" >
+                        <f:selectItem itemLabel="Seleccione un programa social" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{ley_socialController.items}" var="ley_social" itemLabel="#{ley_social.nombre}" itemValue="#{ley_social}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="#{bundle.CreatepacienteLabel_prevision}" for="prevision" />
+
+                    <p:selectOneMenu id="prevision" value="#{clapController.selected.prevision}"  required="true">
+                        <f:selectItem itemLabel="Seleccione un opción" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{previsionController.items}" var="prevision" itemLabel="#{prevision.nombre}" itemValue="#{prevision}"/>
+                        <f:ajax event="valueChange" immediate="true" render="grupo_fonasa" ></f:ajax>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="#{bundle.CreatepacienteLabel_grupo_fonasa}" for="grupo_fonasa" />
+                    <p:selectOneMenu id="grupo_fonasa" value="#{clapController.selected.grupo_fonasa}" disabled="#{!clapController.esFONASA()}">
+                        <f:selectItem itemLabel="Seleccione un opción" itemValue="" noSelectionOption="true" />
+                        <f:selectItem itemLabel="A" itemValue="1" noSelectionOption="false" />
+                        <f:selectItem itemLabel="B" itemValue="2" noSelectionOption="false" />
+                        <f:selectItem itemLabel="C" itemValue="3" noSelectionOption="false" />
+                        <f:selectItem itemLabel="D" itemValue="4" noSelectionOption="false" />
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="#{bundle.CreatepacienteLabel_nacionalidad}" for="nacionalidad" />
+                    <p:autoComplete id="nacionalidad" value="#{clapController.selected.nacionalidad}" completeMethod="#{nacionalidadController.completeNacionalidad}"
+                    var="nacionalidad" itemLabel="#{nacionalidad.nombre}" itemValue="#{nacionalidad}" converter="entityConverter" forceSelection="true" />
+
+
+                    <p:outputLabel value="#{bundle.CreatepacienteLabel_estado_conyugal}" for="estado_conyugal" />
+                    <p:selectOneMenu id="estado_conyugal" value="#{clapController.selected.estado_conyugal}" >
+                        <f:selectItem itemLabel="Seleccione un opción" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{estado_civilController.items}" var="estado_civil" itemLabel="#{estado_civil.nombre}" itemValue="#{estado_civil}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="#{bundle.CreatepacienteLabel_pueblo_originario}" for="pueblo_originario" />
+                    <p:selectOneMenu id="pueblo_originario" value="#{clapController.selected.pueblo_originario}" >
+                        <f:selectItem itemLabel="Seleccione un pueblo originario" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{pueblo_originarioController.items}" var="pueblo_originario" itemLabel="#{pueblo_originario.nombre}" itemValue="#{pueblo_originario}"/>
+                    </p:selectOneMenu>
+                </p:panelGrid>
+                <p:row>
+                    <h1 align="center">Datos generales de la consulta</h1>
+                    <p:separator/>
+                </p:row>
+                <p:panelGrid columns="2" style="weight:100%;" rendered="#{clapController.selected != null}">
+                    <p:column rowspan="2">
                         <p:outputLabel value="#{bundle.CreateclapLabel_numero_consulta}" for="numero_consulta" />
                         <p:inputText id="numero_consulta" value="#{clapController.selected.numero_consulta}" title="#{bundle.CreateclapTitle_numero_consulta}" />
+                    </p:column>
+                    <p:column rowspan="2">
                         <p:outputLabel value="#{bundle.CreateclapLabel_fecha_consulta}" for="fecha_consulta" />
                         <p:calendar id="fecha_consulta" pattern="MM/dd/yyyy" value="#{clapController.selected.fecha_consulta}" title="#{bundle.EditclapTitle_fecha_consulta}"  showOn="button"/>
+                    </p:column>
+                    <p:column rowspan="2">
                         <p:outputLabel value="#{bundle.CreateclapLabel_edad}" for="edad" />
                         <p:inputText id="edad" value="#{clapController.selected.edad}" title="#{bundle.CreateclapTitle_edad}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_acompañante}" for="acompañante" />
-                        <p:inputText id="acompañante" value="#{clapController.selected.acompañante}" title="#{bundle.CreateclapTitle_acompañante}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_motivo_consulta_adolescente_1}" for="motivo_consulta_adolescente_1" />
-                        <p:inputText id="motivo_consulta_adolescente_1" value="#{clapController.selected.motivo_consulta_adolescente_1}" title="#{bundle.CreateclapTitle_motivo_consulta_adolescente_1}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_motivo_consulta_adolescente_2}" for="motivo_consulta_adolescente_2" />
-                        <p:inputText id="motivo_consulta_adolescente_2" value="#{clapController.selected.motivo_consulta_adolescente_2}" title="#{bundle.CreateclapTitle_motivo_consulta_adolescente_2}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_motivo_consulta_adolescente_3}" for="motivo_consulta_adolescente_3" />
-                        <p:inputText id="motivo_consulta_adolescente_3" value="#{clapController.selected.motivo_consulta_adolescente_3}" title="#{bundle.CreateclapTitle_motivo_consulta_adolescente_3}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_motivo_consulta_acompañante_1}" for="motivo_consulta_acompañante_1" />
-                        <p:inputText id="motivo_consulta_acompañante_1" value="#{clapController.selected.motivo_consulta_acompañante_1}" title="#{bundle.CreateclapTitle_motivo_consulta_acompañante_1}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_motivo_consulta_acompañante_2}" for="motivo_consulta_acompañante_2" />
-                        <p:inputText id="motivo_consulta_acompañante_2" value="#{clapController.selected.motivo_consulta_acompañante_2}" title="#{bundle.CreateclapTitle_motivo_consulta_acompañante_2}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_motivo_consulta_acompañante_3}" for="motivo_consulta_acompañante_3" />
-                        <p:inputText id="motivo_consulta_acompañante_3" value="#{clapController.selected.motivo_consulta_acompañante_3}" title="#{bundle.CreateclapTitle_motivo_consulta_acompañante_3}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_descripcion_motivo_consulta}" for="descripcion_motivo_consulta" />
-                        <p:inputText id="descripcion_motivo_consulta" value="#{clapController.selected.descripcion_motivo_consulta}" title="#{bundle.CreateclapTitle_descripcion_motivo_consulta}" />
+                    </p:column>
+                    <p:column rowspan="3">
+                        <p:outputLabel value="#{bundle.CreateclapLabel_acompañante}" for="acompanante" />
+                        <p:selectOneRadio id="acompanante" value="#{clapController.selected.acompanante}" layout="grid" columns="3">
+                            <f:selectItem itemLabel="solo" itemValue="solo" />
+                            <f:selectItem itemLabel="madre" itemValue="madre" />
+                            <f:selectItem itemLabel="padre" itemValue="padre" />
+                            <f:selectItem itemLabel="ambos" itemValue="ambos" />
+                            <f:selectItem itemLabel="amigo" itemValue="amigo" />
+                            <f:selectItem itemLabel="pareja" itemValue="pareja" />
+                            <f:selectItem itemLabel="pariente" itemValue="pariente" />
+                            <f:selectItem itemLabel="otro" itemValue="otro" />
+                        </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="4">
+                        <p:outputLabel value="Motivo de la consulta según adolescente" for="motivo_consulta_adolescente_1" />
+                        <p:inputText id="motivo_consulta_adolescente_1" placeholder="1." value="#{clapController.selected.motivo_consulta_adolescente_1}" title="#{bundle.CreateclapTitle_motivo_consulta_adolescente_1}" />
+                        <p:inputText id="motivo_consulta_adolescente_2" placeholder="2." value="#{clapController.selected.motivo_consulta_adolescente_2}" title="#{bundle.CreateclapTitle_motivo_consulta_adolescente_2}" />
+                        <p:inputText id="motivo_consulta_adolescente_3" placeholder="3." value="#{clapController.selected.motivo_consulta_adolescente_3}" title="#{bundle.CreateclapTitle_motivo_consulta_adolescente_3}" />
+                    </p:column>
+                    <p:column rowspan="4">
+                        <p:outputLabel value="Motivo de la consulta según adolescente " for="motivo_consulta_acompanante_1" />
+                        <p:inputText id="motivo_consulta_acompanante_1" placeholder="1." value="#{clapController.selected.motivo_consulta_acompanante_1}" title="#{bundle.CreateclapTitle_motivo_consulta_acompanante_1}" />
+                        <p:inputText id="motivo_consulta_acompanante_2" placeholder="2." value="#{clapController.selected.motivo_consulta_acompanante_2}" title="#{bundle.CreateclapTitle_motivo_consulta_acompanante_2}" />
+                        <p:inputText id="motivo_consulta_acompanante_3" placeholder="3." value="#{clapController.selected.motivo_consulta_acompanante_3}" title="#{bundle.CreateclapTitle_motivo_consulta_acompanante_3}" />
+                    </p:column>
+                </p:panelGrid>
+                <p:row>
+                    <b:inputText id="descripcion_motivo_consulta" value="#{clapController.selected.descripcion_motivo_consulta}" title="#{bundle.CreateclapTitle_descripcion_motivo_consulta}" />
+                </p:row>
+                <p:row>
+                    <h1 align="center">Antecedentes personales</h1>
+                    <p:separator/>
+                </p:row>
+                <p:panelGrid columns="2" rendered="#{clapController.selected != null}">
+                    <p:column rowspan="2">
                         <p:outputLabel value="#{bundle.CreateclapLabel_perinatales_normales}" for="perinatales_normales" />
-                        <p:inputText id="perinatales_normales" value="#{clapController.selected.perinatales_normales}" title="#{bundle.CreateclapTitle_perinatales_normales}" />
+                        <p:selectOneRadio id="perinatales_normales" value="#{clapController.selected.perinatales_normales}" layout="grid" columns="3">
+                            <f:selectItem itemLabel="sí" itemValue="1" />
+                            <f:selectItem itemLabel="no sé" itemValue="2" />
+                            <f:selectItem itemLabel="no" itemValue="3" />
+                        </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
                         <p:outputLabel value="#{bundle.CreateclapLabel_alergias_normales}" for="alergias_normales" />
-                        <p:inputText id="alergias_normales" value="#{clapController.selected.alergias_normales}" title="#{bundle.CreateclapTitle_alergias_normales}" />
+                        <p:selectOneRadio id="alergias_normales" value="#{clapController.selected.alergias_normales}" layout="grid" columns="3">
+                            <f:selectItem itemLabel="sí" itemValue="1" />
+                            <f:selectItem itemLabel="no sé" itemValue="2" />
+                            <f:selectItem itemLabel="no" itemValue="3" />
+                        </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
                         <p:outputLabel value="#{bundle.CreateclapLabel_vacunas_completas}" for="vacunas_completas" />
-                        <p:inputText id="vacunas_completas" value="#{clapController.selected.vacunas_completas}" title="#{bundle.CreateclapTitle_vacunas_completas}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_enfermedades_importantes}" for="enfermedades_importantes" />
-                        <p:inputText id="enfermedades_importantes" value="#{clapController.selected.enfermedades_importantes}" title="#{bundle.CreateclapTitle_enfermedades_importantes}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_discapacidad}" for="discapacidad" />
-                        <p:inputText id="discapacidad" value="#{clapController.selected.discapacidad}" title="#{bundle.CreateclapTitle_discapacidad}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_accidentes_relevantes}" for="accidentes_relevantes" />
-                        <p:inputText id="accidentes_relevantes" value="#{clapController.selected.accidentes_relevantes}" title="#{bundle.CreateclapTitle_accidentes_relevantes}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_cirugia_hospitalizaciones}" for="cirugia_hospitalizaciones" />
-                        <p:inputText id="cirugia_hospitalizaciones" value="#{clapController.selected.cirugia_hospitalizaciones}" title="#{bundle.CreateclapTitle_cirugia_hospitalizaciones}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_uso_medicamentos}" for="uso_medicamentos" />
-                        <p:inputText id="uso_medicamentos" value="#{clapController.selected.uso_medicamentos}" title="#{bundle.CreateclapTitle_uso_medicamentos}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_problemas_salud_mental}" for="problemas_salud_mental" />
-                        <p:inputText id="problemas_salud_mental" value="#{clapController.selected.problemas_salud_mental}" title="#{bundle.CreateclapTitle_problemas_salud_mental}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_violencia}" for="violencia" />
-                        <p:inputText id="violencia" value="#{clapController.selected.violencia}" title="#{bundle.CreateclapTitle_violencia}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_antecedentes_judiciales}" for="antecedentes_judiciales" />
-                        <p:inputText id="antecedentes_judiciales" value="#{clapController.selected.antecedentes_judiciales}" title="#{bundle.CreateclapTitle_antecedentes_judiciales}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_otros}" for="otros" />
-                        <p:inputText id="otros" value="#{clapController.selected.otros}" title="#{bundle.CreateclapTitle_otros}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_observaciones_antecdentes_personales}" for="observaciones_antecdentes_personales" />
-                        <p:inputText id="observaciones_antecdentes_personales" value="#{clapController.selected.observaciones_antecdentes_personales}" title="#{bundle.CreateclapTitle_observaciones_antecdentes_personales}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_enfermedades_importantes_familia}" for="enfermedades_importantes_familia" />
-                        <p:inputText id="enfermedades_importantes_familia" value="#{clapController.selected.enfermedades_importantes_familia}" title="#{bundle.CreateclapTitle_enfermedades_importantes_familia}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_obesidad_familia}" for="obesidad_familia" />
-                        <p:inputText id="obesidad_familia" value="#{clapController.selected.obesidad_familia}" title="#{bundle.CreateclapTitle_obesidad_familia}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_problemas_salud_mental_familia}" for="problemas_salud_mental_familia" />
-                        <p:inputText id="problemas_salud_mental_familia" value="#{clapController.selected.problemas_salud_mental_familia}" title="#{bundle.CreateclapTitle_problemas_salud_mental_familia}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_violencia_intrafamiliar}" for="violencia_intrafamiliar" />
-                        <p:inputText id="violencia_intrafamiliar" value="#{clapController.selected.violencia_intrafamiliar}" title="#{bundle.CreateclapTitle_violencia_intrafamiliar}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_alcohol_y_otras_drogas}" for="alcohol_y_otras_drogas" />
-                        <p:inputText id="alcohol_y_otras_drogas" value="#{clapController.selected.alcohol_y_otras_drogas}" title="#{bundle.CreateclapTitle_alcohol_y_otras_drogas}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_padre_adolescente}" for="padre_adolescente" />
-                        <p:inputText id="padre_adolescente" value="#{clapController.selected.padre_adolescente}" title="#{bundle.CreateclapTitle_padre_adolescente}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_judiciales}" for="judiciales" />
-                        <p:inputText id="judiciales" value="#{clapController.selected.judiciales}" title="#{bundle.CreateclapTitle_judiciales}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_otros_antecedentes_familiares}" for="otros_antecedentes_familiares" />
-                        <p:inputText id="otros_antecedentes_familiares" value="#{clapController.selected.otros_antecedentes_familiares}" title="#{bundle.CreateclapTitle_otros_antecedentes_familiares}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_observaciones_antecedentes_familiares}" for="observaciones_antecedentes_familiares" />
-                        <p:inputText id="observaciones_antecedentes_familiares" value="#{clapController.selected.observaciones_antecedentes_familiares}" title="#{bundle.CreateclapTitle_observaciones_antecedentes_familiares}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_vive_con_especificación}" for="vive_con_especificación" />
-                        <p:inputText id="vive_con_especificación" value="#{clapController.selected.vive_con_especificación}" title="#{bundle.CreateclapTitle_vive_con_especificación}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_especificacion_comparte_cama}" for="especificacion_comparte_cama" />
+                        <p:selectOneRadio id="vacunas_completas" value="#{clapController.selected.vacunas_completas}" layout="grid" columns="3">
+                            <f:selectItem itemLabel="sí" itemValue="1" />
+                            <f:selectItem itemLabel="no sé" itemValue="2" />
+                            <f:selectItem itemLabel="no" itemValue="3" />
+                        </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_enfermedades_importantes}" for="enfermedades_importantes" />
+                    <p:selectOneRadio id="enfermedades_importantes" value="#{clapController.selected.enfermedades_importantes}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                    </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_discapacidad}" for="discapacidad" />
+                    <p:selectOneRadio id="discapacidad" value="#{clapController.selected.discapacidad}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                    </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_accidentes_relevantes}" for="accidentes_relevantes" />
+                    <p:selectOneRadio id="accidentes_relevantes" value="#{clapController.selected.accidentes_relevantes}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                    </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_cirugia_hospitalizaciones}" for="cirugia_hospitalizaciones" />
+                    <p:selectOneRadio id="cirugia_hospitalizaciones" value="#{clapController.selected.cirugia_hospitalizaciones}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                    </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_uso_medicamentos}" for="uso_medicamentos" />
+                    <p:selectOneRadio id="uso_medicamentos" value="#{clapController.selected.uso_medicamentos}" layout="grid" columns="2">
+                        <f:selectItem itemLabel="Si" itemValue="true" />
+                        <f:selectItem itemLabel="No" itemValue="false" />
+                    </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_problemas_salud_mental}" for="problemas_salud_mental" />
+                    <p:selectOneRadio id="problemas_salud_mental" value="#{clapController.selected.problemas_salud_mental}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                    </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_violencia}" for="violencia" />
+                    <p:selectOneRadio id="violencia" value="#{clapController.selected.violencia}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                    </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_antecedentes_judiciales}" for="antecedentes_judiciales" />
+                    <p:selectOneRadio id="antecedentes_judiciales" value="#{clapController.selected.antecedentes_judiciales}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                    </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_otros}" for="otros" />
+                    <p:selectOneRadio id="otros" value="#{clapController.selected.otros}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                    </p:selectOneRadio>
+                    </p:column>
+                </p:panelGrid>
+                <p:row>
+                    <b:inputText id="observaciones_antecdentes_personales" value="#{clapController.selected.observaciones_antecdentes_personales}" title="#{bundle.CreateclapTitle_observaciones_antecdentes_personales}" />
+                </p:row>
+                <p:row>
+                    <h1 align="center">Antecedentes familiares</h1>
+                    <p:separator/>
+                </p:row>
+                <p:panelGrid columns="2" rendered="#{clapController.selected != null}">
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_enfermedades_importantes_familia}" for="enfermedades_importantes_familia" />
+                    <p:selectOneRadio id="enfermedades_importantes_familia" value="#{clapController.selected.enfermedades_importantes_familia}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                    </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_obesidad_familia}" for="obesidad_familia" />
+                    <p:selectOneRadio id="obesidad_familia" value="#{clapController.selected.obesidad_familia}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                    </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_problemas_salud_mental_familia}" for="problemas_salud_mental_familia" />
+                    <p:selectOneRadio id="problemas_salud_mental_familia" value="#{clapController.selected.problemas_salud_mental_familia}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                    </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_violencia_intrafamiliar}" for="violencia_intrafamiliar" />
+                    <p:selectOneRadio id="violencia_intrafamiliar" value="#{clapController.selected.violencia_intrafamiliar}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                    </p:selectOneRadio>
+                    </p:column>
+                    
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_alcohol_y_otras_drogas}" for="alcohol_y_otras_drogas" />
+                    <p:selectOneRadio id="alcohol_y_otras_drogas" value="#{clapController.selected.alcohol_y_otras_drogas}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                    </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_padre_adolescente}" for="padre_adolescente" />
+                    <p:selectOneRadio id="padre_adolescente" value="#{clapController.selected.padre_adolescente}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                    </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_judiciales}" for="judiciales" />
+                    <p:selectOneRadio id="judiciales" value="#{clapController.selected.judiciales}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                    </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_otros_antecedentes_familiares}" for="otros_antecedentes_familiares" />
+                    <p:selectOneRadio id="otros_antecedentes_familiares" value="#{clapController.selected.otros_antecedentes_familiares}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                    </p:selectOneRadio>
+                    </p:column>
+                </p:panelGrid>
+                <p:row>
+                    <b:inputText id="observaciones_antecedentes_familiares" value="#{clapController.selected.observaciones_antecedentes_familiares}" title="#{bundle.CreateclapTitle_observaciones_antecedentes_familiares}" />
+                </p:row>
+                <p:row>
+                    <h1 align="center">Familia</h1>
+                    <p:separator/>
+                </p:row>
+                <p:panelGrid columns="2" rendered="#{clapController.selected != null}">
+                    <p:column rowspan="6">
+                        <h3>Vive con</h3>
+                        <p:outputLabel value="solo/a" for="vive_solo" />
+                        <p:selectOneRadio id="vive_solo" value="#{clapController.selected.vive_con_solo}" layout="grid" columns="2">
+                            <f:selectItem itemLabel="Si" itemValue="true" />
+                            <f:selectItem itemLabel="No" itemValue="false" />
+                        </p:selectOneRadio>
+                        <p:outputLabel value="madre" for="vive_con_madre" />
+                        <p:selectOneRadio id="vive_con_madre" value="#{clapController.selected.vive_con_madre}" layout="grid" columns="2">
+                            <f:selectItem itemLabel="Si" itemValue="true" />
+                            <f:selectItem itemLabel="No" itemValue="false" />
+                        </p:selectOneRadio>
+                        <p:outputLabel value="padre" for="vive_con_padre" />
+                        <p:selectOneRadio id="vive_con_padre" value="#{clapController.selected.vive_con_padre}" layout="grid" columns="2">
+                            <f:selectItem itemLabel="Si" itemValue="true" />
+                            <f:selectItem itemLabel="No" itemValue="false" />
+                        </p:selectOneRadio>  
+                        <p:outputLabel value="en institución" for="vive_en_institucion" />
+                        <p:selectOneRadio id="vive_en_institucion" value="#{clapController.selected.vive_en_institucion}" layout="grid" columns="2">
+                            <f:selectItem itemLabel="Si" itemValue="true" />
+                            <f:selectItem itemLabel="No" itemValue="false" />
+                        </p:selectOneRadio>
+
+                        <p:outputLabel value="con otros" for="vive_con_otros" />
+                        <p:selectOneRadio id="vive_con_otros" value="#{clapController.selected.vive_con_otros}" layout="grid" columns="2">
+                            <f:selectItem itemLabel="Si" itemValue="true" />
+                            <f:selectItem itemLabel="No" itemValue="false" />
+                        </p:selectOneRadio>
+                        <p:inputText placeholder="Especifique" id="vive_con_especificacion" value="#{clapController.selected.vive_con_especificacion}" title="#{bundle.CreateclapTitle_vive_con_especificación}" />
+                    </p:column>
+                   
+                    <p:column rowspan="3">
+                        <p:outputLabel value="Comparte cama" for="comparte_cama" />
+                        <p:selectOneRadio id="comparte_cama" value="#{clapController.selected.comparte_cama}" layout="grid" columns="2">
+                            <f:selectItem itemLabel="Si" itemValue="true" />
+                            <f:selectItem itemLabel="No" itemValue="false" />
+                        </p:selectOneRadio>      
+                        <p:outputLabel value="¿Con quién?" for="especificacion_comparte_cama" />
                         <p:inputText id="especificacion_comparte_cama" value="#{clapController.selected.especificacion_comparte_cama}" title="#{bundle.CreateclapTitle_especificacion_comparte_cama}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_nivel_instruccion_madre}" for="nivel_instruccion_madre" />
-                        <p:inputText id="nivel_instruccion_madre" value="#{clapController.selected.nivel_instruccion_madre}" title="#{bundle.CreateclapTitle_nivel_instruccion_madre}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_nivel_instruccion_padre}" for="nivel_instruccion_padre" />
-                        <p:inputText id="nivel_instruccion_padre" value="#{clapController.selected.nivel_instruccion_padre}" title="#{bundle.CreateclapTitle_nivel_instruccion_padre}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_nivel_instruccion_pareja}" for="nivel_instruccion_pareja" />
-                        <p:inputText id="nivel_instruccion_pareja" value="#{clapController.selected.nivel_instruccion_pareja}" title="#{bundle.CreateclapTitle_nivel_instruccion_pareja}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_ocupacion_madre}" for="ocupacion_madre" />
+                    </p:column>
+                    <p:column rowspan="6">
+                        <h3>Nivel instrucción</h3>
+                        <p:outputLabel value="madre o sustituta" for="nivel_instruccion_madre" />
+                        <p:selectOneRadio id="nivel_instruccion_madre" value="#{clapController.selected.nivel_instruccion_madre}" layout="grid" columns="4">
+                            <f:selectItem itemLabel="ninguno" itemValue="1" />
+                            <f:selectItem itemLabel="básica" itemValue="2" />
+                            <f:selectItem itemLabel="media" itemValue="3" />
+                            <f:selectItem itemLabel="superior" itemValue="4" />
+                        </p:selectOneRadio>  
+                        <p:outputLabel value="padre o sustituto" for="nivel_instruccion_padre" />
+                        <p:selectOneRadio id="nivel_instruccion_padre" value="#{clapController.selected.nivel_instruccion_padre}" layout="grid" columns="4">
+                            <f:selectItem itemLabel="ninguno" itemValue="1" />
+                            <f:selectItem itemLabel="básica" itemValue="2" />
+                            <f:selectItem itemLabel="media" itemValue="3" />
+                            <f:selectItem itemLabel="superior" itemValue="4" />
+                        </p:selectOneRadio>  
+                        
+                        <p:outputLabel value="pareja" for="nivel_instruccion_pareja" />
+                        <p:selectOneRadio id="nivel_instruccion_pareja" value="#{clapController.selected.nivel_instruccion_pareja}" layout="grid" columns="4">
+                            <f:selectItem itemLabel="ninguno" itemValue="1" />
+                            <f:selectItem itemLabel="básica" itemValue="2" />
+                            <f:selectItem itemLabel="media" itemValue="3" />
+                            <f:selectItem itemLabel="superior" itemValue="4" />
+                        </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="3">
+                        <h3>Ocupacion</h3>
+                        <p:outputLabel value="madre o sustituta" for="ocupacion_madre" />
                         <p:inputText id="ocupacion_madre" value="#{clapController.selected.ocupacion_madre}" title="#{bundle.CreateclapTitle_ocupacion_madre}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_ocupacion_padre}" for="ocupacion_padre" />
+
+                        <p:outputLabel value="padre o sustituto" for="ocupacion_padre" />
                         <p:inputText id="ocupacion_padre" value="#{clapController.selected.ocupacion_padre}" title="#{bundle.CreateclapTitle_ocupacion_padre}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_ocupacion_pareja}" for="ocupacion_pareja" />
+
+                        <p:outputLabel value="pareja" for="ocupacion_pareja" />
                         <p:inputText id="ocupacion_pareja" value="#{clapController.selected.ocupacion_pareja}" title="#{bundle.CreateclapTitle_ocupacion_pareja}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_percepcion_familia}" for="percepcion_familia" />
-                        <p:inputText id="percepcion_familia" value="#{clapController.selected.percepcion_familia}" title="#{bundle.CreateclapTitle_percepcion_familia}" />
+                    </p:column>
+                    <p:column rowspan="2">
+                        <p:outputLabel value="Percepción del adolescente sobre su familia" for="percepcion_familia" />
+                        <p:selectOneRadio id="percepcion_familia" value="#{clapController.selected.percepcion_familia}" layout="grid" columns="4">
+                            <f:selectItem itemLabel="buena" itemValue="1" />
+                            <f:selectItem itemLabel="regular" itemValue="2" />
+                            <f:selectItem itemLabel="mala" itemValue="3" />
+                            <f:selectItem itemLabel="no hay relación" itemValue="4" />
+                        </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
                         <p:outputLabel value="#{bundle.CreateclapLabel_diagrama_familiar}" for="diagrama_familiar" />
                         <p:inputText id="diagrama_familiar" value="#{clapController.selected.diagrama_familiar}" title="#{bundle.CreateclapTitle_diagrama_familiar}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_observaciones_familia}" for="observaciones_familia" />
-                        <p:inputText id="observaciones_familia" value="#{clapController.selected.observaciones_familia}" title="#{bundle.CreateclapTitle_observaciones_familia}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_observaciones_vivienda}" for="observaciones_vivienda" />
-                        <p:inputText id="observaciones_vivienda" value="#{clapController.selected.observaciones_vivienda}" title="#{bundle.CreateclapTitle_observaciones_vivienda}" />
+                    </p:column>
+                </p:panelGrid>
+                <p:row>
+                    <b:inputText id="observaciones_familia" value="#{clapController.selected.observaciones_familia}" title="#{bundle.CreateclapTitle_observaciones_familia}" />
+                </p:row>
+                <p:row>
+                    <h1 align="center">Vivienda</h1>
+                    <p:separator/>
+                </p:row>
+
+                <p:panelGrid columns="2" rendered="#{clapController.selected != null}">
+                    <p:outputLabel value="Condiciones sanitarias" for="condiciones_sanitarias" />
+                    <p:selectOneRadio id="condiciones_sanitarias" value="#{clapController.selected.condiciones_sanitarias}" layout="grid" columns="2">
+                        <f:selectItem itemLabel="Si" itemValue="true" />
+                        <f:selectItem itemLabel="No" itemValue="false" />
+                    </p:selectOneRadio>
+
+                    <p:outputLabel value="Hacinamiento" for="hacinamiento" />
+                    <p:selectOneRadio id="hacinamiento" value="#{clapController.selected.hacinamiento}" layout="grid" columns="2">
+                        <f:selectItem itemLabel="Si" itemValue="true" />
+                        <f:selectItem itemLabel="No" itemValue="false" />
+                    </p:selectOneRadio>
+                </p:panelGrid>
+                <p:row>
+                    <b:inputText id="observaciones_vivienda" value="#{clapController.selected.observaciones_vivienda}" title="#{bundle.CreateclapTitle_observaciones_vivienda}" />
+                </p:row>
+                <p:row>
+                    <h1 align="center">Educación</h1>
+                    <p:separator/>
+                </p:row>
+               
+                <p:panelGrid columns="4" rendered="#{clapController.selected != null}">
+                    <p:column>
+                        <p:outputLabel value="Estudia" for="estudia" />
+                        <p:selectOneRadio id="estudia" value="#{clapController.selected.estudia}" layout="grid" columns="2">
+                            <f:selectItem itemLabel="Si" itemValue="true" />
+                            <f:selectItem itemLabel="No" itemValue="false" />
+                        </p:selectOneRadio>
+
                         <p:outputLabel value="#{bundle.CreateclapLabel_nivel_educacion}" for="nivel_educacion" />
-                        <p:inputText id="nivel_educacion" value="#{clapController.selected.nivel_educacion}" title="#{bundle.CreateclapTitle_nivel_educacion}" />
+                        <p:selectOneRadio id="nivel_educacion" value="#{clapController.selected.nivel_educacion}" layout="grid" columns="4">
+                            <f:selectItem itemLabel="no escolarizado" itemValue="1" />
+                            <f:selectItem itemLabel="básica" itemValue="2" />
+                            <f:selectItem itemLabel="media" itemValue="3" />
+                            <f:selectItem itemLabel="superior" itemValue="4" />
+                        </p:selectOneRadio> 
+                    </p:column>
+
+                    <p:column>
                         <p:outputLabel value="#{bundle.CreateclapLabel_curso}" for="curso" />
-                        <p:inputText id="curso" value="#{clapController.selected.curso}" title="#{bundle.CreateclapTitle_curso}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_años_repetidos}" for="años_repetidos" />
-                        <p:inputText id="años_repetidos" value="#{clapController.selected.años_repetidos}" title="#{bundle.CreateclapTitle_años_repetidos}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_causa_años_repetidos}" for="causa_años_repetidos" />
-                        <p:inputText id="causa_años_repetidos" value="#{clapController.selected.causa_años_repetidos}" title="#{bundle.CreateclapTitle_causa_años_repetidos}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_causa_desercion_exclusion}" for="causa_desercion_exclusion" />
-                        <p:inputText id="causa_desercion_exclusion" value="#{clapController.selected.causa_desercion_exclusion}" title="#{bundle.CreateclapTitle_causa_desercion_exclusion}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_percepcion_rendimiento}" for="percepcion_rendimiento" />
+                        <p:inputText id="curso" value="#{clapController.selected.curso}" maxlength="2" title="#{bundle.CreateclapTitle_curso}" />
+                    </p:column>
+                    <p:column>
+                        <p:outputLabel value="#{bundle.CreateclapLabel_años_repetidos}" for="anos_repetidos" />
+                        <p:inputText id="anos_repetidos" value="#{clapController.selected.anos_repetidos}" title="#{bundle.CreateclapTitle_anos_repetidos}" />
+                        <p:inputText id="causa_anos_repetidos" placeholder="Causa" value="#{clapController.selected.causa_anos_repetidos}" title="#{bundle.CreateclapTitle_causa_anos_repetidos}" />
+                    </p:column>
+                    <p:column rowspan="2">
+                        <p:outputLabel value="Problemas en la escuela" for="problemas_escuela" />
+                        <p:selectOneRadio id="problemas_escuela" value="#{clapController.selected.problemas_escuela}" layout="grid" columns="2">
+                            <f:selectItem itemLabel="Si" itemValue="true" />
+                            <f:selectItem itemLabel="No" itemValue="false" />
+                        </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                        <p:outputLabel value="Violencia escolar" for="violencia_escolar" />
+                        <p:selectOneRadio id="violencia_escolar" value="#{clapController.selected.violencia_escolar}" layout="grid" columns="2">
+                            <f:selectItem itemLabel="Si" itemValue="true" />
+                            <f:selectItem itemLabel="No" itemValue="false" />
+                        </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                        <p:outputLabel value="Deserción/Exclusión" for="desercion" />
+                        <p:selectOneRadio id="desercion" value="#{clapController.selected.desercion_exclusion}" layout="grid" columns="2">
+                            <f:selectItem itemLabel="Si" itemValue="true" />
+                            <f:selectItem itemLabel="No" itemValue="false" />
+                        </p:selectOneRadio>
+                        <p:inputText id="causa_desercion_exclusion" placeholder="Causa" value="#{clapController.selected.causa_desercion_exclusion}" title="#{bundle.CreateclapTitle_causa_desercion_exclusion}" />
+                    </p:column>
+                    <p:column>
+                        <p:outputLabel value="Percepción de redimiento con respecto a la mayoría de sus compañeros" for="percepcion_rendimiento" />
                         <p:inputText id="percepcion_rendimiento" value="#{clapController.selected.percepcion_rendimiento}" title="#{bundle.CreateclapTitle_percepcion_rendimiento}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_observaciones_educacion}" for="observaciones_educacion" />
-                        <p:inputText id="observaciones_educacion" value="#{clapController.selected.observaciones_educacion}" title="#{bundle.CreateclapTitle_observaciones_educacion}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_horas_trabajo}" for="horas_trabajo" />
-                        <p:inputText id="horas_trabajo" value="#{clapController.selected.horas_trabajo}" title="#{bundle.CreateclapTitle_horas_trabajo}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_razon_de_trabajo}" for="razon_de_trabajo" />
-                        <p:inputText id="razon_de_trabajo" value="#{clapController.selected.razon_de_trabajo}" title="#{bundle.CreateclapTitle_razon_de_trabajo}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_legalizado}" for="legalizado" />
-                        <p:inputText id="legalizado" value="#{clapController.selected.legalizado}" title="#{bundle.CreateclapTitle_legalizado}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_tipo_de_trabajo}" for="tipo_de_trabajo" />
-                        <p:inputText id="tipo_de_trabajo" value="#{clapController.selected.tipo_de_trabajo}" title="#{bundle.CreateclapTitle_tipo_de_trabajo}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_observaciones_trabajo}" for="observaciones_trabajo" />
-                        <p:inputText id="observaciones_trabajo" value="#{clapController.selected.observaciones_trabajo}" title="#{bundle.CreateclapTitle_observaciones_trabajo}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_aceptacion}" for="aceptacion" />
-                        <p:inputText id="aceptacion" value="#{clapController.selected.aceptacion}" title="#{bundle.CreateclapTitle_aceptacion}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_edad_pareja}" for="edad_pareja" />
-                        <p:inputText id="edad_pareja" value="#{clapController.selected.edad_pareja}" title="#{bundle.CreateclapTitle_edad_pareja}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_horas_actividad_fisica}" for="horas_actividad_fisica" />
-                        <p:inputText id="horas_actividad_fisica" value="#{clapController.selected.horas_actividad_fisica}" title="#{bundle.CreateclapTitle_horas_actividad_fisica}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_horas_tv}" for="horas_tv" />
-                        <p:inputText id="horas_tv" value="#{clapController.selected.horas_tv}" title="#{bundle.CreateclapTitle_horas_tv}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_horas_computador_consola}" for="horas_computador_consola" />
-                        <p:inputText id="horas_computador_consola" value="#{clapController.selected.horas_computador_consola}" title="#{bundle.CreateclapTitle_horas_computador_consola}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_especificacion_otras_actividades}" for="especificacion_otras_actividades" />
-                        <p:inputText id="especificacion_otras_actividades" value="#{clapController.selected.especificacion_otras_actividades}" title="#{bundle.CreateclapTitle_especificacion_otras_actividades}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_observaciones_vida_social}" for="observaciones_vida_social" />
-                        <p:inputText id="observaciones_vida_social" value="#{clapController.selected.observaciones_vida_social}" title="#{bundle.CreateclapTitle_observaciones_vida_social}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_horas_sueño}" for="horas_sueño" />
-                        <p:inputText id="horas_sueño" value="#{clapController.selected.horas_sueño}" title="#{bundle.CreateclapTitle_horas_sueño}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_comidas_familia}" for="comidas_familia" />
-                        <p:inputText id="comidas_familia" value="#{clapController.selected.comidas_familia}" title="#{bundle.CreateclapTitle_comidas_familia}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_especificacion_alimentacion_especial}" for="especificacion_alimentacion_especial" />
-                        <p:inputText id="especificacion_alimentacion_especial" value="#{clapController.selected.especificacion_alimentacion_especial}" title="#{bundle.CreateclapTitle_especificacion_alimentacion_especial}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_cigarros_dia}" for="cigarros_dia" />
-                        <p:inputText id="cigarros_dia" value="#{clapController.selected.cigarros_dia}" title="#{bundle.CreateclapTitle_cigarros_dia}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_observaciones_habitos_consumo}" for="observaciones_habitos_consumo" />
-                        <p:inputText id="observaciones_habitos_consumo" value="#{clapController.selected.observaciones_habitos_consumo}" title="#{bundle.CreateclapTitle_observaciones_habitos_consumo}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_edad_menarca_espermarca}" for="edad_menarca_espermarca" />
-                        <p:inputText id="edad_menarca_espermarca" value="#{clapController.selected.edad_menarca_espermarca}" title="#{bundle.CreateclapTitle_edad_menarca_espermarca}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_fecha_ultima_menstruacion}" for="fecha_ultima_menstruacion" />
-                        <p:calendar id="fecha_ultima_menstruacion" pattern="MM/dd/yyyy" value="#{clapController.selected.fecha_ultima_menstruacion}" title="#{bundle.EditclapTitle_fecha_ultima_menstruacion}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.CreateclapLabel_ciclos_regulares}" for="ciclos_regulares" />
-                        <p:inputText id="ciclos_regulares" value="#{clapController.selected.ciclos_regulares}" title="#{bundle.CreateclapTitle_ciclos_regulares}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_dismenorrea}" for="dismenorrea" />
-                        <p:inputText id="dismenorrea" value="#{clapController.selected.dismenorrea}" title="#{bundle.CreateclapTitle_dismenorrea}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_especificacion_its_vih}" for="especificacion_its_vih" />
-                        <p:inputText id="especificacion_its_vih" value="#{clapController.selected.especificacion_its_vih}" title="#{bundle.CreateclapTitle_especificacion_its_vih}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_tratamiento}" for="tratamiento" />
-                        <p:inputText id="tratamiento" value="#{clapController.selected.tratamiento}" title="#{bundle.CreateclapTitle_tratamiento}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_tratamiento_contactos}" for="tratamiento_contactos" />
-                        <p:inputText id="tratamiento_contactos" value="#{clapController.selected.tratamiento_contactos}" title="#{bundle.CreateclapTitle_tratamiento_contactos}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_embarazos}" for="embarazos" />
-                        <p:inputText id="embarazos" value="#{clapController.selected.embarazos}" title="#{bundle.CreateclapTitle_embarazos}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_hijos}" for="hijos" />
-                        <p:inputText id="hijos" value="#{clapController.selected.hijos}" title="#{bundle.CreateclapTitle_hijos}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_abortos}" for="abortos" />
-                        <p:inputText id="abortos" value="#{clapController.selected.abortos}" title="#{bundle.CreateclapTitle_abortos}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_observaciones_gineco_urologico}" for="observaciones_gineco_urologico" />
-                        <p:inputText id="observaciones_gineco_urologico" value="#{clapController.selected.observaciones_gineco_urologico}" title="#{bundle.CreateclapTitle_observaciones_gineco_urologico}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_orientacion_sexual}" for="orientacion_sexual" />
-                        <p:inputText id="orientacion_sexual" value="#{clapController.selected.orientacion_sexual}" title="#{bundle.CreateclapTitle_orientacion_sexual}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_especificacion_orientacion_sexual}" for="especificacion_orientacion_sexual" />
-                        <p:inputText id="especificacion_orientacion_sexual" value="#{clapController.selected.especificacion_orientacion_sexual}" title="#{bundle.CreateclapTitle_especificacion_orientacion_sexual}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_conducta_sexual}" for="conducta_sexual" />
-                        <p:inputText id="conducta_sexual" value="#{clapController.selected.conducta_sexual}" title="#{bundle.CreateclapTitle_conducta_sexual}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_edad_inicio_conducta_sexual}" for="edad_inicio_conducta_sexual" />
-                        <p:inputText id="edad_inicio_conducta_sexual" value="#{clapController.selected.edad_inicio_conducta_sexual}" title="#{bundle.CreateclapTitle_edad_inicio_conducta_sexual}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_relaciones_sexuales}" for="relaciones_sexuales" />
-                        <p:inputText id="relaciones_sexuales" value="#{clapController.selected.relaciones_sexuales}" title="#{bundle.CreateclapTitle_relaciones_sexuales}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_pareja_sexual}" for="pareja_sexual" />
-                        <p:inputText id="pareja_sexual" value="#{clapController.selected.pareja_sexual}" title="#{bundle.CreateclapTitle_pareja_sexual}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_dificultades_sexuales}" for="dificultades_sexuales" />
-                        <p:inputText id="dificultades_sexuales" value="#{clapController.selected.dificultades_sexuales}" title="#{bundle.CreateclapTitle_dificultades_sexuales}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_anticoncepcion}" for="anticoncepcion" />
-                        <p:inputText id="anticoncepcion" value="#{clapController.selected.anticoncepcion}" title="#{bundle.CreateclapTitle_anticoncepcion}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_uso_mac}" for="uso_mac" />
-                        <p:inputText id="uso_mac" value="#{clapController.selected.uso_mac}" title="#{bundle.CreateclapTitle_uso_mac}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_especificacion_uso_mac}" for="especificacion_uso_mac" />
-                        <p:inputText id="especificacion_uso_mac" value="#{clapController.selected.especificacion_uso_mac}" title="#{bundle.CreateclapTitle_especificacion_uso_mac}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_razon_no_uso_mac}" for="razon_no_uso_mac" />
-                        <p:inputText id="razon_no_uso_mac" value="#{clapController.selected.razon_no_uso_mac}" title="#{bundle.CreateclapTitle_razon_no_uso_mac}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_observaciones_sexualidad}" for="observaciones_sexualidad" />
-                        <p:inputText id="observaciones_sexualidad" value="#{clapController.selected.observaciones_sexualidad}" title="#{bundle.CreateclapTitle_observaciones_sexualidad}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_imagen_corporal_mac}" for="imagen_corporal_mac" />
-                        <p:inputText id="imagen_corporal_mac" value="#{clapController.selected.imagen_corporal_mac}" title="#{bundle.CreateclapTitle_imagen_corporal_mac}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_bienestas_emocional_mac}" for="bienestas_emocional_mac" />
-                        <p:inputText id="bienestas_emocional_mac" value="#{clapController.selected.bienestas_emocional_mac}" title="#{bundle.CreateclapTitle_bienestas_emocional_mac}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_vida_proyecto_mac}" for="vida_proyecto_mac" />
-                        <p:inputText id="vida_proyecto_mac" value="#{clapController.selected.vida_proyecto_mac}" title="#{bundle.CreateclapTitle_vida_proyecto_mac}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_referente_adulto_mac}" for="referente_adulto_mac" />
-                        <p:inputText id="referente_adulto_mac" value="#{clapController.selected.referente_adulto_mac}" title="#{bundle.CreateclapTitle_referente_adulto_mac}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_nombre_referente_adulto_mac}" for="nombre_referente_adulto_mac" />
-                        <p:inputText id="nombre_referente_adulto_mac" value="#{clapController.selected.nombre_referente_adulto_mac}" title="#{bundle.CreateclapTitle_nombre_referente_adulto_mac}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_telefono_referente_adulto_mac}" for="telefono_referente_adulto_mac" />
-                        <p:inputText id="telefono_referente_adulto_mac" value="#{clapController.selected.telefono_referente_adulto_mac}" title="#{bundle.CreateclapTitle_telefono_referente_adulto_mac}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_observaciones_psico_emocional}" for="observaciones_psico_emocional" />
-                        <p:inputText id="observaciones_psico_emocional" value="#{clapController.selected.observaciones_psico_emocional}" title="#{bundle.CreateclapTitle_observaciones_psico_emocional}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_peso}" for="peso" />
-                        <p:inputText id="peso" value="#{clapController.selected.peso}" title="#{bundle.CreateclapTitle_peso}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_de_peso}" for="de_peso" />
-                        <p:inputText id="de_peso" value="#{clapController.selected.de_peso}" title="#{bundle.CreateclapTitle_de_peso}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_talla}" for="talla" />
-                        <p:inputText id="talla" value="#{clapController.selected.talla}" title="#{bundle.CreateclapTitle_talla}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_de_talla}" for="de_talla" />
-                        <p:inputText id="de_talla" value="#{clapController.selected.de_talla}" title="#{bundle.CreateclapTitle_de_talla}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_presion_abdominal}" for="presion_abdominal" />
-                        <p:inputText id="presion_abdominal" value="#{clapController.selected.presion_abdominal}" title="#{bundle.CreateclapTitle_presion_abdominal}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_presion_arterial}" for="presion_arterial" />
-                        <p:inputText id="presion_arterial" value="#{clapController.selected.presion_arterial}" title="#{bundle.CreateclapTitle_presion_arterial}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_otra_area_examen_fisico}" for="otra_area_examen_fisico" />
-                        <p:inputText id="otra_area_examen_fisico" value="#{clapController.selected.otra_area_examen_fisico}" title="#{bundle.CreateclapTitle_otra_area_examen_fisico}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_observaciones_examen_fisico}" for="observaciones_examen_fisico" />
-                        <p:inputText id="observaciones_examen_fisico" value="#{clapController.selected.observaciones_examen_fisico}" title="#{bundle.CreateclapTitle_observaciones_examen_fisico}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_impresion_diagnostica}" for="impresion_diagnostica" />
-                        <p:inputText id="impresion_diagnostica" value="#{clapController.selected.impresion_diagnostica}" title="#{bundle.CreateclapTitle_impresion_diagnostica}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_indicaciones_interconsultas}" for="indicaciones_interconsultas" />
-                        <p:inputText id="indicaciones_interconsultas" value="#{clapController.selected.indicaciones_interconsultas}" title="#{bundle.CreateclapTitle_indicaciones_interconsultas}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_paciente}" for="paciente" />
-                        <p:selectOneMenu id="paciente" value="#{clapController.selected.paciente}" >
-                            <f:selectItems value="#{pacienteController.itemsAvailableSelectOne}"
-                                           var="pacienteItem"
-                                           itemValue="#{pacienteItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateclapLabel_funcionario}" for="funcionario" />
-                        <p:selectOneMenu id="funcionario" value="#{clapController.selected.funcionario}" >
-                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
-                                           var="funcionarioItem"
-                                           itemValue="#{funcionarioItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateclapLabel_riesgo_ssr}" for="riesgo_ssr" />
-                        <p:inputText id="riesgo_ssr" value="#{clapController.selected.riesgo_ssr}" title="#{bundle.CreateclapTitle_riesgo_ssr}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_riesgo_salud_mental}" for="riesgo_salud_mental" />
-                        <p:inputText id="riesgo_salud_mental" value="#{clapController.selected.riesgo_salud_mental}" title="#{bundle.CreateclapTitle_riesgo_salud_mental}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_riesgo_oh_drogas}" for="riesgo_oh_drogas" />
-                        <p:inputText id="riesgo_oh_drogas" value="#{clapController.selected.riesgo_oh_drogas}" title="#{bundle.CreateclapTitle_riesgo_oh_drogas}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_riesgo_nutricional}" for="riesgo_nutricional" />
-                        <p:inputText id="riesgo_nutricional" value="#{clapController.selected.riesgo_nutricional}" title="#{bundle.CreateclapTitle_riesgo_nutricional}" />
-                        <p:outputLabel value="#{bundle.CreateclapLabel_riesgo_social}" for="riesgo_social" />
-                        <p:inputText id="riesgo_social" value="#{clapController.selected.riesgo_social}" title="#{bundle.CreateclapTitle_riesgo_social}" />
+                    </p:column>
+                    
+                </p:panelGrid>
+                <p:row>
+                    <b:inputText id="observaciones_educacion" value="#{clapController.selected.observaciones_educacion}" title="#{bundle.CreateclapTitle_observaciones_educacion}" />
+                </p:row>
+                <p:row>
+                    <h1 align="center">Trabajo</h1>
+                    <p:separator/>
+                </p:row>
+                <p:panelGrid columns="4" rendered="#{clapController.selected != null}">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_horas_trabajo}" for="horas_trabajo" />
+                    <p:inputText id="horas_trabajo" value="#{clapController.selected.horas_trabajo}" title="#{bundle.CreateclapTitle_horas_trabajo}" />
 
+                    <p:outputLabel value="#{bundle.CreateclapLabel_razon_de_trabajo}" for="razon_de_trabajo" />
+                    <p:inputText id="razon_de_trabajo" value="#{clapController.selected.razon_de_trabajo}" title="#{bundle.CreateclapTitle_razon_de_trabajo}" />
 
-                        
-                        <f:facet name="footer">
-                             <p:commandButton actionListener="#{clapController.create}" value="#{bundle.Save}" onclick="/clap/List?faces-redirect=true"/>
-                             <p:button  value="#{bundle.Cancel}" outcome="/clap/List" />
-                        </f:facet>
-                    </p:panelGrid>
- 
+                    <p:outputLabel value="#{bundle.CreateclapLabel_legalizado}" for="legalizado" />
+                    <p:inputText id="legalizado" value="#{clapController.selected.legalizado}" title="#{bundle.CreateclapTitle_legalizado}" />
+
+                    <p:outputLabel value="#{bundle.CreateclapLabel_tipo_de_trabajo}" for="tipo_de_trabajo" />
+                    <p:inputText id="tipo_de_trabajo" value="#{clapController.selected.tipo_de_trabajo}" title="#{bundle.CreateclapTitle_tipo_de_trabajo}" />
+
+                    <b:inputText id="observaciones_trabajo" value="#{clapController.selected.observaciones_trabajo}" title="#{bundle.CreateclapTitle_observaciones_trabajo}" />
+                </p:panelGrid>
+                <p:row>
+                    <h1 align="center">Vida social</h1>
+                    <p:separator/>
+                </p:row>
+                <p:panelGrid columns="4" rendered="#{clapController.selected != null}">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_aceptacion}" for="aceptacion" />
+                    <p:inputText id="aceptacion" value="#{clapController.selected.aceptacion}" title="#{bundle.CreateclapTitle_aceptacion}" />
+
+                    <p:outputLabel value="#{bundle.CreateclapLabel_edad_pareja}" for="edad_pareja" />
+                    <p:inputText id="edad_pareja" value="#{clapController.selected.edad_pareja}" title="#{bundle.CreateclapTitle_edad_pareja}" />
+
+                    <p:outputLabel value="#{bundle.CreateclapLabel_horas_actividad_fisica}" for="horas_actividad_fisica" />
+                    <p:inputText id="horas_actividad_fisica" value="#{clapController.selected.horas_actividad_fisica}" title="#{bundle.CreateclapTitle_horas_actividad_fisica}" />
+
+                    <p:outputLabel value="#{bundle.CreateclapLabel_horas_tv}" for="horas_tv" />
+                    <p:inputText id="horas_tv" value="#{clapController.selected.horas_tv}" title="#{bundle.CreateclapTitle_horas_tv}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_horas_computador_consola}" for="horas_computador_consola" />
+                    <p:inputText id="horas_computador_consola" value="#{clapController.selected.horas_computador_consola}" title="#{bundle.CreateclapTitle_horas_computador_consola}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_especificacion_otras_actividades}" for="especificacion_otras_actividades" />
+                    <p:inputText id="especificacion_otras_actividades" value="#{clapController.selected.especificacion_otras_actividades}" title="#{bundle.CreateclapTitle_especificacion_otras_actividades}" />
+                    
+                    <b:inputText id="observaciones_vida_social" value="#{clapController.selected.observaciones_vida_social}" title="Observaciones" />
+                </p:panelGrid>
+                <p:row>
+                    <h1 align="center">Hábitos/consumo</h1>
+                    <p:separator/>
+                </p:row>
+                <p:panelGrid columns="4" rendered="#{clapController.selected != null}">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_horas_sueño}" for="horas_sueno" />
+                    <p:inputText id="horas_sueno" value="#{clapController.selected.horas_sueno}" title="#{bundle.CreateclapTitle_horas_sueño}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_comidas_familia}" for="comidas_familia" />
+                    <p:inputText id="comidas_familia" value="#{clapController.selected.comidas_familia}" title="#{bundle.CreateclapTitle_comidas_familia}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_especificacion_alimentacion_especial}" for="especificacion_alimentacion_especial" />
+                    <p:inputText id="especificacion_alimentacion_especial" value="#{clapController.selected.especificacion_alimentacion_especial}" title="#{bundle.CreateclapTitle_especificacion_alimentacion_especial}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_cigarros_dia}" for="cigarros_dia" />
+                    <p:inputText id="cigarros_dia" value="#{clapController.selected.cigarros_dia}" title="#{bundle.CreateclapTitle_cigarros_dia}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_observaciones_habitos_consumo}" for="observaciones_habitos_consumo" />
+                    <p:inputText id="observaciones_habitos_consumo" value="#{clapController.selected.observaciones_habitos_consumo}" title="#{bundle.CreateclapTitle_observaciones_habitos_consumo}" />
+                </p:panelGrid>
+                <p:row>
+                    <h1 align="center">Gineco/urológico</h1>
+                    <p:separator/>
+                </p:row>
+                <p:panelGrid columns="4" rendered="#{clapController.selected != null}">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_edad_menarca_espermarca}" for="edad_menarca_espermarca" />
+                    <p:inputText id="edad_menarca_espermarca" value="#{clapController.selected.edad_menarca_espermarca}" title="#{bundle.CreateclapTitle_edad_menarca_espermarca}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_fecha_ultima_menstruacion}" for="fecha_ultima_menstruacion" />
+                    <p:calendar id="fecha_ultima_menstruacion" pattern="MM/dd/yyyy" value="#{clapController.selected.fecha_ultima_menstruacion}" title="#{bundle.EditclapTitle_fecha_ultima_menstruacion}"  showOn="button"/>
+                    <p:outputLabel value="#{bundle.CreateclapLabel_ciclos_regulares}" for="ciclos_regulares" />
+                    <p:inputText id="ciclos_regulares" value="#{clapController.selected.ciclos_regulares}" title="#{bundle.CreateclapTitle_ciclos_regulares}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_dismenorrea}" for="dismenorrea" />
+                    <p:inputText id="dismenorrea" value="#{clapController.selected.dismenorrea}" title="#{bundle.CreateclapTitle_dismenorrea}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_especificacion_its_vih}" for="especificacion_its_vih" />
+                    <p:inputText id="especificacion_its_vih" value="#{clapController.selected.especificacion_its_vih}" title="#{bundle.CreateclapTitle_especificacion_its_vih}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_tratamiento}" for="tratamiento" />
+                    <p:inputText id="tratamiento" value="#{clapController.selected.tratamiento}" title="#{bundle.CreateclapTitle_tratamiento}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_tratamiento_contactos}" for="tratamiento_contactos" />
+                    <p:inputText id="tratamiento_contactos" value="#{clapController.selected.tratamiento_contactos}" title="#{bundle.CreateclapTitle_tratamiento_contactos}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_embarazos}" for="embarazos" />
+                    <p:inputText id="embarazos" value="#{clapController.selected.embarazos}" title="#{bundle.CreateclapTitle_embarazos}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_hijos}" for="hijos" />
+                    <p:inputText id="hijos" value="#{clapController.selected.hijos}" title="#{bundle.CreateclapTitle_hijos}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_abortos}" for="abortos" />
+                    <p:inputText id="abortos" value="#{clapController.selected.abortos}" title="#{bundle.CreateclapTitle_abortos}" />
+                    <b:inputText id="observaciones_gineco_urologico" value="#{clapController.selected.observaciones_gineco_urologico}" title="Observaciones" />
+                </p:panelGrid>
+                <p:row>
+                    <h1 align="center">Sexualidad</h1>
+                    <p:separator/>
+                </p:row>
+                <p:panelGrid columns="4" rendered="#{clapController.selected != null}">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_orientacion_sexual}" for="orientacion_sexual" />
+                    <p:inputText id="orientacion_sexual" value="#{clapController.selected.orientacion_sexual}" title="#{bundle.CreateclapTitle_orientacion_sexual}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_especificacion_orientacion_sexual}" for="especificacion_orientacion_sexual" />
+                    <p:inputText id="especificacion_orientacion_sexual" value="#{clapController.selected.especificacion_orientacion_sexual}" title="#{bundle.CreateclapTitle_especificacion_orientacion_sexual}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_conducta_sexual}" for="conducta_sexual" />
+                    <p:inputText id="conducta_sexual" value="#{clapController.selected.conducta_sexual}" title="#{bundle.CreateclapTitle_conducta_sexual}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_edad_inicio_conducta_sexual}" for="edad_inicio_conducta_sexual" />
+                    <p:inputText id="edad_inicio_conducta_sexual" value="#{clapController.selected.edad_inicio_conducta_sexual}" title="#{bundle.CreateclapTitle_edad_inicio_conducta_sexual}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_relaciones_sexuales}" for="relaciones_sexuales" />
+                    <p:inputText id="relaciones_sexuales" value="#{clapController.selected.relaciones_sexuales}" title="#{bundle.CreateclapTitle_relaciones_sexuales}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_pareja_sexual}" for="pareja_sexual" />
+                    <p:inputText id="pareja_sexual" value="#{clapController.selected.pareja_sexual}" title="#{bundle.CreateclapTitle_pareja_sexual}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_dificultades_sexuales}" for="dificultades_sexuales" />
+                    <p:inputText id="dificultades_sexuales" value="#{clapController.selected.dificultades_sexuales}" title="#{bundle.CreateclapTitle_dificultades_sexuales}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_anticoncepcion}" for="anticoncepcion" />
+                    <p:inputText id="anticoncepcion" value="#{clapController.selected.anticoncepcion}" title="#{bundle.CreateclapTitle_anticoncepcion}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_uso_mac}" for="uso_mac" />
+                    <p:inputText id="uso_mac" value="#{clapController.selected.uso_mac}" title="#{bundle.CreateclapTitle_uso_mac}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_especificacion_uso_mac}" for="especificacion_uso_mac" />
+                    <p:inputText id="especificacion_uso_mac" value="#{clapController.selected.especificacion_uso_mac}" title="#{bundle.CreateclapTitle_especificacion_uso_mac}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_razon_no_uso_mac}" for="razon_no_uso_mac" />
+                    <p:inputText id="razon_no_uso_mac" value="#{clapController.selected.razon_no_uso_mac}" title="#{bundle.CreateclapTitle_razon_no_uso_mac}" />
+                    <p:inputText id="observaciones_sexualidad" value="#{clapController.selected.observaciones_sexualidad}" title="Observaciones" />
+                </p:panelGrid>
+                <p:row>
+                    <h1 align="center">Situación psico emocional</h1>
+                    <p:separator/>
+                </p:row>
+                    <p:panelGrid columns="4" rendered="#{clapController.selected != null}">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_imagen_corporal_mac}" for="imagen_corporal_mac" />
+                    <p:inputText id="imagen_corporal_mac" value="#{clapController.selected.imagen_corporal_mac}" title="#{bundle.CreateclapTitle_imagen_corporal_mac}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_bienestas_emocional_mac}" for="bienestas_emocional_mac" />
+                    <p:inputText id="bienestas_emocional_mac" value="#{clapController.selected.bienestas_emocional_mac}" title="#{bundle.CreateclapTitle_bienestas_emocional_mac}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_vida_proyecto_mac}" for="vida_proyecto_mac" />
+                    <p:inputText id="vida_proyecto_mac" value="#{clapController.selected.vida_proyecto_mac}" title="#{bundle.CreateclapTitle_vida_proyecto_mac}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_referente_adulto_mac}" for="referente_adulto_mac" />
+                    <p:inputText id="referente_adulto_mac" value="#{clapController.selected.referente_adulto_mac}" title="#{bundle.CreateclapTitle_referente_adulto_mac}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_nombre_referente_adulto_mac}" for="nombre_referente_adulto_mac" />
+                    <p:inputText id="nombre_referente_adulto_mac" value="#{clapController.selected.nombre_referente_adulto_mac}" title="#{bundle.CreateclapTitle_nombre_referente_adulto_mac}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_telefono_referente_adulto_mac}" for="telefono_referente_adulto_mac" />
+                    <p:inputText id="telefono_referente_adulto_mac" value="#{clapController.selected.telefono_referente_adulto_mac}" title="#{bundle.CreateclapTitle_telefono_referente_adulto_mac}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_observaciones_psico_emocional}" for="observaciones_psico_emocional" />
+                    <p:inputText id="observaciones_psico_emocional" value="#{clapController.selected.observaciones_psico_emocional}" title="#{bundle.CreateclapTitle_observaciones_psico_emocional}" />
+                </p:panelGrid>
+                <p:row>
+                    <h1 align="center">Examen físico</h1>
+                    <p:separator/>
+                </p:row>
+                <p:panelGrid columns="4" rendered="#{clapController.selected != null}">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_peso}" for="peso" />
+                    <p:inputText id="peso" value="#{clapController.selected.peso}" title="#{bundle.CreateclapTitle_peso}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_de_peso}" for="de_peso" />
+                    <p:inputText id="de_peso" value="#{clapController.selected.de_peso}" title="#{bundle.CreateclapTitle_de_peso}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_talla}" for="talla" />
+                    <p:inputText id="talla" value="#{clapController.selected.talla}" title="#{bundle.CreateclapTitle_talla}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_de_talla}" for="de_talla" />
+                    <p:inputText id="de_talla" value="#{clapController.selected.de_talla}" title="#{bundle.CreateclapTitle_de_talla}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_presion_abdominal}" for="presion_abdominal" />
+                    <p:inputText id="presion_abdominal" value="#{clapController.selected.presion_abdominal}" title="#{bundle.CreateclapTitle_presion_abdominal}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_presion_arterial}" for="presion_arterial" />
+                    <p:inputText id="presion_arterial" value="#{clapController.selected.presion_arterial}" title="#{bundle.CreateclapTitle_presion_arterial}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_otra_area_examen_fisico}" for="otra_area_examen_fisico" />
+                    <p:inputText id="otra_area_examen_fisico" value="#{clapController.selected.otra_area_examen_fisico}" title="#{bundle.CreateclapTitle_otra_area_examen_fisico}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_observaciones_examen_fisico}" for="observaciones_examen_fisico" />
+                    <p:inputText id="observaciones_examen_fisico" value="#{clapController.selected.observaciones_examen_fisico}" title="#{bundle.CreateclapTitle_observaciones_examen_fisico}" />
+                </p:panelGrid>
+                    <p:row>
+                        <h1 align="center">Diagnóstico general</h1>
+                        <p:separator/>
+                    </p:row>
+                <p:panelGrid columns="4" rendered="#{clapController.selected != null}">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_impresion_diagnostica}" for="impresion_diagnostica" />
+                    <p:inputText id="impresion_diagnostica" value="#{clapController.selected.impresion_diagnostica}" title="#{bundle.CreateclapTitle_impresion_diagnostica}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_indicaciones_interconsultas}" for="indicaciones_interconsultas" />
+                    <p:inputText id="indicaciones_interconsultas" value="#{clapController.selected.indicaciones_interconsultas}" title="#{bundle.CreateclapTitle_indicaciones_interconsultas}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_paciente}" for="paciente" />
+                    <p:selectOneMenu id="paciente" value="#{clapController.selected.paciente}" >
+                        <f:selectItems value="#{pacienteController.itemsAvailableSelectOne}"
+                                       var="pacienteItem"
+                                       itemValue="#{pacienteItem}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="#{bundle.CreateclapLabel_funcionario}" for="funcionario" />
+                    <p:selectOneMenu id="funcionario" value="#{clapController.selected.funcionario}" >
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                       var="funcionarioItem"
+                                       itemValue="#{funcionarioItem}"/>
+                    </p:selectOneMenu>
+                </p:panelGrid>
+                <p:row>
+                    <h1 align="center">Riesgos</h1>
+                    <p:separator/>
+                </p:row>
+                <p:panelGrid columns="4" rendered="#{clapController.selected != null}">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_riesgo_ssr}" for="riesgo_ssr" />
+                    <p:selectBooleanCheckbox id="riesgo_ssr" value="#{clapController.selected.riesgo_ssr}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_riesgo_salud_mental}" for="riesgo_salud_mental" />
+                    <p:selectBooleanCheckbox id="riesgo_salud_mental" value="#{clapController.selected.riesgo_salud_mental}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_riesgo_oh_drogas}" for="riesgo_oh_drogas" />
+                    <p:selectBooleanCheckbox id="riesgo_oh_drogas" value="#{clapController.selected.riesgo_oh_drogas}"/>
+                    <p:outputLabel value="#{bundle.CreateclapLabel_riesgo_nutricional}" for="riesgo_nutricional" />
+                    <p:selectBooleanCheckbox id="riesgo_nutricional" value="#{clapController.selected.riesgo_nutricional}" />
+                    <p:outputLabel value="#{bundle.CreateclapLabel_riesgo_social}" for="riesgo_social" />
+                    <p:selectBooleanCheckbox id="riesgo_social" value="#{clapController.selected.riesgo_social}" />
+                </p:panelGrid>
+                     <p:commandButton actionListener="#{clapController.create}" value="#{bundle.Save}" onclick="/clap/List?faces-redirect=true"/>
+                     <p:button  value="#{bundle.Cancel}" outcome="/clap/List" /> 
             </h:form>
         </b:panel>
         </ui:define>
