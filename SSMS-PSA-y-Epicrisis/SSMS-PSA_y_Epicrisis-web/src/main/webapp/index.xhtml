@@ -16,13 +16,12 @@
         </ui:define>
 
         <ui:define name="body">
-            <br/>
-            <br/>
             <h:form>
                 <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
-                <b:row>
-                    <b:column span="4" offset="4">
-                    <b:panel look="primary" title="#{bundle.LoginTitle}">
+                <b:row style="min-height: 100px"></b:row>
+                <b:row style="height: 100%">
+                    <b:column span="6" offset="3">
+                        <b:panel look="primary" title="#{bundle.LoginTitle}">
                         <b:row>
                             <b:column  span="4">
                                 <h:outputLabel for="Correo" value="#{bundle.correo_login}" />
@@ -48,7 +47,11 @@
                             </b:column>
                         </b:row>
                         <f:facet name="footer">
-                            <b:commandButton look="primary" value="${bundle.submit_login}" style="min-height: 30px;min-width: 80px;margin: 0 auto;" action="#{loginController.login}"/>
+                            <b:row>
+                                <b:column offset="4">
+                                    <b:commandButton look="primary" value="${bundle.submit_login}" style="min-height: 30px;min-width: 80px;margin: 0 auto;" action="#{loginController.login}"/>
+                                </b:column>
+                            </b:row>
                         </f:facet>
                     </b:panel>
                     </b:column>

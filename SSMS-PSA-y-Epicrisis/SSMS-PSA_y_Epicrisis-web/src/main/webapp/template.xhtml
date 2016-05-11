@@ -9,62 +9,72 @@
 
     
     <h:head>
-        <title><ui:insert name="title">Default Title</ui:insert></title>
+        <title><ui:insert name="title">SSMS</ui:insert></title>
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
         <h:outputScript library="js" name="jsfcrud.js"/>
+        <b:navBar brand="#{bundle.AppName}" brandAlign="left" inverse="true">
+            <b:navbarLinks rendered="#{not loginController.verifyLogin()}">
+                <b:navLink value="#{bundle.Home}" outcome="/index" icon="glyphicon glyphicon-home"/>
+            </b:navbarLinks>
+            <b:navbarLinks rendered="#{loginController.verifyLogin()}">
+                <b:navLink  value="#{bundle.Home}" outcome="/home" icon="glyphicon glyphicon-home"/>
+                <b:dropMenu value="#{bundle.seccion1}">
+                    <b:navLink value="Edición de información Personal" outcome="/welcomePrimefaces" />
+                    <b:navLink value="Cambio de contraseña" outcome="/welcomePrimefaces" />
+                </b:dropMenu>
+                <b:dropMenu value="#{bundle.seccion2}">
+                    <b:navLink value="Ingresar ficha CLAP" outcome="/template.xhtml" />
+                    <b:navLink value="Ingresar usuario sin FONASA" outcome="/paciente/List.xhtml" />
+                    <b:navLink value="Formulario de Actividades de intervención" outcome="/template.xhtml" />
+                </b:dropMenu>
+                <b:navLink value="#{bundle.seccion3}" outcome="/welcomePrimefaces" rendered="#{loginController.esFuncionario()}" />
+                <b:dropMenu value="#{bundle.seccion4}">
+                    <b:navLink value="Sábana de Pacientes" outcome="/template.xhtml" />
+                    <b:navLink value="Reportes" outcome="/template.xhtml" />
+                </b:dropMenu>
+                <b:dropMenu value="#{bundle.seccion5}" rendered="#{loginController.esSuperUsuario()}">
+                    <b:navLink value="Control de usuarios" outcome="/usuario/List.xhtml" />
+                    <b:navLink value="Auditoría" outcome="/auditoria/List.xhtml" />
+                    <b:navLink value="Modificación de parámetros" outcome="/usuario/List.xhtml" />
+                </b:dropMenu>
+            </b:navbarLinks>
+            <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
+                    <b:navbarLinks pull="right">
+                <h:form rendered="#{loginController.verifyLogin()}">
+                    <b:commandButton look="Info" value="${bundle.submit_logout}" style="vertical-align: middle;" action="#{loginController.logout}"  icon="glyphicon glyphicon-off" />
+                </h:form>
+            </b:navbarLinks>
+        </b:navBar>
     </h:head>
 
     <h:body>
+        <b:container style="position: relative;">
+            <ui:insert name="body"/>
+            <!--ui:insert name="footer"/-->
+        </b:container>
+        <b:container style="background-color: #2E2EFE; width:100%; padding-top:10px; min-height:100px; position: absolute; bottom:0;">
+            <footer>
+                <p>Programa Salud Adolescente propiedad del Ministerio de Salud de Chile</p>
+                <p>Servicio de Salud Metropolitano Sur</p>
+                <p>Dirección: Av. Santa Rosa 3453, San Miguel, Santiago, Chile - Correo: comunicaciones.ssms@redsalud.gob.cl - Fono: +56 2 25763800</p>
+            </footer>
+        </b:container>
+        <!--p:growl id="growl" life="3000" /-->
 
-        <p:growl id="growl" life="3000" />
+        <!--p:layout fullPage="true"-->
+            <!--p:layoutUnit position="north" style="padding:0px;margin: 0px; border: 0px;" gutter="0"-->
+                
+            <!--/p:layoutUnit-->
 
-        <p:layout fullPage="true">
-            <p:layoutUnit position="north" style="padding:0px;margin: 0px; border: 0px;" gutter="0">
-                <b:navBar brand="#{bundle.AppName}" inverse="true">
-                    <b:navbarLinks rendered="#{not loginController.verifyLogin()}">
-                        <b:navLink value="#{bundle.Home}" outcome="/index" icon="glyphicon glyphicon-home"/>
-                    </b:navbarLinks>
-                    <b:navbarLinks rendered="#{loginController.verifyLogin()}">
-                        <b:navLink  value="#{bundle.Home}" outcome="/home" icon="glyphicon glyphicon-home"/>
-                        <b:dropMenu value="#{bundle.seccion1}">
-                            <b:navLink value="Edición de información Personal" outcome="/welcomePrimefaces" />
-                            <b:navLink value="Cambio de contraseña" outcome="/welcomePrimefaces" />
-                        </b:dropMenu>
-                        <b:dropMenu value="#{bundle.seccion2}">
-                            <b:navLink value="Ingresar ficha CLAP" outcome="/template.xhtml" />
-                            <b:navLink value="Ingresar usuario sin FONASA" outcome="/paciente/List.xhtml" />
-                            <b:navLink value="Formulario de Actividades de intervención" outcome="/template.xhtml" />
-                        </b:dropMenu>
-                        <b:navLink value="#{bundle.seccion3}" outcome="/welcomePrimefaces" rendered="#{loginController.esFuncionario()}" />
-                        <b:dropMenu value="#{bundle.seccion4}">
-                            <b:navLink value="Sábana de Pacientes" outcome="/template.xhtml" />
-                            <b:navLink value="Reportes" outcome="/template.xhtml" />
-                        </b:dropMenu>
-                        <b:dropMenu value="#{bundle.seccion5}" rendered="#{loginController.esSuperUsuario()}">
-                            <b:navLink value="Control de usuarios" outcome="/usuario/List.xhtml" />
-                            <b:navLink value="Auditoría" outcome="/auditoria/List.xhtml" />
-                            <b:navLink value="Modificación de parámetros" outcome="/usuario/List.xhtml" />
-                        </b:dropMenu>
-                    </b:navbarLinks>
-                    <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
-                    <b:navbarLinks pull="right">
-                        <h:form rendered="#{loginController.verifyLogin()}">
-                            <b:commandButton look="Info" value="${bundle.submit_logout}" style="vertical-align: middle;" action="#{loginController.logout}"  icon="glyphicon glyphicon-off" />
-                        </h:form>
-                    </b:navbarLinks>
-                </b:navBar>
-            </p:layoutUnit>
+            <!--p:layoutUnit position="south" style="padding:0px;margin: 0px; border: 0px;" gutter="0"-->
+                
+            <!--/p:layoutUnit-->
 
-            <p:layoutUnit position="south" style="padding:0px;margin: 0px; border: 0px;" gutter="0">
-                <ui:insert name="footer"/>
-            </p:layoutUnit>
+            <!--p:layoutUnit position="center" style="padding:0px;margin: 0px; border: 0px;" gutter="0"-->
+                
+            <!--/p:layoutUnit-->
 
-            <p:layoutUnit position="center" style="padding:0px;margin: 0px; border: 0px;" gutter="0">
-                <ui:insert name="body"/>
-            </p:layoutUnit>
-
-        </p:layout>
-
+        <!--/p:layout-->
     </h:body>
-
+    
 </html>
