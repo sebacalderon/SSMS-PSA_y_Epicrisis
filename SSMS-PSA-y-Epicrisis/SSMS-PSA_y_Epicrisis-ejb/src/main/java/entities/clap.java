@@ -145,7 +145,7 @@ public class clap implements Serializable {
     @Temporal(TemporalType.DATE)
     @Column(name="fecha_consulta_clap")
     private java.util.Date fecha_consulta;
-
+    
     @NotNull
     @Column(name="edad_clap")
     private int edad;
@@ -744,11 +744,11 @@ public class clap implements Serializable {
     
     @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="tanner_mama_clap")
-    private boolean tanner_mama;
+    private int tanner_mama;
     
     @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="tanner_genital_clap")
-    private boolean tanner_genital;
+    private int tanner_genital;
     
     @Column(name="observaciones_examen_fisico_clap",columnDefinition = "TEXT")
     private String observaciones_examen_fisico;
@@ -794,7 +794,7 @@ public class clap implements Serializable {
     @NotNull
     @Column(name="riesgo_social_clap")
     private String riesgo_social;
-
+ 
     public Long getNumero_consulta() {
         return numero_consulta;
     }
@@ -2043,19 +2043,19 @@ public class clap implements Serializable {
         this.tanner_con_foto = tanner_con_foto;
     }
 
-    public boolean isTanner_mama() {
+    public int isTanner_mama() {
         return tanner_mama;
     }
 
-    public void setTanner_mama(boolean tanner_mama) {
+    public void setTanner_mama(int tanner_mama) {
         this.tanner_mama = tanner_mama;
     }
 
-    public boolean isTanner_genital() {
+    public int isTanner_genital() {
         return tanner_genital;
     }
 
-    public void setTanner_genital(boolean tanner_genital) {
+    public void setTanner_genital(int tanner_genital) {
         this.tanner_genital = tanner_genital;
     }
 
