@@ -18,6 +18,11 @@
             <h:form id="pacienteCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="4" rendered="#{pacienteController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_RUN}" for="RUN" />    
+                        <p:column>
+                            <p:inputText id="RUN" value="#{pacienteController.selected.RUN}" title="#{bundle.CreatepacienteTitle_RUN}" required="true" /> -
+                            <p:inputText id="DV" value="#{pacienteController.selected.DV}" title="#{bundle.CreatepacienteTitle_DV}" maxlength="1" style="max-width: 20px;" required="true" />
+                        </p:column>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_nombres}" for="nombres" />
                         <p:inputText id="nombres" value="#{pacienteController.selected.nombres}" title="#{bundle.CreatepacienteTitle_nombres}" maxlength="50" required="true" />
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_primer_apellido}" for="primer_apellido" />
@@ -30,11 +35,7 @@
                         <p:selectOneMenu id="region_residencia" value="#{pacienteController.selected.region_residencia}" required="true" >
                             <f:selectItem itemLabel="Seleccione una región" itemValue="" noSelectionOption="true" />
                             <f:selectItems value="#{regionController.items}" var="region" itemLabel="#{region.nombre}" itemValue="#{region}" />
-                        </p:selectOneMenu>                      
-     
-                          
-                        
-                        
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_comuna_residencia}" for="comuna_residencia" />
                         <p:autoComplete id="comuna_residencia" value="#{pacienteController.selected.comuna_residencia}" completeMethod="#{comunaController.completeComuna}"
                         var="comuna" itemLabel="#{comuna.nombre}" itemValue="#{comuna}" converter="entityConverter" forceSelection="true" />
@@ -49,11 +50,6 @@
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_fecha_nacimiento}" for="fecha_nacimiento" />
                         <p:calendar  id="fecha_nacimiento" value="#{pacienteController.selected.fecha_nacimiento}" title="#{bundle.CreatepacienteTitle_fecha_nacimiento}" pattern="dd/MM/yyyy" navigator="true" required="true">
                         </p:calendar>
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_RUN}" for="RUN" />    
-                        <p:column>
-                            <p:inputText id="RUN" value="#{pacienteController.selected.RUN}" title="#{bundle.CreatepacienteTitle_RUN}" required="true" /> -
-                            <p:inputText id="DV" value="#{pacienteController.selected.DV}" title="#{bundle.CreatepacienteTitle_DV}" maxlength="1" style="max-width: 20px;" required="true" />
-                        </p:column>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_cesfam}" for="cesfam" />
                         <p:selectOneMenu id="cesfam" value="#{pacienteController.selected.cesfam}" >
                             <f:selectItem itemLabel="Seleccione un CESFAM" itemValue="" noSelectionOption="true" />
@@ -70,6 +66,8 @@
                             <f:selectItem itemLabel="Seleccione una opción" itemValue="" noSelectionOption="true" />
                             <f:selectItem itemLabel="Hombre" itemValue="1" noSelectionOption="false" />
                             <f:selectItem itemLabel="Mujer" itemValue="2" noSelectionOption="false" />
+                            <f:selectItem itemLabel="Indefinido" itemValue="3" noSelectionOption="false" />
+                            <f:selectItem itemLabel="Indeterminado" itemValue="4" noSelectionOption="false" />
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_programa_social}" for="programa_social"  />
                         <p:selectOneMenu id="programa_social" value="#{pacienteController.selected.programa_social}" >
