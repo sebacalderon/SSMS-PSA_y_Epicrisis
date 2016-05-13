@@ -60,12 +60,3 @@ footer{
     border-radius: 4px;
     text-shadow: 0px 0px 0px rgba(0,0,0,0);
 }
-
-.ui-button-icon-left ui-icon ui-c ui-icon-plus, .ui-button-icon-left ui-icon ui-c ui-icon-pencil,.ui-button-icon-left ui-icon ui-c ui-icon-search, .ui-button-icon-left ui-icon ui-c ui-icon-trash{
-    color: #FFFFFF;
-}
-
-.ui-button-text ui-c{
-    font-size: 30px;
-
-}
