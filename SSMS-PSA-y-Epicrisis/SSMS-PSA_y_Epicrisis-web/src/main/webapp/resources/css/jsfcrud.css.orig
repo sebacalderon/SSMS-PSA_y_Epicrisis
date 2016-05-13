@@ -16,16 +16,12 @@
 .ui-button {
     margin-top: 10px !important;
 }
-body{
+.body{
     font-family: 'Roboto', sans-serif;
 }
 .ui-panelgrid td, .ui-panelgrid tr
 {
     border-style: none !important
-}
-input
-{
-    width:90%;
 }
 footer{
     color: #848484;
