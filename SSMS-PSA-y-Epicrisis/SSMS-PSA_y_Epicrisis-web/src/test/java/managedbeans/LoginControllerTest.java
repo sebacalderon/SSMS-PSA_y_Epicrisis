@@ -5,6 +5,7 @@
  */
 package managedbeans;
 
+import entities.Rol;
 import entities.Usuario;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -46,7 +47,9 @@ public class LoginControllerTest {
     @Test
     public void testEsEmpleadoMunicipal() {
         System.out.println("esEmpleadoMunicipal");
-        instance.getUsuarioLogueado().setRol("Empleado Municipal");
+        Rol rol = new Rol();
+        rol.setNombres("Empleado Municipal");
+        instance.getUsuarioLogueado().setRol(rol);
         boolean expResult = true;
         boolean result = instance.esEmpleadoMunicipal();
         assertEquals(expResult, result);
@@ -57,8 +60,12 @@ public class LoginControllerTest {
      */
     @Test
     public void testEsFuncionario() {
-        System.out.println("esEmpleadoMunicipal");
-        instance.getUsuarioLogueado().setRol("Funcionario CESFAM");
+        System.out.println("esFuncionarioCESFAM");
+        Rol rol = new Rol();
+        long id = 2;
+        rol.setId(id);
+        rol.setNombres("Funcionario CESFAM");
+        instance.getUsuarioLogueado().setRol(rol);
         boolean expResult = true;
         boolean result = instance.esFuncionario();
         assertEquals(expResult, result);
@@ -69,8 +76,10 @@ public class LoginControllerTest {
      */
     @Test
     public void testEsSuperUsuario() {
-         System.out.println("esEmpleadoMunicipal");
-        instance.getUsuarioLogueado().setRol("Super Usuario");
+        System.out.println("esSuperUsuario");
+        Rol rol = new Rol();
+        rol.setNombres("Super Usuario");
+        instance.getUsuarioLogueado().setRol(rol);
         boolean expResult = true;
         boolean result = instance.esSuperUsuario();
         assertEquals(expResult, result);

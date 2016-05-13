@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.security.MessageDigest;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -66,9 +67,9 @@ public class Usuario implements Serializable {
     @Column(name="password_usuario")
     private String password; 
 
-    @NotNull(message="Debe ingresar un rol")
-    @Column(name="rol_usuario")
-    private String rol;  
+    @JoinColumn(name = "rol_usuario", referencedColumnName = "codigo_rol")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Rol rol;  
 
     @Column(name="habilitado_usuario")
     private boolean habilitado;
@@ -99,14 +100,13 @@ public class Usuario implements Serializable {
     }
     
     
-    public String getRol() {
+    public Rol getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(Rol rol) {
         this.rol = rol;
     }
-    
     
     public String getCorreo() {
         return correo;

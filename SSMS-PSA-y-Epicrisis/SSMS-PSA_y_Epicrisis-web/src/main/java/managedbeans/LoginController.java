@@ -79,6 +79,7 @@ public class LoginController implements Serializable{
             HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
             Usuario usuario;
             usuario = userCtrl.findByCorreo(this.correo);
+            System.out.println(usuario.getRol());
             if (usuario == null) {
                 context.addMessage(null, new FacesMessage("El usuario no existe"));
                 return "/faces/index.xhtml";
@@ -156,14 +157,14 @@ public class LoginController implements Serializable{
     }
     
     public boolean esEmpleadoMunicipal(){
-        return usuarioLogueado.getRol().equals("Empleado Municipal");
+        return usuarioLogueado.getRol().getNombres().equals("Empleado Municipal");
     }
     
     public boolean esFuncionario(){
-        return usuarioLogueado.getRol().equals("Funcionario CESFAM");
+        return usuarioLogueado.getRol().getNombres().equals("Funcionario CESFAM");
     }
     
     public boolean esSuperUsuario(){
-        return usuarioLogueado.getRol().equals("Super Usuario");
+        return usuarioLogueado.getRol().getNombres().equals("Super Usuario");
     }
 }
