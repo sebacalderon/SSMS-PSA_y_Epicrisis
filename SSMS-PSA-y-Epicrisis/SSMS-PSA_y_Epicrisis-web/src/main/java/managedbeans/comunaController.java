@@ -171,21 +171,5 @@ public class comunaController implements Serializable {
                 return null;
             }
         }
-
     }
-    
-    public List<comuna> completeComuna(String query) {
-        List<comuna> allComunas = getItems();
-        List<comuna> filteredComunas = new ArrayList<comuna>();
-         
-        for (int i = 0; i < allComunas.size(); i++) {
-            comuna Comuna = allComunas.get(i);
-            if(Comuna.getNombre().toLowerCase().startsWith(query)) {
-                filteredComunas.add(Comuna);
-            }
-        }
-         
-        return filteredComunas;
-    }
-
 }

@@ -1,13 +1,16 @@
 package managedbeans;
 
+import entities.comuna;
+import entities.nacionalidad;
 import entities.paciente;
 import entities.prevision;
+import entities.region;
 import managedbeans.util.JsfUtil;
 import managedbeans.util.JsfUtil.PersistAction;
 import sessionbeans.pacienteFacadeLocal;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -16,6 +19,7 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -59,18 +63,59 @@ public class pacienteController implements Serializable {
         return false;
     }
     
+    public boolean regionSelected(){
+        if(selected.getRegion_residencia()!=null){
+            return true;
+        }
+        return false;
+    }
+    
     public paciente prepareCreate() {
         selected = new paciente();
         initializeEmbeddableKey();
+        selected.setNombres("Sebastian");
+        selected.setPrimer_apellido("Calderon");
+        selected.setSegundo_apellido("Diaz");
+        selected.setCalle_direccion("sadas");
+        selected.setNumero_direccion("123");
+        selected.setFecha_nacimiento(new java.util.Date());
+        selected.setRUN(18293486);
+        selected.setDV("0");
+        selected.setCorreo("sebastian@algo.com");
+        selected.setSexo(1);
+        region Region = new region();
+        long id = 1;
+        Region.setId(id);
+        Region.setNombre("Región de Tarapacá");
+        selected.setRegion_residencia(Region);
+        comuna Comuna = new comuna();
+        id = 1101;
+        Comuna.setId(id);
+        Comuna.setNombre("Iquique");
+        Comuna.setRegion(Region);
+        selected.setComuna_residencia(Comuna);
+        prevision Prevision = new prevision();
+        id = 2;
+        Prevision.setId(id);
+        Prevision.setNombre("Isapre");
+        selected.setPrevision(Prevision);
+        nacionalidad Nacionalidad = new nacionalidad();
+        id = 213;
+        Nacionalidad.setId(id);        
+        Nacionalidad.setNombre("Chile");
+        selected.setNacionalidad(Nacionalidad);
         return selected;
     }
 
     public String create() {
+        FacesContext context = FacesContext.getCurrentInstance();
         selected.setEstado("Ingresado");
         System.out.println("Comuna Residencia: "+selected.getComuna_residencia());
+        System.out.println("Region: "+selected.getRegion_residencia().getComunas());
         System.out.println("Nacionalidad: "+selected.getNacionalidad());
         System.out.println("Prevision: "+selected.getPrevision());
         System.out.println("Beneficiario de FONASA: "+selected.getGrupo_fonasa());
+        System.out.println("Movil: "+selected.getTelefono_movil());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("pacienteCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -180,4 +225,17 @@ public class pacienteController implements Serializable {
 
     }
     
+    public List<comuna> completeComuna(String query) {
+        List<comuna> allComunas = selected.getRegion_residencia().getComunas();
+        List<comuna> filteredComunas = new ArrayList<comuna>();
+         
+        for (int i = 0; i < allComunas.size(); i++) {
+            comuna Comuna = allComunas.get(i);
+            if(Comuna.getNombre().toLowerCase().startsWith(query.toLowerCase())) {
+                filteredComunas.add(Comuna);
+            }
+        }
+         
+        return filteredComunas;
+    }
 }
