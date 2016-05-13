@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="clapViewDlg" widgetVar="clapViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewclapTitle}">
+            <h:form id="clapViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{clapController.selected != null}">
+                        <h:outputText value="#{bundle.ViewclapLabel_numero_consulta}"/>
+                        <h:outputText value="#{clapController.selected.numero_consulta}" title="#{bundle.ViewclapTitle_numero_consulta}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_fecha_consulta}"/>
+                        <h:outputText value="#{clapController.selected.fecha_consulta}" title="#{bundle.ViewclapTitle_fecha_consulta}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewclapLabel_edad}"/>
+                        <h:outputText value="#{clapController.selected.edad}" title="#{bundle.ViewclapTitle_edad}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_acompañante}"/>
+                        <h:outputText value="#{clapController.selected.acompañante}" title="#{bundle.ViewclapTitle_acompañante}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_motivo_consulta_adolescente_1}"/>
+                        <h:outputText value="#{clapController.selected.motivo_consulta_adolescente_1}" title="#{bundle.ViewclapTitle_motivo_consulta_adolescente_1}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_motivo_consulta_adolescente_2}"/>
+                        <h:outputText value="#{clapController.selected.motivo_consulta_adolescente_2}" title="#{bundle.ViewclapTitle_motivo_consulta_adolescente_2}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_motivo_consulta_adolescente_3}"/>
+                        <h:outputText value="#{clapController.selected.motivo_consulta_adolescente_3}" title="#{bundle.ViewclapTitle_motivo_consulta_adolescente_3}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_motivo_consulta_acompañante_1}"/>
+                        <h:outputText value="#{clapController.selected.motivo_consulta_acompañante_1}" title="#{bundle.ViewclapTitle_motivo_consulta_acompañante_1}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_motivo_consulta_acompañante_2}"/>
+                        <h:outputText value="#{clapController.selected.motivo_consulta_acompañante_2}" title="#{bundle.ViewclapTitle_motivo_consulta_acompañante_2}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_motivo_consulta_acompañante_3}"/>
+                        <h:outputText value="#{clapController.selected.motivo_consulta_acompañante_3}" title="#{bundle.ViewclapTitle_motivo_consulta_acompañante_3}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_descripcion_motivo_consulta}"/>
+                        <h:outputText value="#{clapController.selected.descripcion_motivo_consulta}" title="#{bundle.ViewclapTitle_descripcion_motivo_consulta}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_perinatales_normales}"/>
+                        <h:outputText value="#{clapController.selected.perinatales_normales}" title="#{bundle.ViewclapTitle_perinatales_normales}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_alergias_normales}"/>
+                        <h:outputText value="#{clapController.selected.alergias_normales}" title="#{bundle.ViewclapTitle_alergias_normales}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_vacunas_completas}"/>
+                        <h:outputText value="#{clapController.selected.vacunas_completas}" title="#{bundle.ViewclapTitle_vacunas_completas}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_enfermedades_importantes}"/>
+                        <h:outputText value="#{clapController.selected.enfermedades_importantes}" title="#{bundle.ViewclapTitle_enfermedades_importantes}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_discapacidad}"/>
+                        <h:outputText value="#{clapController.selected.discapacidad}" title="#{bundle.ViewclapTitle_discapacidad}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_accidentes_relevantes}"/>
+                        <h:outputText value="#{clapController.selected.accidentes_relevantes}" title="#{bundle.ViewclapTitle_accidentes_relevantes}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_cirugia_hospitalizaciones}"/>
+                        <h:outputText value="#{clapController.selected.cirugia_hospitalizaciones}" title="#{bundle.ViewclapTitle_cirugia_hospitalizaciones}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_uso_medicamentos}"/>
+                        <h:outputText value="#{clapController.selected.uso_medicamentos}" title="#{bundle.ViewclapTitle_uso_medicamentos}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_problemas_salud_mental}"/>
+                        <h:outputText value="#{clapController.selected.problemas_salud_mental}" title="#{bundle.ViewclapTitle_problemas_salud_mental}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_violencia}"/>
+                        <h:outputText value="#{clapController.selected.violencia}" title="#{bundle.ViewclapTitle_violencia}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_antecedentes_judiciales}"/>
+                        <h:outputText value="#{clapController.selected.antecedentes_judiciales}" title="#{bundle.ViewclapTitle_antecedentes_judiciales}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_otros}"/>
+                        <h:outputText value="#{clapController.selected.otros}" title="#{bundle.ViewclapTitle_otros}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_observaciones_antecdentes_personales}"/>
+                        <h:outputText value="#{clapController.selected.observaciones_antecdentes_personales}" title="#{bundle.ViewclapTitle_observaciones_antecdentes_personales}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_enfermedades_importantes_familia}"/>
+                        <h:outputText value="#{clapController.selected.enfermedades_importantes_familia}" title="#{bundle.ViewclapTitle_enfermedades_importantes_familia}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_obesidad_familia}"/>
+                        <h:outputText value="#{clapController.selected.obesidad_familia}" title="#{bundle.ViewclapTitle_obesidad_familia}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_problemas_salud_mental_familia}"/>
+                        <h:outputText value="#{clapController.selected.problemas_salud_mental_familia}" title="#{bundle.ViewclapTitle_problemas_salud_mental_familia}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_violencia_intrafamiliar}"/>
+                        <h:outputText value="#{clapController.selected.violencia_intrafamiliar}" title="#{bundle.ViewclapTitle_violencia_intrafamiliar}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_alcohol_y_otras_drogas}"/>
+                        <h:outputText value="#{clapController.selected.alcohol_y_otras_drogas}" title="#{bundle.ViewclapTitle_alcohol_y_otras_drogas}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_padre_adolescente}"/>
+                        <h:outputText value="#{clapController.selected.padre_adolescente}" title="#{bundle.ViewclapTitle_padre_adolescente}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_judiciales}"/>
+                        <h:outputText value="#{clapController.selected.judiciales}" title="#{bundle.ViewclapTitle_judiciales}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_otros_antecedentes_familiares}"/>
+                        <h:outputText value="#{clapController.selected.otros_antecedentes_familiares}" title="#{bundle.ViewclapTitle_otros_antecedentes_familiares}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_observaciones_antecedentes_familiares}"/>
+                        <h:outputText value="#{clapController.selected.observaciones_antecedentes_familiares}" title="#{bundle.ViewclapTitle_observaciones_antecedentes_familiares}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_vive_con_especificación}"/>
+                        <h:outputText value="#{clapController.selected.vive_con_especificación}" title="#{bundle.ViewclapTitle_vive_con_especificación}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_especificacion_comparte_cama}"/>
+                        <h:outputText value="#{clapController.selected.especificacion_comparte_cama}" title="#{bundle.ViewclapTitle_especificacion_comparte_cama}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_nivel_instruccion_madre}"/>
+                        <h:outputText value="#{clapController.selected.nivel_instruccion_madre}" title="#{bundle.ViewclapTitle_nivel_instruccion_madre}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_nivel_instruccion_padre}"/>
+                        <h:outputText value="#{clapController.selected.nivel_instruccion_padre}" title="#{bundle.ViewclapTitle_nivel_instruccion_padre}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_nivel_instruccion_pareja}"/>
+                        <h:outputText value="#{clapController.selected.nivel_instruccion_pareja}" title="#{bundle.ViewclapTitle_nivel_instruccion_pareja}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_ocupacion_madre}"/>
+                        <h:outputText value="#{clapController.selected.ocupacion_madre}" title="#{bundle.ViewclapTitle_ocupacion_madre}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_ocupacion_padre}"/>
+                        <h:outputText value="#{clapController.selected.ocupacion_padre}" title="#{bundle.ViewclapTitle_ocupacion_padre}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_ocupacion_pareja}"/>
+                        <h:outputText value="#{clapController.selected.ocupacion_pareja}" title="#{bundle.ViewclapTitle_ocupacion_pareja}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_percepcion_familia}"/>
+                        <h:outputText value="#{clapController.selected.percepcion_familia}" title="#{bundle.ViewclapTitle_percepcion_familia}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_diagrama_familiar}"/>
+                        <h:outputText value="#{clapController.selected.diagrama_familiar}" title="#{bundle.ViewclapTitle_diagrama_familiar}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_observaciones_familia}"/>
+                        <h:outputText value="#{clapController.selected.observaciones_familia}" title="#{bundle.ViewclapTitle_observaciones_familia}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_observaciones_vivienda}"/>
+                        <h:outputText value="#{clapController.selected.observaciones_vivienda}" title="#{bundle.ViewclapTitle_observaciones_vivienda}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_nivel_educacion}"/>
+                        <h:outputText value="#{clapController.selected.nivel_educacion}" title="#{bundle.ViewclapTitle_nivel_educacion}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_curso}"/>
+                        <h:outputText value="#{clapController.selected.curso}" title="#{bundle.ViewclapTitle_curso}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_años_repetidos}"/>
+                        <h:outputText value="#{clapController.selected.años_repetidos}" title="#{bundle.ViewclapTitle_años_repetidos}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_causa_años_repetidos}"/>
+                        <h:outputText value="#{clapController.selected.causa_años_repetidos}" title="#{bundle.ViewclapTitle_causa_años_repetidos}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_causa_desercion_exclusion}"/>
+                        <h:outputText value="#{clapController.selected.causa_desercion_exclusion}" title="#{bundle.ViewclapTitle_causa_desercion_exclusion}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_percepcion_rendimiento}"/>
+                        <h:outputText value="#{clapController.selected.percepcion_rendimiento}" title="#{bundle.ViewclapTitle_percepcion_rendimiento}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_observaciones_educacion}"/>
+                        <h:outputText value="#{clapController.selected.observaciones_educacion}" title="#{bundle.ViewclapTitle_observaciones_educacion}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_horas_trabajo}"/>
+                        <h:outputText value="#{clapController.selected.horas_trabajo}" title="#{bundle.ViewclapTitle_horas_trabajo}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_razon_de_trabajo}"/>
+                        <h:outputText value="#{clapController.selected.razon_de_trabajo}" title="#{bundle.ViewclapTitle_razon_de_trabajo}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_legalizado}"/>
+                        <h:outputText value="#{clapController.selected.legalizado}" title="#{bundle.ViewclapTitle_legalizado}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_tipo_de_trabajo}"/>
+                        <h:outputText value="#{clapController.selected.tipo_de_trabajo}" title="#{bundle.ViewclapTitle_tipo_de_trabajo}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_observaciones_trabajo}"/>
+                        <h:outputText value="#{clapController.selected.observaciones_trabajo}" title="#{bundle.ViewclapTitle_observaciones_trabajo}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_aceptacion}"/>
+                        <h:outputText value="#{clapController.selected.aceptacion}" title="#{bundle.ViewclapTitle_aceptacion}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_edad_pareja}"/>
+                        <h:outputText value="#{clapController.selected.edad_pareja}" title="#{bundle.ViewclapTitle_edad_pareja}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_horas_actividad_fisica}"/>
+                        <h:outputText value="#{clapController.selected.horas_actividad_fisica}" title="#{bundle.ViewclapTitle_horas_actividad_fisica}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_horas_tv}"/>
+                        <h:outputText value="#{clapController.selected.horas_tv}" title="#{bundle.ViewclapTitle_horas_tv}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_horas_computador_consola}"/>
+                        <h:outputText value="#{clapController.selected.horas_computador_consola}" title="#{bundle.ViewclapTitle_horas_computador_consola}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_especificacion_otras_actividades}"/>
+                        <h:outputText value="#{clapController.selected.especificacion_otras_actividades}" title="#{bundle.ViewclapTitle_especificacion_otras_actividades}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_observaciones_vida_social}"/>
+                        <h:outputText value="#{clapController.selected.observaciones_vida_social}" title="#{bundle.ViewclapTitle_observaciones_vida_social}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_horas_sueño}"/>
+                        <h:outputText value="#{clapController.selected.horas_sueño}" title="#{bundle.ViewclapTitle_horas_sueño}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_comidas_familia}"/>
+                        <h:outputText value="#{clapController.selected.comidas_familia}" title="#{bundle.ViewclapTitle_comidas_familia}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_especificacion_alimentacion_especial}"/>
+                        <h:outputText value="#{clapController.selected.especificacion_alimentacion_especial}" title="#{bundle.ViewclapTitle_especificacion_alimentacion_especial}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_cigarros_dia}"/>
+                        <h:outputText value="#{clapController.selected.cigarros_dia}" title="#{bundle.ViewclapTitle_cigarros_dia}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_observaciones_habitos_consumo}"/>
+                        <h:outputText value="#{clapController.selected.observaciones_habitos_consumo}" title="#{bundle.ViewclapTitle_observaciones_habitos_consumo}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_edad_menarca_espermarca}"/>
+                        <h:outputText value="#{clapController.selected.edad_menarca_espermarca}" title="#{bundle.ViewclapTitle_edad_menarca_espermarca}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_fecha_ultima_menstruacion}"/>
+                        <h:outputText value="#{clapController.selected.fecha_ultima_menstruacion}" title="#{bundle.ViewclapTitle_fecha_ultima_menstruacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewclapLabel_ciclos_regulares}"/>
+                        <h:outputText value="#{clapController.selected.ciclos_regulares}" title="#{bundle.ViewclapTitle_ciclos_regulares}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_dismenorrea}"/>
+                        <h:outputText value="#{clapController.selected.dismenorrea}" title="#{bundle.ViewclapTitle_dismenorrea}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_especificacion_its_vih}"/>
+                        <h:outputText value="#{clapController.selected.especificacion_its_vih}" title="#{bundle.ViewclapTitle_especificacion_its_vih}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_tratamiento}"/>
+                        <h:outputText value="#{clapController.selected.tratamiento}" title="#{bundle.ViewclapTitle_tratamiento}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_tratamiento_contactos}"/>
+                        <h:outputText value="#{clapController.selected.tratamiento_contactos}" title="#{bundle.ViewclapTitle_tratamiento_contactos}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_embarazos}"/>
+                        <h:outputText value="#{clapController.selected.embarazos}" title="#{bundle.ViewclapTitle_embarazos}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_hijos}"/>
+                        <h:outputText value="#{clapController.selected.hijos}" title="#{bundle.ViewclapTitle_hijos}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_abortos}"/>
+                        <h:outputText value="#{clapController.selected.abortos}" title="#{bundle.ViewclapTitle_abortos}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_observaciones_gineco_urologico}"/>
+                        <h:outputText value="#{clapController.selected.observaciones_gineco_urologico}" title="#{bundle.ViewclapTitle_observaciones_gineco_urologico}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_orientacion_sexual}"/>
+                        <h:outputText value="#{clapController.selected.orientacion_sexual}" title="#{bundle.ViewclapTitle_orientacion_sexual}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_especificacion_orientacion_sexual}"/>
+                        <h:outputText value="#{clapController.selected.especificacion_orientacion_sexual}" title="#{bundle.ViewclapTitle_especificacion_orientacion_sexual}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_conducta_sexual}"/>
+                        <h:outputText value="#{clapController.selected.conducta_sexual}" title="#{bundle.ViewclapTitle_conducta_sexual}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_edad_inicio_conducta_sexual}"/>
+                        <h:outputText value="#{clapController.selected.edad_inicio_conducta_sexual}" title="#{bundle.ViewclapTitle_edad_inicio_conducta_sexual}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_relaciones_sexuales}"/>
+                        <h:outputText value="#{clapController.selected.relaciones_sexuales}" title="#{bundle.ViewclapTitle_relaciones_sexuales}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_pareja_sexual}"/>
+                        <h:outputText value="#{clapController.selected.pareja_sexual}" title="#{bundle.ViewclapTitle_pareja_sexual}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_dificultades_sexuales}"/>
+                        <h:outputText value="#{clapController.selected.dificultades_sexuales}" title="#{bundle.ViewclapTitle_dificultades_sexuales}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_anticoncepcion}"/>
+                        <h:outputText value="#{clapController.selected.anticoncepcion}" title="#{bundle.ViewclapTitle_anticoncepcion}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_uso_mac}"/>
+                        <h:outputText value="#{clapController.selected.uso_mac}" title="#{bundle.ViewclapTitle_uso_mac}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_especificacion_uso_mac}"/>
+                        <h:outputText value="#{clapController.selected.especificacion_uso_mac}" title="#{bundle.ViewclapTitle_especificacion_uso_mac}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_razon_no_uso_mac}"/>
+                        <h:outputText value="#{clapController.selected.razon_no_uso_mac}" title="#{bundle.ViewclapTitle_razon_no_uso_mac}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_observaciones_sexualidad}"/>
+                        <h:outputText value="#{clapController.selected.observaciones_sexualidad}" title="#{bundle.ViewclapTitle_observaciones_sexualidad}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_imagen_corporal_mac}"/>
+                        <h:outputText value="#{clapController.selected.imagen_corporal_mac}" title="#{bundle.ViewclapTitle_imagen_corporal_mac}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_bienestas_emocional_mac}"/>
+                        <h:outputText value="#{clapController.selected.bienestas_emocional_mac}" title="#{bundle.ViewclapTitle_bienestas_emocional_mac}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_vida_proyecto_mac}"/>
+                        <h:outputText value="#{clapController.selected.vida_proyecto_mac}" title="#{bundle.ViewclapTitle_vida_proyecto_mac}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_referente_adulto_mac}"/>
+                        <h:outputText value="#{clapController.selected.referente_adulto_mac}" title="#{bundle.ViewclapTitle_referente_adulto_mac}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_nombre_referente_adulto_mac}"/>
+                        <h:outputText value="#{clapController.selected.nombre_referente_adulto_mac}" title="#{bundle.ViewclapTitle_nombre_referente_adulto_mac}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_telefono_referente_adulto_mac}"/>
+                        <h:outputText value="#{clapController.selected.telefono_referente_adulto_mac}" title="#{bundle.ViewclapTitle_telefono_referente_adulto_mac}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_observaciones_psico_emocional}"/>
+                        <h:outputText value="#{clapController.selected.observaciones_psico_emocional}" title="#{bundle.ViewclapTitle_observaciones_psico_emocional}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_peso}"/>
+                        <h:outputText value="#{clapController.selected.peso}" title="#{bundle.ViewclapTitle_peso}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_de_peso}"/>
+                        <h:outputText value="#{clapController.selected.de_peso}" title="#{bundle.ViewclapTitle_de_peso}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_talla}"/>
+                        <h:outputText value="#{clapController.selected.talla}" title="#{bundle.ViewclapTitle_talla}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_de_talla}"/>
+                        <h:outputText value="#{clapController.selected.de_talla}" title="#{bundle.ViewclapTitle_de_talla}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_presion_abdominal}"/>
+                        <h:outputText value="#{clapController.selected.presion_abdominal}" title="#{bundle.ViewclapTitle_presion_abdominal}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_presion_arterial}"/>
+                        <h:outputText value="#{clapController.selected.presion_arterial}" title="#{bundle.ViewclapTitle_presion_arterial}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_otra_area_examen_fisico}"/>
+                        <h:outputText value="#{clapController.selected.otra_area_examen_fisico}" title="#{bundle.ViewclapTitle_otra_area_examen_fisico}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_observaciones_examen_fisico}"/>
+                        <h:outputText value="#{clapController.selected.observaciones_examen_fisico}" title="#{bundle.ViewclapTitle_observaciones_examen_fisico}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_impresion_diagnostica}"/>
+                        <h:outputText value="#{clapController.selected.impresion_diagnostica}" title="#{bundle.ViewclapTitle_impresion_diagnostica}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_indicaciones_interconsultas}"/>
+                        <h:outputText value="#{clapController.selected.indicaciones_interconsultas}" title="#{bundle.ViewclapTitle_indicaciones_interconsultas}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_paciente}"/>
+                        <h:outputText value="#{clapController.selected.paciente}" title="#{bundle.ViewclapTitle_paciente}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_funcionario}"/>
+                        <h:outputText value="#{clapController.selected.funcionario}" title="#{bundle.ViewclapTitle_funcionario}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_riesgo_ssr}"/>
+                        <h:outputText value="#{clapController.selected.riesgo_ssr}" title="#{bundle.ViewclapTitle_riesgo_ssr}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_riesgo_salud_mental}"/>
+                        <h:outputText value="#{clapController.selected.riesgo_salud_mental}" title="#{bundle.ViewclapTitle_riesgo_salud_mental}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_riesgo_oh_drogas}"/>
+                        <h:outputText value="#{clapController.selected.riesgo_oh_drogas}" title="#{bundle.ViewclapTitle_riesgo_oh_drogas}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_riesgo_nutricional}"/>
+                        <h:outputText value="#{clapController.selected.riesgo_nutricional}" title="#{bundle.ViewclapTitle_riesgo_nutricional}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_riesgo_social}"/>
+                        <h:outputText value="#{clapController.selected.riesgo_social}" title="#{bundle.ViewclapTitle_riesgo_social}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_nombre_social}"/>
+                        <h:outputText value="#{clapController.selected.nombre_social}" title="#{bundle.ViewclapTitle_nombre_social}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_id}"/>
+                        <h:outputText value="#{clapController.selected.id}" title="#{bundle.ViewclapTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_nacionalidad}"/>
+                        <h:outputText value="#{clapController.selected.nacionalidad}" title="#{bundle.ViewclapTitle_nacionalidad}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_RUN}"/>
+                        <h:outputText value="#{clapController.selected.RUN}" title="#{bundle.ViewclapTitle_RUN}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_DV}"/>
+                        <h:outputText value="#{clapController.selected.DV}" title="#{bundle.ViewclapTitle_DV}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_nombres}"/>
+                        <h:outputText value="#{clapController.selected.nombres}" title="#{bundle.ViewclapTitle_nombres}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_primer_apellido}"/>
+                        <h:outputText value="#{clapController.selected.primer_apellido}" title="#{bundle.ViewclapTitle_primer_apellido}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_segundo_apellido}"/>
+                        <h:outputText value="#{clapController.selected.segundo_apellido}" title="#{bundle.ViewclapTitle_segundo_apellido}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_sexo}"/>
+                        <h:outputText value="#{clapController.selected.sexo}" title="#{bundle.ViewclapTitle_sexo}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_fecha_nacimiento}"/>
+                        <h:outputText value="#{clapController.selected.fecha_nacimiento}" title="#{bundle.ViewclapTitle_fecha_nacimiento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewclapLabel_region_residencia}"/>
+                        <h:outputText value="#{clapController.selected.region_residencia}" title="#{bundle.ViewclapTitle_region_residencia}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_comuna_residencia}"/>
+                        <h:outputText value="#{clapController.selected.comuna_residencia}" title="#{bundle.ViewclapTitle_comuna_residencia}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_calle_direccion}"/>
+                        <h:outputText value="#{clapController.selected.calle_direccion}" title="#{bundle.ViewclapTitle_calle_direccion}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_numero_direccion}"/>
+                        <h:outputText value="#{clapController.selected.numero_direccion}" title="#{bundle.ViewclapTitle_numero_direccion}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_resto_direccion}"/>
+                        <h:outputText value="#{clapController.selected.resto_direccion}" title="#{bundle.ViewclapTitle_resto_direccion}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_telefono_fijo}"/>
+                        <h:outputText value="#{clapController.selected.telefono_fijo}" title="#{bundle.ViewclapTitle_telefono_fijo}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_teléfono_movil}"/>
+                        <h:outputText value="#{clapController.selected.teléfono_movil}" title="#{bundle.ViewclapTitle_teléfono_movil}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_programa_social}"/>
+                        <h:outputText value="#{clapController.selected.programa_social}" title="#{bundle.ViewclapTitle_programa_social}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_prevision}"/>
+                        <h:outputText value="#{clapController.selected.prevision}" title="#{bundle.ViewclapTitle_prevision}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_estado_conyugal}"/>
+                        <h:outputText value="#{clapController.selected.estado_conyugal}" title="#{bundle.ViewclapTitle_estado_conyugal}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_grupo_fonasa}"/>
+                        <h:outputText value="#{clapController.selected.grupo_fonasa}" title="#{bundle.ViewclapTitle_grupo_fonasa}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_pueblo_originario}"/>
+                        <h:outputText value="#{clapController.selected.pueblo_originario}" title="#{bundle.ViewclapTitle_pueblo_originario}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_cesfam}"/>
+                        <h:outputText value="#{clapController.selected.cesfam}" title="#{bundle.ViewclapTitle_cesfam}"/>
+                        <h:outputText value="#{bundle.ViewclapLabel_correo}"/>
+                        <h:outputText value="#{clapController.selected.correo}" title="#{bundle.ViewclapTitle_correo}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="clapViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

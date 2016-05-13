@@ -50,7 +50,9 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListpacienteTitle_fecha_nacimiento}"/>
                             </f:facet>
-                            <h:outputText value="#{item.fecha_nacimiento.day}/#{item.fecha_nacimiento.month}/#{item.fecha_nacimiento.year}"/>
+                            <h:outputText value="#{item.fecha_nacimiento}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
