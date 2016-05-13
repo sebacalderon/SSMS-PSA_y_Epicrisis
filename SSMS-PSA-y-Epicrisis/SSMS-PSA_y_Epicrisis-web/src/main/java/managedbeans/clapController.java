@@ -1,12 +1,11 @@
 package managedbeans;
 
-import entities.comuna;
+import entities.clap;
 import managedbeans.util.JsfUtil;
 import managedbeans.util.JsfUtil.PersistAction;
-import sessionbeans.comunaFacadeLocal;
+import sessionbeans.clapFacadeLocal;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -20,34 +19,23 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("comunaController")
+@Named("clapController")
 @SessionScoped
-public class comunaController implements Serializable {
+public class clapController implements Serializable {
 
     @EJB
-    private sessionbeans.comunaFacadeLocal ejbFacade;
-    List<comuna> items = null;
-    private comuna selected;
-    
-    private String comuna;
+    private sessionbeans.clapFacadeLocal ejbFacade;
+    private List<clap> items = null;
+    private clap selected;
 
-    public String getComuna() {
-        return comuna;
+    public clapController() {
     }
 
-    public void setComuna(String comuna) {
-        this.comuna = comuna;
-    }
-
-
-    public comunaController() {
-    }
-
-    public comuna getSelected() {
+    public clap getSelected() {
         return selected;
     }
 
-    public void setSelected(comuna selected) {
+    public void setSelected(clap selected) {
         this.selected = selected;
     }
 
@@ -57,36 +45,36 @@ public class comunaController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private comunaFacadeLocal getFacade() {
+    private clapFacadeLocal getFacade() {
         return ejbFacade;
     }
 
-    public comuna prepareCreate() {
-        selected = new comuna();
+    public clap prepareCreate() {
+        selected = new clap();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("comunaCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("clapCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("comunaUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("comunaDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("clapDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<comuna> getItems() {
+    public List<clap> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -120,30 +108,44 @@ public class comunaController implements Serializable {
             }
         }
     }
+    
+    public boolean esFONASA(){
+        if(selected.getPrevision()!=null){
+            return selected.getPrevision().getNombre().equals("FONASA");
+        }
+        return false;
+    }
 
-    public comuna getcomuna(java.lang.Long id) {
+    public int calculoEdad(java.util.Date fecha_nacimiento){
+        int edad=0;
+        java.util.Date fecha_actual=new java.util.Date();
+        edad=fecha_actual.getYear()-fecha_nacimiento.getYear();
+        return edad;
+    }
+    
+    public clap getclap(java.lang.Long id) {
         return getFacade().find(id);
     }
 
-    public List<comuna> getItemsAvailableSelectMany() {
+    public List<clap> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<comuna> getItemsAvailableSelectOne() {
+    public List<clap> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = comuna.class)
-    public static class comunaControllerConverter implements Converter {
+    @FacesConverter(forClass = clap.class)
+    public static class clapControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            comunaController controller = (comunaController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "comunaController");
-            return controller.getcomuna(getKey(value));
+            clapController controller = (clapController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "clapController");
+            return controller.getclap(getKey(value));
         }
 
         java.lang.Long getKey(String value) {
@@ -163,13 +165,15 @@ public class comunaController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof comuna) {
-                comuna o = (comuna) object;
+            if (object instanceof clap) {
+                clap o = (clap) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), comuna.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), clap.class.getName()});
                 return null;
             }
         }
+
     }
+
 }

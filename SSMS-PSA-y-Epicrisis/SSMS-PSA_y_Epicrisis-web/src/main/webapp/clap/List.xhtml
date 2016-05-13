@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListclapTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="clapListForm">
+                <b:panel title="#{bundle.ListclapTitle}">
+                    <p:dataTable id="datalist" value="#{clapController.items}" var="item"
+                                 selectionMode="single" selection="#{clapController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton"/>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListclapTitle_nombres}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombres} #{item.primer_apellido} #{item.segundo_apellido}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListclapTitle_RUN}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.RUN} #{item.DV}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListclapTitle_numero_consulta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.numero_consulta}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListclapTitle_fecha_consulta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fecha_consulta}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListclapTitle_funcionario}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.funcionario}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Riesgos"/>
+                            </f:facet>
+                            <h:outputText value="Riesgo salud sexual y reproductiva" rendered="#{item.riesgo_ssr}"/>
+                            <h:outputText value="Riesgo salud mental" rendered="#{item.riesgo_salud_mental}"/>
+                            <h:outputText value="Riesgo alcohol y drogas" rendered="#{item.riesgo_oh_drogas}"/>
+                            <h:outputText value="Riesgo nutricional" rendered="#{item.riesgo_nutricional}"/>
+                            <h:outputText value="Riesgo social" rendered="#{item.riesgo_social}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Edad paciente"/>
+                            </f:facet>
+                            <h:outputText value="#{clapController.calculoEdad(item.fecha_nacimiento)}">
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListclapTitle_correo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.correo}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{clapController.prepareCreate}" action="/clap/Create?faces-redirect=true"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":clapViewForm" oncomplete="PF('clapViewDialog').show()" disabled="#{empty clapController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":clapEditForm" oncomplete="PF('clapEditDialog').show()" disabled="#{empty clapController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </b:panel>
+            </h:form>
+
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>
