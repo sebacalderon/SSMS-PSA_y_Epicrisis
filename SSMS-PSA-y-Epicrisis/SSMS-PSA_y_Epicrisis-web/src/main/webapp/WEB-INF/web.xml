@@ -38,15 +38,22 @@
         </form-login-config>
     </login-config>
     <security-role>
-        <description/>
-        <role-name>Funcionario CESFAM</role-name>
+       <role-name>Super-Usuario</role-name>
     </security-role>
     <security-role>
-        <description/>
-        <role-name>Empleado Municipal</role-name>
+       <role-name>Funcionario-CESFAM</role-name>
     </security-role>
     <security-role>
-        <description/>
-        <role-name>Super Usuario</role-name>
+       <role-name>Empleado-Municipal</role-name>
     </security-role>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>admin-area</web-resource-name>
+            <url-pattern>/faces/usuario/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>admins should be allowed to access this resources</description>
+            <role-name>Super-Usuario</role-name>
+        </auth-constraint>
+    </security-constraint>
 </web-app>

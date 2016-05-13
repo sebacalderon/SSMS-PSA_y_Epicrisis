@@ -423,9 +423,9 @@ INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesf
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13300, 'Centro de Salud Familiar Barros Luco', 'Centro de Salud Familiar', 13130)
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13302, 'Centro de Salud Familiar Recreo', 'Centro de Salud Familiar', 13130)
 
-INSERT INTO rol(codigo_rol, nombre_rol) VALUES (1, 'Super Usuario')
-INSERT INTO rol(codigo_rol, nombre_rol) VALUES (2, 'Funcionario CESFAM')
-INSERT INTO rol(codigo_rol, nombre_rol) VALUES (3, 'Empleado Municipal')
+INSERT INTO rol(codigo_rol, nombre_rol) VALUES (1, 'Super-Usuario')
+INSERT INTO rol(codigo_rol, nombre_rol) VALUES (2, 'Funcionario-CESFAM')
+INSERT INTO rol(codigo_rol, nombre_rol) VALUES (3, 'Empleado-Municipal')
 
 INSERT INTO usuario( codigo_usuario, run_usuario,dv_usuario, correo_usuario, password_usuario, nombres_usuario, primer_apellido_usuario, segundo_apellido_usuario, rol_usuario, cesfam_usuario, habilitado_usuario)VALUES (1, 18455374,'0', 'pablo.salinasc@usach.cl', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Pablo Javier', 'Salinas', 'Cabañas', 1, 13300, true)
 INSERT INTO usuario( codigo_usuario, run_usuario,dv_usuario, correo_usuario, password_usuario, nombres_usuario, primer_apellido_usuario, segundo_apellido_usuario, rol_usuario, cesfam_usuario, habilitado_usuario)VALUES (2, 12345678,'k', 'sebastian.calderon@usach.cl', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Sebastian Patricio', 'Diaz', 'Calderón', 1, 13300, true)
@@ -715,3 +715,5 @@ INSERT INTO nacionalidad(codigo_nacionalidad, nombre_nacionalidad)VALUES (533, '
 INSERT INTO nacionalidad(codigo_nacionalidad, nombre_nacionalidad)VALUES (534, 'Tonga')
 INSERT INTO nacionalidad(codigo_nacionalidad, nombre_nacionalidad)VALUES (535, 'Tuvalu')
 INSERT INTO nacionalidad(codigo_nacionalidad, nombre_nacionalidad)VALUES (536, 'Vanuatu')
+
+CREATE VIEW v_user_role AS select u.correo_usuario AS correo_usuario,u.password_usuario AS password_usuario,g.nombre_rol AS nombre_rol from (usuario u join rol g on((g.codigo_rol = u.rol_usuario)))

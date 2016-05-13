@@ -157,14 +157,14 @@ public class LoginController implements Serializable{
     }
     
     public boolean esEmpleadoMunicipal(){
-        return usuarioLogueado.getRol().getNombres().equals("Empleado Municipal");
+        return usuarioLogueado.getRol().getNombres().equals("Empleado-Municipal");
     }
     
     public boolean esFuncionario(){
-        return usuarioLogueado.getRol().getNombres().equals("Funcionario CESFAM");
+        return usuarioLogueado.getRol().getNombres().equals("Funcionario-CESFAM");
     }
     
     public boolean esSuperUsuario(){
-        return usuarioLogueado.getRol().getNombres().equals("Super Usuario");
+        return usuarioLogueado.getRol().getNombres().equals("Super-Usuario");
     }
 }
