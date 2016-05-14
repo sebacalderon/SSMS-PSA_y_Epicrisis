@@ -4,48 +4,56 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
 
-    <ui:composition>
+    <ui:composition template="/template.xhtml">
 
-        <p:dialog id="UsuarioCreateDlg" widgetVar="UsuarioCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUsuarioTitle}">
-            <h:form id="UsuarioCreateForm">
-                <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
-                        
-                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_nombre}"  for="nombre" />
-                        <p:inputText id="nombre" value="#{usuarioController.selected.nombres}" title="#{bundle.CreateUsuarioTitle_nombre}" required="true" maxlength="50" />
-                        
-                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_primer_apellido}" for="primer_apellido" />
-                        <p:inputText id="primer_apellido" value="#{usuarioController.selected.primer_apellido}" title="#{bundle.CreateUsuarioTitle_primer_apellido}" maxlength="30" required="true" />
-                        
-                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_segundo_apellido}" for="segundo_apellido" />
-                        <p:inputText id="segundo_apellido" value="#{usuarioController.selected.segundo_apellido}" title="#{bundle.CreateUsuarioTitle_segundo_apellido}" maxlength="30" required="true" />
-                                                    
-                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_RUN}" for="run" />
-                        <p:column>
-                            <p:inputText id="run" value="#{usuarioController.selected.RUN}" title="#{bundle.CreateUsuarioTitle_RUN}" required="true"/> - 
-                            <p:inputText id="dv" value="#{usuarioController.selected.DV}" title="#{bundle.CreateUsuarioTitle_DV}" maxlength="1" required="true" style="max-width: 20px;"/>   
-                        </p:column>
-                        
-                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_correo}" for="correo" />
-                        <p:inputText id="correo" value="#{usuarioController.selected.correo}" title="#{bundle.CreateUsuarioTitle_correo}" required="true" />
-                        
-                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_password}" for="password" />
-                        <p:password id="password" value="#{usuarioController.selected.password}" title="#{bundle.CreateUsuarioTitle_password}" required="true" />
-                        
-                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_rol}" for="rol" />
-                        <p:selectOneMenu id="rol" value="#{usuarioController.selected.rol}" style="width:150px">
-                            <f:selectItem itemLabel="Seleccione un rol ..." itemValue="" noSelectionOption="true" />
-                            <f:selectItems value="#{rolController.items}" var="rol" itemLabel="#{rol.nombre}" itemValue="#{rol}" />
-                        </p:selectOneMenu>
-                        
-                    </p:panelGrid>
-                    <p:commandButton actionListener="#{usuarioController.create}" value="#{bundle.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsuarioCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="UsuarioCreateDialog.hide()"/>
-                </h:panelGroup>
-            </h:form>
-        </p:dialog>
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreatepacienteTitle}"></h:outputText>
+        </ui:define> 
 
+        <ui:define name="body">
+            <b:panel id="UsuarioCreateDlg" title="#{bundle.CreateUsuarioTitle}">
+                <h:form id="UsuarioCreateForm">
+                    <h:panelGroup id="display">
+                        <p:panelGrid columns="2" style="width:100%"  rendered="#{usuarioController.selected != null}">
+
+                            <p:outputLabel value="#{bundle.CreateUsuarioLabel_nombre}"  for="nombre" />
+                            <p:inputText id="nombre" value="#{usuarioController.selected.nombres}" title="#{bundle.CreateUsuarioTitle_nombre}" required="true" maxlength="50" />
+
+                            <p:outputLabel value="#{bundle.CreateUsuarioLabel_primer_apellido}" for="primer_apellido" />
+                            <p:inputText id="primer_apellido" value="#{usuarioController.selected.primer_apellido}" title="#{bundle.CreateUsuarioTitle_primer_apellido}" maxlength="30" required="true" />
+
+                            <p:outputLabel value="#{bundle.CreateUsuarioLabel_segundo_apellido}" for="segundo_apellido" />
+                            <p:inputText id="segundo_apellido" value="#{usuarioController.selected.segundo_apellido}" title="#{bundle.CreateUsuarioTitle_segundo_apellido}" maxlength="30" required="true" />
+
+                            <p:outputLabel value="#{bundle.CreateUsuarioLabel_RUN}" for="run" />
+                            <p:column>
+                                <p:inputText id="run" value="#{usuarioController.selected.RUN}" style="max-width: 100px;" title="#{bundle.CreateUsuarioTitle_RUN}" required="true"/> - 
+                                <p:inputText id="dv" value="#{usuarioController.selected.DV}" title="#{bundle.CreateUsuarioTitle_DV}" maxlength="1" required="true" style="max-width: 20px;"/>   
+                            </p:column>
+
+                            <p:outputLabel value="#{bundle.CreateUsuarioLabel_correo}" for="correo" />
+                            <p:inputText id="correo" value="#{usuarioController.selected.correo}" title="#{bundle.CreateUsuarioTitle_correo}" required="true" />
+
+                            <p:outputLabel value="#{bundle.CreateUsuarioLabel_password}" for="password" />
+                            <p:password id="password" value="#{usuarioController.selected.password}" title="#{bundle.CreateUsuarioTitle_password}" required="true" />
+
+                            <p:outputLabel value="#{bundle.CreateUsuarioLabel_rol}" for="rol" />
+                            <p:selectOneMenu id="rol" value="#{usuarioController.selected.rol}" style="width:150px" required="true">
+                                <f:selectItem itemLabel="Seleccione un rol ..." itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{rolController.items}" var="rol" itemLabel="#{rol.nombre}" itemValue="#{rol}" />
+                            </p:selectOneMenu>
+                            <f:facet name="footer">
+                                <p:commandButton action="#{usuarioController.create}" value="#{bundle.Save}" update=":growl"/>
+                                <p:button value="#{bundle.Cancel}" outcome="/usuario/List" />
+                            </f:facet>
+
+                        </p:panelGrid>
+                    </h:panelGroup>
+                </h:form>
+            </b:panel>
+        </ui:define>
     </ui:composition>
 </html>

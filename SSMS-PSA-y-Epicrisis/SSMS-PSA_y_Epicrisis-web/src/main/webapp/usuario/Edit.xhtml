@@ -22,10 +22,10 @@
                         <p:inputText id="segundo_apellido" value="#{usuarioController.selected.segundo_apellido}" title="#{bundle.EditUsuarioTitle_segundo_apellido}" />
 
                         <p:outputLabel value="#{bundle.EditUsuarioLabel_RUN}" for="run" />
-                        <p:inputText id="run" value="#{usuarioController.selected.RUN}" title="#{bundle.EditUsuarioTitle_RUN}" />
-
-                        <p:inputText id="dv" value="#{usuarioController.selected.DV}" title="#{bundle.EditUsuarioTitle_DV}" />
-
+                        <p:column>
+                            <p:inputText id="run" value="#{usuarioController.selected.RUN}" title="#{bundle.EditUsuarioTitle_RUN}" />
+                            <p:inputText id="dv" value="#{usuarioController.selected.DV}" title="#{bundle.EditUsuarioTitle_DV}" />
+                        </p:column>
                         <p:outputLabel value="#{bundle.EditUsuarioLabel_correo}" for="correo" />
                         <p:inputText id="correo" value="#{usuarioController.selected.correo}" title="#{bundle.EditUsuarioTitle_correo}" />
                         
