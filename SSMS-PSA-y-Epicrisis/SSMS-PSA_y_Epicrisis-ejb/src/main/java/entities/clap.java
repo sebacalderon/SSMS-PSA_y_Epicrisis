@@ -520,7 +520,7 @@ public class clap implements Serializable {
     private boolean consumo_otra_sustancia;
  
     @Column(name="especificacion_consumo_otra_sustancia_clap")
-    private boolean especificacion_consumo_otra_sustancia;
+    private String especificacion_consumo_otra_sustancia;
     
     @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="seguridad_vial_clap")
@@ -1587,11 +1587,11 @@ public class clap implements Serializable {
         this.consumo_otra_sustancia = consumo_otra_sustancia;
     }
 
-    public boolean isEspecificacion_consumo_otra_sustancia() {
+    public String getEspecificacion_consumo_otra_sustancia() {
         return especificacion_consumo_otra_sustancia;
     }
 
-    public void setEspecificacion_consumo_otra_sustancia(boolean especificacion_consumo_otra_sustancia) {
+    public void setEspecificacion_consumo_otra_sustancia(String especificacion_consumo_otra_sustancia) {
         this.especificacion_consumo_otra_sustancia = especificacion_consumo_otra_sustancia;
     }
 
