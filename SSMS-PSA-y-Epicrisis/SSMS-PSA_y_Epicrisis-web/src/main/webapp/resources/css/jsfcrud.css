@@ -64,3 +64,17 @@ footer{
     border-radius: 4px;
     text-shadow: 0px 0px 0px rgba(0,0,0,0);
 }
+.footer{
+    background-color: #FAFAFA;
+    min-height:100px;
+    width:100%;
+}
+.roboto{
+    font-family: 'Roboto', sans-serif;
+    border:0px;
+    margin:0px;
+    padding: 0px;
+}
+.ui-widget-content{
+    border:0px !important;
+}
