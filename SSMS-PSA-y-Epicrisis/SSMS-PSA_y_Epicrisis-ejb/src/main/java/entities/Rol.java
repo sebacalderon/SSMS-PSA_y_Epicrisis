@@ -6,14 +6,11 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -24,32 +21,22 @@ import javax.validation.constraints.NotNull;
 public class Rol implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
+    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="codigo_rol")
+    @Id
     private Long id;
     
     @NotNull(message="Debe ingresar un nombre")
     @Column(name="nombre_rol",length=50)
-    private String nombres;
+    private String nombre;
     
-    @OneToMany(mappedBy = "rol", fetch = FetchType.LAZY)
-    private List<Usuario> usuarios;
-
-    public List<Usuario> getUsuarios() {
-        return usuarios;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
-    
-    public String getNombres() {
-        return nombres;
-    }
-
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public Long getId() {

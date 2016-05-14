@@ -12,10 +12,8 @@
             <h:form id="RolCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{rolController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateRolLabel_nombres}" for="nombres" />
-                        <p:inputText id="nombres" value="#{rolController.selected.nombres}" title="#{bundle.CreateRolTitle_nombres}" />
-                        <p:outputLabel value="#{bundle.CreateRolLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{rolController.selected.id}" title="#{bundle.CreateRolTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateRolLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{rolController.selected.nombre}" title="#{bundle.CreateRolTitle_nombre}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{rolController.create}" value="#{bundle.Save}" update="display,:RolListForm:datalist,:growl" oncomplete="handleSubmit(args,'RolCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="RolCreateDialog.hide()"/>

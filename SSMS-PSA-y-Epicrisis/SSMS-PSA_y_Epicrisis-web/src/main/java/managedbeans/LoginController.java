@@ -112,6 +112,7 @@ public class LoginController implements Serializable{
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
         try{
             request.logout();
+            usuarioLogueado = null;
             return "/faces/index.xhtml";
         }catch(ServletException e){
             context.addMessage(null,new FacesMessage("Logout failed."));
@@ -157,14 +158,14 @@ public class LoginController implements Serializable{
     }
     
     public boolean esEmpleadoMunicipal(){
-        return usuarioLogueado.getRol().getNombres().equals("Empleado-Municipal");
+        return usuarioLogueado.getRol().getNombre().equals("Empleado-Municipal");
     }
     
     public boolean esFuncionario(){
-        return usuarioLogueado.getRol().getNombres().equals("Funcionario-CESFAM");
+        return usuarioLogueado.getRol().getNombre().equals("Funcionario-CESFAM");
     }
     
     public boolean esSuperUsuario(){
-        return usuarioLogueado.getRol().getNombres().equals("Super-Usuario");
+        return usuarioLogueado.getRol().getNombre().equals("Super-Usuario");
     }
 }

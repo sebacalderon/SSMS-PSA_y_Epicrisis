@@ -94,6 +94,7 @@ public class UsuarioController implements Serializable {
     }
 
     public Usuario prepareCreate() {
+        System.out.println("prepare Create");
         selected = new Usuario();
         initializeEmbeddableKey();
         return selected;
@@ -128,9 +129,6 @@ public class UsuarioController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
-        String nuevo;
-        nuevo = " ( Nombre: " + selected.getNombres() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+", Activo: "+selected.isHabilitado()+ " )";
-        auditoria("No existía", nuevo, "Crear");
     }
 
     public void update() {

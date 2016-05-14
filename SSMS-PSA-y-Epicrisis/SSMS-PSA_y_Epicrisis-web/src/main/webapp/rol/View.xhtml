@@ -12,8 +12,8 @@
             <h:form id="RolViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{rolController.selected != null}">
-                        <h:outputText value="#{bundle.ViewRolLabel_nombres}"/>
-                        <h:outputText value="#{rolController.selected.nombres}" title="#{bundle.ViewRolTitle_nombres}"/>
+                        <h:outputText value="#{bundle.ViewRolLabel_nombre}"/>
+                        <h:outputText value="#{rolController.selected.nombre}" title="#{bundle.ViewRolTitle_nombre}"/>
                         <h:outputText value="#{bundle.ViewRolLabel_id}"/>
                         <h:outputText value="#{rolController.selected.id}" title="#{bundle.ViewRolTitle_id}"/>
                     </p:panelGrid>

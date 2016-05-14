@@ -4,8 +4,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
 
@@ -38,9 +37,7 @@
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_rol}" for="rol" />
                         <p:selectOneMenu id="rol" value="#{usuarioController.selected.rol}" style="width:150px">
                             <f:selectItem itemLabel="Seleccione un rol ..." itemValue="" noSelectionOption="true" />
-                            <f:selectItem itemLabel="Funcionario CESFAM" itemValue="Funcionario CESFAM" noSelectionOption="false" />
-                            <f:selectItem itemLabel="Empleado Municipal" itemValue="Empleado Municipal" noSelectionOption="false" />
-                            <f:selectItem itemLabel="Super Usuario" itemValue="Super Usuario" noSelectionOption="false" />
+                            <f:selectItems value="#{rolController.items}" var="rol" itemLabel="#{rol.nombre}" itemValue="#{rol}" />
                         </p:selectOneMenu>
                         
                     </p:panelGrid>
