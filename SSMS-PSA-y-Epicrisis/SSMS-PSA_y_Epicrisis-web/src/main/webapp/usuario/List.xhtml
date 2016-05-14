@@ -50,7 +50,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsuarioTitle_rol}"/>
                             </f:facet>
-                            <h:outputText value="#{item.rol}"/>
+                            <h:outputText value="#{item.rol.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -60,7 +60,7 @@
                             <h:outputText value="Deshabilitado" rendered="#{not item.habilitado}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{usuarioController.prepareCreate}" update=":UsuarioCreateForm" oncomplete="PF('UsuarioCreateDialog').show()"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{usuarioController.prepareCreate}" action="/usuario/Create?faces-redirect=true"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":UsuarioViewForm" oncomplete="PF('UsuarioViewDialog').show()" disabled="#{empty usuarioController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":UsuarioEditForm" oncomplete="PF('UsuarioEditDialog').show()" disabled="#{empty usuarioController.selected}"/>
                             <p:commandButton id="desactivateButton" icon="ui-icon-cancel"  value="#{bundle.Delete}" actionListener="#{usuarioController.desactivar}" update=":growl,datalist"  disabled="#{not usuarioController.selected.isHabilitado() or usuarioController.selected.correo.equals(loginController.getUsuarioLogueado().correo)}"/>
@@ -70,7 +70,6 @@
                 </b:panel>
             </h:form>
 
-            <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
         </ui:define>

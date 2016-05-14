@@ -23,8 +23,12 @@
     </welcome-file-list>
     <error-page>
         <error-code>403</error-code>
-        <location>/error.xhtml</location>
+        <location>/faces/error_auth.jsp</location>
     </error-page>
+    <context-param>
+	<param-name>javax.faces.application.CONFIG_FILES</param-name>
+	<param-value>/WEB-INF/faces-config.xml</param-value>
+    </context-param>
     <context-param>
         <param-name>BootsFaces_THEME</param-name>
         <param-value>cerulean</param-value>
@@ -38,15 +42,45 @@
         </form-login-config>
     </login-config>
     <security-role>
-        <description/>
-        <role-name>Funcionario CESFAM</role-name>
+        <role-name>Super-Usuario</role-name>
     </security-role>
     <security-role>
-        <description/>
-        <role-name>Empleado Municipal</role-name>
+        <role-name>Funcionario-CESFAM</role-name>
     </security-role>
     <security-role>
-        <description/>
-        <role-name>Super Usuario</role-name>
+        <role-name>Empleado-Municipal</role-name>
     </security-role>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>admin-area</web-resource-name>
+            <url-pattern>/faces/usuario/*</url-pattern>
+            <url-pattern>/faces/rol/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description></description>
+            <role-name>Super-Usuario</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>common-area</web-resource-name>
+            <url-pattern>/faces/cesfam/*</url-pattern>
+            <url-pattern>/faces/paciente/*</url-pattern>
+            <url-pattern>/faces/clap/*</url-pattern>
+            <url-pattern>/faces/comuna/*</url-pattern>
+            <url-pattern>/faces/crafft/*</url-pattern>
+            <url-pattern>/faces/estado_civil/*</url-pattern>
+            <url-pattern>/faces/ley_social/*</url-pattern>
+            <url-pattern>/faces/nacionalidad/*</url-pattern>
+            <url-pattern>/faces/prevision/*</url-pattern>
+            <url-pattern>/faces/pueblo_originario/*</url-pattern>
+            <url-pattern>/faces/region/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description></description>
+            <role-name>Super-Usuario</role-name>
+            <role-name>Funcionario-CESFAM</role-name>
+            <role-name>Empleado-Municipal</role-name>
+        </auth-constraint>
+    </security-constraint>
 </web-app>

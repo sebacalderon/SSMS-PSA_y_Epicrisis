@@ -96,7 +96,7 @@ public class clap implements Serializable {
     private String telefono_fijo;
     
     @Column(name="telefono_movil_clap")
-    private String teléfono_movil;  
+    private String telefono_movil;  
     
     @NotNull(message="Debe ingresar un sexo")
     @Column(name="sexo_clap")
@@ -145,13 +145,13 @@ public class clap implements Serializable {
     @Temporal(TemporalType.DATE)
     @Column(name="fecha_consulta_clap")
     private java.util.Date fecha_consulta;
-
+    
     @NotNull
     @Column(name="edad_clap")
     private int edad;
     
     @Column(name="acompanante_clap")
-    private String acompañante;
+    private String acompanante;
     
     @Column(name="motivo_consulta_adolescente_1_clap",length = 100)
     private String motivo_consulta_adolescente_1;
@@ -163,13 +163,13 @@ public class clap implements Serializable {
     private String motivo_consulta_adolescente_3;
     
     @Column(name="motivo_consulta_acompanantes_1_clap",length = 100)
-    private String motivo_consulta_acompañante_1;
+    private String motivo_consulta_acompanante_1;
     
     @Column(name="motivo_consulta_acompanante_2_clap",length = 100)
-    private String motivo_consulta_acompañante_2;
+    private String motivo_consulta_acompanante_2;
         
     @Column(name="motivo_consulta_acompanante_3_clap",length = 100)
-    private String motivo_consulta_acompañante_3;
+    private String motivo_consulta_acompanante_3;
     
     @Column(name="descripcion_motivo_consulta_clap",length = 100,columnDefinition = "TEXT")
     private String descripcion_motivo_consulta;
@@ -206,7 +206,7 @@ public class clap implements Serializable {
     
     @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="uso_medicamentos_clap",length = 1)
-    private int uso_medicamentos;
+    private boolean uso_medicamentos;
     
     @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="problemas_salud_mental_clap",length = 1)
@@ -286,8 +286,8 @@ public class clap implements Serializable {
     @Column(name="vive_con_otros_clap",length = 1)
     private boolean vive_con_otros;
     
-    @Column(name="vive_con_especificación_clap")
-    private String vive_con_especificación;
+    @Column(name="vive_con_especificacion_clap")
+    private String vive_con_especificacion;
     
     @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="comparte_cama_clap")
@@ -354,10 +354,10 @@ public class clap implements Serializable {
     
     @NotNull(message = "Debe debe ingresar un valor.")
     @Column(name="anos_repetidos_clap")
-    private int años_repetidos;
+    private int anos_repetidos;
     
     @Column(name="causa_anos_repetidos_clap")
-    private String causa_años_repetidos;
+    private String causa_anos_repetidos;
     
     @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="problemas_escuela_clap")
@@ -479,11 +479,11 @@ public class clap implements Serializable {
     
     @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="sueno_normal_clap")
-    private boolean sueño_normal;
+    private boolean sueno_normal;
     
     @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="horas_sueno_clap")
-    private int horas_sueño;
+    private int horas_sueno;
     
     @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="alimentacion_adecuada_clap")
@@ -520,7 +520,7 @@ public class clap implements Serializable {
     private boolean consumo_otra_sustancia;
  
     @Column(name="especificacion_consumo_otra_sustancia_clap")
-    private boolean especificacion_consumo_otra_sustancia;
+    private String especificacion_consumo_otra_sustancia;
     
     @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="seguridad_vial_clap")
@@ -744,11 +744,11 @@ public class clap implements Serializable {
     
     @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="tanner_mama_clap")
-    private boolean tanner_mama;
+    private int tanner_mama;
     
     @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="tanner_genital_clap")
-    private boolean tanner_genital;
+    private int tanner_genital;
     
     @Column(name="observaciones_examen_fisico_clap",columnDefinition = "TEXT")
     private String observaciones_examen_fisico;
@@ -794,7 +794,7 @@ public class clap implements Serializable {
     @NotNull
     @Column(name="riesgo_social_clap")
     private String riesgo_social;
-
+ 
     public Long getNumero_consulta() {
         return numero_consulta;
     }
@@ -819,12 +819,12 @@ public class clap implements Serializable {
         this.edad = edad;
     }
 
-    public String getAcompañante() {
-        return acompañante;
+    public String getAcompanante() {
+        return acompanante;
     }
 
-    public void setAcompañante(String acompañante) {
-        this.acompañante = acompañante;
+    public void setAcompanante(String acompanante) {
+        this.acompanante = acompanante;
     }
 
     public String getMotivo_consulta_adolescente_1() {
@@ -851,28 +851,28 @@ public class clap implements Serializable {
         this.motivo_consulta_adolescente_3 = motivo_consulta_adolescente_3;
     }
 
-    public String getMotivo_consulta_acompañante_1() {
-        return motivo_consulta_acompañante_1;
+    public String getMotivo_consulta_acompanante_1() {
+        return motivo_consulta_acompanante_1;
     }
 
-    public void setMotivo_consulta_acompañante_1(String motivo_consulta_acompañante_1) {
-        this.motivo_consulta_acompañante_1 = motivo_consulta_acompañante_1;
+    public void setMotivo_consulta_acompanante_1(String motivo_consulta_acompanante_1) {
+        this.motivo_consulta_acompanante_1 = motivo_consulta_acompanante_1;
     }
 
-    public String getMotivo_consulta_acompañante_2() {
-        return motivo_consulta_acompañante_2;
+    public String getMotivo_consulta_acompanante_2() {
+        return motivo_consulta_acompanante_2;
     }
 
-    public void setMotivo_consulta_acompañante_2(String motivo_consulta_acompañante_2) {
-        this.motivo_consulta_acompañante_2 = motivo_consulta_acompañante_2;
+    public void setMotivo_consulta_acompanante_2(String motivo_consulta_acompanante_2) {
+        this.motivo_consulta_acompanante_2 = motivo_consulta_acompanante_2;
     }
 
-    public String getMotivo_consulta_acompañante_3() {
-        return motivo_consulta_acompañante_3;
+    public String getMotivo_consulta_acompanante_3() {
+        return motivo_consulta_acompanante_3;
     }
 
-    public void setMotivo_consulta_acompañante_3(String motivo_consulta_acompañante_3) {
-        this.motivo_consulta_acompañante_3 = motivo_consulta_acompañante_3;
+    public void setMotivo_consulta_acompanante_3(String motivo_consulta_acompanante_3) {
+        this.motivo_consulta_acompanante_3 = motivo_consulta_acompanante_3;
     }
 
     public String getDescripcion_motivo_consulta() {
@@ -939,11 +939,11 @@ public class clap implements Serializable {
         this.cirugia_hospitalizaciones = cirugia_hospitalizaciones;
     }
 
-    public int getUso_medicamentos() {
+    public boolean getUso_medicamentos() {
         return uso_medicamentos;
     }
 
-    public void setUso_medicamentos(int uso_medicamentos) {
+    public void setUso_medicamentos(boolean uso_medicamentos) {
         this.uso_medicamentos = uso_medicamentos;
     }
 
@@ -1099,12 +1099,12 @@ public class clap implements Serializable {
         this.vive_con_otros = vive_con_otros;
     }
 
-    public String getVive_con_especificación() {
-        return vive_con_especificación;
+    public String getVive_con_especificacion() {
+        return vive_con_especificacion;
     }
 
-    public void setVive_con_especificación(String vive_con_especificación) {
-        this.vive_con_especificación = vive_con_especificación;
+    public void setVive_con_especificacion(String vive_con_especificacion) {
+        this.vive_con_especificacion = vive_con_especificacion;
     }
 
     public boolean isComparte_cama() {
@@ -1243,20 +1243,20 @@ public class clap implements Serializable {
         this.curso = curso;
     }
 
-    public int getAños_repetidos() {
-        return años_repetidos;
+    public int getAnos_repetidos() {
+        return anos_repetidos;
     }
 
-    public void setAños_repetidos(int años_repetidos) {
-        this.años_repetidos = años_repetidos;
+    public void setAnos_repetidos(int anos_repetidos) {
+        this.anos_repetidos = anos_repetidos;
     }
 
-    public String getCausa_años_repetidos() {
-        return causa_años_repetidos;
+    public String getCausa_anos_repetidos() {
+        return causa_anos_repetidos;
     }
 
-    public void setCausa_años_repetidos(String causa_años_repetidos) {
-        this.causa_años_repetidos = causa_años_repetidos;
+    public void setCausa_anos_repetidos(String causa_anos_repetidos) {
+        this.causa_anos_repetidos = causa_anos_repetidos;
     }
 
     public boolean isProblemas_escuela() {
@@ -1499,20 +1499,20 @@ public class clap implements Serializable {
         this.observaciones_vida_social = observaciones_vida_social;
     }
 
-    public boolean isSueño_normal() {
-        return sueño_normal;
+    public boolean isSueno_normal() {
+        return sueno_normal;
     }
 
-    public void setSueño_normal(boolean sueño_normal) {
-        this.sueño_normal = sueño_normal;
+    public void setSueno_normal(boolean sueno_normal) {
+        this.sueno_normal = sueno_normal;
     }
 
-    public int getHoras_sueño() {
-        return horas_sueño;
+    public int getHoras_sueno() {
+        return horas_sueno;
     }
 
-    public void setHoras_sueño(int horas_sueño) {
-        this.horas_sueño = horas_sueño;
+    public void setHoras_sueno(int horas_sueno) {
+        this.horas_sueno = horas_sueno;
     }
 
     public boolean isAlimentacion_adecuada() {
@@ -1587,11 +1587,11 @@ public class clap implements Serializable {
         this.consumo_otra_sustancia = consumo_otra_sustancia;
     }
 
-    public boolean isEspecificacion_consumo_otra_sustancia() {
+    public String getEspecificacion_consumo_otra_sustancia() {
         return especificacion_consumo_otra_sustancia;
     }
 
-    public void setEspecificacion_consumo_otra_sustancia(boolean especificacion_consumo_otra_sustancia) {
+    public void setEspecificacion_consumo_otra_sustancia(String especificacion_consumo_otra_sustancia) {
         this.especificacion_consumo_otra_sustancia = especificacion_consumo_otra_sustancia;
     }
 
@@ -2043,19 +2043,19 @@ public class clap implements Serializable {
         this.tanner_con_foto = tanner_con_foto;
     }
 
-    public boolean isTanner_mama() {
+    public int isTanner_mama() {
         return tanner_mama;
     }
 
-    public void setTanner_mama(boolean tanner_mama) {
+    public void setTanner_mama(int tanner_mama) {
         this.tanner_mama = tanner_mama;
     }
 
-    public boolean isTanner_genital() {
+    public int isTanner_genital() {
         return tanner_genital;
     }
 
-    public void setTanner_genital(boolean tanner_genital) {
+    public void setTanner_genital(int tanner_genital) {
         this.tanner_genital = tanner_genital;
     }
 
@@ -2277,12 +2277,12 @@ public class clap implements Serializable {
         this.telefono_fijo = telefono_fijo;
     }
 
-    public String getTeléfono_movil() {
-        return teléfono_movil;
+    public String getTelefono_movil() {
+        return telefono_movil;
     }
 
-    public void setTeléfono_movil(String teléfono_movil) {
-        this.teléfono_movil = teléfono_movil;
+    public void setTelefono_movil(String telefono_movil) {
+        this.telefono_movil = telefono_movil;
     }
 
     public ley_social getPrograma_social() {

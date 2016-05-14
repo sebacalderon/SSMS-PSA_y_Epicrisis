@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<glassfish-web-app>
+   <security-role-mapping>
+        <role-name>Super-Usuario</role-name>
+        <group-name>1</group-name>
+    </security-role-mapping>
+    <security-role-mapping>
+        <role-name>Funcionario-CESFAM</role-name>
+        <group-name>2</group-name>
+    </security-role-mapping>
+    <security-role-mapping>
+        <role-name>Empleado-Municipal</role-name>
+        <group-name>3</group-name>
+    </security-role-mapping>
+</glassfish-web-app>

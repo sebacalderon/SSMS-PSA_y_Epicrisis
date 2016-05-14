@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="clapEditDlg" widgetVar="clapEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditclapTitle}">
+            <h:form id="clapEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{clapController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditclapLabel_numero_consulta}" for="numero_consulta" />
+                        <p:inputText id="numero_consulta" value="#{clapController.selected.numero_consulta}" title="#{bundle.EditclapTitle_numero_consulta}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_fecha_consulta}" for="fecha_consulta" />
+                        <p:calendar id="fecha_consulta" pattern="MM/dd/yyyy" value="#{clapController.selected.fecha_consulta}" title="#{bundle.EditclapTitle_fecha_consulta}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditclapLabel_edad}" for="edad" />
+                        <p:inputText id="edad" value="#{clapController.selected.edad}" title="#{bundle.EditclapTitle_edad}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_acompañante}" for="acompañante" />
+                        <p:inputText id="acompañante" value="#{clapController.selected.acompanante}" title="#{bundle.EditclapTitle_acompañante}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_motivo_consulta_adolescente_1}" for="motivo_consulta_adolescente_1" />
+                        <p:inputText id="motivo_consulta_adolescente_1" value="#{clapController.selected.motivo_consulta_adolescente_1}" title="#{bundle.EditclapTitle_motivo_consulta_adolescente_1}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_motivo_consulta_adolescente_2}" for="motivo_consulta_adolescente_2" />
+                        <p:inputText id="motivo_consulta_adolescente_2" value="#{clapController.selected.motivo_consulta_adolescente_2}" title="#{bundle.EditclapTitle_motivo_consulta_adolescente_2}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_motivo_consulta_adolescente_3}" for="motivo_consulta_adolescente_3" />
+                        <p:inputText id="motivo_consulta_adolescente_3" value="#{clapController.selected.motivo_consulta_adolescente_3}" title="#{bundle.EditclapTitle_motivo_consulta_adolescente_3}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_motivo_consulta_acompañante_1}" for="motivo_consulta_acompañante_1" />
+                        <p:inputText id="motivo_consulta_acompañante_1" value="#{clapController.selected.motivo_consulta_acompanante_1}" title="#{bundle.EditclapTitle_motivo_consulta_acompañante_1}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_motivo_consulta_acompañante_2}" for="motivo_consulta_acompañante_2" />
+                        <p:inputText id="motivo_consulta_acompañante_2" value="#{clapController.selected.motivo_consulta_acompanante_2}" title="#{bundle.EditclapTitle_motivo_consulta_acompañante_2}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_motivo_consulta_acompañante_3}" for="motivo_consulta_acompañante_3" />
+                        <p:inputText id="motivo_consulta_acompañante_3" value="#{clapController.selected.motivo_consulta_acompanante_3}" title="#{bundle.EditclapTitle_motivo_consulta_acompañante_3}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_descripcion_motivo_consulta}" for="descripcion_motivo_consulta" />
+                        <p:inputText id="descripcion_motivo_consulta" value="#{clapController.selected.descripcion_motivo_consulta}" title="#{bundle.EditclapTitle_descripcion_motivo_consulta}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_perinatales_normales}" for="perinatales_normales" />
+                        <p:inputText id="perinatales_normales" value="#{clapController.selected.perinatales_normales}" title="#{bundle.EditclapTitle_perinatales_normales}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_alergias_normales}" for="alergias_normales" />
+                        <p:inputText id="alergias_normales" value="#{clapController.selected.alergias_normales}" title="#{bundle.EditclapTitle_alergias_normales}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_vacunas_completas}" for="vacunas_completas" />
+                        <p:inputText id="vacunas_completas" value="#{clapController.selected.vacunas_completas}" title="#{bundle.EditclapTitle_vacunas_completas}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_enfermedades_importantes}" for="enfermedades_importantes" />
+                        <p:inputText id="enfermedades_importantes" value="#{clapController.selected.enfermedades_importantes}" title="#{bundle.EditclapTitle_enfermedades_importantes}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_discapacidad}" for="discapacidad" />
+                        <p:inputText id="discapacidad" value="#{clapController.selected.discapacidad}" title="#{bundle.EditclapTitle_discapacidad}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_accidentes_relevantes}" for="accidentes_relevantes" />
+                        <p:inputText id="accidentes_relevantes" value="#{clapController.selected.accidentes_relevantes}" title="#{bundle.EditclapTitle_accidentes_relevantes}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_cirugia_hospitalizaciones}" for="cirugia_hospitalizaciones" />
+                        <p:inputText id="cirugia_hospitalizaciones" value="#{clapController.selected.cirugia_hospitalizaciones}" title="#{bundle.EditclapTitle_cirugia_hospitalizaciones}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_uso_medicamentos}" for="uso_medicamentos" />
+                        <p:inputText id="uso_medicamentos" value="#{clapController.selected.uso_medicamentos}" title="#{bundle.EditclapTitle_uso_medicamentos}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_problemas_salud_mental}" for="problemas_salud_mental" />
+                        <p:inputText id="problemas_salud_mental" value="#{clapController.selected.problemas_salud_mental}" title="#{bundle.EditclapTitle_problemas_salud_mental}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_violencia}" for="violencia" />
+                        <p:inputText id="violencia" value="#{clapController.selected.violencia}" title="#{bundle.EditclapTitle_violencia}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_antecedentes_judiciales}" for="antecedentes_judiciales" />
+                        <p:inputText id="antecedentes_judiciales" value="#{clapController.selected.antecedentes_judiciales}" title="#{bundle.EditclapTitle_antecedentes_judiciales}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_otros}" for="otros" />
+                        <p:inputText id="otros" value="#{clapController.selected.otros}" title="#{bundle.EditclapTitle_otros}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_observaciones_antecdentes_personales}" for="observaciones_antecdentes_personales" />
+                        <p:inputText id="observaciones_antecdentes_personales" value="#{clapController.selected.observaciones_antecdentes_personales}" title="#{bundle.EditclapTitle_observaciones_antecdentes_personales}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_enfermedades_importantes_familia}" for="enfermedades_importantes_familia" />
+                        <p:inputText id="enfermedades_importantes_familia" value="#{clapController.selected.enfermedades_importantes_familia}" title="#{bundle.EditclapTitle_enfermedades_importantes_familia}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_obesidad_familia}" for="obesidad_familia" />
+                        <p:inputText id="obesidad_familia" value="#{clapController.selected.obesidad_familia}" title="#{bundle.EditclapTitle_obesidad_familia}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_problemas_salud_mental_familia}" for="problemas_salud_mental_familia" />
+                        <p:inputText id="problemas_salud_mental_familia" value="#{clapController.selected.problemas_salud_mental_familia}" title="#{bundle.EditclapTitle_problemas_salud_mental_familia}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_violencia_intrafamiliar}" for="violencia_intrafamiliar" />
+                        <p:inputText id="violencia_intrafamiliar" value="#{clapController.selected.violencia_intrafamiliar}" title="#{bundle.EditclapTitle_violencia_intrafamiliar}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_alcohol_y_otras_drogas}" for="alcohol_y_otras_drogas" />
+                        <p:inputText id="alcohol_y_otras_drogas" value="#{clapController.selected.alcohol_y_otras_drogas}" title="#{bundle.EditclapTitle_alcohol_y_otras_drogas}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_padre_adolescente}" for="padre_adolescente" />
+                        <p:inputText id="padre_adolescente" value="#{clapController.selected.padre_adolescente}" title="#{bundle.EditclapTitle_padre_adolescente}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_judiciales}" for="judiciales" />
+                        <p:inputText id="judiciales" value="#{clapController.selected.judiciales}" title="#{bundle.EditclapTitle_judiciales}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_otros_antecedentes_familiares}" for="otros_antecedentes_familiares" />
+                        <p:inputText id="otros_antecedentes_familiares" value="#{clapController.selected.otros_antecedentes_familiares}" title="#{bundle.EditclapTitle_otros_antecedentes_familiares}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_observaciones_antecedentes_familiares}" for="observaciones_antecedentes_familiares" />
+                        <p:inputText id="observaciones_antecedentes_familiares" value="#{clapController.selected.observaciones_antecedentes_familiares}" title="#{bundle.EditclapTitle_observaciones_antecedentes_familiares}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_vive_con_especificación}" for="vive_con_especificacion" />
+                        <p:inputText id="vive_con_especificacion" value="#{clapController.selected.vive_con_especificacion}" title="#{bundle.EditclapTitle_vive_con_especificación}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_especificacion_comparte_cama}" for="especificacion_comparte_cama" />
+                        <p:inputText id="especificacion_comparte_cama" value="#{clapController.selected.especificacion_comparte_cama}" title="#{bundle.EditclapTitle_especificacion_comparte_cama}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_nivel_instruccion_madre}" for="nivel_instruccion_madre" />
+                        <p:inputText id="nivel_instruccion_madre" value="#{clapController.selected.nivel_instruccion_madre}" title="#{bundle.EditclapTitle_nivel_instruccion_madre}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_nivel_instruccion_padre}" for="nivel_instruccion_padre" />
+                        <p:inputText id="nivel_instruccion_padre" value="#{clapController.selected.nivel_instruccion_padre}" title="#{bundle.EditclapTitle_nivel_instruccion_padre}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_nivel_instruccion_pareja}" for="nivel_instruccion_pareja" />
+                        <p:inputText id="nivel_instruccion_pareja" value="#{clapController.selected.nivel_instruccion_pareja}" title="#{bundle.EditclapTitle_nivel_instruccion_pareja}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_ocupacion_madre}" for="ocupacion_madre" />
+                        <p:inputText id="ocupacion_madre" value="#{clapController.selected.ocupacion_madre}" title="#{bundle.EditclapTitle_ocupacion_madre}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_ocupacion_padre}" for="ocupacion_padre" />
+                        <p:inputText id="ocupacion_padre" value="#{clapController.selected.ocupacion_padre}" title="#{bundle.EditclapTitle_ocupacion_padre}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_ocupacion_pareja}" for="ocupacion_pareja" />
+                        <p:inputText id="ocupacion_pareja" value="#{clapController.selected.ocupacion_pareja}" title="#{bundle.EditclapTitle_ocupacion_pareja}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_percepcion_familia}" for="percepcion_familia" />
+                        <p:inputText id="percepcion_familia" value="#{clapController.selected.percepcion_familia}" title="#{bundle.EditclapTitle_percepcion_familia}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_diagrama_familiar}" for="diagrama_familiar" />
+                        <p:inputText id="diagrama_familiar" value="#{clapController.selected.diagrama_familiar}" title="#{bundle.EditclapTitle_diagrama_familiar}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_observaciones_familia}" for="observaciones_familia" />
+                        <p:inputText id="observaciones_familia" value="#{clapController.selected.observaciones_familia}" title="#{bundle.EditclapTitle_observaciones_familia}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_observaciones_vivienda}" for="observaciones_vivienda" />
+                        <p:inputText id="observaciones_vivienda" value="#{clapController.selected.observaciones_vivienda}" title="#{bundle.EditclapTitle_observaciones_vivienda}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_nivel_educacion}" for="nivel_educacion" />
+                        <p:inputText id="nivel_educacion" value="#{clapController.selected.nivel_educacion}" title="#{bundle.EditclapTitle_nivel_educacion}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_curso}" for="curso" />
+                        <p:inputText id="curso" value="#{clapController.selected.curso}" title="#{bundle.EditclapTitle_curso}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_anos_repetidos}" for="años_repetidos" />
+                        <p:inputText id="años_repetidos" value="#{clapController.selected.anos_repetidos}" title="#{bundle.EditclapTitle_anos_repetidos}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_causa_anos_repetidos}" for="causa_años_repetidos" />
+                        <p:inputText id="causa_años_repetidos" value="#{clapController.selected.causa_anos_repetidos}" title="#{bundle.EditclapTitle_causa_anos_repetidos}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_causa_desercion_exclusion}" for="causa_desercion_exclusion" />
+                        <p:inputText id="causa_desercion_exclusion" value="#{clapController.selected.causa_desercion_exclusion}" title="#{bundle.EditclapTitle_causa_desercion_exclusion}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_percepcion_rendimiento}" for="percepcion_rendimiento" />
+                        <p:inputText id="percepcion_rendimiento" value="#{clapController.selected.percepcion_rendimiento}" title="#{bundle.EditclapTitle_percepcion_rendimiento}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_observaciones_educacion}" for="observaciones_educacion" />
+                        <p:inputText id="observaciones_educacion" value="#{clapController.selected.observaciones_educacion}" title="#{bundle.EditclapTitle_observaciones_educacion}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_horas_trabajo}" for="horas_trabajo" />
+                        <p:inputText id="horas_trabajo" value="#{clapController.selected.horas_trabajo}" title="#{bundle.EditclapTitle_horas_trabajo}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_razon_de_trabajo}" for="razon_de_trabajo" />
+                        <p:inputText id="razon_de_trabajo" value="#{clapController.selected.razon_de_trabajo}" title="#{bundle.EditclapTitle_razon_de_trabajo}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_legalizado}" for="legalizado" />
+                        <p:inputText id="legalizado" value="#{clapController.selected.legalizado}" title="#{bundle.EditclapTitle_legalizado}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_tipo_de_trabajo}" for="tipo_de_trabajo" />
+                        <p:inputText id="tipo_de_trabajo" value="#{clapController.selected.tipo_de_trabajo}" title="#{bundle.EditclapTitle_tipo_de_trabajo}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_observaciones_trabajo}" for="observaciones_trabajo" />
+                        <p:inputText id="observaciones_trabajo" value="#{clapController.selected.observaciones_trabajo}" title="#{bundle.EditclapTitle_observaciones_trabajo}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_aceptacion}" for="aceptacion" />
+                        <p:inputText id="aceptacion" value="#{clapController.selected.aceptacion}" title="#{bundle.EditclapTitle_aceptacion}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_edad_pareja}" for="edad_pareja" />
+                        <p:inputText id="edad_pareja" value="#{clapController.selected.edad_pareja}" title="#{bundle.EditclapTitle_edad_pareja}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_horas_actividad_fisica}" for="horas_actividad_fisica" />
+                        <p:inputText id="horas_actividad_fisica" value="#{clapController.selected.horas_actividad_fisica}" title="#{bundle.EditclapTitle_horas_actividad_fisica}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_horas_tv}" for="horas_tv" />
+                        <p:inputText id="horas_tv" value="#{clapController.selected.horas_tv}" title="#{bundle.EditclapTitle_horas_tv}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_horas_computador_consola}" for="horas_computador_consola" />
+                        <p:inputText id="horas_computador_consola" value="#{clapController.selected.horas_computador_consola}" title="#{bundle.EditclapTitle_horas_computador_consola}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_especificacion_otras_actividades}" for="especificacion_otras_actividades" />
+                        <p:inputText id="especificacion_otras_actividades" value="#{clapController.selected.especificacion_otras_actividades}" title="#{bundle.EditclapTitle_especificacion_otras_actividades}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_observaciones_vida_social}" for="observaciones_vida_social" />
+                        <p:inputText id="observaciones_vida_social" value="#{clapController.selected.observaciones_vida_social}" title="#{bundle.EditclapTitle_observaciones_vida_social}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_horas_sueño}" for="horas_sueño" />
+                        <p:inputText id="horas_sueño" value="#{clapController.selected.horas_sueño}" title="#{bundle.EditclapTitle_horas_sueño}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_comidas_familia}" for="comidas_familia" />
+                        <p:inputText id="comidas_familia" value="#{clapController.selected.comidas_familia}" title="#{bundle.EditclapTitle_comidas_familia}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_especificacion_alimentacion_especial}" for="especificacion_alimentacion_especial" />
+                        <p:inputText id="especificacion_alimentacion_especial" value="#{clapController.selected.especificacion_alimentacion_especial}" title="#{bundle.EditclapTitle_especificacion_alimentacion_especial}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_cigarros_dia}" for="cigarros_dia" />
+                        <p:inputText id="cigarros_dia" value="#{clapController.selected.cigarros_dia}" title="#{bundle.EditclapTitle_cigarros_dia}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_observaciones_habitos_consumo}" for="observaciones_habitos_consumo" />
+                        <p:inputText id="observaciones_habitos_consumo" value="#{clapController.selected.observaciones_habitos_consumo}" title="#{bundle.EditclapTitle_observaciones_habitos_consumo}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_edad_menarca_espermarca}" for="edad_menarca_espermarca" />
+                        <p:inputText id="edad_menarca_espermarca" value="#{clapController.selected.edad_menarca_espermarca}" title="#{bundle.EditclapTitle_edad_menarca_espermarca}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_fecha_ultima_menstruacion}" for="fecha_ultima_menstruacion" />
+                        <p:calendar id="fecha_ultima_menstruacion" pattern="MM/dd/yyyy" value="#{clapController.selected.fecha_ultima_menstruacion}" title="#{bundle.EditclapTitle_fecha_ultima_menstruacion}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditclapLabel_ciclos_regulares}" for="ciclos_regulares" />
+                        <p:inputText id="ciclos_regulares" value="#{clapController.selected.ciclos_regulares}" title="#{bundle.EditclapTitle_ciclos_regulares}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_dismenorrea}" for="dismenorrea" />
+                        <p:inputText id="dismenorrea" value="#{clapController.selected.dismenorrea}" title="#{bundle.EditclapTitle_dismenorrea}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_especificacion_its_vih}" for="especificacion_its_vih" />
+                        <p:inputText id="especificacion_its_vih" value="#{clapController.selected.especificacion_its_vih}" title="#{bundle.EditclapTitle_especificacion_its_vih}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_tratamiento}" for="tratamiento" />
+                        <p:inputText id="tratamiento" value="#{clapController.selected.tratamiento}" title="#{bundle.EditclapTitle_tratamiento}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_tratamiento_contactos}" for="tratamiento_contactos" />
+                        <p:inputText id="tratamiento_contactos" value="#{clapController.selected.tratamiento_contactos}" title="#{bundle.EditclapTitle_tratamiento_contactos}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_embarazos}" for="embarazos" />
+                        <p:inputText id="embarazos" value="#{clapController.selected.embarazos}" title="#{bundle.EditclapTitle_embarazos}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_hijos}" for="hijos" />
+                        <p:inputText id="hijos" value="#{clapController.selected.hijos}" title="#{bundle.EditclapTitle_hijos}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_abortos}" for="abortos" />
+                        <p:inputText id="abortos" value="#{clapController.selected.abortos}" title="#{bundle.EditclapTitle_abortos}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_observaciones_gineco_urologico}" for="observaciones_gineco_urologico" />
+                        <p:inputText id="observaciones_gineco_urologico" value="#{clapController.selected.observaciones_gineco_urologico}" title="#{bundle.EditclapTitle_observaciones_gineco_urologico}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_orientacion_sexual}" for="orientacion_sexual" />
+                        <p:inputText id="orientacion_sexual" value="#{clapController.selected.orientacion_sexual}" title="#{bundle.EditclapTitle_orientacion_sexual}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_especificacion_orientacion_sexual}" for="especificacion_orientacion_sexual" />
+                        <p:inputText id="especificacion_orientacion_sexual" value="#{clapController.selected.especificacion_orientacion_sexual}" title="#{bundle.EditclapTitle_especificacion_orientacion_sexual}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_conducta_sexual}" for="conducta_sexual" />
+                        <p:inputText id="conducta_sexual" value="#{clapController.selected.conducta_sexual}" title="#{bundle.EditclapTitle_conducta_sexual}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_edad_inicio_conducta_sexual}" for="edad_inicio_conducta_sexual" />
+                        <p:inputText id="edad_inicio_conducta_sexual" value="#{clapController.selected.edad_inicio_conducta_sexual}" title="#{bundle.EditclapTitle_edad_inicio_conducta_sexual}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_relaciones_sexuales}" for="relaciones_sexuales" />
+                        <p:inputText id="relaciones_sexuales" value="#{clapController.selected.relaciones_sexuales}" title="#{bundle.EditclapTitle_relaciones_sexuales}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_pareja_sexual}" for="pareja_sexual" />
+                        <p:inputText id="pareja_sexual" value="#{clapController.selected.pareja_sexual}" title="#{bundle.EditclapTitle_pareja_sexual}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_dificultades_sexuales}" for="dificultades_sexuales" />
+                        <p:inputText id="dificultades_sexuales" value="#{clapController.selected.dificultades_sexuales}" title="#{bundle.EditclapTitle_dificultades_sexuales}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_anticoncepcion}" for="anticoncepcion" />
+                        <p:inputText id="anticoncepcion" value="#{clapController.selected.anticoncepcion}" title="#{bundle.EditclapTitle_anticoncepcion}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_uso_mac}" for="uso_mac" />
+                        <p:inputText id="uso_mac" value="#{clapController.selected.uso_mac}" title="#{bundle.EditclapTitle_uso_mac}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_especificacion_uso_mac}" for="especificacion_uso_mac" />
+                        <p:inputText id="especificacion_uso_mac" value="#{clapController.selected.especificacion_uso_mac}" title="#{bundle.EditclapTitle_especificacion_uso_mac}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_razon_no_uso_mac}" for="razon_no_uso_mac" />
+                        <p:inputText id="razon_no_uso_mac" value="#{clapController.selected.razon_no_uso_mac}" title="#{bundle.EditclapTitle_razon_no_uso_mac}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_observaciones_sexualidad}" for="observaciones_sexualidad" />
+                        <p:inputText id="observaciones_sexualidad" value="#{clapController.selected.observaciones_sexualidad}" title="#{bundle.EditclapTitle_observaciones_sexualidad}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_imagen_corporal_mac}" for="imagen_corporal_mac" />
+                        <p:inputText id="imagen_corporal_mac" value="#{clapController.selected.imagen_corporal_mac}" title="#{bundle.EditclapTitle_imagen_corporal_mac}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_bienestas_emocional_mac}" for="bienestas_emocional_mac" />
+                        <p:inputText id="bienestas_emocional_mac" value="#{clapController.selected.bienestas_emocional_mac}" title="#{bundle.EditclapTitle_bienestas_emocional_mac}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_vida_proyecto_mac}" for="vida_proyecto_mac" />
+                        <p:inputText id="vida_proyecto_mac" value="#{clapController.selected.vida_proyecto_mac}" title="#{bundle.EditclapTitle_vida_proyecto_mac}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_referente_adulto_mac}" for="referente_adulto_mac" />
+                        <p:inputText id="referente_adulto_mac" value="#{clapController.selected.referente_adulto_mac}" title="#{bundle.EditclapTitle_referente_adulto_mac}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_nombre_referente_adulto_mac}" for="nombre_referente_adulto_mac" />
+                        <p:inputText id="nombre_referente_adulto_mac" value="#{clapController.selected.nombre_referente_adulto_mac}" title="#{bundle.EditclapTitle_nombre_referente_adulto_mac}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_telefono_referente_adulto_mac}" for="telefono_referente_adulto_mac" />
+                        <p:inputText id="telefono_referente_adulto_mac" value="#{clapController.selected.telefono_referente_adulto_mac}" title="#{bundle.EditclapTitle_telefono_referente_adulto_mac}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_observaciones_psico_emocional}" for="observaciones_psico_emocional" />
+                        <p:inputText id="observaciones_psico_emocional" value="#{clapController.selected.observaciones_psico_emocional}" title="#{bundle.EditclapTitle_observaciones_psico_emocional}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_peso}" for="peso" />
+                        <p:inputText id="peso" value="#{clapController.selected.peso}" title="#{bundle.EditclapTitle_peso}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_de_peso}" for="de_peso" />
+                        <p:inputText id="de_peso" value="#{clapController.selected.de_peso}" title="#{bundle.EditclapTitle_de_peso}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_talla}" for="talla" />
+                        <p:inputText id="talla" value="#{clapController.selected.talla}" title="#{bundle.EditclapTitle_talla}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_de_talla}" for="de_talla" />
+                        <p:inputText id="de_talla" value="#{clapController.selected.de_talla}" title="#{bundle.EditclapTitle_de_talla}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_presion_abdominal}" for="presion_abdominal" />
+                        <p:inputText id="presion_abdominal" value="#{clapController.selected.presion_abdominal}" title="#{bundle.EditclapTitle_presion_abdominal}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_presion_arterial}" for="presion_arterial" />
+                        <p:inputText id="presion_arterial" value="#{clapController.selected.presion_arterial}" title="#{bundle.EditclapTitle_presion_arterial}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_otra_area_examen_fisico}" for="otra_area_examen_fisico" />
+                        <p:inputText id="otra_area_examen_fisico" value="#{clapController.selected.otra_area_examen_fisico}" title="#{bundle.EditclapTitle_otra_area_examen_fisico}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_observaciones_examen_fisico}" for="observaciones_examen_fisico" />
+                        <p:inputText id="observaciones_examen_fisico" value="#{clapController.selected.observaciones_examen_fisico}" title="#{bundle.EditclapTitle_observaciones_examen_fisico}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_impresion_diagnostica}" for="impresion_diagnostica" />
+                        <p:inputText id="impresion_diagnostica" value="#{clapController.selected.impresion_diagnostica}" title="#{bundle.EditclapTitle_impresion_diagnostica}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_indicaciones_interconsultas}" for="indicaciones_interconsultas" />
+                        <p:inputText id="indicaciones_interconsultas" value="#{clapController.selected.indicaciones_interconsultas}" title="#{bundle.EditclapTitle_indicaciones_interconsultas}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_paciente}" for="paciente" />
+                        <p:selectOneMenu id="paciente" value="#{clapController.selected.paciente}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{pacienteController.itemsAvailableSelectOne}"
+                                           var="pacienteItem"
+                                           itemValue="#{pacienteItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditclapLabel_funcionario}" for="funcionario" />
+                        <p:selectOneMenu id="funcionario" value="#{clapController.selected.funcionario}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="funcionarioItem"
+                                           itemValue="#{funcionarioItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditclapLabel_riesgo_ssr}" for="riesgo_ssr" />
+                        <p:inputText id="riesgo_ssr" value="#{clapController.selected.riesgo_ssr}" title="#{bundle.EditclapTitle_riesgo_ssr}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_riesgo_salud_mental}" for="riesgo_salud_mental" />
+                        <p:inputText id="riesgo_salud_mental" value="#{clapController.selected.riesgo_salud_mental}" title="#{bundle.EditclapTitle_riesgo_salud_mental}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_riesgo_oh_drogas}" for="riesgo_oh_drogas" />
+                        <p:inputText id="riesgo_oh_drogas" value="#{clapController.selected.riesgo_oh_drogas}" title="#{bundle.EditclapTitle_riesgo_oh_drogas}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_riesgo_nutricional}" for="riesgo_nutricional" />
+                        <p:inputText id="riesgo_nutricional" value="#{clapController.selected.riesgo_nutricional}" title="#{bundle.EditclapTitle_riesgo_nutricional}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_riesgo_social}" for="riesgo_social" />
+                        <p:inputText id="riesgo_social" value="#{clapController.selected.riesgo_social}" title="#{bundle.EditclapTitle_riesgo_social}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_nombre_social}" for="nombre_social" />
+                        <p:inputText id="nombre_social" value="#{clapController.selected.nombre_social}" title="#{bundle.EditclapTitle_nombre_social}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{clapController.selected.id}" title="#{bundle.EditclapTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_nacionalidad}" for="nacionalidad" />
+                        <p:selectOneMenu id="nacionalidad" value="#{clapController.selected.nacionalidad}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{nacionalidadController.itemsAvailableSelectOne}"
+                                           var="nacionalidadItem"
+                                           itemValue="#{nacionalidadItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditclapLabel_RUN}" for="RUN" />
+                        <p:inputText id="RUN" value="#{clapController.selected.RUN}" title="#{bundle.EditclapTitle_RUN}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_DV}" for="DV" />
+                        <p:inputText id="DV" value="#{clapController.selected.DV}" title="#{bundle.EditclapTitle_DV}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_nombres}" for="nombres" />
+                        <p:inputText id="nombres" value="#{clapController.selected.nombres}" title="#{bundle.EditclapTitle_nombres}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_primer_apellido}" for="primer_apellido" />
+                        <p:inputText id="primer_apellido" value="#{clapController.selected.primer_apellido}" title="#{bundle.EditclapTitle_primer_apellido}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_segundo_apellido}" for="segundo_apellido" />
+                        <p:inputText id="segundo_apellido" value="#{clapController.selected.segundo_apellido}" title="#{bundle.EditclapTitle_segundo_apellido}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_sexo}" for="sexo" />
+                        <p:inputText id="sexo" value="#{clapController.selected.sexo}" title="#{bundle.EditclapTitle_sexo}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_fecha_nacimiento}" for="fecha_nacimiento" />
+                        <p:calendar id="fecha_nacimiento" pattern="MM/dd/yyyy" value="#{clapController.selected.fecha_nacimiento}" title="#{bundle.EditclapTitle_fecha_nacimiento}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditclapLabel_region_residencia}" for="region_residencia" />
+                        <p:selectOneMenu id="region_residencia" value="#{clapController.selected.region_residencia}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{regionController.itemsAvailableSelectOne}"
+                                           var="region_residenciaItem"
+                                           itemValue="#{region_residenciaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditclapLabel_comuna_residencia}" for="comuna_residencia" />
+                        <p:selectOneMenu id="comuna_residencia" value="#{clapController.selected.comuna_residencia}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{comunaController.itemsAvailableSelectOne}"
+                                           var="comuna_residenciaItem"
+                                           itemValue="#{comuna_residenciaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditclapLabel_calle_direccion}" for="calle_direccion" />
+                        <p:inputText id="calle_direccion" value="#{clapController.selected.calle_direccion}" title="#{bundle.EditclapTitle_calle_direccion}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_numero_direccion}" for="numero_direccion" />
+                        <p:inputText id="numero_direccion" value="#{clapController.selected.numero_direccion}" title="#{bundle.EditclapTitle_numero_direccion}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_resto_direccion}" for="resto_direccion" />
+                        <p:inputText id="resto_direccion" value="#{clapController.selected.resto_direccion}" title="#{bundle.EditclapTitle_resto_direccion}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_telefono_fijo}" for="telefono_fijo" />
+                        <p:inputText id="telefono_fijo" value="#{clapController.selected.telefono_fijo}" title="#{bundle.EditclapTitle_telefono_fijo}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_teléfono_movil}" for="teléfono_movil" />
+                        <p:inputText id="teléfono_movil" value="#{clapController.selected.telefono_movil}" title="#{bundle.EditclapTitle_teléfono_movil}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_programa_social}" for="programa_social" />
+                        <p:selectOneMenu id="programa_social" value="#{clapController.selected.programa_social}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{ley_socialController.itemsAvailableSelectOne}"
+                                           var="programa_socialItem"
+                                           itemValue="#{programa_socialItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditclapLabel_prevision}" for="prevision" />
+                        <p:selectOneMenu id="prevision" value="#{clapController.selected.prevision}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{previsionController.itemsAvailableSelectOne}"
+                                           var="previsionItem"
+                                           itemValue="#{previsionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditclapLabel_estado_conyugal}" for="estado_conyugal" />
+                        <p:selectOneMenu id="estado_conyugal" value="#{clapController.selected.estado_conyugal}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{estado_civilController.itemsAvailableSelectOne}"
+                                           var="estado_conyugalItem"
+                                           itemValue="#{estado_conyugalItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditclapLabel_grupo_fonasa}" for="grupo_fonasa" />
+                        <p:inputText id="grupo_fonasa" value="#{clapController.selected.grupo_fonasa}" title="#{bundle.EditclapTitle_grupo_fonasa}" />
+                        <p:outputLabel value="#{bundle.EditclapLabel_pueblo_originario}" for="pueblo_originario" />
+                        <p:selectOneMenu id="pueblo_originario" value="#{clapController.selected.pueblo_originario}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{pueblo_originarioController.itemsAvailableSelectOne}"
+                                           var="pueblo_originarioItem"
+                                           itemValue="#{pueblo_originarioItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditclapLabel_cesfam}" for="cesfam" />
+                        <p:selectOneMenu id="cesfam" value="#{clapController.selected.cesfam}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{cesfamController.itemsAvailableSelectOne}"
+                                           var="cesfamItem"
+                                           itemValue="#{cesfamItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditclapLabel_correo}" for="correo" />
+                        <p:inputText id="correo" value="#{clapController.selected.correo}" title="#{bundle.EditclapTitle_correo}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{clapController.update}" value="#{bundle.Save}" update="display,:clapListForm:datalist,:growl" oncomplete="handleSubmit(args, 'clapEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="clapEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -9,13 +9,13 @@ import java.io.Serializable;
 import java.security.MessageDigest;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 /**
  *
@@ -54,10 +54,10 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "cesfam_usuario")
     private cesfam cesfam;
     
-    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
-        + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
-        + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
-        message = "Debe ser un mail valido")
+//    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
+//        + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
+//        + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+//        message = "Debe ser un mail valido")
     @NotNull(message="Debe ingresar un correo")
     @Column(name="correo_usuario", unique = true)
     private String correo;
@@ -66,9 +66,10 @@ public class Usuario implements Serializable {
     @Column(name="password_usuario")
     private String password; 
 
+    @JoinColumn(name = "rol_usuario", referencedColumnName = "codigo_rol")
     @NotNull(message="Debe ingresar un rol")
-    @Column(name="rol_usuario")
-    private String rol;  
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Rol rol;  
 
     @Column(name="habilitado_usuario")
     private boolean habilitado;
@@ -99,14 +100,13 @@ public class Usuario implements Serializable {
     }
     
     
-    public String getRol() {
+    public Rol getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(Rol rol) {
         this.rol = rol;
     }
-    
     
     public String getCorreo() {
         return correo;
