@@ -68,6 +68,11 @@ footer{
     background-color: #FAFAFA;
     min-height:100px;
     width:100%;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    bottom:0;
+    height:60px;
 }
 .roboto{
     font-family: 'Roboto', sans-serif;
