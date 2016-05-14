@@ -24,8 +24,8 @@
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton"/>
 
                         <p:column styleClass="tabla">
                             <f:facet name="header">
@@ -66,16 +66,13 @@
                             <h:outputText value="#{item.estado}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{pacienteController.prepareCreate}" action="/paciente/Create?faces-redirect=true"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{pacienteController.prepareCreate}" action="/paciente/Create?faces-redirect=true" rendered="#{loginController.esFuncionario()}"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":pacienteViewForm" oncomplete="PF('pacienteViewDialog').show()" disabled="#{empty pacienteController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":pacienteEditForm" oncomplete="PF('pacienteEditDialog').show()" disabled="#{empty pacienteController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{pacienteController.destroy}" update=":growl,datalist" disabled="#{empty pacienteController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{pacienteController.prepareEdit}" action="/paciente/Edit?faces-redirect=true" disabled="#{empty pacienteController.selected}" rendered="#{loginController.esFuncionario()}"/>
                         </f:facet>
                     </p:dataTable>
                 </b:panel>
             </h:form>
-
-            <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
         </ui:define>
     </ui:composition>

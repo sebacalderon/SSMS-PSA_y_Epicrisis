@@ -108,14 +108,7 @@ public class pacienteController implements Serializable {
     }
 
     public String create() {
-        FacesContext context = FacesContext.getCurrentInstance();
         selected.setEstado("Ingresado");
-        System.out.println("Comuna Residencia: "+selected.getComuna_residencia());
-        System.out.println("Region: "+selected.getRegion_residencia().getComunas());
-        System.out.println("Nacionalidad: "+selected.getNacionalidad());
-        System.out.println("Prevision: "+selected.getPrevision());
-        System.out.println("Beneficiario de FONASA: "+selected.getGrupo_fonasa());
-        System.out.println("Movil: "+selected.getTelefono_movil());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("pacienteCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -123,8 +116,9 @@ public class pacienteController implements Serializable {
         return "/faces/paciente/List.xhtml";
     }
 
-    public void update() {
+    public String update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
+        return "/faces/paciente/List.xhtml";
     }
 
     public void destroy() {
@@ -237,5 +231,11 @@ public class pacienteController implements Serializable {
         }
          
         return filteredComunas;
+    }
+    
+    public paciente prepareEdit() {
+        selected = getSelected();
+        System.out.println(selected.getNombres());
+        return selected;
     }
 }

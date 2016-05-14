@@ -109,7 +109,7 @@
                         </p:selectOneMenu>                        
 
                         <f:facet name="footer">
-                            <p:commandButton action="#{pacienteController.create}" value="#{bundle.Save}" update=":growl"/>
+                            <p:commandButton action="#{pacienteController.create}" value="#{bundle.Save}" oncomplete="/paciente/List"/>
                             <p:button  value="#{bundle.Cancel}" outcome="/paciente/List" />
                         </f:facet>
                     </p:panelGrid>
