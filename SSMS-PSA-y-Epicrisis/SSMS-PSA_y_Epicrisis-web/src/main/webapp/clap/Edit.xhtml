@@ -12,8 +12,6 @@
             <h:form id="clapEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{clapController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditclapLabel_numero_consulta}" for="numero_consulta" />
-                        <p:inputText id="numero_consulta" value="#{clapController.selected.numero_consulta}" title="#{bundle.EditclapTitle_numero_consulta}" />
                         <p:outputLabel value="#{bundle.EditclapLabel_fecha_consulta}" for="fecha_consulta" />
                         <p:calendar id="fecha_consulta" pattern="MM/dd/yyyy" value="#{clapController.selected.fecha_consulta}" title="#{bundle.EditclapTitle_fecha_consulta}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.EditclapLabel_edad}" for="edad" />

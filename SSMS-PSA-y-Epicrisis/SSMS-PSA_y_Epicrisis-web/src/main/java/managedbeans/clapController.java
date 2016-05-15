@@ -21,6 +21,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
 @Named("clapController")
 @SessionScoped
@@ -32,6 +33,12 @@ public class clapController implements Serializable {
     private clap selected;
     private paciente Paciente = null;
 
+    @Inject
+    private pacienteController pacienteCtrl;
+    
+    @Inject
+    private LoginController loginCtrl;    
+    
     public clapController() {
     }
 
@@ -67,11 +74,42 @@ public class clapController implements Serializable {
         return selected;
     }
 
-    public void create() {
+    public String create() {
+        selected.setFuncionario(loginCtrl.getUsuarioLogueado());
+        pacienteCtrl.setSelected(selected.getPaciente());
+        pacienteCtrl.getSelected().setRUN(selected.getRUN());
+        pacienteCtrl.getSelected().setDV(selected.getDV());
+        pacienteCtrl.getSelected().setNombres(selected.getNombres());
+        pacienteCtrl.getSelected().setNombre_social(selected.getNombre_social());
+        pacienteCtrl.getSelected().setPrimer_apellido(selected.getPrimer_apellido());
+        pacienteCtrl.getSelected().setSegundo_apellido(selected.getSegundo_apellido());
+        pacienteCtrl.getSelected().setTelefono_fijo(selected.getTelefono_fijo());
+        pacienteCtrl.getSelected().setTelefono_movil(selected.getTelefono_movil());
+        pacienteCtrl.getSelected().setRegion_residencia(selected.getRegion_residencia());
+        pacienteCtrl.getSelected().setComuna_residencia(selected.getComuna_residencia());
+        pacienteCtrl.getSelected().setCalle_direccion(selected.getCalle_direccion());
+        pacienteCtrl.getSelected().setNumero_direccion(selected.getNumero_direccion());
+        pacienteCtrl.getSelected().setResto_direccion(selected.getResto_direccion());
+        pacienteCtrl.getSelected().setFecha_nacimiento(selected.getFecha_nacimiento());
+        pacienteCtrl.getSelected().setCesfam(selected.getCesfam());
+        pacienteCtrl.getSelected().setSexo(selected.getSexo());
+        pacienteCtrl.getSelected().setNacionalidad(selected.getNacionalidad());
+        pacienteCtrl.getSelected().setCorreo(selected.getCorreo());
+        pacienteCtrl.getSelected().setPrograma_social(selected.getPrograma_social());
+        pacienteCtrl.getSelected().setPrevision(selected.getPrevision());
+        pacienteCtrl.getSelected().setGrupo_fonasa(selected.getGrupo_fonasa());
+        pacienteCtrl.getSelected().setEstado_conyugal(selected.getEstado_conyugal());
+        pacienteCtrl.getSelected().setPueblo_originario(selected.getPueblo_originario());
+        
+        //Manejo de datos para estados de paciente y riesgos
+
+        pacienteCtrl.update();
+        
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("clapCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        return "/faces/clap/List.xhtml";
     }
 
     public void update() {
@@ -193,6 +231,7 @@ public class clapController implements Serializable {
         selected = new clap();
         initializeEmbeddableKey();
         selected.setPaciente(Paciente);
+        selected.setRUN(Paciente.getRUN());
         selected.setDV(Paciente.getDV());
         selected.setNombres(Paciente.getNombres());
         selected.setNombre_social(Paciente.getNombre_social());
@@ -215,6 +254,9 @@ public class clapController implements Serializable {
         selected.setGrupo_fonasa(Paciente.getGrupo_fonasa());
         selected.setEstado_conyugal(Paciente.getEstado_conyugal());
         selected.setPueblo_originario(Paciente.getPueblo_originario());
+        selected.setFecha_consulta(new java.util.Date());
+        selected.setEdad(selected.getFecha_consulta().getYear()-Paciente.getFecha_nacimiento().getYear());
+        System.out.println("Edad: "+selected.getEdad()+"\n año paciente:"+Paciente.getFecha_nacimiento().getYear()+"\n año consulta:"+selected.getFecha_consulta().getYear());
         return selected;
     }
     

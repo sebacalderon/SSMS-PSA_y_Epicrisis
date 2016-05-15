@@ -12,8 +12,6 @@
             <h:form id="clapViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{clapController.selected != null}">
-                        <h:outputText value="#{bundle.ViewclapLabel_numero_consulta}"/>
-                        <h:outputText value="#{clapController.selected.numero_consulta}" title="#{bundle.ViewclapTitle_numero_consulta}"/>
                         <h:outputText value="#{bundle.ViewclapLabel_fecha_consulta}"/>
                         <h:outputText value="#{clapController.selected.fecha_consulta}" title="#{bundle.ViewclapTitle_fecha_consulta}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
