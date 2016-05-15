@@ -123,12 +123,15 @@ public class UsuarioController implements Serializable {
         auditoriaCtrl.create();
     }
     
-    public void create() {
+    public String create() {
+        FacesContext context = FacesContext.getCurrentInstance();
         selected.setHabilitado(true);
+        System.out.println("Rol: "+selected.getRol().getNombre());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        return "/faces/usuario/List.xhtml";
     }
 
     public void update() {
