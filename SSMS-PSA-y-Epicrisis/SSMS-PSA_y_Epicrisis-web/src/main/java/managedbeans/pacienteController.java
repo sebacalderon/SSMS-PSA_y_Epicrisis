@@ -10,7 +10,6 @@ import managedbeans.util.JsfUtil.PersistAction;
 import sessionbeans.pacienteFacadeLocal;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -79,7 +78,7 @@ public class pacienteController implements Serializable {
         selected.setSegundo_apellido("Diaz");
         selected.setCalle_direccion("sadas");
         selected.setNumero_direccion("123");
-        selected.setFecha_nacimiento(new java.util.Date(22,2,93));
+        selected.setFecha_nacimiento(new java.util.Date());
         selected.setRUN(18293486);
         selected.setDV("0");
         selected.setCorreo("sebastian@algo.com");
@@ -236,7 +235,6 @@ public class pacienteController implements Serializable {
     
     public paciente prepareEdit() {
         selected = getSelected();
-        System.out.println(selected.getNombres());
         return selected;
     }
     
