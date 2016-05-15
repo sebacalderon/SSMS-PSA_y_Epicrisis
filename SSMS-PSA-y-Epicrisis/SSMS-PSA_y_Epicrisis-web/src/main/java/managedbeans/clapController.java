@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 package managedbeans;
-
 import entities.clap;
 import entities.comuna;
 import entities.paciente;
