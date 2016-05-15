@@ -1,11 +1,14 @@
 package managedbeans;
 
 import entities.clap;
+import entities.comuna;
+import entities.paciente;
 import managedbeans.util.JsfUtil;
 import managedbeans.util.JsfUtil.PersistAction;
 import sessionbeans.clapFacadeLocal;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -27,8 +30,17 @@ public class clapController implements Serializable {
     private sessionbeans.clapFacadeLocal ejbFacade;
     private List<clap> items = null;
     private clap selected;
+    private paciente Paciente = null;
 
     public clapController() {
+    }
+
+    public paciente getPaciente() {
+        return Paciente;
+    }
+
+    public void setPaciente(paciente Paciente) {
+        this.Paciente = Paciente;
     }
 
     public clap getSelected() {
@@ -174,6 +186,54 @@ public class clapController implements Serializable {
             }
         }
 
+    }
+    
+    public clap prepareClap(paciente Paciente){
+        this.Paciente = Paciente;
+        selected = new clap();
+        initializeEmbeddableKey();
+        selected.setPaciente(Paciente);
+        selected.setDV(Paciente.getDV());
+        selected.setNombres(Paciente.getNombres());
+        selected.setNombre_social(Paciente.getNombre_social());
+        selected.setPrimer_apellido(Paciente.getPrimer_apellido());
+        selected.setSegundo_apellido(Paciente.getSegundo_apellido());
+        selected.setTelefono_fijo(Paciente.getTelefono_fijo());
+        selected.setTelefono_movil(Paciente.getTelefono_movil());
+        selected.setRegion_residencia(Paciente.getRegion_residencia());
+        selected.setComuna_residencia(Paciente.getComuna_residencia());
+        selected.setCalle_direccion(Paciente.getCalle_direccion());
+        selected.setNumero_direccion(Paciente.getNumero_direccion());
+        selected.setResto_direccion(Paciente.getResto_direccion());
+        selected.setFecha_nacimiento(Paciente.getFecha_nacimiento());
+        selected.setCesfam(Paciente.getCesfam());
+        selected.setSexo(Paciente.getSexo());
+        selected.setNacionalidad(Paciente.getNacionalidad());
+        selected.setCorreo(Paciente.getCorreo());
+        selected.setPrograma_social(Paciente.getPrograma_social());
+        selected.setPrevision(Paciente.getPrevision());
+        selected.setGrupo_fonasa(Paciente.getGrupo_fonasa());
+        selected.setEstado_conyugal(Paciente.getEstado_conyugal());
+        selected.setPueblo_originario(Paciente.getPueblo_originario());
+        return selected;
+    }
+    
+    public void setDatosPaciente(){
+        selected.setDV(selected.getPaciente().getDV());
+    }
+    
+    public List<comuna> completeComuna(String query) {
+        List<comuna> allComunas = selected.getRegion_residencia().getComunas();
+        List<comuna> filteredComunas = new ArrayList<comuna>();
+         
+        for (int i = 0; i < allComunas.size(); i++) {
+            comuna Comuna = allComunas.get(i);
+            if(Comuna.getNombre().toLowerCase().startsWith(query.toLowerCase())) {
+                filteredComunas.add(Comuna);
+            }
+        }
+         
+        return filteredComunas;
     }
 
 }

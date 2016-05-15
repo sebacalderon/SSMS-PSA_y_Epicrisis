@@ -238,4 +238,18 @@ public class pacienteController implements Serializable {
         System.out.println(selected.getNombres());
         return selected;
     }
+    
+    public List<paciente> completePaciente(String query) {
+        List<paciente> allPacientes = getItems();
+        List<paciente> filteredPacientes = new ArrayList<paciente>();
+         
+        for (int i = 0; i < allPacientes.size(); i++) {
+            paciente Paciente = allPacientes.get(i);
+            String rut = String.valueOf(Paciente.getRUN());
+            if(rut.startsWith(query)) {
+                filteredPacientes.add(Paciente);
+            }
+        }
+        return filteredPacientes;
+    }
 }

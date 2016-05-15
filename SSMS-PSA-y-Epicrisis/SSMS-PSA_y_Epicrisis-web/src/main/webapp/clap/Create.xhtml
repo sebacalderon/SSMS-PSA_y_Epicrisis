@@ -18,7 +18,7 @@
                 <h2 align="center">#{bundle.CreateclapTitle}</h2>
             </b:row>
             <h:form id="clapCreateForm" rendered="#{clapController.selected != null}">
-                <b:panel title="Ficha personal del paciente" style="margin-left:3%;width: 95%;" look="info">
+                <b:panel id="panel1" title="Ficha personal del paciente" style="margin-left:3%;width: 95%;" look="info">
                     <div style="margin-left:20px;">
                         <b:row>
                             <b:column col-md="6" col-xs="12">
@@ -27,7 +27,12 @@
                                 </b:row>
                                 <b:row>
                                     <p:column>
-                                        <p:inputText id="RUN" value="#{clapController.selected.RUN}" style="max-width:100px;" placeholder="#{bundle.CreatepacienteTitle_RUN}" required="true" /> -
+                                        
+                                        <p:autoComplete id="RUN" value="#{clapController.selected.paciente}" completeMethod="#{pacienteController.completePaciente}"
+                                        var="paciente" itemLabel="#{paciente.RUN}" itemValue="#{paciente.RUN}" converter="entityConverter" forceSelection="true" required="true">
+                                            <f:ajax event="valueChange"  listener="#{clapController.setDatosPaciente}" immediate="true" render="panel1" ></f:ajax>
+                                        </p:autoComplete>
+                                        
                                         <p:inputText id="DV" value="#{clapController.selected.DV}" title="#{bundle.CreatepacienteTitle_DV}" maxlength="1" style="max-width: 20px;" required="true" />
                                     </p:column>
                                 </b:row>
@@ -92,8 +97,9 @@
                                 </b:row>
                                 <b:row>
                                     <p:selectOneMenu id="region_residencia" value="#{clapController.selected.region_residencia}" required="true" >
-                                        <f:selectItem itemLabel="Seleccione una región" itemValue="" noSelectionOption="true" />
+                                        <f:selectItem itemLabel="Seleccione una región" itemValue="#{null}" noSelectionOption="true" />
                                         <f:selectItems value="#{regionController.items}" var="region" itemLabel="#{region.nombre}" itemValue="#{region}" />
+                                        <f:ajax event="valueChange" immediate="true" render="comuna_residencia" ></f:ajax>
                                     </p:selectOneMenu>                            
                                 </b:row>
                             </b:column>
@@ -102,7 +108,7 @@
                                     <p:outputLabel value="#{bundle.CreatepacienteTitle_comuna_residencia}" for="comuna_residencia" />
                                 </b:row>
                                 <b:row>
-                                   <p:autoComplete id="comuna_residencia" value="#{clapController.selected.comuna_residencia}" completeMethod="#{comunaController.completeComuna}"
+                                    <p:autoComplete id="comuna_residencia" value="#{clapController.selected.comuna_residencia}" completeMethod="#{clapController.completeComuna}"
                                     var="comuna" itemLabel="#{comuna.nombre}" itemValue="#{comuna}" placeholder="Comuna de residencia" converter="entityConverter" forceSelection="true" required="true" />                         
                                 </b:row>
                             </b:column>
@@ -264,7 +270,7 @@
                     </p:column>
                     <p:column rowspan="2">
                         <b:row>
-                            <b:column>><p:outputLabel value="#{bundle.CreateclapLabel_edad}" for="edad" /></b:column>
+                            <b:column><p:outputLabel value="#{bundle.CreateclapLabel_edad}" for="edad" /></b:column>
                         </b:row>
                         <b:row>
                             <b:column><p:inputText id="edad" value="#{clapController.selected.edad}" maxlength="3" style="max-width:100px;" title="#{bundle.CreateclapTitle_edad}" /></b:column>
@@ -669,18 +675,18 @@
                             <b:row><p:outputLabel value="#{bundle.CreateclapLabel_curso}" for="curso" /></b:row>
                             <b:row><p:selectOneMenu id="curso" value="#{clapController.selected.curso}">
                                 <f:selectItem itemLabel="Seleccione un curso" noSelectionOption="true" />
-                                <f:selectItem itemLabel="1° básico" itemValue="1° basico" />
-                                <f:selectItem itemLabel="2° básico" itemValue="2° basico" />
-                                <f:selectItem itemLabel="3° básico" itemValue="3° basico" />
-                                <f:selectItem itemLabel="4° básico" itemValue="4° basico" />
-                                <f:selectItem itemLabel="5° básico" itemValue="5° basico" />
-                                <f:selectItem itemLabel="6° básico" itemValue="6° basico" />
-                                <f:selectItem itemLabel="7° básico" itemValue="7° basico" />
-                                <f:selectItem itemLabel="8° básico" itemValue="8° basico" />
-                                <f:selectItem itemLabel="1° medio" itemValue="1° medio" />
-                                <f:selectItem itemLabel="2° medio" itemValue="2° medio" />
-                                <f:selectItem itemLabel="3° medio" itemValue="3° medio" />
-                                <f:selectItem itemLabel="4° medio" itemValue="4° medio" />
+                                <f:selectItem itemLabel="1° básico" itemValue="1 basico" />
+                                <f:selectItem itemLabel="2° básico" itemValue="2 basico" />
+                                <f:selectItem itemLabel="3° básico" itemValue="3 basico" />
+                                <f:selectItem itemLabel="4° básico" itemValue="4 basico" />
+                                <f:selectItem itemLabel="5° básico" itemValue="5 basico" />
+                                <f:selectItem itemLabel="6° básico" itemValue="6 basico" />
+                                <f:selectItem itemLabel="7° básico" itemValue="7 basico" />
+                                <f:selectItem itemLabel="8° básico" itemValue="8 basico" />
+                                <f:selectItem itemLabel="1° medio" itemValue="1 medio" />
+                                <f:selectItem itemLabel="2° medio" itemValue="2 medio" />
+                                <f:selectItem itemLabel="3° medio" itemValue="3 medio" />
+                                <f:selectItem itemLabel="4° medio" itemValue="4 medio" />
                             </p:selectOneMenu></b:row>
                         </b:column>
                     </b:row>
@@ -1421,9 +1427,9 @@
                                 </b:row>
                                 <b:row>
                                     <p:selectOneRadio id="imagen_corporal" style="width:15em;" value="#{clapController.selected.imagen_corporal}" layout="grid" columns="1">
-                                        <f:selectItem itemLabel="conforme" itemValue="true" />
-                                        <f:selectItem itemLabel="crea preocupación" itemValue="false" />
-                                        <f:selectItem itemLabel="impide relación con los demás" itemValue="false" />
+                                        <f:selectItem itemLabel="conforme" itemValue="#{0}" />
+                                        <f:selectItem itemLabel="crea preocupación" itemValue="#{1}" />
+                                        <f:selectItem itemLabel="impide relación con los demás" itemValue="#{2}" />
                                     </p:selectOneRadio>
                                 </b:row>
                             </b:column>
