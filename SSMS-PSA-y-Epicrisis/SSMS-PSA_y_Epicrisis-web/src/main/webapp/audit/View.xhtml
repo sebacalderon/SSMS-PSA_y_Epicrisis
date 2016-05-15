@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="auditViewDlg" widgetVar="auditViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewauditTitle}">
+            <h:form id="auditViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{auditController.selected != null}">
+                        <h:outputText value="#{bundle.ViewauditLabel_p1}"/>
+                        <h:outputText value="#{auditController.selected.p1}" title="#{bundle.ViewauditTitle_p1}"/>
+                        <h:outputText value="#{bundle.ViewauditLabel_p2}"/>
+                        <h:outputText value="#{auditController.selected.p2}" title="#{bundle.ViewauditTitle_p2}"/>
+                        <h:outputText value="#{bundle.ViewauditLabel_p3}"/>
+                        <h:outputText value="#{auditController.selected.p3}" title="#{bundle.ViewauditTitle_p3}"/>
+                        <h:outputText value="#{bundle.ViewauditLabel_p4}"/>
+                        <h:outputText value="#{auditController.selected.p4}" title="#{bundle.ViewauditTitle_p4}"/>
+                        <h:outputText value="#{bundle.ViewauditLabel_p5}"/>
+                        <h:outputText value="#{auditController.selected.p5}" title="#{bundle.ViewauditTitle_p5}"/>
+                        <h:outputText value="#{bundle.ViewauditLabel_p6}"/>
+                        <h:outputText value="#{auditController.selected.p6}" title="#{bundle.ViewauditTitle_p6}"/>
+                        <h:outputText value="#{bundle.ViewauditLabel_p7}"/>
+                        <h:outputText value="#{auditController.selected.p7}" title="#{bundle.ViewauditTitle_p7}"/>
+                        <h:outputText value="#{bundle.ViewauditLabel_p8}"/>
+                        <h:outputText value="#{auditController.selected.p8}" title="#{bundle.ViewauditTitle_p8}"/>
+                        <h:outputText value="#{bundle.ViewauditLabel_p9}"/>
+                        <h:outputText value="#{auditController.selected.p9}" title="#{bundle.ViewauditTitle_p9}"/>
+                        <h:outputText value="#{bundle.ViewauditLabel_p10}"/>
+                        <h:outputText value="#{auditController.selected.p10}" title="#{bundle.ViewauditTitle_p10}"/>
+                        <h:outputText value="#{bundle.ViewauditLabel_id}"/>
+                        <h:outputText value="#{auditController.selected.id}" title="#{bundle.ViewauditTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="auditViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
