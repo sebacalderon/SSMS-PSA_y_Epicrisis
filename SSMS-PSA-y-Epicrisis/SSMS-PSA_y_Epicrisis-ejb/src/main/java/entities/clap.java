@@ -650,33 +650,33 @@ public class clap implements Serializable {
     
     @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="imagen_corporal_clap")
-    private int imagen_corporal_mac;
+    private int imagen_corporal;
     
     @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="bienestar_emocional_clap")
-    private int bienestas_emocional_mac;
+    private int bienestar_emocional;
     
     @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="vida_proyecto_clap")
-    private int vida_proyecto_mac;
+    private int vida_proyecto;
     
     @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="ideacion_suicida_clap")
-    private boolean ideacion_suicida_mac;
+    private boolean ideacion_suicida;
 
     @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="intento_suicida_clap")
-    private boolean intento_suicida_mac;
+    private boolean intento_suicida;
     
     @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="referente_adulto_clap")
-    private int referente_adulto_mac;
+    private int referente_adulto;
     
     @Column(name="nombre_referente_adulto_clap")
-    private String nombre_referente_adulto_mac;
+    private String nombre_referente_adulto;
     
     @Column(name="telefono_referente_adulto_clap")
-    private String telefono_referente_adulto_mac;
+    private String telefono_referente_adulto;
     
     @Column(name="observaciones_psico_emocional_clap",columnDefinition = "TEXT")
     private String observaciones_psico_emocional;
@@ -702,6 +702,12 @@ public class clap implements Serializable {
     @NotNull(message = "Debe ingresar un valor.")
     @Column(name="presion_abdominal_clap")
     private int presion_abdominal;
+    
+    @Column(name="imc_clap")
+    private int imc;
+    
+    @Column(name="de_imc_clap")
+    private int de_imc;
     
     @NotNull(message = "Debe ingresar un valor.")
     @Column(name="presion_arterial_clap")
@@ -771,27 +777,21 @@ public class clap implements Serializable {
     @JoinColumn(name="funcionario_PSA_clap")
     private Usuario funcionario;
     
-    @NotNull
     @Column(name="riesgo_cardiovascular_clap")
     private boolean riesgo_cardiovascular;
     
-    @NotNull
     @Column(name="riesgo_ssr_clap")
     private String riesgo_ssr;
     
-    @NotNull
     @Column(name="riesgo_salud_mental_clap")
     private String riesgo_salud_mental;
     
-    @NotNull
     @Column(name="riesgo_oh_drogas_clap")
     private String riesgo_oh_drogas;
     
-    @NotNull
     @Column(name="riesgo_nutricional_clap")
     private String riesgo_nutricional;
     
-    @NotNull
     @Column(name="riesgo_social_clap")
     private String riesgo_social;
  
@@ -801,6 +801,22 @@ public class clap implements Serializable {
 
     public void setNumero_consulta(Long numero_consulta) {
         this.numero_consulta = numero_consulta;
+    }
+
+    public int getImc() {
+        return imc;
+    }
+
+    public void setImc(int imc) {
+        this.imc = imc;
+    }
+
+    public int getDe_imc() {
+        return de_imc;
+    }
+
+    public void setDe_imc(int de_imc) {
+        this.de_imc = de_imc;
     }
 
     public Date getFecha_consulta() {
@@ -1851,68 +1867,68 @@ public class clap implements Serializable {
         this.observaciones_sexualidad = observaciones_sexualidad;
     }
 
-    public int getImagen_corporal_mac() {
-        return imagen_corporal_mac;
+    public int getImagen_corporal() {
+        return imagen_corporal;
     }
 
-    public void setImagen_corporal_mac(int imagen_corporal_mac) {
-        this.imagen_corporal_mac = imagen_corporal_mac;
+    public void setImagen_corporal(int imagen_corporal) {
+        this.imagen_corporal = imagen_corporal;
     }
 
-    public int getBienestas_emocional_mac() {
-        return bienestas_emocional_mac;
+    public int getBienestar_emocional() {
+        return bienestar_emocional;
     }
 
-    public void setBienestas_emocional_mac(int bienestas_emocional_mac) {
-        this.bienestas_emocional_mac = bienestas_emocional_mac;
+    public void setBienestar_emocional(int bienestar_emocional) {
+        this.bienestar_emocional = bienestar_emocional;
     }
 
-    public int getVida_proyecto_mac() {
-        return vida_proyecto_mac;
+    public int getVida_proyecto() {
+        return vida_proyecto;
     }
 
-    public void setVida_proyecto_mac(int vida_proyecto_mac) {
-        this.vida_proyecto_mac = vida_proyecto_mac;
+    public void setVida_proyecto(int vida_proyecto) {
+        this.vida_proyecto = vida_proyecto;
     }
 
-    public boolean isIdeacion_suicida_mac() {
-        return ideacion_suicida_mac;
+    public boolean isIdeacion_suicida() {
+        return ideacion_suicida;
     }
 
-    public void setIdeacion_suicida_mac(boolean ideacion_suicida_mac) {
-        this.ideacion_suicida_mac = ideacion_suicida_mac;
+    public void setIdeacion_suicida(boolean ideacion_suicida) {
+        this.ideacion_suicida = ideacion_suicida;
     }
 
-    public boolean isIntento_suicida_mac() {
-        return intento_suicida_mac;
+    public boolean isIntento_suicida() {
+        return intento_suicida;
     }
 
-    public void setIntento_suicida_mac(boolean intento_suicida_mac) {
-        this.intento_suicida_mac = intento_suicida_mac;
+    public void setIntento_suicida(boolean intento_suicida) {
+        this.intento_suicida = intento_suicida;
     }
 
-    public int getReferente_adulto_mac() {
-        return referente_adulto_mac;
+    public int getReferente_adulto() {
+        return referente_adulto;
     }
 
-    public void setReferente_adulto_mac(int referente_adulto_mac) {
-        this.referente_adulto_mac = referente_adulto_mac;
+    public void setReferente_adulto(int referente_adulto) {
+        this.referente_adulto = referente_adulto;
     }
 
-    public String getNombre_referente_adulto_mac() {
-        return nombre_referente_adulto_mac;
+    public String getNombre_referente_adulto() {
+        return nombre_referente_adulto;
     }
 
-    public void setNombre_referente_adulto_mac(String nombre_referente_adulto_mac) {
-        this.nombre_referente_adulto_mac = nombre_referente_adulto_mac;
+    public void setNombre_referente_adulto(String nombre_referente_adulto) {
+        this.nombre_referente_adulto = nombre_referente_adulto;
     }
 
-    public String getTelefono_referente_adulto_mac() {
-        return telefono_referente_adulto_mac;
+    public String getTelefono_referente_adulto() {
+        return telefono_referente_adulto;
     }
 
-    public void setTelefono_referente_adulto_mac(String telefono_referente_adulto_mac) {
-        this.telefono_referente_adulto_mac = telefono_referente_adulto_mac;
+    public void setTelefono_referente_adulto(String telefono_referente_adulto) {
+        this.telefono_referente_adulto = telefono_referente_adulto;
     }
 
     public String getObservaciones_psico_emocional() {
@@ -2043,7 +2059,7 @@ public class clap implements Serializable {
         this.tanner_con_foto = tanner_con_foto;
     }
 
-    public int isTanner_mama() {
+    public int getTanner_mama() {
         return tanner_mama;
     }
 
@@ -2051,7 +2067,7 @@ public class clap implements Serializable {
         this.tanner_mama = tanner_mama;
     }
 
-    public int isTanner_genital() {
+    public int getTanner_genital() {
         return tanner_genital;
     }
 
