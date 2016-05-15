@@ -141,11 +141,7 @@ public class clap implements Serializable {
     private pueblo_originario pueblo_originario;
     
     //Datos de la consulta
-    
-    @NotNull
-    @Column(name="numero_consulta_clap")
-    private Long numero_consulta;
-    
+
     @NotNull
     @Temporal(TemporalType.DATE)
     @Column(name="fecha_consulta_clap")
@@ -809,13 +805,6 @@ public class clap implements Serializable {
     }
     
  
-    public Long getNumero_consulta() {
-        return numero_consulta;
-    }
-
-    public void setNumero_consulta(Long numero_consulta) {
-        this.numero_consulta = numero_consulta;
-    }
 
     public int getImc() {
         return imc;

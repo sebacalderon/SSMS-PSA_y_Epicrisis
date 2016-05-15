@@ -258,6 +258,13 @@
                     </div>
                 </b:panel>
 
+<<<<<<< HEAD
+        <p:dialog id="clapEditDlg" widgetVar="clapEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditclapTitle}">
+            <h:form id="clapEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{clapController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditclapLabel_fecha_consulta}" for="fecha_consulta" />
+=======
                 <b:panel title="Datos generales de la consulta" style="margin-left:3%;width: 95%;" look="info">
                 <p:panelGrid columns="2" style="width:98%;border:10px;" rendered="#{clapController.selected != null}">
                     <p:column rowspan="2">
@@ -266,6 +273,7 @@
                     </p:column>
                     <p:column rowspan="2">
                         <p:outputLabel value="#{bundle.CreateclapLabel_fecha_consulta}" for="fecha_consulta" />
+>>>>>>> origin/master
                         <p:calendar id="fecha_consulta" pattern="MM/dd/yyyy" value="#{clapController.selected.fecha_consulta}" title="#{bundle.EditclapTitle_fecha_consulta}"  showOn="button"/>
                     </p:column>
                     <p:column rowspan="2">

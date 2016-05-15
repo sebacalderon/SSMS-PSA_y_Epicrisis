@@ -49,6 +49,11 @@ public class audit implements Serializable {
     
     private int P10;
 
+    public audit() {
+    }
+
+    
+    
     public int getP1() {
         return P1;
     }

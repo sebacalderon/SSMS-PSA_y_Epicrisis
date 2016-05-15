@@ -261,12 +261,8 @@
                 <b:panel title="Datos generales de la consulta" style="margin-left:3%;width: 95%;" look="info">
                 <p:panelGrid columns="2" style="width:98%;border:10px;" rendered="#{clapController.selected != null}">
                     <p:column rowspan="2">
-                        <p:outputLabel value="#{bundle.CreateclapLabel_numero_consulta}" for="numero_consulta"/>
-                        <p:inputText id="numero_consulta" value="#{clapController.selected.numero_consulta}" placeholder="#{bundle.CreateclapTitle_numero_consulta}" />
-                    </p:column>
-                    <p:column rowspan="2">
                         <p:outputLabel value="#{bundle.CreateclapLabel_fecha_consulta}" for="fecha_consulta" />
-                        <p:calendar id="fecha_consulta" pattern="MM/dd/yyyy" value="#{clapController.selected.fecha_consulta}" title="#{bundle.EditclapTitle_fecha_consulta}"  showOn="button"/>
+                        <p:calendar id="fecha_consulta" pattern="dd/MM/yyyy" value="#{clapController.selected.fecha_consulta}" title="#{bundle.EditclapTitle_fecha_consulta}"  showOn="button"/>
                     </p:column>
                     <p:column rowspan="2">
                         <b:row>
@@ -675,18 +671,18 @@
                             <b:row><p:outputLabel value="#{bundle.CreateclapLabel_curso}" for="curso" /></b:row>
                             <b:row><p:selectOneMenu id="curso" value="#{clapController.selected.curso}">
                                 <f:selectItem itemLabel="Seleccione un curso" noSelectionOption="true" />
-                                <f:selectItem itemLabel="1° básico" itemValue="1 basico" />
-                                <f:selectItem itemLabel="2° básico" itemValue="2 basico" />
-                                <f:selectItem itemLabel="3° básico" itemValue="3 basico" />
-                                <f:selectItem itemLabel="4° básico" itemValue="4 basico" />
-                                <f:selectItem itemLabel="5° básico" itemValue="5 basico" />
-                                <f:selectItem itemLabel="6° básico" itemValue="6 basico" />
-                                <f:selectItem itemLabel="7° básico" itemValue="7 basico" />
-                                <f:selectItem itemLabel="8° básico" itemValue="8 basico" />
-                                <f:selectItem itemLabel="1° medio" itemValue="1 medio" />
-                                <f:selectItem itemLabel="2° medio" itemValue="2 medio" />
-                                <f:selectItem itemLabel="3° medio" itemValue="3 medio" />
-                                <f:selectItem itemLabel="4° medio" itemValue="4 medio" />
+                                <f:selectItem itemLabel="1° básico" itemValue="1 basico" noSelectionOption="false" />
+                                <f:selectItem itemLabel="2° básico" itemValue="2 basico" noSelectionOption="false" />
+                                <f:selectItem itemLabel="3° básico" itemValue="3 basico" noSelectionOption="false" />
+                                <f:selectItem itemLabel="4° básico" itemValue="4 basico" noSelectionOption="false" />
+                                <f:selectItem itemLabel="5° básico" itemValue="5 basico" noSelectionOption="false" />
+                                <f:selectItem itemLabel="6° básico" itemValue="6 basico" noSelectionOption="false" />
+                                <f:selectItem itemLabel="7° básico" itemValue="7 basico" noSelectionOption="false" />
+                                <f:selectItem itemLabel="8° básico" itemValue="8 basico" noSelectionOption="false" />
+                                <f:selectItem itemLabel="1° medio" itemValue="1 medio" noSelectionOption="false" />
+                                <f:selectItem itemLabel="2° medio" itemValue="2 medio" noSelectionOption="false" />
+                                <f:selectItem itemLabel="3° medio" itemValue="3 medio" noSelectionOption="false" />
+                                <f:selectItem itemLabel="4° medio" itemValue="4 medio" noSelectionOption="false" />
                             </p:selectOneMenu></b:row>
                         </b:column>
                     </b:row>
@@ -1199,8 +1195,6 @@
                                         <f:selectItem itemLabel="n/c" itemValue="3" />
                                     </p:selectOneRadio>
                                 </b:row>
-                            </b:column>
-                            <b:column col-md="4" col-xs="6">
                                 <b:row>
                                     <p:outputLabel value="Flujo secrecion patológico" for="flujo_secrecion_patologico" />
                                 </b:row>
@@ -1239,21 +1233,18 @@
                                     </p:selectOneRadio>
                                 </b:row>
                             </b:column>
-                        </b:row>
-                        <br/>
-                        <b:row>
-                            <b:column col-md="4" col-xs="12">
+                            <b:column col-md="4" col-xs="6">
                                 <b:row>
-                                    <p:outputLabel value="#{bundle.CreateclapLabel_embarazos}" for="embarazos" />
-                                    <p:inputText id="embarazos" value="#{clapController.selected.embarazos}" style="max-width: 50px;" />
+                                    <b:column col-md="6"><p:outputLabel value="#{bundle.CreateclapLabel_embarazos}" for="embarazos" /></b:column>
+                                    <b:column col-md="6"><p:inputText id="embarazos" value="#{clapController.selected.embarazos}" style="max-width: 50px;" /></b:column>
                                 </b:row>
                                 <b:row>
-                                    <p:outputLabel value="#{bundle.CreateclapLabel_hijos}" for="hijos" />
-                                    <p:inputText id="hijos" value="#{clapController.selected.hijos}" style="max-width: 50px;" />
+                                    <b:column col-md="6"><p:outputLabel value="#{bundle.CreateclapLabel_hijos}" for="hijos" /></b:column>
+                                    <b:column col-md="6"><p:inputText id="hijos" value="#{clapController.selected.hijos}" style="max-width: 50px;" /></b:column>
                                 </b:row>
                                 <b:row>
-                                    <p:outputLabel value="#{bundle.CreateclapLabel_abortos}" for="abortos" />
-                                    <p:inputText id="abortos" value="#{clapController.selected.abortos}" style="max-width: 50px;"  />
+                                    <b:column col-md="6"><p:outputLabel value="#{bundle.CreateclapLabel_abortos}" for="abortos" /></b:column>
+                                    <b:column col-md="6"><p:inputText id="abortos" value="#{clapController.selected.abortos}" style="max-width: 50px;"  /></b:column>
                                 </b:row>
                             </b:column>
                         </b:row>
@@ -1271,7 +1262,7 @@
                                     <p:outputLabel value="#{bundle.CreateclapLabel_orientacion_sexual}" for="orientacion_sexual" />
                                 </b:row>
                                 <b:row>
-                                    <p:selectOneRadio id="orientacion_sexual" style="width:18em;" value="#{clapController.selected.orientacion_sexual}" layout="grid" columns="3">
+                                    <p:selectOneRadio id="orientacion_sexual" style="width:18em;" value="#{clapController.selected.orientacion_sexual}" layout="grid" columns="2">
                                         <f:selectItem itemLabel="heretosexual" itemValue="1" />
                                         <f:selectItem itemLabel="homosexual" itemValue="2" />
                                         <f:selectItem itemLabel="bisexual" itemValue="3" />
@@ -1288,7 +1279,7 @@
                                     <p:outputLabel value="Intención o conducta sexual" for="conducta_sexual" />
                                 </b:row>
                                 <b:row>
-                                    <p:selectOneRadio id="conducta_sexual" style="width:18em;" value="#{clapController.selected.conducta_sexual}" layout="grid" columns="3">
+                                    <p:selectOneRadio id="conducta_sexual" style="width:18em;" value="#{clapController.selected.conducta_sexual}" layout="grid" columns="2">
                                         <f:selectItem itemLabel="postergadora" itemValue="1" />
                                         <f:selectItem itemLabel="anticipadora" itemValue="2" />
                                         <f:selectItem itemLabel="activa" itemValue="3" />
@@ -1344,7 +1335,7 @@
                                     <p:outputLabel value="Anticoncepción (uso habitual condón)" for="anticoncepcion" />
                                 </b:row>
                                 <b:row>
-                                    <p:selectOneRadio id="anticoncepcion" style="width:15em;" value="#{clapController.selected.anticoncepcion}" layout="grid" columns="3">
+                                    <p:selectOneRadio id="anticoncepcion" style="width:15em;" value="#{clapController.selected.anticoncepcion}" layout="grid" columns="2">
                                         <f:selectItem itemLabel="siempre" itemValue="1" />
                                         <f:selectItem itemLabel="a veces" itemValue="2" />
                                         <f:selectItem itemLabel="nunca" itemValue="3" />
@@ -1438,7 +1429,7 @@
                                     <p:outputLabel value="#{bundle.CreateclapLabel_imagen_corporal}" for="imagen_corporal" />
                                 </b:row>
                                 <b:row>
-                                    <p:selectOneRadio id="imagen_corporal" style="width:15em;" value="#{clapController.selected.imagen_corporal}" layout="grid" columns="1">
+                                    <p:selectOneRadio id="imagen_corporal" style="width:20m;" value="#{clapController.selected.imagen_corporal}" layout="grid" columns="1">
                                         <f:selectItem itemLabel="conforme" itemValue="#{0}" />
                                         <f:selectItem itemLabel="crea preocupación" itemValue="#{1}" />
                                         <f:selectItem itemLabel="impide relación con los demás" itemValue="#{2}" />
@@ -1450,7 +1441,7 @@
                                     <p:outputLabel value="Bienestar social" for="bienestar_emocional" />
                                 </b:row>
                                 <b:row>
-                                    <p:selectOneRadio id="bienestar_emocional" style="width:15em;" value="#{clapController.selected.bienestar_emocional}" layout="grid" columns="2">
+                                    <p:selectOneRadio id="bienestar_emocional" style="width:18em;" value="#{clapController.selected.bienestar_emocional}" layout="grid" columns="2">
                                         <f:selectItem itemLabel="normal" itemValue="1" />
                                         <f:selectItem itemLabel="deprimido/bajoneado" itemValue="2" />
                                         <f:selectItem itemLabel="irritable" itemValue="3" />
@@ -1481,6 +1472,7 @@
                             <b:column col-md="4" col-xs="6">
                                 <b:row>
                                     <b>Riesgo suicida</b>
+                                    <br/>
                                 </b:row>
                                 <b:row>
                                     <b:column col-xs="4"><p:outputLabel value="Ideación suicida" for="ideacion_suicida" /></b:column>
@@ -1501,7 +1493,7 @@
                                     </b:column>
                                 </b:row>
                             </b:column>
-                            <b:column col-md="6" col-xs="12">
+                            <b:column col-md="4" col-xs="6">
                                 <b:row>
                                     <p:outputLabel value="Referente adulto" for="referente_adulto" />
                                 </b:row>
@@ -1688,29 +1680,34 @@
                             <b:column col-md="4" col-xs="6">
                                 <b:row>
                                     <b>Tanner</b>
+                                    <br/>
                                 </b:row>
                                 <b:row>
                                     <p:selectBooleanCheckbox value="#{clapController.selected.tanner_con_foto}" itemLabel="con foto" />
                                 </b:row>
                                 <b:row>
-                                    <b>mama</b>
-                                    <p:selectOneMenu id="tanner_mama" style="width:9em;" value="#{clapController.selected.tanner_mama}">
-                                        <f:selectItem itemLabel="I" itemValue="1" />
-                                        <f:selectItem itemLabel="II" itemValue="2" />
-                                        <f:selectItem itemLabel="III" itemValue="3" />
-                                        <f:selectItem itemLabel="IV" itemValue="4" />
-                                        <f:selectItem itemLabel="V" itemValue="5" />
-                                    </p:selectOneMenu>
+                                    <b:column col-md="4"><b>mama</b></b:column>
+                                    <b:column col-md="8">
+                                        <p:selectOneMenu id="tanner_mama" style="width:9em;" value="#{clapController.selected.tanner_mama}">
+                                            <f:selectItem itemLabel="I" itemValue="1" />
+                                            <f:selectItem itemLabel="II" itemValue="2" />
+                                            <f:selectItem itemLabel="III" itemValue="3" />
+                                            <f:selectItem itemLabel="IV" itemValue="4" />
+                                            <f:selectItem itemLabel="V" itemValue="5" />
+                                        </p:selectOneMenu>
+                                    </b:column>
                               </b:row>
                                 <b:row>
-                                    <b>genital</b>
-                                    <p:selectOneMenu id="tanner_genital" style="width:9em;" value="#{clapController.selected.tanner_genital}">
-                                        <f:selectItem itemLabel="I" itemValue="1" />
-                                        <f:selectItem itemLabel="II" itemValue="2" />
-                                        <f:selectItem itemLabel="III" itemValue="3" />
-                                        <f:selectItem itemLabel="IV" itemValue="4" />
-                                        <f:selectItem itemLabel="V" itemValue="5" />
-                                    </p:selectOneMenu>
+                                    <b:column col-md="4"><b>genital</b></b:column>
+                                    <b:column col-md="8">
+                                        <p:selectOneMenu id="tanner_genital" style="width:9em;" value="#{clapController.selected.tanner_genital}">
+                                            <f:selectItem itemLabel="I" itemValue="1" />
+                                            <f:selectItem itemLabel="II" itemValue="2" />
+                                            <f:selectItem itemLabel="III" itemValue="3" />
+                                            <f:selectItem itemLabel="IV" itemValue="4" />
+                                            <f:selectItem itemLabel="V" itemValue="5" />
+                                        </p:selectOneMenu>
+                                    </b:column>
                                 </b:row>
                             </b:column>
                         </b:row>
@@ -1731,8 +1728,9 @@
 
 
                 <b:column offset-xs="5">
-                     <p:commandButton actionListener="#{clapController.create}" value="#{bundle.Save}" onclick="/clap/List?faces-redirect=true"/>
+                     <p:commandButton actionListener="#{clapController.create}" value="#{bundle.Save}" oncomplete="/clap/List"/>
                      <p:button  value="#{bundle.Cancel}" outcome="/clap/List" /> 
+                     <br/><br/>
                 </b:column>
 
             </h:form>
