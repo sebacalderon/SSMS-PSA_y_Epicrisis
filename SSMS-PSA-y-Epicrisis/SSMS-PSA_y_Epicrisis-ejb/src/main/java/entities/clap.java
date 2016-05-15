@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -118,6 +119,10 @@ public class clap implements Serializable {
     @NotNull(message="Debe ingresar un tipo de previsión")
     @JoinColumn(name="prevision_clap")
     private prevision prevision;
+    
+    @OneToOne
+    @JoinColumn(name="audit_clap")
+    private audit audit;
     
     @Column(name="grupo_fonasa_clap")
     private int grupo_fonasa;    
@@ -794,6 +799,15 @@ public class clap implements Serializable {
     
     @Column(name="riesgo_social_clap")
     private String riesgo_social;
+
+    public audit getAudit() {
+        return audit;
+    }
+
+    public void setAudit(audit audit) {
+        this.audit = audit;
+    }
+    
  
     public Long getNumero_consulta() {
         return numero_consulta;

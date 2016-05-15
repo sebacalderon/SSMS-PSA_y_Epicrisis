@@ -1,5 +1,6 @@
 package managedbeans;
 
+import entities.audit;
 import entities.clap;
 import entities.comuna;
 import entities.paciente;
@@ -63,6 +64,7 @@ public class clapController implements Serializable {
 
     public clap prepareCreate() {
         selected = new clap();
+        selected.setAudit(new audit());
         initializeEmbeddableKey();
         return selected;
     }
