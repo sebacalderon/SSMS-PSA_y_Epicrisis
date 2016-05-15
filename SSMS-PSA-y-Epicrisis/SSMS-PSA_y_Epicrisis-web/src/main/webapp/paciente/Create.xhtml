@@ -69,6 +69,8 @@
                             <f:selectItem itemLabel="Seleccione una opción" itemValue="" noSelectionOption="true" />
                             <f:selectItem itemLabel="Hombre" itemValue="1" noSelectionOption="false" />
                             <f:selectItem itemLabel="Mujer" itemValue="2" noSelectionOption="false" />
+                            <f:selectItem itemLabel="No definido" itemValue="3" noSelectionOption="false" />
+                            <f:selectItem itemLabel="No determinado" itemValue="4" noSelectionOption="false" />                            
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_programa_social}" for="programa_social"  />
                         <p:selectOneMenu id="programa_social" value="#{pacienteController.selected.programa_social}" >
@@ -92,7 +94,7 @@
                             <f:selectItem itemLabel="D" itemValue="4" noSelectionOption="false" />
                         </p:selectOneMenu>
                         
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_nacionalidad}" for="nacionalidad" />
+                        <p:outputLabel value="País" for="nacionalidad" />
                         <p:autoComplete id="nacionalidad" value="#{pacienteController.selected.nacionalidad}" completeMethod="#{nacionalidadController.completeNacionalidad}"
                         var="nacionalidad" itemLabel="#{nacionalidad.nombre}" itemValue="#{nacionalidad}" converter="entityConverter" forceSelection="true" required="true"/>
                         

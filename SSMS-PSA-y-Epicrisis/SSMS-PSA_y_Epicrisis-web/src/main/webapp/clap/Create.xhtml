@@ -169,6 +169,8 @@
                                         <f:selectItem itemLabel="Seleccione una opción" itemValue="" noSelectionOption="true" />
                                         <f:selectItem itemLabel="Hombre" itemValue="1" noSelectionOption="false" />
                                         <f:selectItem itemLabel="Mujer" itemValue="2" noSelectionOption="false" />
+                                        <f:selectItem itemLabel="No definido" itemValue="3" noSelectionOption="false" />
+                                        <f:selectItem itemLabel="No determinado" itemValue="4" noSelectionOption="false" />     
                                     </p:selectOneMenu>
                                 </b:row>
                             </b:column>
@@ -176,7 +178,7 @@
                         <b:row>
                             <b:column col-md="6" col-xs="12">
                                 <b:row>
-                                    <p:outputLabel value="#{bundle.CreatepacienteLabel_nacionalidad}" for="nacionalidad" />
+                                    <p:outputLabel value="Pais" for="nacionalidad" />
                                 </b:row>
                                 <b:row>
                                     <p:autoComplete id="nacionalidad" value="#{clapController.selected.nacionalidad}" completeMethod="#{nacionalidadController.completeNacionalidad}"
