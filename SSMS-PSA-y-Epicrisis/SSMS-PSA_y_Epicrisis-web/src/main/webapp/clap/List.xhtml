@@ -85,13 +85,12 @@
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{clapController.prepareCreate}" action="/clap/Create?faces-redirect=true" rendered="#{loginController.esFuncionario()}"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":clapViewForm" oncomplete="PF('clapViewDialog').show()" disabled="#{empty clapController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":clapEditForm" oncomplete="PF('clapEditDialog').show()" disabled="#{empty clapController.selected}" rendered="#{loginController.esFuncionario()}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{clapController.prepareEdit}" action="/clap/Edit?faces-redirect=true" disabled="#{empty clapController.selected}" rendered="#{loginController.esFuncionario()}"/>
                         </f:facet>
                     </p:dataTable>
                 </b:panel>
             </h:form>
 
-            <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
         </ui:define>
     </ui:composition>

@@ -74,8 +74,9 @@ public class clapController implements Serializable {
         }
     }
 
-    public void update() {
+    public String update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        return "/faces/clap/List.xhtml";
     }
 
     public void destroy() {
@@ -235,5 +236,9 @@ public class clapController implements Serializable {
          
         return filteredComunas;
     }
-
+    
+    public clap prepareEdit() {
+        selected = getSelected();
+        return selected;
+    }
 }

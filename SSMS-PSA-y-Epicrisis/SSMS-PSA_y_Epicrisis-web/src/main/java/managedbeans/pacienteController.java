@@ -235,7 +235,6 @@ public class pacienteController implements Serializable {
     
     public paciente prepareEdit() {
         selected = getSelected();
-        System.out.println(selected.getNombres());
         return selected;
     }
     
