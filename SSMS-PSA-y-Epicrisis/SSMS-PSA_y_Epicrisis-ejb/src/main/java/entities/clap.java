@@ -535,7 +535,7 @@ public class clap implements Serializable {
     
     @NotNull(message = "ingresar la edad de la menarca o espermarca")
     @Column(name="edad_menarca_espermarca_clap")
-    private String edad_menarca_espermarca;
+    private int edad_menarca_espermarca;
 
     @Temporal(TemporalType.DATE)
     @Column(name="fecha_ultima_menstruacion_clap")
@@ -600,7 +600,7 @@ public class clap implements Serializable {
     private int conducta_sexual;
     
     @Column(name="edad_inicio_conducta_sexual_clap")
-    private String edad_inicio_conducta_sexual;
+    private int edad_inicio_conducta_sexual;
     
     @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="relaciones_sexuales_clap")
@@ -1631,11 +1631,11 @@ public class clap implements Serializable {
         this.observaciones_habitos_consumo = observaciones_habitos_consumo;
     }
 
-    public String getEdad_menarca_espermarca() {
+    public int getEdad_menarca_espermarca() {
         return edad_menarca_espermarca;
     }
 
-    public void setEdad_menarca_espermarca(String edad_menarca_espermarca) {
+    public void setEdad_menarca_espermarca(int edad_menarca_espermarca) {
         this.edad_menarca_espermarca = edad_menarca_espermarca;
     }
 
@@ -1767,11 +1767,11 @@ public class clap implements Serializable {
         this.conducta_sexual = conducta_sexual;
     }
 
-    public String getEdad_inicio_conducta_sexual() {
+    public int getEdad_inicio_conducta_sexual() {
         return edad_inicio_conducta_sexual;
     }
 
-    public void setEdad_inicio_conducta_sexual(String edad_inicio_conducta_sexual) {
+    public void setEdad_inicio_conducta_sexual(int edad_inicio_conducta_sexual) {
         this.edad_inicio_conducta_sexual = edad_inicio_conducta_sexual;
     }
 

@@ -35,7 +35,7 @@
                                             <f:ajax event="valueChange"  listener="#{clapController.setDatosPaciente}" immediate="true" render="panel1" ></f:ajax>
                                         </p:autoComplete>
                                         
-                                        <pe:inputNumber id="DV" value="#{clapController.selected.DV}" title="#{bundle.CreatepacienteTitle_DV}" maxlength="1" style="max-width: 20px;" required="true" />
+                                        <p:inputText id="DV" value="#{clapController.selected.DV}" title="#{bundle.CreatepacienteTitle_DV}" maxlength="1" style="max-width: 20px;" required="true" />
                                     </p:column>
                                 </b:row>
                             </b:column>
@@ -129,7 +129,7 @@
                                     <p:outputLabel value="#{bundle.CreatepacienteTitle_numero_direccion}" for="numero_direccion" />
                                 </b:row>
                                 <b:row>
-                                    <pe:inputNumber id="numero_direccion" value="#{clapController.selected.numero_direccion}" minValue="0" maxValue="10000" title="#{bundle.CreatepacienteTitle_numero_direccion}" maxlength="8" required="true"/>
+                                    <pe:inputNumber id="numero_direccion" value="#{clapController.selected.numero_direccion}" style="campo-numerico" minValue="0" maxValue="10000" title="#{bundle.CreatepacienteTitle_numero_direccion}" maxlength="8" required="true"/>
                                 </b:row>
                             </b:column>
                             <b:column col-md="3" col-xs="12">
@@ -273,7 +273,7 @@
                             <b:column><p:outputLabel value="#{bundle.CreateclapLabel_edad}" for="edad" /></b:column>
                         </b:row>
                         <b:row>
-                            <b:column><pe:inputNumber id="edad" value="#{clapController.selected.edad}" minValue="0" maxValue="150" style="max-width:100px;" title="#{bundle.CreateclapTitle_edad}" /></b:column>
+                            <b:column><pe:inputNumber id="edad" value="#{clapController.selected.edad}" minValue="0" maxValue="150" styleClass="campo-numerico" title="#{bundle.CreateclapTitle_edad}" /></b:column>
                         </b:row>
                     </p:column>
                     <p:column rowspan="3">
@@ -695,10 +695,10 @@
                         <b:column col-md="4">
                             <b:row>
                                 <b:column col-xs="6"><p:outputLabel value="#{bundle.CreateclapLabel_anos_repetidos}" for="anos_repetidos" /></b:column>
-                                <b:column col-xs="6"><pe:inputNumber id="anos_repetidos" value="#{clapController.selected.anos_repetidos}" minValue="0" maxValue="10" style="max-width:50px;" title="#{bundle.CreateclapTitle_anos_repetidos}" /></b:column>
+                                <b:column col-xs="4"><pe:inputNumber id="anos_repetidos" value="#{clapController.selected.anos_repetidos}" minValue="0" maxValue="10" styleClass="campo-numerico" title="#{bundle.CreateclapTitle_anos_repetidos}" /></b:column>
                             </b:row>
                             <b:row>
-                                <b:column><p:inputText id="causa_anos_repetidos" placeholder="Causa"  value="#{clapController.selected.causa_anos_repetidos}" title="#{bundle.CreateclapTitle_causa_anos_repetidos}" /></b:column>
+                                <b:column col-xs="12"><p:inputText id="causa_anos_repetidos" placeholder="Causa"  value="#{clapController.selected.causa_anos_repetidos}" title="#{bundle.CreateclapTitle_causa_anos_repetidos}" /></b:column>
                             </b:row>
                         </b:column>
                         <b:column col-md="4">
@@ -758,7 +758,7 @@
                             <p:outputLabel value="horas por semana" for="horas_trabajo" />
                         </b:row>
                         <b:row>
-                            <pe:inputNumber id="horas_trabajo" style="max-width:50px;" minValue="0" maxValue="100" value="#{clapController.selected.horas_trabajo}" maxlength="2" title="#{bundle.CreateclapTitle_horas_trabajo}" />
+                            <b:column col-xs="3"><pe:inputNumber id="horas_trabajo" styleClass="campo-numerico" minValue="0" maxValue="100" value="#{clapController.selected.horas_trabajo}" maxlength="2" title="#{bundle.CreateclapTitle_horas_trabajo}" /></b:column>
                         </b:row>
                     </b:column>
                     <b:column col-md="3" col-xs="6">
@@ -888,7 +888,7 @@
                                 <p:outputLabel value="#{bundle.CreateclapLabel_edad_pareja}" for="edad_pareja" />
                             </b:row>
                             <b:row>
-                                <pe:inputNumber id="edad_pareja" minValue="0" maxValue="140" value="#{clapController.selected.edad_pareja}" style="max-width: 50px;" title="#{bundle.CreateclapTitle_edad_pareja}" /> años
+                                <b:column col-xs="3"><pe:inputNumber id="edad_pareja" minValue="0" maxValue="140" value="#{clapController.selected.edad_pareja}" styleClass="campo-numerico" title="#{bundle.CreateclapTitle_edad_pareja}" /></b:column> años
                             </b:row>
                         </b:column>
                     </b:row>
@@ -935,7 +935,7 @@
                                 <p:outputLabel value="Actividad física" for="horas_actividad_fisica" />
                             </b:row>
                             <b:row>
-                                <pe:inputNumber id="horas_actividad_fisica" minValue="0" maxValue="100" value="#{clapController.selected.horas_actividad_fisica}" style="max-width: 50px;" title="#{bundle.CreateclapTitle_horas_actividad_fisica}" /> horas por semana
+                                <b:column col-xs="3"><pe:inputNumber id="horas_actividad_fisica" minValue="0" maxValue="100" value="#{clapController.selected.horas_actividad_fisica}" styleClass="campo-numerico" title="#{bundle.CreateclapTitle_horas_actividad_fisica}" /></b:column> horas por semana
                             </b:row>
                         </b:column>
                         <b:column col-md="4" col-xs="6">
@@ -943,7 +943,7 @@
                                 <p:outputLabel value="TV" for="horas_tv" />
                             </b:row>
                             <b:row>
-                                <pe:inputNumber id="horas_tv" value="#{clapController.selected.horas_tv}" minValue="0" maxValue="24" style="max-width: 50px;" /> horas por día
+                                <b:column col-xs="3"><pe:inputNumber id="horas_tv" value="#{clapController.selected.horas_tv}" minValue="0" maxValue="24" styleClass="campo-numerico" /></b:column> horas por día
                             </b:row>
                         </b:column>
                         <b:column col-md="4" col-xs="6">
@@ -951,7 +951,7 @@
                                 <p:outputLabel value="Computador/consola y otros" for="horas_computador_consola" />
                             </b:row>
                             <b:row>
-                              <pe:inputNumber id="horas_computador_consola" value="#{clapController.selected.horas_computador_consola}" minValue="0" maxValue="24" style="max-width: 50px;" /> horas por día
+                              <b:column col-xs="3"><pe:inputNumber id="horas_computador_consola" value="#{clapController.selected.horas_computador_consola}" minValue="0" maxValue="24" styleClass="campo-numerico" /></b:column> horas por día
                             </b:row>
                         </b:column>
                     </b:row>
@@ -1019,7 +1019,7 @@
                                 </p:selectOneRadio>
                             </b:row>
                             <b:row>
-                                <pe:inputNumber minValue="0" maxValue="24" value="#{clapController.selected.horas_sueno}" style="max-width: 50px;" id="horas_sueno" /> horas por día
+                                <b:column col-xs="3"><pe:inputNumber minValue="0" maxValue="24" value="#{clapController.selected.horas_sueno}" styleClass="campo-numerico" id="horas_sueno" /></b:column> horas por día
                             </b:row>
                         </b:column>
                         <b:column col-md="4" col-xs="6">
@@ -1038,7 +1038,7 @@
                                 <p:outputLabel value="Comidas con familia" for="comidas_familia" />
                             </b:row>
                             <b:row>
-                                <pe:inputNumber id="comidas_familia" minValue="0" maxValue="10" value="#{clapController.selected.comidas_familia}" style="max-width: 50px;"/> n° de comidas/día
+                                <b:column col-xs="3"><pe:inputNumber id="comidas_familia" minValue="0" maxValue="10" value="#{clapController.selected.comidas_familia}" styleClass="campo-numerico"/></b:column> n° de comidas/día
                             </b:row>
                         </b:column>
                     </b:row>
@@ -1069,7 +1069,7 @@
                                 </p:selectOneRadio>
                             </b:row>
                             <b:row>
-                                <pe:inputNumber id="cigarros_dia" minValue="0" maxValue="100" value="#{clapController.selected.cigarros_dia}" style="max-width: 50px;" title="#{bundle.CreateclapTitle_cigarros_dia}" /> promedio cigarros/día
+                                <b:column col-xs="3"><pe:inputNumber styleClass="campo-numerico" id="cigarros_dia" minValue="0" maxValue="100" value="#{clapController.selected.cigarros_dia}" title="#{bundle.CreateclapTitle_cigarros_dia}" /></b:column> promedio cigarros/día
                             </b:row>
                         </b:column>
                         <b:column col-md="4" col-xs="6">
@@ -1342,7 +1342,7 @@
                                     <p:outputLabel value="#{bundle.CreateclapLabel_edad_menarca_espermarca}" for="edad_menarca_espermarca" />
                                 </b:row>
                                 <b:row>
-                                    <pe:inputNumber id="edad_menarca_espermarca" minValue="0" maxValue="50" value="#{clapController.selected.edad_menarca_espermarca}"/> años
+                                    <b:column col-xs="3"><pe:inputNumber styleClass="campo-numerico" id="edad_menarca_espermarca" minValue="0" maxValue="50" value="#{clapController.selected.edad_menarca_espermarca}"/></b:column> años
                                 </b:row>
                             </b:column>
                             <b:column col-md="4" col-xs="6">
@@ -1478,7 +1478,7 @@
                                 </b:row>
                                 <b:row>
                                     <p:outputLabel value="edad de inicio" for="edad_inicio_conducta_sexual" />
-                                    <pe:inputNumber id="edad_inicio_conducta_sexual" minValue="0" maxValue="70" style="max-width: 50px;" value="#{clapController.selected.edad_inicio_conducta_sexual}" title="#{bundle.CreateclapTitle_edad_inicio_conducta_sexual}" />
+                                    <pe:inputNumber id="edad_inicio_conducta_sexual" minValue="0" maxValue="70" styleClass="campo-numerico" value="#{clapController.selected.edad_inicio_conducta_sexual}" title="#{bundle.CreateclapTitle_edad_inicio_conducta_sexual}" /> años
                                 </b:row>
                             </b:column>
                             <b:column col-md="4" col-xs="6">
