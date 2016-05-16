@@ -25,8 +25,8 @@
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton"/>
+                        <p:ajax event="rowSelect"   update="viewButton editButton"/>
+                        <p:ajax event="rowUnselect" update="viewButton editButton"/>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListclapTitle_nombres}"/>
