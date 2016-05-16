@@ -21,6 +21,7 @@ and open the template in the editor.
             <h:form id="perfilForm" rendered="#{usuarioController.preparaPerfil()}">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
+                         <p:outputLabel value="#{bundle.EditUsuarioLabel_nombres}" for="nombres" />
                         <p:inputText id="nombres" value="#{usuarioController.selected.nombres}" title="#{bundle.EditUsuarioTitle_nombre}" />
                         
                         <p:outputLabel value="#{bundle.EditUsuarioLabel_primer_apellido}" for="primer_apellido" />
