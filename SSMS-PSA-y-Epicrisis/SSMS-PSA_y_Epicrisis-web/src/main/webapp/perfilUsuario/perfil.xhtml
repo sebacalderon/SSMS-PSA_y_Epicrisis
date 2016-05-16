@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+    <ui:composition template="/template.xhtml">
+
+        <ui:define name="title">
+            <h:outputText value="Perfil de usuario"></h:outputText>
+        </ui:define> 
+
+        <ui:define name="body">
+            <h:form id="perfilForm" rendered="#{usuarioController.preparaPerfil()}">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
+                        <p:inputText id="nombres" value="#{usuarioController.selected.nombres}" title="#{bundle.EditUsuarioTitle_nombre}" />
+                        
+                        <p:outputLabel value="#{bundle.EditUsuarioLabel_primer_apellido}" for="primer_apellido" />
+                        <p:inputText id="primer_apellido" value="#{usuarioController.selected.primer_apellido}" title="#{bundle.EditUsuarioTitle_primer_apellido}" />
+
+                        <p:outputLabel value="#{bundle.EditUsuarioLabel_segundo_apellido}" for="segundo_apellido" />
+                        <p:inputText id="segundo_apellido" value="#{usuarioController.selected.segundo_apellido}" title="#{bundle.EditUsuarioTitle_segundo_apellido}" />
+
+                        <p:outputLabel value="#{bundle.EditUsuarioLabel_correo}" for="correo" />
+                        <p:inputText id="correo" value="#{usuarioController.selected.correo}" title="#{bundle.EditUsuarioTitle_correo}" />
+                        
+                        <b:commandButton icon="ui-icon-lock" value="Cambio de contraseña" update=":CambioPassForm" oncomplete="PF('CambioPass').show()"/>
+                    </p:panelGrid>
+                    <b:commandButton actionListener="#{usuarioController.update}" value="#{bundle.Save}"/>
+                </h:panelGroup>
+            </h:form>
+
+            <p:dialog id="CambioPass" widgetVar="CambioPass" modal="true" resizable="false" appendTo="@(body)" header="Cambio de contraseña">
+                <h:form id="CambioPassForm">
+                        <b:row>
+                            <b:column col-xs="6"><p:outputLabel value="Contraseña actual:" for="old-password" /></b:column>
+                            <b:column col-xs="6"><p:password id="old-password" value="#{usuarioController.old_password}" title="#{bundle.EditUsuarioTitle_password}" required="true" /></b:column>
+                        </b:row>
+                        <b:row>
+                            <b:column col-xs="6"><p:outputLabel value="Nueva contraseña:" for="new-password" /></b:column>
+                            <b:column col-xs="6"><p:password id="new-password" value="#{usuarioController.new_password}" title="#{bundle.EditUsuarioTitle_password}" required="true" /></b:column>
+                        </b:row>
+                        <p:commandButton actionListener="#{usuarioController.cambioPassword()}" value="Cambiar contraseña" update=":CambioPassForm,:growl" oncomplete="handleSubmit(args, 'CambioPass');"/>
+                        <p:commandButton value="#{bundle.Cancel}" onclick="CambioPass.hide()"/>
+                </h:form>
+            </p:dialog>
+        </ui:define>
+        
+    </ui:composition>
+</html>

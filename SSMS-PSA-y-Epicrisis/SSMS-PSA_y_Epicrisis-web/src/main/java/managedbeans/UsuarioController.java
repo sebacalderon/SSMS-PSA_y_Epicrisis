@@ -36,9 +36,13 @@ public class UsuarioController implements Serializable {
     private String old_password = "";
     private String new_password = "";
     
+    
        @Inject
     private AuditoriaController auditoriaCtrl;
 
+       @Inject
+    private LoginController loginCtrl;
+       
     public AuditoriaController getAuditoriaCtrl() {
         return auditoriaCtrl;
     }
@@ -133,32 +137,33 @@ public class UsuarioController implements Serializable {
         }
         return "/faces/usuario/List.xhtml";
     }
-
-    public void update() {
-        prepareUpdate();
+    
+    public boolean preparaPerfil(){
+        selected=new Usuario(loginCtrl.getUsuarioLogueado());
+        return true;
+    }
+    
+    public void cambioPassword(){
+        
         if (new_password.length() > 0) {
-            boolean succes = selected.cambiarPassword(old_password, new_password);
+            boolean success = selected.cambiarPassword(old_password, new_password);
 
-            if (succes) {
+            if (success) {
                 JsfUtil.addSuccessMessage("Contraseña cambiada con éxito");
             } else {
                 JsfUtil.addErrorMessage("No se pudo cambiar la contraseña");
             }
         }
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
-        String antiguo;
-        String nuevo;
-        antiguo = " ( Nombre: " + antiguovalor.getNombres() + " , Correo: " + antiguovalor.getCorreo() + " , Contraseña: " + antiguovalor.getPassword() + " , Rol: " + antiguovalor.getRol() +", Activo: "+selected.isHabilitado()+ " )";
-        nuevo = " ( Nombre: " + selected.getNombres() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+", Activo: "+selected.isHabilitado()+ " )";
-        auditoria(antiguo, nuevo, "Editar");
+    }
+
+    public void update() {
+        prepareUpdate();
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
     }
 
     public void desactivar() {
-        String antiguo,nuevo;
-        nuevo = " ( Nombre: " + selected.getNombres() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+", Activo: "+selected.isHabilitado()+ " )";
         selected.setHabilitado(false);
-        antiguo = " ( Nombre: " + selected.getNombres() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+", Activo: "+selected.isHabilitado()+ " )";
-        auditoria(antiguo, nuevo, "Desactivar");
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection

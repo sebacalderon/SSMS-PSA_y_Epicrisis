@@ -1620,7 +1620,7 @@
                                     <p:outputLabel value="#{bundle.CreateclapLabel_imagen_corporal}" for="imagen_corporal" />
                                 </b:row>
                                 <b:row>
-                                    <p:selectOneRadio id="imagen_corporal" style="width:20m;" value="#{clapController.selected.imagen_corporal}" layout="grid" columns="1">
+                                    <p:selectOneRadio id="imagen_corporal" style="width:100%" value="#{clapController.selected.imagen_corporal}" layout="grid" columns="1">
                                         <f:selectItem itemLabel="conforme" itemValue="#{0}" />
                                         <f:selectItem itemLabel="crea preocupación" itemValue="#{1}" />
                                         <f:selectItem itemLabel="impide relación con los demás" itemValue="#{2}" />
@@ -1632,7 +1632,7 @@
                                     <p:outputLabel value="Bienestar social" for="bienestar_emocional" />
                                 </b:row>
                                 <b:row>
-                                    <p:selectOneRadio id="bienestar_emocional" style="width:18em;" value="#{clapController.selected.bienestar_emocional}" layout="grid" columns="2">
+                                    <p:selectOneRadio id="bienestar_emocional" style="width:100%" value="#{clapController.selected.bienestar_emocional}" layout="grid" columns="2">
                                         <f:selectItem itemLabel="normal" itemValue="1" />
                                         <f:selectItem itemLabel="deprimido/bajoneado" itemValue="2" />
                                         <f:selectItem itemLabel="irritable" itemValue="3" />
@@ -1718,28 +1718,36 @@
                         <b:row>
                             <b:column col-md="4" col-xs="6">
                                 <b:row>
-                                    <p:outputLabel value="Peso (Kg)" for="peso" />
+                                    <b:column col-xs="8">
+                                        <p:outputLabel value="Peso (Kg)" for="peso" />
+                                    </b:column>
+                                    <b:column col-xs="4">
+                                        <p:outputLabel value="DE" for="de_peso"/>
+                                    </b:column>
                                 </b:row>
                                 <b:row>
                                     <b:column col-xs="8">
                                         <pe:inputNumber id="peso" value="#{clapController.selected.peso}" minValue="0" maxValue="250" title="#{bundle.CreateclapTitle_peso}" />
                                     </b:column>
                                     <b:column col-xs="4">
-                                        <p:outputLabel value="DE" for="de_peso"/>
                                         <pe:inputNumber id="de_peso" value="#{clapController.selected.de_peso}" minValue="0" maxValue="1000" style="max-width: 50px;"/>
                                     </b:column>
                                 </b:row>
                             </b:column>
                             <b:column col-md="4" col-xs="6">
                                 <b:row>
-                                    <p:outputLabel value="Talla (cm)" for="talla" />
+                                    <b:column col-xs="8">
+                                        <p:outputLabel value="Talla (cm)" for="talla" />
+                                    </b:column>
+                                    <b:column col-xs="4">
+                                        <p:outputLabel for="de_talla" value="DE" />
+                                    </b:column>
                                 </b:row>
                                 <b:row>
                                     <b:column col-xs="8">
                                         <pe:inputNumber id="talla" value="#{clapController.selected.talla}" minValue="0" maxValue="250" />
                                     </b:column>
                                     <b:column col-xs="4">
-                                        <p:outputLabel for="de_talla" value="DE" />
                                         <pe:inputNumber id="de_talla" value="#{clapController.selected.de_talla}"  minValue="0" maxValue="1000"  style="max-width: 50px;" />
                                     </b:column>
                                 </b:row>
@@ -1757,7 +1765,12 @@
                         <b:row>
                             <b:column col-md="4" col-xs="6">
                                 <b:row>
-                                    <p:outputLabel value="IMC" for="talla" />
+                                    <b:column col-xs="8">
+                                        <p:outputLabel value="IMC" for="talla" />
+                                    </b:column>
+                                    <b:column col-xs="4">
+                                        <p:outputLabel for="de_imc" value="DE" />
+                                    </b:column>
                                 </b:row>
                                 <b:row>
                                     <b:column col-xs="8">
