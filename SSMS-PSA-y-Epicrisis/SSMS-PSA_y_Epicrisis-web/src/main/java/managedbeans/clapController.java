@@ -1,5 +1,7 @@
 package managedbeans;
 
+import entities.Crafft;
+import entities.audit;
 import entities.clap;
 import entities.comuna;
 import entities.paciente;
@@ -32,6 +34,10 @@ public class clapController implements Serializable {
     private List<clap> items = null;
     private clap selected;
     private paciente Paciente = null;
+    private boolean auditCrafft;
+    private audit audit;
+    private Crafft crafft;
+    private int puntajeACrafft;
 
     @Inject
     private pacienteController pacienteCtrl;
@@ -42,6 +48,16 @@ public class clapController implements Serializable {
     public clapController() {
     }
 
+    public int getPuntajeACrafft() {
+        return puntajeACrafft;
+    }
+
+    public void setPuntajeACrafft(int puntajeACrafft) {
+        this.puntajeACrafft = puntajeACrafft;
+    }
+    
+    
+    
     public paciente getPaciente() {
         return Paciente;
     }
@@ -50,6 +66,30 @@ public class clapController implements Serializable {
         this.Paciente = Paciente;
     }
 
+    public Crafft getCrafft() {
+        return crafft;
+    }
+
+    public void setCrafft(Crafft crafft) {
+        this.crafft = crafft;
+    }
+
+    public boolean isAuditCrafft() {
+        return auditCrafft;
+    }
+
+    public audit getAudit() {
+        return audit;
+    }
+
+    public void setAudit(audit audit) {
+        this.audit = audit;
+    }
+    
+    public void setAuditCrafft(boolean auditCrafft) {
+        this.auditCrafft = auditCrafft;
+    }
+    
     public clap getSelected() {
         return selected;
     }
@@ -71,6 +111,11 @@ public class clapController implements Serializable {
     public clap prepareCreate() {
         selected = new clap();
         initializeEmbeddableKey();
+        return selected;
+    }
+    
+    public clap prepareEdit() {
+        selected = getSelected();
         return selected;
     }
 
@@ -100,10 +145,14 @@ public class clapController implements Serializable {
         pacienteCtrl.getSelected().setGrupo_fonasa(selected.getGrupo_fonasa());
         pacienteCtrl.getSelected().setEstado_conyugal(selected.getEstado_conyugal());
         pacienteCtrl.getSelected().setPueblo_originario(selected.getPueblo_originario());
-        
         //Manejo de datos para estados de paciente y riesgos
 
         pacienteCtrl.update();
+        
+        audit.setClap(selected);
+        selected.setAudit(audit);
+        crafft.setClap(selected);
+        selected.setCrafft(crafft);
         
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("clapCreated"));
         if (!JsfUtil.isValidationFailed()) {
@@ -230,6 +279,11 @@ public class clapController implements Serializable {
         this.Paciente = Paciente;
         selected = new clap();
         initializeEmbeddableKey();
+        selected.setConsumo_alcohol(false);
+        selected.setConsumo_marihuana(false);
+        selected.setConsumo_otra_sustancia(false);
+        selected.setAudit(null);
+        selected.setCrafft(null);
         selected.setPaciente(Paciente);
         selected.setRUN(Paciente.getRUN());
         selected.setDV(Paciente.getDV());
@@ -257,6 +311,9 @@ public class clapController implements Serializable {
         selected.setFecha_consulta(new java.util.Date());
         selected.setEdad(selected.getFecha_consulta().getYear()-Paciente.getFecha_nacimiento().getYear());
         System.out.println("Edad: "+selected.getEdad()+"\n año paciente:"+Paciente.getFecha_nacimiento().getYear()+"\n año consulta:"+selected.getFecha_consulta().getYear());
+        puntajeACrafft = 0;
+        audit = new audit();
+        crafft = new Crafft();
         return selected;
     }
     
@@ -277,5 +334,77 @@ public class clapController implements Serializable {
          
         return filteredComunas;
     }
+    
+    public void instanciaCrafftAudit(){
+        int edad = selected.getEdad();
+        System.out.println(selected.isConsumo_alcohol()+" "+selected.isConsumo_marihuana()+" "+selected.isConsumo_otra_sustancia());
+        if (selected.isConsumo_alcohol() || selected.isConsumo_marihuana() || selected.isConsumo_otra_sustancia()) {
+            System.out.println("hay una verdadera");
+            if (edad > 9 && edad < 15) {
+                    System.out.println("Se hace Audit");
+                    System.out.println("Muestra seccion");
+                    auditCrafft = false;
+            }else{
+                if (edad > 14 && edad < 20) {
+                        System.out.println("Se hace Crafft");
+                        System.out.println("Muestra seccion");
+                        auditCrafft = false;
 
+                }else{
+                    System.out.println("No se hace nada");
+                    System.out.println("No se muestra seccion");
+                    auditCrafft = true;
+                }
+            }
+        }else{
+            if (!selected.isConsumo_alcohol() && !selected.isConsumo_marihuana() && !selected.isConsumo_otra_sustancia()) {
+                System.out.println("Todas son falsas");
+                System.out.println("No se muestra seccion");
+                auditCrafft = true;
+            }
+        }
+        System.out.println(auditCrafft); 
+    }
+    
+    public void serviceChangeA(boolean resp){
+       if (resp) {
+            if (puntajeACrafft>=1) {
+                puntajeACrafft-=1;
+            }
+        }else{
+             puntajeACrafft+=1;
+        }
+    }
+    
+    public int tipoIntervencion(){
+        int puntaje = calculaPuntaje();
+        if (puntaje <= 7) {
+            System.out.println("Intervencion Minima");
+            return 0;
+        }else if (puntaje >= 8 && puntaje <= 15){
+            System.out.println("Intervencion Breve");
+            return 1;
+        }else{
+            System.out.println("Derivacion Asistida");
+            return 2;
+        }
+    }
+    
+    private int calculaPuntaje() {
+        return audit.getP1()+audit.getP2()+audit.getP3()+audit.getP4()+audit.getP5()+audit.getP6()+audit.getP7()+audit.getP8()+audit.getP9()+audit.getP10();
+    }
+    
+    public boolean esIntervencionMinima() {
+        int puntaje = audit.getP1()+audit.getP2()+audit.getP3();
+        if (selected.getSexo() == 1) {
+            if (puntaje <=4){
+                return true;
+            }
+        }else{
+            if (puntaje<=3) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

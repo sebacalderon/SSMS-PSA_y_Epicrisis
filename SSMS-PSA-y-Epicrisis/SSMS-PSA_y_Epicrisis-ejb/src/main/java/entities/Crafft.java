@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -55,6 +57,18 @@ public class Crafft implements Serializable {
     
     @Column(name="B6")
     private boolean B6;
+    
+    @OneToOne
+    @JoinColumn(name="codigo_clap")
+    private clap clap;
+
+    public clap getClap() {
+        return clap;
+    }
+
+    public void setClap(clap clap) {
+        this.clap = clap;
+    }
 
     public Long getId() {
         return id;

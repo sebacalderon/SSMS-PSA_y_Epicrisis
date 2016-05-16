@@ -7,15 +7,12 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -123,6 +120,10 @@ public class clap implements Serializable {
     @OneToOne
     @JoinColumn(name="audit_clap")
     private audit audit;
+    
+    @OneToOne
+    @JoinColumn(name="crafft_clap")
+    private Crafft crafft;
     
     @Column(name="grupo_fonasa_clap")
     private int grupo_fonasa;    
@@ -2062,10 +2063,19 @@ public class clap implements Serializable {
         this.tanner_con_foto = tanner_con_foto;
     }
 
+    public Crafft getCrafft() {
+        return crafft;
+    }
+
+    public void setCrafft(Crafft crafft) {
+        this.crafft = crafft;
+    }
+    
     public int getTanner_mama() {
         return tanner_mama;
     }
 
+    
     public void setTanner_mama(int tanner_mama) {
         this.tanner_mama = tanner_mama;
     }
