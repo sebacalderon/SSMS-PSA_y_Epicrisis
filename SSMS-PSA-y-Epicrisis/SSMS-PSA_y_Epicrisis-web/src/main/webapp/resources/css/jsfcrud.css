@@ -94,7 +94,7 @@ footer{
     border-top: none;
     border-bottom: none;
     cursor: pointer;
-    width: inherit !important;
+    width: 22px !important;
     height: 100%;
     position: absolute;
     right: 0;
