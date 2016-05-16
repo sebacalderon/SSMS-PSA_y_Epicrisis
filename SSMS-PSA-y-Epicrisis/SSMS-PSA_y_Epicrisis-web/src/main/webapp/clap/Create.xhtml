@@ -1001,7 +1001,7 @@
                     </facet>
                 </b:panel>
                 
-                <b:panel title="Hábitos/consumo" style="margin-left:3%;width: 95%; " look="info">
+                <b:panel id="habitos" title="Hábitos/consumo" style="margin-left:3%;width: 95%; " look="info">
                     <div style="margin-left: 20px;">
                     <b:row>
                         <b:column col-md="4" col-xs="6">
@@ -1079,27 +1079,27 @@
                             <b:row>
                                 <b:column col-md="4"><p:outputLabel value="Alcohol" for="consumo_alcohol" /></b:column>
                                 <b:column col-md="8">
-                                    <p:selectOneRadio id="consumo_alcohol" style="width:12em;" value="#{clapController.selected.trabajo_infantil}" layout="grid" columns="2">
-                                        <f:selectItem itemValue="true" />
-                                        <f:selectItem itemValue="false" />
+                                    <p:selectOneRadio id="consumo_alcohol" style="width:12em;" value="#{clapController.selected.consumo_alcohol}" layout="grid" columns="2" >
+                                        <f:selectItem itemValue="#{true}" />
+                                        <f:selectItem itemValue="#{false}" />
                                     </p:selectOneRadio>
                                 </b:column>
                             </b:row>
                             <b:row>
                                 <b:column col-md="4"><p:outputLabel value="Marihuana" for="consumo_marihuana" /></b:column>
                                 <b:column col-md="8">
-                                    <p:selectOneRadio id="consumo_marihuana" style="width:12em" value="#{clapController.selected.trabajo_juvenil}" layout="grid" columns="2">
-                                        <f:selectItem itemValue="true" />
-                                        <f:selectItem itemValue="false" />
+                                    <p:selectOneRadio id="consumo_marihuana" style="width:12em" value="#{clapController.selected.consumo_marihuana}" layout="grid" columns="2">
+                                        <f:selectItem itemValue="#{true}" />  
+                                        <f:selectItem itemValue="#{false}" />                          
                                     </p:selectOneRadio>
                                 </b:column>
                             </b:row>
                             <b:row>
                                 <b:column col-md="4"><p:outputLabel value="Otra sustancia" for="consumo_otra_sustancia" /></b:column>
                                 <b:column col-md="8">
-                                    <p:selectOneRadio id="consumo_otra_sustancia" style="width:12em" value="#{clapController.selected.trabajo_juvenil}" layout="grid" columns="2">
-                                        <f:selectItem itemValue="true" />
-                                        <f:selectItem itemValue="false" />
+                                    <p:selectOneRadio id="consumo_otra_sustancia" style="width:12em" value="#{clapController.selected.consumo_otra_sustancia}" layout="grid" columns="2">
+                                        <f:selectItem itemValue="#{true}" />
+                                        <f:selectItem itemValue="#{false}" />                                       
                                     </p:selectOneRadio>
                                 </b:column>
                             </b:row>
@@ -1129,19 +1129,206 @@
                     <facet>
                         <b:inputText id="observaciones_habitos_consumo" value="#{clapController.selected.observaciones_habitos_consumo}" label="#{bundle.CreateclapTitle_observaciones_habitos_consumo}" />
                     </facet>
+                    
+                    <b:panel id="CoA" title="CRAFFT O Audit" style="margin-left:3%;width: 95%; " look="info">
+                    
+                        <b:panel id="audit" title="Audit" style="margin-left:3%;width: 95%; " look="info">
+
+                            <b:panel title="Parte A" style="margin-left:3%;width: 90%;" look="info">
+                                    <p:panelGrid columns="2">
+                                        <p:outputLabel value="#{bundle.CreateauditLabel_p1}" for="p1" style="width:350px" />
+                                        <p:selectOneMenu id="p1" value="#{clapController.audit.p1}" style="min-width:190px">
+                                            <f:selectItem itemValue="#{0}" itemLabel="Nunca"/>
+                                            <f:selectItem itemValue="#{1}" itemLabel="Una o menos veces al mes"/>
+                                            <f:selectItem itemValue="#{2}" itemLabel="De 2 a 4 veces al mes"/>
+                                            <f:selectItem itemValue="#{3}" itemLabel="De 2 a 3 veces a la semana"/>
+                                            <f:selectItem itemValue="#{4}" itemLabel="De 4 o más veces a la semana"/>
+                                            <f:ajax event="valueChange"  listener="#{clapController.tipoIntervencion()}" immediate="true" render="audit" ></f:ajax>                                            
+                                        </p:selectOneMenu>
+
+                                        <p:outputLabel value="#{bundle.CreateauditLabel_p2}" for="p2" style="width:350px" />
+                                        <p:selectOneMenu id="p2" value="#{clapController.audit.p2}" style="min-width:190px">
+                                            <f:selectItem itemValue="#{0}" itemLabel="1 ó 2"/>
+                                            <f:selectItem itemValue="#{1}" itemLabel="3 ó 4"/>
+                                            <f:selectItem itemValue="#{2}" itemLabel="5 ó 6"/>
+                                            <f:selectItem itemValue="#{3}" itemLabel="7, 8 o 9"/>
+                                            <f:selectItem itemValue="#{4}" itemLabel="10 o más"/>
+                                            <f:ajax event="valueChange"  listener="#{clapController.tipoIntervencion()}" immediate="true" render="audit" ></f:ajax>                                                                                        
+                                        </p:selectOneMenu>
+
+                                        <p:outputLabel value="#{bundle.CreateauditLabel_p3}" for="p3" style="width:350px" />
+                                        <p:selectOneMenu id="p3" value="#{clapController.audit.p3}" style="min-width:190px">
+                                            <f:selectItem itemValue="#{0}" itemLabel="Nunca"/>
+                                            <f:selectItem itemValue="#{1}" itemLabel="Menos de una vez al mes"/>
+                                            <f:selectItem itemValue="#{2}" itemLabel="Mensualmente"/>
+                                            <f:selectItem itemValue="#{3}" itemLabel="Semanalmente"/>
+                                            <f:selectItem itemValue="#{4}" itemLabel="A diario o casi a diario"/>
+                                            <f:ajax event="valueChange"  listener="#{clapController.tipoIntervencion()}" immediate="true" render="audit" ></f:ajax>                                                                                        
+                                        </p:selectOneMenu>
+                                    </p:panelGrid>
+                            </b:panel>
+                            <b:panel title="Parte B" style="margin-left:3%;width: 90%;" look="info">
+                                    <p:panelGrid columns="2">
+                                        <p:outputLabel value="#{bundle.CreateauditLabel_p4}" for="p4" style="width:350px" />
+                                        <p:selectOneMenu id="p4" value="#{clapController.audit.p4}" style="min-width:190px" disabled="#{clapController.esIntervencionMinima()}">
+                                            <f:selectItem itemValue="#{0}" itemLabel="Nunca"/>
+                                            <f:selectItem itemValue="#{1}" itemLabel="Menos de una vez al mes"/>
+                                            <f:selectItem itemValue="#{2}" itemLabel="Mensualmente"/>
+                                            <f:selectItem itemValue="#{3}" itemLabel="Semanalmente"/>
+                                            <f:selectItem itemValue="#{4}" itemLabel="A diario o casi a diario"/>
+                                            <f:ajax event="valueChange"  listener="#{clapController.tipoIntervencion()}" immediate="true" render="audit" ></f:ajax>
+                                        </p:selectOneMenu>
+
+                                        <p:outputLabel value="#{bundle.CreateauditLabel_p5}" for="p5" style="width:350px" />
+                                        <p:selectOneMenu id="p5" value="#{clapController.audit.p5}" style="min-width:190px" disabled="#{clapController.esIntervencionMinima()}">
+                                            <f:selectItem itemValue="#{0}" itemLabel="Nunca"/>
+                                            <f:selectItem itemValue="#{1}" itemLabel="Menos de una vez al mes"/>
+                                            <f:selectItem itemValue="#{2}" itemLabel="Mensualmente"/>
+                                            <f:selectItem itemValue="#{3}" itemLabel="Semanalmente"/>
+                                            <f:selectItem itemValue="#{4}" itemLabel="A diario o casi a diario"/>
+                                            <f:ajax event="valueChange"  listener="#{clapController.tipoIntervencion()}" immediate="true" render="audit" ></f:ajax>
+                                        </p:selectOneMenu>
+
+                                        <p:outputLabel value="#{bundle.CreateauditLabel_p6}" for="p6" style="width:350px" />
+                                        <p:selectOneMenu id="p6" value="#{clapController.audit.p6}" style="min-width:190px" disabled="#{clapController.esIntervencionMinima()}">
+                                            <f:selectItem itemValue="#{0}" itemLabel="Nunca"/>
+                                            <f:selectItem itemValue="#{1}" itemLabel="Menos de una vez al mes"/>
+                                            <f:selectItem itemValue="#{2}" itemLabel="Mensualmente"/>
+                                            <f:selectItem itemValue="#{3}" itemLabel="Semanalmente"/>
+                                            <f:selectItem itemValue="#{4}" itemLabel="A diario o casi a diario"/>
+                                            <f:ajax event="valueChange"  listener="#{clapController.tipoIntervencion()}" immediate="true" render="audit" ></f:ajax>
+                                        </p:selectOneMenu>
+
+                                        <p:outputLabel value="#{bundle.CreateauditLabel_p7}" for="p7" style="width:350px" />
+                                        <p:selectOneMenu id="p7" value="#{clapController.audit.p7}" style="min-width:190px" disabled="#{clapController.esIntervencionMinima()}">
+                                            <f:selectItem itemValue="#{0}" itemLabel="Nunca"/>
+                                            <f:selectItem itemValue="#{1}" itemLabel="Menos de una vez al mes"/>
+                                            <f:selectItem itemValue="#{2}" itemLabel="Mensualmente"/>
+                                            <f:selectItem itemValue="#{3}" itemLabel="Semanalmente"/>
+                                            <f:selectItem itemValue="#{4}" itemLabel="A diario o casi a diario"/>
+                                            <f:ajax event="valueChange"  listener="#{clapController.tipoIntervencion()}" immediate="true" render="audit" ></f:ajax>
+                                        </p:selectOneMenu>
+
+                                        <p:outputLabel value="#{bundle.CreateauditLabel_p8}" for="p8" style="width:350px" />
+                                        <p:selectOneMenu id="p8" value="#{clapController.audit.p8}" style="min-width:190px" disabled="#{clapController.esIntervencionMinima()}">
+                                            <f:selectItem itemValue="#{0}" itemLabel="Nunca"/>
+                                            <f:selectItem itemValue="#{1}" itemLabel="Menos de una vez al mes"/>
+                                            <f:selectItem itemValue="#{2}" itemLabel="Mensualmente"/>
+                                            <f:selectItem itemValue="#{3}" itemLabel="Semanalmente"/>
+                                            <f:selectItem itemValue="#{4}" itemLabel="A diario o casi a diario"/>
+                                            <f:ajax event="valueChange"  listener="#{clapController.tipoIntervencion()}" immediate="true" render="audit" ></f:ajax>
+                                        </p:selectOneMenu>
+
+                                        <p:outputLabel value="#{bundle.CreateauditLabel_p9}" for="p9" style="width:350px" />
+                                        <p:selectOneMenu id="p9" value="#{clapController.audit.p9}" style="min-width:190px" disabled="#{clapController.esIntervencionMinima()}">
+                                            <f:selectItem itemValue="#{0}" itemLabel="No"/>
+                                            <f:selectItem itemValue="#{2}" itemLabel="Sí, pero en el curso del último año"/>
+                                            <f:selectItem itemValue="#{4}" itemLabel="Sí, el último año"/>
+                                            <f:ajax event="valueChange"  listener="#{clapController.tipoIntervencion()}" immediate="true" render="audit" ></f:ajax>
+                                        </p:selectOneMenu>
+
+                                        <p:outputLabel value="#{bundle.CreateauditLabel_p10}" for="p10" style="width:350px" />
+                                        <p:selectOneMenu id="p10" value="#{clapController.audit.p10}" style="min-width:190px" disabled="#{clapController.esIntervencionMinima()}">
+                                            <f:selectItem itemValue="#{0}" itemLabel="No"/>
+                                            <f:selectItem itemValue="#{2}" itemLabel="Sí, pero en el curso del último año"/>
+                                            <f:selectItem itemValue="#{4}" itemLabel="Sí, el último año"/>
+                                            <f:ajax event="valueChange"  listener="#{clapController.tipoIntervencion()}" immediate="true" render="audit" ></f:ajax>
+                                        </p:selectOneMenu>
+                                    </p:panelGrid>
+                                </b:panel>
+                            <p:panelGrid columns="3">
+                                <b:panel id="intervencion1" title="realice INTERVENCIÓN MÍNIMA" style="align-content: center ;width: 70%; text-align: center" look="success" rendered="#{clapController.tipoIntervencion() == 0}">
+                                        <h:outputText value="0-7 Puntos" style="text-align: center"/>
+                                        <br />
+                                        <h:outputText value="CONSUMO DE BAJO RIESGO" style="text-align: center"/>
+                                 </b:panel>
+                                <b:panel id="intervencion2" title="realice INTERVENCIÓN BREVE" style="align-content: center ;width: 70%; text-align: center" look="warning" rendered="#{clapController.tipoIntervencion() == 1}">
+                                        <h:outputText value="8-15 Puntos" style="text-align: center"/>
+                                        <br />
+                                        <h:outputText value="CONSUMO DE RIESGO" style="text-align: center"/>
+                                </b:panel>
+                                <b:panel id="intervencion3" title="realice DERIVACIÓN ASISTIDA" style="align-content: center ;width: 60%; text-align: center" look="danger" rendered="#{clapController.tipoIntervencion() == 2}">
+                                        <h:outputText value="16 Puntos o más" style="text-align: center"/>
+                                        <br />
+                                        <h:outputText value="posible CONSUMO PROBLEMA o DEPENDENCIA" style="text-align: center"/>
+                                        <br />
+                                        <h:outputText value="Realice derivación asistida para una evaluación completa y una intervención breve igualmente" style="text-align: center"/>
+                                </b:panel>
+                            </p:panelGrid>
+                        </b:panel>
+                        
+                        <b:panel id="crafft" title="CRAFFT" style="margin-left:3%;width: 95%; " look="info">
+                
+                        <b:panel title="Parte A: Durante los últimos 12 meses" style="margin-left:3%;width: 95%;" look="info">
+                            <p:panelGrid columns="2">
+                            <p:outputLabel value="#{bundle.CreateCrafftTitle_A1}" for="A1" style="width:350px" />
+                            <p:selectOneRadio id="A1" value="#{clapController.crafft.a1}" style="min-width:100px">
+                                <f:selectItem itemValue="#{true}" itemLabel="Si"/>
+                                <f:selectItem itemValue="#{false}" itemLabel="No"/>
+                                <f:ajax event="valueChange"  listener="#{clapController.serviceChangeA(clapController.crafft.a1)}" immediate="true" render="crafft" ></f:ajax>
+                            </p:selectOneRadio>
+
+                            <p:outputLabel value="#{bundle.CreateCrafftTitle_A2}" for="A2" style="width:350px"/>
+                            <p:selectOneRadio id="A2" value="#{clapController.crafft.a2}" style="min-width:100px">
+                                <f:selectItem itemValue="#{true}" itemLabel="Si"/>
+                                <f:selectItem itemValue="#{false}" itemLabel="No" />
+                                <f:ajax event="valueChange"  listener="#{clapController.serviceChangeA(clapController.crafft.a2)}" immediate="true" render="crafft" ></f:ajax>
+                            </p:selectOneRadio>
+
+                            <p:outputLabel value="#{bundle.CreateCrafftTitle_A3}" for="A3" style="width:350px"/>
+                            <p:selectOneRadio id="A3" value="#{clapController.crafft.a3}" style="min-width:100px">
+                                <f:selectItem itemValue="#{true}" itemLabel="Si"/>
+                                <f:selectItem itemValue="#{false}" itemLabel="No" />
+                                <f:ajax event="valueChange"  listener="#{clapController.serviceChangeA(clapController.crafft.a3)}" immediate="true" render="crafft" ></f:ajax>
+                            </p:selectOneRadio>
+                            </p:panelGrid>
+                        </b:panel>
+                        
+                        <b:panel title="Parte B: Preguntas CRAFFT" style="margin-left:3%;width: 95%;" look="info">
+                            <p:panelGrid columns="2">
+                            <p:outputLabel value="#{bundle.CreateCrafftTitle_B1}" for="B1" style="width:350px"/>
+                            <p:selectOneRadio id="B1" value="#{clapController.crafft.b1}" style="min-width:100px" disabled="#{clapController.puntajeACrafft == 0}">
+                                <f:selectItem itemValue="#{true}" itemLabel="Si"/>
+                                <f:selectItem itemValue="#{false}" itemLabel="No" />
+                            </p:selectOneRadio>
+
+                            <p:outputLabel value="#{bundle.CreateCrafftTitle_B2}" for="B2" style="width:350px" />
+                            <p:selectOneRadio id="B2" value="#{clapController.crafft.b2}" style="min-width:100px" disabled="#{clapController.puntajeACrafft == 0}">
+                                <f:selectItem itemValue="#{true}" itemLabel="Si"/>
+                                <f:selectItem itemValue="#{false}" itemLabel="No" />
+                            </p:selectOneRadio>
+
+                            <p:outputLabel value="#{bundle.CreateCrafftTitle_B3}" for="B3" style="width:350px" />
+                            <p:selectOneRadio id="B3" value="#{clapController.crafft.b3}" style="min-width:100px" disabled="#{clapController.puntajeACrafft == 0}">
+                                <f:selectItem itemValue="#{true}" itemLabel="Si"/>
+                                <f:selectItem itemValue="#{false}" itemLabel="No" />
+                            </p:selectOneRadio>
+
+                            <p:outputLabel value="#{bundle.CreateCrafftTitle_B4}" for="B4" style="width:350px" />
+                            <p:selectOneRadio id="B4" value="#{clapController.crafft.b4}" style="min-width:100px" disabled="#{clapController.puntajeACrafft == 0}">
+                                <f:selectItem itemValue="#{true}" itemLabel="Si"/>
+                                <f:selectItem itemValue="#{false}" itemLabel="No" />
+                            </p:selectOneRadio>
+
+                            <p:outputLabel value="#{bundle.CreateCrafftTitle_B5}" for="B5" style="width:350px" />
+                            <p:selectOneRadio id="B5" value="#{clapController.crafft.b5}" style="min-width:100px" disabled="#{clapController.puntajeACrafft == 0}">
+                                <f:selectItem itemValue="#{true}" itemLabel="Si"/>
+                                <f:selectItem itemValue="#{false}" itemLabel="No" />
+                            </p:selectOneRadio>
+
+                            <p:outputLabel value="#{bundle.CreateCrafftTitle_B6}" for="B6" style="width:350px" />
+                            <p:selectOneRadio id="B6" value="#{clapController.crafft.b6}" style="min-width:100px" disabled="#{clapController.puntajeACrafft == 0}">
+                                <f:selectItem itemValue="#{true}" itemLabel="Si"/>
+                                <f:selectItem itemValue="#{false}" itemLabel="No" />
+                            </p:selectOneRadio>
+                            </p:panelGrid>
+                        </b:panel>
+        
+                        </b:panel>
+                    </b:panel>
+                  
                 </b:panel>
                 
-                <b:panel title="CRAFFT" style="margin-left:3%;width: 95%; " look="info" rendered="">
-                    
-                    
-                    
-                </b:panel>
-                
-                <b:panel title="Audit" style="margin-left:3%;width: 95%; " look="info" rendered="">
-                    
-                    
-                    
-                </b:panel>
 
                 <b:panel title="Gineco/urológico" style="margin-left:3%;width: 95%; " look="info">
                     <div style="margin-left: 20px;">

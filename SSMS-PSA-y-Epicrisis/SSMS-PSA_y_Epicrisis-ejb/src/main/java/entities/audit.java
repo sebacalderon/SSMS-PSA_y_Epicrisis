@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -48,11 +50,21 @@ public class audit implements Serializable {
     private int P9;
     
     private int P10;
+    
+    @OneToOne
+    @JoinColumn(name="clap_audit")
+    private clap clap;
 
     public audit() {
     }
 
-    
+    public clap getClap() {
+        return clap;
+    }
+
+    public void setClap(clap clap) {
+        this.clap = clap;
+    }
     
     public int getP1() {
         return P1;
