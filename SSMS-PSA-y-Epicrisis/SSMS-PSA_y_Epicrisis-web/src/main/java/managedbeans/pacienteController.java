@@ -176,7 +176,27 @@ public class pacienteController implements Serializable {
         return getFacade().findAll();
     }
 
-    
+
+    public boolean validarRut() {
+
+        boolean validacion = false;
+        try {
+            int rutAux = selected.getRUN();
+            String dv = selected.getDV();
+
+            int m = 0, s = 1;
+            for (; rutAux != 0; rutAux /= 10) {
+                s = (s + rutAux % 10 * (9 - m++ % 6)) % 11;
+            }
+            if (dv.charAt(0) == (char) (s != 0 ? s + 47 : 75)) {
+                validacion = true;
+            }
+
+        } catch (java.lang.NumberFormatException e) {
+        } catch (Exception e) {
+        }
+        return validacion;
+    }
     
     @FacesConverter(forClass = paciente.class)
     public static class pacienteControllerConverter implements Converter {

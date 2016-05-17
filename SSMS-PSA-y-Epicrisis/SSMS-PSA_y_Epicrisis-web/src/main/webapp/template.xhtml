@@ -25,17 +25,17 @@
                 <b:dropMenu value="#{bundle.seccion2}">
                     <b:navLink value="Ficha CLAP" outcome="/clap/List.xhtml" />
                     <b:navLink value="Pacientes" outcome="/paciente/List.xhtml" />
-                    <b:navLink value="Formulario de Actividades de intervención" outcome="/template.xhtml" />
+                    <b:navLink value="Formulario de Actividades de intervención" outcome="/en_construccion.xhtml" />
                 </b:dropMenu>
-                <b:navLink value="#{bundle.seccion3}" outcome="/welcomePrimefaces" rendered="#{loginController.esFuncionario()}" />
+                <b:navLink value="#{bundle.seccion3}" outcome="/en_construccion.xhtml" rendered="#{loginController.esFuncionario()}" />
                 <b:dropMenu value="#{bundle.seccion4}">
-                    <b:navLink value="Sábana de Pacientes" outcome="/template.xhtml" />
-                    <b:navLink value="Reportes" outcome="/template.xhtml" />
+                    <b:navLink value="Sábana de Pacientes" outcome="/en_construccion.xhtml" />
+                    <b:navLink value="Reportes" outcome="/en_construccion.xhtml" />
                 </b:dropMenu>
                 <b:dropMenu value="#{bundle.seccion5}" rendered="#{loginController.esSuperUsuario()}">
                     <b:navLink value="Control de usuarios" outcome="/usuario/List.xhtml" />
-                    <b:navLink value="Auditoría" outcome="/auditoria/List.xhtml" />
-                    <b:navLink value="Modificación de parámetros" outcome="/usuario/List.xhtml" />
+                    <b:navLink value="Auditoría" outcome="/en_construccion.xhtml" />
+                    <b:navLink value="Modificación de parámetros" outcome="/en_construccion.xhtml" />
                 </b:dropMenu>
             </b:navbarLinks>
             <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>

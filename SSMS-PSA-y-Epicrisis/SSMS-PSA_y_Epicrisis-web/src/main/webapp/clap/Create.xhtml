@@ -274,6 +274,7 @@
                         </b:row>
                         <b:row>
                             <b:column><pe:inputNumber id="edad" value="#{clapController.selected.edad}" minValue="0" maxValue="150" styleClass="campo-numerico" title="#{bundle.CreateclapTitle_edad}" disabled="true"/></b:column>
+
                         </b:row>
                     </p:column>
                     <p:column rowspan="3">
@@ -296,7 +297,7 @@
                         <p:inputText id="motivo_consulta_adolescente_3" placeholder="3." value="#{clapController.selected.motivo_consulta_adolescente_3}" title="#{bundle.CreateclapTitle_motivo_consulta_adolescente_3}" />
                     </p:column>
                     <p:column rowspan="4">
-                        <p:outputLabel value="Motivo de la consulta según adolescente " for="motivo_consulta_acompanante_1" />
+                        <p:outputLabel value="Motivo de la consulta según acompañante" for="motivo_consulta_acompanante_1" />
                         <p:inputText id="motivo_consulta_acompanante_1" placeholder="1." value="#{clapController.selected.motivo_consulta_acompanante_1}" title="#{bundle.CreateclapTitle_motivo_consulta_acompanante_1}" />
                         <p:inputText id="motivo_consulta_acompanante_2" placeholder="2." value="#{clapController.selected.motivo_consulta_acompanante_2}" title="#{bundle.CreateclapTitle_motivo_consulta_acompanante_2}" />
                         <p:inputText id="motivo_consulta_acompanante_3" placeholder="3." value="#{clapController.selected.motivo_consulta_acompanante_3}" title="#{bundle.CreateclapTitle_motivo_consulta_acompanante_3}" />
@@ -418,12 +419,12 @@
                 <b:panel title="Antecedentes familiares" style="margin-left:3%;width: 95%; " look="info">
                 <p:panelGrid columns="2" style="width:98%;border:10px;" rendered="#{clapController.selected != null}">
                     <p:column rowspan="2">
-                    <p:outputLabel value="#{bundle.CreateclapLabel_enfermedades_importantes_familia}" for="enfermedades_importantes_familia" />
-                    <p:selectOneRadio id="enfermedades_importantes_familia" style="width:13em;" value="#{clapController.selected.enfermedades_importantes_familia}" layout="grid" columns="3">
-                        <f:selectItem itemLabel="sí" itemValue="1" />
-                        <f:selectItem itemLabel="no sé" itemValue="2" />
-                        <f:selectItem itemLabel="no" itemValue="3" />
-                    </p:selectOneRadio>
+                        <p:outputLabel value="#{bundle.CreateclapLabel_enfermedades_importantes_familia}" for="enfermedades_importantes_familia" />
+                        <p:selectOneRadio id="enfermedades_importantes_familia" style="width:13em;" value="#{clapController.selected.enfermedades_importantes_familia}" layout="grid" columns="3">
+                            <f:selectItem itemLabel="sí" itemValue="1" />
+                            <f:selectItem itemLabel="no sé" itemValue="2" />
+                            <f:selectItem itemLabel="no" itemValue="3" />
+                        </p:selectOneRadio>
                     </p:column>
                     <p:column rowspan="2">
                     <p:outputLabel value="#{bundle.CreateclapLabel_obesidad_familia}" for="obesidad_familia" />
@@ -1880,7 +1881,7 @@
                                     <p:outputLabel value="Otra área" for="otra_area_examen_fisico" />
                                 </b:row>
                                 <b:row>
-                                    <p:inputText id="otra_area_examen_fisico" value="#{clapController.selected.otra_area_examen_fisico}" title="#{bundle.CreateclapTitle_otra_area_examen_fisico}" />
+                                    <p:inputText id="otra_area_examen_fisico" placeholder="Especifique" value="#{clapController.selected.otra_area_examen_fisico}" title="#{bundle.CreateclapTitle_otra_area_examen_fisico}" />
                                 </b:row>
                             </b:column>
                             <b:column col-md="4" col-xs="6">
