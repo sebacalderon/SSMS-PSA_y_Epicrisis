@@ -266,14 +266,14 @@
                 <p:panelGrid columns="2" style="width:98%;border:10px;" rendered="#{clapController.selected != null}">
                     <p:column rowspan="2">
                         <p:outputLabel value="#{bundle.CreateclapLabel_fecha_consulta}" for="fecha_consulta" />
-                        <p:calendar id="fecha_consulta" pattern="dd/MM/yyyy" value="#{clapController.selected.fecha_consulta}" title="#{bundle.EditclapTitle_fecha_consulta}"  showOn="button"/>
+                        <p:calendar id="fecha_consulta" pattern="dd/MM/yyyy" value="#{clapController.selected.fecha_consulta}" title="#{bundle.EditclapTitle_fecha_consulta}" disabled="true"/>
                     </p:column>
                     <p:column rowspan="2">
                         <b:row>
                             <b:column><p:outputLabel value="#{bundle.CreateclapLabel_edad}" for="edad" /></b:column>
                         </b:row>
                         <b:row>
-                            <b:column><pe:inputNumber id="edad" value="#{clapController.selected.edad}" minValue="0" maxValue="150" styleClass="campo-numerico" title="#{bundle.CreateclapTitle_edad}" /></b:column>
+                            <b:column><pe:inputNumber id="edad" value="#{clapController.selected.edad}" minValue="0" maxValue="150" styleClass="campo-numerico" title="#{bundle.CreateclapTitle_edad}" disabled="true"/></b:column>
                         </b:row>
                     </p:column>
                     <p:column rowspan="3">
