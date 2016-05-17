@@ -92,7 +92,7 @@
                             <f:selectItem itemLabel="D" itemValue="4" noSelectionOption="false" />
                         </p:selectOneMenu>
                         
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_nacionalidad}" for="nacionalidad" />
+                        <p:outputLabel value="País" for="nacionalidad" />
                         <p:autoComplete id="nacionalidad" value="#{pacienteController.selected.nacionalidad}" completeMethod="#{nacionalidadController.completeNacionalidad}"
                         var="nacionalidad" itemLabel="#{nacionalidad.nombre}" itemValue="#{nacionalidad}" converter="entityConverter" forceSelection="true" required="true"/>
                         
