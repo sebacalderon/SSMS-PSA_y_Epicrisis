@@ -24,8 +24,8 @@
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowSelect"   />
+                        <p:ajax event="rowUnselect" />
 
                         <p:column>
                             <f:facet name="header">
@@ -36,73 +36,81 @@
                         
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="Id CLAP"/>
+                            </f:facet>
+                            <h:outputText value="#{item.clap.id}"/>
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.CreateCrafftLabel_A1}"/>
                             </f:facet>
-                            <h:outputText value="#{item.a1}"/>
+                            <h:outputText value="#{item.a1 ? 'Si' : 'No'}"/>
                         </p:column>
 
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.CreateCrafftLabel_A2}"/>
                             </f:facet>
-                            <h:outputText value="#{item.a2}"/>
+                            <h:outputText value="#{item.a2 ? 'Si' : 'No'}"/>
                         </p:column>
 
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.CreateCrafftLabel_A3}"/>
                             </f:facet>
-                            <h:outputText value="#{item.a3}"/>
+                            <h:outputText value="#{item.a3 ? 'Si' : 'No'}"/>
                         </p:column>
 
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.CreateCrafftLabel_B1}"/>
                             </f:facet>
-                            <h:outputText value="#{item.b1}"/>
+                            <h:outputText value="#{item.b1 ? 'Si' : 'No'}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.CreateCrafftLabel_B2}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.b2 ? 'Si' : 'No'}"/>
                         </p:column>
 
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.CreateCrafftLabel_B3}"/>
                             </f:facet>
-                            <h:outputText value="#{item.b2}"/>
+                            <h:outputText value="#{item.b3 ? 'Si' : 'No'}"/>
                         </p:column>
-
+                        
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.CreateCrafftLabel_B4}"/>
                             </f:facet>
-                            <h:outputText value="#{item.b4}"/>
+                            <h:outputText value="#{item.b4 ? 'Si' : 'No'}"/>
                         </p:column>
 
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.CreateCrafftLabel_B5}"/>
                             </f:facet>
-                            <h:outputText value="#{item.b5}"/>
+                            <h:outputText value="#{item.b5 ? 'Si' : 'No'}"/>
                         </p:column>
 
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.CreateCrafftLabel_B6}"/>
                             </f:facet>
-                            <h:outputText value="#{item.b6}"/>
+                            <h:outputText value="#{item.b6 ? 'Si' : 'No'}"/>
                         </p:column>
                         
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{crafftController.prepareCreate}" update=":CrafftCreateForm" oncomplete="PF('CrafftCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CrafftViewForm" oncomplete="PF('CrafftViewDialog').show()" disabled="#{empty crafftController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CrafftEditForm" oncomplete="PF('CrafftEditDialog').show()" disabled="#{empty crafftController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{crafftController.destroy}" update=":growl,datalist" disabled="#{empty crafftController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
             </h:form>
 
-            <ui:include src="Create.xhtml"/>
-            <ui:include src="Edit.xhtml"/>
-            <ui:include src="View.xhtml"/>
+            
         </ui:define>
     </ui:composition>
 

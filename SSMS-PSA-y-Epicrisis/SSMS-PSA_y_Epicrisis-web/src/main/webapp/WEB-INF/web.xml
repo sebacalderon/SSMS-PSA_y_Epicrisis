@@ -64,17 +64,11 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>common-area</web-resource-name>
-            <url-pattern>/faces/cesfam/*</url-pattern>
             <url-pattern>/faces/paciente/*</url-pattern>
             <url-pattern>/faces/clap/*</url-pattern>
-            <url-pattern>/faces/comuna/*</url-pattern>
             <url-pattern>/faces/crafft/*</url-pattern>
-            <url-pattern>/faces/estado_civil/*</url-pattern>
-            <url-pattern>/faces/ley_social/*</url-pattern>
-            <url-pattern>/faces/nacionalidad/*</url-pattern>
-            <url-pattern>/faces/prevision/*</url-pattern>
-            <url-pattern>/faces/pueblo_originario/*</url-pattern>
-            <url-pattern>/faces/region/*</url-pattern>
+            <url-pattern>/faces/audit/*</url-pattern>
+            <url-pattern>/faces/home.xhtml</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description></description>
