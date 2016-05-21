@@ -176,8 +176,8 @@ public class Usuario implements Serializable {
         return nombres;
     }
 
-    public void setNombre(String nombre) {
-        this.nombres = nombre;
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
     }
     
     public Long getId() {
