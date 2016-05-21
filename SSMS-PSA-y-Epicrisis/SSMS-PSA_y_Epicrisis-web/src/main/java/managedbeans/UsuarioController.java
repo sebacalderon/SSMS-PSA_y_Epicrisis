@@ -106,7 +106,7 @@ public class UsuarioController implements Serializable {
 
     public void prepareUpdate() {
         antiguovalor = new Usuario();
-        antiguovalor.setNombre(selected.getNombres());
+        antiguovalor.setNombres(selected.getNombres());
         antiguovalor.setCorreo(selected.getCorreo());
         antiguovalor.setPassword(selected.getPassword());
         antiguovalor.setRol(selected.getRol());
