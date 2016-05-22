@@ -14,7 +14,7 @@
                 <h:panelGroup id="display">
                         <p:panelGrid columns="2" style="width:100%"  rendered="#{usuarioController.selected != null}">
 
-                            <p:outputLabel value="#{bundle.CreateUsuarioLabel_nombre}"  for="nombre" />
+                            <p:outputLabel value="Nombres"  for="nombre" />
                             <p:inputText id="nombre" value="#{usuarioController.selected.nombres}" title="#{bundle.CreateUsuarioTitle_nombre}" required="true" maxlength="50" />
 
                             <p:outputLabel value="#{bundle.CreateUsuarioLabel_primer_apellido}" for="primer_apellido" />
@@ -23,14 +23,11 @@
                             <p:outputLabel value="#{bundle.CreateUsuarioLabel_segundo_apellido}" for="segundo_apellido" />
                             <p:inputText id="segundo_apellido" value="#{usuarioController.selected.segundo_apellido}" title="#{bundle.CreateUsuarioTitle_segundo_apellido}" maxlength="30" required="true" />
 
-                            <p:outputLabel value="#{bundle.CreateUsuarioLabel_RUN}" for="run" />
-                            <p:column>
-                                <p:inputText id="run" value="#{usuarioController.selected.RUN}" style="max-width: 100px;" title="#{bundle.CreateUsuarioTitle_RUN}" required="true"/> - 
-                                <p:inputText id="dv" value="#{usuarioController.selected.DV}" title="#{bundle.CreateUsuarioTitle_DV}" maxlength="1" required="true" style="max-width: 20px;"/>   
-                            </p:column>
+                            <p:outputLabel value="R.U.T. (con puntos y guión)" for="rut" />
+                            <p:inputMask id="rut" value="#{usuarioController.selected.RUT}" mask="99.999.999-*" style="max-width: 100px;" required="true" placeholder="Ej: 12.345.678-9"/>
 
                             <p:outputLabel value="#{bundle.CreateUsuarioLabel_correo}" for="correo" />
-                            <p:inputText id="correo" value="#{usuarioController.selected.correo}" title="#{bundle.CreateUsuarioTitle_correo}" required="true" />
+                            <p:inputText id="correo" value="#{usuarioController.selected.correo}" title="#{bundle.CreateUsuarioTitle_correo}"  />
 
                             <p:outputLabel value="#{bundle.CreateUsuarioLabel_password}" for="password" />
                             <p:password id="password" value="#{usuarioController.selected.password}" title="#{bundle.CreateUsuarioTitle_password}" required="true" />

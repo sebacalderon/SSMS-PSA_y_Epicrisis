@@ -30,10 +30,10 @@
                         <b:panel look="primary" title="#{bundle.LoginTitle}">
                         <b:row>
                             <b:column  span="4">
-                                <h:outputLabel for="Correo" value="#{bundle.correo_login}" />
+                                <h:outputLabel for="rut" value="RUT *" />
                             </b:column>
                             <b:column span="8">
-                                <b:inputText id="Correo" value="#{loginController.correo}" placeholder="Correo" required="true">
+                                <b:inputText id="rut" value="#{loginController.rut}" placeholder="Ej: 12.345.678-9" required="true">
                                   <f:facet name="prepend">
                                     <b:icon name="user" />
                                   </f:facet>

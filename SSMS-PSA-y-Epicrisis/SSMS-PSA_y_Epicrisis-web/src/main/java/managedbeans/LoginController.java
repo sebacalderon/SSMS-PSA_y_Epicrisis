@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 @SessionScoped
 public class LoginController implements Serializable{
 
-    private String correo;
+    private String rut;
     private String password;
     @Inject
     private UsuarioController userCtrl;
@@ -56,12 +56,12 @@ public class LoginController implements Serializable{
         
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getRut() {
+        return rut;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setRut(String rut) {
+        this.rut = rut;
     }
 
     public String getPassword() {
@@ -78,27 +78,27 @@ public class LoginController implements Serializable{
             FacesContext context = FacesContext.getCurrentInstance();
             HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
             Usuario usuario;
-            usuario = userCtrl.findByCorreo(this.correo);
+            usuario = userCtrl.findByRUT(this.rut);
             System.out.println(usuario.getRol());
             if (usuario == null) {
-                context.addMessage(null, new FacesMessage("El usuario no existe"));
+                context.addMessage(null, new FacesMessage("El funcionario no existe"));
                 return "/faces/index.xhtml";
             }else if(!usuario.isHabilitado()){
-                context.addMessage(null, new FacesMessage("El usuario está deshabilitado"));
+                context.addMessage(null, new FacesMessage("El funcionnario está deshabilitado"));
                 return "/faces/index.xhtml";
             }else{
                 if (request.getRemoteUser() == null) {
                     try {
-                        request.login(this.correo, this.password);
+                        request.login(this.rut, this.password);
                         usuarioLogueado = new Usuario(usuario);
-                        context.addMessage(null, new FacesMessage("Usuario autentificado correctamente"));
+                        context.addMessage(null, new FacesMessage("Funcionario autentificado correctamente"));
                     } catch (ServletException e) {
-                        context.addMessage(null, new FacesMessage("El correo y la contraseña ingresados no coinciden"));
+                        context.addMessage(null, new FacesMessage("El RUT y la contraseña ingresados no coinciden"));
                         return "/faces/index.xhtml";
                     }
                 } else {
                     //usuario ya logueado
-                    context.addMessage(null, new FacesMessage("Usuario ya autentificado"));
+                    context.addMessage(null, new FacesMessage("Funcionario ya autentificado"));
                 }
                 return "/faces/home.xhtml";
             }

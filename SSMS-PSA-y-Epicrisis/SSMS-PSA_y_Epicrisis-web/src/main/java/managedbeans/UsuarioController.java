@@ -184,10 +184,10 @@ public class UsuarioController implements Serializable {
         }
     }
     
-    public Usuario findByCorreo(String correo) {
+    public Usuario findByRUT(String rut) {
         getAllItems();//todos los items
         for (Usuario item : todos) {//para cada item de Preingreso de la bd
-            if (correo.equals(item.getCorreo())) {//si el objeto a comparar es igual al rut de entrada
+            if (rut.equals(item.getRUT())) {//si el objeto a comparar es igual al rut de entrada
                 setSelected(item);
                 return item;//se retorna
             }

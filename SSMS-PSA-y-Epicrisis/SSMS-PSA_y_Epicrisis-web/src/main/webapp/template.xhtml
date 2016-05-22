@@ -11,8 +11,10 @@
         <title><ui:insert name="title">SSMS</ui:insert></title>
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
         <h:outputScript library="js" name="jsfcrud.js"/>
-        <p:graphicImage library="img" name="ssms.png" height="111px" width="111px"/>
-        <p:graphicImage library="img" name="banner.jpg" height="111px" width="1238px"/>
+        <p:graphicImage library="img" name="ssms.png"  style="width:9% !important;height:auto;">
+        </p:graphicImage>
+        <p:graphicImage library="img" name="banner.jpg" style="width:91% !important;height:auto;">
+        </p:graphicImage>
         <b:navBar brand="#{bundle.AppName}" brandAlign="left">
             <b:navbarLinks rendered="#{not loginController.verifyLogin()}">
                 <b:navLink value="#{bundle.Home}" outcome="/index" icon="glyphicon glyphicon-home"/>
@@ -22,9 +24,8 @@
                 <b:dropMenu value="#{bundle.seccion1}">
                     <b:navLink value="Edición de información Personal" outcome="" />
                 </b:dropMenu>
-                <b:dropMenu value="#{bundle.seccion2}">
-                    <b:navLink value="Ficha CLAP" outcome="/clap/List.xhtml" />
-                    <b:navLink value="Pacientes" outcome="/paciente/List.xhtml" />
+                <b:dropMenu value="Usuarios">
+                    <b:navLink value="Población bajo control" outcome="/paciente/List.xhtml" />
                     <b:navLink value="Formulario de Actividades de intervención" outcome="/en_construccion.xhtml" />
                 </b:dropMenu>
                 <b:navLink value="#{bundle.seccion3}" outcome="/en_construccion.xhtml" rendered="#{loginController.esFuncionario()}" />
@@ -33,7 +34,7 @@
                     <b:navLink value="Reportes" outcome="/en_construccion.xhtml" />
                 </b:dropMenu>
                 <b:dropMenu value="#{bundle.seccion5}" rendered="#{loginController.esSuperUsuario()}">
-                    <b:navLink value="Control de usuarios" outcome="/usuario/List.xhtml" />
+                    <b:navLink value="Control de sesiones" outcome="/usuario/List.xhtml" />
                     <b:navLink value="Auditoría" outcome="/en_construccion.xhtml" />
                     <b:navLink value="Modificación de parámetros" outcome="/en_construccion.xhtml" />
                 </b:dropMenu>

@@ -42,13 +42,9 @@ public class Usuario implements Serializable {
     @Column(name="segundo_apellido_usuario",length=30)
     private String segundo_apellido;
     
-    @NotNull(message="Debe ingresar un run")
-    @Column(name="run_usuario",length=8)
-    private int RUN;
-    
-    @NotNull(message="Debe ingresar un dígito verificador")
-    @Column(name="dv_usuario",length=1)
-    private String DV;
+    @NotNull(message="Debe ingresar un RUT")
+    @Column(name="rut_usuario",length=12,unique = true)
+    private String RUT;
     
     @ManyToOne
     @JoinColumn(name = "cesfam_usuario")
@@ -58,8 +54,7 @@ public class Usuario implements Serializable {
 //        + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
 //        + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
 //        message = "Debe ser un mail valido")
-    @NotNull(message="Debe ingresar un correo")
-    @Column(name="correo_usuario", unique = true)
+    @Column(name="correo_usuario")
     private String correo;
     
     @NotNull(message="Debe ingresar una contraseña")
@@ -81,8 +76,7 @@ public class Usuario implements Serializable {
         this.primer_apellido=usuario.primer_apellido;
         this.segundo_apellido=usuario.segundo_apellido;
         this.cesfam=usuario.cesfam;
-        this.RUN=usuario.RUN;
-        this.DV=usuario.DV;
+        this.RUT=usuario.RUT;
         this.password= usuario.password;
         this.rol = usuario.rol;
         this.habilitado=true;
@@ -148,20 +142,12 @@ public class Usuario implements Serializable {
         this.segundo_apellido = segundo_apellido;
     }
 
-    public int getRUN() {
-        return RUN;
+    public String getRUT() {
+        return RUT;
     }
 
-    public void setRUN(int RUN) {
-        this.RUN = RUN;
-    }
-
-    public String getDV() {
-        return DV;
-    }
-
-    public void setDV(String DV) {
-        this.DV = DV;
+    public void setRUT(String RUT) {
+        this.RUT = RUT;
     }
 
     public cesfam getCESFAM() {
