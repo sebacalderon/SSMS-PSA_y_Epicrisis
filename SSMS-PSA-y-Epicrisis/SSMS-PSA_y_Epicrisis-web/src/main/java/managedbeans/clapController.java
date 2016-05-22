@@ -34,7 +34,9 @@ public class clapController implements Serializable {
     private List<clap> items = null;
     private clap selected;
     private paciente Paciente = null;
-    private boolean auditCrafft;
+    private boolean auditCrafft = false;
+    private boolean isAudit = false;
+    private boolean isCrafft = false;
     private audit audit;
     private Crafft crafft;
     private int puntajeACrafft;
@@ -55,8 +57,22 @@ public class clapController implements Serializable {
     public void setPuntajeACrafft(int puntajeACrafft) {
         this.puntajeACrafft = puntajeACrafft;
     }
-    
-    
+
+    public boolean isIsAudit() {
+        return isAudit;
+    }
+
+    public void setIsAudit(boolean isAudit) {
+        this.isAudit = isAudit;
+    }
+
+    public boolean isIsCrafft() {
+        return isCrafft;
+    }
+
+    public void setIsCrafft(boolean isCrafft) {
+        this.isCrafft = isCrafft;
+    }
     
     public paciente getPaciente() {
         return Paciente;
@@ -110,6 +126,7 @@ public class clapController implements Serializable {
 
     public clap prepareCreate() {
         selected = new clap();
+        auditCrafft = false;
         initializeEmbeddableKey();
         return selected;
     }
@@ -149,11 +166,18 @@ public class clapController implements Serializable {
 
         pacienteCtrl.update();
         
-        audit.setClap(selected);
-        selected.setAudit(audit);
-        crafft.setClap(selected);
-        selected.setCrafft(crafft);
-        
+        if (auditCrafft) {
+            if (isAudit) {
+                audit.setClap(selected);
+                selected.setAudit(audit);
+                selected.setCrafft(null);
+            }else{
+                crafft.setClap(selected);
+                selected.setCrafft(crafft);
+                selected.setAudit(null);
+            }
+        }
+    
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("clapCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -279,9 +303,6 @@ public class clapController implements Serializable {
         this.Paciente = Paciente;
         selected = new clap();
         initializeEmbeddableKey();
-        selected.setConsumo_alcohol(false);
-        selected.setConsumo_marihuana(false);
-        selected.setConsumo_otra_sustancia(false);
         selected.setAudit(null);
         selected.setCrafft(null);
         selected.setPaciente(Paciente);
@@ -314,6 +335,9 @@ public class clapController implements Serializable {
         puntajeACrafft = 0;
         audit = new audit();
         crafft = new Crafft();
+        isAudit = false;
+        isCrafft = false;
+        auditCrafft = false;
         return selected;
     }
     
@@ -335,35 +359,36 @@ public class clapController implements Serializable {
         return filteredComunas;
     }
     
-    public void instanciaCrafftAudit(){
-        int edad = selected.getEdad();
-        System.out.println(selected.isConsumo_alcohol()+" "+selected.isConsumo_marihuana()+" "+selected.isConsumo_otra_sustancia());
-        if (selected.isConsumo_alcohol() || selected.isConsumo_marihuana() || selected.isConsumo_otra_sustancia()) {
-            System.out.println("hay una verdadera");
-            if (edad > 9 && edad < 15) {
-                    System.out.println("Se hace Audit");
-                    System.out.println("Muestra seccion");
-                    auditCrafft = false;
-            }else{
-                if (edad > 14 && edad < 20) {
-                        System.out.println("Se hace Crafft");
-                        System.out.println("Muestra seccion");
-                        auditCrafft = false;
-
-                }else{
-                    System.out.println("No se hace nada");
-                    System.out.println("No se muestra seccion");
+    public void AuditCrafft(boolean resp){
+        int cont = 0;
+        if (selected.isConsumo_alcohol()) {
+            cont+=1;
+        }
+        if (selected.isConsumo_marihuana()) {
+            cont+=1;
+        }
+        if (selected.isConsumo_otra_sustancia()) {
+            cont+=1;
+        }
+        if (resp){
+            if (cont == 1) {
+                System.out.println("Solo uno era verdadero, y ahora es falso");
+                auditCrafft = false;
+            }
+        }else{
+            if (auditCrafft == false) {
+                if (selected.getEdad() > 9 && selected.getEdad() < 15) {
+                    isAudit = true;
+                    isCrafft = false;
+                    auditCrafft = true;
+                }
+                if (selected.getEdad() > 14 && selected.getEdad() < 20) {
+                    isCrafft = true;
+                    isAudit = false;
                     auditCrafft = true;
                 }
             }
-        }else{
-            if (!selected.isConsumo_alcohol() && !selected.isConsumo_marihuana() && !selected.isConsumo_otra_sustancia()) {
-                System.out.println("Todas son falsas");
-                System.out.println("No se muestra seccion");
-                auditCrafft = true;
-            }
         }
-        System.out.println(auditCrafft); 
     }
     
     public void serviceChangeA(boolean resp){
