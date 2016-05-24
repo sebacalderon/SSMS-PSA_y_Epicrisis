@@ -7,13 +7,16 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -126,7 +129,18 @@ public class paciente implements Serializable {
     
     @Column(name="estado_paciente")
     private String estado;
+    
+    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
+    private List<clap> CLAPS;
 
+    public List<clap> getCLAPS() {
+        return CLAPS;
+    }
+
+    public void setCLAPS(List<clap> CLAPS) {
+        this.CLAPS = CLAPS;
+    }
+    
     public String getNombre_social() {
         return nombre_social;
     }
