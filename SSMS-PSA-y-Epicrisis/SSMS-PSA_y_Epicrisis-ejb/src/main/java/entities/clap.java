@@ -79,7 +79,7 @@ public class clap implements Serializable {
     private java.util.Date fecha_nacimiento;
     
     @NotNull(message="Debe ingresar un run")
-    @Column(name="run_clap",length=8, unique=true)
+    @Column(name="run_clap",length=8)
     private int RUN;
     
     @NotNull(message="Debe ingresar un dígito verificador")
@@ -702,18 +702,22 @@ public class clap implements Serializable {
     private int de_talla;
     
     @NotNull(message = "Debe ingresar un valor.")
-    @Column(name="presion_abdominal_clap")
-    private int presion_abdominal;
+    @Column(name="perimetro_abdominal_clap")
+    private int perimetro_abdominal;
     
     @Column(name="imc_clap")
-    private int imc;
+    private float imc;
     
     @Column(name="de_imc_clap")
     private int de_imc;
     
     @NotNull(message = "Debe ingresar un valor.")
-    @Column(name="presion_arterial_clap")
-    private float presion_arterial;
+    @Column(name="presion_arterial_sistolica_clap")
+    private int presion_arterial_sistolica;
+    
+    @NotNull(message = "Debe ingresar un valor.")
+    @Column(name="presion_arterial_diastolica_clap")
+    private int presion_arterial_diastolica;
     
     @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="aspecto_general_clap")
@@ -783,19 +787,19 @@ public class clap implements Serializable {
     private boolean riesgo_cardiovascular;
     
     @Column(name="riesgo_ssr_clap")
-    private String riesgo_ssr;
+    private boolean riesgo_ssr;
     
     @Column(name="riesgo_salud_mental_clap")
-    private String riesgo_salud_mental;
+    private boolean riesgo_salud_mental;
     
     @Column(name="riesgo_oh_drogas_clap")
-    private String riesgo_oh_drogas;
+    private boolean riesgo_oh_drogas;
     
     @Column(name="riesgo_nutricional_clap")
-    private String riesgo_nutricional;
+    private boolean riesgo_nutricional;
     
     @Column(name="riesgo_social_clap")
-    private String riesgo_social;
+    private boolean riesgo_social;
 
     public audit getAudit() {
         return audit;
@@ -805,13 +809,13 @@ public class clap implements Serializable {
         this.audit = audit;
     }
     
- 
+    
 
-    public int getImc() {
+    public float getImc() {
         return imc;
     }
 
-    public void setImc(int imc) {
+    public void setImc(float imc) {
         this.imc = imc;
     }
 
@@ -1975,20 +1979,28 @@ public class clap implements Serializable {
         this.de_talla = de_talla;
     }
 
-    public int getPresion_abdominal() {
-        return presion_abdominal;
+    public int getPerimetro_abdominal() {
+        return perimetro_abdominal;
     }
 
-    public void setPresion_abdominal(int presion_abdominal) {
-        this.presion_abdominal = presion_abdominal;
+    public void setPerimetro_abdominal(int perimetro_abdominal) {
+        this.perimetro_abdominal = perimetro_abdominal;
     }
 
-    public float getPresion_arterial() {
-        return presion_arterial;
+    public int getPresion_arterial_sistolica() {
+        return presion_arterial_sistolica;
     }
 
-    public void setPresion_arterial(float presion_arterial) {
-        this.presion_arterial = presion_arterial;
+    public void setPresion_arterial_sistolica(int presion_arterial_sistolica) {
+        this.presion_arterial_sistolica = presion_arterial_sistolica;
+    }
+
+    public int getPresion_arterial_diastolica() {
+        return presion_arterial_diastolica;
+    }
+
+    public void setPresion_arterial_diastolica(int presion_arterial_diastolica) {
+        this.presion_arterial_diastolica = presion_arterial_diastolica;
     }
 
     public boolean isAspecto_general() {
@@ -2136,43 +2148,43 @@ public class clap implements Serializable {
         this.riesgo_cardiovascular = riesgo_cardiovascular;
     }
 
-    public String getRiesgo_ssr() {
+    public boolean isRiesgo_ssr() {
         return riesgo_ssr;
     }
 
-    public void setRiesgo_ssr(String riesgo_ssr) {
+    public void setRiesgo_ssr(boolean riesgo_ssr) {
         this.riesgo_ssr = riesgo_ssr;
     }
 
-    public String getRiesgo_salud_mental() {
+    public boolean isRiesgo_salud_mental() {
         return riesgo_salud_mental;
     }
 
-    public void setRiesgo_salud_mental(String riesgo_salud_mental) {
+    public void setRiesgo_salud_mental(boolean riesgo_salud_mental) {
         this.riesgo_salud_mental = riesgo_salud_mental;
     }
 
-    public String getRiesgo_oh_drogas() {
+    public boolean isRiesgo_oh_drogas() {
         return riesgo_oh_drogas;
     }
 
-    public void setRiesgo_oh_drogas(String riesgo_oh_drogas) {
+    public void setRiesgo_oh_drogas(boolean riesgo_oh_drogas) {
         this.riesgo_oh_drogas = riesgo_oh_drogas;
     }
 
-    public String getRiesgo_nutricional() {
+    public boolean isRiesgo_nutricional() {
         return riesgo_nutricional;
     }
 
-    public void setRiesgo_nutricional(String riesgo_nutricional) {
+    public void setRiesgo_nutricional(boolean riesgo_nutricional) {
         this.riesgo_nutricional = riesgo_nutricional;
     }
 
-    public String getRiesgo_social() {
+    public boolean isRiesgo_social() {
         return riesgo_social;
     }
 
-    public void setRiesgo_social(String riesgo_social) {
+    public void setRiesgo_social(boolean riesgo_social) {
         this.riesgo_social = riesgo_social;
     }
     
