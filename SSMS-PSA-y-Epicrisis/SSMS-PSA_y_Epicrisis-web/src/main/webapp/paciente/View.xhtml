@@ -44,84 +44,15 @@
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_fecha_nacimiento}" for="fecha_nacimiento" />
                         <h:outputText id="fecha_nacimiento" value="#{pacienteController.selected.fecha_nacimiento}" title="#{bundle.ViewpacienteTitle_resto_direccion}"/>                                 
                         
+                        <p:selectOneMenu id="clap" value="#{clapController.selected}" >
+                            <f:selectItem itemLabel="Seleccione un opción" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{pacienteController.selected.CLAPS}" var="clap" itemLabel="#{clap.fecha_consulta}" itemValue="#{clap}"/>
+                        </p:selectOneMenu>
+                        
                     </p:panelGrid>
                 </h:panelGroup>
             </h:form>
         </b:panel>
-            <h:form id="clapListForm" rendered="#{pacienteController.selected.CLAPS != null}">
-                            <b:panel title="#{bundle.ListclapTitle}">
-                                <p:dataTable id="datalist" value="#{pacienteController.selected.CLAPS}" var="item"
-                                             selectionMode="single" selection="#{clapController.selected}"
-                                             paginator="true"
-                                             rowKey="#{item.id}"
-                                             rows="10"
-                                             rowsPerPageTemplate="10,20,30,40,50"
-                                             >
-
-                                    <p:ajax event="rowSelect"   update="viewButton editButton"/>
-                                    <p:ajax event="rowUnselect" update="viewButton editButton"/>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="#{bundle.ListclapTitle_nombres}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.nombres} #{item.primer_apellido} #{item.segundo_apellido}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="#{bundle.ListclapTitle_RUN}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.paciente.RUN} - #{item.DV}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="#{bundle.ListclapTitle_numero_consulta}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.id}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="#{bundle.ListclapTitle_fecha_consulta}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.fecha_consulta}">
-                                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                                        </h:outputText>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="#{bundle.ListclapTitle_funcionario}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.funcionario}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Riesgos"/>
-                                        </f:facet>
-                                        <h:outputText value="Riesgo salud sexual y reproductiva" rendered="#{item.riesgo_ssr}"/>
-                                        <h:outputText value="Riesgo salud mental" rendered="#{item.riesgo_salud_mental}"/>
-                                        <h:outputText value="Riesgo alcohol y drogas" rendered="#{item.riesgo_oh_drogas}"/>
-                                        <h:outputText value="Riesgo nutricional" rendered="#{item.riesgo_nutricional}"/>
-                                        <h:outputText value="Riesgo social" rendered="#{item.riesgo_social}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Edad paciente"/>
-                                        </f:facet>
-                                        <h:outputText value="#{clapController.calculoEdad(item.fecha_nacimiento)}">
-                                        </h:outputText>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="#{bundle.ListclapTitle_correo}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.correo}"/>
-                                    </p:column>
-                                    <f:facet name="footer">
-                                        <p:commandButton id="viewButton" rendered="false"   icon="ui-icon-search" value="#{bundle.View}" update=":clapViewForm" oncomplete="PF('clapViewDialog').show()" disabled="#{empty clapController.selected}"/>
-                                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{clapController.prepareEdit}" action="/clap/Edit?faces-redirect=true" disabled="#{empty clapController.selected}" rendered="#{loginController.esFuncionario()}"/>
-                                    </f:facet>
-                                </p:dataTable>
-                            </b:panel>
-                        </h:form>
         </ui:define>
     </ui:composition>
 </html>

@@ -180,7 +180,7 @@ public class clapController implements Serializable {
         }
         
         for (int i = 0; i < selected.getPaciente().getCLAPS().size(); i++) {
-            selected.getPaciente().getCLAPS().get(0).getPaciente().getNombres();
+            System.out.println(selected.getPaciente().getCLAPS().get(i).getPaciente().getNombres());
         }
         
         if (auditCrafft) {

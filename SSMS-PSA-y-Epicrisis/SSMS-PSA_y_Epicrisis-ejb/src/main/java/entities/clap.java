@@ -178,51 +178,39 @@ public class clap implements Serializable {
     
     //Antecedentes personales
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="perinatales_normales_clap",length = 1)
     private int perinatales_normales;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="alergias_clap",length = 1)
     private int alergias_normales;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="vacunas_completas_clap",length = 1)
     private int vacunas_completas;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="enfermedades_importantes_clap",length = 1)
     private int enfermedades_importantes;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="discapacidad_clap",length = 1)
     private int discapacidad;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="accidentes_relevantes_clap",length = 1)
     private int accidentes_relevantes;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="cirugia_hospitalizaciones_clap",length = 1)
     private int cirugia_hospitalizaciones;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="uso_medicamentos_clap",length = 1)
     private boolean uso_medicamentos;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="problemas_salud_mental_clap",length = 1)
     private int problemas_salud_mental;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="violencia_clap",length = 1)
     private int violencia;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="antecedentes_judiciales_clap",length = 1)
     private int antecedentes_judiciales;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="otros_antecedentes_personales_clap",length = 1)
     private int otros;
     
@@ -231,35 +219,27 @@ public class clap implements Serializable {
     
     //Antecedentes familiares
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="enfermeades_importantes_familia_clap",length = 1)
     private int enfermedades_importantes_familia;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="obesidad_familia_clap",length = 1)
     private int obesidad_familia;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="problemas_salud_mental_familia_clap",length = 1)
     private int problemas_salud_mental_familia;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="violencia_intrafamiliar_clap",length = 1)
     private int violencia_intrafamiliar;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="alcohol_y_otras_drogas_clap",length = 1)
     private int alcohol_y_otras_drogas;
      
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="padre_adolescente_clap",length = 1)
     private int padre_adolescente;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="judiciales_clap",length = 1)
     private int judiciales;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="otros_antecedentes_familiares_clap",length = 1)
     private int otros_antecedentes_familiares;
     
@@ -268,30 +248,24 @@ public class clap implements Serializable {
 
     //Familia
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="vive_con_solo_clap",length = 1)
     private boolean vive_con_solo;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="vive_con_madre_clap",length = 1)
     private boolean vive_con_madre;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="vive_con_padre_clap",length = 1)
     private boolean vive_con_padre;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="vive_en_institucion_clap",length = 1)
     private boolean vive_en_institucion;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="vive_con_otros_clap",length = 1)
     private boolean vive_con_otros;
     
     @Column(name="vive_con_especificacion_clap")
     private String vive_con_especificacion;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="comparte_cama_clap")
     private boolean comparte_cama;
     
@@ -316,7 +290,6 @@ public class clap implements Serializable {
     @Column(name="ocupacion_pareja_clap")
     private String ocupacion_pareja;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="percepcion_familia_clap")
     private int percepcion_familia;
     
@@ -329,11 +302,9 @@ public class clap implements Serializable {
     
     //vivienda
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="condiciones_sanitarias_clap")
     private boolean condiciones_sanitarias;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="hacinamiento_clap")
     private boolean hacinamiento;
     
@@ -342,41 +313,33 @@ public class clap implements Serializable {
     
     //Educacion
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="estudia_clap")
     private boolean estudia;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="nivel_educacion_clap")
     private int nivel_educacion;
     
-    @NotNull(message = "Debe ingresar el nivel curso en que se encuentra actualmente")
     @Column(name="curso_clap")
     private String curso;
     
-    @NotNull(message = "Debe debe ingresar un valor.")
     @Column(name="anos_repetidos_clap")
     private int anos_repetidos;
     
     @Column(name="causa_anos_repetidos_clap")
     private String causa_anos_repetidos;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="problemas_escuela_clap")
     private boolean problemas_escuela;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="violencia_escolar_clap")
     private boolean violencia_escolar;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="desercion_exclusion_clap")
     private boolean desercion_exclusion;
     
     @Column(name="causa_desercion_exclusion_clap")
     private String causa_desercion_exclusion;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="percepcion_rendimiento_clap")
     private int percepcion_rendimiento;
     
@@ -385,34 +348,27 @@ public class clap implements Serializable {
     
     //Trabajo
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="trabaja_clap")
     private boolean trabaja;
     
     @Column(name="horas_trabajo_clap")
     private int horas_trabajo;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="trabajo_infantil_clap")
     private boolean trabajo_infantil;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="trabajo_juvenil_clap")
     private boolean trabajo_juvenil;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="peores_formas_clap")
     private boolean peores_formas;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="ser_dom_no_remu_peligroso_clap")
     private boolean ser_dom_no_remu_peligroso;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="razon_de_trabajo_clap")
     private int razon_de_trabajo;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="legalizado_clap")
     private int legalizado;
     
@@ -424,50 +380,39 @@ public class clap implements Serializable {
     
     //vida social
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="aceptacion_clap")
     private int aceptacion;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="pareja_clap")
     private boolean pareja;
     
     @Column(name="edad_pareja_clap")
     private int edad_pareja;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="violencia_pareja_clap")
     private boolean violencia_pareja;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="amigos_clap")
     private boolean amigos;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="suicidalidad_amigos_clap")
     private boolean suicidalidad_amigos;
     
-    @NotNull(message = "Debe ingresar la cantidad de horas que dedica a alguna actividad física.")
     @Column(name="horas_actividad_fisica_clap")
     private int horas_actividad_fisica;
     
-    @NotNull(message = "Debe ingresar la cantidad de horas que dedica a la televisión.")
     @Column(name="horas_tv_clap")
     private int horas_tv;
     
-    @NotNull(message = "Debe ingresar la cantidad de horas que dedica al computador o consola.")
     @Column(name="horas_computador_consola_clap")
     private int horas_computador_consola;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="cyberbulling_clap")
     private boolean cyberbulling;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="grooming_clap")
     private boolean grooming;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="otras_actividades_clap")
     private boolean otras_actividades;
     
@@ -479,52 +424,42 @@ public class clap implements Serializable {
     
     //habitos y consumo
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="sueno_normal_clap")
     private boolean sueno_normal;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="horas_sueno_clap")
     private int horas_sueno;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="alimentacion_adecuada_clap")
     private boolean alimentacion_adecuada;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="comidas_familia_clap")
     private int comidas_familia;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="alimentacion_especial_clap")
     private boolean alimentacion_especial;
     
     @Column(name="espeficicacion_alimentacion_especial_clap")
     private String especificacion_alimentacion_especial;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="tabaco_clap")
     private boolean tabaco;
     
     @Column(name="cigarros_dia_clap")
     private int cigarros_dia;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="consumo_alcohol_clap")
     private boolean consumo_alcohol;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="consumo_marihuana_clap")
     private boolean consumo_marihuana;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="consumo_otra_sustancia_clap")
     private boolean consumo_otra_sustancia;
  
     @Column(name="especificacion_consumo_otra_sustancia_clap")
     private String especificacion_consumo_otra_sustancia;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="seguridad_vial_clap")
     private boolean seguridad_vial;
     
@@ -533,7 +468,6 @@ public class clap implements Serializable {
     
     //gineco/urólogo
     
-    @NotNull(message = "ingresar la edad de la menarca o espermarca")
     @Column(name="edad_menarca_espermarca_clap")
     private int edad_menarca_espermarca;
 
@@ -544,42 +478,33 @@ public class clap implements Serializable {
     @Column(name="no_conoce_fecha_ultima_menstruacion_clap")
     private boolean no_conoce_fecha_ultima_menstruacion;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="ciclos_regulares_clap")
     private int ciclos_regulares;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="dismenorrea_clap")
     private int dismenorrea;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="flujo_secrecion_patologico_clap")
     private boolean flujo_secrecion_patologico;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="its_vih_clap")
     private boolean its_vih;
     
     @Column(name="especificacion_its_vih_clap")
     private String especificacion_its_vih;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="tratamiento_clap")
     private int tratamiento;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="tratamiento_contactos_clap")
     private int tratamiento_contactos;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="embarazos_clap")
     private int embarazos;
     
-    @NotNull(message = "Debe ingresar un valor.")
     @Column(name="hijos_clap")
     private int hijos;
     
-    @NotNull(message = "Debe ingresar un valor.")
     @Column(name="abortos_clap")
     private int abortos;
     
@@ -588,57 +513,45 @@ public class clap implements Serializable {
     
     //sexualidad
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="orientacion_sexual_clap")
     private int orientacion_sexual;
     
     @Column(name="especificacion_orientacion_sexual_clap")
     private String especificacion_orientacion_sexual;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="conducta_sexual_clap")
     private int conducta_sexual;
     
     @Column(name="edad_inicio_conducta_sexual_clap")
     private int edad_inicio_conducta_sexual;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="relaciones_sexuales_clap")
     private int relaciones_sexuales;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="pareja_sexual_clap")
     private int pareja_sexual;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="dificultades_sexuales_clap")
     private int dificultades_sexuales;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="anticoncepcion_clap")
     private int anticoncepcion;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="uso_mac_clap")
     private int uso_mac;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="especificacion_uso_mac_clap")
     private String especificacion_uso_mac;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="razon_no_uso_mac_clap")
     private String razon_no_uso_mac;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="consejera_uso_mac_clap")
     private boolean consejeria_uso_mac;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="aco_emergencia_clap")
     private boolean aco_emergencia;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="abuso_sexual_clap")
     private boolean abuso_sexual;
     
@@ -650,27 +563,21 @@ public class clap implements Serializable {
     
     //Situación psico_emocinoal
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="imagen_corporal_clap")
     private int imagen_corporal;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="bienestar_emocional_clap")
     private int bienestar_emocional;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="vida_proyecto_clap")
     private int vida_proyecto;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="ideacion_suicida_clap")
     private boolean ideacion_suicida;
 
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="intento_suicida_clap")
     private boolean intento_suicida;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="referente_adulto_clap")
     private int referente_adulto;
     
@@ -685,23 +592,18 @@ public class clap implements Serializable {
     
     //Examen físico
     
-    @NotNull(message = "Debe ingresar un valor.")
     @Column(name="peso_clap")
     private int peso;
     
-    @NotNull(message = "Debe ingresar un valor.")
     @Column(name="de_peso_clap")
     private int de_peso;
     
-    @NotNull(message = "Debe ingresar un valor.")
     @Column(name="talla_clap")
     private int talla;
     
-    @NotNull(message = "Debe ingresar un valor.")
     @Column(name="de_talla_clap")
     private int de_talla;
     
-    @NotNull(message = "Debe ingresar un valor.")
     @Column(name="perimetro_abdominal_clap")
     private int perimetro_abdominal;
     
@@ -711,54 +613,42 @@ public class clap implements Serializable {
     @Column(name="de_imc_clap")
     private int de_imc;
     
-    @NotNull(message = "Debe ingresar un valor.")
     @Column(name="presion_arterial_sistolica_clap")
     private int presion_arterial_sistolica;
     
-    @NotNull(message = "Debe ingresar un valor.")
     @Column(name="presion_arterial_diastolica_clap")
     private int presion_arterial_diastolica;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="aspecto_general_clap")
     private boolean aspecto_general;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="agudeza_visual_clap")
     private boolean agudeza_visual;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="salud_bucal_clap")
     private boolean salud_bucal;
      
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="cardio_pulmonar_clap")
     private boolean cardio_pulmonar;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="abdomen_clap")
     private boolean abdomen;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="columna_clap")
     private boolean columna;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="extremidades_clap")
     private boolean extremidades;
     
     @Column(name="otra_area_examen_fisico_clap")
     private String otra_area_examen_fisico;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="tanner_con_foto_clap")
     private boolean tanner_con_foto;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="tanner_mama_clap")
     private int tanner_mama;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="tanner_genital_clap")
     private int tanner_genital;
     
@@ -767,11 +657,9 @@ public class clap implements Serializable {
     
     //final
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="impresion_diagnostica_clap",columnDefinition = "TEXT")
     private String impresion_diagnostica;
     
-    @NotNull(message = "Debe seleccionar una opción.")
     @Column(name="indicaciones_interconsultas_clap",columnDefinition = "TEXT")
     private String indicaciones_interconsultas;
     
