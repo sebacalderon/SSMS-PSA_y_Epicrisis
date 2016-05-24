@@ -130,7 +130,7 @@ public class paciente implements Serializable {
     @Column(name="estado_paciente")
     private String estado;
     
-    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "paciente", fetch = FetchType.EAGER)
     private List<clap> CLAPS;
 
     public List<clap> getCLAPS() {

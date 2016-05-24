@@ -6,9 +6,11 @@
 package sessionbeans;
 
 import entities.clap;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +29,14 @@ public class clapFacade extends AbstractFacade<clap> implements clapFacadeLocal 
 
     public clapFacade() {
         super(clap.class);
+    }
+    
+    @Override
+    public List<clap> findbyPaciente(int RUN) {
+        Query query;
+        query = em.createNamedQuery("clap.findbyPaciente").
+                setParameter("RUN",RUN);
+        return query.getResultList();
     }
     
 }

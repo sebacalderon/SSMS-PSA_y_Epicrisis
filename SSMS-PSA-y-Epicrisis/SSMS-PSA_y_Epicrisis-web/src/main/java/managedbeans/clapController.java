@@ -33,6 +33,7 @@ public class clapController implements Serializable {
     @EJB
     private sessionbeans.clapFacadeLocal ejbFacade;
     private List<clap> items = null;
+    private List<clap> itemsPorPaciente = null;
     private clap selected;
     private paciente Paciente = null;
     private boolean auditCrafft = false;
@@ -73,6 +74,15 @@ public class clapController implements Serializable {
         this.isAudit = isAudit;
     }
 
+    public List<clap> getItemsPorPaciente(int RUN) {
+        itemsPorPaciente = getFacade().findbyPaciente(RUN);
+        return itemsPorPaciente;
+    }
+
+    public void setItemsPorPaciente(List<clap> itemsPorPaciente) {
+        this.itemsPorPaciente = itemsPorPaciente;
+    }
+    
     public boolean isIsCrafft() {
         return isCrafft;
     }

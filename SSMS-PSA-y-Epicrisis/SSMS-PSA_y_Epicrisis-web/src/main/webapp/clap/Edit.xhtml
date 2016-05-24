@@ -19,7 +19,7 @@
                 <h2 align="center">#{bundle.EditclapTitle}</h2>
             </b:row>
             <h:form id="clapEditForm" rendered="#{clapController.selected != null}">
-                <b:panel id="panel1" title="Ficha personal del paciente" style="margin-left:3%;width: 95%;" look="info">
+               <b:panel id="panel1" title="Ficha personal del paciente" style="margin-left:3%;width: 95%;" look="info">
                     <div style="margin-left:20px;">
                         <b:row>
                             <b:column col-md="6" col-xs="12">
@@ -491,13 +491,14 @@
 
                 <b:panel title="Familia" style="margin-left:3%;width: 95%; " look="info">
                     <p:panelGrid columns="2" style="width:98%;border:10px;" rendered="#{clapController.selected != null}">
-                        <b:column col-md="6" col-xs="12">
+                        <b:column id="vive_con" col-md="6" col-xs="12">
                             <h4>Vive con</h4>
                             <b:row>
                                 <b:column col-xs="4"><p:outputLabel value="solo/a" for="vive_solo" /></b:column>
                                 <b:column col-xs="8"><p:selectOneRadio id="vive_solo" style="width:13em;" value="#{clapController.selected.vive_con_solo}" layout="grid" columns="2">
                                     <f:selectItem itemLabel="Si" itemValue="true" />
                                     <f:selectItem itemLabel="No" itemValue="false" />
+                                    <p:ajax event="valueChange"  listener="#{clapController.setViveCon}" immediate="true" update="vive_con" ></p:ajax>
                                 </p:selectOneRadio>
                                 </b:column>
                             </b:row>
@@ -506,6 +507,7 @@
                                 <b:column col-md="8"><p:selectOneRadio id="vive_con_madre" style="width:13em;" value="#{clapController.selected.vive_con_madre}" layout="grid" columns="2">
                                 <f:selectItem itemLabel="Si" itemValue="true" />
                                 <f:selectItem itemLabel="No" itemValue="false" />
+                                <p:ajax event="valueChange"  listener="#{clapController.setViveCon}" immediate="true" update="vive_con" ></p:ajax>
                             </p:selectOneRadio></b:column>
                             </b:row>
                             <b:row>
@@ -513,6 +515,7 @@
                             <b:column col-md="8"><p:selectOneRadio id="vive_con_padre" style="width:13em;" value="#{clapController.selected.vive_con_padre}" layout="grid" columns="2">
                                 <f:selectItem itemLabel="Si" itemValue="true" />
                                 <f:selectItem itemLabel="No" itemValue="false" />
+                                <p:ajax event="valueChange"  listener="#{clapController.setViveCon}" immediate="true" update="vive_con" ></p:ajax>
                                 </p:selectOneRadio></b:column>
                             
                             </b:row>
@@ -522,6 +525,7 @@
                                 <b:column col-md="8"><p:selectOneRadio id="vive_en_institucion" style="width:13em;" value="#{clapController.selected.vive_en_institucion}" layout="grid" columns="2">
                                     <f:selectItem itemLabel="Si" itemValue="true" />
                                     <f:selectItem itemLabel="No" itemValue="false" />
+                                    <p:ajax event="valueChange"  listener="#{clapController.setViveCon}" immediate="true" update="vive_con" ></p:ajax>
                                 </p:selectOneRadio></b:column>
                             </b:row>
                             <b:row>
@@ -529,6 +533,7 @@
                                 <b:column col-md="8"><p:selectOneRadio id="vive_con_otros" style="width:13em;" value="#{clapController.selected.vive_con_otros}" layout="grid" columns="2">
                                     <f:selectItem itemLabel="Si" itemValue="true" />
                                     <f:selectItem itemLabel="No" itemValue="false" />
+                                    <p:ajax event="valueChange"  listener="#{clapController.setViveCon}" immediate="true" update="vive_con" ></p:ajax>
                                 </p:selectOneRadio></b:column>
                             </b:row>
                             <b:row style="margin-left:20px;">
@@ -1083,8 +1088,8 @@
                                 <b:column col-md="4"><p:outputLabel value="Alcohol" for="consumo_alcohol" /></b:column>
                                 <b:column col-md="8">
                                     <p:selectOneRadio id="consumo_alcohol" style="width:12em;" value="#{clapController.selected.consumo_alcohol}" layout="grid" columns="2" >
-                                        <f:selectItem itemValue="false" itemLabel="No"/>
-                                        <f:selectItem itemValue="true" itemLabel="Si"/>
+                                        <f:selectItem itemValue="false" />
+                                        <f:selectItem itemValue="true" />
                                         <f:ajax event="valueChange"  listener="#{clapController.AuditCrafft(clapController.selected.consumo_alcohol)}" immediate="true" render="habitos" ></f:ajax>                                                                                    
                                     </p:selectOneRadio>
                                 </b:column>
@@ -1093,8 +1098,8 @@
                                 <b:column col-md="4"><p:outputLabel value="Marihuana" for="consumo_marihuana" /></b:column>
                                 <b:column col-md="8">
                                     <p:selectOneRadio id="consumo_marihuana" style="width:12em" value="#{clapController.selected.consumo_marihuana}" layout="grid" columns="2">
-                                        <f:selectItem itemValue="false" itemLabel="No"/>
-                                        <f:selectItem itemValue="true" itemLabel="Si"/>
+                                        <f:selectItem itemValue="false" />
+                                        <f:selectItem itemValue="true" />
                                         <f:ajax event="valueChange"  listener="#{clapController.AuditCrafft(clapController.selected.consumo_marihuana)}" immediate="true" render="habitos" ></f:ajax>
                                     </p:selectOneRadio>
                                 </b:column>
@@ -1103,8 +1108,8 @@
                                 <b:column col-md="4"><p:outputLabel value="Otra sustancia" for="consumo_otra_sustancia" /></b:column>
                                 <b:column col-md="8">
                                     <p:selectOneRadio id="consumo_otra_sustancia" style="width:12em" value="#{clapController.selected.consumo_otra_sustancia}" layout="grid" columns="2">
-                                        <f:selectItem itemValue="false" itemLabel="No"/>
-                                        <f:selectItem itemValue="true" itemLabel="Si"/>
+                                        <f:selectItem itemValue="false" />
+                                        <f:selectItem itemValue="true" />
                                         <f:ajax event="valueChange"  listener="#{clapController.AuditCrafft(clapController.selected.consumo_otra_sustancia)}" immediate="true" render="habitos" ></f:ajax>
                                     </p:selectOneRadio>
                                 </b:column>
@@ -1729,7 +1734,9 @@
                                 </b:row>
                                 <b:row>
                                     <b:column col-xs="8">
-                                        <pe:inputNumber id="peso" value="#{clapController.selected.peso}" minValue="0" maxValue="250" title="#{bundle.CreateclapTitle_peso}" />
+                                        <pe:inputNumber id="peso" value="#{clapController.selected.peso}" minValue="0" maxValue="250" title="#{bundle.CreateclapTitle_peso}" >
+                                            <p:ajax event="keyup"  listener="#{clapController.setIMC}" immediate="true" update="imc" ></p:ajax>
+                                        </pe:inputNumber>
                                     </b:column>
                                     <b:column col-xs="4">
                                         <pe:inputNumber id="de_peso" value="#{clapController.selected.de_peso}" minValue="0" maxValue="1000" style="max-width: 50px;"/>
@@ -1747,7 +1754,9 @@
                                 </b:row>
                                 <b:row>
                                     <b:column col-xs="8">
-                                        <pe:inputNumber id="talla" value="#{clapController.selected.talla}" minValue="0" maxValue="250" />
+                                        <pe:inputNumber id="talla" value="#{clapController.selected.talla}" minValue="0" maxValue="250" >
+                                            <p:ajax event="keyup"  listener="#{clapController.setIMC}" immediate="true" update="imc" ></p:ajax>
+                                        </pe:inputNumber>
                                     </b:column>
                                     <b:column col-xs="4">
                                         <pe:inputNumber id="de_talla" value="#{clapController.selected.de_talla}"  minValue="0" maxValue="1000"  style="max-width: 50px;" />
@@ -1756,10 +1765,10 @@
                             </b:column>
                             <b:column col-md="4" col-xs="6">
                                 <b:row>
-                                    <p:outputLabel value="Presion abdominal" for="presion_abdominal" />
+                                    <p:outputLabel value="Perímetro abdominal" for="perimetro_abdominal" />
                                 </b:row>
                                 <b:row>
-                                   <pe:inputNumber minValue="0" maxValue="1000"  id="presion_abdominal" value="#{clapController.selected.presion_abdominal}" />
+                                   <pe:inputNumber minValue="0" maxValue="1000"  id="perimetro_abdominal" value="#{clapController.selected.perimetro_abdominal}" />
                                 </b:row>
                             </b:column>
                         </b:row>
@@ -1768,7 +1777,8 @@
                             <b:column col-md="4" col-xs="6">
                                 <b:row>
                                     <b:column col-xs="8">
-                                        <p:outputLabel value="IMC" for="talla" />
+                                        <p:outputLabel value="IMC" for="imc" >
+                                        </p:outputLabel>
                                     </b:column>
                                     <b:column col-xs="4">
                                         <p:outputLabel for="de_imc" value="DE" />
@@ -1776,7 +1786,7 @@
                                 </b:row>
                                 <b:row>
                                     <b:column col-xs="8">
-                                        <pe:inputNumber id="imc" minValue="0" maxValue="100" value="#{clapController.selected.imc}" />
+                                        <pe:inputNumber disabled="true" id="imc" value="#{clapController.selected.imc}" />
                                     </b:column>
                                     <b:column col-xs="4">
                                         <pe:inputNumber id="de_imc" minValue="0" maxValue="1000" value="#{clapController.selected.de_imc}" style="max-width: 50px;" title="DE" />
@@ -1788,7 +1798,9 @@
                                     <p:outputLabel value="Presion arterial" for="presion_arterial" />
                                 </b:row>
                                 <b:row>
-                                   <pe:inputNumber id="presion_arterial"  minValue="0" maxValue="1000" value="#{clapController.selected.presion_arterial}" />
+                                    <b:column col-xs="5"><pe:inputNumber id="presion_arterial"  minValue="0" maxValue="1000" value="#{clapController.selected.presion_arterial_sistolica}" /></b:column>
+                                    <b:column col-xs="1"> / </b:column> 
+                                    <b:column col-xs="5"><pe:inputNumber  minValue="0" maxValue="1000" value="#{clapController.selected.presion_arterial_diastolica}" /></b:column>
                                 </b:row>
                             </b:column>
                             <b:column col-md="4" col-xs="6">
