@@ -3,6 +3,7 @@ package managedbeans;
 import entities.Crafft;
 import entities.audit;
 import entities.clap;
+import entities.clap_;
 import entities.comuna;
 import entities.paciente;
 import managedbeans.util.JsfUtil;
@@ -41,6 +42,12 @@ public class clapController implements Serializable {
     private Crafft crafft;
     private int puntajeACrafft;
 
+    boolean vive_solo=false;
+    boolean vive_en_institucion=false;
+    boolean vive_con_madre=false;
+    boolean vive_con_padre=false;
+    boolean vive_con_otros=false;
+    
     @Inject
     private pacienteController pacienteCtrl;
     
@@ -178,6 +185,86 @@ public class clapController implements Serializable {
             }
         }
     
+        //Riesgos
+        selected.setRiesgo_cardiovascular(false);
+        selected.setRiesgo_nutricional(false);
+        selected.setRiesgo_oh_drogas(false);
+        selected.setRiesgo_salud_mental(false);
+        selected.setRiesgo_social(false);
+        selected.setRiesgo_ssr(false);
+        
+        //cardiovascular nutricional
+        if(selected.getImc()<24){
+            selected.setRiesgo_cardiovascular(true);
+            selected.setRiesgo_nutricional(true);
+        }
+        if(selected.isCardio_pulmonar()){
+            selected.setRiesgo_cardiovascular(true);
+        }
+        if(selected.getPresion_arterial_sistolica()>=120||selected.getPresion_arterial_diastolica()>=80){
+            selected.setRiesgo_cardiovascular(true);
+        }
+        if(selected.getPerimetro_abdominal()>88&&selected.getSexo()==2||selected.getPerimetro_abdominal()>102&&selected.getSexo()==3){
+            selected.setRiesgo_cardiovascular(true);
+            selected.setRiesgo_nutricional(true);
+        }
+        if(selected.isAlimentacion_adecuada()){
+            selected.setRiesgo_nutricional(true);
+        }
+        //ssr
+        if(selected.getConducta_sexual()==3||selected.getEdad_inicio_conducta_sexual()< 14){
+            selected.setRiesgo_ssr(true);
+        }
+        if(selected.getDificultades_sexuales()==2){
+            selected.setRiesgo_ssr(true);
+        }
+        if(selected.getCiclos_regulares()==2||selected.getDismenorrea()==2||selected.isFlujo_secrecion_patologico()){
+            selected.setRiesgo_ssr(true);
+        }
+        if(selected.isIts_vih()||selected.getTratamiento()>1||selected.getTratamiento_contactos()>1){
+            selected.setRiesgo_ssr(true);
+        }
+        if(selected.getEmbarazos()>0||selected.getHijos()>0||selected.getAbortos()>0){
+            selected.setRiesgo_ssr(true);
+        }
+        if(selected.getUso_mac()>1||selected.getAnticoncepcion()>1||selected.isAbuso_sexual()){
+            selected.setRiesgo_ssr(true);
+        }
+        
+        //Salud mental
+        
+        if(selected.getImagen_corporal()>1||selected.getBienestar_emocional()>1){
+            selected.setRiesgo_salud_mental(true);
+        }
+        if(selected.getVida_proyecto()==3||selected.isIntento_suicida()||selected.isIdeacion_suicida()){
+            selected.setRiesgo_salud_mental(true);
+        }
+        
+        //Drogas
+        
+        if(selected.isTabaco()||selected.isConsumo_alcohol()||selected.isConsumo_marihuana()||selected.isConsumo_otra_sustancia()){
+            selected.setRiesgo_oh_drogas(true);
+        }
+        
+        //riesgo social
+        
+        if(selected.getReferente_adulto()==5||selected.getAceptacion()==2||selected.getAceptacion()==3||selected.isAmigos()==false||selected.isSuicidalidad_amigos()==true){
+            selected.setRiesgo_social(true);
+        }
+        if(selected.isCyberbulling()|selected.isGrooming()||selected.isViolencia_escolar()||selected.isViolencia_pareja()){
+            selected.setRiesgo_social(true);
+        }
+        if(selected.isVive_con_solo()||selected.isVive_en_institucion()||selected.getPercepcion_familia()>2||selected.isDesercion_exclusion()){
+            selected.setRiesgo_social(true);
+        }
+        System.out.println("Riesgo cardiovascular: "+selected.isRiesgo_cardiovascular());
+        System.out.println("Riesgo nutricional: "+selected.isRiesgo_nutricional());
+        System.out.println("Riesgo OH drogas: "+selected.isRiesgo_oh_drogas());
+        System.out.println("Riesgo salud mental: "+selected.isRiesgo_salud_mental());
+        System.out.println("Riesgo social: "+selected.isRiesgo_social());
+        System.out.println("Riesgo ssr: "+selected.isRiesgo_ssr());
+
+        
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("clapCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -185,6 +272,48 @@ public class clapController implements Serializable {
         return "/faces/clap/List.xhtml";
     }
 
+    public void setIMC(){
+        if(selected.getTalla()!= 0 && selected.getPeso()!=0){
+            selected.setImc((float) (selected.getPeso()/Math.pow((float)selected.getTalla()/100,2)));
+        }
+        System.out.println("Peso: "+selected.getPeso());
+        System.out.println("Talla: "+(float)selected.getTalla()/100);
+        System.out.println("IMC: "+selected.getImc());
+    }
+    
+    public void setViveCon(){
+        if(selected.isVive_con_madre()&&vive_con_madre==false){
+            selected.setVive_con_solo(false);
+            selected.setVive_en_institucion(false);
+        }
+        else if(selected.isVive_con_padre()&&vive_con_padre==false){
+            selected.setVive_con_solo(false);
+            selected.setVive_en_institucion(false);
+        }
+        else if(selected.isVive_con_otros()&&vive_con_otros==false){
+            selected.setVive_con_solo(false);
+            selected.setVive_en_institucion(false);
+        }
+        else if(selected.isVive_en_institucion()&&vive_en_institucion==false){
+            selected.setVive_con_madre(false);
+            selected.setVive_con_padre(false);
+            selected.setVive_con_solo(false);
+            selected.setVive_con_otros(false);
+        }
+        else if(selected.isVive_con_solo()&&vive_solo==false){
+            selected.setVive_con_madre(false);
+            selected.setVive_con_otros(false);
+            selected.setVive_con_padre(false);
+            selected.setVive_en_institucion(false);
+        }
+        vive_con_madre=selected.isVive_con_madre();
+        vive_solo=selected.isVive_con_solo();
+        vive_con_padre=selected.isVive_con_padre();
+        vive_en_institucion=selected.isVive_en_institucion();
+        vive_con_otros=selected.isVive_con_otros();
+
+    }
+    
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
     }
