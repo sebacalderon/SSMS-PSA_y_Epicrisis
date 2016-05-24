@@ -4,69 +4,127 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
 
-    <ui:composition>
+    <ui:composition template="/template.xhtml">
+        
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewpacienteTitle}"></h:outputText>
+        </ui:define> 
 
-        <p:dialog id="pacienteViewDlg" widgetVar="pacienteViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewpacienteTitle}">
+        <ui:define name="body">
+        <b:panel id="pacienteViewDlg" title="#{bundle.ViewpacienteTitle}">
             <h:form id="pacienteViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{pacienteController.selected != null}">
-                        <h:outputText value="#{bundle.ViewpacienteLabel_nombre_social}"/>
-                        <h:outputText value="#{pacienteController.selected.nombre_social}" title="#{bundle.ViewpacienteTitle_nombre_social}"/>
-                        <h:outputText value="#{bundle.ViewpacienteLabel_id}"/>
-                        <h:outputText value="#{pacienteController.selected.id}" title="#{bundle.ViewpacienteTitle_id}"/>
-                        <h:outputText value="#{bundle.ViewpacienteLabel_nacionalidad}"/>
-                        <h:outputText value="#{pacienteController.selected.nacionalidad}" title="#{bundle.ViewpacienteTitle_nacionalidad}"/>
-                        <h:outputText value="#{bundle.ViewpacienteLabel_RUN}"/>
-                        <h:outputText value="#{pacienteController.selected.RUN}" title="#{bundle.ViewpacienteTitle_RUN}"/>
-                        <h:outputText value="#{bundle.ViewpacienteLabel_DV}"/>
-                        <h:outputText value="#{pacienteController.selected.DV}" title="#{bundle.ViewpacienteTitle_DV}"/>
-                        <h:outputText value="#{bundle.ViewpacienteLabel_nombres}"/>
-                        <h:outputText value="#{pacienteController.selected.nombres}" title="#{bundle.ViewpacienteTitle_nombres}"/>
-                        <h:outputText value="#{bundle.ViewpacienteLabel_primer_apellido}"/>
-                        <h:outputText value="#{pacienteController.selected.primer_apellido}" title="#{bundle.ViewpacienteTitle_primer_apellido}"/>
-                        <h:outputText value="#{bundle.ViewpacienteLabel_segundo_apellido}"/>
-                        <h:outputText value="#{pacienteController.selected.segundo_apellido}" title="#{bundle.ViewpacienteTitle_segundo_apellido}"/>
-                        <h:outputText value="#{bundle.ViewpacienteLabel_sexo}"/>
-                        <h:outputText value="#{pacienteController.selected.sexo}" title="#{bundle.ViewpacienteTitle_sexo}"/>
-                        <h:outputText value="#{bundle.ViewpacienteLabel_fecha_nacimiento}"/>
-                        <h:outputText value="#{pacienteController.selected.fecha_nacimiento}" title="#{bundle.ViewpacienteTitle_fecha_nacimiento}"/>
-                        <h:outputText value="#{bundle.ViewpacienteLabel_region_residencia}"/>
-                        <h:outputText value="#{pacienteController.selected.region_residencia}" title="#{bundle.ViewpacienteTitle_region_residencia}"/>
-                        <h:outputText value="#{bundle.ViewpacienteLabel_comuna_residencia}"/>
-                        <h:outputText value="#{pacienteController.selected.comuna_residencia}" title="#{bundle.ViewpacienteTitle_comuna_residencia}"/>
-                        <h:outputText value="#{bundle.ViewpacienteLabel_calle_direccion}"/>
-                        <h:outputText value="#{pacienteController.selected.calle_direccion}" title="#{bundle.ViewpacienteTitle_calle_direccion}"/>
-                        <h:outputText value="#{bundle.ViewpacienteLabel_numero_direccion}"/>
-                        <h:outputText value="#{pacienteController.selected.numero_direccion}" title="#{bundle.ViewpacienteTitle_numero_direccion}"/>
-                        <h:outputText value="#{bundle.ViewpacienteLabel_resto_direccion}"/>
-                        <h:outputText value="#{pacienteController.selected.resto_direccion}" title="#{bundle.ViewpacienteTitle_resto_direccion}"/>
-                        <h:outputText value="#{bundle.ViewpacienteLabel_telefono_fijo}"/>
-                        <h:outputText value="#{pacienteController.selected.telefono_fijo}" title="#{bundle.ViewpacienteTitle_telefono_fijo}"/>
-                        <h:outputText value="#{bundle.ViewpacienteLabel_teléfono_movil}"/>
-                        <h:outputText value="#{pacienteController.selected.telefono_movil}" title="#{bundle.ViewpacienteTitle_telefono_movil}"/>
-                        <h:outputText value="#{bundle.ViewpacienteLabel_programa_social}"/>
-                        <h:outputText value="#{pacienteController.selected.programa_social}" title="#{bundle.ViewpacienteTitle_programa_social}"/>
-                        <h:outputText value="#{bundle.ViewpacienteLabel_prevision}"/>
-                        <h:outputText value="#{pacienteController.selected.prevision}" title="#{bundle.ViewpacienteTitle_prevision}"/>
-                        <h:outputText value="#{bundle.ViewpacienteLabel_estado_conyugal}"/>
-                        <h:outputText value="#{pacienteController.selected.estado_conyugal}" title="#{bundle.ViewpacienteTitle_estado_conyugal}"/>
-                        <h:outputText value="#{bundle.ViewpacienteLabel_grupo_fonasa}"/>
-                        <h:outputText value="#{pacienteController.selected.grupo_fonasa}" title="#{bundle.ViewpacienteTitle_grupo_fonasa}"/>
-                        <h:outputText value="#{bundle.ViewpacienteLabel_pueblo_originario}"/>
-                        <h:outputText value="#{pacienteController.selected.pueblo_originario}" title="#{bundle.ViewpacienteTitle_pueblo_originario}"/>
-                        <h:outputText value="#{bundle.ViewpacienteLabel_cesfam}"/>
-                        <h:outputText value="#{pacienteController.selected.cesfam}" title="#{bundle.ViewpacienteTitle_cesfam}"/>
-                        <h:outputText value="#{bundle.ViewpacienteLabel_correo}"/>
-                        <h:outputText value="#{pacienteController.selected.correo}" title="#{bundle.ViewpacienteTitle_correo}"/>
-                        <h:outputText value="#{bundle.ViewpacienteLabel_estado}"/>
-                        <h:outputText value="#{pacienteController.selected.estado}" title="#{bundle.ViewpacienteTitle_estado}"/>
+                    <p:panelGrid columns="4" rendered="#{pacienteController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_nombres}" for="nombres" />
+                        <h:outputText id="nombres" value="#{pacienteController.selected.nombres}" title="#{bundle.ViewpacienteTitle_nombres}"/>
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_primer_apellido}" for="primer_apellido" />
+                        <h:outputText id="primer_apellido" value="#{pacienteController.selected.primer_apellido}" title="#{bundle.ViewpacienteTitle_primer_apellido}"/>
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_segundo_apellido}" for="segundo_apellido" />
+                        <h:outputText id="segundo_apellido" value="#{pacienteController.selected.segundo_apellido}" title="#{bundle.ViewpacienteTitle_segundo_apellido}"/>                        
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_nombre_social}" for="nombre_social" />
+                        <h:outputText id="nombre_social" value="#{pacienteController.selected.nombre_social}" title="#{bundle.ViewpacienteTitle_nombre_social}"/>                        
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_region_residencia}" for="region_residencia" />
+                        <h:outputText id="region_residencia" value="#{pacienteController.selected.region_residencia.nombre}" title="#{bundle.ViewpacienteTitle_region_residencia}"/>                                              
+    
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_comuna_residencia}" for="comuna_residencia" />
+                        <h:outputText id="comuna_residencia" value="#{pacienteController.selected.comuna_residencia.nombre}" title="#{bundle.ViewpacienteTitle_comuna_residencia}"/>                                              
+                      
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_calle_direccion}" for="calle_direccion" />
+                        <h:outputText id="calle_direccion" value="#{pacienteController.selected.calle_direccion}" title="#{bundle.ViewpacienteTitle_calle_direccion}"/>                                              
+
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_numero_direccion}" for="numero_direccion" />
+                        <h:outputText id="numero_direccion" value="#{pacienteController.selected.numero_direccion}" title="#{bundle.ViewpacienteTitle_numero_direccion}"/>                                              
+
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_resto_direccion}" for="resto_direccion" />
+                        <h:outputText id="resto_direccion" value="#{pacienteController.selected.resto_direccion}" title="#{bundle.ViewpacienteTitle_resto_direccion}"/>                                              
+                        
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_fecha_nacimiento}" for="fecha_nacimiento" />
+                        <h:outputText id="fecha_nacimiento" value="#{pacienteController.selected.fecha_nacimiento}" title="#{bundle.ViewpacienteTitle_resto_direccion}"/>                                 
+                        
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="pacienteViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
-        </p:dialog>
-
+        </b:panel>
+            <b:panel id="pacienteClapViewDlg" title="CLAPS del Paciente">
+            <h:form id="clapViewForm">
+                <h:panelGroup id="display">
+                    
+                <p:dataTable id="datalist" value="#{clapController.getItemsPorPaciente(pacienteController.selected.RUN)}" var="item"
+                             selectionMode="single" selection="#{clapController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+                    <p:ajax event="rowSelect"   update="viewButton editButton createClap"/>
+                        <p:ajax event="rowUnselect" update="viewButton editButton createClap"/>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListclapTitle_nombres}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombres} #{item.primer_apellido} #{item.segundo_apellido}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListclapTitle_RUN}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.paciente.RUN} - #{item.DV}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListclapTitle_numero_consulta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListclapTitle_fecha_consulta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fecha_consulta}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListclapTitle_funcionario}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.funcionario}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Riesgos"/>
+                            </f:facet>
+                            <h:outputText value="Riesgo salud sexual y reproductiva" rendered="#{item.riesgo_ssr}"/>
+                            <h:outputText value="Riesgo salud mental" rendered="#{item.riesgo_salud_mental}"/>
+                            <h:outputText value="Riesgo alcohol y drogas" rendered="#{item.riesgo_oh_drogas}"/>
+                            <h:outputText value="Riesgo nutricional" rendered="#{item.riesgo_nutricional}"/>
+                            <h:outputText value="Riesgo social" rendered="#{item.riesgo_social}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Edad paciente"/>
+                            </f:facet>
+                            <h:outputText value="#{clapController.calculoEdad(item.fecha_nacimiento)}">
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListclapTitle_correo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.correo}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createClap" icon="ui-icon-plus"   value="Crear Clap" actionListener="#{clapController.prepareClap(pacienteController.selected)}" action="/clap/Create?faces-redirect=true" rendered="#{loginController.esFuncionario()}"/>                            
+                            <p:commandButton id="viewButton" rendered="false"   icon="ui-icon-search" value="#{bundle.View}" update=":clapViewForm" oncomplete="PF('clapViewDialog').show()" disabled="#{empty clapController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{clapController.prepareEdit}" action="/clap/Edit?faces-redirect=true" disabled="#{empty clapController.selected}" rendered="#{loginController.esFuncionario()}"/>
+                        </f:facet>
+                </p:dataTable>
+                </h:panelGroup>
+            </h:form>
+        </b:panel>
+        </ui:define>
     </ui:composition>
 </html>

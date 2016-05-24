@@ -27,7 +27,9 @@ public interface clapFacadeLocal {
     List<clap> findAll();
 
     List<clap> findRange(int[] range);
-
+    
+    List<clap> findbyPaciente(int RUN);
+    
     int count();
     
 }

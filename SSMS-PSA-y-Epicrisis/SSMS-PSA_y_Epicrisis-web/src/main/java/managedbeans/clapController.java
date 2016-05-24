@@ -33,6 +33,7 @@ public class clapController implements Serializable {
     @EJB
     private sessionbeans.clapFacadeLocal ejbFacade;
     private List<clap> items = null;
+    private List<clap> itemsPorPaciente = null;
     private clap selected;
     private paciente Paciente = null;
     private boolean auditCrafft = false;
@@ -73,6 +74,15 @@ public class clapController implements Serializable {
         this.isAudit = isAudit;
     }
 
+    public List<clap> getItemsPorPaciente(int RUN) {
+        itemsPorPaciente = getFacade().findbyPaciente(RUN);
+        return itemsPorPaciente;
+    }
+
+    public void setItemsPorPaciente(List<clap> itemsPorPaciente) {
+        this.itemsPorPaciente = itemsPorPaciente;
+    }
+    
     public boolean isIsCrafft() {
         return isCrafft;
     }
@@ -170,8 +180,18 @@ public class clapController implements Serializable {
         pacienteCtrl.getSelected().setEstado_conyugal(selected.getEstado_conyugal());
         pacienteCtrl.getSelected().setPueblo_originario(selected.getPueblo_originario());
         //Manejo de datos para estados de paciente y riesgos
-
         pacienteCtrl.update();
+        
+        if (selected.getPaciente().getCLAPS() == null){
+            selected.getPaciente().setCLAPS(new ArrayList<clap>());
+            selected.getPaciente().getCLAPS().add(selected);
+        }else{
+            selected.getPaciente().getCLAPS().add(selected);
+        }
+        
+        for (int i = 0; i < selected.getPaciente().getCLAPS().size(); i++) {
+            System.out.println(selected.getPaciente().getCLAPS().get(i).getPaciente().getNombres());
+        }
         
         if (auditCrafft) {
             if (isAudit) {
@@ -460,7 +480,6 @@ public class clapController implements Serializable {
         selected.setPueblo_originario(Paciente.getPueblo_originario());
         selected.setFecha_consulta(new java.util.Date());
         selected.setEdad(selected.getFecha_consulta().getYear()-Paciente.getFecha_nacimiento().getYear());
-        System.out.println("Edad: "+selected.getEdad()+"\n año paciente:"+Paciente.getFecha_nacimiento().getYear()+"\n año consulta:"+selected.getFecha_consulta().getYear());
         puntajeACrafft = 0;
         audit = new audit();
         crafft = new Crafft();
@@ -501,7 +520,6 @@ public class clapController implements Serializable {
         }
         if (resp){
             if (cont == 1) {
-                System.out.println("Solo uno era verdadero, y ahora es falso");
                 auditCrafft = false;
             }
         }else{
@@ -533,13 +551,10 @@ public class clapController implements Serializable {
     public int tipoIntervencion(){
         int puntaje = calculaPuntaje();
         if (puntaje <= 7) {
-            System.out.println("Intervencion Minima");
             return 0;
         }else if (puntaje >= 8 && puntaje <= 15){
-            System.out.println("Intervencion Breve");
             return 1;
         }else{
-            System.out.println("Derivacion Asistida");
             return 2;
         }
     }
