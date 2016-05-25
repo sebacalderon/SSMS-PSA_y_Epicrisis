@@ -27,6 +27,13 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton createClap"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton createClap"/>
 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_RUN}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.RUN}-#{item.DV}"/>
+                        </p:column>
+                        
                         <p:column styleClass="tabla">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListpacienteTitle_nombre}"/>
@@ -39,12 +46,7 @@
                             </f:facet>
                             <h:outputText value="#{item.nacionalidad.nombre}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListpacienteTitle_RUN}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.RUN}-#{item.DV}"/>
-                        </p:column>
+                        
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListpacienteTitle_fecha_nacimiento}"/>
