@@ -153,7 +153,7 @@ public class clapController implements Serializable {
         return selected;
     }
 
-    public String create() {
+    public void create() {
         selected.setFuncionario(loginCtrl.getUsuarioLogueado());
         pacienteCtrl.setSelected(selected.getPaciente());
         pacienteCtrl.getSelected().setRUN(selected.getRUN());
@@ -289,7 +289,6 @@ public class clapController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
-        return "/faces/clap/List.xhtml";
     }
 
     public void setIMC(){

@@ -31,7 +31,7 @@ public class UsuarioController implements Serializable {
     private sessionbeans.UsuarioFacadeLocal ejbFacade;
     private List<Usuario> items = null;
     private List<Usuario> todos = null;
-    private Usuario selected;
+    private Usuario selected = null;
     private Usuario antiguovalor;
     private String old_password = "";
     private String new_password = "";
@@ -185,7 +185,11 @@ public class UsuarioController implements Serializable {
     }
     
     public boolean isSuperUsuario(){
-        return selected.getRol().getNombre().equals("Super-Usuario");
+        if (selected.getId() == null) {
+            return true;
+        }else{
+            return selected.getRol().getNombre().equals("Super-Usuario");
+        }
     }
     
     public Usuario findByRUT(String rut) {

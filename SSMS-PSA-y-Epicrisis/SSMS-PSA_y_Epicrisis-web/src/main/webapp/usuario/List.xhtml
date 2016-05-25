@@ -15,6 +15,14 @@
         </ui:define>
 
         <ui:define name="body">
+            <h:form>
+            <p:breadCrumb>
+                <p:menuitem value="Categories" url="/faces/home.xhtml" />
+                <p:menuitem value="Administración"/>
+                <p:menuitem value="Control de Sesiones" url="/faces/usuario/List.xhtml" />
+            </p:breadCrumb>
+            </h:form>
+            <br />
             <h:form id="UsuarioListForm">
                 <b:panel title="#{bundle.ListUsuarioTitle}">
                     <p:dataTable id="datalist" value="#{usuarioController.items}" var="item" styleClass="table table-striped table-bordered"
@@ -56,8 +64,8 @@
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{usuarioController.prepareCreate}" update=":UsuarioCreateForm" oncomplete="PF('UsuarioCreateDialog').show()"/>
                             <p:commandButton id="viewButton"  rendered="false" icon="ui-icon-search" value="#{bundle.View}" update=":UsuarioViewForm" oncomplete="PF('UsuarioViewDialog').show()" disabled="#{empty usuarioController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":UsuarioEditForm" oncomplete="PF('UsuarioEditDialog').show()" disabled="#{empty usuarioController.selected || usuarioController.superUsuario}"/>
-                            <p:commandButton id="desactivateButton" icon="ui-icon-cancel"  value="#{bundle.Delete}" actionListener="#{usuarioController.desactivar}" update=":growl,datalist"  disabled="#{not usuarioController.selected.isHabilitado() or usuarioController.selected.correo.equals(loginController.getUsuarioLogueado().correo) || usuarioController.superUsuario}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":UsuarioEditForm" oncomplete="PF('UsuarioEditDialog').show()" disabled="#{empty usuarioController.selected || (not empty usuarioController.selected and usuarioController.superUsuario)}"/>
+                            <p:commandButton id="desactivateButton" icon="ui-icon-cancel"  value="#{bundle.Delete}" actionListener="#{usuarioController.desactivar}" update=":growl,datalist"  disabled="#{not usuarioController.selected.isHabilitado() or usuarioController.selected.correo.equals(loginController.getUsuarioLogueado().correo) || (not empty usuarioController.selected and usuarioController.superUsuario)}"/>
                             <p:commandButton id="activateButton" icon="ui-icon-check"  value="#{bundle.Activate}" actionListener="#{usuarioController.activar}" update=":growl,datalist"  disabled="#{usuarioController.selected.isHabilitado()}"/>
                         </f:facet>
                     </p:dataTable>
