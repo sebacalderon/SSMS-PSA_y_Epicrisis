@@ -14,6 +14,15 @@
         </ui:define> 
 
         <ui:define name="body">
+            <h:form>
+            <p:breadCrumb>
+                <p:menuitem value="Categories" url="/faces/home.xhtml" />
+                <p:menuitem value="Usuarios"/>
+                <p:menuitem value="Población bajo control" url="/faces/paciente/List.xhtml" />
+                <p:menuitem value="Crear Usuario"/>
+            </p:breadCrumb>
+            </h:form>
+            <br />
         <b:panel id="pacienteCreateDlg" title="#{bundle.CreatepacienteTitle}">
             <h:form id="pacienteCreateForm">
                 <h:panelGroup id="display">

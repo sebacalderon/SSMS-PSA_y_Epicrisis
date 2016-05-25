@@ -15,6 +15,18 @@
         </ui:define> 
 
         <ui:define name="body">
+            <h:form>
+            <p:breadCrumb>
+                <p:menuitem value="Categories" url="/faces/home.xhtml" />
+                <p:menuitem value="Usuarios"/>
+                <p:menuitem value="Población bajo control" url="/faces/paciente/List.xhtml" />
+                <p:menuitem value="#{clapController.selected.paciente.RUN}-#{clapController.selected.paciente.DV}" rendered="#{clapController.selected != null}" url="/faces/paciente/View.xhtml"/>
+                <p:menuitem value="Editar CLAP" />
+                <p:menuitem value="CLAP #{clapController.selected.id}" rendered="#{clapController.selected != null}"/>
+
+            </p:breadCrumb>
+            </h:form>
+            <br />
             <b:row>
                 <h2 align="center">#{bundle.EditclapTitle}</h2>
             </b:row>
