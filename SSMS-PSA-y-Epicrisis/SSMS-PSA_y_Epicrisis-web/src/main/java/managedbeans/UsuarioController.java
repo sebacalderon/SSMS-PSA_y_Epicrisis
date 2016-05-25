@@ -184,6 +184,10 @@ public class UsuarioController implements Serializable {
         }
     }
     
+    public boolean isSuperUsuario(){
+        return selected.getRol().getNombre().equals("Super-Usuario");
+    }
+    
     public Usuario findByRUT(String rut) {
         getAllItems();//todos los items
         for (Usuario item : todos) {//para cada item de Preingreso de la bd
@@ -290,5 +294,4 @@ public class UsuarioController implements Serializable {
         }
 
     }
-
 }
