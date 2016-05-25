@@ -33,11 +33,7 @@
                                 <h:outputLabel for="rut" value="RUT *" />
                             </b:column>
                             <b:column span="8">
-                                <b:inputText id="rut" value="#{loginController.rut}" placeholder="Ej: 12.345.678-9" required="true" >
-                                  <f:facet name="prepend">
-                                    <b:icon name="user" />
-                                  </f:facet>
-                                </b:inputText>
+                                <p:inputMask id="rut" value="#{loginController.rut}" mask="99.999.999-*" placeholder="01.111.111-1" required="true"/>
                             </b:column>
                         </b:row>
                         <b:row>
@@ -45,11 +41,7 @@
                             <h:outputLabel for="Password" value="#{bundle.password_login}" />
                             </b:column>
                             <b:column span="8">
-                                <b:inputSecret id="Password" value="#{loginController.password}" placeholder="Contraseña" required="true">
-                                    <f:facet name="prepend">
-                                      <b:iconAwesome name="key" />
-                                    </f:facet>
-                                </b:inputSecret>
+                                    <p:password id="Password" value="#{loginController.password}" placeholder="Contraseña" required="true"/>
                             </b:column>
                         </b:row>
                         <f:facet name="footer">
