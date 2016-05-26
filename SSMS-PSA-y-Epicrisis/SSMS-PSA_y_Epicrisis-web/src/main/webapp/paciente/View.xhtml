@@ -19,7 +19,7 @@
                 <p:menuitem value="Categories" url="/faces/home.xhtml" />
                 <p:menuitem value="Usuarios"/>
                 <p:menuitem value="Población bajo control" url="/faces/paciente/List.xhtml" />
-                <p:menuitem value="#{clapController.selected.paciente.RUN}-#{clapController.selected.paciente.DV}" rendered="#{clapController.selected != null}"/>
+                <p:menuitem value="#{pacienteController.selected.RUN}-#{pacienteController.selected.DV}" rendered="#{pacienteController.selected != null}"/>
             </p:breadCrumb>
             </h:form>
             <br />
