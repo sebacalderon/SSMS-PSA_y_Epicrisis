@@ -26,7 +26,9 @@
         <b:panel id="pacienteViewDlg" title="#{bundle.ViewpacienteTitle}">
             <h:form id="pacienteViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="4" rendered="#{pacienteController.selected != null}">
+                    <p:panelGrid columns="4" style="width:100%;" rendered="#{pacienteController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_RUN}" for="RUN" />
+                        <h:outputText id="RUN" value="#{pacienteController.selected.RUN}-#{pacienteController.selected.DV}"/>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_nombres}" for="nombres" />
                         <h:outputText id="nombres" value="#{pacienteController.selected.nombres}" title="#{bundle.ViewpacienteTitle_nombres}"/>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_primer_apellido}" for="primer_apellido" />
@@ -51,7 +53,9 @@
                         <h:outputText id="resto_direccion" value="#{pacienteController.selected.resto_direccion}" title="#{bundle.ViewpacienteTitle_resto_direccion}"/>                                              
                         
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_fecha_nacimiento}" for="fecha_nacimiento" />
-                        <h:outputText id="fecha_nacimiento" value="#{pacienteController.selected.fecha_nacimiento}" title="#{bundle.ViewpacienteTitle_resto_direccion}"/>                                 
+                        <h:outputText id="fecha_nacimiento" value="#{pacienteController.selected.fecha_nacimiento}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>                         
                         
                     </p:panelGrid>
                 </h:panelGroup>

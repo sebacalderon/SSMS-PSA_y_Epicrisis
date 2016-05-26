@@ -27,6 +27,11 @@
             <h:form id="pacienteCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="4" rendered="#{pacienteController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_RUN}" for="RUN" />    
+                        <p:column>
+                            <p:inputText id="RUN" value="#{pacienteController.selected.RUN}" style="max-width: 100px;" title="#{bundle.CreatepacienteTitle_RUN}" required="true" /> -
+                            <p:inputText id="DV" value="#{pacienteController.selected.DV}" title="#{bundle.CreatepacienteTitle_DV}" maxlength="1" style="max-width: 20px;" required="true"/>
+                        </p:column>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_nombres}" for="nombres" />
                         <p:inputText id="nombres" value="#{pacienteController.selected.nombres}" title="#{bundle.CreatepacienteTitle_nombres}" maxlength="50" required="true" />
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_primer_apellido}" for="primer_apellido" />
@@ -55,11 +60,6 @@
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_fecha_nacimiento}" for="fecha_nacimiento" />
                         <p:calendar  id="fecha_nacimiento" value="#{pacienteController.selected.fecha_nacimiento}" title="#{bundle.CreatepacienteTitle_fecha_nacimiento}" pattern="dd/MM/yyyy" navigator="true" required="true">
                         </p:calendar>
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_RUN}" for="RUN" />    
-                        <p:column>
-                            <p:inputText id="RUN" value="#{pacienteController.selected.RUN}" style="max-width: 100px;" title="#{bundle.CreatepacienteTitle_RUN}" required="true" /> -
-                            <p:inputText id="DV" value="#{pacienteController.selected.DV}" title="#{bundle.CreatepacienteTitle_DV}" maxlength="1" style="max-width: 20px;" required="true"/>
-                        </p:column>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_cesfam}" for="cesfam" />
                         <p:selectOneMenu id="cesfam" value="#{pacienteController.selected.cesfam}" >
                             <f:selectItem itemLabel="Seleccione un CESFAM" itemValue="" noSelectionOption="true" />
