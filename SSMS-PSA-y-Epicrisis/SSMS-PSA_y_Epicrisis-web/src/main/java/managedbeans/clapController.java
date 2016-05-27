@@ -542,6 +542,14 @@ public class clapController implements Serializable {
             if (puntajeACrafft>=1) {
                 puntajeACrafft-=1;
             }
+            if (puntajeACrafft == 0) {
+               crafft.setB1(false);
+               crafft.setB2(false);
+               crafft.setB3(false);
+               crafft.setB4(false);
+               crafft.setB5(false);
+               crafft.setB6(false);
+           }
         }else{
              puntajeACrafft+=1;
         }
