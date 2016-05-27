@@ -150,6 +150,21 @@ public class clapController implements Serializable {
     
     public clap prepareEdit() {
         selected = getSelected();
+        if (selected.getAudit()==null) {
+            isAudit = false;
+        }else{
+            isAudit = true;
+        }
+        if (selected.getCrafft()==null) {
+            isCrafft = false;
+        }else{
+            isCrafft = true;
+        }
+        if (!isAudit && !isCrafft) {
+            auditCrafft = false;
+        }else{
+            auditCrafft = true;
+        }
         return selected;
     }
 
