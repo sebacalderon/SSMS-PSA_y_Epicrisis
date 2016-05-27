@@ -574,10 +574,24 @@ public class clapController implements Serializable {
         int puntaje = audit.getP1()+audit.getP2()+audit.getP3();
         if (selected.getSexo() == 1) {
             if (puntaje <=4){
+                audit.setP4(0);
+                audit.setP5(0);
+                audit.setP6(0);
+                audit.setP7(0);
+                audit.setP8(0);
+                audit.setP9(0);
+                audit.setP10(0);
                 return true;
             }
         }else{
             if (puntaje<=3) {
+                audit.setP4(0);
+                audit.setP5(0);
+                audit.setP6(0);
+                audit.setP7(0);
+                audit.setP8(0);
+                audit.setP9(0);
+                audit.setP10(0);
                 return true;
             }
         }
