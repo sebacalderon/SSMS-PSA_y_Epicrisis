@@ -39,7 +39,6 @@
                             </p:selectOneMenu>
                             <f:facet name="footer">
                                 <p:commandButton actionListener="#{usuarioController.create()}" value="#{bundle.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsuarioCreateDialog');"/>
-                                <p:commandButton value="#{bundle.Cancel}" onclick="UsuarioCreateDialog.hide()"/>
                             </f:facet>
 
                         </p:panelGrid>
