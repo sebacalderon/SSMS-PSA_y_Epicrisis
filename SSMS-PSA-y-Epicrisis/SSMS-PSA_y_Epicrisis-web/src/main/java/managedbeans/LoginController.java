@@ -103,6 +103,8 @@ public class LoginController implements Serializable{
                 return "/faces/home.xhtml";
             }
         }catch(Exception e){
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("El usuario no existe"));
             return "/faces/index.xhtml";
         }
     }
