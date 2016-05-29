@@ -168,7 +168,7 @@ public class clapController implements Serializable {
         return selected;
     }
 
-    public void create() {
+    public String create() {
         selected.setFuncionario(loginCtrl.getUsuarioLogueado());
         pacienteCtrl.setSelected(selected.getPaciente());
         pacienteCtrl.getSelected().setRUN(selected.getRUN());
@@ -195,15 +195,13 @@ public class clapController implements Serializable {
         pacienteCtrl.getSelected().setEstado_conyugal(selected.getEstado_conyugal());
         pacienteCtrl.getSelected().setPueblo_originario(selected.getPueblo_originario());
         //Manejo de datos para estados de paciente y riesgos
+        pacienteCtrl.getSelected().setCLAPS(null);
         pacienteCtrl.update();
         
-        if (selected.getPaciente().getCLAPS() == null){
-            selected.getPaciente().setCLAPS(new ArrayList<clap>());
-            selected.getPaciente().getCLAPS().add(selected);
-        }else{
-            selected.getPaciente().getCLAPS().add(selected);
-        }
-        
+
+        selected.getPaciente().setCLAPS(new ArrayList<clap>());
+        selected.getPaciente().getCLAPS().add(selected);
+   
         for (int i = 0; i < selected.getPaciente().getCLAPS().size(); i++) {
             System.out.println(selected.getPaciente().getCLAPS().get(i).getPaciente().getNombres());
         }
@@ -304,6 +302,8 @@ public class clapController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        
+        return "/faces/paciente/View.xhtml";
     }
 
     public void setIMC(){
