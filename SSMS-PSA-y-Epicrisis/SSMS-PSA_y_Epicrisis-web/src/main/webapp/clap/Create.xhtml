@@ -1943,13 +1943,6 @@
                         </p:row>
                     </facet>
                 </b:panel>
-                <facet name="footer">
-                        <p:row>
-                        <p:commandButton action="#{clapController.create}" value="#{bundle.Save}" oncomplete="/paciente/List"/>
-                     <p:button  value="#{bundle.Cancel}" outcome="/paciente/View" />
-                     <br/><br/>
-                        </p:row>
-                </facet>
                 <b:row>
                     <b:inputText id="impresion_diagnostica" value="#{clapController.selected.impresion_diagnostica}" label="#{bundle.CreateclapTitle_impresion_diagnostica}" />
                 </b:row>
@@ -1960,8 +1953,8 @@
 
 
                 <b:column offset-xs="5">
-                    <p:commandButton actionListener="#{clapController.create}" value="#{bundle.Save}"/>
-                    <p:button  value="#{bundle.Cancel}" outcome="/paciente/List" /> 
+                    <p:commandButton action="#{clapController.create}" value="#{bundle.Save}" oncomplete="/paciente/List"/>
+                    <p:button  value="#{bundle.Cancel}" outcome="/paciente/View" /> 
                     <br/><br/>
                 </b:column>
                 
