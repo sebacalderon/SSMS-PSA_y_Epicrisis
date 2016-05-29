@@ -50,10 +50,10 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "cesfam_usuario")
     private cesfam cesfam;
     
-//    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
-//        + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
-//        + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
-//        message = "Debe ser un mail valido")
+    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
+        + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
+        + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+        message = "Debe ser un mail valido")
     @Column(name="correo_usuario")
     private String correo;
     
