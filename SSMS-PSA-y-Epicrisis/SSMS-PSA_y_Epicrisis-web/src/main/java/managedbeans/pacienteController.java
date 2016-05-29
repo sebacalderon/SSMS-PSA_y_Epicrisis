@@ -19,7 +19,9 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
@@ -79,7 +81,7 @@ public class pacienteController implements Serializable {
         selected.setNumero_direccion("123");
         selected.setFecha_nacimiento(new java.util.Date());
         selected.setRUN(18293486);
-        selected.setDV("0");
+        selected.setDV("1");
         selected.setCorreo("sebastian@algo.com");
         selected.setSexo(1);
         region Region = new region();
@@ -176,25 +178,30 @@ public class pacienteController implements Serializable {
     }
 
 
-    public boolean validarRut() {
+    public void validaRun(FacesContext context, UIComponent toValidate, Object value) {
 
-        boolean validacion = false;
         try {
+            context = FacesContext.getCurrentInstance();
+            FacesMessage message = null;
             int rutAux = selected.getRUN();
-            String dv = selected.getDV();
+            String dv = (String) value;
 
             int m = 0, s = 1;
             for (; rutAux != 0; rutAux /= 10) {
                 s = (s + rutAux % 10 * (9 - m++ % 6)) % 11;
             }
             if (dv.charAt(0) == (char) (s != 0 ? s + 47 : 75)) {
-                validacion = true;
+                ((UIInput) toValidate).setValid(true);
+                System.out.println("Run "+selected.getRUN()+"-"+selected.getDV()+" Válido");
+            }else{
+                ((UIInput) toValidate).setValid(false);
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: el RUN ingresado no es válido",  "El rut ingresado no es válido.") );
+                System.out.println("Run "+selected.getRUN()+"-"+selected.getDV()+" inválido");
             }
 
         } catch (java.lang.NumberFormatException e) {
         } catch (Exception e) {
         }
-        return validacion;
     }
     
     @FacesConverter(forClass = paciente.class)

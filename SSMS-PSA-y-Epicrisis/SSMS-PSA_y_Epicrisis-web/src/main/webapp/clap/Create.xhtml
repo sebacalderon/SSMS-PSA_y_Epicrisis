@@ -40,11 +40,11 @@
                                     <p:column>
                                         
                                         <p:autoComplete id="RUN" value="#{clapController.selected.paciente}" completeMethod="#{pacienteController.completePaciente}"
-                                        var="paciente" itemLabel="#{paciente.RUN}" itemValue="#{paciente.RUN}" converter="entityConverter" forceSelection="true" required="true">
-                                            <f:ajax event="valueChange"  listener="#{clapController.setDatosPaciente}" immediate="true" render="panel1" ></f:ajax>
+                                        var="paciente" itemLabel="#{paciente.RUN}" itemValue="#{paciente.RUN}" converter="entityConverter" forceSelection="true" required="true" disabled="true">
+                                            <f:ajax event="valueChange"  listener="#{clapController.setDatosPaciente}" immediate="true" render="panel1"  ></f:ajax>
                                         </p:autoComplete>
                                         
-                                        <p:inputText id="DV" value="#{clapController.selected.DV}" title="#{bundle.CreatepacienteTitle_DV}" maxlength="1" style="max-width: 20px;" required="true" />
+                                        <p:inputText id="DV" value="#{clapController.selected.DV}" title="#{bundle.CreatepacienteTitle_DV}" maxlength="1" style="max-width: 20px;" required="true" disabled="true" />
                                     </p:column>
                                 </b:row>
                             </b:column>
@@ -271,7 +271,7 @@
                     </div>
                 </b:panel>
 
-                <b:panel title="Datos generales de la consulta" style="margin-left:3%;width: 95%;" look="info">
+                <b:panel id="panel2" title="Datos generales de la consulta" style="margin-left:3%;width: 95%;" look="info">
                 <p:panelGrid columns="2" style="width:98%;border:10px;" rendered="#{clapController.selected != null}">
                     <p:column rowspan="2">
                         <p:outputLabel value="#{bundle.CreateclapLabel_fecha_consulta}" for="fecha_consulta" />
@@ -318,7 +318,7 @@
                     </facet>
                 </b:panel>
 
-                <b:panel title="Antecedentes personales" style="margin-left:3%;width: 95%; " look="info">
+                <b:panel id="panel3" title="Antecedentes personales" style="margin-left:3%;width: 95%; " look="info">
                 <p:panelGrid columns="2" style="width:98%;border:10px;" rendered="#{clapController.selected != null}">
 
                     <p:column rowspan="2">
@@ -424,7 +424,7 @@
                     </facet>
                 </b:panel>
 
-                <b:panel title="Antecedentes familiares" style="margin-left:3%;width: 95%; " look="info">
+                <b:panel id="panel4" title="Antecedentes familiares" style="margin-left:3%;width: 95%; " look="info">
                 <p:panelGrid columns="2" style="width:98%;border:10px;" rendered="#{clapController.selected != null}">
                     <p:column rowspan="2">
                         <p:outputLabel value="#{bundle.CreateclapLabel_enfermedades_importantes_familia}" for="enfermedades_importantes_familia" />
@@ -499,7 +499,7 @@
                     </facet>
                 </b:panel>
 
-                <b:panel title="Familia" style="margin-left:3%;width: 95%; " look="info">
+                <b:panel id="panel5" title="Familia" style="margin-left:3%;width: 95%; " look="info">
                     <p:panelGrid columns="2" style="width:98%;border:10px;" rendered="#{clapController.selected != null}">
                         <b:column id="vive_con" col-md="6" col-xs="12">
                             <h4>Vive con</h4>
@@ -643,7 +643,7 @@
                 </b:panel>
 
                 
-                <b:panel title="Vivienda" style="margin-left:3%;width: 95%; " look="info">
+                <b:panel id="panel6" title="Vivienda" style="margin-left:3%;width: 95%; " look="info">
 
                     <p:panelGrid columns="2" style="width:98%;border:10px;" rendered="#{clapController.selected != null}">
                         <p:outputLabel value="Condiciones sanitarias" for="condiciones_sanitarias" />
@@ -666,7 +666,7 @@
                 </b:panel>
 
                
-                <b:panel title="Educación" style="margin-left:3%;width: 95%; " look="info">
+                <b:panel id="panel7" title="Educación" style="margin-left:3%;width: 95%; " look="info">
                     <b:row>
                         <b:column col-md="4">
                             <p:outputLabel value="Estudia" for="estudia" />
@@ -756,7 +756,7 @@
                         </facet>
                 </b:panel>
 
-                <b:panel title="Trabajo" style="margin-left:3%;width: 95%; " look="info">
+                <b:panel id="panel8" title="Trabajo" style="margin-left:3%;width: 95%; " look="info">
                     <b:row>
                     <b:column col-md="3" col-xs="6" style="margin-left: 20px;">
                         <b:row>
@@ -870,7 +870,7 @@
                     </facet>
                 </b:panel>
 
-                <b:panel title="Vida social" style="margin-left:3%;width: 95%; " look="info">
+                <b:panel id="panel9" title="Vida social" style="margin-left:3%;width: 95%; " look="info">
                     <div style="margin-left: 20px;">
                     <b:row>
                         <b:column col-md="4" col-xs="6">
@@ -1351,7 +1351,7 @@
                 </b:panel>
                 
 
-                <b:panel title="Gineco/urológico" style="margin-left:3%;width: 95%; " look="info">
+                <b:panel id="panel11" title="Gineco/urológico" style="margin-left:3%;width: 95%; " look="info">
                     <div style="margin-left: 20px;">
                         <b:row>
                             <b:column col-md="4" col-xs="6">
@@ -1462,7 +1462,7 @@
                     </facet>
                 </b:panel>
 
-                <b:panel title="Sexualidad" style="margin-left:3%;width: 95%; " look="info">
+                <b:panel id="panel12" title="Sexualidad" style="margin-left:3%;width: 95%; " look="info">
                     <div style="margin-left: 20px;">
                         <b:row>
                             <b:column col-md="4" col-xs="6">
@@ -1629,7 +1629,7 @@
                     </facet>
                 </b:panel>
 
-                <b:panel title="Situación psico emocional" style="margin-left:3%;width: 95%; " look="info">
+                <b:panel id="panel13" title="Situación psico emocional" style="margin-left:3%;width: 95%; " look="info">
                     <div style="margin-left: 20px;">
                         <b:row>
                             <b:column col-md="4" col-xs="6">
@@ -1730,7 +1730,7 @@
                     </facet>
                 </b:panel>
 
-                <b:panel title="Examen físico" style="margin-left:3%;width: 95%; " look="info">
+                <b:panel id="panel14" title="Examen físico" style="margin-left:3%;width: 95%; " look="info">
                     <div style="margin-left: 20px;">
                         <b:row>
                             <b:column col-md="4" col-xs="6">
@@ -1958,9 +1958,9 @@
 
 
                 <b:column offset-xs="5">
-                     <p:commandButton actionListener="#{clapController.create}" value="#{bundle.Save}" oncomplete="/faces/clap/List.xhtml"/>
-                     <p:button  value="#{bundle.Cancel}" outcome="/paciente/List" /> 
-                     <br/><br/>
+                    <p:commandButton actionListener="#{clapController.create}" value="#{bundle.Save}"/>
+                    <p:button  value="#{bundle.Cancel}" outcome="/paciente/List" /> 
+                    <br/><br/>
                 </b:column>
 
             </h:form>

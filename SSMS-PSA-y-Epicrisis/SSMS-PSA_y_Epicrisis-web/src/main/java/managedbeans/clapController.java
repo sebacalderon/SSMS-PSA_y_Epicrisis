@@ -143,6 +143,13 @@ public class clapController implements Serializable {
 
     public clap prepareCreate() {
         selected = new clap();
+        selected.setRiesgo_cardiovascular(false);
+        selected.setRiesgo_nutricional(false);
+        selected.setRiesgo_oh_drogas(false);
+        selected.setRiesgo_salud_mental(false);
+        selected.setRiesgo_social(false);
+        selected.setRiesgo_ssr(false);
+        selected.setCompleto(false);
         auditCrafft = false;
         initializeEmbeddableKey();
         return selected;
@@ -182,6 +189,7 @@ public class clapController implements Serializable {
         //Manejo de datos para estados de paciente y riesgos
         pacienteCtrl.update();
         
+        
         if (selected.getPaciente().getCLAPS() == null){
             selected.getPaciente().setCLAPS(new ArrayList<clap>());
             selected.getPaciente().getCLAPS().add(selected);
@@ -205,7 +213,16 @@ public class clapController implements Serializable {
             }
         }
     
+        //Verifica si completa el clap
+        if(selected.getAbortos()!=0&&selected.getAbortos()!=0){
+            selected.setCompleto(true);
+        }else{
+            selected.setCompleto(false);
+        }
+        
+        
         //Riesgos
+        
         selected.setRiesgo_cardiovascular(false);
         selected.setRiesgo_nutricional(false);
         selected.setRiesgo_oh_drogas(false);

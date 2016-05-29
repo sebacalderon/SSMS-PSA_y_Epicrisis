@@ -39,7 +39,12 @@ public class clap implements Serializable {
     @Column(name="codigo_clap")
     private Long id;
     
+    @Column(name="completo_clap")
+    private boolean completo;
+    
+    
     //Ficha personal de paciente
+    
     
     @NotNull(message="Debe ingresar un nombre")
     @Column(name="nombres_clap",length=50)
@@ -1876,6 +1881,14 @@ public class clap implements Serializable {
         return perimetro_abdominal;
     }
 
+    public boolean isCompleto() {
+        return completo;
+    }
+
+    public void setCompleto(boolean completo) {
+        this.completo = completo;
+    }
+    
     public void setPerimetro_abdominal(int perimetro_abdominal) {
         this.perimetro_abdominal = perimetro_abdominal;
     }

@@ -15,7 +15,7 @@
                         <p:panelGrid columns="2" style="width:100%"  rendered="#{usuarioController.selected != null}">
                             
                             <p:outputLabel value="R.U.T. (con puntos y guión)" for="rut" />
-                            <p:inputMask id="rut" value="#{usuarioController.selected.RUT}" mask="99.999.999-*" style="max-width: 100px;" required="true" placeholder="Ej: 12.345.678-9"/>
+                            <p:inputMask id="rut" value="#{usuarioController.selected.RUT}" mask="99.999.999-*" style="max-width: 100px;" required="true" validator="#{usuarioController.validaRun}" placeholder="Ej: 12.345.678-9"/>
                             
                             <p:outputLabel value="Nombres"  for="nombre" />
                             <p:inputText id="nombre" value="#{usuarioController.selected.nombres}" title="#{bundle.CreateUsuarioTitle_nombre}" required="true" maxlength="50" />
