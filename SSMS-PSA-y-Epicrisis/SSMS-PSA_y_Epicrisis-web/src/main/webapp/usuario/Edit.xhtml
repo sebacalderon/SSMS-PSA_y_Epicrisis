@@ -32,9 +32,11 @@
                             <f:selectItem itemLabel="Seleccione un rol ..." itemValue="" noSelectionOption="true" />
                             <f:selectItems value="#{rolController.items}" var="rol" itemLabel="#{rol.nombre}" itemValue="#{rol}" />
                         </p:selectOneMenu>
-                    </p:panelGrid>
+                    <f:facet name="footer">
                     <p:commandButton actionListener="#{usuarioController.update}" value="#{bundle.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UsuarioEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="UsuarioEditDialog.hide()"/>
+                    </f:facet>
+                    </p:panelGrid>
+                    
                 </h:panelGroup>
             </h:form>
         </p:dialog>

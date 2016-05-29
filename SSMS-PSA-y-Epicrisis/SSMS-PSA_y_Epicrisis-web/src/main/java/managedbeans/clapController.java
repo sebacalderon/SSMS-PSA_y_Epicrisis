@@ -157,10 +157,25 @@ public class clapController implements Serializable {
     
     public clap prepareEdit() {
         selected = getSelected();
+        if (selected.getAudit()==null) {
+            isAudit = false;
+        }else{
+            isAudit = true;
+        }
+        if (selected.getCrafft()==null) {
+            isCrafft = false;
+        }else{
+            isCrafft = true;
+        }
+        if (!isAudit && !isCrafft) {
+            auditCrafft = false;
+        }else{
+            auditCrafft = true;
+        }
         return selected;
     }
 
-    public void create() {
+    public String create() {
         selected.setFuncionario(loginCtrl.getUsuarioLogueado());
         pacienteCtrl.setSelected(selected.getPaciente());
         pacienteCtrl.getSelected().setRUN(selected.getRUN());
@@ -187,16 +202,13 @@ public class clapController implements Serializable {
         pacienteCtrl.getSelected().setEstado_conyugal(selected.getEstado_conyugal());
         pacienteCtrl.getSelected().setPueblo_originario(selected.getPueblo_originario());
         //Manejo de datos para estados de paciente y riesgos
+        pacienteCtrl.getSelected().setCLAPS(null);
         pacienteCtrl.update();
         
-        
-        if (selected.getPaciente().getCLAPS() == null){
-            selected.getPaciente().setCLAPS(new ArrayList<clap>());
-            selected.getPaciente().getCLAPS().add(selected);
-        }else{
-            selected.getPaciente().getCLAPS().add(selected);
-        }
-        
+
+        selected.getPaciente().setCLAPS(new ArrayList<clap>());
+        selected.getPaciente().getCLAPS().add(selected);
+   
         for (int i = 0; i < selected.getPaciente().getCLAPS().size(); i++) {
             System.out.println(selected.getPaciente().getCLAPS().get(i).getPaciente().getNombres());
         }
@@ -306,6 +318,8 @@ public class clapController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        
+        return "/faces/paciente/View.xhtml";
     }
 
     public void setIMC(){
@@ -559,6 +573,14 @@ public class clapController implements Serializable {
             if (puntajeACrafft>=1) {
                 puntajeACrafft-=1;
             }
+            if (puntajeACrafft == 0) {
+               crafft.setB1(false);
+               crafft.setB2(false);
+               crafft.setB3(false);
+               crafft.setB4(false);
+               crafft.setB5(false);
+               crafft.setB6(false);
+           }
         }else{
              puntajeACrafft+=1;
         }
@@ -583,10 +605,24 @@ public class clapController implements Serializable {
         int puntaje = audit.getP1()+audit.getP2()+audit.getP3();
         if (selected.getSexo() == 1) {
             if (puntaje <=4){
+                audit.setP4(0);
+                audit.setP5(0);
+                audit.setP6(0);
+                audit.setP7(0);
+                audit.setP8(0);
+                audit.setP9(0);
+                audit.setP10(0);
                 return true;
             }
         }else{
             if (puntaje<=3) {
+                audit.setP4(0);
+                audit.setP5(0);
+                audit.setP6(0);
+                audit.setP7(0);
+                audit.setP8(0);
+                audit.setP9(0);
+                audit.setP10(0);
                 return true;
             }
         }
