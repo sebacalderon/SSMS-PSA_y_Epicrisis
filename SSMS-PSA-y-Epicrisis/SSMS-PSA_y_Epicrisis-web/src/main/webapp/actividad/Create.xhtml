@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="actividadCreateDlg" widgetVar="actividadCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateactividadTitle}">
+            <h:form id="actividadCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{actividadController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateactividadLabel_fecha_realizacion}" for="fecha_realizacion" />
+                        <p:calendar id="fecha_realizacion" pattern="MM/dd/yyyy" value="#{actividadController.selected.fecha_realizacion}" title="#{bundle.EditactividadTitle_fecha_realizacion}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateactividadLabel_fecha_agendamiento}" for="fecha_agendamiento" />
+                        <p:calendar id="fecha_agendamiento" pattern="MM/dd/yyyy" value="#{actividadController.selected.fecha_agendamiento}" title="#{bundle.EditactividadTitle_fecha_agendamiento}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateactividadLabel_actividad}" for="actividad" />
+                        <p:inputText id="actividad" value="#{actividadController.selected.actividad}" title="#{bundle.CreateactividadTitle_actividad}" />
+                        <p:outputLabel value="#{bundle.CreateactividadLabel_clap}" for="clap" />
+                        <p:selectOneMenu id="clap" value="#{actividadController.selected.clap}" >
+                            <f:selectItems value="#{clapController.itemsAvailableSelectOne}"
+                                           var="clapItem"
+                                           itemValue="#{clapItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateactividadLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{actividadController.selected.id}" title="#{bundle.CreateactividadTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{actividadController.create}" value="#{bundle.Save}" update="display,:actividadListForm:datalist,:growl" oncomplete="handleSubmit(args,'actividadCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="actividadCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

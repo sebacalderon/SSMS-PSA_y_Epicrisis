@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="actividadViewDlg" widgetVar="actividadViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewactividadTitle}">
+            <h:form id="actividadViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{actividadController.selected != null}">
+                        <h:outputText value="#{bundle.ViewactividadLabel_fecha_realizacion}"/>
+                        <h:outputText value="#{actividadController.selected.fecha_realizacion}" title="#{bundle.ViewactividadTitle_fecha_realizacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewactividadLabel_fecha_agendamiento}"/>
+                        <h:outputText value="#{actividadController.selected.fecha_agendamiento}" title="#{bundle.ViewactividadTitle_fecha_agendamiento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewactividadLabel_actividad}"/>
+                        <h:outputText value="#{actividadController.selected.actividad}" title="#{bundle.ViewactividadTitle_actividad}"/>
+                        <h:outputText value="#{bundle.ViewactividadLabel_clap}"/>
+                        <h:outputText value="#{actividadController.selected.clap}" title="#{bundle.ViewactividadTitle_clap}"/>
+                        <h:outputText value="#{bundle.ViewactividadLabel_id}"/>
+                        <h:outputText value="#{actividadController.selected.id}" title="#{bundle.ViewactividadTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="actividadViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
