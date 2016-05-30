@@ -18,6 +18,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
 @Named("actividadController")
 @SessionScoped
@@ -27,7 +28,10 @@ public class actividadController implements Serializable {
     private sessionbeans.actividadFacadeLocal ejbFacade;
     private List<actividad> items = null;
     private actividad selected;
-
+    @Inject
+    private pacienteController pacienteCtrl;
+    @Inject
+    private LoginController loginCtrl;
     public actividadController() {
     }
 
@@ -52,6 +56,9 @@ public class actividadController implements Serializable {
     public actividad prepareCreate() {
         selected = new actividad();
         initializeEmbeddableKey();
+        selected.setPaciente(pacienteCtrl.getSelected());
+        selected.setUsuario(loginCtrl.getUsuarioLogueado());
+        selected.setFecha_realizacion(new java.util.Date());
         return selected;
     }
 
