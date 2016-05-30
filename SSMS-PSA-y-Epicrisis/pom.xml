@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>cl.diinf</groupId>
   <artifactId>SSMS-PSA_y_Epicrisis</artifactId>
-  <version>1.0</version>
+  <version>1.4.1</version>
   <packaging>pom</packaging>
   <name>SSMS-PSA_y_Epicrisis</name>
   <modules>
