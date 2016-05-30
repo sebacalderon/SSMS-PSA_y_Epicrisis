@@ -319,7 +319,7 @@ public class clapController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
         }
         
-        return "/faces/paciente/View.xhtml";
+        return "/faces/clap/Riesgos.xhtml";
     }
 
     public void setIMC(){
@@ -361,7 +361,7 @@ public class clapController implements Serializable {
         vive_con_padre=selected.isVive_con_padre();
         vive_en_institucion=selected.isVive_en_institucion();
         vive_con_otros=selected.isVive_con_otros();
-
+        
     }
     
     public void update() {
