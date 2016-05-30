@@ -29,8 +29,13 @@
                     <p:panelGrid columns="4" rendered="#{pacienteController.selected != null}">
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_RUN}" for="RUN" />    
                         <p:column>
-                            <p:inputText id="RUN" value="#{pacienteController.selected.RUN}" style="max-width: 100px;" title="#{bundle.CreatepacienteTitle_RUN}" required="true"/> -
-                            <p:inputText id="DV" value="#{pacienteController.selected.DV}" title="#{bundle.CreatepacienteTitle_DV}" maxlength="1" style="max-width: 20px;" required="true" validator="#{pacienteController.validaRun}" validatorMessage="El RUN ingresado no es válido"></p:inputText>
+                            <p:inputText id="RUN" value="#{pacienteController.selected.RUN}" style="max-width: 100px;" title="#{bundle.CreatepacienteTitle_RUN}" required="true">
+                            <p:ajax event="blur" />
+                            </p:inputText>
+                            -
+                            <p:inputText id="DV" value="#{pacienteController.selected.DV}" title="#{bundle.CreatepacienteTitle_DV}" style="max-width: 20px;" required="true">
+                            <p:ajax event="blur" />
+                            </p:inputText>
                         </p:column>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_nombres}" for="nombres" />
                         <p:inputText id="nombres" value="#{pacienteController.selected.nombres}" title="#{bundle.CreatepacienteTitle_nombres}" maxlength="50" required="true" />
@@ -53,7 +58,7 @@
                                               
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_calle_direccion}" for="calle_direccion" />
                         <p:inputText id="calle_direccion" value="#{pacienteController.selected.calle_direccion}" title="#{bundle.CreatepacienteTitle_calle_direccion}" maxlength="50" required="true" />
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_numero_direccion}" for="numero_direccion" />
+                        <p:outputLabel value="Número:" for="numero_direccion" />
                         <p:inputText id="numero_direccion" value="#{pacienteController.selected.numero_direccion}" title="#{bundle.CreatepacienteTitle_numero_direccion}" maxlength="8" required="true"/>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_resto_direccion}" for="resto_direccion" />
                         <p:inputText id="resto_direccion" value="#{pacienteController.selected.resto_direccion}" title="#{bundle.CreatepacienteTitle_resto_direccion}" maxlength="50" />

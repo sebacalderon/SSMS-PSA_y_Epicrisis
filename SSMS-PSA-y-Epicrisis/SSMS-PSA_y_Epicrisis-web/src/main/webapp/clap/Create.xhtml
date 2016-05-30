@@ -135,7 +135,7 @@
                             </b:column>
                             <b:column col-md="3" col-xs="12">
                                 <b:row>
-                                    <p:outputLabel value="#{bundle.CreatepacienteTitle_numero_direccion}" for="numero_direccion" />
+                                    <p:outputLabel value="Número:" for="numero_direccion" />
                                 </b:row>
                                 <b:row>
                                     <pe:inputNumber id="numero_direccion" value="#{clapController.selected.numero_direccion}" style="campo-numerico" minValue="0" maxValue="10000" title="#{bundle.CreatepacienteTitle_numero_direccion}" maxlength="8" required="true"/>
@@ -1949,15 +1949,11 @@
                 <b:row>
                     <b:inputText id="indicaciones_interconsultas" value="#{clapController.selected.indicaciones_interconsultas}" label="#{bundle.CreateclapTitle_indicaciones_interconsultas}" />
                 </b:row>
-
-
-
                 <b:column offset-xs="5">
-                    <p:commandButton action="#{clapController.create}" value="#{bundle.Save}" oncomplete="/paciente/List"/>
+                    <p:commandButton action="#{clapController.create}" value="#{bundle.Save}" oncomplete="/clap/Riesgos"/>
                     <p:button  value="#{bundle.Cancel}" outcome="/paciente/View" /> 
                     <br/><br/>
                 </b:column>
-                
             </h:form>
         </ui:define>
 
