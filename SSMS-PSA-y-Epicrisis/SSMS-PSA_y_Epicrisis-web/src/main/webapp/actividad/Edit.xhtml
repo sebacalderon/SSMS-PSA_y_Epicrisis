@@ -4,7 +4,9 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
 
     <ui:composition>
 
@@ -12,21 +14,28 @@
             <h:form id="actividadEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{actividadController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditactividadLabel_fecha_realizacion}" for="fecha_realizacion" />
-                        <p:calendar id="fecha_realizacion" pattern="MM/dd/yyyy" value="#{actividadController.selected.fecha_realizacion}" title="#{bundle.EditactividadTitle_fecha_realizacion}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.EditactividadLabel_fecha_agendamiento}" for="fecha_agendamiento" />
-                        <p:calendar id="fecha_agendamiento" pattern="MM/dd/yyyy" value="#{actividadController.selected.fecha_agendamiento}" title="#{bundle.EditactividadTitle_fecha_agendamiento}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.EditactividadLabel_actividad}" for="actividad" />
-                        <p:inputText id="actividad" value="#{actividadController.selected.actividad}" title="#{bundle.EditactividadTitle_actividad}" />
-                        <p:outputLabel value="#{bundle.EditactividadLabel_clap}" for="clap" />
-                        <p:selectOneMenu id="clap" value="#{actividadController.selected.clap}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{clapController.itemsAvailableSelectOne}"
-                                           var="clapItem"
-                                           itemValue="#{clapItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditactividadLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{actividadController.selected.id}" title="#{bundle.EditactividadTitle_id}" />
+                        <p:outputLabel value="Actividades realizadas:" />
+                        <p:column>
+                            <p:panelGrid columns="2">
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_actividad_fisica}" itemLabel="Consejeria en Actividad Fisica" />
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_alimentacion_saludable}" itemLabel="Consejería en alimentación saludable "/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_consumo_drogas}" itemLabel="Consejería en consumo de Drogas "/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_familiares}" itemLabel="Consejerias familiares "/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_motivacional}" itemLabel="Entrevista Motivacional "/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_regulacion_fecundidad}" itemLabel="Consejería en Regulación de Fecundidad "/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_salud_mental}" itemLabel="Consejería Salud Mental "/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_ssr}" itemLabel="Consejeria en Salud Sexual y Reproductiva"/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_tabaquismo}" itemLabel="Consejería en Tabaquismo "/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_vih_its}" itemLabel="Consejería en Prevención de VIH e ITS "/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.ingreso_control_prenatal}" itemLabel="Ingreso a Control Prenatal "/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.ingreso_programa_cardiovascular}" itemLabel="Ingreso a Programa Cariovascular"/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.ingreso_programa_intervencion}" itemLabel="Ingreso a Programas de Intervencion "/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.ingreso_regulacion_fecundidad}" itemLabel="Ingreso a Regulacion de Fecundidad "/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.ingreso_salud_mental}" itemLabel="Ingreso a salud Mental"/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.nivelacion_estudios}" itemLabel="Nivelación  de estudios "/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.vinculacion_beneficios_sociales}" itemLabel="Vinculacion de beneficios sociales "/>
+                            </p:panelGrid>
+                        </p:column>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{actividadController.update}" value="#{bundle.Save}" update="display,:actividadListForm:datalist,:growl" oncomplete="handleSubmit(args, 'actividadEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="actividadEditDialog.hide()"/>
