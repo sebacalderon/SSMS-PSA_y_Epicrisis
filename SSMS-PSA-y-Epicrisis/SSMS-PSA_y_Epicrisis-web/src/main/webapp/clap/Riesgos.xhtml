@@ -20,12 +20,13 @@
                 <p:menuitem value="Usuarios"/>
                 <p:menuitem value="Población bajo control" url="/faces/paciente/List.xhtml" />
                 <p:menuitem value="#{clapController.selected.paciente.RUN}-#{clapController.selected.paciente.DV}" rendered="#{clapController.selected != null}" url="/faces/paciente/View.xhtml"/>
+                <p:menuitem value="CLAP #{clapController.selected.id}" rendered="#{clapController.selected != null}"/>
                 <p:menuitem value="Riesgos" />
             </p:breadCrumb>
                 <br />
             </h:form>
             <b:row>
-                <h2 align="center">Riesgos Paciente #{clapController.selected.paciente.RUN}-#{clapController.selected.paciente.DV}</h2>
+                <h2 align="center">Riesgos Paciente #{clapController.selected.paciente.RUN}-#{clapController.selected.paciente.DV} CLAP #{clapController.selected.id}</h2>
             </b:row>
             <br/><br/><br/>
             <h:form>
@@ -38,7 +39,7 @@
                         <f:facet name="footer">
                         <b:row>
                         <b:column offset="8" col-xs="4">
-                            <b:commandButton look="danger" value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_cardiovascular(true)}">
+                            <b:commandButton look="danger" value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_cardiovascular(true)}" rendered="#{not loginController.esSuperUsuario()}">
                                 <p:ajax event="click" update="cardio"/>
                             </b:commandButton>
                         </b:column>
@@ -65,7 +66,7 @@
                         <f:facet name="footer">
                         <b:row>
                         <b:column offset="8" col-xs="4">
-                            <b:commandButton look="danger" value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_nutricional(true)}">
+                            <b:commandButton look="danger" value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_nutricional(true)}" rendered="#{not loginController.esSuperUsuario()}">
                                 <p:ajax event="click" update="nutri"/>
                             </b:commandButton>
                         </b:column>
@@ -93,7 +94,7 @@
                         <f:facet name="footer">
                         <b:row>
                         <b:column offset="8" col-xs="4">
-                            <b:commandButton look="danger" value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_social(true)}">
+                            <b:commandButton look="danger" value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_social(true)}" rendered="#{not loginController.esSuperUsuario()}">
                                 <p:ajax event="click" update="social" />
                             </b:commandButton>
                         </b:column>
@@ -120,7 +121,7 @@
                         <f:facet name="footer">
                         <b:row>
                         <b:column offset="8" col-xs="4">
-                            <b:commandButton look="danger" value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_salud_mental(true)}">
+                            <b:commandButton look="danger" value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_salud_mental(true)}" rendered="#{not loginController.esSuperUsuario()}">
                                 <p:ajax event="click" update="mental"/>
                             </b:commandButton>
                         </b:column>
@@ -147,7 +148,7 @@
                         <f:facet name="footer">
                         <b:row>
                         <b:column offset="8" col-xs="4">
-                            <b:commandButton look="danger" value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_oh_drogas(true)}">
+                            <b:commandButton look="danger" value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_oh_drogas(true)}" rendered="#{not loginController.esSuperUsuario()}">
                                 <p:ajax event="click" update="alcohol"/>
                             </b:commandButton> 
                         </b:column>
@@ -174,7 +175,7 @@
                         <f:facet name="footer">
                         <b:row>
                         <b:column offset="8" col-xs="4">
-                            <b:commandButton look="danger" value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_ssr(true)}">
+                            <b:commandButton look="danger" value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_ssr(true)}" rendered="#{not loginController.esSuperUsuario()}">
                                 <p:ajax event="click" update="ssr"/>
                             </b:commandButton>
                         </b:column>

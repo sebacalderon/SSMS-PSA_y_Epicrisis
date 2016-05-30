@@ -25,8 +25,8 @@
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
 
-                        <p:ajax event="rowSelect"   update="viewButton editButton"/>
-                        <p:ajax event="rowUnselect" update="viewButton editButton"/>
+                        <p:ajax event="rowSelect"   update="viewButton editButton viewRiesgoButton"/>
+                        <p:ajax event="rowUnselect" update="viewButton editButton viewRiesgoButton"/>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListclapTitle_nombres}"/>
@@ -84,6 +84,7 @@
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="viewButton" rendered="false"   icon="ui-icon-search" value="#{bundle.View}" update=":clapViewForm" oncomplete="PF('clapViewDialog').show()" disabled="#{empty clapController.selected}"/>
+                            <p:commandButton id="viewRiesgoButton"   icon="ui-icon-search" value="Ver Riesgos" actionListener="#{clapController.prepareRiesgos}" action="/clap/Riesgos?faces-redirect=true" disabled="#{empty clapController.selected}" rendered="#{loginController.esFuncionario() || loginController.esSuperUsuario()}"/>                            
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{clapController.prepareEdit}" action="/clap/Edit?faces-redirect=true" disabled="#{empty clapController.selected}" rendered="#{loginController.esFuncionario()}"/>
                         </f:facet>
                     </p:dataTable>

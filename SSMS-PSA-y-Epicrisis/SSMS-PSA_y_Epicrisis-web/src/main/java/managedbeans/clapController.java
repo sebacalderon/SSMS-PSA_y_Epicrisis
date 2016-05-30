@@ -174,6 +174,11 @@ public class clapController implements Serializable {
         }
         return selected;
     }
+    
+    public clap prepareRiesgos(){
+        selected = getSelected();
+        return selected;
+    }
 
     public String create() {
         selected.setFuncionario(loginCtrl.getUsuarioLogueado());
