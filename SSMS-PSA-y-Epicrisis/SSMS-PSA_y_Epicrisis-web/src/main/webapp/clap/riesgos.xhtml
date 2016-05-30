@@ -27,149 +27,177 @@
             <b:row>
                 <h2 align="center">Riesgos Paciente #{clapController.selected.paciente.RUN}-#{clapController.selected.paciente.DV}</h2>
             </b:row>
+            <br/><br/><br/>
             <h:form>
             <b:row>
                 <div id="cardio">
-                <b:column col-xs="6">
+                 <b:column offset="3" col-xs="12" col-md="6">
                     <b:panel
                         title="El paciente no posee Riesgo Cardiovascular"
-                        look="success" rendered="#{clapController.selected.riesgo_cardiovascular}">
-                        <b:inputText value="#{clapCotroller.selected.observacion_riesgo_cardiovascular}" />
-                        <f:facet name="footer">
-                            <b:commandButton value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_cardiovascular(true)}">
+                        look="success" rendered="#{not clapController.selected.riesgo_cardiovascular}">
+                        <f:facet name="footer">
+                        <b:row>
+                        <b:column offset="8" col-xs="4">
+                            <b:commandButton look="danger" value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_cardiovascular(true)}">
                                 <p:ajax event="click" update="cardio"/>
                             </b:commandButton>
+                        </b:column>
+                        </b:row>
                         </f:facet>
                     </b:panel>
                 </b:column>
-                <b:column col-xs="6">
+                 <b:column offset="3" col-xs="12" col-md="6">
                     <b:panel
                         title="El paciente posee Riesgo Cardiovascular"
-                        look="danger" rendered="#{not clapController.selected.riesgo_cardiovascular}">
-                        <h:outputText value="Panel Content" />
+                        look="danger" rendered="#{clapController.selected.riesgo_cardiovascular}">
+                        <i>Debe realizarse una actividad de intervención para mitigar dicho riesgo</i>
                     </b:panel>
-                </b:column>
-                <b:column offset="3" col-xs="3">
-
                 </b:column>
                 </div>
             </b:row>
                 <br/>
             <b:row>
                 <div id="nutri">
-                <b:column col-xs="6">
+                 <b:column offset="3" col-xs="12" col-md="6">
                     <b:panel
                         title="El paciente no posee Riesgo Nuticional"
-                        look="success" rendered="#{clapController.selected.riesgo_nutricional}">
-                        <h:outputText value="Panel Content" />
+                        look="success" rendered="#{not clapController.selected.riesgo_nutricional}">
+                        <f:facet name="footer">
+                        <b:row>
+                        <b:column offset="8" col-xs="4">
+                            <b:commandButton look="danger" value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_nutricional(true)}">
+                                <p:ajax event="click" update="nutri"/>
+                            </b:commandButton>
+                        </b:column>
+                        </b:row>
+                        </f:facet>
                     </b:panel>
                 </b:column>
-                <b:column col-xs="6">
+                 <b:column offset="3" col-xs="12" col-md="6">
                     <b:panel
                         title="El paciente posee Riesgo Nuticional"
-                        look="danger" rendered="#{not clapController.selected.riesgo_nutricional}">
-                        <h:outputText value="Panel Content" />
+                        look="danger" rendered="#{clapController.selected.riesgo_nutricional}">
+                        <i>Debe realizarse una actividad de intervención para mitigar dicho riesgo</i>
                     </b:panel>
                 </b:column>
-                <b:column offset="3" col-xs="3">
-                    <b:commandButton value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_nutricional(true)}"/>
-                </b:column>
+
                 </div>
             </b:row>
             <br/>
             <b:row>
                 <div id="social">
-                <b:column col-xs="6">
+                 <b:column offset="3" col-xs="12" col-md="6">
                     <b:panel
                         title="El paciente no posee Riesgo Social"
-                        look="success" rendered="#{clapController.selected.riesgo_social}">
-                        <h:outputText value="Panel Content" />
+                        look="success" rendered="#{not clapController.selected.riesgo_social}">
+                        <f:facet name="footer">
+                        <b:row>
+                        <b:column offset="8" col-xs="4">
+                            <b:commandButton look="danger" value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_social(true)}">
+                                <p:ajax event="click" update="social" />
+                            </b:commandButton>
+                        </b:column>
+                        </b:row>
+                        </f:facet>
                     </b:panel>
                 </b:column>
-                <b:column col-xs="6">
+                <b:column offset="3" col-xs="12" col-md="6">
                     <b:panel
-                        title="El paciente no posee Riesgo Social"
-                        look="danger" rendered="#{not clapController.selected.riesgo_social}">
-                        <h:outputText value="Panel Content" />
+                        title="El paciente posee Riesgo Social"
+                        look="danger" rendered="#{clapController.selected.riesgo_social}">
+                        <i>Debe realizarse una actividad de intervención para mitigar dicho riesgo</i>
                     </b:panel>
-                </b:column>
-                <b:column offset="3" col-xs="3">
-                    <b:commandButton value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_social(true)}">
-                        <p:ajax event="click" update="social"/>
-                    </b:commandButton>
                 </b:column>
                 </div>
             </b:row>
             <br/>
             <b:row>
                 <div id="mental">
-                <b:column col-xs="6">
-                    <b:panel
-                        title="El paciente posee riesgo de Salud Mental"
-                        look="success" rendered="#{clapController.selected.riesgo_salud_mental}">
-                        <h:outputText value="Panel Content" />
-                    </b:panel> 
-                </b:column>
-                <b:column col-xs="6">
+                <b:column offset="3" col-xs="12" col-md="6">
                     <b:panel
                         title="El paciente no posee riesgo de Salud Mental"
-                        look="danger" rendered="#{not clapController.selected.riesgo_salud_mental}">
-                        <h:outputText value="Panel Content" />
+                        look="success" rendered="#{not clapController.selected.riesgo_salud_mental}">
+                        <f:facet name="footer">
+                        <b:row>
+                        <b:column offset="8" col-xs="4">
+                            <b:commandButton look="danger" value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_salud_mental(true)}">
+                                <p:ajax event="click" update="mental"/>
+                            </b:commandButton>
+                        </b:column>
+                        </b:row>
+                        </f:facet>
                     </b:panel> 
                 </b:column>
-                <b:column offset="3" col-xs="3">
-                    <b:commandButton value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_salud_mental(true)}"/>
-                </b:column>    
+                <b:column offset="3" col-xs="12" col-md="6">
+                    <b:panel
+                        title="El paciente posee riesgo de Salud Mental"
+                        look="danger" rendered="#{clapController.selected.riesgo_salud_mental}">
+                        <i>Debe realizarse una actividad de intervención para mitigar dicho riesgo</i>
+                    </b:panel> 
+                </b:column>
                 </div>
             </b:row>
             <br/>
             <b:row>
                 <div id="alcohol">
-                <b:column col-xs="6">
+                <b:column offset="3" col-xs="12" col-md="6">
                     <b:panel
                         title="El usuario no posee riesgo de Alcohol y drogas"
-                        look="success" rendered="#{clapController.selected.riesgo_oh_drogas}">
-                        <h:outputText value="Panel Content" />
+                        look="success" rendered="#{not clapController.selected.riesgo_oh_drogas}">
+                        <f:facet name="footer">
+                        <b:row>
+                        <b:column offset="8" col-xs="4">
+                            <b:commandButton look="danger" value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_oh_drogas(true)}">
+                                <p:ajax event="click" update="alcohol"/>
+                            </b:commandButton> 
+                        </b:column>
+                        </b:row>
+                        </f:facet>
                     </b:panel> 
                 </b:column>
-                <b:column col-xs="6">
+                <b:column offset="3" col-xs="12" col-md="6">
                     <b:panel
                         title="El paciente no posee riesgo de Alcohol y drogas"
-                        look="danger" rendered="#{not clapController.selected.riesgo_oh_drogas}">
-                        <h:outputText value="Panel Content" />
+                        look="danger" rendered="#{clapController.selected.riesgo_oh_drogas}">
+                        <i>Debe realizarse una actividad de intervención para mitigar dicho riesgo</i>
                     </b:panel> 
                 </b:column>
-                <b:column offset="3" col-xs="3">
-                    <b:commandButton value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_oh_drogas(true)}">
-                        <p:ajax event="click" update="mental"/>
-                    </b:commandButton>
-                </b:column> 
                 </div>
             </b:row>
             <br/>
             <b:row>
                 <div id="ssr">
-                <b:column col-xs="6">
+                <b:column offset="3" col-xs="12" col-md="6">
                     <b:panel
                         title="El paciente no posee riesgo de Salud Sexual y Reproductiva"
-                        look="success" rendered="#{clapController.selected.riesgo_ssr}">
-                        <h:outputText value="Panel Content" />
+                        look="success" rendered="#{not clapController.selected.riesgo_ssr}">
+                        <f:facet name="footer">
+                        <b:row>
+                        <b:column offset="8" col-xs="4">
+                            <b:commandButton look="danger" value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_ssr(true)}">
+                                <p:ajax event="click" update="ssr"/>
+                            </b:commandButton>
+                        </b:column>
+                        </b:row>
+                        </f:facet>
                     </b:panel>
                 </b:column>
-                <b:column col-xs="6">
+                <b:column offset="3" col-xs="12" col-md="6">
                     <b:panel
                         title="El paciente posee riesgo de Salud Sexual y Reproductiva"
-                        look="danger" rendered="#{not clapController.selected.riesgo_ssr}">
-                        <h:outputText value="Panel Content" />
+                        look="danger" rendered="#{clapController.selected.riesgo_ssr}">
+                        <i>Debe realizarse una actividad de intervención para mitigar dicho riesgo</i>
                     </b:panel>
                 </b:column>
-                <b:column offset="3" col-xs="3">
-                    <b:commandButton value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_ssr(true)}">
-                        <p:ajax event="click" update="ssr"/>
-                    </b:commandButton>
-                </b:column> 
                 </div>
-           </b:row>
+            </b:row>
+            <b:row>
+                <h2 align="center">Actividades de intervención}</h2>
+                <br/><br/>
+                <b:column>
+                    hola
+                </b:column>
+            </b:row>
            </h:form>
         </ui:define>
         
