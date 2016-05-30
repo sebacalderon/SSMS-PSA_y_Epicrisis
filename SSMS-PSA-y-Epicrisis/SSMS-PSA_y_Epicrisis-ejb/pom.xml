@@ -9,7 +9,7 @@
 
     <groupId>cl.diinf</groupId>
     <artifactId>SSMS-PSA_y_Epicrisis-ejb</artifactId>
-    <version>1.4.1</version>
+    <version>1.0</version>
     <packaging>ejb</packaging>
 
     <name>SSMS-PSA_y_Epicrisis-ejb</name>
