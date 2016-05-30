@@ -29,8 +29,13 @@
                     <p:panelGrid columns="4" rendered="#{pacienteController.selected != null}">
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_RUN}" for="RUN" />    
                         <p:column>
-                            <p:inputText id="RUN" value="#{pacienteController.selected.RUN}" style="max-width: 100px;" title="#{bundle.CreatepacienteTitle_RUN}" required="true"/> -
-                            <p:inputText id="DV" value="#{pacienteController.selected.DV}" title="#{bundle.CreatepacienteTitle_DV}" maxlength="1" style="max-width: 20px;" required="true" validator="#{pacienteController.validaRun}" validatorMessage="El RUN ingresado no es válido"></p:inputText>
+                            <p:inputText id="RUN" value="#{pacienteController.selected.RUN}" style="max-width: 100px;" title="#{bundle.CreatepacienteTitle_RUN}" required="true">
+                            <p:ajax event="blur" />
+                            </p:inputText>
+                            -
+                            <p:inputText id="DV" value="#{pacienteController.selected.DV}" title="#{bundle.CreatepacienteTitle_DV}" style="max-width: 20px;" required="true">
+                            <p:ajax event="blur" />
+                            </p:inputText>
                         </p:column>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_nombres}" for="nombres" />
                         <p:inputText id="nombres" value="#{pacienteController.selected.nombres}" title="#{bundle.CreatepacienteTitle_nombres}" maxlength="50" required="true" />

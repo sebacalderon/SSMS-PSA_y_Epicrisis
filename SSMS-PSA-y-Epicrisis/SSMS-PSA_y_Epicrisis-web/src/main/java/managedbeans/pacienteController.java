@@ -74,47 +74,61 @@ public class pacienteController implements Serializable {
     public paciente prepareCreate() {
         selected = new paciente();
         initializeEmbeddableKey();
-//        selected.setNombres("Sebastian");
-//        selected.setPrimer_apellido("Calderon");
-//        selected.setSegundo_apellido("Diaz");
-//        selected.setCalle_direccion("sadas");
-//        selected.setNumero_direccion("123");
-//        selected.setFecha_nacimiento(new java.util.Date());
+        selected.setNombres("Sebastian");
+        selected.setPrimer_apellido("Calderon");
+        selected.setSegundo_apellido("Diaz");
+        selected.setCalle_direccion("sadas");
+        selected.setNumero_direccion("123");
+        selected.setFecha_nacimiento(new java.util.Date());
 //        selected.setRUN(18293486);
 //        selected.setDV("1");
-//        selected.setCorreo("sebastian@algo.com");
-//        selected.setSexo(1);
-//        region Region = new region();
-//        long id = 1;
-//        Region.setId(id);
-//        Region.setNombre("Región de Tarapacá");
-//        selected.setRegion_residencia(Region);
-//        comuna Comuna = new comuna();
-//        id = 1101;
-//        Comuna.setId(id);
-//        Comuna.setNombre("Iquique");
-//        Comuna.setRegion(Region);
-//        selected.setComuna_residencia(Comuna);
-//        prevision Prevision = new prevision();
-//        id = 2;
-//        Prevision.setId(id);
-//        Prevision.setNombre("Isapre");
-//        selected.setPrevision(Prevision);
-//        nacionalidad Nacionalidad = new nacionalidad();
-//        id = 213;
-//        Nacionalidad.setId(id);        
-//        Nacionalidad.setNombre("Chile");
-//        selected.setNacionalidad(Nacionalidad);
+        selected.setCorreo("sebastian@algo.com");
+        selected.setSexo(1);
+        region Region = new region();
+        long id = 1;
+        Region.setId(id);
+        Region.setNombre("Región de Tarapacá");
+        selected.setRegion_residencia(Region);
+        comuna Comuna = new comuna();
+        id = 1101;
+        Comuna.setId(id);
+        Comuna.setNombre("Iquique");
+        Comuna.setRegion(Region);
+        selected.setComuna_residencia(Comuna);
+        prevision Prevision = new prevision();
+        id = 2;
+        Prevision.setId(id);
+        Prevision.setNombre("Isapre");
+        selected.setPrevision(Prevision);
+        nacionalidad Nacionalidad = new nacionalidad();
+        id = 213;
+        Nacionalidad.setId(id);        
+        Nacionalidad.setNombre("Chile");
+        selected.setNacionalidad(Nacionalidad);
         return selected;
     }
 
     public String create() {
-        selected.setEstado("Ingresado");
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("pacienteCreated"));
-        if (!JsfUtil.isValidationFailed()) {
-            items = null;    // Invalidate list of items to trigger re-query.
-        }
-        return "/faces/paciente/List.xhtml";
+        Object value = null;
+        FacesContext context;
+        context = FacesContext.getCurrentInstance();
+        FacesMessage message = null; 
+        
+        boolean flag = verificaRun();
+                
+        if (flag) {
+            selected.setEstado("Ingresado");
+            persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("pacienteCreated"));
+            if (!JsfUtil.isValidationFailed()) {
+                items = null;    // Invalidate list of items to trigger re-query.
+            }
+            System.out.println("Run "+selected.getRUN()+"-"+selected.getDV()+" Válido");
+            return "/faces/paciente/List.xhtml";
+        }else{
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: el RUN ingresado no es válido",  "El rut ingresado no es válido.") );
+            System.out.println("Run "+selected.getRUN()+"-"+selected.getDV()+" inválido");
+            return "/faces/paciente/Create.xhtml";
+        }   
     }
 
     public String update() {
@@ -177,31 +191,56 @@ public class pacienteController implements Serializable {
         return getFacade().findAll();
     }
 
+    public boolean verificaRun(){
+        String rut2 = "";
 
-    public void validaRun(FacesContext context, UIComponent toValidate, Object value) {
+        rut2 = String.valueOf(selected.getRUN());
+ 
+        rut2 = Integer.toString(selected.getRUN());
+        
+        boolean flag = false; 
+        String rut = rut2.trim(); 
 
-        try {
-            context = FacesContext.getCurrentInstance();
-            FacesMessage message = null;
-            int rutAux = selected.getRUN();
-            String dv = (String) value;
+        String posibleVerificador = selected.getDV().trim(); 
+        int cantidad = rut.length(); 
+        int factor = 2; 
+        int suma = 0; 
+        String verificador = ""; 
 
-            int m = 0, s = 1;
-            for (; rutAux != 0; rutAux /= 10) {
-                s = (s + rutAux % 10 * (9 - m++ % 6)) % 11;
-            }
-            if (dv.charAt(0) == (char) (s != 0 ? s + 47 : 75)) {
-                ((UIInput) toValidate).setValid(true);
-                System.out.println("Run "+selected.getRUN()+"-"+selected.getDV()+" Válido");
-            }else{
-                ((UIInput) toValidate).setValid(false);
-                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: el RUN ingresado no es válido",  "El rut ingresado no es válido.") );
-                System.out.println("Run "+selected.getRUN()+"-"+selected.getDV()+" inválido");
-            }
+        for(int i = cantidad; i > 0; i--) 
+        { 
+            if(factor > 7) 
+            { 
+                factor = 2; 
+            } 
+            suma += (Integer.parseInt(rut.substring((i-1), i)))*factor; 
+            factor++; 
 
-        } catch (java.lang.NumberFormatException e) {
-        } catch (Exception e) {
+        } 
+        verificador = String.valueOf(11 - suma%11); 
+        if(verificador.equals(posibleVerificador)) 
+        { 
+            flag = true; 
+        } 
+        else 
+        { 
+            if((verificador.equals("10")) && (posibleVerificador.toLowerCase().equals("k"))) 
+            { 
+                flag = true; 
+            } 
+            else 
+            { 
+                if((verificador.equals("11") && posibleVerificador.equals("0"))) 
+                { 
+                    flag = true; 
+                } 
+                else 
+                { 
+                    flag = false; 
+                } 
+            } 
         }
+        return flag;
     }
     
     @FacesConverter(forClass = paciente.class)
