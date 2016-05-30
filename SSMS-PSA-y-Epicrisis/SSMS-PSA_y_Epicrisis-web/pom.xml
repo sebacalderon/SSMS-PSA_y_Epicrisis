@@ -9,7 +9,7 @@
 
     <groupId>cl.diinf</groupId>
     <artifactId>SSMS-PSA_y_Epicrisis-web</artifactId>
-    <version>1.0</version>
+    <version>1.4.1</version>
     <packaging>war</packaging>
 
     <name>SSMS-PSA_y_Epicrisis-web</name>

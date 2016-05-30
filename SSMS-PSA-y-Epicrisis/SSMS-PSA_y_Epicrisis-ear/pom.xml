@@ -9,7 +9,7 @@
 
     <groupId>cl.diinf</groupId>
     <artifactId>SSMS-PSA_y_Epicrisis-ear</artifactId>
-    <version>1.0</version>
+    <version>1.4.1</version>
     <packaging>ear</packaging>
 
     <name>SSMS-PSA_y_Epicrisis-ear</name>
