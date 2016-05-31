@@ -461,11 +461,17 @@ public class clapController implements Serializable {
     }
     
     public boolean esIncompleto(){
-        return selected.getEstado().equals("Incompleto");
+        if(selected!=null){
+            return selected.getEstado().equals("Incompleto");
+        }
+        return true;
     }
     
     public boolean esAnulado(){
-        return selected.getEstado().equals("Anulado");
+        if(selected!=null){
+            return selected.getEstado().equals("Anulado");
+        }
+        return true;
     }
     
     public void setViveCon(){
