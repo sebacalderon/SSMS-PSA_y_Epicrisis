@@ -144,6 +144,7 @@ public class pacienteController implements Serializable {
         }
     }
 
+    
     public List<paciente> getItems() {
         if (items == null) {
             items = getFacade().findAll();
