@@ -192,17 +192,39 @@
                 </b:column>
                 </div>
             </b:row>
+            </h:form>
             <b:row>
                 <h2 align="center">Actividades de intervención</h2>
-                <br/><br/>
-                <b:column offset-xs="4">
-                    <b:commandButton look="primary" id="createButton" icon="ui-icon-plus" style="width:250px;height: 250px;"  value="Realizar actividades de intervención" actionListener="#{actividadController.prepareCreate}" update=":actividadCreateForm" oncomplete="PF('actividadCreateDialog').show()"/>
-                    <b:commandButton look="default" id="agendarButton" icon="ui-icon-plus"   style="width:250px;height: 250px;"   value="Agendar consulta para actividades de intervención" actionListener="#{actividadController.prepareAgendar}" update=":actividadAgendarForm" oncomplete="PF('actividadAgendarDialog').show()"/>
-                </b:column>
+                
+                <h:form id="actividadListForm">
+                    <p:dataTable id="datalist" value="#{actividadController.items}" var="item" styleClass="table table-striped table-bordered"
+                                 selectionMode="single" selection="#{actividadController.selected}"
+                                 rowKey="#{item.id}"
+                                 >
+                        
+
+                        <p:ajax event="rowSelect"   update="createButton" />
+                        <p:ajax event="rowUnselect" update="createButton"/>
+
+                        
+                        
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="Ahora" actionListener="#{actividadController.prepareCreate}" update=":actividadCreateForm" oncomplete="PF('actividadCreateDialog').show()"/>
+                            <p:commandButton id="agendarButton" icon="ui-icon-plus"  value="Despues" actionListener="#{actividadController.prepareAgendar}" update=":actividadAgendarForm" oncomplete="PF('actividadAgendarDialog').show()"/>
+                        </f:facet>
+
+                    </p:dataTable>
+                        
+                </h:form>
             </b:row>
-           </h:form>
-            <ui:include src="Create_Actividades.xhtml"/>
-            <ui:include src="Agendar.xhtml"/>
+
+          
+           
+            
+            <ui:include src="/actividad/Create.xhtml"/>
+            <ui:include src="/actividad/Agendar.xhtml"/>
+
+           
         </ui:define>
         
     </ui:composition>

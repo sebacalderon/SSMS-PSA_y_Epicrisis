@@ -136,17 +136,11 @@
                             <h:outputText value="#{item.estado}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createClap" icon="ui-icon-plus"   value="Crear Clap" actionListener="#{clapController.prepareClap(pacienteController.selected)}" action="/clap/Create?faces-redirect=true" rendered="#{loginController.esFuncionario()}"/>                            
+                          <p:commandButton id="createClap" icon="ui-icon-plus"   value="Crear Clap" actionListener="#{clapController.prepareClap(pacienteController.selected)}" action="/clap/Create?faces-redirect=true" rendered="#{loginController.esFuncionario()}"/>                            
                             <p:commandButton id="viewButton" rendered="false"   icon="ui-icon-search" value="#{bundle.View}" update=":clapViewForm" oncomplete="PF('clapViewDialog').show()" disabled="#{empty clapController.selected}"/>
-<<<<<<< HEAD
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{clapController.prepareEdit}" action="/clap/Edit?faces-redirect=true" disabled="#{empty clapController.selected || not clapController.esIncompleto()}" rendered="#{loginController.esFuncionario()}"/>
                             <p:commandButton id="desactivateButton" icon="ui-icon-cancel"  value="Anular" actionListener="#{clapController.anular}" update=":growl,datalist"  disabled="#{clapController.esAnulado() || empty clapController.selected}"/>
-                            <p:commandButton id="viewRiesgosButton"   icon="ui-icon-search" value="Ver Riesgos" actionListener="#{clapController.prepareRiesgos}" action="/clap/Riesgos?faces-redirect=true" disabled="#{empty clapController.selected}" rendered="#{loginController.esFuncionario() || loginController.esSuperUsuario()}"/>                            
-=======
-                            <p:commandButton id="viewRiesgosButton"   icon="ui-icon-search" value="Ver Riesgos" actionListener="#{clapController.prepareRiesgos}" action="/clap/Riesgos?faces-redirect=true" disabled="#{empty clapController.selected || clapController.esIncompleto()}" rendered="#{loginController.esFuncionario() || loginController.esSuperUsuario()}"/>                            
-                            <p:commandButton id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{clapController.prepareEdit}" action="/clap/Edit?faces-redirect=true" disabled="#{empty clapController.selected || not clapController.esIncompleto()}" rendered="#{loginController.esFuncionario()}"/>
-                            <p:commandButton id="desactivateButton" icon="ui-icon-cancel"  value="Anular" actionListener="#{clapController.anular}" update=":growl,datalist"  disabled="#{empty clapController.selected || clapController.esAnulado()}"/>
->>>>>>> origin/master
+                            <p:commandButton id="viewRiesgosButton"   icon="ui-icon-search" value="Ver Riesgos" actionListener="#{clapController.prepareRiesgos}" action="/clap/Riesgos?faces-redirect=true" disabled="#{empty clapController.selected}" rendered="#{loginController.esFuncionario() || loginController.esSuperUsuario()}"/>                      
                         </f:facet>
                 </p:dataTable>
                 </h:panelGroup>
