@@ -1026,6 +1026,48 @@
                     <b:row>
                         <b:column col-md="4" col-xs="6">
                             <b:row>
+                                <b>Alcohol y otras drogas</b>
+                            </b:row>
+                            <b:row>
+                                <b:column offset="4" col-md="3">No</b:column>
+                                <b:column col-md="4">Si</b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column col-md="4"><p:outputLabel value="Alcohol" for="consumo_alcohol" /></b:column>
+                                <b:column col-md="8">
+                                    <p:selectOneRadio id="consumo_alcohol" style="width:12em;" value="#{clapController.selected.consumo_alcohol}" layout="grid" columns="2" >
+                                        <f:selectItem itemValue="false" />
+                                        <f:selectItem itemValue="true" />
+                                        <f:ajax event="valueChange"  listener="#{clapController.AuditCrafft(clapController.selected.consumo_alcohol)}" immediate="true" render="habitos" ></f:ajax>                                                                                    
+                                    </p:selectOneRadio>
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column col-md="4"><p:outputLabel value="Marihuana" for="consumo_marihuana" /></b:column>
+                                <b:column col-md="8">
+                                    <p:selectOneRadio id="consumo_marihuana" style="width:12em" value="#{clapController.selected.consumo_marihuana}" layout="grid" columns="2">
+                                        <f:selectItem itemValue="false" />
+                                        <f:selectItem itemValue="true" />
+                                        <f:ajax event="valueChange"  listener="#{clapController.AuditCrafft(clapController.selected.consumo_marihuana)}" immediate="true" render="habitos" ></f:ajax>
+                                    </p:selectOneRadio>
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column col-md="4"><p:outputLabel value="Otra sustancia" for="consumo_otra_sustancia" /></b:column>
+                                <b:column col-md="8">
+                                    <p:selectOneRadio id="consumo_otra_sustancia" style="width:12em" value="#{clapController.selected.consumo_otra_sustancia}" layout="grid" columns="2">
+                                        <f:selectItem itemValue="false" />
+                                        <f:selectItem itemValue="true" />
+                                        <f:ajax event="valueChange"  listener="#{clapController.AuditCrafft(clapController.selected.consumo_otra_sustancia)}" immediate="true" render="habitos" ></f:ajax>
+                                    </p:selectOneRadio>
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <p:inputText id="especificacion_consumo_otra_sustancia" placeholder="¿Cuál?¿Cuáles?" value="#{clapController.selected.especificacion_consumo_otra_sustancia}" /> 
+                            </b:row>
+                        </b:column>
+                        <b:column col-md="4" col-xs="6">
+                            <b:row>
                                 <p:outputLabel value="Sueño normal" for="sueno_normal" />
                             </b:row>
                             <b:row>
@@ -1090,54 +1132,6 @@
                         </b:column>
                         <b:column col-md="4" col-xs="6">
                             <b:row>
-                                <b>Alcohol y otras drogas</b>
-                            </b:row>
-                            <b:row>
-                                <b:column offset="4" col-md="3">No</b:column>
-                                <b:column col-md="4">Si</b:column>
-                            </b:row>
-                            <b:row>
-                                <b:column col-md="4"><p:outputLabel value="Alcohol" for="consumo_alcohol" /></b:column>
-                                <b:column col-md="8">
-                                    <p:selectOneRadio id="consumo_alcohol" style="width:12em;" value="#{clapController.selected.consumo_alcohol}" layout="grid" columns="2" >
-                                        <f:selectItem itemValue="false" />
-                                        <f:selectItem itemValue="true" />
-                                        <f:ajax event="valueChange"  listener="#{clapController.AuditCrafft(clapController.selected.consumo_alcohol)}" immediate="true" render="habitos" ></f:ajax>                                                                                    
-                                    </p:selectOneRadio>
-                                </b:column>
-                            </b:row>
-                            <b:row>
-                                <b:column col-md="4"><p:outputLabel value="Marihuana" for="consumo_marihuana" /></b:column>
-                                <b:column col-md="8">
-                                    <p:selectOneRadio id="consumo_marihuana" style="width:12em" value="#{clapController.selected.consumo_marihuana}" layout="grid" columns="2">
-                                        <f:selectItem itemValue="false" />
-                                        <f:selectItem itemValue="true" />
-                                        <f:ajax event="valueChange"  listener="#{clapController.AuditCrafft(clapController.selected.consumo_marihuana)}" immediate="true" render="habitos" ></f:ajax>
-                                    </p:selectOneRadio>
-                                </b:column>
-                            </b:row>
-                            <b:row>
-                                <b:column col-md="4"><p:outputLabel value="Otra sustancia" for="consumo_otra_sustancia" /></b:column>
-                                <b:column col-md="8">
-                                    <p:selectOneRadio id="consumo_otra_sustancia" style="width:12em" value="#{clapController.selected.consumo_otra_sustancia}" layout="grid" columns="2">
-                                        <f:selectItem itemValue="false" />
-                                        <f:selectItem itemValue="true" />
-                                        <f:ajax event="valueChange"  listener="#{clapController.AuditCrafft(clapController.selected.consumo_otra_sustancia)}" immediate="true" render="habitos" ></f:ajax>
-                                    </p:selectOneRadio>
-                                </b:column>
-                            </b:row>
-                            <b:row>
-                                <p:inputText id="especificacion_consumo_otra_sustancia" placeholder="¿Cuál?¿Cuáles?" value="#{clapController.selected.especificacion_consumo_otra_sustancia}" /> 
-                            </b:row>
-                        </b:column>
-                    </b:row>
-                        <br/>
-                    <b:row>        
-                        <b:column col-md="4" col-xs="6">
-                            sección del crafft o audit
-                        </b:column>
-                        <b:column col-md="4" col-xs="6">
-                            <b:row>
                                 <p:outputLabel value="Seguridad vial" for="seguridad_vial" />
                             </b:row>
                             <b:row>
@@ -1148,6 +1142,7 @@
                             </b:row>
                         </b:column>
                     </b:row>
+                        <br/>
                     </div>
                     <facet>
                         <b:inputText id="observaciones_habitos_consumo" value="#{clapController.selected.observaciones_habitos_consumo}" label="#{bundle.CreateclapTitle_observaciones_habitos_consumo}" />
