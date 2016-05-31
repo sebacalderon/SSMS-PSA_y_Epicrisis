@@ -192,7 +192,17 @@
                 </b:column>
                 </div>
             </b:row>
+            <b:row>
+                <h2 align="center">Actividades de intervención</h2>
+                <br/><br/>
+                <b:column offset-xs="4">
+                    <b:commandButton look="primary" id="createButton" icon="ui-icon-plus" style="width:250px;height: 250px;"  value="Realizar actividades de intervención" actionListener="#{actividadController.prepareCreate}" update=":actividadCreateForm" oncomplete="PF('actividadCreateDialog').show()"/>
+                    <b:commandButton look="default" id="agendarButton" icon="ui-icon-plus"   style="width:250px;height: 250px;"   value="Agendar consulta para actividades de intervención" actionListener="#{actividadController.prepareAgendar}" update=":actividadAgendarForm" oncomplete="PF('actividadAgendarDialog').show()"/>
+                </b:column>
+            </b:row>
            </h:form>
+            <ui:include src="Create_Actividades.xhtml"/>
+            <ui:include src="Agendar.xhtml"/>
         </ui:define>
         
     </ui:composition>

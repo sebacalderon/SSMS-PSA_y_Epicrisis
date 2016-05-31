@@ -61,6 +61,13 @@ public class actividadController implements Serializable {
         selected.setFecha_realizacion(new java.util.Date());
         return selected;
     }
+    
+    public actividad prepareAgendar() {
+        selected = new actividad();
+        initializeEmbeddableKey();
+        selected.setPaciente(pacienteCtrl.getSelected());
+        return selected;
+    }
 
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("actividadCreated"));

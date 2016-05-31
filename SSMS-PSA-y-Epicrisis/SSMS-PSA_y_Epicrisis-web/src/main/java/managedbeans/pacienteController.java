@@ -243,6 +243,11 @@ public class pacienteController implements Serializable {
         }
         return flag;
     }
+
+    public void riesgosSinResolver() {
+        selected.setEstado("Riesgos sin resolver");
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
+    }
     
     @FacesConverter(forClass = paciente.class)
     public static class pacienteControllerConverter implements Converter {

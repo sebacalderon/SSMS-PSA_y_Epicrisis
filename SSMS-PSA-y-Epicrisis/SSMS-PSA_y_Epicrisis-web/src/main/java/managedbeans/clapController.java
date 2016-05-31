@@ -419,8 +419,8 @@ public class clapController implements Serializable {
         System.out.println("Riesgo salud mental: "+selected.isRiesgo_salud_mental());
         System.out.println("Riesgo social: "+selected.isRiesgo_social());
         System.out.println("Riesgo ssr: "+selected.isRiesgo_ssr());
-
         
+
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("clapCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -428,6 +428,7 @@ public class clapController implements Serializable {
         if(selected.getEstado().equals("Nuevo")){
             List<clap> claps = getItemsPorPaciente(pacienteCtrl.getSelected().getRUN());
             if(claps.size()>1){
+                System.out.println("Eziste mas de 1 clap");
                 for(int i=0;i<claps.size();i++){
                     if(claps.get(i).getEstado().equals("Vigente")){
                         setSelected(claps.get(i));
@@ -439,11 +440,18 @@ public class clapController implements Serializable {
                         persist(PersistAction.UPDATE,"");
                     }
                 }
-            }else{
-                selected.setEstado("Vigente");
-                persist(PersistAction.UPDATE,"");
             }
+//            else{
+//                System.out.println("Primer clap ingresado");
+//                selected.setEstado("Vigente");
+//                persist(PersistAction.UPDATE,"");
+//            }
         }
+        //Cambia estado de paciente
+//        if(selected.isRiesgo_cardiovascular()||selected.isRiesgo_nutricional()||selected.isRiesgo_oh_drogas()||selected.isRiesgo_salud_mental()||selected.isRiesgo_social()||selected.isRiesgo_ssr()){
+//            pacienteCtrl.riesgosSinResolver();
+//        }
+        
         if(completo){
             return "/faces/clap/Riesgos.xhtml";
         }else{
@@ -461,11 +469,17 @@ public class clapController implements Serializable {
     }
     
     public boolean esIncompleto(){
-        return selected.getEstado().equals("Incompleto");
+        if(selected!=null){
+            return selected.getEstado().equals("Incompleto");
+        }
+        return true;
     }
     
     public boolean esAnulado(){
-        return selected.getEstado().equals("Anulado");
+        if(selected!=null){
+            return selected.getEstado().equals("Anulado");
+        }
+        return true;
     }
     
     public void setViveCon(){
@@ -616,6 +630,7 @@ public class clapController implements Serializable {
         if(selected.getEstado().equals("Nuevo")){
             List<clap> claps = getItemsPorPaciente(pacienteCtrl.getSelected().getRUN());
             if(claps.size()>1){
+                System.out.println("Eziste mas de 1 clap");
                 for(int i=0;i<claps.size();i++){
                     if(claps.get(i).getEstado().equals("Vigente")){
                         setSelected(claps.get(i));
@@ -627,7 +642,9 @@ public class clapController implements Serializable {
                         persist(PersistAction.UPDATE,"");
                     }
                 }
-            }else{
+            }
+            else{
+                System.out.println("Primer clap ingresado");
                 selected.setEstado("Vigente");
                 persist(PersistAction.UPDATE,"");
             }

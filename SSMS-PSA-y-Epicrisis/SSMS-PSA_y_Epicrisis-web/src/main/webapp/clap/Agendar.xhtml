@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+
+    <ui:composition>
+
+        <p:dialog id="actividadAgendarDlg" widgetVar="actividadAgendarDialog" modal="true" resizable="false" appendTo="@(body)" header="Agendar Consulta">
+            <h:form id="actividadAgendarForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{actividadController.selected != null}">
+                        <p:outputLabel value="Usuario atendido:" for="paciente" />
+                        <h:outputText id="paciente" value="#{actividadController.selected.paciente.RUN}-#{actividadController.selected.paciente.DV}" />
+                        
+                        <p:outputLabel value="Fecha de agendamiento" for="fecha_agendamiento" />
+                        <p:calendar id="fecha_agendamiento" pattern="dd/MM/yyyy" value="#{actividadController.selected.fecha_agendamiento}"/>
+
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{actividadController.create}" value="#{bundle.Save}" update="display,:growl" oncomplete="handleSubmit(args,'actividadAgendarDialog');"/>
+                    <p:button value="#{bundle.Cancel}" onclick="actividadAgendarDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

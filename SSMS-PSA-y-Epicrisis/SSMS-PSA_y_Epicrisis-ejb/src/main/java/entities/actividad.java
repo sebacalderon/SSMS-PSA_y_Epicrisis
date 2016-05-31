@@ -97,7 +97,6 @@ public class actividad implements Serializable {
     private paciente paciente;
 
     @JoinColumn(name = "usuario_actividad", referencedColumnName = "codigo_usuario")
-    @NotNull(message="Debe ingresar una sesión")
     @ManyToOne(fetch = FetchType.LAZY)
     private Usuario usuario;
     
