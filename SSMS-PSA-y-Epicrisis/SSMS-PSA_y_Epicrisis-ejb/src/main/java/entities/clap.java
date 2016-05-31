@@ -39,8 +39,8 @@ public class clap implements Serializable {
     @Column(name="codigo_clap")
     private Long id;
     
-    @Column(name="completo_clap")
-    private boolean completo;
+    @Column(name="estado_clap")
+    private String estado;
     
     
     //Ficha personal de paciente
@@ -1533,6 +1533,14 @@ public class clap implements Serializable {
         this.observaciones_habitos_consumo = observaciones_habitos_consumo;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    
     public int getEdad_menarca_espermarca() {
         return edad_menarca_espermarca;
     }
@@ -1881,13 +1889,7 @@ public class clap implements Serializable {
         return perimetro_abdominal;
     }
 
-    public boolean isCompleto() {
-        return completo;
-    }
 
-    public void setCompleto(boolean completo) {
-        this.completo = completo;
-    }
     
     public void setPerimetro_abdominal(int perimetro_abdominal) {
         this.perimetro_abdominal = perimetro_abdominal;

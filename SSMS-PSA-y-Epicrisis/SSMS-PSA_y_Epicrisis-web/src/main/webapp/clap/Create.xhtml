@@ -1633,9 +1633,9 @@
                                 </b:row>
                                 <b:row>
                                     <p:selectOneRadio id="imagen_corporal" style="width:100%" value="#{clapController.selected.imagen_corporal}" layout="grid" columns="1">
-                                        <f:selectItem itemLabel="conforme" itemValue="#{0}" />
-                                        <f:selectItem itemLabel="crea preocupación" itemValue="#{1}" />
-                                        <f:selectItem itemLabel="impide relación con los demás" itemValue="#{2}" />
+                                        <f:selectItem itemLabel="conforme" itemValue="1" />
+                                        <f:selectItem itemLabel="crea preocupación" itemValue="2" />
+                                        <f:selectItem itemLabel="impide relación con los demás" itemValue="3" />
                                     </p:selectOneRadio>
                                 </b:row>
                             </b:column>
@@ -1950,7 +1950,7 @@
                     <b:inputText id="indicaciones_interconsultas" value="#{clapController.selected.indicaciones_interconsultas}" label="#{bundle.CreateclapTitle_indicaciones_interconsultas}" />
                 </b:row>
                 <b:column offset-xs="5">
-                    <p:commandButton action="#{clapController.create}" value="#{bundle.Save}" oncomplete="/clap/Riesgos"/>
+                    <p:commandButton action="#{clapController.create}" value="#{bundle.Save}"/>
                     <p:button  value="#{bundle.Cancel}" outcome="/paciente/View" /> 
                     <br/><br/>
                 </b:column>
