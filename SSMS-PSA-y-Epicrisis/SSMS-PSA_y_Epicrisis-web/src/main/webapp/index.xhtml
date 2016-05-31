@@ -15,13 +15,11 @@
             <h:outputText value="#{bundle.LoginTitle}"></h:outputText>
         </ui:define>
         
-        <ui:define name="body1" rendered="#{loginController.usuarioLogueado != null}">
-            <h1>Bienvenido #{loginController.getUsuarioLogueado().nombres} #{loginController.getUsuarioLogueado().primer_apellido}!</h1>
-            <br />
-            <br />
-        </ui:define>
-
         <ui:define name="body">
+            <h:form rendered="#{loginController.usuarioLogueado != null}">
+                <h1 align="center">Bienvenido/a #{loginController.getUsuarioLogueado().nombres} #{loginController.getUsuarioLogueado().primer_apellido}</h1>
+            <h2 align="center ">al sistema del Programa Social Adolescente.</h2>
+            </h:form>
             <h:form rendered="#{loginController.usuarioLogueado == null}">
                 <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
                 <b:row ></b:row>
