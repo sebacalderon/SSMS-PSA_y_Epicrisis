@@ -32,6 +32,10 @@ public class LoginController implements Serializable{
     
     private Usuario usuarioLogueado=null;
 
+    public LoginController() {
+        //Constructor
+    }
+    
     public UsuarioController getUserCtrl() {
         return userCtrl;
     }
@@ -48,12 +52,9 @@ public class LoginController implements Serializable{
         this.usuarioLogueado = usuarioLogueado;
     }
     
-    public LoginController() {
-    }
-    
     @PostConstruct
     public void Init(){
-        
+        //Autogenerado
     }
 
     public String getRut() {
@@ -80,10 +81,7 @@ public class LoginController implements Serializable{
             Usuario usuario;
             usuario = userCtrl.findByRUT(this.rut);
             System.out.println(usuario.getRol());
-            if (usuario == null) {
-                context.addMessage(null, new FacesMessage("El funcionario no existe"));
-                return "/faces/index.xhtml";
-            }else if(!usuario.isHabilitado()){
+            if (!usuario.isHabilitado()) {
                 context.addMessage(null, new FacesMessage("El funcionnario está deshabilitado"));
                 return "/faces/index.xhtml";
             }else{
