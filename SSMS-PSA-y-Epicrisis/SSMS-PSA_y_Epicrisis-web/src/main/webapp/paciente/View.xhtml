@@ -72,13 +72,10 @@
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
-<<<<<<< HEAD
-                        <p:ajax event="rowSelect"   update="viewButton editButton createClap desactivateButton"/>
-                        <p:ajax event="rowUnselect" update="viewButton editButton createClap desactivateButton"/>
-=======
-                    <p:ajax event="rowSelect"   update="viewButton editButton createClap viewRiesgosButton"/>
-                        <p:ajax event="rowUnselect" update="viewButton editButton createClap viewRiesgosButton"/>
->>>>>>> origin/master
+                                 
+                        <p:ajax event="rowSelect"   update="viewButton editButton createClap viewRiesgosButton desactivateButton"/>
+                        <p:ajax event="rowUnselect" update="viewButton editButton createClap viewRiesgosButton desactivateButton"/>
+
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListclapTitle_nombres}"/>

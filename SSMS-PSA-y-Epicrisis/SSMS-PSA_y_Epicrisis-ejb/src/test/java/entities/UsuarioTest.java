@@ -44,7 +44,6 @@ public class UsuarioTest {
      */
     @Test
     public void testCambiarPassword() {
-        System.out.println("cambiarPassword");
         String old_password = "";
         String new_password = "1";
         boolean expResult = true;
