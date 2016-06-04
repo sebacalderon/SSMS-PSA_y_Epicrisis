@@ -717,5 +717,4 @@ INSERT INTO nacionalidad(codigo_nacionalidad, nombre_nacionalidad)VALUES (534, '
 INSERT INTO nacionalidad(codigo_nacionalidad, nombre_nacionalidad)VALUES (535, 'Tuvalu')
 INSERT INTO nacionalidad(codigo_nacionalidad, nombre_nacionalidad)VALUES (536, 'Vanuatu')
 
-CREATE VIEW v_user_role AS select u.correo_usuario AS correo_usuario,u.password_usuario AS password_usuario,g.nombre_rol AS nombre_rol from (usuario u join rol g on((g.codigo_rol = u.rol_usuario)))
 INSERT INTO paciente(dv_paciente, run_paciente, calle_direccion_paciente, correo_paciente, estado_paciente, fecha_nacimiento_paciente, nombre_social_paciente, nombres_paciente, numero_direccion_paciente, primer_apellido_paciente, segundo_apellido_paciente, sexo_usuario, telefono_fijo_paciente, telefono_movil_paciente, cesfam_paciente, comuna_residencia_paciente, estado_conyugal_paciente, nacionalidad_paciente, prevision_paciente, pueblo_originario_paciente, region_residencia_paciente) VALUES ('0',18455374,'Garcia Reyes','pablo.salinas.cabanas@gmail.com','Ingresado','1993-02-22','Obi Wan','Pablo','61','Salinas','Cabanas',1,'(22) 682-1922','(+569) 7298-8118',13300,13101,1,213,2,10,13)

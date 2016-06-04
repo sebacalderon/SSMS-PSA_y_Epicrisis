@@ -453,9 +453,9 @@ public class clapController implements Serializable {
 //        }
         
         if(completo){
-            return "/faces/clap/Riesgos.xhtml";
+            return "/faces/clap/Riesgos.xhtml?faces-redirect=true";
         }else{
-            return "/faces/paciente/View.xhtml";
+            return "/faces/paciente/View.xhtml?faces-redirect=true";
         }
     }
 

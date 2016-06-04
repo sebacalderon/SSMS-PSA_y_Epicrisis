@@ -1,0 +1,474 @@
+body{
+    border-top: 5px solid #848484;
+}
+#headerContainer{
+    min-height: 115px;
+}
+#headerTop{
+    height: 100%;
+}
+#logoLawen{
+    background-image: url("../img/logo-lawen-web.png");
+    background-repeat: no-repeat;
+    background-position: center left;
+    height: 115px;
+    display: block;
+}
+#topRight{
+    height: 115px;
+}
+.navbar-default{
+    border-width: 1px 0 0;
+    border-style: solid none none;
+    background-color: #ffffff;
+    background-image: none;
+    box-shadow: none;
+}
+.navbar-default .navbar-collapse, .navbar-default .navbar-form{
+    border-color: #ffffff;
+}
+.row{
+    margin-left: 0px!important;
+    margin-right: 0px!important;
+}
+#blu1 {
+    height: 40px;
+}
+
+#blu1 a{
+    color:#ffffff;
+}
+
+#blu2{
+    text-align: center;
+    padding: 5px 20px 20px;
+}
+#logoDiinf{
+    height: 115px;
+    float: right;
+    z-index: -1;
+}
+#logoUdes{
+    height: 115px;
+    float: right;
+    z-index: -1;
+}
+.diinf{
+    
+}
+#textFooter{
+    text-align: right;
+    color:#bdbdbd;
+}
+.ayudaMod {
+    margin-left: 95.6667%;
+}
+.navbar-form {
+    margin: 0px!important;
+    display: flex;
+}
+.formLogin{
+    
+}
+#passb, #userb{
+    margin-right: 10px;    
+}
+.formRight{
+    float: right;
+}
+
+#daniel{
+    overflow: hidden;
+    display: block;
+}
+
+.botonForm{
+    margin: 0 10px 0 5px !important;
+    padding: 2px 5px !important;
+}
+#northTop{
+    background-color: #7eaa14;
+}
+
+#menuLawen{
+    margin-bottom: 0px;
+}
+.azul{
+    color: #7eaa14;
+}
+
+/* Menu interno template */
+.ui-menu, .ui-menu .ui-menu-child {
+    background: no-repeat;
+    border: 0px;
+}
+.menuLeft{
+    float: right;
+}
+
+.ui-datatable-header.ui-widget-header.ui-corner-top {
+    background-color: #ffffff !important;
+    border-color: #ff6600;
+    border-radius: unset;
+    border-style: none none none solid;
+    border-width: 0 0 0 10px;
+    clear: both;
+    font-family: Verdana;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+
+    border: 1px solid #666666;
+    color: #ffffff;
+    text-shadow: 1px 1px 1px #7EAA14;
+}
+
+.ui-carousel .ui-carousel-header {
+    height: 27px!important;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+    background: none repeat scroll 0 0 #ff6600 !important;
+    border: 1px solid #ffffff!important;
+    color: #ffffff!important;
+    text-shadow: 1px 1px 1px #ff6600!important;
+}
+
+.hola{
+    color: #ff6600;
+    font-weight: bold;
+    font-variant: sub;
+}
+
+#loginError{
+    padding: 20px;
+    border: 5px solid #bdbdbd;
+    border-radius: 10px;
+    margin: 40px;
+}
+.col-centered {
+    float: none !important;
+    margin: 0 auto!important;
+}
+.panelSeparado{
+    margin-top: 10px;
+}
+
+#ui-datepicker-div{
+    z-index: 1036!important;
+}
+
+.ui-state-active {
+    background: #7EAA14;
+    color: #fff!important;
+}
+
+.tab1_preingresod{
+    max-width: 688px;
+    overflow: hidden;
+}
+
+.spaceGrid{
+    margin-bottom: 5px;
+    margin-top: 5px
+}
+
+.ui-panelgrid .ui-grid-responsive .ui-panelgrid-cell {
+    border: 1px solid #eee !important;
+}
+
+.Item {
+    color: #ff6600;
+    font-size: 16px !important;
+}
+.subItem {
+    color: #0080AA;
+    font-size: 14px !important;
+}
+.subSubItem {
+    color: #AE203D;
+    font-size: 12px !important;
+}
+
+.linkEsfera{
+    color: #49A049!important;
+}
+
+.ui-grid-col-6 {
+    width: 100%!important;
+}
+
+.nombreColCensoA{
+    color: #8014AA!important;
+}
+
+.colClassCondiciones{
+    background-color: #f6f5c7 !important;
+    color: #444 !important;
+}
+
+label {
+    font-size: 11px !important;
+}
+
+.odd{
+    background-color: #f6f5c7;
+}
+
+#curitaNotFound{
+    max-height: 310px;    
+}
+
+.centrar{
+    border: 5px solid #eeeeee;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+.volver{
+    padding: 10px;
+    margin-top: 20px !important;
+}
+
+.movedA{
+    padding-right: 0;
+}
+.moved{
+    margin-left: -30px !important;
+    overflow-x: scroll;
+    padding-left: 0 !important;
+}
+
+.botonCerrar{
+    height: 25px !important;
+    width: 155px !important;
+}
+
+.ui-button {
+    margin-top: 0px !important;
+}
+
+.psc1 > li{
+    padding-left: 10px;
+}
+.psc2 > li{
+    padding-left: 10px;
+}
+.psc3 > li{
+    padding-left: 10px;
+}
+
+/* Paneles index*/
+.panel-atenciones > .panel-heading {
+    background-image: linear-gradient(to bottom, #6b7ab2 0px, #6b7ab2 100%);
+    background-repeat: repeat-x;
+}
+.panel-atenciones > .panel-heading {
+    background-color: #6b7ab2;
+    border-color: #6b7ab2;
+    color: #fff;
+}
+
+.panel-atenciones {
+    border-color: #6b7ab2;
+}
+
+.panel-cardiovascular  > .panel-heading {
+    background-image: linear-gradient(to bottom, #139c28 0px, #139c28 100%);
+    background-repeat: repeat-x;
+}
+.panel-cardiovascular > .panel-heading {
+    background-color: #139c28;
+    border-color: #139c28;
+    color: #fff;
+}
+.panel-cardiovascular {
+    border-color: #139c28;
+}
+
+.panel-censo > .panel-heading {
+    background-color: #ED5565;
+    border-color: #ED5565;
+    color: #fff;
+}
+.panel-censo > .panel-heading + .panel-collapse > .panel-body {
+    border-top-color: #ED5565;
+}
+.panel-censo > .panel-heading .badge {
+    background-color: #3c763d;
+    color: #dff0d8;
+}
+.panel-censo > .panel-footer + .panel-collapse > .panel-body {
+    border-bottom-color: #91BEAE;
+}
+.panel-censo {
+    border-color: #ED5565;
+}
+
+.panel-psam > .panel-heading {
+    background-color: #327ca0;
+    border-color: #327ca0;
+    color: #fff;
+}
+.panel-psam {
+    border-color: #327CA0;
+}
+.botonCensoPSAM{
+    background-color: #327CA0 !important;
+    background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)) repeat scroll 0 0 #2C6AA0 !important;
+    border: 0px!important;
+    color: #fff!important;
+    font-weight: normal !important;
+    text-shadow: unset !important;
+}
+.botonCensoPSCV{
+    background-color: #2C6AA0 !important;
+    background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)) repeat scroll 0 0 #139C28 !important;
+    border: 0px!important;
+    color: #fff!important;
+    font-weight: normal !important;
+    text-shadow: unset !important;
+}
+.botonCensoPSCVNR{
+    background-color: #2C6AA0 !important;
+    background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)) repeat scroll 0 0 #139C28 !important;
+    border: 0px!important;
+    color: #fff!important;
+    font-weight: normal !important;
+    text-shadow: unset !important;
+}
+
+.paddinExtra{
+    padding-bottom: 10px;
+    padding-top: 5px;
+}
+
+/* ALERTS */
+.alert-atenciones {
+    background-image: linear-gradient(to bottom, #6b7ab2 0px, #6b7ab2 100%);
+    background-repeat: repeat-x;
+    border-color: #6b7ab2;
+}
+.alert-atenciones {
+    background-color: #6b7ab2;
+    border-color: #6b7ab2;
+    color: #ffffff;
+}
+.alert-cardiovascular {
+    background-image: linear-gradient(to bottom, #139c28 0px, #139c28 100%);
+    background-repeat: repeat-x;
+    border-color: #139c28;
+}
+.alert-cardiovascular {
+    background-color: #139c28;
+    border-color: #139c28;
+    color: #ffffff;
+}
+
+/* breadcrumb */
+.ui-breadcrumb {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+    border: 0 none !important;
+    margin: 0;
+    overflow: hidden;
+    padding: 0px!important;
+}
+.ui-widget-header a {
+    color: #7B7B7B;
+}
+
+.ui-breadcrumb .ui-icon-home {
+    background-image: url("../images/hospital.png") !important;
+    background-position: 0; /* asuming bandeau.png is a single image */
+}
+.ui-icon {
+    height: 18px!important;
+    width: 16px!important;
+}
+
+.modal-dialog {
+    max-width: 950px!important;
+    width: auto;
+}
+
+.modal-header {
+    background-color: #0085ff;
+    border-bottom: 1px solid #e5e5e5;
+    border-radius: 5px 5px 0 0;
+    color: #fff;
+    min-height: 16.4286px;
+    padding: 15px 15px 0px;
+}
+
+.label {
+    font-weight: normal !important;
+    padding-left: 5px!important;
+    padding-top: 5px!important;
+}
+
+.ui-widget-content {
+    border: 0px solid #a8a8a8!important;
+}
+
+.ui-panelgrid .ui-grid-responsive .ui-panelgrid-cell {
+    border-bottom: 1px solid #eee !important;
+    border-image: none !important;
+    border-left: 0 none !important;
+    border-right: 0 none !important;
+    border-top: 0 none !important;
+}
+
+.obligatorio{
+    color: #FE1A00 !important;
+}
+
+.qwe {
+    margin-bottom: 20px;
+}
+
+.ui-datatable-empty-message {
+    color: #FE1A00 !important;
+}
+
+.purple-text { 
+    color: #4F4F4F; 
+}
+
+.ui-widget .ui-widget {
+    font-stretch: condensed!important;
+}
+
+.subTitle{
+    font-weight: bold; 
+    margin-bottom: 10px; 
+    margin-top: 10px; 
+    color: #47639E;
+}
+.subTitleView{
+    font-weight: bold; 
+    margin-bottom: 10px; 
+    margin-top: 10px; 
+    color: #7642B5;
+}
+.ui-panelgrid .ui-panelgrid-cell {
+    border-bottom: 1px solid #dddddd !important;
+    border-color: #eeeeee !important;
+    padding: 4px 10px!important;
+}
+
+.textAreas{
+    background-color: #fff; 
+    border:1px solid #bdbdbd; 
+    width: 100%; 
+    height: 186px;
+    resize: none; 
+    padding: 10px!important; 
+    border-radius: 5px;
+}
+.fa-question::before {
+    content: "?";
+}
+
