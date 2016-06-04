@@ -149,7 +149,7 @@ public class pacienteController implements Serializable {
 
     public String update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
-        return "/faces/paciente/List.xhtml";
+        return "/faces/paciente/View.xhtml?faces-redirect=true";
     }
 
     public void destroy() {
