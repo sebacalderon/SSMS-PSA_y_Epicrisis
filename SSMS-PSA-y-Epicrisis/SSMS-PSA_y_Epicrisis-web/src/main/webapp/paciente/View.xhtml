@@ -71,7 +71,10 @@
                         <h:outputText id="prevision" value="#{pacienteController.selected.prevision.nombre}" title="#{bundle.ViewpacienteTitle_prevision}"/>                     
                       
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_grupo_fonasa}" for="grupo_fonasa" rendered="#{pacienteController.selected.prevision.id == 1}"/>
-                        <h:outputText id="grupo_fonasa" value="#{pacienteController.selected.grupo_fonasa}" title="#{bundle.ViewpacienteTitle_grupo_fonasa}" rendered="#{pacienteController.selected.prevision.id == 1}"/>                     
+                        <h:outputText id="grupo_fonasa" value="A" title="#{bundle.ViewpacienteTitle_grupo_fonasa}" rendered="#{pacienteController.selected.prevision.id == 1 and pacienteController.selected.grupo_fonasa == 1}"/>
+                        <h:outputText id="grupo_fonasa2" value="B" title="#{bundle.ViewpacienteTitle_grupo_fonasa}" rendered="#{pacienteController.selected.prevision.id == 1 and pacienteController.selected.grupo_fonasa == 2}"/>
+                        <h:outputText id="grupo_fonasa3" value="C" title="#{bundle.ViewpacienteTitle_grupo_fonasa}" rendered="#{pacienteController.selected.prevision.id == 1 and pacienteController.selected.grupo_fonasa == 3}"/>
+                        <h:outputText id="grupo_fonasa4" value="D" title="#{bundle.ViewpacienteTitle_grupo_fonasa}" rendered="#{pacienteController.selected.prevision.id == 1 and pacienteController.selected.grupo_fonasa == 4}"/>
                         
                         <p:outputLabel value="País" for="nacionalidad" />
                         <h:outputText id="nacionalidad" value="#{pacienteController.selected.nacionalidad.nombre}" title="#{bundle.ViewpacienteTitle_nacionalidad}"/>                     
@@ -82,7 +85,9 @@
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_pueblo_originario}" for="pueblo_originario" />
                         <h:outputText id="pueblo_originario" value="#{pacienteController.selected.pueblo_originario.nombre}" title="#{bundle.ViewpacienteTitle_pueblo_originario}"/>                     
                         
-                        
+                        <f:facet name="footer">
+                            <p:commandButton id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{pacienteController.prepareEdit}" action="/paciente/Edit?faces-redirect=true" disabled="#{empty pacienteController.selected}" rendered="#{loginController.esFuncionario()}"/>
+                    </f:facet>
                     </p:panelGrid>
                 </h:panelGroup>
             </h:form>
