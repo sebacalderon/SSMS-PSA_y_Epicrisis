@@ -34,11 +34,29 @@ public class pacienteController implements Serializable {
     private sessionbeans.pacienteFacadeLocal ejbFacade;
     private List<paciente> items = null;
     private paciente selected;
+    private int RUN;
+    private String DV;
     
     
     public pacienteController() {
     }
 
+    public int getRUN() {
+        return RUN;
+    }
+
+    public void setRUN(int RUN) {
+        this.RUN = RUN;
+    }
+
+    public String getDV() {
+        return DV;
+    }
+
+    public void setDV(String DV) {
+        this.DV = DV;
+    }
+    
     public paciente getSelected() {
         return selected;
     }
@@ -322,4 +340,27 @@ public class pacienteController implements Serializable {
         }
         return filteredPacientes;
     }
+    
+    public String buscarPorRUN(){
+        List<paciente> pacientes = getFacade().findbyRUN(RUN);
+        if (pacientes.size() == 0) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Paciente no Encontrado. Buscar en Fonasa",  null);
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            return "/faces/paciente/Buscar.xhtml";
+        }else{
+            paciente paciente = pacientes.get(0);
+            if (!paciente.getDV().equals(DV)) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "RUN Invalido",  null);
+                FacesContext.getCurrentInstance().addMessage(null, message);
+                return "/faces/paciente/Buscar.xhtml";
+            }else{
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Paciente Encontrado",  null);
+                FacesContext.getCurrentInstance().addMessage(null, message);
+                selected = paciente;
+                return "/faces/paciente/View.xhtml";
+            }
+        }
+    }
+    
+    
 }

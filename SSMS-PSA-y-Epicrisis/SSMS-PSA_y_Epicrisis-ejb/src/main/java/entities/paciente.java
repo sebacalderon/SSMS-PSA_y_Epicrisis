@@ -16,6 +16,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,6 +29,9 @@ import javax.validation.constraints.Pattern;
  * @author obi
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name="paciente.findbyRUN",query="SELECT p FROM paciente p WHERE p.RUN=:RUN")
+})
 public class paciente implements Serializable {
 
     private static final long serialVersionUID = 1L;

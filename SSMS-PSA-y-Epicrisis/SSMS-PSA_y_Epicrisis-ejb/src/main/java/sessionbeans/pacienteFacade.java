@@ -6,9 +6,11 @@
 package sessionbeans;
 
 import entities.paciente;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,4 +31,11 @@ public class pacienteFacade extends AbstractFacade<paciente> implements paciente
         super(paciente.class);
     }
     
+    @Override
+    public List<paciente> findbyRUN(int RUN) {
+        Query query;
+        query = em.createNamedQuery("paciente.findbyRUN").
+                setParameter("RUN",RUN);
+        return query.getResultList();
+    }
 }
