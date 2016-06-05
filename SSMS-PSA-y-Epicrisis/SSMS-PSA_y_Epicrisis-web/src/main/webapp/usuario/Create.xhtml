@@ -4,8 +4,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
 
@@ -28,9 +27,6 @@
 
                             <p:outputLabel value="#{bundle.CreateUsuarioLabel_correo}" for="correo" />
                             <p:inputText id="correo" value="#{usuarioController.selected.correo}" title="#{bundle.CreateUsuarioTitle_correo}"  />
-
-                            <p:outputLabel value="#{bundle.CreateUsuarioLabel_password}" for="password" />
-                            <p:password id="password" value="#{usuarioController.selected.password}" title="#{bundle.CreateUsuarioTitle_password}" required="true" />
 
                             <p:outputLabel value="#{bundle.CreateUsuarioLabel_rol}" for="rol" />
                             <p:selectOneMenu id="rol" value="#{usuarioController.selected.rol}" style="width:150px" required="true">

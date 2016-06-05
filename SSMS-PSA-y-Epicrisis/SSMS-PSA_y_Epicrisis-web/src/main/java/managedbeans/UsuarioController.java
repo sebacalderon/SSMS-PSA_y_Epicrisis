@@ -37,23 +37,40 @@ public class UsuarioController implements Serializable {
     private Usuario antiguovalor;
     private String old_password = "";
     private String new_password = "";
+    private String pass_repeat;
+    private String pass;
     
-    
-       @Inject
+    @Inject
     private AuditoriaController auditoriaCtrl;
 
        @Inject
     private LoginController loginCtrl;
+    
+       public UsuarioController() {
+    }
        
     public AuditoriaController getAuditoriaCtrl() {
         return auditoriaCtrl;
     }
 
+    public String getPass_repeat() {
+        return pass_repeat;
+    }
+
+    public void setPass_repeat(String pass_repeat) {
+        this.pass_repeat = pass_repeat;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+   
     public void setAuditoriaCtrl(AuditoriaController auditoriaCtrl) {
         this.auditoriaCtrl = auditoriaCtrl;
-    }
-       
-    public UsuarioController() {
     }
 
     public String getOld_password() {
@@ -100,7 +117,6 @@ public class UsuarioController implements Serializable {
     }
 
     public Usuario prepareCreate() {
-        System.out.println("prepare Create");
         selected = new Usuario();
         initializeEmbeddableKey();
         return selected;
@@ -132,6 +148,15 @@ public class UsuarioController implements Serializable {
     public String create() {
         FacesContext context = FacesContext.getCurrentInstance();
         selected.setHabilitado(true);
+        selected.setLogin_uno(true);
+        String rut = selected.getRUT();
+        if (selected.getRUT().charAt(0) == '0') {
+            String pass = new StringBuilder().append(rut.charAt(1)).append(rut.charAt(3)).append(rut.charAt(4)).append(rut.charAt(5)).toString();
+            selected.setPassword(pass);
+        }else{
+            String pass = new StringBuilder().append(rut.charAt(0)).append(rut.charAt(1)).append(rut.charAt(3)).append(rut.charAt(4)).toString();
+            selected.setPassword(pass);
+        }
         System.out.println("Rol: "+selected.getRol().getNombre());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioCreated"));
         if (!JsfUtil.isValidationFailed()) {
@@ -152,11 +177,12 @@ public class UsuarioController implements Serializable {
 
             if (success) {
                 JsfUtil.addSuccessMessage("Contraseña cambiada con éxito");
+                persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
+
             } else {
                 JsfUtil.addErrorMessage("No se pudo cambiar la contraseña");
             }
         }
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
     }
 
     public void update() {
@@ -183,11 +209,9 @@ public class UsuarioController implements Serializable {
             }
             if (dv == (char) (s != 0 ? s + 47 : 75)) {
                 ((UIInput) toValidate).setValid(true);
-                System.out.println("Run "+selected.getRUT()+" Válido");
             }else{
                 ((UIInput) toValidate).setValid(false);
                 context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: El RUN ingresado no es válido.",  "El rut ingresado no es válido.") );
-                System.out.println("Run "+selected.getRUT()+" inválido");
             }
 
         } catch (java.lang.NumberFormatException e) {
@@ -331,5 +355,22 @@ public class UsuarioController implements Serializable {
             }
         }
 
+    }
+    
+    public void login_uno() {
+        FacesContext context;
+        context = FacesContext.getCurrentInstance();
+        FacesMessage message = null;
+        if (pass.equals(pass_repeat)) {
+            setOld_password(selected.getPassword());
+            setNew_password(pass);
+            selected.setLogin_uno(false);
+            selected.setPassword(pass);
+            JsfUtil.addSuccessMessage("Contraseña cambiada con éxito");
+            persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
+        }else{
+            context.addMessage(null, new FacesMessage(message.SEVERITY_ERROR, "Error: Las contraseñas no coinciden", ""));
+        }
+        loginCtrl.setUsuarioLogueado(selected);
     }
 }
