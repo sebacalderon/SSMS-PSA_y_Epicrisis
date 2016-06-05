@@ -5,15 +5,11 @@
  */
 package managedbeans;
 
-import entities.Crafft;
 import entities.audit;
 import entities.clap;
-import entities.comuna;
-import entities.paciente;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -51,7 +47,6 @@ public class clapControllerTest {
      */
     @Test
     public void testCalculoEdad() throws ParseException {
-        System.out.println("calculoEdad");
         SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd-MM-yyyy");
         String strFecha = "10-09-1992";
         Date fecha_nacimiento = formatoDelTexto.parse(strFecha);
@@ -67,7 +62,6 @@ public class clapControllerTest {
      */
     @Test
     public void testServiceChangeTrueA() {
-        System.out.println("serviceChangeTrueA");
         boolean resp = true;
         clapController instance = new clapController();
         instance.setPuntajeACrafft(2);
@@ -77,7 +71,6 @@ public class clapControllerTest {
 
     @Test
     public void testServiceChangeFalseA() {
-        System.out.println("serviceChangeFalseA");
         boolean resp = false;
         clapController instance = new clapController();
         instance.setPuntajeACrafft(2);
@@ -90,7 +83,6 @@ public class clapControllerTest {
      */
     @Test
     public void testTipoIntervencionMinima() {
-        System.out.println("tipoIntervencionMinima");
         clapController instance = new clapController();
         audit audit = new audit();
         audit.setP1(7);
@@ -102,7 +94,6 @@ public class clapControllerTest {
 
     @Test
     public void testTipoIntervencionBreve() {
-        System.out.println("tipoIntervencionBreve");
         clapController instance = new clapController();
         audit audit = new audit();
         audit.setP1(15);
@@ -114,7 +105,6 @@ public class clapControllerTest {
     
     @Test
     public void testTipoIntervencionAsistida() {
-        System.out.println("tipoIntervencionAsistida");
         clapController instance = new clapController();
         audit audit = new audit();
         audit.setP1(20);
@@ -129,7 +119,6 @@ public class clapControllerTest {
      */
     @Test
     public void testEsIntervencionMinimaHombre() {
-        System.out.println("esIntervencionMinimaHombre");
         clapController instance = new clapController();
         clap clap = new clap();
         audit audit = new audit();
@@ -145,7 +134,6 @@ public class clapControllerTest {
     
     @Test
     public void testEsIntervencionMinimaMujer() {
-        System.out.println("esIntervencionMinimaMujer");
         clapController instance = new clapController();
         clap clap = new clap();
         audit audit = new audit();
@@ -160,7 +148,6 @@ public class clapControllerTest {
     
     @Test
     public void testNoEsIntervencionMinimaHombre() {
-        System.out.println("esIntervencionMinimaHombre");
         clapController instance = new clapController();
         clap clap = new clap();
         audit audit = new audit();
@@ -176,7 +163,6 @@ public class clapControllerTest {
     
     @Test
     public void testNoEsIntervencionMinimaMujer() {
-        System.out.println("esIntervencionMinimaMujer");
         clapController instance = new clapController();
         clap clap = new clap();
         audit audit = new audit();

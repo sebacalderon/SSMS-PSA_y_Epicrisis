@@ -213,10 +213,6 @@ public class clapController implements Serializable {
 
         selected.getPaciente().setCLAPS(new ArrayList<clap>());
         selected.getPaciente().getCLAPS().add(selected);
-   
-        for (int i = 0; i < selected.getPaciente().getCLAPS().size(); i++) {
-            System.out.println(selected.getPaciente().getCLAPS().get(i).getPaciente().getNombres());
-        }
         
         if (auditCrafft) {
             if (isAudit) {
@@ -413,13 +409,6 @@ public class clapController implements Serializable {
         if(selected.isVive_con_solo()||selected.isVive_en_institucion()||selected.getPercepcion_familia()>2||selected.isDesercion_exclusion()){
             selected.setRiesgo_social(true);
         }
-        System.out.println("Riesgo cardiovascular: "+selected.isRiesgo_cardiovascular());
-        System.out.println("Riesgo nutricional: "+selected.isRiesgo_nutricional());
-        System.out.println("Riesgo OH drogas: "+selected.isRiesgo_oh_drogas());
-        System.out.println("Riesgo salud mental: "+selected.isRiesgo_salud_mental());
-        System.out.println("Riesgo social: "+selected.isRiesgo_social());
-        System.out.println("Riesgo ssr: "+selected.isRiesgo_ssr());
-        
 
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("clapCreated"));
         if (!JsfUtil.isValidationFailed()) {
@@ -428,7 +417,6 @@ public class clapController implements Serializable {
         if(selected.getEstado().equals("Nuevo")){
             List<clap> claps = getItemsPorPaciente(pacienteCtrl.getSelected().getRUN());
             if(claps.size()>1){
-                System.out.println("Existe mas de 1 clap");
                 for(int i=0;i<claps.size();i++){
                     if(claps.get(i).getEstado().equals("Vigente")){
                         setSelected(claps.get(i));
@@ -463,9 +451,7 @@ public class clapController implements Serializable {
         if(selected.getTalla()!= 0 && selected.getPeso()!=0){
             selected.setImc((float) (selected.getPeso()/Math.pow((float)selected.getTalla()/100,2)));
         }
-        System.out.println("Peso: "+selected.getPeso());
-        System.out.println("Talla: "+(float)selected.getTalla()/100);
-        System.out.println("IMC: "+selected.getImc());
+        
     }
     
     public boolean esIncompleto(){
@@ -630,7 +616,6 @@ public class clapController implements Serializable {
         if(selected.getEstado().equals("Nuevo")){
             List<clap> claps = getItemsPorPaciente(pacienteCtrl.getSelected().getRUN());
             if(claps.size()>1){
-                System.out.println("Eziste mas de 1 clap");
                 for(int i=0;i<claps.size();i++){
                     if(claps.get(i).getEstado().equals("Vigente")){
                         setSelected(claps.get(i));
@@ -644,7 +629,6 @@ public class clapController implements Serializable {
                 }
             }
             else{
-                System.out.println("Primer clap ingresado");
                 selected.setEstado("Vigente");
                 persist(PersistAction.UPDATE,"");
             }

@@ -46,7 +46,6 @@ public class CrafftControllerTest {
      */
     @Test
     public void testServiceChangeA() {
-        System.out.println("serviceChangeA");
         boolean resp = false;
         instance.serviceChangeA(resp);
         assertEquals(1, instance.getPuntajeA());

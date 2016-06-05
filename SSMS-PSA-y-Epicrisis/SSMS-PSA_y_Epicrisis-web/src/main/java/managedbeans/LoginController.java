@@ -80,7 +80,7 @@ public class LoginController implements Serializable{
             HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
             Usuario usuario;
             usuario = userCtrl.findByRUT(this.rut);
-            System.out.println(usuario.getRol());
+            usuario.getRol();
             if (!usuario.isHabilitado()) {
                 context.addMessage(null, new FacesMessage("El funcionnario está deshabilitado"));
                 return "/faces/index.xhtml";

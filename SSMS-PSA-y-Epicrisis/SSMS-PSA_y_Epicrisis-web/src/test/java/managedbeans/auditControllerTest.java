@@ -46,13 +46,11 @@ public class auditControllerTest {
 
     @Test
     public void testEsIntervencionMinima(){
-        System.out.println("testEsIntervencionMinima");
         boolean expResult = true;
         boolean result;
         Random random = new Random();
         if (random.nextBoolean()){
             //HOMBRE
-            System.out.println("Hombre");
             Audit.setP1(1);
             Audit.setP2(1);
             Audit.setP3(2);
@@ -61,7 +59,6 @@ public class auditControllerTest {
             result = instance.esIntervencionMinima();
         }else{
             //Mujer
-            System.out.println("Mujer");
             Audit.setP1(1);
             Audit.setP2(1);
             Audit.setP3(1);
@@ -74,13 +71,11 @@ public class auditControllerTest {
     
     @Test
     public void testNoEsIntervencionMinima(){
-        System.out.println("testNoEsIntervencionMinima");
         boolean expResult = false;
         boolean result;
         Random random = new Random();
         if (random.nextBoolean()){
             //HOMBRE
-            System.out.println("Hombre");
             Audit.setP1(1);
             Audit.setP2(1);
             Audit.setP3(3);
@@ -89,7 +84,6 @@ public class auditControllerTest {
             result = instance.esIntervencionMinima();
         }else{
             //Mujer
-            System.out.println("Mujer");
             Audit.setP1(1);
             Audit.setP2(1);
             Audit.setP3(2);

@@ -157,7 +157,6 @@ public class UsuarioController implements Serializable {
             String pass = new StringBuilder().append(rut.charAt(0)).append(rut.charAt(1)).append(rut.charAt(3)).append(rut.charAt(4)).toString();
             selected.setPassword(pass);
         }
-        System.out.println("Rol: "+selected.getRol().getNombre());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
