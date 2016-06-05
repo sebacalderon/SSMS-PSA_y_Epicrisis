@@ -428,7 +428,7 @@ public class clapController implements Serializable {
         if(selected.getEstado().equals("Nuevo")){
             List<clap> claps = getItemsPorPaciente(pacienteCtrl.getSelected().getRUN());
             if(claps.size()>1){
-                System.out.println("Eziste mas de 1 clap");
+                System.out.println("Existe mas de 1 clap");
                 for(int i=0;i<claps.size();i++){
                     if(claps.get(i).getEstado().equals("Vigente")){
                         setSelected(claps.get(i));
@@ -453,9 +453,9 @@ public class clapController implements Serializable {
 //        }
         
         if(completo){
-            return "/faces/clap/Riesgos.xhtml?faces-redirect=true";
+            return "/faces/clap/Riesgos.xhtml";
         }else{
-            return "/faces/paciente/View.xhtml?faces-redirect=true";
+            return "/faces/paciente/View.xhtml";
         }
     }
 

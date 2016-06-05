@@ -28,8 +28,11 @@
             <b:row>
                 <h2 align="center">Riesgos Paciente #{clapController.selected.paciente.RUN}-#{clapController.selected.paciente.DV} CLAP #{clapController.selected.id}</h2>
             </b:row>
+            <b:row rendered="#{clapController.esIncompleto()}">
+                <h3 align="center">No es posible ver los riesgos de una ficha CLAP no terminada</h3>
+            </b:row>
             <br/><br/><br/>
-            <h:form>
+            <h:form rendered="#{not clapController.esIncompleto()}">
             <b:row>
                 <div id="cardio">
                  <b:column offset="3" col-xs="12" col-md="6">
@@ -193,7 +196,7 @@
                 </div>
             </b:row>
             </h:form>
-            <b:row>
+            <b:row rendered="#{not clapController.esIncompleto() and not loginController.esSuperUsuario()}">
                 <h2 align="center">Actividades de intervención</h2>
                 
                 <h:form id="actividadListForm">

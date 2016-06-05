@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="Búsqueda de Usuario"></h:outputText>
+        </ui:define>
+        
+        <ui:define name="body">
+            <b:panel title="Búsqueda de Usuario por RUN" look="info">
+                <h:form id="buscar">
+                    
+                    <p:outputLabel value="Ingrese RUN: " for="RUN" />    
+                    <p:column>
+                        <p:inputText id="RUN" value="#{pacienteController.RUN}" style="max-width: 100px;" title="#{bundle.CreatepacienteTitle_RUN}" required="true">
+                        <p:ajax event="blur" />
+                        </p:inputText>
+                        -
+                        <p:inputText id="DV" value="#{pacienteController.DV}" title="#{bundle.CreatepacienteTitle_DV}" style="max-width: 20px;" required="true">
+                        <p:ajax event="blur" />
+                        </p:inputText>
+                    </p:column>
+                    
+                    <p:column>
+                        <b:commandButton value="Buscar" id="withIcon" action="#{pacienteController.buscarPorRUN}"/> 
+                    </p:column>
+                </h:form>
+            </b:panel>    
+        </ui:define>
+        
+        
+    </ui:composition>
+</html>
+

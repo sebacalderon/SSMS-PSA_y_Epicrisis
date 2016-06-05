@@ -30,4 +30,5 @@ public interface pacienteFacadeLocal {
 
     int count();
     
+    List<paciente> findbyRUN(int RUN);
 }
