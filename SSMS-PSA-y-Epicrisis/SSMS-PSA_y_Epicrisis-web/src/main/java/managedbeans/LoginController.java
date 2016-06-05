@@ -168,4 +168,13 @@ public class LoginController implements Serializable{
     public boolean esSuperUsuario(){
         return usuarioLogueado.getRol().getNombre().equals("Super-Usuario");
     }
+    
+    public boolean esPrimerLogin(){
+        if (usuarioLogueado.isLogin_uno()== true) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
+
