@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
 
     <ui:composition template="/template.xhtml">
 
@@ -22,7 +22,25 @@
             <h1 align="center">Bienvenido/a #{loginController.getUsuarioLogueado().nombres} #{loginController.getUsuarioLogueado().primer_apellido}</h1>
             <h2 align="center ">al sistema del Programa Social Adolescente.</h2>
             <br />
+            <h:form rendered="#{loginController.esPrimerLogin()}">
+            <h4 align="center">Al ser éste su primer acceso al sistema, debe cambiar la contraseña que se le asignó por defecto (4 primeros dígitos de su RUN):</h4>
+                <h:panelGroup id="display" >
+                    <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
+                    
+                    <p:outputLabel value="#{bundle.CreateUsuarioLabel_password}" for="password" />
+                    <p:password id="password" value="#{usuarioController.pass}" title="#{bundle.CreateUsuarioTitle_password}" required="true" />    
+                    
+                    <p:outputLabel value="Repita Contraseña" for="repeat" />
+                    <p:password id="repeat" value="#{usuarioController.pass_repeat}" title="#{bundle.CreateUsuarioTitle_password}" required="true" />    
+                    
+                    </p:panelGrid>
+                    <b:commandButton actionListener="#{usuarioController.login_uno}" value="#{bundle.Save}"/>
+                </h:panelGroup>
+            </h:form>
+            
             <br />
+            <br />
+            
         </ui:define>
         
     </ui:composition>

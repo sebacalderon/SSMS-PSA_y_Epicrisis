@@ -50,6 +50,7 @@ public class clapController implements Serializable {
     boolean vive_con_otros=false;
     
     boolean actividadElegida=false;
+
     
     @Inject
     private pacienteController pacienteCtrl;
@@ -138,7 +139,6 @@ public class clapController implements Serializable {
         actividadElegida=false;
         this.selected = selected;
     }
-
     protected void setEmbeddableKeys() {
     }
 
@@ -215,16 +215,16 @@ public class clapController implements Serializable {
         pacienteCtrl.getSelected().setEstado_conyugal(selected.getEstado_conyugal());
         pacienteCtrl.getSelected().setPueblo_originario(selected.getPueblo_originario());
         //Manejo de datos para estados de paciente y riesgos
-        pacienteCtrl.getSelected().setCLAPS(null);
-        pacienteCtrl.update();
-        
-
-        selected.getPaciente().setCLAPS(new ArrayList<clap>());
-        selected.getPaciente().getCLAPS().add(selected);
-   
-        for (int i = 0; i < selected.getPaciente().getCLAPS().size(); i++) {
-            System.out.println(selected.getPaciente().getCLAPS().get(i).getPaciente().getNombres());
-        }
+//        pacienteCtrl.getSelected().setCLAPS(null);
+//        pacienteCtrl.update();
+//        
+//
+//        selected.getPaciente().setCLAPS(new ArrayList<clap>());
+//        selected.getPaciente().getCLAPS().add(selected);
+//   
+//        for (int i = 0; i < selected.getPaciente().getCLAPS().size(); i++) {
+//            System.out.println(selected.getPaciente().getCLAPS().get(i).getPaciente().getNombres());
+//        }
         
         if (auditCrafft) {
             if (isAudit) {
@@ -432,7 +432,7 @@ public class clapController implements Serializable {
         clap nuevoClap = getSelected();
 
         List<clap> claps = getItemsPorPaciente(pacienteCtrl.getSelected().getRUN());
-        if(claps.size()>1){
+        if(claps.size()>=1){
             System.out.println("Eziste mas de 1 clap");
             for(int i=0;i<claps.size();i++){
                 if(claps.get(i).getEstado().equals("Vigente")){
@@ -442,14 +442,13 @@ public class clapController implements Serializable {
                 }
             }
         }
-
-        
+        setSelected(nuevoClap);
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("clapCreated"));
+        if (!JsfUtil.isValidationFailed()) {
+            items = null;    // Invalidate list of items to trigger re-query.
+        }
         if(completo){
-            setSelected(nuevoClap);
-            persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("clapCreated"));
-            if (!JsfUtil.isValidationFailed()) {
-                items = null;    // Invalidate list of items to trigger re-query.
-            }
+
             return "/faces/clap/Riesgos.xhtml";
         }else{
             return "/faces/paciente/View.xhtml";
@@ -460,9 +459,15 @@ public class clapController implements Serializable {
         if(selected.getTalla()!= 0 && selected.getPeso()!=0){
             selected.setImc((float) (selected.getPeso()/Math.pow((float)selected.getTalla()/100,2)));
         }
-        System.out.println("Peso: "+selected.getPeso());
-        System.out.println("Talla: "+(float)selected.getTalla()/100);
-        System.out.println("IMC: "+selected.getImc());
+        
+    }
+
+    public boolean isActividadElegida() {
+        return actividadElegida;
+    }
+
+    public void setActividadElegida(boolean actividadElegida) {
+        this.actividadElegida = actividadElegida;
     }
     
     public boolean esIncompleto(){
@@ -758,14 +763,6 @@ public class clapController implements Serializable {
         return items;
     }
 
-    public boolean isActividadElegida() {
-        return actividadElegida;
-    }
-
-    public void setActividadElegida(boolean actividadElegida) {
-        this.actividadElegida = actividadElegida;
-    }
-    
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();

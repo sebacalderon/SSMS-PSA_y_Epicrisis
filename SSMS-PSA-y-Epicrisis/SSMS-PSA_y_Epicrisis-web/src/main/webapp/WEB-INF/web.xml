@@ -15,15 +15,19 @@
     </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            100
         </session-timeout>
     </session-config>
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
     <error-page>
+        <error-code>404</error-code>
+        <location>/faces/error.xhtml?faces-redirect=true</location>
+    </error-page>
+    <error-page>
         <error-code>403</error-code>
-        <location>/faces/error_auth.jsp</location>
+        <location>/faces/accesodenegado.xhtml?faces-redirect=true</location>
     </error-page>
     <context-param>
 	<param-name>javax.faces.application.CONFIG_FILES</param-name>

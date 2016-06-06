@@ -70,6 +70,9 @@ public class Usuario implements Serializable {
     @Column(name="habilitado_usuario")
     private boolean habilitado;
     
+    @Column(name="primer_login")
+    private boolean login_uno;
+    
     public Usuario(Usuario usuario){
         this.id = usuario.id;
         this.correo= usuario.correo;
@@ -81,6 +84,7 @@ public class Usuario implements Serializable {
         this.password= usuario.password;
         this.rol = usuario.rol;
         this.habilitado=true;
+        this.login_uno = usuario.login_uno;
     }
 
     public Usuario(){
@@ -93,7 +97,14 @@ public class Usuario implements Serializable {
     public void setHabilitado(boolean habilitado) {
         this.habilitado = habilitado;
     }
-    
+
+    public boolean isLogin_uno() {
+        return login_uno;
+    }
+
+    public void setLogin_uno(boolean login_uno) {
+        this.login_uno = login_uno;
+    }
     
     public Rol getRol() {
         return rol;
@@ -117,14 +128,6 @@ public class Usuario implements Serializable {
 
     public void setPassword(String password) {
         this.password = this.sha256(password);
-    }
-
-    public boolean cambiarPassword(String old_password, String new_password) {
-        if (sha256(old_password).compareTo(this.password) == 0) {
-            setPassword(new_password);
-            return true;
-        }
-        return false;
     }
 
     public String getPrimer_apellido() {
@@ -216,4 +219,13 @@ public class Usuario implements Serializable {
             throw new RuntimeException(e);
         }
     }
+    
+    public boolean cambiarPassword(String old_password, String new_password) {
+        if (sha256(old_password).compareTo(this.password) == 0) {
+            setPassword(new_password);
+            return true;
+        }
+        return false;
+    }
+    
 }

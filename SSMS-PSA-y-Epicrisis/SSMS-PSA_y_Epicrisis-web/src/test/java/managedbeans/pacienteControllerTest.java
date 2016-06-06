@@ -5,10 +5,8 @@
  */
 package managedbeans;
 
-import entities.comuna;
 import entities.paciente;
 import entities.prevision;
-import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -46,7 +44,6 @@ public class pacienteControllerTest {
      */
     @Test
     public void testEsFONASA() {
-        System.out.println("esFONASA");
         pacienteController instance = new pacienteController();
         paciente paciente = new paciente();
         prevision prevision = new prevision();
@@ -61,7 +58,6 @@ public class pacienteControllerTest {
 
     @Test
     public void testNoEsFONASA() {
-        System.out.println("NoEsFONASA");
         pacienteController instance = new pacienteController();
         paciente paciente = new paciente();
         prevision prevision = new prevision();

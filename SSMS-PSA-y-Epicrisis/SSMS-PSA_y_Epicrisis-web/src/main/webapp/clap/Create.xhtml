@@ -1950,7 +1950,7 @@
                     <b:inputText id="indicaciones_interconsultas" value="#{clapController.selected.indicaciones_interconsultas}" label="#{bundle.CreateclapTitle_indicaciones_interconsultas}" />
                 </b:row>
                 <b:column offset-xs="5">
-                    <p:commandButton action="#{clapController.create}" value="#{bundle.Save}"/>
+                    <p:commandButton action="#{clapController.create}" value="#{bundle.Save}" oncomplete="/paciente/List"/>
                     <p:button  value="#{bundle.Cancel}" outcome="/paciente/View" /> 
                     <br/><br/>
                 </b:column>

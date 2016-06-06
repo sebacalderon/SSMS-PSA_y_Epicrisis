@@ -39,24 +39,55 @@
                         <h:outputText id="nombre_social" value="#{pacienteController.selected.nombre_social}" title="#{bundle.ViewpacienteTitle_nombre_social}"/>                        
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_region_residencia}" for="region_residencia" />
                         <h:outputText id="region_residencia" value="#{pacienteController.selected.region_residencia.nombre}" title="#{bundle.ViewpacienteTitle_region_residencia}"/>                                              
-    
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_comuna_residencia}" for="comuna_residencia" />
-                        <h:outputText id="comuna_residencia" value="#{pacienteController.selected.comuna_residencia.nombre}" title="#{bundle.ViewpacienteTitle_comuna_residencia}"/>                                              
-                      
+                        <h:outputText id="comuna_residencia" value="#{pacienteController.selected.comuna_residencia.nombre}" title="#{bundle.ViewpacienteTitle_comuna_residencia}"/>                                                                    
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_calle_direccion}" for="calle_direccion" />
                         <h:outputText id="calle_direccion" value="#{pacienteController.selected.calle_direccion}" title="#{bundle.ViewpacienteTitle_calle_direccion}"/>                                              
-
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_numero_direccion}" for="numero_direccion" />
                         <h:outputText id="numero_direccion" value="#{pacienteController.selected.numero_direccion}" title="#{bundle.ViewpacienteTitle_numero_direccion}"/>                                              
-
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_resto_direccion}" for="resto_direccion" />
-                        <h:outputText id="resto_direccion" value="#{pacienteController.selected.resto_direccion}" title="#{bundle.ViewpacienteTitle_resto_direccion}"/>                                              
-                        
+                        <h:outputText id="resto_direccion" value="#{pacienteController.selected.resto_direccion}" title="#{bundle.ViewpacienteTitle_resto_direccion}"/>                                                                      
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_fecha_nacimiento}" for="fecha_nacimiento" />
                         <h:outputText id="fecha_nacimiento" value="#{pacienteController.selected.fecha_nacimiento}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
-                        </h:outputText>                         
+                        </h:outputText>                        
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_cesfam}" for="cesfam" />
+                        <h:outputText id="cesfam" value="#{pacienteController.selected.cesfam.nombre}" title="#{bundle.ViewpacienteTitle_cesfam}"/>                        
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_telefono_fijo}" for="telefono_fijo" />
+                        <h:outputText id="telefono_fijo" value="#{pacienteController.selected.telefono_fijo}" title="#{bundle.ViewpacienteTitle_telefono_fijo}"/>
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_teléfono_movil}" for="telefono_movil" />
+                        <h:outputText id="telefono_movil" value="#{pacienteController.selected.telefono_movil}" title="#{bundle.ViewpacienteTitle_telefono_movil}"/>
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_correo}" for="correo" />
+                        <h:outputText id="correo" value="#{pacienteController.selected.correo}" title="#{bundle.ViewpacienteTitle_correo}"/>
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_sexo}" for="sexo1" />
+                        <h:outputText id="sexo1" value="Hombre" title="#{bundle.ViewpacienteTitle_sexo}" rendered="#{pacienteController.selected.sexo == 1}"/>
+                        <h:outputText id="sexo2" value="Mujer" title="#{bundle.ViewpacienteTitle_sexo}" rendered="#{pacienteController.selected.sexo == 2}"/>
+                        <h:outputText id="sexo3" value="No Definido" title="#{bundle.ViewpacienteTitle_sexo}" rendered="#{pacienteController.selected.sexo == 3}"/>
+                        <h:outputText id="sexo4" value="No Determinado" title="#{bundle.ViewpacienteTitle_sexo}" rendered="#{pacienteController.selected.sexo == 4}"/>
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_programa_social}" for="programa_social"  />
+                        <h:outputText id="programa_social" value="#{pacienteController.selected.programa_social.nombre}" title="#{bundle.ViewpacienteTitle_programa_social}"/>
+
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_prevision}" for="prevision" />
+                        <h:outputText id="prevision" value="#{pacienteController.selected.prevision.nombre}" title="#{bundle.ViewpacienteTitle_prevision}"/>                     
+                      
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_grupo_fonasa}" for="grupo_fonasa" rendered="#{pacienteController.selected.prevision.id == 1}"/>
+                        <h:outputText id="grupo_fonasa" value="A" title="#{bundle.ViewpacienteTitle_grupo_fonasa}" rendered="#{pacienteController.selected.prevision.id == 1 and pacienteController.selected.grupo_fonasa == 1}"/>
+                        <h:outputText id="grupo_fonasa2" value="B" title="#{bundle.ViewpacienteTitle_grupo_fonasa}" rendered="#{pacienteController.selected.prevision.id == 1 and pacienteController.selected.grupo_fonasa == 2}"/>
+                        <h:outputText id="grupo_fonasa3" value="C" title="#{bundle.ViewpacienteTitle_grupo_fonasa}" rendered="#{pacienteController.selected.prevision.id == 1 and pacienteController.selected.grupo_fonasa == 3}"/>
+                        <h:outputText id="grupo_fonasa4" value="D" title="#{bundle.ViewpacienteTitle_grupo_fonasa}" rendered="#{pacienteController.selected.prevision.id == 1 and pacienteController.selected.grupo_fonasa == 4}"/>
                         
+                        <p:outputLabel value="País" for="nacionalidad" />
+                        <h:outputText id="nacionalidad" value="#{pacienteController.selected.nacionalidad.nombre}" title="#{bundle.ViewpacienteTitle_nacionalidad}"/>                     
+           
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_estado_conyugal}" for="estado_conyugal" />
+                        <h:outputText id="estado_conyugal" value="#{pacienteController.selected.estado_conyugal.nombre}" title="#{bundle.ViewpacienteTitle_estado_conyugal}"/>                     
+                        
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_pueblo_originario}" for="pueblo_originario" />
+                        <h:outputText id="pueblo_originario" value="#{pacienteController.selected.pueblo_originario.nombre}" title="#{bundle.ViewpacienteTitle_pueblo_originario}"/>                     
+                        
+                        <f:facet name="footer">
+                            <p:commandButton id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{pacienteController.prepareEdit}" action="/paciente/Edit?faces-redirect=true" disabled="#{empty pacienteController.selected}" rendered="#{loginController.esFuncionario()}"/>
+                        </f:facet>
                     </p:panelGrid>
                 </h:panelGroup>
             </h:form>
@@ -82,19 +113,6 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListclapTitle_nombres}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.nombres} #{item.primer_apellido} #{item.segundo_apellido}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListclapTitle_RUN}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.paciente.RUN} - #{item.DV}"/>
-                        </p:column>
-
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListclapTitle_fecha_consulta}"/>
                             </f:facet>
                             <h:outputText value="#{item.fecha_consulta}">
@@ -105,17 +123,19 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListclapTitle_funcionario}"/>
                             </f:facet>
-                            <h:outputText value="#{item.funcionario.RUT}"/>
+                            <h:outputText value="#{item.funcionario.nombres}"/>
+                            #{" "}
+                            <h:outputText value="#{item.funcionario.primer_apellido}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Riesgos"/>
                             </f:facet>
-                            <h:outputText value="Riesgo salud sexual y reproductiva" rendered="#{item.riesgo_ssr}"/><br/>
-                            <h:outputText value="Riesgo salud mental" rendered="#{item.riesgo_salud_mental}"/><br/>
-                            <h:outputText value="Riesgo alcohol y drogas" rendered="#{item.riesgo_oh_drogas}"/><br/>
-                            <h:outputText value="Riesgo nutricional" rendered="#{item.riesgo_nutricional}"/><br/>
-                            <h:outputText value="Riesgo social" rendered="#{item.riesgo_social}"/>
+                            <h:outputText value="Riesgo salud sexual y reproductiva &lt;br /&gt;" rendered="#{item.riesgo_ssr}" escape="false"/>
+                            <h:outputText value="Riesgo salud mental &lt;br /&gt;" rendered="#{item.riesgo_salud_mental}" escape="false"/>
+                            <h:outputText value="Riesgo alcohol y drogas &lt;br /&gt;" rendered="#{item.riesgo_oh_drogas}" escape="false"/>
+                            <h:outputText value="Riesgo nutricional &lt;br /&gt;" rendered="#{item.riesgo_nutricional}" escape="false"/>
+                            <h:outputText value="Riesgo social &lt;br /&gt;" rendered="#{item.riesgo_social}" escape="false"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -132,10 +152,16 @@
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createClap" icon="ui-icon-plus"   value="Crear Clap" actionListener="#{clapController.prepareClap(pacienteController.selected)}" action="/clap/Create?faces-redirect=true" rendered="#{loginController.esFuncionario()}"/>                            
-                            <p:commandButton id="viewButton" rendered="false"   icon="ui-icon-search" value="#{bundle.View}" update=":clapViewForm" oncomplete="PF('clapViewDialog').show()" disabled="#{empty clapController.selected}"/>
+                            <p:commandButton id="viewButton" icon="ui-icon-search" value="#{bundle.View}" disabled="#{empty clapController.selected}" action="/clap/View?faces-redirect=true"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{clapController.prepareEdit}" action="/clap/Edit?faces-redirect=true" disabled="#{empty clapController.selected || not clapController.esIncompleto()}" rendered="#{loginController.esFuncionario()}"/>
-                            <p:commandButton id="viewRiesgosButton"   icon="ui-icon-search" value="Ver Riesgos" actionListener="#{clapController.prepareRiesgos}" action="/clap/Riesgos?faces-redirect=true" disabled="#{empty clapController.selected || clapController.esIncompleto()}" rendered="#{loginController.esFuncionario() || loginController.esSuperUsuario()}"/>                            
-                            <p:commandButton id="desactivateButton" icon="ui-icon-cancel"  value="Anular" actionListener="#{clapController.anular}" update=":growl,datalist"  disabled="#{empty clapController.selected || clapController.esAnulado()}"/>
+                            <p:commandButton id="desactivateButton" icon="ui-icon-cancel"  value="Anular" actionListener="#{clapController.anular}" update=":growl,datalist"  disabled="#{clapController.esAnulado() || empty clapController.selected}" rendered="#{loginController.esFuncionario()}">
+                                <p:confirm header="Confirme Anulación" message="Esta segur@ de anular la ficha CLAP?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                            <p:commandButton id="viewRiesgosButton"   icon="ui-icon-search" value="Ver Riesgos" actionListener="#{clapController.prepareRiesgos}" action="/clap/Riesgos?faces-redirect=true" disabled="#{empty clapController.selected || clapController.esIncompleto() || clapController.esAnulado()}" rendered="#{loginController.esFuncionario() || loginController.esSuperUsuario()}"/>                      
                         </f:facet>
                 </p:dataTable>
                 </h:panelGroup>

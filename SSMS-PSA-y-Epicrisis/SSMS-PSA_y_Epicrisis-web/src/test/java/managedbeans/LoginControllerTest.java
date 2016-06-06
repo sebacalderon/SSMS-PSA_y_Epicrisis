@@ -60,7 +60,6 @@ public class LoginControllerTest {
      */
     @Test
     public void testEsFuncionario() {
-        System.out.println("esFuncionarioCESFAM");
         Rol rol = new Rol();
         long id = 2;
         rol.setId(id);
@@ -76,7 +75,6 @@ public class LoginControllerTest {
      */
     @Test
     public void testEsSuperUsuario() {
-        System.out.println("esSuperUsuario");
         Rol rol = new Rol();
         rol.setNombre("Super-Usuario");
         instance.getUsuarioLogueado().setRol(rol);

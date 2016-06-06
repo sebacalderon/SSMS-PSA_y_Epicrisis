@@ -1,6 +1,5 @@
 package managedbeans;
 
-import entities.actividad;
 import entities.comuna;
 import entities.nacionalidad;
 import entities.paciente;
@@ -22,7 +21,6 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
@@ -36,13 +34,32 @@ public class pacienteController implements Serializable {
     private sessionbeans.pacienteFacadeLocal ejbFacade;
     private List<paciente> items = null;
     private paciente selected;
+    private int RUN;
+    private String DV;
     
     @Inject
     private clapController clapCtrl;
     
+    
     public pacienteController() {
     }
 
+    public int getRUN() {
+        return RUN;
+    }
+
+    public void setRUN(int RUN) {
+        this.RUN = RUN;
+    }
+
+    public String getDV() {
+        return DV;
+    }
+
+    public void setDV(String DV) {
+        this.DV = DV;
+    }
+    
     public paciente getSelected() {
         return selected;
     }
@@ -78,37 +95,37 @@ public class pacienteController implements Serializable {
     public paciente prepareCreate() {
         selected = new paciente();
         initializeEmbeddableKey();
-//        selected.setNombres("Sebastian");
-//        selected.setPrimer_apellido("Calderon");
-//        selected.setSegundo_apellido("Diaz");
-//        selected.setCalle_direccion("sadas");
-//        selected.setNumero_direccion("123");
-//        selected.setFecha_nacimiento(new java.util.Date());
-//        selected.setRUN(18293486);
-//        selected.setDV("1");
-//        selected.setCorreo("sebastian@algo.com");
-//        selected.setSexo(1);
-//        region Region = new region();
-//        long id = 1;
-//        Region.setId(id);
-//        Region.setNombre("Región de Tarapacá");
-//        selected.setRegion_residencia(Region);
-//        comuna Comuna = new comuna();
-//        id = 1101;
-//        Comuna.setId(id);
-//        Comuna.setNombre("Iquique");
-//        Comuna.setRegion(Region);
-//        selected.setComuna_residencia(Comuna);
-//        prevision Prevision = new prevision();
-//        id = 2;
-//        Prevision.setId(id);
-//        Prevision.setNombre("Isapre");
-//        selected.setPrevision(Prevision);
-//        nacionalidad Nacionalidad = new nacionalidad();
-//        id = 213;
-//        Nacionalidad.setId(id);        
-//        Nacionalidad.setNombre("Chile");
-//        selected.setNacionalidad(Nacionalidad);
+        selected.setNombres("Sebastian");
+        selected.setPrimer_apellido("Calderon");
+        selected.setSegundo_apellido("Diaz");
+        selected.setCalle_direccion("sadas");
+        selected.setNumero_direccion("123");
+        selected.setFecha_nacimiento(new java.util.Date());
+        selected.setRUN(18293486);
+        selected.setDV("1");
+        selected.setCorreo("sebastian@algo.com");
+        selected.setSexo(1);
+        region Region = new region();
+        long id = 1;
+        Region.setId(id);
+        Region.setNombre("Región de Tarapacá");
+        selected.setRegion_residencia(Region);
+        comuna Comuna = new comuna();
+        id = 1101;
+        Comuna.setId(id);
+        Comuna.setNombre("Iquique");
+        Comuna.setRegion(Region);
+        selected.setComuna_residencia(Comuna);
+        prevision Prevision = new prevision();
+        id = 2;
+        Prevision.setId(id);
+        Prevision.setNombre("Isapre");
+        selected.setPrevision(Prevision);
+        nacionalidad Nacionalidad = new nacionalidad();
+        id = 213;
+        Nacionalidad.setId(id);        
+        Nacionalidad.setNombre("Chile");
+        selected.setNacionalidad(Nacionalidad);
         return selected;
     }
 
@@ -126,18 +143,22 @@ public class pacienteController implements Serializable {
             if (!JsfUtil.isValidationFailed()) {
                 items = null;    // Invalidate list of items to trigger re-query.
             }
-            System.out.println("Run "+selected.getRUN()+"-"+selected.getDV()+" Válido");
-            return "/faces/paciente/List.xhtml";
+            return "/faces/paciente/View.xhtml";
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: el RUN ingresado no es válido",  "El rut ingresado no es válido.") );
-            System.out.println("Run "+selected.getRUN()+"-"+selected.getDV()+" inválido");
             return "/faces/paciente/Create.xhtml";
         }   
     }
 
+    public void agendarActividad() {
+        selected.setEstado("Actividad agendada");
+        clapCtrl.setActividadElegida(true);
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
+    }
+
     public String update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
-        return "/faces/paciente/List.xhtml";
+        return "/faces/paciente/View.xhtml?faces-redirect=true";
     }
 
     public void destroy() {
@@ -148,11 +169,6 @@ public class pacienteController implements Serializable {
         }
     }
 
-    public void agendarActividad() {
-        selected.setEstado("Actividad agendada");
-        clapCtrl.setActividadElegida(true);
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
-    }
     
     public List<paciente> getItems() {
         if (items == null) {
@@ -331,4 +347,27 @@ public class pacienteController implements Serializable {
         }
         return filteredPacientes;
     }
+    
+    public String buscarPorRUN(){
+        List<paciente> pacientes = getFacade().findbyRUN(RUN);
+        if (pacientes.size() == 0) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Paciente no Encontrado. Buscar en Fonasa",  null);
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            return "/faces/paciente/Buscar.xhtml";
+        }else{
+            paciente paciente = pacientes.get(0);
+            if (!paciente.getDV().equals(DV)) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "RUN Invalido",  null);
+                FacesContext.getCurrentInstance().addMessage(null, message);
+                return "/faces/paciente/Buscar.xhtml";
+            }else{
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Paciente Encontrado",  null);
+                FacesContext.getCurrentInstance().addMessage(null, message);
+                selected = paciente;
+                return "/faces/paciente/View.xhtml";
+            }
+        }
+    }
+    
+    
 }

@@ -173,7 +173,6 @@ public class CrafftController implements Serializable {
         }
     }
     public void serviceChangeA(boolean resp){
-        System.out.println("Change A to: " + !resp);
        if (resp) {
             if (puntajeA>=1) {
                 puntajeA-=1;
@@ -181,6 +180,5 @@ public class CrafftController implements Serializable {
         }else{
              puntajeA+=1;
         }
-        System.out.println("Puntaje A = " + puntajeA);
     }
 }

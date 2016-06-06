@@ -28,8 +28,11 @@
             <b:row>
                 <h2 align="center">Riesgos Paciente #{clapController.selected.paciente.RUN}-#{clapController.selected.paciente.DV} CLAP #{clapController.selected.id}</h2>
             </b:row>
+            <b:row rendered="#{clapController.esIncompleto()}">
+                <h3 align="center">No es posible ver los riesgos de una ficha CLAP no terminada</h3>
+            </b:row>
             <br/><br/><br/>
-            <h:form>
+            <h:form rendered="#{not clapController.esIncompleto()}">
             <b:row>
                 <div id="cardio">
                  <b:column offset="3" col-xs="12" col-md="6">
@@ -201,16 +204,16 @@
                                   selectionMode="single" selection="#{actividadController.selected}"
                                   rowKey="#{item.id}"
                                   >
-                         <p:ajax event="rowSelect"   update="createButton" />
-                         <p:ajax event="rowUnselect" update="createButton"/>
+                         <p:ajax event="rowSelect"   update="createButton agendarButton" />
+                         <p:ajax event="rowUnselect" update="createButton agendarButton"/>
                          <f:facet name="footer">
                              <p:commandButton id="createButton" icon="ui-icon-plus"   value="Ahora" actionListener="#{actividadController.prepareCreate}" update=":actividadCreateForm" oncomplete="PF('actividadCreateDialog').show()" disabled="#{clapController.isActividadElegida()}"/>
-                             <p:commandButton id="agendarButton" icon="ui-icon-plus"  value="Despues" action="#{pacienteController.agendarActividad}" disabled="#{clapController.isActividadElegida()}"/>
+                             <p:commandButton id="agendarButton" icon="ui-icon-plus"  value="Despues" actionListener="#{pacienteController.agendarActividad()}"  update=":growl,datalist" disabled="#{clapController.isActividadElegida()}"/>
                          </f:facet>
                      </p:dataTable>
                  </h:form>
             </b:row>
-            <ui:include src="Create_Actividades.xhtml"/>
+            <ui:include src="/actividad/Create.xhtml"/>
         </ui:define>
         
     </ui:composition>

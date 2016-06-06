@@ -1,0 +1,5 @@
+projectKey=cl.diinf
+serverUrl=http://localhost:9000
+dashboardUrl=http://localhost:9000/dashboard/index/cl.diinf
+ceTaskId=AVUERR5m_CDVbxjXOUcX
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AVUERR5m_CDVbxjXOUcX
