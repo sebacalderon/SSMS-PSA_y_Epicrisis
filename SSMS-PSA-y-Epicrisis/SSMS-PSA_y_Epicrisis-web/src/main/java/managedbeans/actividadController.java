@@ -32,6 +32,9 @@ public class actividadController implements Serializable {
     private pacienteController pacienteCtrl;
     @Inject
     private LoginController loginCtrl;
+    @Inject
+    private clapController clapCtrl;
+    
     public actividadController() {
     }
 
@@ -61,15 +64,9 @@ public class actividadController implements Serializable {
         selected.setFecha_realizacion(new java.util.Date());
         return selected;
     }
-    
-    public actividad prepareAgendar() {
-        selected = new actividad();
-        initializeEmbeddableKey();
-        selected.setPaciente(pacienteCtrl.getSelected());
-        return selected;
-    }
 
     public void create() {
+        clapCtrl.setActividadElegida(true);
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("actividadCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.

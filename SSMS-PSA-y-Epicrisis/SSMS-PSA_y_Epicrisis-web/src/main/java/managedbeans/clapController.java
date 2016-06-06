@@ -49,6 +49,8 @@ public class clapController implements Serializable {
     boolean vive_con_padre=false;
     boolean vive_con_otros=false;
     
+    boolean actividadElegida=false;
+    
     @Inject
     private pacienteController pacienteCtrl;
     
@@ -128,6 +130,12 @@ public class clapController implements Serializable {
     }
 
     public void setSelected(clap selected) {
+        vive_solo=false;
+        vive_en_institucion=false;
+        vive_con_madre=false;
+        vive_con_padre=false;
+        vive_con_otros=false;
+        actividadElegida=false;
         this.selected = selected;
     }
 
@@ -281,7 +289,7 @@ public class clapController implements Serializable {
             selected.getTanner_mama()!=0&&
             selected.getTanner_genital()!=0
                 ){
-            selected.setEstado("Nuevo");
+            selected.setEstado("Vigente");
             completo=true;
         }else{
             selected.setEstado("Incompleto");
@@ -420,39 +428,28 @@ public class clapController implements Serializable {
         System.out.println("Riesgo social: "+selected.isRiesgo_social());
         System.out.println("Riesgo ssr: "+selected.isRiesgo_ssr());
         
+        //Guarda localmente el clap selected
+        clap nuevoClap = getSelected();
 
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("clapCreated"));
-        if (!JsfUtil.isValidationFailed()) {
-            items = null;    // Invalidate list of items to trigger re-query.
-        }
-        if(selected.getEstado().equals("Nuevo")){
-            List<clap> claps = getItemsPorPaciente(pacienteCtrl.getSelected().getRUN());
-            if(claps.size()>1){
-                System.out.println("Eziste mas de 1 clap");
-                for(int i=0;i<claps.size();i++){
-                    if(claps.get(i).getEstado().equals("Vigente")){
-                        setSelected(claps.get(i));
-                        selected.setEstado("Antiguo");
-                        persist(PersistAction.UPDATE,"");
-                    } else if(claps.get(i).getEstado().equals("Nuevo")){
-                        setSelected(claps.get(i));
-                        selected.setEstado("Vigente");
-                        persist(PersistAction.UPDATE,"");
-                    }
+        List<clap> claps = getItemsPorPaciente(pacienteCtrl.getSelected().getRUN());
+        if(claps.size()>1){
+            System.out.println("Eziste mas de 1 clap");
+            for(int i=0;i<claps.size();i++){
+                if(claps.get(i).getEstado().equals("Vigente")){
+                    setSelected(claps.get(i));
+                    selected.setEstado("Antiguo");
+                    persist(PersistAction.UPDATE,"");
                 }
             }
-//            else{
-//                System.out.println("Primer clap ingresado");
-//                selected.setEstado("Vigente");
-//                persist(PersistAction.UPDATE,"");
-//            }
         }
-        //Cambia estado de paciente
-//        if(selected.isRiesgo_cardiovascular()||selected.isRiesgo_nutricional()||selected.isRiesgo_oh_drogas()||selected.isRiesgo_salud_mental()||selected.isRiesgo_social()||selected.isRiesgo_ssr()){
-//            pacienteCtrl.riesgosSinResolver();
-//        }
+
         
         if(completo){
+            setSelected(nuevoClap);
+            persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("clapCreated"));
+            if (!JsfUtil.isValidationFailed()) {
+                items = null;    // Invalidate list of items to trigger re-query.
+            }
             return "/faces/clap/Riesgos.xhtml";
         }else{
             return "/faces/paciente/View.xhtml";
@@ -625,6 +622,87 @@ public class clapController implements Serializable {
 //            (selected.getTanner_mama()!=0)+"\n"+
 //            (selected.getTanner_genital()!=0)
      //   );
+     
+        //Riesgos
+        
+        selected.setRiesgo_cardiovascular(false);
+        selected.setRiesgo_nutricional(false);
+        selected.setRiesgo_oh_drogas(false);
+        selected.setRiesgo_salud_mental(false);
+        selected.setRiesgo_social(false);
+        selected.setRiesgo_ssr(false);
+        
+        //cardiovascular nutricional
+        if(selected.getImc()<24){
+            selected.setRiesgo_cardiovascular(true);
+            selected.setRiesgo_nutricional(true);
+        }
+        if(selected.isCardio_pulmonar()){
+            selected.setRiesgo_cardiovascular(true);
+        }
+        if(selected.getPresion_arterial_sistolica()>=120||selected.getPresion_arterial_diastolica()>=80){
+            selected.setRiesgo_cardiovascular(true);
+        }
+        if(selected.getPerimetro_abdominal()>88&&selected.getSexo()==2||selected.getPerimetro_abdominal()>102&&selected.getSexo()==3){
+            selected.setRiesgo_cardiovascular(true);
+            selected.setRiesgo_nutricional(true);
+        }
+        if(selected.isAlimentacion_adecuada()){
+            selected.setRiesgo_nutricional(true);
+        }
+        //ssr
+        if(selected.getConducta_sexual()==3||selected.getEdad_inicio_conducta_sexual()< 14){
+            selected.setRiesgo_ssr(true);
+        }
+        if(selected.getDificultades_sexuales()==2){
+            selected.setRiesgo_ssr(true);
+        }
+        if(selected.getCiclos_regulares()==2||selected.getDismenorrea()==2||selected.isFlujo_secrecion_patologico()){
+            selected.setRiesgo_ssr(true);
+        }
+        if(selected.isIts_vih()||selected.getTratamiento()>1||selected.getTratamiento_contactos()>1){
+            selected.setRiesgo_ssr(true);
+        }
+        if(selected.getEmbarazos()>0||selected.getHijos()>0||selected.getAbortos()>0){
+            selected.setRiesgo_ssr(true);
+        }
+        if(selected.getUso_mac()>1||selected.getAnticoncepcion()>1||selected.isAbuso_sexual()){
+            selected.setRiesgo_ssr(true);
+        }
+        
+        //Salud mental
+        
+        if(selected.getImagen_corporal()>1||selected.getBienestar_emocional()>1){
+            selected.setRiesgo_salud_mental(true);
+        }
+        if(selected.getVida_proyecto()==3||selected.isIntento_suicida()||selected.isIdeacion_suicida()){
+            selected.setRiesgo_salud_mental(true);
+        }
+        
+        //Drogas
+        
+        if(selected.isTabaco()||selected.isConsumo_alcohol()||selected.isConsumo_marihuana()||selected.isConsumo_otra_sustancia()){
+            selected.setRiesgo_oh_drogas(true);
+        }
+        
+        //riesgo social
+        
+        if(selected.getReferente_adulto()==5||selected.getAceptacion()==2||selected.getAceptacion()==3||selected.isAmigos()==false||selected.isSuicidalidad_amigos()==true){
+            selected.setRiesgo_social(true);
+        }
+        if(selected.isCyberbulling()|selected.isGrooming()||selected.isViolencia_escolar()||selected.isViolencia_pareja()){
+            selected.setRiesgo_social(true);
+        }
+        if(selected.isVive_con_solo()||selected.isVive_en_institucion()||selected.getPercepcion_familia()>2||selected.isDesercion_exclusion()){
+            selected.setRiesgo_social(true);
+        }
+        System.out.println("Riesgo cardiovascular: "+selected.isRiesgo_cardiovascular());
+        System.out.println("Riesgo nutricional: "+selected.isRiesgo_nutricional());
+        System.out.println("Riesgo OH drogas: "+selected.isRiesgo_oh_drogas());
+        System.out.println("Riesgo salud mental: "+selected.isRiesgo_salud_mental());
+        System.out.println("Riesgo social: "+selected.isRiesgo_social());
+        System.out.println("Riesgo ssr: "+selected.isRiesgo_ssr());
+        
         
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
         if(selected.getEstado().equals("Nuevo")){
@@ -680,6 +758,14 @@ public class clapController implements Serializable {
         return items;
     }
 
+    public boolean isActividadElegida() {
+        return actividadElegida;
+    }
+
+    public void setActividadElegida(boolean actividadElegida) {
+        this.actividadElegida = actividadElegida;
+    }
+    
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();

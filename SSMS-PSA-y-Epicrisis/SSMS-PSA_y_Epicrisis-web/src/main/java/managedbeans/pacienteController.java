@@ -1,5 +1,6 @@
 package managedbeans;
 
+import entities.actividad;
 import entities.comuna;
 import entities.nacionalidad;
 import entities.paciente;
@@ -25,6 +26,7 @@ import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
 @Named("pacienteController")
 @SessionScoped
@@ -35,6 +37,8 @@ public class pacienteController implements Serializable {
     private List<paciente> items = null;
     private paciente selected;
     
+    @Inject
+    private clapController clapCtrl;
     
     public pacienteController() {
     }
@@ -144,6 +148,11 @@ public class pacienteController implements Serializable {
         }
     }
 
+    public void agendarActividad() {
+        selected.setEstado("Actividad agendada");
+        clapCtrl.setActividadElegida(true);
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
+    }
     
     public List<paciente> getItems() {
         if (items == null) {

@@ -76,6 +76,12 @@
                         <p:ajax event="rowUnselect" update="viewButton editButton createClap viewRiesgosButton desactivateButton"/>
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListclapTitle_numero_consulta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListclapTitle_nombres}"/>
                             </f:facet>
                             <h:outputText value="#{item.nombres} #{item.primer_apellido} #{item.segundo_apellido}"/>
@@ -86,12 +92,7 @@
                             </f:facet>
                             <h:outputText value="#{item.paciente.RUN} - #{item.DV}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListclapTitle_numero_consulta}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
+
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListclapTitle_fecha_consulta}"/>
@@ -104,16 +105,16 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListclapTitle_funcionario}"/>
                             </f:facet>
-                            <h:outputText value="#{item.funcionario}"/>
+                            <h:outputText value="#{item.funcionario.RUT}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Riesgos"/>
                             </f:facet>
-                            <h:outputText value="Riesgo salud sexual y reproductiva" rendered="#{item.riesgo_ssr}"/>
-                            <h:outputText value="Riesgo salud mental" rendered="#{item.riesgo_salud_mental}"/>
-                            <h:outputText value="Riesgo alcohol y drogas" rendered="#{item.riesgo_oh_drogas}"/>
-                            <h:outputText value="Riesgo nutricional" rendered="#{item.riesgo_nutricional}"/>
+                            <h:outputText value="Riesgo salud sexual y reproductiva" rendered="#{item.riesgo_ssr}"/><br/>
+                            <h:outputText value="Riesgo salud mental" rendered="#{item.riesgo_salud_mental}"/><br/>
+                            <h:outputText value="Riesgo alcohol y drogas" rendered="#{item.riesgo_oh_drogas}"/><br/>
+                            <h:outputText value="Riesgo nutricional" rendered="#{item.riesgo_nutricional}"/><br/>
                             <h:outputText value="Riesgo social" rendered="#{item.riesgo_social}"/>
                         </p:column>
                         <p:column>
@@ -125,12 +126,6 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListclapTitle_correo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.correo}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="Estado"/>
                             </f:facet>
                             <h:outputText value="#{item.estado}"/>
@@ -138,15 +133,9 @@
                         <f:facet name="footer">
                             <p:commandButton id="createClap" icon="ui-icon-plus"   value="Crear Clap" actionListener="#{clapController.prepareClap(pacienteController.selected)}" action="/clap/Create?faces-redirect=true" rendered="#{loginController.esFuncionario()}"/>                            
                             <p:commandButton id="viewButton" rendered="false"   icon="ui-icon-search" value="#{bundle.View}" update=":clapViewForm" oncomplete="PF('clapViewDialog').show()" disabled="#{empty clapController.selected}"/>
-<<<<<<< HEAD
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{clapController.prepareEdit}" action="/clap/Edit?faces-redirect=true" disabled="#{empty clapController.selected || not clapController.esIncompleto()}" rendered="#{loginController.esFuncionario()}"/>
-                            <p:commandButton id="desactivateButton" icon="ui-icon-cancel"  value="Anular" actionListener="#{clapController.anular}" update=":growl,datalist"  disabled="#{clapController.esAnulado() || empty clapController.selected}"/>
-                            <p:commandButton id="viewRiesgosButton"   icon="ui-icon-search" value="Ver Riesgos" actionListener="#{clapController.prepareRiesgos}" action="/clap/Riesgos?faces-redirect=true" disabled="#{empty clapController.selected}" rendered="#{loginController.esFuncionario() || loginController.esSuperUsuario()}"/>                            
-=======
                             <p:commandButton id="viewRiesgosButton"   icon="ui-icon-search" value="Ver Riesgos" actionListener="#{clapController.prepareRiesgos}" action="/clap/Riesgos?faces-redirect=true" disabled="#{empty clapController.selected || clapController.esIncompleto()}" rendered="#{loginController.esFuncionario() || loginController.esSuperUsuario()}"/>                            
-                            <p:commandButton id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{clapController.prepareEdit}" action="/clap/Edit?faces-redirect=true" disabled="#{empty clapController.selected || not clapController.esIncompleto()}" rendered="#{loginController.esFuncionario()}"/>
                             <p:commandButton id="desactivateButton" icon="ui-icon-cancel"  value="Anular" actionListener="#{clapController.anular}" update=":growl,datalist"  disabled="#{empty clapController.selected || clapController.esAnulado()}"/>
->>>>>>> origin/master
                         </f:facet>
                 </p:dataTable>
                 </h:panelGroup>
