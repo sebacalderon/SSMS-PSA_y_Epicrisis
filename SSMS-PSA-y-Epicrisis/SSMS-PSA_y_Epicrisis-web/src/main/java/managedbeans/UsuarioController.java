@@ -359,7 +359,7 @@ public class UsuarioController implements Serializable {
     public void login_uno() {
         FacesContext context;
         context = FacesContext.getCurrentInstance();
-        FacesMessage message = null;
+        FacesMessage message = new FacesMessage();
         if (pass.equals(pass_repeat)) {
             setOld_password(selected.getPassword());
             setNew_password(pass);
