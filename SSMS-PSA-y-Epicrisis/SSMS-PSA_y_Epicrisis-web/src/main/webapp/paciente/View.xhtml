@@ -196,12 +196,6 @@
                             <h:outputText value="#{item.usuario.RUT}">
                             </h:outputText>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Usuario atendido"/>
-                            </f:facet>
-                            <h:outputText value="#{item.paciente.RUN}-#{item.paciente.DV}"/>
-                        </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":actividadViewForm" oncomplete="PF('actividadViewDialog').show()" disabled="#{empty actividadController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":actividadEditForm" oncomplete="PF('actividadEditDialog').show()" disabled="#{empty actividadController.selected}" rendered="#{loginController.esFuncionario() || loginController.esEmpleadoMunicipal()}"/>
