@@ -153,7 +153,7 @@
                         <f:facet name="footer">
                             <p:commandButton id="createClap" icon="ui-icon-plus"   value="Crear Clap" actionListener="#{clapController.prepareClap(pacienteController.selected)}" action="/clap/Create?faces-redirect=true" rendered="#{loginController.esFuncionario()}"/>                            
                             <p:commandButton id="viewButton" icon="ui-icon-search" value="#{bundle.View}" disabled="#{empty clapController.selected}" action="/clap/View?faces-redirect=true"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{clapController.prepareEdit}" action="/clap/Edit?faces-redirect=true" disabled="#{empty clapController.selected || not clapController.esIncompleto()}" rendered="#{loginController.esFuncionario()}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{clapController.prepareEdit}" action="/clap/Edit?faces-redirect=true" disabled="#{empty clapController.selected ||  not clapController.esIncompleto()}" rendered="#{loginController.esFuncionario()}"/>
                             <p:commandButton id="desactivateButton" icon="ui-icon-cancel"  value="Anular" actionListener="#{clapController.anular}" update=":growl,datalist"  disabled="#{clapController.esAnulado() || empty clapController.selected}" rendered="#{loginController.esFuncionario()}">
                                 <p:confirm header="Confirme Anulación" message="Esta segur@ de anular la ficha CLAP?" icon="ui-icon-alert" />
                             </p:commandButton>
@@ -166,6 +166,51 @@
                 </p:dataTable>
                 </h:panelGroup>
             </h:form>
+        </b:panel>
+            <br/>
+            <b:panel id="pacienteActividadViewDlg" title="Actividades de Intervención del Usuario">
+            <h:form id="actividadListForm">
+                <h:panelGroup id="display2">                   
+                    <p:dataTable id="datalist" value="#{actividadController.getItemsPorPaciente(pacienteController.selected)}" var="item"
+                                 selectionMode="single" selection="#{actividadController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >      
+                        <p:ajax event="rowSelect"   update="viewButton editButton"/>
+                        <p:ajax event="rowUnselect" update="viewButton editButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListactividadTitle_fecha_realizacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fecha_realizacion}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Funcionario PSA a cargo"/>
+                            </f:facet>
+                            <h:outputText value="#{item.usuario.RUT}">
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Usuario atendido"/>
+                            </f:facet>
+                            <h:outputText value="#{item.paciente.RUN}-#{item.paciente.DV}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":actividadViewForm" oncomplete="PF('actividadViewDialog').show()" disabled="#{empty actividadController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":actividadEditForm" oncomplete="PF('actividadEditDialog').show()" disabled="#{empty actividadController.selected}" rendered="#{loginController.esFuncionario() || loginController.esEmpleadoMunicipal()}"/>
+                        </f:facet>
+                </p:dataTable>
+                </h:panelGroup>
+            </h:form>
+                <ui:include src="/actividad/Edit.xhtml"/>
+                <ui:include src="/actividad/View.xhtml"/>
         </b:panel>
         </ui:define>
     </ui:composition>

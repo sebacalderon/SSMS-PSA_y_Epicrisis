@@ -1,6 +1,7 @@
 package managedbeans;
 
 import entities.actividad;
+import entities.paciente;
 import managedbeans.util.JsfUtil;
 import managedbeans.util.JsfUtil.PersistAction;
 import sessionbeans.actividadFacadeLocal;
@@ -34,6 +35,7 @@ public class actividadController implements Serializable {
     private LoginController loginCtrl;
     @Inject
     private clapController clapCtrl;
+    private List<actividad> itemsPorPaciente;
     
     public actividadController() {
     }
@@ -171,6 +173,11 @@ public class actividadController implements Serializable {
             }
         }
 
+    }
+    
+    public List<actividad> getItemsPorPaciente(paciente paciente) {
+        itemsPorPaciente = getFacade().findbyPaciente(paciente);
+        return itemsPorPaciente;
     }
 
 }
