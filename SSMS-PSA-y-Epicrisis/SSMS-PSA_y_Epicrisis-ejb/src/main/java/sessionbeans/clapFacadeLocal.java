@@ -5,7 +5,9 @@
  */
 package sessionbeans;
 
+import entities.cesfam;
 import entities.clap;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -30,6 +32,10 @@ public interface clapFacadeLocal {
     
     List<clap> findbyPaciente(int RUN);
     
+    List<clap> findbyEstado(String estado, Date fecha);
+    
     int count();
+
+    List<clap> findbyEstadoCesfam(String estado, cesfam cesfam, Date fecha);
     
 }

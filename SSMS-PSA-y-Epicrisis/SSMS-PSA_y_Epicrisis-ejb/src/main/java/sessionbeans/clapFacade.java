@@ -5,7 +5,10 @@
  */
 package sessionbeans;
 
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import entities.cesfam;
 import entities.clap;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -39,4 +42,19 @@ public class clapFacade extends AbstractFacade<clap> implements clapFacadeLocal 
         return query.getResultList();
     }
     
+    @Override
+    public List<clap> findbyEstado(String estado, Date fecha) {
+        Query query;
+        query = em.createNamedQuery("clap.findbyEstado").
+                setParameter("estado", estado).setParameter("fecha", fecha);
+        return query.getResultList();
+    }
+    
+    @Override
+    public List<clap> findbyEstadoCesfam(String estado, cesfam cesfam, Date fecha){
+        Query query;
+        query = em.createNamedQuery("clap.findbyEstadoCesfam").
+                setParameter("estado", estado).setParameter("cesfam", cesfam).setParameter("fecha", fecha);
+        return query.getResultList();
+    }
 }

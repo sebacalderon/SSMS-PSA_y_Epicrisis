@@ -29,7 +29,9 @@ import javax.validation.constraints.Pattern;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name="clap.findbyPaciente",query="SELECT p FROM clap p WHERE p.RUN=:RUN")
+    @NamedQuery(name="clap.findbyPaciente",query="SELECT p FROM clap p WHERE p.RUN=:RUN"),
+    @NamedQuery(name="clap.findbyEstado",query="SELECT p FROM clap p WHERE p.estado=:estado AND p.fecha_consulta >= :fecha"),
+    @NamedQuery(name="clap.findbyEstadoCesfam",query="SELECT p FROM clap p WHERE p.estado=:estado AND p.cesfam=:cesfam AND p.fecha_consulta >= :fecha")
 })
 public class clap implements Serializable {
 

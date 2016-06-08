@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition template="/template.xhtml">
 
@@ -36,6 +37,65 @@
                     </p:panelGrid>
                     <b:commandButton actionListener="#{usuarioController.login_uno}" value="#{bundle.Save}"/>
                 </h:panelGroup>
+            </h:form>
+            <br/>
+            <h:form>
+            <b:panel title="Fichas CLAPS no terminadas" look="danger">
+                <p:dataTable id="datalist" value="#{clapController.getItemsPorEstado(1, loginController.usuarioLogueado.CESFAM)}" var="item"
+                                 selectionMode="single" selection="#{clapController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="viewButton editButton viewRiesgoButton"/>
+                        <p:ajax event="rowUnselect" update="viewButton editButton viewRiesgoButton"/>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="RUN Usuario"/>
+                            </f:facet>
+                            <h:outputText value="#{item.paciente.RUN} - #{item.DV}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListclapTitle_numero_consulta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListclapTitle_fecha_consulta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fecha_consulta}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListclapTitle_funcionario}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.funcionario.RUT}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Correo Usuario"/>
+                            </f:facet>
+                            <h:outputText value="#{item.correo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Estado"/>
+                            </f:facet>
+                            <h:outputText value="#{item.estado}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="viewButton" rendered="false"   icon="ui-icon-search" value="#{bundle.View}" update=":clapViewForm" oncomplete="PF('clapViewDialog').show()" disabled="#{empty clapController.selected}"/>
+                            <p:commandButton id="viewRiesgoButton"   icon="ui-icon-search" value="Ver Riesgos" actionListener="#{clapController.prepareRiesgos}" action="/clap/Riesgos?faces-redirect=true" disabled="#{empty clapController.selected}" rendered="#{loginController.esFuncionario() || loginController.esSuperUsuario()}"/>                            
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{clapController.prepareEdit}" action="/clap/Edit?faces-redirect=true" disabled="#{empty clapController.selected}" rendered="#{loginController.esFuncionario()}"/>
+                        </f:facet>
+                    </p:dataTable>
+            </b:panel>
             </h:form>
             
             <br />
