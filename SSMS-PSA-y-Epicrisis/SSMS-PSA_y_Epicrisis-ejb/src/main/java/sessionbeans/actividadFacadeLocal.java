@@ -6,6 +6,7 @@
 package sessionbeans;
 
 import entities.actividad;
+import entities.paciente;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -29,5 +30,7 @@ public interface actividadFacadeLocal {
     List<actividad> findRange(int[] range);
 
     int count();
+    
+    List<actividad> findbyPaciente(paciente paciente);
     
 }

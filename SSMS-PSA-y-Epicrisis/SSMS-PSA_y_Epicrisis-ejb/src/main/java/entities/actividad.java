@@ -15,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -24,6 +26,9 @@ import javax.validation.constraints.NotNull;
  * @author Seba
  */
 @Entity
+@NamedQueries({
+@NamedQuery(name="actividad.findbyPaciente",query="SELECT p FROM actividad p WHERE p.paciente=:paciente")
+})
 public class actividad implements Serializable {
 
     private static final long serialVersionUID = 1L;
