@@ -38,6 +38,9 @@ public class pacienteController implements Serializable {
     private String DV;
     
     @Inject
+    private LoginController loginCtrl;
+    
+    @Inject
     private clapController clapCtrl;
     
     
@@ -351,9 +354,12 @@ public class pacienteController implements Serializable {
     public String buscarPorRUN(){
         List<paciente> pacientes = getFacade().findbyRUN(RUN);
         if (pacientes.size() == 0) {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Paciente no Encontrado. Buscar en Fonasa",  null);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no Encontrado. Buscar en Fonasa",  null);
             FacesContext.getCurrentInstance().addMessage(null, message);
             return "/faces/paciente/Buscar.xhtml";
+            /////////////////
+            //PARTE DE FONASA
+            /////////////////
         }else{
             paciente paciente = pacientes.get(0);
             if (!paciente.getDV().equals(DV)) {
@@ -361,10 +367,24 @@ public class pacienteController implements Serializable {
                 FacesContext.getCurrentInstance().addMessage(null, message);
                 return "/faces/paciente/Buscar.xhtml";
             }else{
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Paciente Encontrado",  null);
-                FacesContext.getCurrentInstance().addMessage(null, message);
-                selected = paciente;
-                return "/faces/paciente/View.xhtml";
+                if (loginCtrl.esSuperUsuario()) {
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario Encontrado",  null);
+                    FacesContext.getCurrentInstance().addMessage(null, message);
+                    selected = paciente;
+                    return "/faces/paciente/View.xhtml";    
+                }else{
+                    //Si no es super usuario, se muestra la informacion solo si es del CESFAM que le corresponde
+                    if (loginCtrl.getUsuarioLogueado().getCESFAM().getId() == paciente.getCesfam().getId()) {
+                        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario Encontrado",  null);
+                        FacesContext.getCurrentInstance().addMessage(null, message);
+                        selected = paciente;
+                        return "/faces/paciente/View.xhtml";
+                    }else{
+                        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario es de otro CESFAM",  null);
+                        FacesContext.getCurrentInstance().addMessage(null, message);
+                        return "/faces/paciente/Buscar.xhtml";
+                    }
+                }
             }
         }
     }

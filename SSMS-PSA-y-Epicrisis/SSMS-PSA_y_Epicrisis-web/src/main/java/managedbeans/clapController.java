@@ -3,7 +3,6 @@ package managedbeans;
 import entities.Crafft;
 import entities.audit;
 import entities.clap;
-import entities.clap_;
 import entities.comuna;
 import entities.paciente;
 import managedbeans.util.JsfUtil;
