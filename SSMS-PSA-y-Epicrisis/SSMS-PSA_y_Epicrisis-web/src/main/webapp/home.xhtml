@@ -49,8 +49,8 @@
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
 
-                        <p:ajax event="rowSelect"   update="viewButton editButton viewRiesgoButton"/>
-                        <p:ajax event="rowUnselect" update="viewButton editButton viewRiesgoButton"/>
+                        <p:ajax event="rowSelect"   update="viewButton editButton viewUsuarioButton"/>
+                        <p:ajax event="rowUnselect" update="viewButton editButton viewUsuarioButton"/>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="RUN Usuario"/>
@@ -83,16 +83,11 @@
                             </f:facet>
                             <h:outputText value="#{item.correo}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Estado"/>
-                            </f:facet>
-                            <h:outputText value="#{item.estado}"/>
-                        </p:column>
+                        
                         <f:facet name="footer">
-                            <p:commandButton id="viewButton" rendered="false"   icon="ui-icon-search" value="#{bundle.View}" update=":clapViewForm" oncomplete="PF('clapViewDialog').show()" disabled="#{empty clapController.selected}"/>
-                            <p:commandButton id="viewRiesgoButton"   icon="ui-icon-search" value="Ver Riesgos" actionListener="#{clapController.prepareRiesgos}" action="/clap/Riesgos?faces-redirect=true" disabled="#{empty clapController.selected}" rendered="#{loginController.esFuncionario() || loginController.esSuperUsuario()}"/>                            
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{clapController.prepareEdit}" action="/clap/Edit?faces-redirect=true" disabled="#{empty clapController.selected}" rendered="#{loginController.esFuncionario()}"/>
+                            <p:commandButton id="viewButton" icon="ui-icon-search" value="Ver CLAP" disabled="#{empty clapController.selected}" action="/clap/View?faces-redirect=true"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Editar CLAP" actionListener="#{clapController.prepareEdit}" action="/clap/Edit?faces-redirect=true" disabled="#{empty clapController.selected || not clapController.esIncompleto()}" rendered="#{loginController.esFuncionario()}"/>
+                            <p:commandButton id="viewUsuarioButton" icon="ui-icon-search" value="Ver Usuario" disabled="#{empty clapController.selected}" action="#{pacienteController.pacienteClap(clapController.selected.paciente)}"/>
                         </f:facet>
                     </p:dataTable>
             </b:panel>

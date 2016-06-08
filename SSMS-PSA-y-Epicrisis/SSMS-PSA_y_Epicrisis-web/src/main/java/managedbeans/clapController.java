@@ -916,10 +916,11 @@ public class clapController implements Serializable {
         selected.setGrupo_fonasa(Paciente.getGrupo_fonasa());
         selected.setEstado_conyugal(Paciente.getEstado_conyugal());
         selected.setPueblo_originario(Paciente.getPueblo_originario());
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, -61);
-        Date fecha = cal.getTime();
-        selected.setFecha_consulta(fecha);
+        //Para probar con CLAP de hace mas de 2 meses
+//        Calendar cal = Calendar.getInstance();
+//        cal.add(Calendar.DATE, -61);
+//        Date fecha = cal.getTime();
+        selected.setFecha_consulta(new java.util.Date());
         selected.setEdad(selected.getFecha_consulta().getYear()-Paciente.getFecha_nacimiento().getYear());
         puntajeACrafft = 0;
         audit = new audit();

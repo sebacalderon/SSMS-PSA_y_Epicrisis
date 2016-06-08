@@ -389,5 +389,8 @@ public class pacienteController implements Serializable {
         }
     }
     
-    
+    public String pacienteClap(paciente paciente){
+        setSelected(paciente);
+        return "/paciente/View?faces-redirect=true";
+    }
 }
