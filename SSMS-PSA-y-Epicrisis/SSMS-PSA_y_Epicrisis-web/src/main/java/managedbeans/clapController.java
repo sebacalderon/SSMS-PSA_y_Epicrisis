@@ -19,6 +19,7 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -48,6 +49,7 @@ public class clapController implements Serializable {
     
     boolean actividadElegida=false;
 
+    private int number;
     
     @Inject
     private pacienteController pacienteCtrl;
@@ -148,6 +150,16 @@ public class clapController implements Serializable {
         auditCrafft = false;
         initializeEmbeddableKey();
         return selected;
+    }
+    
+    public int getNumber() {
+        return number;
+    }
+ 
+    public void increment() {
+        number++;
+        autosave();
+        
     }
     
     public clap prepareEdit() {
@@ -625,6 +637,184 @@ public class clapController implements Serializable {
 
     public List<clap> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+
+    public void autosave() {
+        boolean completo=false;
+        //Verifica si completa el clap
+        if( selected.getPerinatales_normales()!=0&&
+            selected.getAlergias_normales()!=0&&
+            selected.getVacunas_completas()!=0&&
+            selected.getEnfermedades_importantes()!=0&&
+            selected.getDiscapacidad()!=0&&
+            selected.getAccidentes_relevantes()!=0&&
+            selected.getCirugia_hospitalizaciones()!=0&&
+            selected.getProblemas_salud_mental()!=0&&
+            selected.getViolencia()!=0&&
+            selected.getAntecedentes_judiciales()!=0&&
+            selected.getOtros()!=0&&
+            selected.getEnfermedades_importantes_familia()!=0&&
+            selected.getObesidad_familia()!=0&&
+            selected.getProblemas_salud_mental_familia()!=0&&
+            selected.getViolencia_intrafamiliar()!=0&&
+            selected.getAlcohol_y_otras_drogas()!=0&&
+            selected.getPadre_adolescente()!=0&&
+            selected.getJudiciales()!=0&&
+            selected.getOtros_antecedentes_familiares()!=0&&
+            selected.getPercepcion_familia()!=0&&
+            selected.getNivel_educacion()!=0&&
+            !selected.getCurso().equals("")&&
+            selected.getPercepcion_rendimiento()!=0&&
+            selected.getAceptacion()!=0&&
+            selected.getHoras_actividad_fisica()!=0&&
+            selected.getHoras_tv()!=0&&
+            selected.getHoras_computador_consola()!=0&&
+            selected.getHoras_sueno()!=0 &&
+            selected.getEdad_menarca_espermarca()!=0&&
+            selected.getCiclos_regulares()!=0&&
+            selected.getDismenorrea()!=0&&
+            selected.getOrientacion_sexual()!=0&&
+            selected.getConducta_sexual()!=0&&
+            selected.getRelaciones_sexuales()!=0&&
+            selected.getPareja_sexual()!=0&&
+            selected.getDificultades_sexuales()!=0&&
+            selected.getAnticoncepcion()!=0&&
+            selected.getUso_mac()!=0&&
+            selected.getImagen_corporal()!=0&&
+            selected.getBienestar_emocional()!=0&&
+            selected.getVida_proyecto()!=0&&
+            selected.getReferente_adulto()!=0&&
+            selected.getPeso()!=0&&
+            selected.getTalla()!=0&&
+            selected.getPresion_arterial_diastolica()!=0&&
+            selected.getPresion_arterial_sistolica()!=0&&
+            selected.getPerimetro_abdominal()!=0&&
+            selected.getTanner_mama()!=0&&
+            selected.getTanner_genital()!=0
+            ){
+            selected.setEstado("Nuevo");
+            completo=true;
+        }else{
+            selected.setEstado("Incompleto");
+            completo=false;
+        }
+        
+        selected.setRiesgo_cardiovascular(false);
+        selected.setRiesgo_nutricional(false);
+        selected.setRiesgo_oh_drogas(false);
+        selected.setRiesgo_salud_mental(false);
+        selected.setRiesgo_social(false);
+        selected.setRiesgo_ssr(false);
+        
+        //cardiovascular nutricional
+        if(selected.getImc()<24){
+            selected.setRiesgo_cardiovascular(true);
+            selected.setRiesgo_nutricional(true);
+        }
+        if(selected.isCardio_pulmonar()){
+            selected.setRiesgo_cardiovascular(true);
+        }
+        if(selected.getPresion_arterial_sistolica()>=120||selected.getPresion_arterial_diastolica()>=80){
+            selected.setRiesgo_cardiovascular(true);
+        }
+        if(selected.getPerimetro_abdominal()>88&&selected.getSexo()==2||selected.getPerimetro_abdominal()>102&&selected.getSexo()==3){
+            selected.setRiesgo_cardiovascular(true);
+            selected.setRiesgo_nutricional(true);
+        }
+        if(selected.isAlimentacion_adecuada()){
+            selected.setRiesgo_nutricional(true);
+        }
+        //ssr
+        if(selected.getConducta_sexual()==3||selected.getEdad_inicio_conducta_sexual()< 14){
+            selected.setRiesgo_ssr(true);
+        }
+        if(selected.getDificultades_sexuales()==2){
+            selected.setRiesgo_ssr(true);
+        }
+        if(selected.getCiclos_regulares()==2||selected.getDismenorrea()==2||selected.isFlujo_secrecion_patologico()){
+            selected.setRiesgo_ssr(true);
+        }
+        if(selected.isIts_vih()||selected.getTratamiento()>1||selected.getTratamiento_contactos()>1){
+            selected.setRiesgo_ssr(true);
+        }
+        if(selected.getEmbarazos()>0||selected.getHijos()>0||selected.getAbortos()>0){
+            selected.setRiesgo_ssr(true);
+        }
+        if(selected.getUso_mac()>1||selected.getAnticoncepcion()>1||selected.isAbuso_sexual()){
+            selected.setRiesgo_ssr(true);
+        }
+        
+        //Salud mental
+        
+        if(selected.getImagen_corporal()>1||selected.getBienestar_emocional()>1){
+            selected.setRiesgo_salud_mental(true);
+        }
+        if(selected.getVida_proyecto()==3||selected.isIntento_suicida()||selected.isIdeacion_suicida()){
+            selected.setRiesgo_salud_mental(true);
+        }
+        
+        //Drogas
+        
+        if(selected.isTabaco()||selected.isConsumo_alcohol()||selected.isConsumo_marihuana()||selected.isConsumo_otra_sustancia()){
+            selected.setRiesgo_oh_drogas(true);
+        }
+        
+        //riesgo social
+        
+        if(selected.getReferente_adulto()==5||selected.getAceptacion()==2||selected.getAceptacion()==3||selected.isAmigos()==false||selected.isSuicidalidad_amigos()==true){
+            selected.setRiesgo_social(true);
+        }
+        if(selected.isCyberbulling()|selected.isGrooming()||selected.isViolencia_escolar()||selected.isViolencia_pareja()){
+            selected.setRiesgo_social(true);
+        }
+        if(selected.isVive_con_solo()||selected.isVive_en_institucion()||selected.getPercepcion_familia()>2||selected.isDesercion_exclusion()){
+            selected.setRiesgo_social(true);
+        }
+        
+        System.out.println(selected.getAcompanante());
+        persist(PersistAction.UPDATE,"Autoguardado");
+        if(selected.getEstado().equals("Nuevo")){
+            List<clap> claps = getItemsPorPaciente(pacienteCtrl.getSelected().getRUN());
+            if(claps.size()>1){
+                System.out.println("Eziste mas de 1 clap");
+                for(int i=0;i<claps.size();i++){
+                    if(claps.get(i).getEstado().equals("Vigente")){
+                        setSelected(claps.get(i));
+                        selected.setEstado("Antiguo");
+                        persist(PersistAction.UPDATE,"");
+                    } else if(claps.get(i).getEstado().equals("Nuevo")){
+                        setSelected(claps.get(i));
+                        selected.setEstado("Vigente");
+                        persist(PersistAction.UPDATE,"");
+                    }
+                }
+            }
+            else{
+                System.out.println("Primer clap ingresado");
+                selected.setEstado("Vigente");
+                persist(PersistAction.UPDATE,"");
+            }
+        }
+       
+        if (selected.getAudit()!= null) {
+            audit audit = auditCtrl.getItemsPorClap(selected).get(0);
+            Long id = auditCtrl.getItemsPorClap(selected).get(0).getId();
+            audit = selected.getAudit();
+            audit.setId(id);
+            auditCtrl.setSelected(audit);
+            auditCtrl.update();
+        }
+        
+        if (selected.getCrafft()!= null) {
+            Crafft crafft = crafftCtrl.getItemsPorClap(selected).get(0);
+            Long id = crafftCtrl.getItemsPorClap(selected).get(0).getId();
+            crafft = selected.getCrafft();
+            crafft.setId(id);
+            crafftCtrl.setSelected(crafft);
+            crafftCtrl.update();
+        }
+        
+        
     }
 
     @FacesConverter(forClass = clap.class)

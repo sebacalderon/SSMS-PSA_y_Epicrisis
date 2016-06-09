@@ -15,6 +15,10 @@
         </ui:define> 
 
         <ui:define name="body">
+            <p:growl id="msgs" showDetail="true" />
+            <h:form>
+                <p:poll interval="30" listener="#{clapController.autosave()}" immediate="true" update="msgs"/>
+            </h:form>
             <h:form>
             <p:breadCrumb>
                 <p:menuitem value="Categories" url="/faces/home.xhtml" />
@@ -31,7 +35,7 @@
                 <h2 align="center">#{bundle.EditclapTitle}</h2>
             </b:row>
             <h:form id="clapEditForm" rendered="#{clapController.selected != null}">
-               <b:panel id="panel1" title="Ficha personal del paciente" style="margin-left:3%;width: 95%;" look="info">
+                <b:panel id="panel1" title="Ficha personal del paciente" style="margin-left:3%;width: 95%;" look="info">
                     <div style="margin-left:20px;">
                         <b:row>
                             <b:column col-md="6" col-xs="12">
@@ -298,6 +302,7 @@
                             <f:selectItem itemLabel="pareja" itemValue="pareja" />
                             <f:selectItem itemLabel="pariente" itemValue="pariente" />
                             <f:selectItem itemLabel="otro" itemValue="otro" />
+                            <p:ajax event="valueChange"  immediate="true" ></p:ajax>
                         </p:selectOneRadio>
                     </p:column>
                     <p:column rowspan="4">
