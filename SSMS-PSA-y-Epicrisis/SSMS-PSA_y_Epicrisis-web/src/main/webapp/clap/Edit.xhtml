@@ -17,7 +17,7 @@
         <ui:define name="body">
             <p:growl id="msgs" showDetail="true" />
             <h:form>
-                <p:poll interval="30" listener="#{clapController.autosave()}" immediate="true" update="msgs"/>
+                <p:poll interval="150" listener="#{clapController.autosave()}" immediate="true" update="msgs"/>
             </h:form>
             <h:form>
             <p:breadCrumb>
