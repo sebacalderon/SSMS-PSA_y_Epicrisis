@@ -1,6 +1,7 @@
 package managedbeans;
 
 import entities.Crafft;
+import entities.clap;
 import managedbeans.util.JsfUtil;
 import managedbeans.util.JsfUtil.PersistAction;
 import sessionbeans.CrafftFacadeLocal;
@@ -67,6 +68,12 @@ public class CrafftController implements Serializable {
         return selected;
     }
 
+    public List<Crafft> getItemsPorClap(clap clap) {
+        List<Crafft> itemsPorClap;
+        itemsPorClap = getFacade().findbyClap(clap);
+        return itemsPorClap;
+    }
+    
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("CrafftCreated"));
         if (!JsfUtil.isValidationFailed()) {

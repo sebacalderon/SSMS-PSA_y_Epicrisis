@@ -6,6 +6,7 @@
 package sessionbeans;
 
 import entities.Crafft;
+import entities.clap;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -27,6 +28,7 @@ public interface CrafftFacadeLocal {
     List<Crafft> findAll();
 
     List<Crafft> findRange(int[] range);
+    List<Crafft> findbyClap(clap clap);
 
     int count();
     

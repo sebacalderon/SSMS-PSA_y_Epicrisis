@@ -1,6 +1,7 @@
 package managedbeans;
 
 import entities.audit;
+import entities.clap;
 import managedbeans.util.JsfUtil;
 import managedbeans.util.JsfUtil.PersistAction;
 import sessionbeans.auditFacadeLocal;
@@ -90,6 +91,12 @@ public class auditController implements Serializable {
         return items;
     }
 
+    public List<audit> getItemsPorClap(clap clap) {
+        List<audit> itemsPorClap;
+        itemsPorClap = getFacade().findbyClap(clap);
+        return itemsPorClap;
+    }
+    
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();

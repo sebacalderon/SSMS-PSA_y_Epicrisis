@@ -6,6 +6,7 @@
 package sessionbeans;
 
 import entities.audit;
+import entities.clap;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -28,6 +29,8 @@ public interface auditFacadeLocal {
 
     List<audit> findRange(int[] range);
 
+    List<audit> findbyClap(clap clap);
+    
     int count();
     
 }

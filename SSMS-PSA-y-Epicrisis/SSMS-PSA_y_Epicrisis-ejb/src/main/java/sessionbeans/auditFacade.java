@@ -6,9 +6,12 @@
 package sessionbeans;
 
 import entities.audit;
+import entities.clap;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,4 +32,11 @@ public class auditFacade extends AbstractFacade<audit> implements auditFacadeLoc
         super(audit.class);
     }
     
+    @Override
+    public List<audit> findbyClap(clap clap) {
+        Query query;
+        query = em.createNamedQuery("audit.findbyClap").
+                setParameter("clap",clap);
+        return query.getResultList();
+    }
 }
