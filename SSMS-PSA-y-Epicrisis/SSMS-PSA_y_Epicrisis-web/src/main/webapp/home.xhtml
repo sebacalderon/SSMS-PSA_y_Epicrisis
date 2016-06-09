@@ -15,30 +15,36 @@
 
         <ui:define name="body">
             <h:form>
-            <p:breadCrumb>
-                <p:menuitem value="Categories" url="/faces/home.xhtml" />
-            </p:breadCrumb>
+                <p:breadCrumb>
+                    <p:menuitem value="Categories" url="/faces/home.xhtml" />
+                </p:breadCrumb>
                 <br />
             </h:form>
             <h1 align="center">Bienvenido/a #{loginController.getUsuarioLogueado().nombres} #{loginController.getUsuarioLogueado().primer_apellido}</h1>
             <h2 align="center ">al sistema del Programa Social Adolescente.</h2>
             <br />
             <h:form rendered="#{loginController.esPrimerLogin()}">
-            <h4 align="center">Al ser éste su primer acceso al sistema, debe cambiar la contraseña que se le asignó por defecto (4 primeros dígitos de su RUN):</h4>
-                <h:panelGroup id="display" >
-                    <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
-                    
-                    <p:outputLabel value="#{bundle.CreateUsuarioLabel_password}" for="password" />
-                    <p:password id="password" value="#{usuarioController.pass}" title="#{bundle.CreateUsuarioTitle_password}" required="true" />    
-                    
-                    <p:outputLabel value="Repita Contraseña" for="repeat" />
-                    <p:password id="repeat" value="#{usuarioController.pass_repeat}" title="#{bundle.CreateUsuarioTitle_password}" required="true" />    
-                    
-                    </p:panelGrid>
-                    <b:commandButton actionListener="#{usuarioController.login_uno}" value="#{bundle.Save}"/>
-                </h:panelGroup>
+                <h4 align="center">Al ser éste su primer acceso al sistema, debe cambiar la contraseña que se le asignó por defecto (4 primeros dígitos de su RUN):</h4>
+                <b:row>
+                    <b:column offset="4" col-xs="12" col-md="4">
+                        <b:panel title="Cambio de contraseña" look="warning">
+                            <h:panelGroup id="display" >
+                                <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
+
+                                <p:outputLabel value="#{bundle.CreateUsuarioLabel_password}" for="password" />
+                                <p:password id="password" value="#{usuarioController.pass}" title="#{bundle.CreateUsuarioTitle_password}" required="true" />    
+
+                                <p:outputLabel value="Repita Contraseña" for="repeat" />
+                                <p:password id="repeat" value="#{usuarioController.pass_repeat}" title="#{bundle.CreateUsuarioTitle_password}" required="true" />    
+
+                                </p:panelGrid>
+                                <b:commandButton actionListener="#{usuarioController.login_uno}" value="#{bundle.Save}"/>
+                            </h:panelGroup>
+                        </b:panel>
+                    </b:column>
+                </b:row>
             </h:form>
-            <br/>
+            <br/><br/>
             <h:form>
             <b:panel title="Fichas CLAPS no terminadas" look="danger">
                 <p:dataTable id="datalist" value="#{clapController.getItemsPorEstado(1, loginController.usuarioLogueado.CESFAM)}" var="item"
@@ -92,7 +98,59 @@
                     </p:dataTable>
             </b:panel>
             </h:form>
-            
+            <br />
+            <h:form id="pacienteListForm">
+                <b:panel title="Pacientes en riesgo, sin actividades de intervención" look="danger">
+                    <p:dataTable id="datalist2" value="#{pacienteController.getItemsRiesgoHome(1)}" var="item"
+                                 selectionMode="single" selection="#{pacienteController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+                        <p:ajax event="rowSelect"   update=" viewButton"/>
+                        <p:ajax event="rowUnselect" update=" viewButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_RUN}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.RUN}-#{item.DV}"/>
+                        </p:column>
+                        
+                        <p:column styleClass="tabla">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_nombre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombres} #{item.primer_apellido} #{item.segundo_apellido}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_nacionalidad}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nacionalidad.nombre}"/>
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_fecha_nacimiento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fecha_nacimiento}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListpacienteTitle_estado}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.estado}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="viewButton" icon="ui-icon-search" value="#{bundle.View}" disabled="#{empty pacienteController.selected}" action="/paciente/View?faces-redirect=true"/>
+                        </f:facet>
+                    </p:dataTable>
+                </b:panel>
+            </h:form>
             <br />
             <br />
             

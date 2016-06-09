@@ -1,5 +1,6 @@
 package managedbeans;
 
+import entities.cesfam;
 import entities.comuna;
 import entities.nacionalidad;
 import entities.paciente;
@@ -11,6 +12,8 @@ import sessionbeans.pacienteFacadeLocal;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -36,6 +39,7 @@ public class pacienteController implements Serializable {
     private paciente selected;
     private int RUN;
     private String DV;
+    private List<paciente> itemsRiesgo = null;
     
     @Inject
     private LoginController loginCtrl;
@@ -142,6 +146,7 @@ public class pacienteController implements Serializable {
                 
         if (flag) {
             selected.setEstado("Ingresado");
+            selected.setFecha_estado(new java.util.Date());
             persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("pacienteCreated"));
             if (!JsfUtil.isValidationFailed()) {
                 items = null;    // Invalidate list of items to trigger re-query.
@@ -150,11 +155,12 @@ public class pacienteController implements Serializable {
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: el RUN ingresado no es válido",  "El rut ingresado no es válido.") );
             return "/faces/paciente/Create.xhtml";
-        }   
+        }
     }
 
     public void agendarActividad() {
         selected.setEstado("Actividad agendada");
+        selected.setFecha_estado(new java.util.Date());
         clapCtrl.setActividadElegida(true);
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
     }
@@ -172,6 +178,32 @@ public class pacienteController implements Serializable {
         }
     }
 
+    public List<paciente> getItemsRiesgoHome(int num) {
+        //Si es super usuario, no hay filtro por cesfam
+        Date fecha = new java.util.Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(fecha);
+        c.add(Calendar.DATE, -60);
+        fecha = c.getTime();
+        
+        if (loginCtrl.esSuperUsuario()) {
+            if (num == 1) {
+               itemsRiesgo = getFacade().findbyEstadoFecha("Actividad agendada", fecha);
+               System.out.println(itemsRiesgo);
+               return itemsRiesgo;
+           }else{
+               return itemsRiesgo;
+           }   
+        }else{
+            if (num == 1) {
+                itemsRiesgo = getFacade().findbyEstadoCesfamFecha("Actividad agendada", loginCtrl.getUsuarioLogueado().getCESFAM(),fecha);
+                System.out.println(itemsRiesgo);
+                return itemsRiesgo;
+            }else{
+                return itemsRiesgo;
+            }
+        }
+    }
     
     public List<paciente> getItems() {
         if (items == null) {
@@ -274,6 +306,7 @@ public class pacienteController implements Serializable {
 
     public void riesgosSinResolver() {
         selected.setEstado("Riesgos sin resolver");
+        selected.setFecha_estado(new java.util.Date());
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
     }
     
