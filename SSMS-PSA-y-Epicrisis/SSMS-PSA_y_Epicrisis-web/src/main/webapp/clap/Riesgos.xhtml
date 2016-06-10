@@ -196,7 +196,7 @@
                 </div>
             </b:row>
             </h:form>
-            <b:row rendered="#{ clapController.esIncompleto() and not loginController.esSuperUsuario()}">
+            <b:row rendered="#{not clapController.esIncompleto() and not loginController.esSuperUsuario()}">
                   <h2 align="center">Actividades de intervención</h2>
                   
                  <h:form id="actividadListForm">
