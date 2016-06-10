@@ -277,7 +277,7 @@
                 <p:panelGrid columns="2" style="width:98%;border:10px;" rendered="#{clapController.selected != null}">
                     <p:column rowspan="2">
                         <p:outputLabel value="#{bundle.CreateclapLabel_fecha_consulta}" for="fecha_consulta" />
-                        <p:calendar id="fecha_consulta" pattern="dd/MM/yyyy" value="#{clapController.selected.fecha_consulta}" title="#{bundle.EditclapTitle_fecha_consulta}" disabled="true"/>
+                        <p:calendar id="fecha_consulta" pattern="dd/MM/yyyy" value="#{clapController.selected.fecha_consulta}" title="#{bundle.EditclapTitle_fecha_consulta}" />
                     </p:column>
                     <p:column rowspan="2">
                         <b:row>
@@ -1953,8 +1953,8 @@
                 </b:row>
 
                 <b:column offset-xs="5">
-                     <p:commandButton action="#{clapController.update}" value="#{bundle.Save}"/>
-                     <p:button  value="#{bundle.Cancel}" outcome="/paciente/List" /> 
+                     <p:commandButton action="#{clapController.update}" value="#{bundle.Save}" oncomplete="/paciente/List"/>
+                     <p:button  value="#{bundle.Cancel}" outcome="/paciente/View" /> 
                      <br/><br/>
                 </b:column>
             </h:form>

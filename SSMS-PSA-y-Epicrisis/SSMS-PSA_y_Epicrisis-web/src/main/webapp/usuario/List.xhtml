@@ -56,6 +56,12 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUsuarioTitle_CESFAM}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.CESFAM.nombre}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsuarioTitle_activo}"/>
                             </f:facet>
                             <h:outputText value="Habilitado" rendered="#{item.habilitado}"/>

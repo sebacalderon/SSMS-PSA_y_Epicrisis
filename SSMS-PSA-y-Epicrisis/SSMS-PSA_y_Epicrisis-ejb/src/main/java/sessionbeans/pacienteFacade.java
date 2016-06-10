@@ -5,7 +5,10 @@
  */
 package sessionbeans;
 
+import entities.cesfam;
+import entities.clap;
 import entities.paciente;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -36,6 +39,22 @@ public class pacienteFacade extends AbstractFacade<paciente> implements paciente
         Query query;
         query = em.createNamedQuery("paciente.findbyRUN").
                 setParameter("RUN",RUN);
+        return query.getResultList();
+    }
+    
+    @Override
+    public List<paciente> findbyEstadoCesfamFecha(String estado, cesfam cesfam, Date fecha){
+        Query query;
+        query = em.createNamedQuery("paciente.findbyEstadoCesfamFecha").
+                setParameter("estado", estado).setParameter("cesfam", cesfam).setParameter("fecha", fecha);
+        return query.getResultList();
+    }
+    
+    @Override
+    public List<paciente> findbyEstadoFecha(String estado, Date fecha) {
+        Query query;
+        query = em.createNamedQuery("paciente.findbyEstadoFecha").
+                setParameter("estado", estado).setParameter("fecha", fecha);
         return query.getResultList();
     }
 }

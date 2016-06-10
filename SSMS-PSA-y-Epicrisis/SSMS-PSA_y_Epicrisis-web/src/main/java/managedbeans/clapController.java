@@ -2,6 +2,7 @@ package managedbeans;
 
 import entities.Crafft;
 import entities.audit;
+import entities.cesfam;
 import entities.clap;
 import entities.comuna;
 import entities.paciente;
@@ -11,6 +12,8 @@ import sessionbeans.clapFacadeLocal;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -33,6 +36,7 @@ public class clapController implements Serializable {
     private sessionbeans.clapFacadeLocal ejbFacade;
     private List<clap> items = null;
     private List<clap> itemsPorPaciente = null;
+    private List<clap> itemsNoTerminados = null;
     private clap selected;
     private paciente Paciente = null;
     private boolean auditCrafft = false;
@@ -78,7 +82,46 @@ public class clapController implements Serializable {
 
     public List<clap> getItemsPorPaciente(int RUN) {
         itemsPorPaciente = getFacade().findbyPaciente(RUN);
+        Date fecha = new java.util.Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(fecha);
+        c.add(Calendar.DATE, -60);
+        fecha = c.getTime();
+        List<clap> itemsIncompletos = getFacade().findbyPacienteEstado(RUN, "Incompleto");
+        for (clap clap : itemsIncompletos) {
+            if (clap.getFecha_consulta().before(fecha)) {
+                clap.setEstado("Anulado");
+                selected = clap;
+                persist(PersistAction.UPDATE,"");
+            }
+        }
         return itemsPorPaciente;
+    }
+    
+    public List<clap> getItemsPorEstado(int num, cesfam cesfam) {
+        //Si es super usuario, no hay filtro por cesfam
+        Date fecha = new java.util.Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(fecha);
+        c.add(Calendar.DATE, -60);
+        fecha = c.getTime();
+        
+        if (loginCtrl.esSuperUsuario()) {
+            // 1 = Incompleto
+            if (num == 1) {
+               itemsNoTerminados = getFacade().findbyEstadoFecha("Incompleto", fecha);
+               return itemsNoTerminados;
+           }else{
+               return itemsNoTerminados;
+           }   
+        }else{
+            if (num == 1) {
+                itemsNoTerminados = getFacade().findbyEstadoCesfamFecha("Incompleto", loginCtrl.getUsuarioLogueado().getCESFAM(),fecha);
+                return itemsNoTerminados;
+            }else{
+                return itemsNoTerminados;
+            }
+        }
     }
 
     public void setItemsPorPaciente(List<clap> itemsPorPaciente) {
@@ -420,19 +463,18 @@ public class clapController implements Serializable {
         if(selected.isVive_con_solo()||selected.isVive_en_institucion()||selected.getPercepcion_familia()>2||selected.isDesercion_exclusion()){
             selected.setRiesgo_social(true);
         }
-        System.out.println("Riesgo cardiovascular: "+selected.isRiesgo_cardiovascular());
-        System.out.println("Riesgo nutricional: "+selected.isRiesgo_nutricional());
-        System.out.println("Riesgo OH drogas: "+selected.isRiesgo_oh_drogas());
-        System.out.println("Riesgo salud mental: "+selected.isRiesgo_salud_mental());
-        System.out.println("Riesgo social: "+selected.isRiesgo_social());
-        System.out.println("Riesgo ssr: "+selected.isRiesgo_ssr());
-        
+//        System.out.println("Riesgo cardiovascular: "+selected.isRiesgo_cardiovascular());
+//        System.out.println("Riesgo nutricional: "+selected.isRiesgo_nutricional());
+//        System.out.println("Riesgo OH drogas: "+selected.isRiesgo_oh_drogas());
+//        System.out.println("Riesgo salud mental: "+selected.isRiesgo_salud_mental());
+//        System.out.println("Riesgo social: "+selected.isRiesgo_social());
+//        System.out.println("Riesgo ssr: "+selected.isRiesgo_ssr());
+//        
         //Guarda localmente el clap selected
         clap nuevoClap = getSelected();
 
         List<clap> claps = getItemsPorPaciente(pacienteCtrl.getSelected().getRUN());
         if(claps.size()>=1){
-            System.out.println("Eziste mas de 1 clap");
             for(int i=0;i<claps.size();i++){
                 if(claps.get(i).getEstado().equals("Vigente")){
                     setSelected(claps.get(i));
@@ -887,6 +929,10 @@ public class clapController implements Serializable {
         selected.setGrupo_fonasa(Paciente.getGrupo_fonasa());
         selected.setEstado_conyugal(Paciente.getEstado_conyugal());
         selected.setPueblo_originario(Paciente.getPueblo_originario());
+        //Para probar con CLAP de hace mas de 2 meses
+//        Calendar cal = Calendar.getInstance();
+//        cal.add(Calendar.DATE, -61);
+//        Date fecha = cal.getTime();
         selected.setFecha_consulta(new java.util.Date());
         selected.setEdad(selected.getFecha_consulta().getYear()-Paciente.getFecha_nacimiento().getYear());
         puntajeACrafft = 0;

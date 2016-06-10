@@ -5,7 +5,9 @@
  */
 package sessionbeans;
 
+import entities.cesfam;
 import entities.clap;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -39,4 +41,27 @@ public class clapFacade extends AbstractFacade<clap> implements clapFacadeLocal 
         return query.getResultList();
     }
     
+    @Override
+    public List<clap> findbyEstadoFecha(String estado, Date fecha) {
+        Query query;
+        query = em.createNamedQuery("clap.findbyEstadoFecha").
+                setParameter("estado", estado).setParameter("fecha", fecha);
+        return query.getResultList();
+    }
+    
+    @Override
+    public List<clap> findbyEstadoCesfamFecha(String estado, cesfam cesfam, Date fecha){
+        Query query;
+        query = em.createNamedQuery("clap.findbyEstadoCesfamFecha").
+                setParameter("estado", estado).setParameter("cesfam", cesfam).setParameter("fecha", fecha);
+        return query.getResultList();
+    }
+    
+    @Override
+    public List<clap> findbyPacienteEstado(int RUN, String estado) {
+        Query query;
+        query = em.createNamedQuery("clap.findbyPacienteEstado").
+                setParameter("RUN",RUN).setParameter("estado", estado);
+        return query.getResultList();
+    }
 }

@@ -30,7 +30,9 @@ import javax.validation.constraints.Pattern;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name="paciente.findbyRUN",query="SELECT p FROM paciente p WHERE p.RUN=:RUN")
+    @NamedQuery(name="paciente.findbyRUN",query="SELECT p FROM paciente p WHERE p.RUN=:RUN"),
+    @NamedQuery(name="paciente.findbyEstadoFecha",query="SELECT p FROM paciente p WHERE p.estado=:estado AND p.fecha_estado >= :fecha"),
+    @NamedQuery(name="paciente.findbyEstadoCesfamFecha",query="SELECT p FROM paciente p WHERE p.estado=:estado AND p.cesfam=:cesfam AND p.fecha_estado >= :fecha")
 })
 public class paciente implements Serializable {
 
@@ -139,6 +141,10 @@ public class paciente implements Serializable {
     @Column(name="estado_paciente")
     private String estado;
     
+    @Temporal(TemporalType.DATE)
+    @Column(name="fecha_estado_paciente")
+    private java.util.Date fecha_estado;
+    
     @OneToMany(mappedBy = "paciente", fetch = FetchType.EAGER)
     private List<clap> CLAPS;
 
@@ -156,6 +162,14 @@ public class paciente implements Serializable {
     
     public void setNombre_social(String nombre_social) {
         this.nombre_social = nombre_social;
+    }
+
+    public java.util.Date getFecha_estado() {
+        return fecha_estado;
+    }
+
+    public void setFecha_estado(java.util.Date fecha_estado) {
+        this.fecha_estado = fecha_estado;
     }
     
     public Long getId() {
