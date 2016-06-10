@@ -159,7 +159,7 @@ public class pacienteController implements Serializable {
     }
 
     public void agendarActividad() {
-        selected.setEstado("Actividad agendada");
+        selected.setEstado("Riesgos no Tratados");
         selected.setFecha_estado(new java.util.Date());
         clapCtrl.setActividadElegida(true);
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
@@ -188,16 +188,14 @@ public class pacienteController implements Serializable {
         
         if (loginCtrl.esSuperUsuario()) {
             if (num == 1) {
-               itemsRiesgo = getFacade().findbyEstadoFecha("Actividad agendada", fecha);
-               System.out.println(itemsRiesgo);
+               itemsRiesgo = getFacade().findbyEstadoFecha("Riesgos no Tratados", fecha);
                return itemsRiesgo;
            }else{
                return itemsRiesgo;
            }   
         }else{
             if (num == 1) {
-                itemsRiesgo = getFacade().findbyEstadoCesfamFecha("Actividad agendada", loginCtrl.getUsuarioLogueado().getCESFAM(),fecha);
-                System.out.println(itemsRiesgo);
+                itemsRiesgo = getFacade().findbyEstadoCesfamFecha("Riesgos no Tratados", loginCtrl.getUsuarioLogueado().getCESFAM(),fecha);
                 return itemsRiesgo;
             }else{
                 return itemsRiesgo;
