@@ -977,6 +977,8 @@ public class clapController implements Serializable {
         if (resp){
             if (cont == 1) {
                 auditCrafft = false;
+                selected.setCrafft(null);
+                selected.setAudit(null);
             }
         }else{
             if (auditCrafft == false) {
