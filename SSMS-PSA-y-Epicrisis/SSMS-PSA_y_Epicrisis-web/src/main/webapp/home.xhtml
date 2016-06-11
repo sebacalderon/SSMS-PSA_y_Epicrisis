@@ -100,7 +100,7 @@
             </h:form>
             <br />
             <h:form id="pacienteListForm">
-                <b:panel title="Pacientes en riesgo, sin actividades de intervención" look="danger">
+                <b:panel title="Pacientes en riesgo, con actividades de intervención pendientes" look="danger">
                     <p:dataTable id="datalist2" value="#{pacienteController.getItemsRiesgoHome(1)}" var="item"
                                  selectionMode="single" selection="#{pacienteController.selected}"
                                  paginator="true"
