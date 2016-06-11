@@ -88,6 +88,10 @@ public class clapController implements Serializable {
         return chart;
     }
 
+    public void setChart(StreamedContent chart) {
+        this.chart = chart;
+    }
+    
     public int getPuntajeACrafft() {
         return puntajeACrafft;
     }
@@ -195,7 +199,7 @@ public class clapController implements Serializable {
         return selected;
     }
     
-    public clap prepareEdit(){
+    public clap prepareEdit() throws FileNotFoundException{
         selected = getSelected();
         if (selected.getAudit()==null) {
             isAudit = false;
@@ -229,6 +233,12 @@ public class clapController implements Serializable {
     public clap prepareRiesgos(){
         selected = getSelected();
         return selected;
+    }
+    
+    public StreamedContent cargarImagen() throws FileNotFoundException{
+        File chartFile = new File(selected.getDiagrama_familiar());
+        setChart(new DefaultStreamedContent(new FileInputStream(chartFile), "image/png"));
+        return chart;
     }
 
     public String create() {
@@ -296,13 +306,6 @@ public class clapController implements Serializable {
             selected.setImc((float) (selected.getPeso()/Math.pow((float)selected.getTalla()/100,2)));
         }
         
-    }
-    
-    public void cargarImagen() throws FileNotFoundException{
-        if (selected.getDiagrama_familiar()!=null) {
-            File chartFile = new File(selected.getDiagrama_familiar());
-            chart = new DefaultStreamedContent(new FileInputStream(chartFile), "image/png");
-        }
     }
 
     public boolean isActividadElegida() {
