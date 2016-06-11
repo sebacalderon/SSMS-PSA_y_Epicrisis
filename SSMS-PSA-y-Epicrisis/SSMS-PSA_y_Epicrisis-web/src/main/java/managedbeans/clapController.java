@@ -5,11 +5,22 @@ import entities.audit;
 import entities.clap;
 import entities.comuna;
 import entities.paciente;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import managedbeans.util.JsfUtil;
 import managedbeans.util.JsfUtil.PersistAction;
 import sessionbeans.clapFacadeLocal;
 
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -19,12 +30,17 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.imageio.ImageIO;
 import javax.inject.Inject;
+import org.apache.commons.io.FilenameUtils;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+import org.primefaces.model.UploadedFile;
 
 @Named("clapController")
 @SessionScoped
@@ -40,7 +56,9 @@ public class clapController implements Serializable {
     private boolean isAudit = false;
     private boolean isCrafft = false;
     private int puntajeACrafft;
-
+    private UploadedFile imagen = null;
+    private StreamedContent chart;
+    
     boolean vive_solo=false;
     boolean vive_en_institucion=false;
     boolean vive_con_madre=false;
@@ -49,7 +67,7 @@ public class clapController implements Serializable {
     
     boolean actividadElegida=false;
 
-    private int number;
+    private int minutos = 10;
     
     @Inject
     private pacienteController pacienteCtrl;
@@ -66,12 +84,24 @@ public class clapController implements Serializable {
     public clapController() {
     }
 
+    public StreamedContent getChart() {
+        return chart;
+    }
+
     public int getPuntajeACrafft() {
         return puntajeACrafft;
     }
 
     public void setPuntajeACrafft(int puntajeACrafft) {
         this.puntajeACrafft = puntajeACrafft;
+    }
+
+    public UploadedFile getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(UploadedFile imagen) {
+        this.imagen = imagen;
     }
 
     public boolean isIsAudit() {
@@ -106,6 +136,11 @@ public class clapController implements Serializable {
     public void setPaciente(paciente Paciente) {
         this.Paciente = Paciente;
     }
+    
+    public void upload(FileUploadEvent event) {
+        UploadedFile uploadedFile = event.getFile();
+        setImagen(uploadedFile);
+    }
 
     public boolean isAuditCrafft() {
         return auditCrafft;
@@ -119,6 +154,14 @@ public class clapController implements Serializable {
         return selected;
     }
 
+    public int getMinutos() {
+        return minutos;
+    }
+
+    public void setMinutos(int minutos) {
+        this.minutos = minutos;
+    }
+    
     public void setSelected(clap selected) {
         vive_solo=false;
         vive_en_institucion=false;
@@ -152,17 +195,7 @@ public class clapController implements Serializable {
         return selected;
     }
     
-    public int getNumber() {
-        return number;
-    }
- 
-    public void increment() {
-        number++;
-        autosave();
-        
-    }
-    
-    public clap prepareEdit() {
+    public clap prepareEdit(){
         selected = getSelected();
         if (selected.getAudit()==null) {
             isAudit = false;
@@ -264,6 +297,13 @@ public class clapController implements Serializable {
         }
         
     }
+    
+    public void cargarImagen() throws FileNotFoundException{
+        if (selected.getDiagrama_familiar()!=null) {
+            File chartFile = new File(selected.getDiagrama_familiar());
+            chart = new DefaultStreamedContent(new FileInputStream(chartFile), "image/png");
+        }
+    }
 
     public boolean isActividadElegida() {
         return actividadElegida;
@@ -320,7 +360,7 @@ public class clapController implements Serializable {
         
     }
     
-    public String update() {
+    public String update() throws IOException {
         boolean completo=false;
         //Verifica si completa el clap
         if( selected.getPerinatales_normales()!=0&&
@@ -552,6 +592,36 @@ public class clapController implements Serializable {
             crafft.setId(id);
             crafftCtrl.setSelected(crafft);
             crafftCtrl.update();
+        }
+        List<clap> claps = getItemsPorPaciente(pacienteCtrl.getSelected().getRUN());
+        selected = claps.get(claps.size()-1);
+        ////////////////
+        //Imagen
+        ////////////////
+        if (imagen!=null) {
+            
+            Path folder = Paths.get("C:/genogramas");
+            String filename = "Clap "+selected.getId();
+            String extension = FilenameUtils.getExtension(imagen.getFileName());
+            Path file = Files.createTempFile(folder, filename + "-", "." + extension);
+            
+            System.out.println(file.getFileName());
+
+            try (InputStream input = imagen.getInputstream()) {
+                Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
+                selected.setDiagrama_familiar("C:/genogramas/"+file.getFileName());
+                getFacade().edit(selected);
+            }
+            File img = new File("C:/genogramas/"+file.getFileName());
+            BufferedImage bimg = ImageIO.read(img);
+            int type = bimg.getType() == 0? BufferedImage.TYPE_INT_ARGB : bimg.getType();
+            
+            
+            System.out.println("Imagen mayor a 1MB");
+            BufferedImage resizeImagePng = resizeImage(bimg, type);
+            ImageIO.write(resizeImagePng, "jpg", new File("C:/genogramas/"+file.getFileName())); 
+
+            System.out.println("Uploaded file successfully saved in " + file);
         }
         
         if(completo){
@@ -815,6 +885,15 @@ public class clapController implements Serializable {
         }
         
         
+    }
+
+    private BufferedImage resizeImage(BufferedImage bimg, int type) {
+        BufferedImage resizedImage = new BufferedImage(400, 400, type);
+	Graphics2D g = resizedImage.createGraphics();
+	g.drawImage(bimg, 0, 0, 400, 400, null);
+	g.dispose();
+		
+	return resizedImage;
     }
 
     @FacesConverter(forClass = clap.class)

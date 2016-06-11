@@ -17,7 +17,7 @@
         <ui:define name="body">
             <p:growl id="msgs" showDetail="true" />
             <h:form>
-                <p:poll interval="150" listener="#{clapController.autosave()}" immediate="true" update="msgs"/>
+                <p:poll interval="#{60*clapController.minutos}" listener="#{clapController.autosave()}" immediate="true" update="msgs"/>
             </h:form>
             <h:form>
             <p:breadCrumb>
@@ -638,8 +638,13 @@
                             </p:selectOneRadio>
                         </b:column>
                         <b:column col-md="6">
-                            <p:outputLabel value="#{bundle.CreateclapLabel_diagrama_familiar}" for="diagrama_familiar" />
-                            <p:inputText id="diagrama_familiar" value="#{clapController.selected.diagrama_familiar}" title="#{bundle.CreateclapTitle_diagrama_familiar}" />
+                            <h4>Genograma</h4>
+                            <p:fileUpload id="genograma" fileUploadListener="#{clapController.upload}" label="Elegir Imagen" update="messages" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1" invalidFileMessage="Tipo de Archivo Inválido" cancelLabel="Cancelar" skinSimple="false" auto="false" uploadLabel="Subir" rendered="#{clapController.selected.diagrama_familiar == null}"/>        
+                            <p:commandButton value="Ver Imagen" actionListener="#{clapController.cargarImagen()}" type="button" rendered="#{clapController.selected.diagrama_familiar != null}" oncomplete="PF('dlg2').show();"/>
+                            <p:dialog header="Imagen de Genograma" widgetVar="dlg2" modal="true" height="500" width="500">
+                                <p:graphicImage value="#{clapController.chart}" rendered="#{clapController.selected.diagrama_familiar != null}"/>
+                            </p:dialog>
+                            <p:growl id="messages" showDetail="true"/>
                         </b:column>
                     </p:panelGrid>
                     <facet name="footer">
@@ -1958,7 +1963,7 @@
                 </b:row>
 
                 <b:column offset-xs="5">
-                     <p:commandButton action="#{clapController.update}" value="#{bundle.Save}"/>
+                    <p:commandButton action="#{clapController.update}" value="#{bundle.Save}" oncomplete="/paciente/List"/>
                      <p:button  value="#{bundle.Cancel}" outcome="/paciente/List" /> 
                      <br/><br/>
                 </b:column>
