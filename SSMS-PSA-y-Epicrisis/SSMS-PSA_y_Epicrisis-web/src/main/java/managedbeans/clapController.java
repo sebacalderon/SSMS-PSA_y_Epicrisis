@@ -360,14 +360,14 @@ public class clapController implements Serializable {
     }
     
     public boolean esIncompleto(){
-        if(selected!=null){
+        if(selected!=null && selected.getId()!=null){
             return selected.getEstado().equals("Incompleto");
         }
         return true;
     }
     
     public boolean esAnulado(){
-        if(selected!=null){
+        if(selected!=null && selected.getId()!=null){
             return selected.getEstado().equals("Anulado");
         }
         return true;
