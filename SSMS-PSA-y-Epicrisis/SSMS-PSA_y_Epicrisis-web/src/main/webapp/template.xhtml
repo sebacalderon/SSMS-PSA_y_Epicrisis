@@ -17,19 +17,15 @@
         </p:graphicImage>
         <p:graphicImage library="img" name="banner.jpg" style="width:91% !important;height:auto;">
         </p:graphicImage>
-        <b:navBar brand="SSMS P.I.S.A." brandAlign="left">
+        <b:navBar brand="SSMS P.S.I.A." brandAlign="left">
             <b:navbarLinks rendered="#{not loginController.verifyLogin()}">
                 <b:navLink value="#{bundle.Home}" outcome="/index" icon="glyphicon glyphicon-home"/>
             </b:navbarLinks>
             <b:navbarLinks rendered="#{loginController.verifyLogin()}">
                 <b:navLink  value="#{bundle.Home}" outcome="/home" icon="glyphicon glyphicon-home"/>
-                <b:dropMenu value="#{bundle.seccion1}">
-                    <b:navLink value="Cambio de contraseña" outcome="/perfilUsuario/cambio_pass.xhtml" />
-                </b:dropMenu>
                 <b:dropMenu value="Usuarios">
                     <b:navLink value="Población bajo control" outcome="/paciente/List.xhtml" />
                     <b:navLink value="Búsqueda por RUN" outcome="/paciente/Buscar.xhtml" />
-                    <b:navLink value="Formulario de Actividades de intervención" outcome="/en_construccion.xhtml" />
                 </b:dropMenu>
                 <b:navLink value="#{bundle.seccion3}" outcome="/en_construccion.xhtml" rendered="#{loginController.esFuncionario()}" />
                 <b:dropMenu value="#{bundle.seccion4}">
@@ -43,14 +39,19 @@
                 </b:dropMenu>
             </b:navbarLinks>
             <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
+
             <b:navbarLinks pull="right">
-                <h:form rendered="#{loginController.verifyLogin()}">
-                    <b:row>
-                        <b:column style="padding-top: 8px">
-                            <b:commandButton size="large" look="Info" value="${bundle.submit_logout}" style="vertical-align: central;" action="#{loginController.logout}"  icon="glyphicon glyphicon-off" />
-                        </b:column>
-                    </b:row>
-                </h:form>
+                <b:dropMenu value="Perfil #{loginController.getUsuarioLogueado().nombres} #{loginController.getUsuarioLogueado().primer_apellido}" rendered="#{loginController.getUsuarioLogueado()!=null}">
+                    <b:navLink value="Cambio de contraseña" outcome="/perfilUsuario/cambio_pass.xhtml" />
+                </b:dropMenu>
+                    <b:column col-xs="6">
+                        <h:form rendered="#{loginController.verifyLogin()}">
+                            <div style="padding-top: 8px">
+                                <b:commandButton size="large" look="Info" value="${bundle.submit_logout}" style="vertical-align: central;" action="#{loginController.logout}"  icon="glyphicon glyphicon-off" />
+                            </div>
+                        </h:form>
+                    </b:column>
+                
             </b:navbarLinks>
         </b:navBar>
     </h:head>
