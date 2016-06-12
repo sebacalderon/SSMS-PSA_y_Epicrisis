@@ -77,7 +77,7 @@
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{pacienteController.prepareCreate}" action="/paciente/Create?faces-redirect=true" rendered="#{loginController.esFuncionario()}"/>
-                            <p:commandButton id="createClap" icon="ui-icon-plus"   value="Crear Clap" actionListener="#{clapController.prepareClap(pacienteController.selected)}" action="/clap/Create?faces-redirect=true" rendered="#{loginController.esFuncionario()}" disabled="#{empty pacienteController.selected}"/>
+                            <p:commandButton id="createClap" icon="ui-icon-plus"   value="Crear Clap" action="#{clapController.create()}" rendered="#{loginController.esFuncionario()}" disabled="#{empty pacienteController.selected}"/>
                             <p:commandButton id="viewButton" icon="ui-icon-search" value="#{bundle.View}" disabled="#{empty pacienteController.selected}" action="/paciente/View?faces-redirect=true"/>
                             <p:commandButton id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{pacienteController.prepareEdit}" action="/paciente/Edit?faces-redirect=true" disabled="#{empty pacienteController.selected}" rendered="#{loginController.esFuncionario()}"/>
                         </f:facet>
