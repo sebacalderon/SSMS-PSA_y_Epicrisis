@@ -151,7 +151,7 @@
                             <h:outputText value="#{item.estado}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createClap" icon="ui-icon-plus"   value="Crear Clap" action="#{clapController.create()}" oncomplete="/paciente/List" rendered="#{loginController.esFuncionario()}">
+                            <p:commandButton id="createClap" icon="ui-icon-plus"   value="Crear Clap" action="#{clapController.create()}" oncomplete="/paciente/List" rendered="#{loginController.esFuncionario()}"/>
                             <p:commandButton id="viewButton" icon="ui-icon-search" value="#{bundle.View}" disabled="#{empty clapController.selected || clapController.selected.id == null}" action="/clap/View?faces-redirect=true"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{clapController.prepareEdit}" action="/clap/Edit?faces-redirect=true" disabled="#{empty clapController.selected ||  not clapController.esIncompleto() || clapController.selected.id == null}" rendered="#{loginController.esFuncionario()}"/>
                             <p:commandButton id="desactivateButton" icon="ui-icon-cancel"  value="Anular" actionListener="#{clapController.anular}" update=":growl,datalist"  disabled="#{clapController.esAnulado() || empty clapController.selected}" rendered="#{loginController.esFuncionario()}">
