@@ -2396,7 +2396,62 @@ public class clap implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.clap[ id=" + id + " ]";
+        String clap=new String();
+        //Datos paciente
+        clap.concat(id+",");
+        clap.concat(RUN+"-"+DV+",");
+        clap.concat(nombres+",");
+        clap.concat(primer_apellido+",");
+        clap.concat(segundo_apellido+",");
+        clap.concat(nombre_social+",");
+        clap.concat(telefono_fijo+",");
+        if(domicilio==true){
+            clap.concat("Si,");
+        }else{
+            clap.concat("No,");
+        }
+        clap.concat(telefono_movil+",");
+        clap.concat(recados+",");
+        if(recados==true){
+            clap.concat("Si,");
+        }else{
+            clap.concat("No,");
+        }
+        clap.concat(region_residencia.getNombre()+",");
+        clap.concat(comuna_residencia.getNombre()+",");
+        clap.concat(calle_direccion+",");
+        clap.concat(numero_direccion+",");
+        clap.concat(resto_direccion+",");
+        clap.concat(fecha_nacimiento.toString()+",");
+        if(sexo==1){
+            clap.concat("Hombre,");
+        }else if(sexo==2){
+            clap.concat("Mujer,");
+        }else if(sexo==3){
+            clap.concat("No definido,");
+        }else if(sexo==4){
+            clap.concat("No determinado,");
+        }
+        clap.concat(nacionalidad+",");
+        clap.concat(correo+",");
+        clap.concat(programa_social.getNombre()+",");
+        clap.concat(prevision.getNombre()+",");
+        if(grupo_fonasa==1){
+            clap.concat("A,");
+        }else if(grupo_fonasa==2){
+            clap.concat("B,");
+        }else if(grupo_fonasa==3){
+            clap.concat("C,");
+        }else if(grupo_fonasa==4){
+            clap.concat("D,");
+        }
+        clap.concat(estado_conyugal.getNombre()+",");
+        clap.concat(pueblo_originario.getNombre()+",");
+        
+        //Datos consulta
+        
+        
+        return clap;
     }
     
 }
