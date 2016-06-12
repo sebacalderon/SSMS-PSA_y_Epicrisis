@@ -929,6 +929,8 @@ public class clapController implements Serializable {
         selected.setGrupo_fonasa(Paciente.getGrupo_fonasa());
         selected.setEstado_conyugal(Paciente.getEstado_conyugal());
         selected.setPueblo_originario(Paciente.getPueblo_originario());
+        selected.setDomicilio(Paciente.isDomicilio());
+        selected.setRecados(Paciente.isRecados());
         //Para probar con CLAP de hace mas de 2 meses
 //        Calendar cal = Calendar.getInstance();
 //        cal.add(Calendar.DATE, -61);

@@ -107,8 +107,16 @@ public class clap implements Serializable {
     @Column(name="telefono_fijo_clap")
     private String telefono_fijo;
     
+    @NotNull
+    @Column(name="domicilio_clap")
+    private boolean domicilio;
+    
     @Column(name="telefono_movil_clap")
     private String telefono_movil;  
+    
+    @NotNull
+    @Column(name="recados_clap")
+    private boolean recados;
     
     @NotNull(message="Debe ingresar un sexo")
     @Column(name="sexo_clap")
@@ -156,7 +164,16 @@ public class clap implements Serializable {
     private pueblo_originario pueblo_originario;
     
     //Datos de la consulta
-
+        
+    @Column(name="control_en_clap")
+    private int control_en;
+    
+    @Column(name="hcn_clap")
+    private int hcn;
+    
+    @Column(name="establecimiento_educacional_clap")
+    private String establecimiento_educacional;
+    
     @NotNull
     @Temporal(TemporalType.DATE)
     @Column(name="fecha_consulta_clap")
@@ -551,6 +568,9 @@ public class clap implements Serializable {
     @Column(name="anticoncepcion_clap")
     private int anticoncepcion;
     
+    @Column(name="doble_proteccion_clap")
+    private boolean doble_proteccion;
+    
     @Column(name="uso_mac_clap")
     private int uso_mac;
     
@@ -639,9 +659,15 @@ public class clap implements Serializable {
     @Column(name="agudeza_visual_clap")
     private boolean agudeza_visual;
     
+    @Column(name="agudeza_auditiva_clap")
+    private boolean agudeza_auditiva;
+    
     @Column(name="salud_bucal_clap")
     private boolean salud_bucal;
-     
+    
+    @Column(name="tiroides_clap")
+    private boolean tiroides;
+    
     @Column(name="cardio_pulmonar_clap")
     private boolean cardio_pulmonar;
     
@@ -654,8 +680,6 @@ public class clap implements Serializable {
     @Column(name="extremidades_clap")
     private boolean extremidades;
     
-    @Column(name="otra_area_examen_fisico_clap")
-    private String otra_area_examen_fisico;
     
     @Column(name="tanner_con_foto_clap")
     private boolean tanner_con_foto;
@@ -710,8 +734,6 @@ public class clap implements Serializable {
     public void setAudit(audit audit) {
         this.audit = audit;
     }
-    
-    
 
     public float getImc() {
         return imc;
@@ -755,6 +777,30 @@ public class clap implements Serializable {
 
     public String getMotivo_consulta_adolescente_1() {
         return motivo_consulta_adolescente_1;
+    }
+
+    public boolean isDoble_proteccion() {
+        return doble_proteccion;
+    }
+
+    public void setDoble_proteccion(boolean doble_proteccion) {
+        this.doble_proteccion = doble_proteccion;
+    }
+
+    public boolean isAgudeza_auditiva() {
+        return agudeza_auditiva;
+    }
+
+    public void setAgudeza_auditiva(boolean agudeza_auditiva) {
+        this.agudeza_auditiva = agudeza_auditiva;
+    }
+
+    public boolean isTiroides() {
+        return tiroides;
+    }
+
+    public void setTiroides(boolean tiroides) {
+        this.tiroides = tiroides;
     }
 
     public void setMotivo_consulta_adolescente_1(String motivo_consulta_adolescente_1) {
@@ -1041,6 +1087,23 @@ public class clap implements Serializable {
         this.comparte_cama = comparte_cama;
     }
 
+    public boolean isDomicilio() {
+        return domicilio;
+    }
+
+    public void setDomicilio(boolean domicilio) {
+        this.domicilio = domicilio;
+    }
+
+    public boolean isRecados() {
+        return recados;
+    }
+
+    public void setRecados(boolean recados) {
+        this.recados = recados;
+    }
+    
+
     public String getEspecificacion_comparte_cama() {
         return especificacion_comparte_cama;
     }
@@ -1183,6 +1246,30 @@ public class clap implements Serializable {
 
     public void setCausa_anos_repetidos(String causa_anos_repetidos) {
         this.causa_anos_repetidos = causa_anos_repetidos;
+    }
+
+    public int getControl_en() {
+        return control_en;
+    }
+
+    public void setControl_en(int control_en) {
+        this.control_en = control_en;
+    }
+
+    public int getHcn() {
+        return hcn;
+    }
+
+    public void setHcn(int hcn) {
+        this.hcn = hcn;
+    }
+
+    public String getEstablecimiento_educacional() {
+        return establecimiento_educacional;
+    }
+
+    public void setEstablecimiento_educacional(String establecimiento_educacional) {
+        this.establecimiento_educacional = establecimiento_educacional;
     }
 
     public boolean isProblemas_escuela() {
@@ -1971,13 +2058,6 @@ public class clap implements Serializable {
         this.extremidades = extremidades;
     }
 
-    public String getOtra_area_examen_fisico() {
-        return otra_area_examen_fisico;
-    }
-
-    public void setOtra_area_examen_fisico(String otra_area_examen_fisico) {
-        this.otra_area_examen_fisico = otra_area_examen_fisico;
-    }
 
     public boolean isTanner_con_foto() {
         return tanner_con_foto;

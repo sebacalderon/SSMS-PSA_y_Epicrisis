@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+    <ui:composition template="/template.xhtml">
+
+        <ui:define name="title">
+            <h:outputText value="Cambio de contraseña"></h:outputText>
+        </ui:define> 
+
+        <ui:define name="body">
+            <b:row>
+                <b:column offset="3" col-md="6">
+                    <b:panel title="Cambio de contraseña" look="info">
+                        <h:form id="CambioPassForm">
+                            <b:row>
+                                <b:column col-xs="6"><p:outputLabel value="Contraseña actual:" for="old-password" /></b:column>
+                                <b:column col-xs="6"><p:password id="old-password" value="#{usuarioController.old_password}" title="#{bundle.EditUsuarioTitle_password}" required="true" /></b:column>
+                            </b:row>
+                            <br/>
+                            <b:row>
+                                <b:column col-xs="6"><p:outputLabel value="Nueva contraseña:" for="new-password" /></b:column>
+                                <b:column col-xs="6"><p:password id="new-password" value="#{usuarioController.new_password}" title="#{bundle.EditUsuarioTitle_password}" required="true" /></b:column>
+                            </b:row>
+                            <br/>
+                            <b:column offset="5">
+                            <p:commandButton action="#{usuarioController.cambioPassword()}" value="Guardar cambios" update=":CambioPassForm,:growl">
+                                <p:confirm header="Confirme la habilitación" message="Esta segur@ ?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                            <p:commandButton value="#{bundle.Cancel}" action="/faces/home?faces-redirect=true"/>
+                            </b:column>
+                        </h:form>
+                    </b:panel>
+                </b:column>
+            </b:row>
+        </ui:define>
+        
+    </ui:composition>
+</html>

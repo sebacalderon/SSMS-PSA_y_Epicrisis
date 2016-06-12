@@ -98,8 +98,16 @@ public class paciente implements Serializable {
     @Column(name="telefono_fijo_paciente")
     private String telefono_fijo;
     
+    @NotNull
+    @Column(name="domicilio_paciente")
+    private boolean domicilio;
+    
     @Column(name="telefono_movil_paciente")
     private String telefono_movil;
+    
+    @NotNull
+    @Column(name="recados_paciente")
+    private boolean recados;
     
     @NotNull(message="Debe ingresar un sexo")
     @Column(name="sexo_usuario")
@@ -196,6 +204,22 @@ public class paciente implements Serializable {
         this.RUN = RUN;
     }
 
+    public boolean isDomicilio() {
+        return domicilio;
+    }
+
+    public void setDomicilio(boolean domicilio) {
+        this.domicilio = domicilio;
+    }
+
+    public boolean isRecados() {
+        return recados;
+    }
+
+    public void setRecados(boolean recados) {
+        this.recados = recados;
+    }
+    
     public String getDV() {
         return DV;
     }

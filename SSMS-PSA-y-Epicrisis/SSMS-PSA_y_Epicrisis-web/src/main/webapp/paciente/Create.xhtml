@@ -70,12 +70,28 @@
                             <f:selectItem itemLabel="Seleccione un CESFAM" itemValue="" noSelectionOption="true" />
                             <f:selectItems value="#{cesfamController.items}" var="cesfam" itemLabel="#{cesfam.nombre}" itemValue="#{cesfam}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_telefono_fijo}" for="telefono_fijo" />
-                        <p:inputMask id="telefono_fijo" value="#{pacienteController.selected.telefono_fijo}" title="#{bundle.CreatepacienteTitle_telefono_fijo}" mask="(99) 999-9999" />
-                        
+                        <p:outputLabel value="#{bundle.CreatepacienteTitle_telefono_fijo}" for="telefono_fijo" />
+                        <p:column>
+                            <b:row>
+                                <b:column col-xs="8">
+                                    <p:inputMask id="telefono_fijo" value="#{pacienteController.selected.telefono_fijo}" mask="(99) 999-9999" />
+                                </b:column>
+                                <b:column col-xs="4">
+                                    <p:selectBooleanCheckbox value="#{pacienteController.selected.domicilio}" itemLabel="Domicilio"/>
+                                </b:column>
+                            </b:row>
+                        </p:column>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_teléfono_movil}" for="telefono_movil" />
-                        <p:inputMask id="telefono_movil" value="#{pacienteController.selected.telefono_movil}" title="#{bundle.CreatepacienteTitle_teléfono_movil}" mask="(+569) 9999-9999" />
-                        
+                        <p:column>
+                            <b:row>
+                                <b:column col-xs="8">
+                                    <p:inputMask id="telefono_movil" value="#{pacienteController.selected.telefono_movil}" title="#{bundle.CreatepacienteTitle_telefono_fijo}" mask="(99) 999-9999" />
+                                </b:column>
+                                <b:column col-xs="4">
+                                    <p:selectBooleanCheckbox value="#{pacienteController.selected.recados}" itemLabel="Recados"/>
+                                </b:column>
+                            </b:row>
+                        </p:column>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_correo}" for="correo" />
                         <p:inputText id="correo" value="#{pacienteController.selected.correo}" title="#{bundle.CreatepacienteTitle_correo}" required="true" />
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_sexo}" for="sexo" />
