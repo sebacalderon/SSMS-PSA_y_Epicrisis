@@ -424,8 +424,8 @@ INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesf
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13302, 'Centro de Salud Familiar Recreo', 'Centro de Salud Familiar', 13130)
 
 INSERT INTO rol(codigo_rol, nombre_rol) VALUES (1, 'Super-Usuario')
-INSERT INTO rol(codigo_rol, nombre_rol) VALUES (2, 'Funcionario-CESFAM')
-INSERT INTO rol(codigo_rol, nombre_rol) VALUES (3, 'Empleado-Municipal')
+INSERT INTO rol(codigo_rol, nombre_rol) VALUES (2, 'Funcionario')
+INSERT INTO rol(codigo_rol, nombre_rol) VALUES (3, 'Encargado-Programa')
 
 INSERT INTO usuario( codigo_usuario, rut_usuario, correo_usuario, password_usuario, nombres_usuario, primer_apellido_usuario, segundo_apellido_usuario, rol_usuario, cesfam_usuario, habilitado_usuario, primer_login)VALUES (1001, '18.455.374-0', 'pablo.salinasc@usach.cl', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Pablo Javier', 'Salinas', 'Cabañas', 1, 13300, true, true)
 INSERT INTO usuario( codigo_usuario, rut_usuario, correo_usuario, password_usuario, nombres_usuario, primer_apellido_usuario, segundo_apellido_usuario, rol_usuario, cesfam_usuario, habilitado_usuario, primer_login)VALUES (1002, '18.293.486-0', 'sebastian.calderon@usach.cl', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Sebastian Patricio', 'Diaz', 'Calderón', 1, 13301, true, true)

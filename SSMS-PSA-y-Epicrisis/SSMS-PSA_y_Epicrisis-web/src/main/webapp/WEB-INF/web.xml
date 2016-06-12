@@ -49,10 +49,10 @@
         <role-name>Super-Usuario</role-name>
     </security-role>
     <security-role>
-        <role-name>Funcionario-CESFAM</role-name>
+        <role-name>Funcionario</role-name>
     </security-role>
     <security-role>
-        <role-name>Empleado-Municipal</role-name>
+        <role-name>Encargado-Programa</role-name>
     </security-role>
     <security-constraint>
         <web-resource-collection>
@@ -77,8 +77,8 @@
         <auth-constraint>
             <description></description>
             <role-name>Super-Usuario</role-name>
-            <role-name>Funcionario-CESFAM</role-name>
-            <role-name>Empleado-Municipal</role-name>
+            <role-name>Funcionario</role-name>
+            <role-name>Encargado-Programa</role-name>
         </auth-constraint>
     </security-constraint>
 </web-app>

@@ -29,8 +29,11 @@
                     </p:column>
                     
                     <p:column>
-                        <b:commandButton value="Buscar" id="withIcon" action="#{pacienteController.buscarPorRUN}"/> 
-                    </p:column>
+                        <b:commandButton value="Buscar" id="withIcon" action="#{pacienteController.buscarPorRUN}"/>
+                       </p:column>
+                </h:form>
+                <h:form>
+                    <b:commandButton icon="ui-icon-plus"   value="Crear Nuevo Usuario" actionListener="#{pacienteController.prepareCreate}" action="/paciente/Create?faces-redirect=true" rendered="#{loginController.esFuncionario()}"/>                    
                 </h:form>
             </b:panel>    
         </ui:define>

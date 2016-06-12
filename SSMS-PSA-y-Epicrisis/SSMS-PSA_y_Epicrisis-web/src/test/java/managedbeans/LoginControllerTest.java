@@ -48,10 +48,10 @@ public class LoginControllerTest {
     public void testEsEmpleadoMunicipal() {
         System.out.println("esEmpleadoMunicipal");
         Rol rol = new Rol();
-        rol.setNombre("Empleado-Municipal");
+        rol.setNombre("Encargado-Programa");
         instance.getUsuarioLogueado().setRol(rol);
         boolean expResult = true;
-        boolean result = instance.esEmpleadoMunicipal();
+        boolean result = instance.esEncargadoPrograma();
         assertEquals(expResult, result);
     }
 
@@ -63,7 +63,7 @@ public class LoginControllerTest {
         Rol rol = new Rol();
         long id = 2;
         rol.setId(id);
-        rol.setNombre("Funcionario-CESFAM");
+        rol.setNombre("Funcionario");
         instance.getUsuarioLogueado().setRol(rol);
         boolean expResult = true;
         boolean result = instance.esFuncionario();
