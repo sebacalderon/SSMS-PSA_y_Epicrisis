@@ -837,32 +837,7 @@ public class clapController implements Serializable {
         }
         if(selected.isVive_con_solo()||selected.isVive_en_institucion()||selected.getPercepcion_familia()>2||selected.isDesercion_exclusion()){
             selected.setRiesgo_social(true);
-        }
-        
-        System.out.println(selected.getNombres()); 
-        System.out.println(selected.getNombre_social()); 
-        System.out.println(selected.getPrimer_apellido()); 
-        System.out.println(selected.getSegundo_apellido()); 
-        System.out.println(selected.getTelefono_fijo()); 
-        System.out.println(selected.getTelefono_movil()); 
-        System.out.println(selected.getRegion_residencia().getNombre()); 
-        System.out.println(selected.getComuna_residencia().getNombre()); 
-        System.out.println(selected.getCalle_direccion()); 
-        System.out.println(selected.getNumero_direccion());
-        System.out.println(selected.getResto_direccion());
-        System.out.println(selected.getFecha_nacimiento());
-        System.out.println(selected.getCesfam().getNombre());
-        System.out.println(selected.getSexo());
-        System.out.println(selected.getNacionalidad().getNombre());
-        System.out.println(selected.getCorreo());
-        System.out.println(selected.getPrograma_social().getNombre());
-        System.out.println(selected.getPrevision().getNombre());
-        System.out.println(selected.getGrupo_fonasa());
-        System.out.println(selected.getEstado_conyugal().getNombre());
-        System.out.println(selected.getPueblo_originario().getNombre());
-        
-        System.out.println(selected.getAcompanante());
-        
+        }   
         
         persist(PersistAction.UPDATE,"Autoguardado");
         if(selected.getEstado().equals("Nuevo")){
