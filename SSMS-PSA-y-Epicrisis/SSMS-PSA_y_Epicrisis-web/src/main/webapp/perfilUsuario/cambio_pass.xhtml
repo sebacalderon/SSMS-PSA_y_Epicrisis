@@ -33,10 +33,15 @@ and open the template in the editor.
                             </b:row>
                             <br/>
                             <b:column offset="5">
-                            <p:commandButton action="#{usuarioController.cambioPassword()}" value="Guardar cambios" update=":CambioPassForm,:growl">
-                                <p:confirm header="Confirme la habilitación" message="Esta segur@ ?" icon="ui-icon-alert" />
+                            <p:growl id="message" showDetail="true" />
+                            <p:commandButton action="#{usuarioController.cambioPassword()}" value="Guardar cambios" update="message">
+                                <p:confirm header="Confirme la edición de datos" message="Esta segur@ de guardar cambiar la contraseña?" icon="ui-icon-alert" />
                             </p:commandButton>
-                            <p:commandButton value="#{bundle.Cancel}" action="/faces/home?faces-redirect=true"/>
+                            <p:commandButton value="Volver" action="/faces/home?faces-redirect=true"/>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
                             </b:column>
                         </h:form>
                     </b:panel>

@@ -169,7 +169,7 @@ public class UsuarioController implements Serializable {
         return true;
     }
     
-    public String cambioPassword(){
+    public void cambioPassword(){
         
         if (new_password.length() > 0) {
             selected=new Usuario(loginCtrl.getUsuarioLogueado());
@@ -183,7 +183,6 @@ public class UsuarioController implements Serializable {
                 JsfUtil.addErrorMessage("No se pudo cambiar la contraseña");
             }
         }
-        return "/faces/home?faces-redirect=true";
     }
 
     public void update() {
