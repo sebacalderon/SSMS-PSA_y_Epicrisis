@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
@@ -20,6 +22,9 @@ import javax.validation.constraints.NotNull;
  * @author Seba
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name="Crafft.findbyClap",query="SELECT p FROM Crafft p WHERE p.clap=:clap")
+})
 public class Crafft implements Serializable {
 
     private static final long serialVersionUID = 1L;

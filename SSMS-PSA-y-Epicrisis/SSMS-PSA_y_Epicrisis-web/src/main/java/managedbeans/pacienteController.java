@@ -151,6 +151,8 @@ public class pacienteController implements Serializable {
             if (!JsfUtil.isValidationFailed()) {
                 items = null;    // Invalidate list of items to trigger re-query.
             }
+            selected = getFacade().findbyRUN(selected.getRUN()).get(0);
+            clapCtrl.setSelected(null);
             return "/faces/paciente/View.xhtml";
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: el RUN ingresado no es válido",  "El rut ingresado no es válido.") );

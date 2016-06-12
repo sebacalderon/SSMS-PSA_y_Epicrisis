@@ -6,9 +6,13 @@
 package sessionbeans;
 
 import entities.Crafft;
+import entities.clap;
+import entities.paciente;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +31,14 @@ public class CrafftFacade extends AbstractFacade<Crafft> implements CrafftFacade
 
     public CrafftFacade() {
         super(Crafft.class);
+    }
+    
+    @Override
+    public List<Crafft> findbyClap(clap clap) {
+        Query query;
+        query = em.createNamedQuery("Crafft.findbyClap").
+                setParameter("clap",clap);
+        return query.getResultList();
     }
     
 }

@@ -15,6 +15,10 @@
         </ui:define> 
 
         <ui:define name="body">
+            <p:growl id="msgs" showDetail="true" />
+            <h:form>
+                <p:poll interval="30" listener="#{clapController.autosave()}" immediate="true" update="msgs"/>
+            </h:form>
             <h:form>
             <p:breadCrumb>
                 <p:menuitem value="Categories" url="/faces/home.xhtml" />
@@ -31,7 +35,7 @@
                 <h2 align="center">#{bundle.EditclapTitle}</h2>
             </b:row>
             <h:form id="clapEditForm" rendered="#{clapController.selected != null}">
-               <b:panel id="panel1" title="Ficha personal del paciente" style="margin-left:3%;width: 95%;" look="info">
+                <b:panel id="panel1" title="Ficha personal del paciente" style="margin-left:3%;width: 95%;" look="info">
                     <div style="margin-left:20px;">
                         <b:row>
                             <b:column col-md="6" col-xs="12">
@@ -57,7 +61,9 @@
                                     <p:outputLabel value="#{bundle.CreatepacienteTitle_nombres}" for="nombres" />
                                 </b:row>
                                 <b:row>  
-                                    <p:inputText id="nombres" value="#{clapController.selected.nombres}" placeholder="#{bundle.CreatepacienteTitle_nombres}" maxlength="50" required="true" />
+                                    <p:inputText id="nombres" value="#{clapController.selected.nombres}" placeholder="#{bundle.CreatepacienteTitle_nombres}" maxlength="50" required="true">
+                                        <p:ajax event="blur" immediate="true"/>
+                                    </p:inputText>
                                 </b:row>
                             </b:column>
                             <b:column col-md="6" col-xs="12">
@@ -65,7 +71,9 @@
                                     <p:outputLabel value="#{bundle.CreatepacienteTitle_nombre_social}" for="nombre_social" />
                                 </b:row>
                                 <b:row>  
-                                    <p:inputText id="nombre_social" value="#{clapController.selected.nombre_social}" placeholder="#{bundle.CreatepacienteTitle_nombre_social}" />
+                                    <p:inputText id="nombre_social" value="#{clapController.selected.nombre_social}" placeholder="#{bundle.CreatepacienteTitle_nombre_social}">
+                                        <p:ajax event="blur" immediate="true"/>
+                                    </p:inputText>
                                 </b:row>
                             </b:column>
                         </b:row>
@@ -75,7 +83,9 @@
                                     <p:outputLabel value="#{bundle.CreatepacienteTitle_primer_apellido}" for="primer_apellido" />
                                 </b:row>
                                 <b:row>
-                                    <p:inputText id="primer_apellido" value="#{clapController.selected.primer_apellido}" placeholder="#{bundle.CreatepacienteTitle_primer_apellido}" maxlength="30" required="true" />
+                                    <p:inputText id="primer_apellido" value="#{clapController.selected.primer_apellido}" placeholder="#{bundle.CreatepacienteTitle_primer_apellido}" maxlength="30" required="true">
+                                    <p:ajax event="blur" immediate="true"/>
+                                    </p:inputText>
                                 </b:row>
                             </b:column>
                             <b:column col-md="3" col-xs="12">
@@ -83,7 +93,9 @@
                                     <p:outputLabel value="#{bundle.CreatepacienteTitle_segundo_apellido}" for="segundo_apellido" />
                                 </b:row>
                                 <b:row>
-                                    <p:inputText id="segundo_apellido" value="#{clapController.selected.segundo_apellido}" placeholder="#{bundle.CreatepacienteTitle_segundo_apellido}" maxlength="30" required="true" />
+                                    <p:inputText id="segundo_apellido" value="#{clapController.selected.segundo_apellido}" placeholder="#{bundle.CreatepacienteTitle_segundo_apellido}" maxlength="30" required="true">
+                                    <p:ajax event="blur" immediate="true"/>
+                                    </p:inputText>
                                 </b:row>
                             </b:column>
                             <b:column col-md="3" col-xs="12">
@@ -91,7 +103,9 @@
                                     <p:outputLabel value="#{bundle.CreatepacienteTitle_telefono_fijo}" for="telefono_fijo" />
                                 </b:row>
                                 <b:row>
-                                    <p:inputMask id="telefono_fijo" value="#{clapController.selected.telefono_fijo}" placeholder="#{bundle.CreatepacienteTitle_telefono_fijo}" mask="(99) 999-9999" />
+                                    <p:inputMask id="telefono_fijo" value="#{clapController.selected.telefono_fijo}" placeholder="#{bundle.CreatepacienteTitle_telefono_fijo}" mask="(99) 999-9999">
+                                    <p:ajax event="blur" immediate="true"/>
+                                    </p:inputMask>
                                 </b:row>
                             </b:column>
                             <b:column col-md="3" col-xs="12">
@@ -99,7 +113,9 @@
                                     <p:outputLabel value="#{bundle.CreatepacienteTitle_teléfono_movil}" for="telefono_movil" />
                                 </b:row>
                                 <b:row>
-                                    <p:inputMask id="telefono_movil" value="#{clapController.selected.telefono_movil}" placeholder="#{bundle.CreatepacienteTitle_teléfono_movil}"  mask="(+56) 9999-9999" />
+                                    <p:inputMask id="telefono_movil" value="#{clapController.selected.telefono_movil}" placeholder="#{bundle.CreatepacienteTitle_teléfono_movil}"  mask="(+56) 9999-9999">
+                                    <p:ajax event="blur" immediate="true"/>
+                                    </p:inputMask>
                                 </b:row>
                             </b:column>
                         </b:row>
@@ -122,7 +138,9 @@
                                 </b:row>
                                 <b:row>
                                     <p:autoComplete id="comuna_residencia" value="#{clapController.selected.comuna_residencia}" completeMethod="#{clapController.completeComuna}"
-                                    var="comuna" itemLabel="#{comuna.nombre}" itemValue="#{comuna}" placeholder="Comuna de residencia" converter="entityConverter" forceSelection="true" required="true" />                         
+                                                    var="comuna" itemLabel="#{comuna.nombre}" itemValue="#{comuna}" placeholder="Comuna de residencia" converter="entityConverter" forceSelection="true" required="true">
+                                    <p:ajax event="blur" immediate="true"/>
+                                    </p:autoComplete>                         
                                 </b:row>
                             </b:column>
                         </b:row>
@@ -132,7 +150,9 @@
                                     <p:outputLabel value="#{bundle.CreatepacienteTitle_calle_direccion}" for="calle_direccion" />
                                 </b:row>
                                 <b:row>
-                                    <p:inputText id="calle_direccion" value="#{clapController.selected.calle_direccion}" placeholder="#{bundle.CreatepacienteTitle_calle_direccion}" maxlength="50" required="true" />
+                                    <p:inputText id="calle_direccion" value="#{clapController.selected.calle_direccion}" placeholder="#{bundle.CreatepacienteTitle_calle_direccion}" maxlength="50" required="true">
+                                    <p:ajax event="blur" immediate="true"/>
+                                    </p:inputText>
                                 </b:row>
                             </b:column>
                             <b:column col-md="3" col-xs="12">
@@ -140,7 +160,9 @@
                                     <p:outputLabel value="Número:" for="numero_direccion" />
                                 </b:row>
                                 <b:row>
-                                    <pe:inputNumber id="numero_direccion" value="#{clapController.selected.numero_direccion}" style="campo-numerico" minValue="0" maxValue="10000" title="#{bundle.CreatepacienteTitle_numero_direccion}" maxlength="8" required="true"/>
+                                    <pe:inputNumber id="numero_direccion" value="#{clapController.selected.numero_direccion}" style="campo-numerico" minValue="0" maxValue="10000" title="#{bundle.CreatepacienteTitle_numero_direccion}" maxlength="8" required="true">
+                                    <p:ajax event="blur" immediate="true"/>
+                                    </pe:inputNumber>
                                 </b:row>
                             </b:column>
                             <b:column col-md="3" col-xs="12">
@@ -148,7 +170,9 @@
                                     <p:outputLabel value="#{bundle.CreatepacienteTitle_resto_direccion}" for="resto_direccion" />
                                 </b:row>
                                 <b:row>
-                                    <p:inputText id="resto_direccion" value="#{clapController.selected.resto_direccion}" placeholder="#{bundle.CreatepacienteTitle_resto_direccion}" maxlength="50" />
+                                    <p:inputText id="resto_direccion" value="#{clapController.selected.resto_direccion}" placeholder="#{bundle.CreatepacienteTitle_resto_direccion}" maxlength="50">
+                                    <p:ajax event="blur" immediate="true"/>
+                                    </p:inputText>
                                 </b:row>
                             </b:column>
                         </b:row>
@@ -159,6 +183,7 @@
                                 </b:row>
                                 <b:row>
                                     <p:calendar  id="fecha_nacimiento" value="#{clapController.selected.fecha_nacimiento}" placeholder="#{bundle.CreatepacienteTitle_fecha_nacimiento}" pattern="dd/MM/yyyy" navigator="true" required="true">
+                                    <p:ajax event="dateSelect" immediate="true"/>
                                     </p:calendar>
                                 </b:row>
                             </b:column>
@@ -170,6 +195,7 @@
                                     <p:selectOneMenu id="cesfam" value="#{clapController.selected.cesfam}" >
                                         <f:selectItem itemLabel="Seleccione un CESFAM" itemValue="" noSelectionOption="true" />
                                         <f:selectItems value="#{cesfamController.items}" var="cesfam" itemLabel="#{cesfam.nombre}" itemValue="#{cesfam}"/>
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneMenu>                            
                                 </b:row>
                             </b:column>
@@ -184,6 +210,7 @@
                                         <f:selectItem itemLabel="Mujer" itemValue="2" noSelectionOption="false" />
                                         <f:selectItem itemLabel="No definido" itemValue="3" noSelectionOption="false" />
                                         <f:selectItem itemLabel="No determinado" itemValue="4" noSelectionOption="false" />     
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>                                    
                                     </p:selectOneMenu>
                                 </b:row>
                             </b:column>
@@ -195,7 +222,9 @@
                                 </b:row>
                                 <b:row>
                                     <p:autoComplete id="nacionalidad" value="#{clapController.selected.nacionalidad}" completeMethod="#{nacionalidadController.completeNacionalidad}"
-                                    var="nacionalidad" itemLabel="#{nacionalidad.nombre}" itemValue="#{nacionalidad}" converter="entityConverter" forceSelection="true" />
+                                                    var="nacionalidad" itemLabel="#{nacionalidad.nombre}" itemValue="#{nacionalidad}" converter="entityConverter" forceSelection="true">
+                                    <p:ajax event="itemSelect" immediate="true"/>                                    
+                                    </p:autoComplete>
                                 </b:row>
                             </b:column>
                             <b:column col-md="6" col-xs="12">
@@ -203,7 +232,9 @@
                                     <p:outputLabel value="#{bundle.CreatepacienteTitle_correo}" for="correo" />
                                 </b:row>
                                 <b:row>
-                                    <p:inputText id="correo" value="#{clapController.selected.correo}" placeholder="#{bundle.CreatepacienteTitle_correo}" required="true" />
+                                    <p:inputText id="correo" value="#{clapController.selected.correo}" placeholder="#{bundle.CreatepacienteTitle_correo}" required="true">
+                                        <p:ajax event="blur" immediate="true"/>
+                                    </p:inputText>
                                 </b:row>
                             </b:column>
                             <b:column col-md="6" col-xs="12">
@@ -214,6 +245,7 @@
                                     <p:selectOneMenu id="programa_social" value="#{clapController.selected.programa_social}" >
                                         <f:selectItem itemLabel="Seleccione un programa social" itemValue="" noSelectionOption="true" />
                                         <f:selectItems value="#{ley_socialController.items}" var="ley_social" itemLabel="#{ley_social.nombre}" itemValue="#{ley_social}"/>
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>                                                                        
                                     </p:selectOneMenu>
                                 </b:row>
                             </b:column>
@@ -242,6 +274,7 @@
                                         <f:selectItem itemLabel="B" itemValue="2" noSelectionOption="false" />
                                         <f:selectItem itemLabel="C" itemValue="3" noSelectionOption="false" />
                                         <f:selectItem itemLabel="D" itemValue="4" noSelectionOption="false" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>                                                                        
                                     </p:selectOneMenu>
                                 </b:row>
                             </b:column>
@@ -255,6 +288,7 @@
                                     <p:selectOneMenu id="estado_conyugal" value="#{clapController.selected.estado_conyugal}" >
                                         <f:selectItem itemLabel="Seleccione un opción" itemValue="" noSelectionOption="true" />
                                         <f:selectItems value="#{estado_civilController.items}" var="estado_civil" itemLabel="#{estado_civil.nombre}" itemValue="#{estado_civil}"/>
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>                                    
                                     </p:selectOneMenu>
                                 </b:row>
                             </b:column>
@@ -266,6 +300,7 @@
                                     <p:selectOneMenu id="pueblo_originario" value="#{clapController.selected.pueblo_originario}" >
                                         <f:selectItem itemLabel="Seleccione un pueblo originario" itemValue="" noSelectionOption="true" />
                                         <f:selectItems value="#{pueblo_originarioController.items}" var="pueblo_originario" itemLabel="#{pueblo_originario.nombre}" itemValue="#{pueblo_originario}"/>
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>                                    
                                     </p:selectOneMenu>
                                 </b:row>
                             </b:column>
@@ -298,24 +333,39 @@
                             <f:selectItem itemLabel="pareja" itemValue="pareja" />
                             <f:selectItem itemLabel="pariente" itemValue="pariente" />
                             <f:selectItem itemLabel="otro" itemValue="otro" />
+                            <p:ajax event="valueChange"  immediate="true" ></p:ajax>
                         </p:selectOneRadio>
                     </p:column>
                     <p:column rowspan="4">
                         <p:outputLabel value="Motivo de la consulta según adolescente" for="motivo_consulta_adolescente_1" />
-                        <p:inputText id="motivo_consulta_adolescente_1" placeholder="1." value="#{clapController.selected.motivo_consulta_adolescente_1}" title="#{bundle.CreateclapTitle_motivo_consulta_adolescente_1}" />
-                        <p:inputText id="motivo_consulta_adolescente_2" placeholder="2." value="#{clapController.selected.motivo_consulta_adolescente_2}" title="#{bundle.CreateclapTitle_motivo_consulta_adolescente_2}" />
-                        <p:inputText id="motivo_consulta_adolescente_3" placeholder="3." value="#{clapController.selected.motivo_consulta_adolescente_3}" title="#{bundle.CreateclapTitle_motivo_consulta_adolescente_3}" />
+                        <p:inputText id="motivo_consulta_adolescente_1" placeholder="1." value="#{clapController.selected.motivo_consulta_adolescente_1}" title="#{bundle.CreateclapTitle_motivo_consulta_adolescente_1}" >
+                            <p:ajax event="blur" immediate="true"/>
+                        </p:inputText>
+                        <p:inputText id="motivo_consulta_adolescente_2" placeholder="2." value="#{clapController.selected.motivo_consulta_adolescente_2}" title="#{bundle.CreateclapTitle_motivo_consulta_adolescente_2}" >
+                        <p:ajax event="blur" immediate="true"/>
+                        </p:inputText>
+                        <p:inputText id="motivo_consulta_adolescente_3" placeholder="3." value="#{clapController.selected.motivo_consulta_adolescente_3}" title="#{bundle.CreateclapTitle_motivo_consulta_adolescente_3}" >
+                        <p:ajax event="blur" immediate="true"/>
+                        </p:inputText>
                     </p:column>
                     <p:column rowspan="4">
                         <p:outputLabel value="Motivo de la consulta según acompañante" for="motivo_consulta_acompanante_1" />
-                        <p:inputText id="motivo_consulta_acompanante_1" placeholder="1." value="#{clapController.selected.motivo_consulta_acompanante_1}" title="#{bundle.CreateclapTitle_motivo_consulta_acompanante_1}" />
-                        <p:inputText id="motivo_consulta_acompanante_2" placeholder="2." value="#{clapController.selected.motivo_consulta_acompanante_2}" title="#{bundle.CreateclapTitle_motivo_consulta_acompanante_2}" />
-                        <p:inputText id="motivo_consulta_acompanante_3" placeholder="3." value="#{clapController.selected.motivo_consulta_acompanante_3}" title="#{bundle.CreateclapTitle_motivo_consulta_acompanante_3}" />
+                        <p:inputText id="motivo_consulta_acompanante_1" placeholder="1." value="#{clapController.selected.motivo_consulta_acompanante_1}" title="#{bundle.CreateclapTitle_motivo_consulta_acompanante_1}" >
+                        <p:ajax event="blur" immediate="true"/>
+                        </p:inputText>
+                        <p:inputText id="motivo_consulta_acompanante_2" placeholder="2." value="#{clapController.selected.motivo_consulta_acompanante_2}" title="#{bundle.CreateclapTitle_motivo_consulta_acompanante_2}" >
+                        <p:ajax event="blur" immediate="true"/>
+                        </p:inputText>
+                        <p:inputText id="motivo_consulta_acompanante_3" placeholder="3." value="#{clapController.selected.motivo_consulta_acompanante_3}" title="#{bundle.CreateclapTitle_motivo_consulta_acompanante_3}" >
+                        <p:ajax event="blur" immediate="true"/>
+                        </p:inputText>
                     </p:column>
                 </p:panelGrid>
                     <facet name="footer">
                         <p:row>
-                            <b:inputText label="Descripción del motivo de la consulta" id="descripcion_motivo_consulta" value="#{clapController.selected.descripcion_motivo_consulta}" title="#{bundle.CreateclapTitle_descripcion_motivo_consulta}" />
+                            <b:inputText label="Descripción del motivo de la consulta" id="descripcion_motivo_consulta" value="#{clapController.selected.descripcion_motivo_consulta}" title="#{bundle.CreateclapTitle_descripcion_motivo_consulta}" >
+                            <p:ajax event="blur" immediate="true"/>
+                            </b:inputText>
                         </p:row>
                     </facet>
                 </b:panel>
@@ -329,6 +379,7 @@
                             <f:selectItem itemLabel="sí" itemValue="1" />
                             <f:selectItem itemLabel="no sé" itemValue="2" />
                             <f:selectItem itemLabel="no" itemValue="3" />
+                            <f:ajax event="valueChange" immediate="true"></f:ajax>
                         </p:selectOneRadio>
                     </p:column>
                     <p:column rowspan="2">
@@ -337,6 +388,7 @@
                             <f:selectItem itemLabel="sí" itemValue="1" />
                             <f:selectItem itemLabel="no sé" itemValue="2" />
                             <f:selectItem itemLabel="no" itemValue="3" />
+                            <f:ajax event="valueChange" immediate="true"></f:ajax>
                         </p:selectOneRadio>
                     </p:column>
                     <p:column rowspan="2">
@@ -345,6 +397,7 @@
                             <f:selectItem itemLabel="sí" itemValue="1" />
                             <f:selectItem itemLabel="no sé" itemValue="2" />
                             <f:selectItem itemLabel="no" itemValue="3" />
+                            <f:ajax event="valueChange" immediate="true"></f:ajax>
                         </p:selectOneRadio>
                     </p:column>
                     <p:column rowspan="2">
@@ -353,6 +406,7 @@
                         <f:selectItem itemLabel="sí" itemValue="1" />
                         <f:selectItem itemLabel="no sé" itemValue="2" />
                         <f:selectItem itemLabel="no" itemValue="3" />
+                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                     </p:selectOneRadio>
                     </p:column>
                     <p:column rowspan="2">
@@ -361,6 +415,7 @@
                         <f:selectItem itemLabel="sí" itemValue="1" />
                         <f:selectItem itemLabel="no sé" itemValue="2" />
                         <f:selectItem itemLabel="no" itemValue="3" />
+                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                     </p:selectOneRadio>
                     </p:column>
                     <p:column rowspan="2">
@@ -369,6 +424,7 @@
                         <f:selectItem itemLabel="sí" itemValue="1" />
                         <f:selectItem itemLabel="no sé" itemValue="2" />
                         <f:selectItem itemLabel="no" itemValue="3" />
+                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                     </p:selectOneRadio>
                     </p:column>
                     <p:column rowspan="2">
@@ -377,6 +433,7 @@
                         <f:selectItem itemLabel="sí" itemValue="1" />
                         <f:selectItem itemLabel="no sé" itemValue="2" />
                         <f:selectItem itemLabel="no" itemValue="3" />
+                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                     </p:selectOneRadio>
                     </p:column>
                     <p:column rowspan="2">
@@ -384,6 +441,7 @@
                     <p:selectOneRadio id="uso_medicamentos" style="width:13em;" value="#{clapController.selected.uso_medicamentos}" layout="grid" columns="2">
                         <f:selectItem itemLabel="Si" itemValue="true" />
                         <f:selectItem itemLabel="No" itemValue="false" />
+                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                     </p:selectOneRadio>
                     </p:column>
                     <p:column rowspan="2">
@@ -392,6 +450,7 @@
                         <f:selectItem itemLabel="sí" itemValue="1" />
                         <f:selectItem itemLabel="no sé" itemValue="2" />
                         <f:selectItem itemLabel="no" itemValue="3" />
+                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                     </p:selectOneRadio>
                     </p:column>
                     <p:column rowspan="2">
@@ -400,6 +459,7 @@
                         <f:selectItem itemLabel="sí" itemValue="1" />
                         <f:selectItem itemLabel="no sé" itemValue="2" />
                         <f:selectItem itemLabel="no" itemValue="3" />
+                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                     </p:selectOneRadio>
                     </p:column>
                     <p:column rowspan="2">
@@ -408,6 +468,7 @@
                         <f:selectItem itemLabel="sí" itemValue="1" />
                         <f:selectItem itemLabel="no sé" itemValue="2" />
                         <f:selectItem itemLabel="no" itemValue="3" />
+                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                     </p:selectOneRadio>
                     </p:column>
                     <p:column rowspan="2">
@@ -416,12 +477,15 @@
                         <f:selectItem itemLabel="sí" itemValue="1" />
                         <f:selectItem itemLabel="no sé" itemValue="2" />
                         <f:selectItem itemLabel="no" itemValue="3" />
+                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                     </p:selectOneRadio>
                     </p:column>
                 </p:panelGrid>
                     <facet name="footer">
                         <p:row>
-                            <b:inputText id="observaciones_antecdentes_personales" label="Observaciones" value="#{clapController.selected.observaciones_antecdentes_personales}" title="#{bundle.CreateclapTitle_observaciones_antecdentes_personales}" />
+                            <b:inputText id="observaciones_antecdentes_personales" label="Observaciones" value="#{clapController.selected.observaciones_antecdentes_personales}" title="#{bundle.CreateclapTitle_observaciones_antecdentes_personales}" >
+                            <p:ajax event="blur" immediate="true"/>
+                            </b:inputText>
                         </p:row>
                     </facet>
                 </b:panel>
@@ -434,6 +498,7 @@
                             <f:selectItem itemLabel="sí" itemValue="1" />
                             <f:selectItem itemLabel="no sé" itemValue="2" />
                             <f:selectItem itemLabel="no" itemValue="3" />
+                            <f:ajax event="valueChange" immediate="true"></f:ajax>
                         </p:selectOneRadio>
                     </p:column>
                     <p:column rowspan="2">
@@ -442,6 +507,7 @@
                         <f:selectItem itemLabel="sí" itemValue="1" />
                         <f:selectItem itemLabel="no sé" itemValue="2" />
                         <f:selectItem itemLabel="no" itemValue="3" />
+                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                     </p:selectOneRadio>
                     </p:column>
                     <p:column rowspan="2">
@@ -450,6 +516,7 @@
                         <f:selectItem itemLabel="sí" itemValue="1" />
                         <f:selectItem itemLabel="no sé" itemValue="2" />
                         <f:selectItem itemLabel="no" itemValue="3" />
+                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                     </p:selectOneRadio>
                     </p:column>
                     <p:column rowspan="2">
@@ -458,6 +525,7 @@
                         <f:selectItem itemLabel="sí" itemValue="1" />
                         <f:selectItem itemLabel="no sé" itemValue="2" />
                         <f:selectItem itemLabel="no" itemValue="3" />
+                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                     </p:selectOneRadio>
                     </p:column>
                     
@@ -467,6 +535,7 @@
                         <f:selectItem itemLabel="sí" itemValue="1" />
                         <f:selectItem itemLabel="no sé" itemValue="2" />
                         <f:selectItem itemLabel="no" itemValue="3" />
+                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                     </p:selectOneRadio>
                     </p:column>
                     <p:column rowspan="2">
@@ -475,6 +544,7 @@
                         <f:selectItem itemLabel="sí" itemValue="1" />
                         <f:selectItem itemLabel="no sé" itemValue="2" />
                         <f:selectItem itemLabel="no" itemValue="3" />
+                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                     </p:selectOneRadio>
                     </p:column>
                     <p:column rowspan="2">
@@ -483,6 +553,7 @@
                         <f:selectItem itemLabel="sí" itemValue="1" />
                         <f:selectItem itemLabel="no sé" itemValue="2" />
                         <f:selectItem itemLabel="no" itemValue="3" />
+                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                     </p:selectOneRadio>
                     </p:column>
                     <p:column rowspan="2">
@@ -491,12 +562,15 @@
                         <f:selectItem itemLabel="sí" itemValue="1" />
                         <f:selectItem itemLabel="no sé" itemValue="2" />
                         <f:selectItem itemLabel="no" itemValue="3" />
+                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                     </p:selectOneRadio>
                     </p:column>
                 </p:panelGrid>
                     <facet name="footer">
                         <p:row>
-                            <b:inputText id="observaciones_antecedentes_familiares" value="#{clapController.selected.observaciones_antecedentes_familiares}" label="#{bundle.CreateclapTitle_observaciones_antecedentes_familiares}" />
+                            <b:inputText id="observaciones_antecedentes_familiares" value="#{clapController.selected.observaciones_antecedentes_familiares}" label="#{bundle.CreateclapTitle_observaciones_antecedentes_familiares}" >
+                            <p:ajax event="blur" immediate="true"/>
+                            </b:inputText>              
                         </p:row>
                     </facet>
                 </b:panel>
@@ -549,7 +623,9 @@
                                 </p:selectOneRadio></b:column>
                             </b:row>
                             <b:row style="margin-left:20px;">
-                                <p:inputText placeholder="Especifique" id="vive_con_especificacion" value="#{clapController.selected.vive_con_especificacion}" title="#{bundle.CreateclapTitle_vive_con_especificación}" />
+                                <p:inputText placeholder="Especifique" id="vive_con_especificacion" value="#{clapController.selected.vive_con_especificacion}" title="#{bundle.CreateclapTitle_vive_con_especificación}">
+                                <p:ajax event="blur" immediate="true"/>
+                                </p:inputText>
                             </b:row>
                         </b:column>
 
@@ -558,9 +634,12 @@
                             <p:selectOneRadio id="comparte_cama" style="width:13em;" value="#{clapController.selected.comparte_cama}" layout="grid" columns="2">
                                 <f:selectItem itemLabel="Si" itemValue="true" />
                                 <f:selectItem itemLabel="No" itemValue="false" />
+                                <f:ajax event="valueChange" immediate="true"></f:ajax>
                             </p:selectOneRadio>      
                             <p:outputLabel value="¿Con quién?" for="especificacion_comparte_cama" />
-                            <p:inputText id="especificacion_comparte_cama" value="#{clapController.selected.especificacion_comparte_cama}" title="#{bundle.CreateclapTitle_especificacion_comparte_cama}" />
+                            <p:inputText id="especificacion_comparte_cama" value="#{clapController.selected.especificacion_comparte_cama}" title="#{bundle.CreateclapTitle_especificacion_comparte_cama}">
+                            <p:ajax event="blur" immediate="true"/>
+                            </p:inputText>
                         </b:column>
                         <b:column col-md="6" col-xs="12">
                             <h4>Nivel instrucción</h4>
@@ -580,6 +659,7 @@
                                         <f:selectItem  itemValue="2" />
                                         <f:selectItem  itemValue="3" />
                                         <f:selectItem  itemValue="4" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:column>
                             </b:row>
@@ -593,6 +673,7 @@
                                         <f:selectItem  itemValue="2" />
                                         <f:selectItem itemValue="3" />
                                         <f:selectItem  itemValue="4" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>  
                                 </b:column>
                             </b:row>
@@ -606,6 +687,7 @@
                                         <f:selectItem itemValue="2" />
                                         <f:selectItem itemValue="3" />
                                         <f:selectItem itemValue="4" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:column>
                             </b:row>
@@ -615,13 +697,19 @@
                         <b:column col-md="6">
                             <h4>Ocupación</h4>
                             <b:row><p:outputLabel value="madre o sustituta" for="ocupacion_madre" /></b:row>
-                            <b:row><p:inputText id="ocupacion_madre" value="#{clapController.selected.ocupacion_madre}" title="#{bundle.CreateclapTitle_ocupacion_madre}" />
+                            <b:row><p:inputText id="ocupacion_madre" value="#{clapController.selected.ocupacion_madre}" title="#{bundle.CreateclapTitle_ocupacion_madre}" >
+                                <p:ajax event="blur" immediate="true"/>
+                                </p:inputText>
                             </b:row>
                             <b:row><p:outputLabel value="padre o sustituto" for="ocupacion_padre" /></b:row>
-                            <b:row><p:inputText id="ocupacion_padre" value="#{clapController.selected.ocupacion_padre}" title="#{bundle.CreateclapTitle_ocupacion_padre}" />
+                            <b:row><p:inputText id="ocupacion_padre" value="#{clapController.selected.ocupacion_padre}" title="#{bundle.CreateclapTitle_ocupacion_padre}">
+                                <p:ajax event="blur" immediate="true"/>
+                                </p:inputText>
                             </b:row>
                             <b:row><p:outputLabel value="pareja" for="ocupacion_pareja" /></b:row>
-                            <b:row><p:inputText id="ocupacion_pareja" value="#{clapController.selected.ocupacion_pareja}" title="#{bundle.CreateclapTitle_ocupacion_pareja}" /></b:row>
+                            <b:row><p:inputText id="ocupacion_pareja" value="#{clapController.selected.ocupacion_pareja}" title="#{bundle.CreateclapTitle_ocupacion_pareja}" >
+                                <p:ajax event="blur" immediate="true"/>
+                                </p:inputText></b:row>
                         </b:column>
                         <b:column col-md="6">
                             <p:outputLabel value="Percepción del adolescente sobre su familia" for="percepcion_familia" />
@@ -630,16 +718,24 @@
                                 <f:selectItem itemLabel="regular" itemValue="2" />
                                 <f:selectItem itemLabel="mala" itemValue="3" />
                                 <f:selectItem itemLabel="no hay relación" itemValue="4" />
+                                <f:ajax event="valueChange" immediate="true"></f:ajax>
                             </p:selectOneRadio>
                         </b:column>
                         <b:column col-md="6">
-                            <p:outputLabel value="#{bundle.CreateclapLabel_diagrama_familiar}" for="diagrama_familiar" />
-                            <p:inputText id="diagrama_familiar" value="#{clapController.selected.diagrama_familiar}" title="#{bundle.CreateclapTitle_diagrama_familiar}" />
+                            <h4>Genograma</h4>
+                            <p:fileUpload id="genograma" fileUploadListener="#{clapController.upload}" label="Elegir Imagen" update="messages" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1" invalidFileMessage="Tipo de Archivo Inválido" cancelLabel="Cancelar" skinSimple="false" auto="false" uploadLabel="Subir" rendered="#{clapController.selected.diagrama_familiar == null}"/>        
+                            <p:commandButton value="Ver Imagen" onclick="PF('dlg2').show();" type="button" rendered="#{clapController.selected.diagrama_familiar != null}"/>
+                            <p:dialog header="Imagen de Genograma" widgetVar="dlg2" modal="true" height="450" width="450">
+                                <p:graphicImage value="#{clapController.cargarImagen()}" rendered="#{clapController.selected.diagrama_familiar != null}"/>
+                            </p:dialog>
+                            <p:growl id="messages" showDetail="true"/>
                         </b:column>
                     </p:panelGrid>
                     <facet name="footer">
                         <p:row>
-                            <b:inputText id="observaciones_familia" value="#{clapController.selected.observaciones_familia}" label="#{bundle.CreateclapTitle_observaciones_familia}" />
+                            <b:inputText id="observaciones_familia" value="#{clapController.selected.observaciones_familia}" label="#{bundle.CreateclapTitle_observaciones_familia}">
+                            <p:ajax event="blur" immediate="true"/>
+                            </b:inputText>
                         </p:row>
                     </facet>
                 </b:panel>
@@ -652,17 +748,21 @@
                         <p:selectOneRadio id="condiciones_sanitarias" style="width:13em;" value="#{clapController.selected.condiciones_sanitarias}" layout="grid" columns="2">
                             <f:selectItem itemLabel="Si" itemValue="true" />
                             <f:selectItem itemLabel="No" itemValue="false" />
+                            <f:ajax event="valueChange" immediate="true"></f:ajax>
                         </p:selectOneRadio>
 
                         <p:outputLabel value="Hacinamiento" for="hacinamiento" />
                         <p:selectOneRadio id="hacinamiento" style="width:13em;" value="#{clapController.selected.hacinamiento}" layout="grid" columns="2">
                             <f:selectItem itemLabel="Si" itemValue="true" />
                             <f:selectItem itemLabel="No" itemValue="false" />
+                            <f:ajax event="valueChange" immediate="true"></f:ajax>
                         </p:selectOneRadio>
                     </p:panelGrid>
                     <facet name="footer">
                         <p:row>
-                            <b:inputText id="observaciones_vivienda" value="#{clapController.selected.observaciones_vivienda}" label="#{bundle.CreateclapTitle_observaciones_vivienda}" />
+                            <b:inputText id="observaciones_vivienda" value="#{clapController.selected.observaciones_vivienda}" label="#{bundle.CreateclapTitle_observaciones_vivienda}">
+                            <p:ajax event="blur" immediate="true"/>                            
+                            </b:inputText>
                         </p:row>
                     </facet>
                 </b:panel>
@@ -674,7 +774,8 @@
                             <p:outputLabel value="Estudia" for="estudia" />
                             <p:selectOneRadio id="estudia" style="width:13em;" value="#{clapController.selected.estudia}" layout="grid" columns="2">
                                 <f:selectItem itemLabel="Si" itemValue="true" />
-                                <f:selectItem itemLabel="No" itemValue="false" />
+                                <f:selectItem itemLabel="No" itemValue="false" />                            
+                                <f:ajax event="valueChange" immediate="true"></f:ajax>
                             </p:selectOneRadio>
                         </b:column>
                         <b:column col-md="4">
@@ -684,6 +785,7 @@
                                 <f:selectItem itemLabel=" básica " itemValue="2" />
                                 <f:selectItem itemLabel=" media " itemValue="3" />
                                 <f:selectItem itemLabel=" superior " itemValue="4" />
+                                <f:ajax event="valueChange" immediate="true"></f:ajax>
                             </p:selectOneRadio> 
                         </b:column>
 
@@ -703,6 +805,7 @@
                                 <f:selectItem itemLabel="2° medio" itemValue="2 medio" noSelectionOption="false" />
                                 <f:selectItem itemLabel="3° medio" itemValue="3 medio" noSelectionOption="false" />
                                 <f:selectItem itemLabel="4° medio" itemValue="4 medio" noSelectionOption="false" />
+                                <f:ajax event="valueChange" immediate="true"></f:ajax>
                             </p:selectOneMenu></b:row>
                         </b:column>
                     </b:row>
@@ -711,10 +814,14 @@
                         <b:column col-md="4">
                             <b:row>
                                 <b:column col-xs="6"><p:outputLabel value="#{bundle.CreateclapLabel_anos_repetidos}" for="anos_repetidos" /></b:column>
-                                <b:column col-xs="4"><pe:inputNumber id="anos_repetidos" value="#{clapController.selected.anos_repetidos}" minValue="0" maxValue="10" styleClass="campo-numerico" title="#{bundle.CreateclapTitle_anos_repetidos}" /></b:column>
+                                <b:column col-xs="4"><pe:inputNumber id="anos_repetidos" value="#{clapController.selected.anos_repetidos}" minValue="0" maxValue="10" styleClass="campo-numerico" title="#{bundle.CreateclapTitle_anos_repetidos}">
+                                    <p:ajax event="blur" immediate="true"/>                                                                
+                                </pe:inputNumber></b:column>
                             </b:row>
                             <b:row>
-                                <b:column col-xs="12"><p:inputText id="causa_anos_repetidos" placeholder="Causa"  value="#{clapController.selected.causa_anos_repetidos}" title="#{bundle.CreateclapTitle_causa_anos_repetidos}" /></b:column>
+                                <b:column col-xs="12"><p:inputText id="causa_anos_repetidos" placeholder="Causa"  value="#{clapController.selected.causa_anos_repetidos}" title="#{bundle.CreateclapTitle_causa_anos_repetidos}" >
+                                    <p:ajax event="blur" immediate="true"/>                                                                
+                                </p:inputText></b:column>
                             </b:row>
                         </b:column>
                         <b:column col-md="4">
@@ -722,6 +829,7 @@
                             <p:selectOneRadio id="problemas_escuela" style="width:13em;" value="#{clapController.selected.problemas_escuela}" layout="grid" columns="2">
                                 <f:selectItem itemLabel="Si" itemValue="true" />
                                 <f:selectItem itemLabel="No" itemValue="false" />
+                                <f:ajax event="valueChange" immediate="true"></f:ajax>
                             </p:selectOneRadio>
                         </b:column>
                         <b:column col-md="4">
@@ -729,6 +837,7 @@
                             <p:selectOneRadio id="violencia_escolar" style="width:13em;" value="#{clapController.selected.violencia_escolar}" layout="grid" columns="2">
                                 <f:selectItem itemLabel="Si" itemValue="true" />
                                 <f:selectItem itemLabel="No" itemValue="false" />
+                                <f:ajax event="valueChange" immediate="true"></f:ajax>
                             </p:selectOneRadio>
                         </b:column>
                     </b:row>
@@ -739,8 +848,11 @@
                             <p:selectOneRadio id="desercion" style="width:13em;" value="#{clapController.selected.desercion_exclusion}" layout="grid" columns="2">
                                 <f:selectItem itemLabel="Si" itemValue="true" />
                                 <f:selectItem itemLabel="No" itemValue="false" />
+                                <f:ajax event="valueChange" immediate="true"></f:ajax>
                             </p:selectOneRadio>
-                            <p:inputText id="causa_desercion_exclusion" placeholder="Causa" value="#{clapController.selected.causa_desercion_exclusion}" title="#{bundle.CreateclapTitle_causa_desercion_exclusion}" />
+                            <p:inputText id="causa_desercion_exclusion" placeholder="Causa" value="#{clapController.selected.causa_desercion_exclusion}" title="#{bundle.CreateclapTitle_causa_desercion_exclusion}" >
+                                    <p:ajax event="blur" immediate="true"/>                                                                                            
+                            </p:inputText>
                         </b:column>
                         <b:column col-md="4">
                             <p:outputLabel value="Percepción de redimiento con respecto a la mayoría de sus compañeros" style="max-width:200px;" for="percepcion_rendimiento" />
@@ -748,12 +860,15 @@
                                 <f:selectItem itemLabel="Mejor" itemValue="1" />
                                 <f:selectItem itemLabel="Peor" itemValue="2" />
                                 <f:selectItem itemLabel="Igual" itemValue="3" />
+                                <f:ajax event="valueChange" immediate="true"></f:ajax>
                             </p:selectOneRadio>
                         </b:column>
                     </b:row>
                         <facet name="footer">
                             <p:row>
-                                <b:inputText id="observaciones_educacion" value="#{clapController.selected.observaciones_educacion}" label="#{bundle.CreateclapTitle_observaciones_educacion}" />
+                                <b:inputText id="observaciones_educacion" value="#{clapController.selected.observaciones_educacion}" label="#{bundle.CreateclapTitle_observaciones_educacion}">
+                                    <p:ajax event="blur" immediate="true"/>                                                                                                                            
+                                </b:inputText>
                             </p:row>
                         </facet>
                 </b:panel>
@@ -768,13 +883,16 @@
                             <p:selectOneRadio id="trabaja" style="width:13em;" value="#{clapController.selected.trabaja}" layout="grid" columns="2">
                                 <f:selectItem itemLabel="Si" itemValue="true" />
                                 <f:selectItem itemLabel="No" itemValue="false" />
+                                <f:ajax event="valueChange" immediate="true"></f:ajax>
                             </p:selectOneRadio>
                         </b:row>
                         <b:row>
                             <p:outputLabel value="horas por semana" for="horas_trabajo" />
                         </b:row>
                         <b:row>
-                            <b:column col-xs="3"><pe:inputNumber id="horas_trabajo" styleClass="campo-numerico" minValue="0" maxValue="100" value="#{clapController.selected.horas_trabajo}" maxlength="2" title="#{bundle.CreateclapTitle_horas_trabajo}" /></b:column>
+                            <b:column col-xs="3"><pe:inputNumber id="horas_trabajo" styleClass="campo-numerico" minValue="0" maxValue="100" value="#{clapController.selected.horas_trabajo}" maxlength="2" title="#{bundle.CreateclapTitle_horas_trabajo}" >
+                                    <p:ajax event="blur" immediate="true"/>                                                                                                                                                            
+                                </pe:inputNumber></b:column>
                         </b:row>
                     </b:column>
                     <b:column col-md="3" col-xs="6">
@@ -791,6 +909,7 @@
                                 <p:selectOneRadio id="trabajo_infantil" style="width:12em;" value="#{clapController.selected.trabajo_infantil}" layout="grid" columns="2">
                                     <f:selectItem itemValue="true" />
                                     <f:selectItem itemValue="false" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                                 </p:selectOneRadio>
                             </b:column>
                         </b:row>
@@ -800,6 +919,7 @@
                                 <p:selectOneRadio id="trabajo_juvenil" style="width:12em" value="#{clapController.selected.trabajo_juvenil}" layout="grid" columns="2">
                                     <f:selectItem itemValue="true" />
                                     <f:selectItem itemValue="false" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                                 </p:selectOneRadio>
                             </b:column>
                         </b:row>
@@ -812,6 +932,7 @@
                             <p:selectOneRadio id="peores_formas" style="width:13em;" value="#{clapController.selected.peores_formas}" layout="grid" columns="2">
                                 <f:selectItem itemLabel="Si" itemValue="true" />
                                 <f:selectItem itemLabel="No" itemValue="false" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                             </p:selectOneRadio>
                         </b:row>
                     </b:column>
@@ -823,6 +944,7 @@
                             <p:selectOneRadio id="ser_dom_no_remu_peligroso" style="width:13em;" value="#{clapController.selected.ser_dom_no_remu_peligroso}" layout="grid" columns="2">
                                 <f:selectItem itemLabel="Si" itemValue="true" />
                                 <f:selectItem itemLabel="No" itemValue="false" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                             </p:selectOneRadio>
                         </b:row>
                     </b:column>
@@ -840,6 +962,7 @@
                                 <f:selectItem itemLabel="me gusta" itemValue="3" />
                                 <f:selectItem itemLabel="otra" itemValue="4" />
                                 <f:selectItem itemLabel="n/c" itemValue="5" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                             </p:selectOneRadio>
                         </b:row>
                     </b:column>
@@ -852,6 +975,7 @@
                                 <f:selectItem itemLabel="sí" itemValue="1" />
                                 <f:selectItem itemLabel="no" itemValue="2" />
                                 <f:selectItem itemLabel="n/c" itemValue="3" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                             </p:selectOneRadio>
                         </b:row>
                     </b:column>
@@ -860,14 +984,18 @@
                             <p:outputLabel value="#{bundle.CreateclapLabel_tipo_de_trabajo}" for="tipo_de_trabajo" />
                         </b:row>
                         <b:row>
-                            <p:inputText id="tipo_de_trabajo" value="#{clapController.selected.tipo_de_trabajo}" title="#{bundle.CreateclapTitle_tipo_de_trabajo}" />
+                            <p:inputText id="tipo_de_trabajo" value="#{clapController.selected.tipo_de_trabajo}" title="#{bundle.CreateclapTitle_tipo_de_trabajo}">
+                                    <p:ajax event="blur" immediate="true"/>                                                                                                                                                                                        
+                            </p:inputText>
                         </b:row>
                     </b:column>
                     </b:row>
 
                     <facet name="footer">
                         <p:row>
-                           <b:inputText id="observaciones_trabajo" value="#{clapController.selected.observaciones_trabajo}" label="Observaciones" />
+                            <b:inputText id="observaciones_trabajo" value="#{clapController.selected.observaciones_trabajo}" label="Observaciones" >
+                                    <p:ajax event="blur" immediate="true"/>                                                                                                                                                                                        
+                            </b:inputText>
                         </p:row>
                     </facet>
                 </b:panel>
@@ -885,6 +1013,7 @@
                                     <f:selectItem itemLabel="rechazado" itemValue="2" />
                                     <f:selectItem itemLabel="ignorado" itemValue="3" />
                                     <f:selectItem itemLabel="no sabe" itemValue="4"  />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                                 </p:selectOneRadio>
                             </b:row>
                         </b:column>
@@ -896,6 +1025,7 @@
                                 <p:selectOneRadio id="pareja" style="width:13em;" value="#{clapController.selected.pareja}" layout="grid" columns="2">
                                     <f:selectItem itemLabel="si" itemValue="true" />
                                     <f:selectItem itemLabel="no" itemValue="false" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                                 </p:selectOneRadio>
                             </b:row>
                         </b:column>
@@ -904,7 +1034,9 @@
                                 <p:outputLabel value="#{bundle.CreateclapLabel_edad_pareja}" for="edad_pareja" />
                             </b:row>
                             <b:row>
-                                <b:column col-xs="3"><pe:inputNumber id="edad_pareja" minValue="0" maxValue="140" value="#{clapController.selected.edad_pareja}" styleClass="campo-numerico" title="#{bundle.CreateclapTitle_edad_pareja}" /></b:column> años
+                                <b:column col-xs="3"><pe:inputNumber id="edad_pareja" minValue="0" maxValue="140" value="#{clapController.selected.edad_pareja}" styleClass="campo-numerico" title="#{bundle.CreateclapTitle_edad_pareja}" >
+                                    <p:ajax event="blur" immediate="true"/>                                                                                                                                                                                                                            
+                                </pe:inputNumber></b:column> años
                             </b:row>
                         </b:column>
                     </b:row>
@@ -918,6 +1050,7 @@
                                 <p:selectOneRadio id="violencia_pareja" style="width:13em;" value="#{clapController.selected.violencia_pareja}" layout="grid" columns="2">
                                     <f:selectItem itemLabel="si" itemValue="true" />
                                     <f:selectItem itemLabel="no" itemValue="false" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                                 </p:selectOneRadio>
                             </b:row>
                         </b:column>
@@ -929,6 +1062,7 @@
                                 <p:selectOneRadio id="amigos" style="width:13em;" value="#{clapController.selected.amigos}" layout="grid" columns="2">
                                     <f:selectItem itemLabel="si" itemValue="true" />
                                     <f:selectItem itemLabel="no" itemValue="false" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                                 </p:selectOneRadio>
                             </b:row>
                         </b:column>
@@ -940,6 +1074,7 @@
                                 <p:selectOneRadio id="suicidalidad_amigos" style="width:13em;" value="#{clapController.selected.suicidalidad_amigos}" layout="grid" columns="2">
                                     <f:selectItem itemLabel="si" itemValue="true" />
                                     <f:selectItem itemLabel="no" itemValue="false" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                                 </p:selectOneRadio>
                             </b:row>
                         </b:column>
@@ -951,7 +1086,9 @@
                                 <p:outputLabel value="Actividad física" for="horas_actividad_fisica" />
                             </b:row>
                             <b:row>
-                                <b:column col-xs="3"><pe:inputNumber id="horas_actividad_fisica" minValue="0" maxValue="100" value="#{clapController.selected.horas_actividad_fisica}" styleClass="campo-numerico" title="#{bundle.CreateclapTitle_horas_actividad_fisica}" /></b:column> horas por semana
+                                <b:column col-xs="3"><pe:inputNumber id="horas_actividad_fisica" minValue="0" maxValue="100" value="#{clapController.selected.horas_actividad_fisica}" styleClass="campo-numerico" title="#{bundle.CreateclapTitle_horas_actividad_fisica}" >
+                                    <p:ajax event="blur" immediate="true"/>
+                                </pe:inputNumber></b:column> horas por semana
                             </b:row>
                         </b:column>
                         <b:column col-md="4" col-xs="6">
@@ -959,7 +1096,9 @@
                                 <p:outputLabel value="TV" for="horas_tv" />
                             </b:row>
                             <b:row>
-                                <b:column col-xs="3"><pe:inputNumber id="horas_tv" value="#{clapController.selected.horas_tv}" minValue="0" maxValue="24" styleClass="campo-numerico" /></b:column> horas por día
+                                <b:column col-xs="3"><pe:inputNumber id="horas_tv" value="#{clapController.selected.horas_tv}" minValue="0" maxValue="24" styleClass="campo-numerico" >
+                                    <p:ajax event="blur" immediate="true"/>
+                                    </pe:inputNumber></b:column> horas por día
                             </b:row>
                         </b:column>
                         <b:column col-md="4" col-xs="6">
@@ -967,7 +1106,9 @@
                                 <p:outputLabel value="Computador/consola y otros" for="horas_computador_consola" />
                             </b:row>
                             <b:row>
-                              <b:column col-xs="3"><pe:inputNumber id="horas_computador_consola" value="#{clapController.selected.horas_computador_consola}" minValue="0" maxValue="24" styleClass="campo-numerico" /></b:column> horas por día
+                                <b:column col-xs="3"><pe:inputNumber id="horas_computador_consola" value="#{clapController.selected.horas_computador_consola}" minValue="0" maxValue="24" styleClass="campo-numerico" >
+                                    <p:ajax event="blur" immediate="true"/>
+                                    </pe:inputNumber></b:column> horas por día
                             </b:row>
                         </b:column>
                     </b:row>
@@ -981,6 +1122,7 @@
                                 <p:selectOneRadio id="cyberbulling" style="width:13em;" value="#{clapController.selected.cyberbulling}" layout="grid" columns="2">
                                     <f:selectItem itemLabel="si" itemValue="true" />
                                     <f:selectItem itemLabel="no" itemValue="false" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                                 </p:selectOneRadio>
                             </b:row>
                         </b:column>
@@ -992,6 +1134,7 @@
                                 <p:selectOneRadio id="grooming" style="width:13em;" value="#{clapController.selected.grooming}" layout="grid" columns="2">
                                     <f:selectItem itemLabel="si" itemValue="true" />
                                     <f:selectItem itemLabel="no" itemValue="false" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                                 </p:selectOneRadio>
                             </b:row>
                         </b:column>
@@ -1006,17 +1149,22 @@
                                 <p:selectOneRadio id="otras_actividades" style="width:13em;" value="#{clapController.selected.otras_actividades}" layout="grid" columns="2">
                                     <f:selectItem itemLabel="si" itemValue="true" />
                                     <f:selectItem itemLabel="no" itemValue="false" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                                 </p:selectOneRadio>
                             </b:row>
                             <b:row>
-                                <p:inputText id="especificacion_otras_actividades" value="#{clapController.selected.especificacion_otras_actividades}" placeholder="¿Cuáles?" />
+                                <p:inputText id="especificacion_otras_actividades" value="#{clapController.selected.especificacion_otras_actividades}" placeholder="¿Cuáles?" >
+                                    <p:ajax event="blur" immediate="true"/>                                
+                                </p:inputText>
                             </b:row>
                         </b:column>
                     </b:row>
                     </div>
                     <facet>
                         <p:row>
-                            <b:inputText id="observaciones_vida_social" value="#{clapController.selected.observaciones_vida_social}" label="Observaciones" />
+                            <b:inputText id="observaciones_vida_social" value="#{clapController.selected.observaciones_vida_social}" label="Observaciones" >                            
+                                    <p:ajax event="blur" immediate="true"/>
+                            </b:inputText>
                         </p:row>
                     </facet>
                 </b:panel>
@@ -1063,7 +1211,9 @@
                                 </b:column>
                             </b:row>
                             <b:row>
-                                <p:inputText id="especificacion_consumo_otra_sustancia" placeholder="¿Cuál?¿Cuáles?" value="#{clapController.selected.especificacion_consumo_otra_sustancia}" /> 
+                                <p:inputText id="especificacion_consumo_otra_sustancia" placeholder="¿Cuál?¿Cuáles?" value="#{clapController.selected.especificacion_consumo_otra_sustancia}" >
+                                    <p:ajax event="blur" immediate="true"/>                                
+                                </p:inputText> 
                             </b:row>
                         </b:column>
                         <b:column col-md="4" col-xs="6">
@@ -1074,10 +1224,13 @@
                                 <p:selectOneRadio id="sueno_normal" style="width:13em;" value="#{clapController.selected.sueno_normal}" layout="grid" columns="2">
                                     <f:selectItem itemLabel="si" itemValue="true" />
                                     <f:selectItem itemLabel="no" itemValue="false" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                                 </p:selectOneRadio>
                             </b:row>
                             <b:row>
-                                <b:column col-xs="3"><pe:inputNumber minValue="0" maxValue="24" value="#{clapController.selected.horas_sueno}" styleClass="campo-numerico" id="horas_sueno" /></b:column> horas por día
+                                <b:column col-xs="3"><pe:inputNumber minValue="0" maxValue="24" value="#{clapController.selected.horas_sueno}" styleClass="campo-numerico" id="horas_sueno" >
+                                    <p:ajax event="blur" immediate="true"/>                                                                    
+                                    </pe:inputNumber></b:column> horas por día
                             </b:row>
                         </b:column>
                         <b:column col-md="4" col-xs="6">
@@ -1088,6 +1241,7 @@
                                 <p:selectOneRadio id="alimentacion_adecuada" style="width:13em;" value="#{clapController.selected.alimentacion_adecuada}" layout="grid" columns="2">
                                     <f:selectItem itemLabel="si" itemValue="true" />
                                     <f:selectItem itemLabel="no" itemValue="false" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                                 </p:selectOneRadio>
                             </b:row>
                         </b:column>
@@ -1096,7 +1250,9 @@
                                 <p:outputLabel value="Comidas con familia" for="comidas_familia" />
                             </b:row>
                             <b:row>
-                                <b:column col-xs="3"><pe:inputNumber id="comidas_familia" minValue="0" maxValue="10" value="#{clapController.selected.comidas_familia}" styleClass="campo-numerico"/></b:column> n° de comidas/día
+                                <b:column col-xs="3"><pe:inputNumber id="comidas_familia" minValue="0" maxValue="10" value="#{clapController.selected.comidas_familia}" styleClass="campo-numerico">
+                                    <p:ajax event="blur" immediate="true"/>                                                                                                        
+                                    </pe:inputNumber></b:column> n° de comidas/día
                             </b:row>
                         </b:column>
                     </b:row>
@@ -1110,10 +1266,13 @@
                                 <p:selectOneRadio id="alimentacion_especial" style="width:13em;" value="#{clapController.selected.alimentacion_especial}" layout="grid" columns="2">
                                     <f:selectItem itemLabel="si" itemValue="true" />
                                     <f:selectItem itemLabel="no" itemValue="false" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                                 </p:selectOneRadio>
                             </b:row>
                             <b:row>
-                                <p:inputText id="especificacion_alimentacion_especial" value="#{clapController.selected.especificacion_alimentacion_especial}" placeholder="¿Cuál?" />
+                                <p:inputText id="especificacion_alimentacion_especial" value="#{clapController.selected.especificacion_alimentacion_especial}" placeholder="¿Cuál?" >
+                                <p:ajax event="blur" immediate="true"/>
+                                </p:inputText>
                             </b:row>
                         </b:column>
                         <b:column col-md="4" col-xs="6">
@@ -1124,10 +1283,13 @@
                                 <p:selectOneRadio id="tabaco" style="width:13em;" value="#{clapController.selected.tabaco}" layout="grid" columns="2">
                                     <f:selectItem itemLabel="si" itemValue="true" />
                                     <f:selectItem itemLabel="no" itemValue="false" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                                 </p:selectOneRadio>
                             </b:row>
                             <b:row>
-                                <b:column col-xs="3"><pe:inputNumber styleClass="campo-numerico" id="cigarros_dia" minValue="0" maxValue="100" value="#{clapController.selected.cigarros_dia}" title="#{bundle.CreateclapTitle_cigarros_dia}" /></b:column> promedio cigarros/día
+                                <b:column col-xs="3"><pe:inputNumber styleClass="campo-numerico" id="cigarros_dia" minValue="0" maxValue="100" value="#{clapController.selected.cigarros_dia}" title="#{bundle.CreateclapTitle_cigarros_dia}" >
+                                <p:ajax event="blur" immediate="true"/>
+                                    </pe:inputNumber></b:column> promedio cigarros/día
                             </b:row>
                         </b:column>
                         <b:column col-md="4" col-xs="6">
@@ -1138,6 +1300,7 @@
                                 <p:selectOneRadio id="seguridad_vial" style="width:13em;" value="#{clapController.selected.seguridad_vial}" layout="grid" columns="2">
                                     <f:selectItem itemLabel="si" itemValue="true" />
                                     <f:selectItem itemLabel="no" itemValue="false" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                                 </p:selectOneRadio>
                             </b:row>
                         </b:column>
@@ -1145,7 +1308,9 @@
                         <br/>
                     </div>
                     <facet>
-                        <b:inputText id="observaciones_habitos_consumo" value="#{clapController.selected.observaciones_habitos_consumo}" label="#{bundle.CreateclapTitle_observaciones_habitos_consumo}" />
+                        <b:inputText id="observaciones_habitos_consumo" value="#{clapController.selected.observaciones_habitos_consumo}" label="#{bundle.CreateclapTitle_observaciones_habitos_consumo}" >
+                                <p:ajax event="blur" immediate="true"/>
+                        </b:inputText>
                     </facet>
                     
                     <b:panel id="CA" title="Test de Riesgo de Alcohol o Drogas" style="margin-left:3%;width: 95%; " look="info" rendered="#{clapController.auditCrafft}">
@@ -1155,7 +1320,7 @@
                             <b:panel title="Parte A" style="margin-left:3%;width: 90%;" look="info">
                                     <p:panelGrid columns="2">
                                         <p:outputLabel value="#{bundle.CreateauditLabel_p1}" for="p1" style="width:350px" />
-                                        <p:selectOneMenu id="p1" value="#{clapController.audit.p1}" style="min-width:190px">
+                                        <p:selectOneMenu id="p1" value="#{clapController.selected.audit.p1}" style="min-width:190px">
                                             <f:selectItem itemValue="#{0}" itemLabel="Nunca"/>
                                             <f:selectItem itemValue="#{1}" itemLabel="Una o menos veces al mes"/>
                                             <f:selectItem itemValue="#{2}" itemLabel="De 2 a 4 veces al mes"/>
@@ -1165,7 +1330,7 @@
                                         </p:selectOneMenu>
 
                                         <p:outputLabel value="#{bundle.CreateauditLabel_p2}" for="p2" style="width:350px" />
-                                        <p:selectOneMenu id="p2" value="#{clapController.audit.p2}" style="min-width:190px">
+                                        <p:selectOneMenu id="p2" value="#{clapController.selected.audit.p2}" style="min-width:190px">
                                             <f:selectItem itemValue="#{0}" itemLabel="1 ó 2"/>
                                             <f:selectItem itemValue="#{1}" itemLabel="3 ó 4"/>
                                             <f:selectItem itemValue="#{2}" itemLabel="5 ó 6"/>
@@ -1175,7 +1340,7 @@
                                         </p:selectOneMenu>
 
                                         <p:outputLabel value="#{bundle.CreateauditLabel_p3}" for="p3" style="width:350px" />
-                                        <p:selectOneMenu id="p3" value="#{clapController.audit.p3}" style="min-width:190px">
+                                        <p:selectOneMenu id="p3" value="#{clapController.selected.audit.p3}" style="min-width:190px">
                                             <f:selectItem itemValue="#{0}" itemLabel="Nunca"/>
                                             <f:selectItem itemValue="#{1}" itemLabel="Menos de una vez al mes"/>
                                             <f:selectItem itemValue="#{2}" itemLabel="Mensualmente"/>
@@ -1188,7 +1353,7 @@
                             <b:panel title="Parte B" style="margin-left:3%;width: 90%;" look="info">
                                     <p:panelGrid columns="2">
                                         <p:outputLabel value="#{bundle.CreateauditLabel_p4}" for="p4" style="width:350px" />
-                                        <p:selectOneMenu id="p4" value="#{clapController.audit.p4}" style="min-width:190px" disabled="#{clapController.esIntervencionMinima()}">
+                                        <p:selectOneMenu id="p4" value="#{clapController.selected.audit.p4}" style="min-width:190px" disabled="#{clapController.esIntervencionMinima()}">
                                             <f:selectItem itemValue="#{0}" itemLabel="Nunca"/>
                                             <f:selectItem itemValue="#{1}" itemLabel="Menos de una vez al mes"/>
                                             <f:selectItem itemValue="#{2}" itemLabel="Mensualmente"/>
@@ -1198,7 +1363,7 @@
                                         </p:selectOneMenu>
 
                                         <p:outputLabel value="#{bundle.CreateauditLabel_p5}" for="p5" style="width:350px" />
-                                        <p:selectOneMenu id="p5" value="#{clapController.audit.p5}" style="min-width:190px" disabled="#{clapController.esIntervencionMinima()}">
+                                        <p:selectOneMenu id="p5" value="#{clapController.selected.audit.p5}" style="min-width:190px" disabled="#{clapController.esIntervencionMinima()}">
                                             <f:selectItem itemValue="#{0}" itemLabel="Nunca"/>
                                             <f:selectItem itemValue="#{1}" itemLabel="Menos de una vez al mes"/>
                                             <f:selectItem itemValue="#{2}" itemLabel="Mensualmente"/>
@@ -1208,7 +1373,7 @@
                                         </p:selectOneMenu>
 
                                         <p:outputLabel value="#{bundle.CreateauditLabel_p6}" for="p6" style="width:350px" />
-                                        <p:selectOneMenu id="p6" value="#{clapController.audit.p6}" style="min-width:190px" disabled="#{clapController.esIntervencionMinima()}">
+                                        <p:selectOneMenu id="p6" value="#{clapController.selected.audit.p6}" style="min-width:190px" disabled="#{clapController.esIntervencionMinima()}">
                                             <f:selectItem itemValue="#{0}" itemLabel="Nunca"/>
                                             <f:selectItem itemValue="#{1}" itemLabel="Menos de una vez al mes"/>
                                             <f:selectItem itemValue="#{2}" itemLabel="Mensualmente"/>
@@ -1218,7 +1383,7 @@
                                         </p:selectOneMenu>
 
                                         <p:outputLabel value="#{bundle.CreateauditLabel_p7}" for="p7" style="width:350px" />
-                                        <p:selectOneMenu id="p7" value="#{clapController.audit.p7}" style="min-width:190px" disabled="#{clapController.esIntervencionMinima()}">
+                                        <p:selectOneMenu id="p7" value="#{clapController.selected.audit.p7}" style="min-width:190px" disabled="#{clapController.esIntervencionMinima()}">
                                             <f:selectItem itemValue="#{0}" itemLabel="Nunca"/>
                                             <f:selectItem itemValue="#{1}" itemLabel="Menos de una vez al mes"/>
                                             <f:selectItem itemValue="#{2}" itemLabel="Mensualmente"/>
@@ -1228,7 +1393,7 @@
                                         </p:selectOneMenu>
 
                                         <p:outputLabel value="#{bundle.CreateauditLabel_p8}" for="p8" style="width:350px" />
-                                        <p:selectOneMenu id="p8" value="#{clapController.audit.p8}" style="min-width:190px" disabled="#{clapController.esIntervencionMinima()}">
+                                        <p:selectOneMenu id="p8" value="#{clapController.selected.audit.p8}" style="min-width:190px" disabled="#{clapController.esIntervencionMinima()}">
                                             <f:selectItem itemValue="#{0}" itemLabel="Nunca"/>
                                             <f:selectItem itemValue="#{1}" itemLabel="Menos de una vez al mes"/>
                                             <f:selectItem itemValue="#{2}" itemLabel="Mensualmente"/>
@@ -1238,7 +1403,7 @@
                                         </p:selectOneMenu>
 
                                         <p:outputLabel value="#{bundle.CreateauditLabel_p9}" for="p9" style="width:350px" />
-                                        <p:selectOneMenu id="p9" value="#{clapController.audit.p9}" style="min-width:190px" disabled="#{clapController.esIntervencionMinima()}">
+                                        <p:selectOneMenu id="p9" value="#{clapController.selected.audit.p9}" style="min-width:190px" disabled="#{clapController.esIntervencionMinima()}">
                                             <f:selectItem itemValue="#{0}" itemLabel="No"/>
                                             <f:selectItem itemValue="#{2}" itemLabel="Sí, pero en el curso del último año"/>
                                             <f:selectItem itemValue="#{4}" itemLabel="Sí, el último año"/>
@@ -1246,7 +1411,7 @@
                                         </p:selectOneMenu>
 
                                         <p:outputLabel value="#{bundle.CreateauditLabel_p10}" for="p10" style="width:350px" />
-                                        <p:selectOneMenu id="p10" value="#{clapController.audit.p10}" style="min-width:190px" disabled="#{clapController.esIntervencionMinima()}">
+                                        <p:selectOneMenu id="p10" value="#{clapController.selected.audit.p10}" style="min-width:190px" disabled="#{clapController.esIntervencionMinima()}">
                                             <f:selectItem itemValue="#{0}" itemLabel="No"/>
                                             <f:selectItem itemValue="#{2}" itemLabel="Sí, pero en el curso del último año"/>
                                             <f:selectItem itemValue="#{4}" itemLabel="Sí, el último año"/>
@@ -1280,24 +1445,24 @@
                         <b:panel title="Parte A: Durante los últimos 12 meses" style="margin-left:3%;width: 95%;" look="info">
                             <p:panelGrid columns="2">
                             <p:outputLabel value="#{bundle.CreateCrafftTitle_A1}" for="A1" style="width:350px" />
-                            <p:selectOneRadio id="A1" value="#{clapController.crafft.a1}" style="min-width:100px">
+                            <p:selectOneRadio id="A1" value="#{clapController.selected.crafft.a1}" style="min-width:100px">
                                 <f:selectItem itemValue="#{true}" itemLabel="Si"/>
                                 <f:selectItem itemValue="#{false}" itemLabel="No"/>
-                                <f:ajax event="valueChange"  listener="#{clapController.serviceChangeA(clapController.crafft.a1)}" immediate="true" render="crafft" ></f:ajax>
+                                <f:ajax event="valueChange"  listener="#{clapController.serviceChangeA(clapController.selected.crafft.a1)}" immediate="true" render="crafft" ></f:ajax>
                             </p:selectOneRadio>
 
                             <p:outputLabel value="#{bundle.CreateCrafftTitle_A2}" for="A2" style="width:350px"/>
-                            <p:selectOneRadio id="A2" value="#{clapController.crafft.a2}" style="min-width:100px">
+                            <p:selectOneRadio id="A2" value="#{clapController.selected.crafft.a2}" style="min-width:100px">
                                 <f:selectItem itemValue="#{true}" itemLabel="Si"/>
                                 <f:selectItem itemValue="#{false}" itemLabel="No" />
-                                <f:ajax event="valueChange"  listener="#{clapController.serviceChangeA(clapController.crafft.a2)}" immediate="true" render="crafft" ></f:ajax>
+                                <f:ajax event="valueChange"  listener="#{clapController.serviceChangeA(clapController.selected.crafft.a2)}" immediate="true" render="crafft" ></f:ajax>
                             </p:selectOneRadio>
 
                             <p:outputLabel value="#{bundle.CreateCrafftTitle_A3}" for="A3" style="width:350px"/>
-                            <p:selectOneRadio id="A3" value="#{clapController.crafft.a3}" style="min-width:100px">
+                            <p:selectOneRadio id="A3" value="#{clapController.selected.crafft.a3}" style="min-width:100px">
                                 <f:selectItem itemValue="#{true}" itemLabel="Si"/>
                                 <f:selectItem itemValue="#{false}" itemLabel="No" />
-                                <f:ajax event="valueChange"  listener="#{clapController.serviceChangeA(clapController.crafft.a3)}" immediate="true" render="crafft" ></f:ajax>
+                                <f:ajax event="valueChange"  listener="#{clapController.serviceChangeA(clapController.selected.crafft.a3)}" immediate="true" render="crafft" ></f:ajax>
                             </p:selectOneRadio>
                             </p:panelGrid>
                         </b:panel>
@@ -1305,39 +1470,45 @@
                         <b:panel title="Parte B: Preguntas CRAFFT" style="margin-left:3%;width: 95%;" look="info">
                             <p:panelGrid columns="2">
                             <p:outputLabel value="#{bundle.CreateCrafftTitle_B1}" for="B1" style="width:350px"/>
-                            <p:selectOneRadio id="B1" value="#{clapController.crafft.b1}" style="min-width:100px" disabled="#{clapController.puntajeACrafft == 0}">
+                            <p:selectOneRadio id="B1" value="#{clapController.selected.crafft.b1}" style="min-width:100px" disabled="#{clapController.puntajeACrafft == 0}">
                                 <f:selectItem itemValue="#{true}" itemLabel="Si"/>
                                 <f:selectItem itemValue="#{false}" itemLabel="No" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                             </p:selectOneRadio>
 
                             <p:outputLabel value="#{bundle.CreateCrafftTitle_B2}" for="B2" style="width:350px" />
-                            <p:selectOneRadio id="B2" value="#{clapController.crafft.b2}" style="min-width:100px" disabled="#{clapController.puntajeACrafft == 0}">
+                            <p:selectOneRadio id="B2" value="#{clapController.selected.crafft.b2}" style="min-width:100px" disabled="#{clapController.puntajeACrafft == 0}">
                                 <f:selectItem itemValue="#{true}" itemLabel="Si"/>
                                 <f:selectItem itemValue="#{false}" itemLabel="No" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                             </p:selectOneRadio>
 
                             <p:outputLabel value="#{bundle.CreateCrafftTitle_B3}" for="B3" style="width:350px" />
-                            <p:selectOneRadio id="B3" value="#{clapController.crafft.b3}" style="min-width:100px" disabled="#{clapController.puntajeACrafft == 0}">
+                            <p:selectOneRadio id="B3" value="#{clapController.selected.crafft.b3}" style="min-width:100px" disabled="#{clapController.puntajeACrafft == 0}">
                                 <f:selectItem itemValue="#{true}" itemLabel="Si"/>
                                 <f:selectItem itemValue="#{false}" itemLabel="No" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                             </p:selectOneRadio>
 
                             <p:outputLabel value="#{bundle.CreateCrafftTitle_B4}" for="B4" style="width:350px" />
-                            <p:selectOneRadio id="B4" value="#{clapController.crafft.b4}" style="min-width:100px" disabled="#{clapController.puntajeACrafft == 0}">
+                            <p:selectOneRadio id="B4" value="#{clapController.selected.crafft.b4}" style="min-width:100px" disabled="#{clapController.puntajeACrafft == 0}">
                                 <f:selectItem itemValue="#{true}" itemLabel="Si"/>
                                 <f:selectItem itemValue="#{false}" itemLabel="No" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                             </p:selectOneRadio>
 
                             <p:outputLabel value="#{bundle.CreateCrafftTitle_B5}" for="B5" style="width:350px" />
-                            <p:selectOneRadio id="B5" value="#{clapController.crafft.b5}" style="min-width:100px" disabled="#{clapController.puntajeACrafft == 0}">
+                            <p:selectOneRadio id="B5" value="#{clapController.selected.crafft.b5}" style="min-width:100px" disabled="#{clapController.puntajeACrafft == 0}">
                                 <f:selectItem itemValue="#{true}" itemLabel="Si"/>
                                 <f:selectItem itemValue="#{false}" itemLabel="No" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                             </p:selectOneRadio>
 
                             <p:outputLabel value="#{bundle.CreateCrafftTitle_B6}" for="B6" style="width:350px" />
-                            <p:selectOneRadio id="B6" value="#{clapController.crafft.b6}" style="min-width:100px" disabled="#{clapController.puntajeACrafft == 0}">
+                            <p:selectOneRadio id="B6" value="#{clapController.selected.crafft.b6}" style="min-width:100px" disabled="#{clapController.puntajeACrafft == 0}">
                                 <f:selectItem itemValue="#{true}" itemLabel="Si"/>
                                 <f:selectItem itemValue="#{false}" itemLabel="No" />
+                                    <f:ajax event="valueChange" immediate="true"></f:ajax>
                             </p:selectOneRadio>
                             </p:panelGrid>
                         </b:panel>
@@ -1356,7 +1527,9 @@
                                     <p:outputLabel value="#{bundle.CreateclapLabel_edad_menarca_espermarca}" for="edad_menarca_espermarca" />
                                 </b:row>
                                 <b:row>
-                                    <b:column col-xs="3"><pe:inputNumber styleClass="campo-numerico" id="edad_menarca_espermarca" minValue="0" maxValue="50" value="#{clapController.selected.edad_menarca_espermarca}"/></b:column> años
+                                    <b:column col-xs="3"><pe:inputNumber styleClass="campo-numerico" id="edad_menarca_espermarca" minValue="0" maxValue="50" value="#{clapController.selected.edad_menarca_espermarca}">
+                                <p:ajax event="blur" immediate="true"/>                                        
+                                        </pe:inputNumber></b:column> años
                                 </b:row>
                             </b:column>
                             <b:column col-md="4" col-xs="6">
@@ -1364,12 +1537,15 @@
                                     <p:outputLabel value="#{bundle.CreateclapLabel_fecha_ultima_menstruacion}" for="fecha_ultima_menstruacion" />
                                 </b:row>
                                 <b:row>
-                                    <p:calendar id="fecha_ultima_menstruacion" pattern="MM/dd/yyyy" value="#{clapController.selected.fecha_ultima_menstruacion}" showOn="button"/>
+                                    <p:calendar id="fecha_ultima_menstruacion" pattern="dd/MM/yyyy" value="#{clapController.selected.fecha_ultima_menstruacion}" showOn="button">
+                                    <p:ajax event="dateSelect" immediate="true"/>                                    
+                                    </p:calendar>
                                 </b:row>
                                 <b:row>
                                     <p:selectOneRadio id="no_conoce_fecha_ultima_menstruacion" style="width:13em;" value="#{clapController.selected.no_conoce_fecha_ultima_menstruacion}" layout="grid" columns="2">
                                         <f:selectItem itemLabel="no conoce" itemValue="true" />
                                         <f:selectItem itemLabel="n/c" itemValue="false" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                             </b:column>
@@ -1383,6 +1559,7 @@
                                         <f:selectItem itemLabel="no" itemValue="2" />
                                         <f:selectItem itemLabel="n/s" itemValue="3" />
                                         <f:selectItem itemLabel="n/c" itemValue="4" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                             </b:column>
@@ -1398,6 +1575,7 @@
                                         <f:selectItem itemLabel="si" itemValue="1" />
                                         <f:selectItem itemLabel="no" itemValue="2" />
                                         <f:selectItem itemLabel="n/c" itemValue="3" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                                 <b:row>
@@ -1407,6 +1585,7 @@
                                     <p:selectOneRadio id="flujo_secrecion_patologico" style="width:13em;" value="#{clapController.selected.flujo_secrecion_patologico}" layout="grid" columns="2">
                                         <f:selectItem itemLabel="si" itemValue="true" />
                                         <f:selectItem itemLabel="no" itemValue="false" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                             </b:column>
@@ -1416,10 +1595,13 @@
                                     <p:selectOneRadio id="its_vih" style="width:13em;" value="#{clapController.selected.its_vih}" layout="grid" columns="2">
                                         <f:selectItem itemLabel="si" itemValue="true" />
                                         <f:selectItem itemLabel="no" itemValue="false" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                                 <b:row>
-                                    <p:inputText id="especificacion_its_vih" value="#{clapController.selected.especificacion_its_vih}" placeholder="¿Cuáles?" />
+                                    <p:inputText id="especificacion_its_vih" value="#{clapController.selected.especificacion_its_vih}" placeholder="¿Cuáles?" >
+                                        <p:ajax event="blur" immediate="true"/>                                    
+                                    </p:inputText>
                                 </b:row>
                                 <b:row>
                                     <p:outputLabel value="#{bundle.CreateclapLabel_tratamiento}" for="tratamiento" />
@@ -1427,6 +1609,7 @@
                                         <f:selectItem itemLabel="si" itemValue="1" />
                                         <f:selectItem itemLabel="no" itemValue="2" />
                                         <f:selectItem itemLabel="n/s" itemValue="3" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                                 <b:row>
@@ -1435,27 +1618,36 @@
                                         <f:selectItem itemLabel="si" itemValue="1" />
                                         <f:selectItem itemLabel="no" itemValue="2" />
                                         <f:selectItem itemLabel="n/s" itemValue="3" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                             </b:column>
                             <b:column col-md="4" col-xs="6">
                                 <b:row>
                                     <b:column col-md="6"><p:outputLabel value="#{bundle.CreateclapLabel_embarazos}" for="embarazos" /></b:column>
-                                    <b:column col-md="6"><pe:inputNumber id="embarazos" minValue="0" maxValue="20" value="#{clapController.selected.embarazos}" style="max-width: 50px;" /></b:column>
+                                    <b:column col-md="6"><pe:inputNumber id="embarazos" minValue="0" maxValue="20" value="#{clapController.selected.embarazos}" style="max-width: 50px;">
+                                        <p:ajax event="blur" immediate="true"/>                                                                            
+                                        </pe:inputNumber></b:column>
                                 </b:row>
                                 <b:row>
                                     <b:column col-md="6"><p:outputLabel value="#{bundle.CreateclapLabel_hijos}" for="hijos" /></b:column>
-                                    <b:column col-md="6"><pe:inputNumber id="hijos" minValue="0" maxValue="20" value="#{clapController.selected.hijos}" style="max-width: 50px;" /></b:column>
+                                    <b:column col-md="6"><pe:inputNumber id="hijos" minValue="0" maxValue="20" value="#{clapController.selected.hijos}" style="max-width: 50px;">
+                                        <p:ajax event="blur" immediate="true"/>                                                                            
+                                        </pe:inputNumber></b:column>
                                 </b:row>
                                 <b:row>
                                     <b:column col-md="6"><p:outputLabel value="#{bundle.CreateclapLabel_abortos}" for="abortos" /></b:column>
-                                    <b:column col-md="6"><pe:inputNumber id="abortos" minValue="0" maxValue="20" value="#{clapController.selected.abortos}" style="max-width: 50px;"  /></b:column>
+                                    <b:column col-md="6"><pe:inputNumber id="abortos" minValue="0" maxValue="20" value="#{clapController.selected.abortos}" style="max-width: 50px;"  >
+                                        <p:ajax event="blur" immediate="true"/>                                                                            
+                                        </pe:inputNumber></b:column>
                                 </b:row>
                             </b:column>
                         </b:row>
                     </div>
                     <facet>
-                        <b:inputText id="observaciones_gineco_urologico" value="#{clapController.selected.observaciones_gineco_urologico}" label="Observaciones" />
+                        <b:inputText id="observaciones_gineco_urologico" value="#{clapController.selected.observaciones_gineco_urologico}" label="Observaciones" >
+                            <p:ajax event="blur" immediate="true"/>                                                            
+                        </b:inputText>
                     </facet>
                 </b:panel>
 
@@ -1472,11 +1664,14 @@
                                         <f:selectItem itemLabel="homosexual" itemValue="2" />
                                         <f:selectItem itemLabel="bisexual" itemValue="3" />
                                         <f:selectItem itemLabel="n/r" itemValue="4" />
-                                    </p:selectOneRadio>
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
+                                   </p:selectOneRadio>
                                 </b:row>
                                 <b:row>
                                     <p:outputLabel value="Se identifica como (opcional)" for="especificacion_orientacion_sexual" />
-                                    <p:inputText id="especificacion_orientacion_sexual" value="#{clapController.selected.especificacion_orientacion_sexual}" />
+                                    <p:inputText id="especificacion_orientacion_sexual" value="#{clapController.selected.especificacion_orientacion_sexual}" >
+                                        <p:ajax event="blur" immediate="true"/>
+                                    </p:inputText>
                                 </b:row>
                             </b:column>
                             <b:column col-md="4" col-xs="6">
@@ -1488,11 +1683,14 @@
                                         <f:selectItem itemLabel="postergadora" itemValue="1" />
                                         <f:selectItem itemLabel="anticipadora" itemValue="2" />
                                         <f:selectItem itemLabel="activa" itemValue="3" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                                 <b:row>
                                     <p:outputLabel value="edad de inicio" for="edad_inicio_conducta_sexual" />
-                                    <pe:inputNumber id="edad_inicio_conducta_sexual" minValue="0" maxValue="70" styleClass="campo-numerico" value="#{clapController.selected.edad_inicio_conducta_sexual}" title="#{bundle.CreateclapTitle_edad_inicio_conducta_sexual}" /> años
+                                    <pe:inputNumber id="edad_inicio_conducta_sexual" minValue="0" maxValue="70" styleClass="campo-numerico" value="#{clapController.selected.edad_inicio_conducta_sexual}" title="#{bundle.CreateclapTitle_edad_inicio_conducta_sexual}">
+                                        <p:ajax event="blur" immediate="true"/>
+                                    </pe:inputNumber> años
                                 </b:row>
                             </b:column>
                             <b:column col-md="4" col-xs="6">
@@ -1505,6 +1703,7 @@
                                         <f:selectItem itemLabel="mismo sexo" itemValue="2" />
                                         <f:selectItem itemLabel="ambos sexos" itemValue="3" />
                                         <f:selectItem itemLabel="n/c" itemValue="4" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                             </b:column>
@@ -1520,6 +1719,7 @@
                                         <f:selectItem itemLabel="única ambos" itemValue="1" />
                                         <f:selectItem itemLabel="varias" itemValue="2" />
                                         <f:selectItem itemLabel="n/c" itemValue="3" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                             </b:column>
@@ -1532,6 +1732,7 @@
                                         <f:selectItem itemLabel="si" itemValue="1" />
                                         <f:selectItem itemLabel="no" itemValue="2" />
                                         <f:selectItem itemLabel="n/c" itemValue="3" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                             </b:column>
@@ -1544,6 +1745,7 @@
                                         <f:selectItem itemLabel="siempre" itemValue="1" />
                                         <f:selectItem itemLabel="a veces" itemValue="2" />
                                         <f:selectItem itemLabel="nunca" itemValue="3" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                             </b:column>
@@ -1556,7 +1758,9 @@
                                         <p:outputLabel value="#{bundle.CreateclapLabel_uso_mac}" for="uso_mac" />
                                     </b:column>
                                     <b:column col-xs="6">
-                                        <p:inputText id="especificacion_uso_mac" value="#{clapController.selected.especificacion_uso_mac}" placeholder="¿Cuál?" />
+                                        <p:inputText id="especificacion_uso_mac" value="#{clapController.selected.especificacion_uso_mac}" placeholder="¿Cuál?">
+                                           <p:ajax event="blur" immediate="true"/>                                        
+                                        </p:inputText>
                                     </b:column>
                                 </b:row>
                                 <b:row>
@@ -1565,10 +1769,13 @@
                                             <f:selectItem itemLabel="si" itemValue="1" />
                                             <f:selectItem itemLabel="no" itemValue="2" />
                                             <f:selectItem itemLabel="a veces" itemValue="3" />
+                                            <f:ajax event="valueChange" immediate="true"></f:ajax>
                                         </p:selectOneRadio>
                                     </b:column>
                                     <b:column col-xs="6">
-                                        <p:inputText id="razon_no_uso_mac" value="#{clapController.selected.razon_no_uso_mac}" placeholder="Razón no uso" />
+                                        <p:inputText id="razon_no_uso_mac" value="#{clapController.selected.razon_no_uso_mac}" placeholder="Razón no uso" >
+                                           <p:ajax event="blur" immediate="true"/>
+                                        </p:inputText>
                                     </b:column>
                                 </b:row>
                             </b:column>
@@ -1580,6 +1787,7 @@
                                     <p:selectOneRadio id="consejeria_uso_mac" style="width:15em;" value="#{clapController.selected.consejeria_uso_mac}" layout="grid" columns="3">
                                         <f:selectItem itemLabel="si" itemValue="true" />
                                         <f:selectItem itemLabel="no" itemValue="false" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                             </b:column>
@@ -1591,6 +1799,7 @@
                                     <p:selectOneRadio id="aco_emergencia" style="width:15em;" value="#{clapController.selected.aco_emergencia}" layout="grid" columns="3">
                                         <f:selectItem itemLabel="si" itemValue="true" />
                                         <f:selectItem itemLabel="no" itemValue="false" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                             </b:column>
@@ -1605,6 +1814,7 @@
                                     <p:selectOneRadio id="abuso_sexual" style="width:15em;" value="#{clapController.selected.abuso_sexual}" layout="grid" columns="3">
                                         <f:selectItem itemLabel="si" itemValue="true" />
                                         <f:selectItem itemLabel="no" itemValue="false" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                             </b:column>
@@ -1616,13 +1826,16 @@
                                     <p:selectOneRadio id="reparacion_abuso_sexual" style="width:15em;" value="#{clapController.selected.reparacion_abuso_sexual}" layout="grid" columns="3">
                                         <f:selectItem itemLabel="si" itemValue="true" />
                                         <f:selectItem itemLabel="no" itemValue="false" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                             </b:column>
                         </b:row>
                     </div>
                     <facet name="footer">
-                        <b:inputText id="observaciones_sexualidad" value="#{clapController.selected.observaciones_sexualidad}" label="Observaciones" />
+                        <b:inputText id="observaciones_sexualidad" value="#{clapController.selected.observaciones_sexualidad}" label="Observaciones">
+                            <p:ajax event="blur" immediate="true"/>                        
+                        </b:inputText>
                     </facet>
                 </b:panel>
 
@@ -1638,6 +1851,7 @@
                                         <f:selectItem itemLabel="conforme" itemValue="1" />
                                         <f:selectItem itemLabel="crea preocupación" itemValue="2" />
                                         <f:selectItem itemLabel="impide relación con los demás" itemValue="3" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                             </b:column>
@@ -1656,6 +1870,7 @@
                                         <f:selectItem itemLabel="ansioso/angustiado" itemValue="7" />
                                         <f:selectItem itemLabel="alta impulsividad" itemValue="8" />
                                         <f:selectItem itemLabel="autoagresiones" itemValue="9" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                             </b:column>
@@ -1668,6 +1883,7 @@
                                         <f:selectItem itemLabel="claro" itemValue="1" />
                                         <f:selectItem itemLabel="confuso" itemValue="2" />
                                         <f:selectItem itemLabel="ausente" itemValue="3" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                             </b:column>
@@ -1685,6 +1901,7 @@
                                         <p:selectOneRadio id="ideacion_suicida" style="width:15em;" value="#{clapController.selected.ideacion_suicida}" layout="grid" columns="2">
                                             <f:selectItem itemLabel="si" itemValue="true" />
                                             <f:selectItem itemLabel="no" itemValue="false" />
+                                            <f:ajax event="valueChange" immediate="true"></f:ajax>
                                         </p:selectOneRadio>
                                     </b:column>
                                 </b:row>
@@ -1694,6 +1911,7 @@
                                         <p:selectOneRadio id="intento_suicida" style="width:15em;" value="#{clapController.selected.intento_suicida}" layout="grid" columns="2">
                                             <f:selectItem itemLabel="si" itemValue="true" />
                                             <f:selectItem itemLabel="no" itemValue="false" />
+                                            <f:ajax event="valueChange" immediate="true"></f:ajax>
                                         </p:selectOneRadio>
                                     </b:column>
                                 </b:row>
@@ -1709,20 +1927,27 @@
                                         <f:selectItem itemLabel="familiar" itemValue="3" />
                                         <f:selectItem itemLabel="otro" itemValue="4" />
                                         <f:selectItem itemLabel="ninguno" itemValue="5" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                                 <b:row>
-                                    <p:inputText id="nombre_referente_adulto" value="#{clapController.selected.nombre_referente_adulto}" placeholder="Nombre" />
+                                    <p:inputText id="nombre_referente_adulto" value="#{clapController.selected.nombre_referente_adulto}" placeholder="Nombre" >
+                                        <p:ajax event="blur" immediate="true"/>                                                
+                                    </p:inputText>
                                 </b:row>
                                 <b:row>
-                                    <p:inputText id="telefono_referente_adulto" value="#{clapController.selected.telefono_referente_adulto}" placeholder="Teléfono" />
+                                    <p:inputText id="telefono_referente_adulto" value="#{clapController.selected.telefono_referente_adulto}" placeholder="Teléfono">
+                                        <p:ajax event="blur" immediate="true"/>                                                            
+                                    </p:inputText>
                                 </b:row>
                             </b:column>
                         </b:row>
                     </div>
                     <facet>
                         <p:row>
-                            <b:inputText id="observaciones_psico_emocional" value="#{clapController.selected.observaciones_psico_emocional}" label="#{bundle.CreateclapTitle_observaciones_psico_emocional}" />
+                            <b:inputText id="observaciones_psico_emocional" value="#{clapController.selected.observaciones_psico_emocional}" label="#{bundle.CreateclapTitle_observaciones_psico_emocional}">
+                                <p:ajax event="blur" immediate="true"/>                                                    
+                            </b:inputText>
                         </p:row>
                     </facet>
                 </b:panel>
@@ -1746,7 +1971,9 @@
                                         </pe:inputNumber>
                                     </b:column>
                                     <b:column col-xs="4">
-                                        <pe:inputNumber id="de_peso" value="#{clapController.selected.de_peso}" minValue="0" maxValue="1000" style="max-width: 50px;"/>
+                                        <pe:inputNumber id="de_peso" value="#{clapController.selected.de_peso}" minValue="0" maxValue="1000" style="max-width: 50px;">
+                                            <p:ajax event="blur" immediate="true"/>                                                                
+                                        </pe:inputNumber>
                                     </b:column>
                                 </b:row>
                             </b:column>
@@ -1766,7 +1993,9 @@
                                         </pe:inputNumber>
                                     </b:column>
                                     <b:column col-xs="4">
-                                        <pe:inputNumber id="de_talla" value="#{clapController.selected.de_talla}"  minValue="0" maxValue="1000"  style="max-width: 50px;" />
+                                        <pe:inputNumber id="de_talla" value="#{clapController.selected.de_talla}"  minValue="0" maxValue="1000"  style="max-width: 50px;">
+                                            <p:ajax event="blur" immediate="true"/>                                                                
+                                        </pe:inputNumber>
                                     </b:column>
                                 </b:row>
                             </b:column>
@@ -1775,7 +2004,9 @@
                                     <p:outputLabel value="Perímetro abdominal" for="perimetro_abdominal" />
                                 </b:row>
                                 <b:row>
-                                   <pe:inputNumber minValue="0" maxValue="1000"  id="perimetro_abdominal" value="#{clapController.selected.perimetro_abdominal}" />
+                                    <pe:inputNumber minValue="0" maxValue="1000"  id="perimetro_abdominal" value="#{clapController.selected.perimetro_abdominal}">
+                                        <p:ajax event="blur" immediate="true"/>                                                            
+                                    </pe:inputNumber>
                                 </b:row>
                             </b:column>
                         </b:row>
@@ -1793,10 +2024,14 @@
                                 </b:row>
                                 <b:row>
                                     <b:column col-xs="8">
-                                        <pe:inputNumber disabled="true" id="imc" value="#{clapController.selected.imc}" />
+                                        <pe:inputNumber disabled="true" id="imc" value="#{clapController.selected.imc}">
+                                            <p:ajax event="blur" immediate="true"/>                                                                
+                                        </pe:inputNumber>
                                     </b:column>
                                     <b:column col-xs="4">
-                                        <pe:inputNumber id="de_imc" minValue="0" maxValue="1000" value="#{clapController.selected.de_imc}" style="max-width: 50px;" title="DE" />
+                                        <pe:inputNumber id="de_imc" minValue="0" maxValue="1000" value="#{clapController.selected.de_imc}" style="max-width: 50px;" title="DE">
+                                            <p:ajax event="blur" immediate="true"/>                                                                
+                                        </pe:inputNumber>
                                     </b:column>
                                 </b:row>
                             </b:column>
@@ -1805,9 +2040,13 @@
                                     <p:outputLabel value="Presion arterial" for="presion_arterial" />
                                 </b:row>
                                 <b:row>
-                                    <b:column col-xs="5"><pe:inputNumber id="presion_arterial"  minValue="0" maxValue="1000" value="#{clapController.selected.presion_arterial_sistolica}" /></b:column>
+                                    <b:column col-xs="5"><pe:inputNumber id="presion_arterial"  minValue="0" maxValue="1000" value="#{clapController.selected.presion_arterial_sistolica}" >
+                                        <p:ajax event="blur" immediate="true"/>
+                                        </pe:inputNumber></b:column>
                                     <b:column col-xs="1"> / </b:column> 
-                                    <b:column col-xs="5"><pe:inputNumber  minValue="0" maxValue="1000" value="#{clapController.selected.presion_arterial_diastolica}" /></b:column>
+                                    <b:column col-xs="5"><pe:inputNumber  minValue="0" maxValue="1000" value="#{clapController.selected.presion_arterial_diastolica}" >
+                                        <p:ajax event="blur" immediate="true"/>
+                                        </pe:inputNumber></b:column>
                                 </b:row>
                             </b:column>
                             <b:column col-md="4" col-xs="6">
@@ -1818,6 +2057,7 @@
                                     <p:selectOneRadio id="aspecto_general" style="width:15em;" value="#{clapController.selected.aspecto_general}" layout="grid" columns="3">
                                         <f:selectItem itemLabel="normal" itemValue="true" />
                                         <f:selectItem itemLabel="anormal" itemValue="false" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                             </b:column>
@@ -1832,6 +2072,7 @@
                                     <p:selectOneRadio id="agudeza_visual" style="width:15em;" value="#{clapController.selected.agudeza_visual}" layout="grid" columns="3">
                                         <f:selectItem itemLabel="normal" itemValue="true" />
                                         <f:selectItem itemLabel="anormal" itemValue="false" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                             </b:column>
@@ -1843,6 +2084,7 @@
                                     <p:selectOneRadio id="salud_bucal" style="width:15em;" value="#{clapController.selected.salud_bucal}" layout="grid" columns="3">
                                         <f:selectItem itemLabel="normal" itemValue="true" />
                                         <f:selectItem itemLabel="anormal" itemValue="false" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                             </b:column>
@@ -1854,6 +2096,7 @@
                                     <p:selectOneRadio id="cardio_pulmonar" style="width:15em;" value="#{clapController.selected.cardio_pulmonar}" layout="grid" columns="3">
                                         <f:selectItem itemLabel="normal" itemValue="true" />
                                         <f:selectItem itemLabel="anormal" itemValue="false" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                             </b:column>
@@ -1868,6 +2111,7 @@
                                     <p:selectOneRadio id="abdomen" style="width:15em;" value="#{clapController.selected.abdomen}" layout="grid" columns="3">
                                         <f:selectItem itemLabel="normal" itemValue="true" />
                                         <f:selectItem itemLabel="anormal" itemValue="false" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                             </b:column>
@@ -1879,6 +2123,7 @@
                                     <p:selectOneRadio id="columna" style="width:15em;" value="#{clapController.selected.columna}" layout="grid" columns="3">
                                         <f:selectItem itemLabel="normal" itemValue="true" />
                                         <f:selectItem itemLabel="anormal" itemValue="false" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                             </b:column>
@@ -1890,6 +2135,7 @@
                                     <p:selectOneRadio id="extremidades" style="width:15em;" value="#{clapController.selected.extremidades}" layout="grid" columns="3">
                                         <f:selectItem itemLabel="normal" itemValue="true" />
                                         <f:selectItem itemLabel="anormal" itemValue="false" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneRadio>
                                 </b:row>
                             </b:column>
@@ -1901,7 +2147,9 @@
                                     <p:outputLabel value="Otra área" for="otra_area_examen_fisico" />
                                 </b:row>
                                 <b:row>
-                                    <p:inputText id="otra_area_examen_fisico" placeholder="Especifique" value="#{clapController.selected.otra_area_examen_fisico}" title="#{bundle.CreateclapTitle_otra_area_examen_fisico}" />
+                                    <p:inputText id="otra_area_examen_fisico" placeholder="Especifique" value="#{clapController.selected.otra_area_examen_fisico}" title="#{bundle.CreateclapTitle_otra_area_examen_fisico}">
+                                        <p:ajax event="blur" immediate="true"/>                                    
+                                    </p:inputText>
                                 </b:row>
                             </b:column>
                             <b:column col-md="4" col-xs="6">
@@ -1910,7 +2158,9 @@
                                     <br/>
                                 </b:row>
                                 <b:row>
-                                    <p:selectBooleanCheckbox value="#{clapController.selected.tanner_con_foto}" itemLabel="con foto" />
+                                    <p:selectBooleanCheckbox value="#{clapController.selected.tanner_con_foto}" itemLabel="con foto">
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>                                    
+                                    </p:selectBooleanCheckbox>
                                 </b:row>
                                 <b:row>
                                     <b:column col-md="4"><b>mama</b></b:column>
@@ -1921,6 +2171,7 @@
                                             <f:selectItem itemLabel="III" itemValue="3" />
                                             <f:selectItem itemLabel="IV" itemValue="4" />
                                             <f:selectItem itemLabel="V" itemValue="5" />
+                                            <f:ajax event="valueChange" immediate="true"></f:ajax>
                                         </p:selectOneMenu>
                                     </b:column>
                               </b:row>
@@ -1933,6 +2184,7 @@
                                             <f:selectItem itemLabel="III" itemValue="3" />
                                             <f:selectItem itemLabel="IV" itemValue="4" />
                                             <f:selectItem itemLabel="V" itemValue="5" />
+                                            <f:ajax event="valueChange" immediate="true"></f:ajax>
                                         </p:selectOneMenu>
                                     </b:column>
                                 </b:row>
@@ -1941,15 +2193,21 @@
                     </div>
                     <facet name="footer">
                         <p:row>
-                            <b:inputText id="observaciones_examen_fisico" value="#{clapController.selected.observaciones_examen_fisico}" label="#{bundle.CreateclapTitle_observaciones_examen_fisico}" />
+                            <b:inputText id="observaciones_examen_fisico" value="#{clapController.selected.observaciones_examen_fisico}" label="#{bundle.CreateclapTitle_observaciones_examen_fisico}">
+                                <p:ajax event="blur" immediate="true"/>                            
+                            </b:inputText>
                         </p:row>
                     </facet>
                 </b:panel>
                 <b:row>
-                    <b:inputText id="impresion_diagnostica" value="#{clapController.selected.impresion_diagnostica}" label="#{bundle.CreateclapTitle_impresion_diagnostica}" />
+                    <b:inputText id="impresion_diagnostica" value="#{clapController.selected.impresion_diagnostica}" label="#{bundle.CreateclapTitle_impresion_diagnostica}">
+                    <p:ajax event="blur" immediate="true"/>
+                    </b:inputText>
                 </b:row>
                 <b:row>
-                    <b:inputText id="indicaciones_interconsultas" value="#{clapController.selected.indicaciones_interconsultas}" label="#{bundle.CreateclapTitle_indicaciones_interconsultas}" />
+                    <b:inputText id="indicaciones_interconsultas" value="#{clapController.selected.indicaciones_interconsultas}" label="#{bundle.CreateclapTitle_indicaciones_interconsultas}">
+                    <p:ajax event="blur" immediate="true"/>
+                    </b:inputText>
                 </b:row>
 
                 <b:column offset-xs="5">

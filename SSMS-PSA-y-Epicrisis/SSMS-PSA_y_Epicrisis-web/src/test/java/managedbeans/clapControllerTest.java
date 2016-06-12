@@ -86,7 +86,9 @@ public class clapControllerTest {
         clapController instance = new clapController();
         audit audit = new audit();
         audit.setP1(7);
-        instance.setAudit(audit);
+        clap clap = new clap();
+        clap.setAudit(audit);
+        instance.setSelected(clap);
         int expResult = 0;
         int result = instance.tipoIntervencion();
         assertEquals(expResult, result);
@@ -97,7 +99,9 @@ public class clapControllerTest {
         clapController instance = new clapController();
         audit audit = new audit();
         audit.setP1(15);
-        instance.setAudit(audit);
+        clap clap = new clap();
+        clap.setAudit(audit);
+        instance.setSelected(clap);
         int expResult = 1;
         int result = instance.tipoIntervencion();
         assertEquals(expResult, result);
@@ -108,7 +112,9 @@ public class clapControllerTest {
         clapController instance = new clapController();
         audit audit = new audit();
         audit.setP1(20);
-        instance.setAudit(audit);
+        clap clap = new clap();
+        clap.setAudit(audit);
+        instance.setSelected(clap);
         int expResult = 2;
         int result = instance.tipoIntervencion();
         assertEquals(expResult, result);
@@ -123,8 +129,8 @@ public class clapControllerTest {
         clap clap = new clap();
         audit audit = new audit();
         audit.setP1(4);
-        instance.setAudit(audit);
         clap.setSexo(1);
+        clap.setAudit(audit);
         instance.setSelected(clap);
         boolean expResult = true;
         boolean result = instance.esIntervencionMinima();
@@ -138,8 +144,8 @@ public class clapControllerTest {
         clap clap = new clap();
         audit audit = new audit();
         audit.setP1(3);
-        instance.setAudit(audit);
         clap.setSexo(0);
+        clap.setAudit(audit);
         instance.setSelected(clap);
         boolean expResult = true;
         boolean result = instance.esIntervencionMinima();
@@ -152,8 +158,8 @@ public class clapControllerTest {
         clap clap = new clap();
         audit audit = new audit();
         audit.setP1(5);
-        instance.setAudit(audit);
         clap.setSexo(1);
+        clap.setAudit(audit);
         instance.setSelected(clap);
         boolean expResult = false;
         boolean result = instance.esIntervencionMinima();
@@ -167,8 +173,8 @@ public class clapControllerTest {
         clap clap = new clap();
         audit audit = new audit();
         audit.setP1(4);
-        instance.setAudit(audit);
         clap.setSexo(0);
+        clap.setAudit(audit);
         instance.setSelected(clap);
         boolean expResult = false;
         boolean result = instance.esIntervencionMinima();

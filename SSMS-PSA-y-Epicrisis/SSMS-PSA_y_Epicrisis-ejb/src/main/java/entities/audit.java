@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
@@ -20,6 +22,9 @@ import javax.validation.constraints.NotNull;
  * @author Seba
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name="audit.findbyClap",query="SELECT p FROM audit p WHERE p.clap=:clap")
+})
 public class audit implements Serializable {
 
     private static final long serialVersionUID = 1L;
