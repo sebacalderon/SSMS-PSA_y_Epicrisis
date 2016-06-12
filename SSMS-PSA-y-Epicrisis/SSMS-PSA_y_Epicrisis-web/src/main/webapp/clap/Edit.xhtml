@@ -17,7 +17,7 @@
         <ui:define name="body">
             <p:growl id="msgs" showDetail="true" />
             <h:form>
-                <p:poll interval="#{60*clapController.minutos}" listener="#{clapController.autosave()}" immediate="true" update="msgs"/>
+                <p:poll interval="10" listener="#{clapController.autosave()}" immediate="true" update="msgs"/>
             </h:form>
             <h:form>
             <p:breadCrumb>
@@ -61,7 +61,9 @@
                                     <p:outputLabel value="#{bundle.CreatepacienteTitle_nombres}" for="nombres" />
                                 </b:row>
                                 <b:row>  
-                                    <p:inputText id="nombres" value="#{clapController.selected.nombres}" placeholder="#{bundle.CreatepacienteTitle_nombres}" maxlength="50" required="true" />
+                                    <p:inputText id="nombres" value="#{clapController.selected.nombres}" placeholder="#{bundle.CreatepacienteTitle_nombres}" maxlength="50" required="true">
+                                        <p:ajax event="blur" immediate="true"/>
+                                    </p:inputText>
                                 </b:row>
                             </b:column>
                             <b:column col-md="6" col-xs="12">
@@ -69,7 +71,9 @@
                                     <p:outputLabel value="#{bundle.CreatepacienteTitle_nombre_social}" for="nombre_social" />
                                 </b:row>
                                 <b:row>  
-                                    <p:inputText id="nombre_social" value="#{clapController.selected.nombre_social}" placeholder="#{bundle.CreatepacienteTitle_nombre_social}" />
+                                    <p:inputText id="nombre_social" value="#{clapController.selected.nombre_social}" placeholder="#{bundle.CreatepacienteTitle_nombre_social}">
+                                        <p:ajax event="blur" immediate="true"/>
+                                    </p:inputText>
                                 </b:row>
                             </b:column>
                         </b:row>
@@ -79,7 +83,9 @@
                                     <p:outputLabel value="#{bundle.CreatepacienteTitle_primer_apellido}" for="primer_apellido" />
                                 </b:row>
                                 <b:row>
-                                    <p:inputText id="primer_apellido" value="#{clapController.selected.primer_apellido}" placeholder="#{bundle.CreatepacienteTitle_primer_apellido}" maxlength="30" required="true" />
+                                    <p:inputText id="primer_apellido" value="#{clapController.selected.primer_apellido}" placeholder="#{bundle.CreatepacienteTitle_primer_apellido}" maxlength="30" required="true">
+                                    <p:ajax event="blur" immediate="true"/>
+                                    </p:inputText>
                                 </b:row>
                             </b:column>
                             <b:column col-md="3" col-xs="12">
@@ -87,7 +93,9 @@
                                     <p:outputLabel value="#{bundle.CreatepacienteTitle_segundo_apellido}" for="segundo_apellido" />
                                 </b:row>
                                 <b:row>
-                                    <p:inputText id="segundo_apellido" value="#{clapController.selected.segundo_apellido}" placeholder="#{bundle.CreatepacienteTitle_segundo_apellido}" maxlength="30" required="true" />
+                                    <p:inputText id="segundo_apellido" value="#{clapController.selected.segundo_apellido}" placeholder="#{bundle.CreatepacienteTitle_segundo_apellido}" maxlength="30" required="true">
+                                    <p:ajax event="blur" immediate="true"/>
+                                    </p:inputText>
                                 </b:row>
                             </b:column>
                             <b:column col-md="3" col-xs="12">
@@ -95,7 +103,9 @@
                                     <p:outputLabel value="#{bundle.CreatepacienteTitle_telefono_fijo}" for="telefono_fijo" />
                                 </b:row>
                                 <b:row>
-                                    <p:inputMask id="telefono_fijo" value="#{clapController.selected.telefono_fijo}" placeholder="#{bundle.CreatepacienteTitle_telefono_fijo}" mask="(99) 999-9999" />
+                                    <p:inputMask id="telefono_fijo" value="#{clapController.selected.telefono_fijo}" placeholder="#{bundle.CreatepacienteTitle_telefono_fijo}" mask="(99) 999-9999">
+                                    <p:ajax event="blur" immediate="true"/>
+                                    </p:inputMask>
                                 </b:row>
                             </b:column>
                             <b:column col-md="3" col-xs="12">
@@ -103,7 +113,9 @@
                                     <p:outputLabel value="#{bundle.CreatepacienteTitle_teléfono_movil}" for="telefono_movil" />
                                 </b:row>
                                 <b:row>
-                                    <p:inputMask id="telefono_movil" value="#{clapController.selected.telefono_movil}" placeholder="#{bundle.CreatepacienteTitle_teléfono_movil}"  mask="(+56) 9999-9999" />
+                                    <p:inputMask id="telefono_movil" value="#{clapController.selected.telefono_movil}" placeholder="#{bundle.CreatepacienteTitle_teléfono_movil}"  mask="(+56) 9999-9999">
+                                    <p:ajax event="blur" immediate="true"/>
+                                    </p:inputMask>
                                 </b:row>
                             </b:column>
                         </b:row>
@@ -126,7 +138,9 @@
                                 </b:row>
                                 <b:row>
                                     <p:autoComplete id="comuna_residencia" value="#{clapController.selected.comuna_residencia}" completeMethod="#{clapController.completeComuna}"
-                                    var="comuna" itemLabel="#{comuna.nombre}" itemValue="#{comuna}" placeholder="Comuna de residencia" converter="entityConverter" forceSelection="true" required="true" />                         
+                                                    var="comuna" itemLabel="#{comuna.nombre}" itemValue="#{comuna}" placeholder="Comuna de residencia" converter="entityConverter" forceSelection="true" required="true">
+                                    <p:ajax event="blur" immediate="true"/>
+                                    </p:autoComplete>                         
                                 </b:row>
                             </b:column>
                         </b:row>
@@ -136,7 +150,9 @@
                                     <p:outputLabel value="#{bundle.CreatepacienteTitle_calle_direccion}" for="calle_direccion" />
                                 </b:row>
                                 <b:row>
-                                    <p:inputText id="calle_direccion" value="#{clapController.selected.calle_direccion}" placeholder="#{bundle.CreatepacienteTitle_calle_direccion}" maxlength="50" required="true" />
+                                    <p:inputText id="calle_direccion" value="#{clapController.selected.calle_direccion}" placeholder="#{bundle.CreatepacienteTitle_calle_direccion}" maxlength="50" required="true">
+                                    <p:ajax event="blur" immediate="true"/>
+                                    </p:inputText>
                                 </b:row>
                             </b:column>
                             <b:column col-md="3" col-xs="12">
@@ -144,7 +160,9 @@
                                     <p:outputLabel value="Número:" for="numero_direccion" />
                                 </b:row>
                                 <b:row>
-                                    <pe:inputNumber id="numero_direccion" value="#{clapController.selected.numero_direccion}" style="campo-numerico" minValue="0" maxValue="10000" title="#{bundle.CreatepacienteTitle_numero_direccion}" maxlength="8" required="true"/>
+                                    <pe:inputNumber id="numero_direccion" value="#{clapController.selected.numero_direccion}" style="campo-numerico" minValue="0" maxValue="10000" title="#{bundle.CreatepacienteTitle_numero_direccion}" maxlength="8" required="true">
+                                    <p:ajax event="blur" immediate="true"/>
+                                    </pe:inputNumber>
                                 </b:row>
                             </b:column>
                             <b:column col-md="3" col-xs="12">
@@ -152,7 +170,9 @@
                                     <p:outputLabel value="#{bundle.CreatepacienteTitle_resto_direccion}" for="resto_direccion" />
                                 </b:row>
                                 <b:row>
-                                    <p:inputText id="resto_direccion" value="#{clapController.selected.resto_direccion}" placeholder="#{bundle.CreatepacienteTitle_resto_direccion}" maxlength="50" />
+                                    <p:inputText id="resto_direccion" value="#{clapController.selected.resto_direccion}" placeholder="#{bundle.CreatepacienteTitle_resto_direccion}" maxlength="50">
+                                    <p:ajax event="blur" immediate="true"/>
+                                    </p:inputText>
                                 </b:row>
                             </b:column>
                         </b:row>
@@ -163,6 +183,7 @@
                                 </b:row>
                                 <b:row>
                                     <p:calendar  id="fecha_nacimiento" value="#{clapController.selected.fecha_nacimiento}" placeholder="#{bundle.CreatepacienteTitle_fecha_nacimiento}" pattern="dd/MM/yyyy" navigator="true" required="true">
+                                    <p:ajax event="dateSelect" immediate="true"/>
                                     </p:calendar>
                                 </b:row>
                             </b:column>
@@ -174,6 +195,7 @@
                                     <p:selectOneMenu id="cesfam" value="#{clapController.selected.cesfam}" >
                                         <f:selectItem itemLabel="Seleccione un CESFAM" itemValue="" noSelectionOption="true" />
                                         <f:selectItems value="#{cesfamController.items}" var="cesfam" itemLabel="#{cesfam.nombre}" itemValue="#{cesfam}"/>
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>
                                     </p:selectOneMenu>                            
                                 </b:row>
                             </b:column>
@@ -188,6 +210,7 @@
                                         <f:selectItem itemLabel="Mujer" itemValue="2" noSelectionOption="false" />
                                         <f:selectItem itemLabel="No definido" itemValue="3" noSelectionOption="false" />
                                         <f:selectItem itemLabel="No determinado" itemValue="4" noSelectionOption="false" />     
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>                                    
                                     </p:selectOneMenu>
                                 </b:row>
                             </b:column>
@@ -199,7 +222,9 @@
                                 </b:row>
                                 <b:row>
                                     <p:autoComplete id="nacionalidad" value="#{clapController.selected.nacionalidad}" completeMethod="#{nacionalidadController.completeNacionalidad}"
-                                    var="nacionalidad" itemLabel="#{nacionalidad.nombre}" itemValue="#{nacionalidad}" converter="entityConverter" forceSelection="true" />
+                                                    var="nacionalidad" itemLabel="#{nacionalidad.nombre}" itemValue="#{nacionalidad}" converter="entityConverter" forceSelection="true">
+                                    <p:ajax event="itemSelect" immediate="true"/>                                    
+                                    </p:autoComplete>
                                 </b:row>
                             </b:column>
                             <b:column col-md="6" col-xs="12">
@@ -207,7 +232,9 @@
                                     <p:outputLabel value="#{bundle.CreatepacienteTitle_correo}" for="correo" />
                                 </b:row>
                                 <b:row>
-                                    <p:inputText id="correo" value="#{clapController.selected.correo}" placeholder="#{bundle.CreatepacienteTitle_correo}" required="true" />
+                                    <p:inputText id="correo" value="#{clapController.selected.correo}" placeholder="#{bundle.CreatepacienteTitle_correo}" required="true">
+                                        <p:ajax event="blur" immediate="true"/>
+                                    </p:inputText>
                                 </b:row>
                             </b:column>
                             <b:column col-md="6" col-xs="12">
@@ -218,6 +245,7 @@
                                     <p:selectOneMenu id="programa_social" value="#{clapController.selected.programa_social}" >
                                         <f:selectItem itemLabel="Seleccione un programa social" itemValue="" noSelectionOption="true" />
                                         <f:selectItems value="#{ley_socialController.items}" var="ley_social" itemLabel="#{ley_social.nombre}" itemValue="#{ley_social}"/>
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>                                                                        
                                     </p:selectOneMenu>
                                 </b:row>
                             </b:column>
@@ -246,6 +274,7 @@
                                         <f:selectItem itemLabel="B" itemValue="2" noSelectionOption="false" />
                                         <f:selectItem itemLabel="C" itemValue="3" noSelectionOption="false" />
                                         <f:selectItem itemLabel="D" itemValue="4" noSelectionOption="false" />
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>                                                                        
                                     </p:selectOneMenu>
                                 </b:row>
                             </b:column>
@@ -259,6 +288,7 @@
                                     <p:selectOneMenu id="estado_conyugal" value="#{clapController.selected.estado_conyugal}" >
                                         <f:selectItem itemLabel="Seleccione un opción" itemValue="" noSelectionOption="true" />
                                         <f:selectItems value="#{estado_civilController.items}" var="estado_civil" itemLabel="#{estado_civil.nombre}" itemValue="#{estado_civil}"/>
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>                                    
                                     </p:selectOneMenu>
                                 </b:row>
                             </b:column>
@@ -270,6 +300,7 @@
                                     <p:selectOneMenu id="pueblo_originario" value="#{clapController.selected.pueblo_originario}" >
                                         <f:selectItem itemLabel="Seleccione un pueblo originario" itemValue="" noSelectionOption="true" />
                                         <f:selectItems value="#{pueblo_originarioController.items}" var="pueblo_originario" itemLabel="#{pueblo_originario.nombre}" itemValue="#{pueblo_originario}"/>
+                                        <f:ajax event="valueChange" immediate="true"></f:ajax>                                    
                                     </p:selectOneMenu>
                                 </b:row>
                             </b:column>

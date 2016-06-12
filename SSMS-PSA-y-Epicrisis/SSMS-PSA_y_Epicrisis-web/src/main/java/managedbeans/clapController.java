@@ -601,7 +601,7 @@ public class clapController implements Serializable {
         ////////////////
         //Imagen
         ////////////////
-        if (imagen!=null) {
+        if (imagen!=null && selected.getDiagrama_familiar()!=null) {
             
             Path folder = Paths.get("C:/genogramas");
             String filename = "Clap "+selected.getId();
@@ -617,14 +617,9 @@ public class clapController implements Serializable {
             }
             File img = new File("C:/genogramas/"+file.getFileName());
             BufferedImage bimg = ImageIO.read(img);
-            int type = bimg.getType() == 0? BufferedImage.TYPE_INT_ARGB : bimg.getType();
-            
-            
-            System.out.println("Imagen mayor a 1MB");
+            int type = bimg.getType() == 0? BufferedImage.TYPE_INT_ARGB : bimg.getType();            
             BufferedImage resizeImagePng = resizeImage(bimg, type);
             ImageIO.write(resizeImagePng, "jpg", new File("C:/genogramas/"+file.getFileName())); 
-
-            System.out.println("Uploaded file successfully saved in " + file);
         }
         
         if(completo){
@@ -844,7 +839,31 @@ public class clapController implements Serializable {
             selected.setRiesgo_social(true);
         }
         
+        System.out.println(selected.getNombres()); 
+        System.out.println(selected.getNombre_social()); 
+        System.out.println(selected.getPrimer_apellido()); 
+        System.out.println(selected.getSegundo_apellido()); 
+        System.out.println(selected.getTelefono_fijo()); 
+        System.out.println(selected.getTelefono_movil()); 
+        System.out.println(selected.getRegion_residencia().getNombre()); 
+        System.out.println(selected.getComuna_residencia().getNombre()); 
+        System.out.println(selected.getCalle_direccion()); 
+        System.out.println(selected.getNumero_direccion());
+        System.out.println(selected.getResto_direccion());
+        System.out.println(selected.getFecha_nacimiento());
+        System.out.println(selected.getCesfam().getNombre());
+        System.out.println(selected.getSexo());
+        System.out.println(selected.getNacionalidad().getNombre());
+        System.out.println(selected.getCorreo());
+        System.out.println(selected.getPrograma_social().getNombre());
+        System.out.println(selected.getPrevision().getNombre());
+        System.out.println(selected.getGrupo_fonasa());
+        System.out.println(selected.getEstado_conyugal().getNombre());
+        System.out.println(selected.getPueblo_originario().getNombre());
+        
         System.out.println(selected.getAcompanante());
+        
+        
         persist(PersistAction.UPDATE,"Autoguardado");
         if(selected.getEstado().equals("Nuevo")){
             List<clap> claps = getItemsPorPaciente(pacienteCtrl.getSelected().getRUN());
