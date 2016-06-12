@@ -167,6 +167,24 @@ public class pacienteController implements Serializable {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
     }
 
+    public void tratarRiesgo(){
+        selected.setEstado("Riesgos tratados o en tratamiento");
+        selected.setFecha_estado(new java.util.Date());
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
+    }
+    
+    public void sinRiesgo(){
+        selected.setEstado("Sin riesgo");
+        selected.setFecha_estado(new java.util.Date());
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
+    }
+    
+    public void clapIncompleto(){
+        selected.setEstado("Clap Incompleto");
+        selected.setFecha_estado(new java.util.Date());
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
+    }
+    
     public String update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
         return "/faces/paciente/View.xhtml?faces-redirect=true";

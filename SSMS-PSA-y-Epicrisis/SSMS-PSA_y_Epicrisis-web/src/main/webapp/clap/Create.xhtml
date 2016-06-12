@@ -298,7 +298,7 @@
                                 <p:outputLabel value="H.C.N°" for="hcn" />
                             </b:row>
                             <b:row>
-                                <p:inputText id="hcn" placeholder="Ingrese el número de historial clínico" value="#{clapController.selected.hcn}" />
+                                <pe:inputNumber minValue="1" id="hcn" value="#{clapController.selected.hcn}" />
                             </b:row>
                         </b:column>
                     </b:row>
@@ -1538,7 +1538,7 @@
                                 <br/>
                                 <b:row>
                                     <p:outputLabel value="Edad de inicio" for="edad_inicio_conducta_sexual" />
-                                    <pe:inputNumber id="edad_inicio_conducta_sexual" minValue="0" maxValue="70" styleClass="campo-numerico" style="width:100px;" value="#{clapController.selected.edad_inicio_conducta_sexual}" title="#{bundle.CreateclapTitle_edad_inicio_conducta_sexual}" /> años
+                                    <pe:inputNumber id="edad_inicio_conducta_sexual" minValue="0" maxValue="70" styleClass="campo-numerico" style="min-width:100px;" value="#{clapController.selected.edad_inicio_conducta_sexual}" title="#{bundle.CreateclapTitle_edad_inicio_conducta_sexual}" /> años
                                 </b:row>
                             </b:column>
                             <b:column col-md="4" col-xs="6">

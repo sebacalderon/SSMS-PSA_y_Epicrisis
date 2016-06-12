@@ -73,6 +73,7 @@ public class actividadController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        pacienteCtrl.tratarRiesgo();
     }
 
     public void update() {

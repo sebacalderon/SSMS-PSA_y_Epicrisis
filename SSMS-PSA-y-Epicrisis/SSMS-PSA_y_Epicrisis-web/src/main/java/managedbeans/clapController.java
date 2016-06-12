@@ -597,6 +597,16 @@ public class clapController implements Serializable {
 //        System.out.println("Riesgo social: "+selected.isRiesgo_social());
 //        System.out.println("Riesgo ssr: "+selected.isRiesgo_ssr());
 //        
+
+        if(completo){
+            if(selected.isRiesgo_cardiovascular()||selected.isRiesgo_nutricional()||selected.isRiesgo_oh_drogas()||selected.isRiesgo_salud_mental()||selected.isRiesgo_social()||selected.isRiesgo_ssr()){
+                pacienteCtrl.riesgosSinResolver();
+            }else{
+                pacienteCtrl.sinRiesgo();
+            }
+        }else{
+            pacienteCtrl.clapIncompleto();
+        }
         
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
         if(selected.getEstado().equals("Nuevo")){
@@ -1019,7 +1029,13 @@ public class clapController implements Serializable {
         isAudit = false;
         isCrafft = false;
         auditCrafft = false;
-        
+        selected.setRiesgo_cardiovascular(false);
+        selected.setRiesgo_nutricional(false);
+        selected.setRiesgo_oh_drogas(false);
+        selected.setRiesgo_salud_mental(false);
+        selected.setRiesgo_social(false);
+        selected.setRiesgo_ssr(false);
+        selected.setEstado("Incompleto");
         return selected;
     }
     
