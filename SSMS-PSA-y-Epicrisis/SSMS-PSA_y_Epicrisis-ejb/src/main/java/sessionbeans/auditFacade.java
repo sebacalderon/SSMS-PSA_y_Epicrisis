@@ -38,5 +38,5 @@ public class auditFacade extends AbstractFacade<audit> implements auditFacadeLoc
         query = em.createNamedQuery("audit.findbyClap").
                 setParameter("clap",clap);
         return query.getResultList();
-    }
+    } 
 }

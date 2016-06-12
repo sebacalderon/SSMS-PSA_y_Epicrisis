@@ -28,7 +28,6 @@ public interface auditFacadeLocal {
     List<audit> findAll();
 
     List<audit> findRange(int[] range);
-
     List<audit> findbyClap(clap clap);
     
     int count();

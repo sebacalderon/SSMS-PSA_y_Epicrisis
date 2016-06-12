@@ -28,6 +28,7 @@ public interface CrafftFacadeLocal {
     List<Crafft> findAll();
 
     List<Crafft> findRange(int[] range);
+    
     List<Crafft> findbyClap(clap clap);
 
     int count();
