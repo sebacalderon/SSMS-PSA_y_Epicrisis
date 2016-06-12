@@ -17,7 +17,7 @@
         <ui:define name="body">
             <p:growl id="msgs" showDetail="true" />
             <h:form>
-                <p:poll interval="30" listener="#{clapController.autosave()}" immediate="true" update="msgs"/>
+                <p:poll interval="600" listener="#{clapController.autosave()}" immediate="true" update="msgs"/>
             </h:form>
             <h:form>
             <p:breadCrumb>
@@ -155,7 +155,6 @@
                                 <b:row>
                                     <p:autoComplete id="comuna_residencia" value="#{clapController.selected.comuna_residencia}" completeMethod="#{clapController.completeComuna}"
                                                     var="comuna" itemLabel="#{comuna.nombre}" itemValue="#{comuna}" placeholder="Comuna de residencia" converter="entityConverter" forceSelection="true" required="true" >
-                                        <p:ajax event="blur" immediate="true"/>
                                     </p:autoComplete>                         
                                 </b:row>
                             </b:column>
@@ -352,11 +351,11 @@
                                 <p:outputLabel value="Cesfam" for="cesfam" />
                             </b:row>
                             <b:row>
-                                <p:selectOneMenu id="cesfam" value="#{clapController.selected.cesfam}" >
+                                <h:selectOneMenu id="cesfam" value="#{clapController.selected.cesfam}" >
                                     <f:selectItem itemLabel="Seleccione un CESFAM" itemValue="" noSelectionOption="true" />
                                     <f:selectItems value="#{cesfamController.items}" var="cesfam" itemLabel="#{cesfam.nombre}" itemValue="#{cesfam}"/>
                                     <p:ajax event="valueChange" immediate="true"></p:ajax>
-                                </p:selectOneMenu>
+                                </h:selectOneMenu>
                             </b:row>
                         </b:column>
                         <b:column col-xs="5" style="margin-left: 20px;">
@@ -855,7 +854,7 @@
                         </b:column>
                         <b:column col-md="4">
                             <b:row><p:outputLabel value="#{bundle.CreateclapLabel_curso}" for="curso" /></b:row>
-                            <b:row><p:selectOneMenu id="curso" value="#{clapController.selected.curso}">
+                            <b:row><h:selectOneMenu id="curso" value="#{clapController.selected.curso}">
                                 <f:selectItem itemLabel="Seleccione un curso" noSelectionOption="true" />
                                 <f:selectItem itemLabel="1° básico" itemValue="1 basico" noSelectionOption="false" />
                                 <f:selectItem itemLabel="2° básico" itemValue="2 basico" noSelectionOption="false" />
@@ -870,7 +869,7 @@
                                 <f:selectItem itemLabel="3° medio" itemValue="3 medio" noSelectionOption="false" />
                                 <f:selectItem itemLabel="4° medio" itemValue="4 medio" noSelectionOption="false" />
                                 <f:ajax event="valueChange" immediate="true"/>
-                            </p:selectOneMenu></b:row>
+                            </h:selectOneMenu></b:row>
                         </b:column>
                     </b:row>
                     <br/>
@@ -2261,27 +2260,27 @@
                                 <b:row>
                                     <b:column col-md="4"><b>mama</b></b:column>
                                     <b:column col-md="8">
-                                        <p:selectOneMenu id="tanner_mama" style="width:9em;" value="#{clapController.selected.tanner_mama}">
+                                        <h:selectOneMenu id="tanner_mama" style="width:9em;" value="#{clapController.selected.tanner_mama}">
                                             <f:selectItem itemLabel="I" itemValue="1" />
                                             <f:selectItem itemLabel="II" itemValue="2" />
                                             <f:selectItem itemLabel="III" itemValue="3" />
                                             <f:selectItem itemLabel="IV" itemValue="4" />
                                             <f:selectItem itemLabel="V" itemValue="5" />
                                         <f:ajax event="valueChange" immediate="true"></f:ajax>
-                                        </p:selectOneMenu>
+                                        </h:selectOneMenu>
                                     </b:column>
                                 </b:row>
                                 <b:row>
                                     <b:column col-md="4"><b>genital</b></b:column>
                                     <b:column col-md="8">
-                                        <p:selectOneMenu id="tanner_genital" style="width:9em;" value="#{clapController.selected.tanner_genital}">
+                                        <h:selectOneMenu id="tanner_genital" style="width:9em;" value="#{clapController.selected.tanner_genital}">
                                             <f:selectItem itemLabel="I" itemValue="1" />
                                             <f:selectItem itemLabel="II" itemValue="2" />
                                             <f:selectItem itemLabel="III" itemValue="3" />
                                             <f:selectItem itemLabel="IV" itemValue="4" />
                                             <f:selectItem itemLabel="V" itemValue="5" />
                                         <f:ajax event="valueChange" immediate="true"></f:ajax>
-                                        </p:selectOneMenu>
+                                        </h:selectOneMenu>
                                     </b:column>
                                 </b:row>
                             </b:column>
