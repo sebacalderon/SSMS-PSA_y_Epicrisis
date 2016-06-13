@@ -41,7 +41,7 @@
                                         
                                         <p:autoComplete id="RUN" value="#{clapController.selected.paciente}" completeMethod="#{pacienteController.completePaciente}"
                                         var="paciente" itemLabel="#{paciente.RUN}" itemValue="#{paciente.RUN}" converter="entityConverter" forceSelection="true" required="true" disabled="true">
-                                            <f:ajax event="valueChange"  listener="#{clapController.setDatosPaciente}" immediate="true" render="panel1"  ></f:ajax>
+                                            
                                         </p:autoComplete>
                                         
                                         <p:inputText id="DV" value="#{clapController.selected.DV}" title="#{bundle.CreatepacienteTitle_DV}" maxlength="1" style="max-width: 20px;" required="true" disabled="true" />
@@ -298,7 +298,7 @@
                                 <p:outputLabel value="H.C.N°" for="hcn" />
                             </b:row>
                             <b:row>
-                                <pe:inputNumber minValue="1" id="hcn" value="#{clapController.selected.hcn}" />
+                                <p:inputText id="hcn" value="#{clapController.selected.hcn}" />
                             </b:row>
                         </b:column>
                     </b:row>
