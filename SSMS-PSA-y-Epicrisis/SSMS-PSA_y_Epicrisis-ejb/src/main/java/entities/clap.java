@@ -2398,59 +2398,522 @@ public class clap implements Serializable {
     public String toString() {
         String clap=new String();
         //Datos paciente
-        clap.concat(id+",");
-        clap.concat(RUN+"-"+DV+",");
-        clap.concat(nombres+",");
-        clap.concat(primer_apellido+",");
-        clap.concat(segundo_apellido+",");
-        clap.concat(nombre_social+",");
-        clap.concat(telefono_fijo+",");
+        clap=clap.concat(id+",");
+        clap=clap.concat(RUN+"-"+DV+",");
+        clap=clap.concat(nombres+",");
+        clap=clap.concat(primer_apellido+",");
+        clap=clap.concat(segundo_apellido+",");
+        clap=clap.concat(nombre_social+",");
+        clap=clap.concat(telefono_fijo+",");
         if(domicilio==true){
-            clap.concat("Si,");
+            clap=clap.concat("Si,");
         }else{
-            clap.concat("No,");
+            clap=clap.concat("No,");
         }
-        clap.concat(telefono_movil+",");
-        clap.concat(recados+",");
+        clap=clap.concat(telefono_movil+",");
+        clap=clap.concat(recados+",");
         if(recados==true){
-            clap.concat("Si,");
+            clap=clap.concat("Si,");
         }else{
-            clap.concat("No,");
+            clap=clap.concat("No,");
         }
-        clap.concat(region_residencia.getNombre()+",");
-        clap.concat(comuna_residencia.getNombre()+",");
-        clap.concat(calle_direccion+",");
-        clap.concat(numero_direccion+",");
-        clap.concat(resto_direccion+",");
-        clap.concat(fecha_nacimiento.toString()+",");
+        clap=clap.concat(region_residencia.getNombre()+",");
+        clap=clap.concat(comuna_residencia.getNombre()+",");
+        clap=clap.concat(calle_direccion+",");
+        clap=clap.concat(numero_direccion+",");
+        clap=clap.concat(resto_direccion+",");
+        clap=clap.concat(fecha_nacimiento.toString()+",");
         if(sexo==1){
-            clap.concat("Hombre,");
+            clap=clap.concat("Hombre,");
         }else if(sexo==2){
-            clap.concat("Mujer,");
+            clap=clap.concat("Mujer,");
         }else if(sexo==3){
-            clap.concat("No definido,");
+            clap=clap.concat("No definido,");
         }else if(sexo==4){
-            clap.concat("No determinado,");
+            clap=clap.concat("No determinado,");
         }
-        clap.concat(nacionalidad+",");
-        clap.concat(correo+",");
-        clap.concat(programa_social.getNombre()+",");
-        clap.concat(prevision.getNombre()+",");
+        clap=clap.concat(nacionalidad+",");
+        clap=clap.concat(correo+",");
+        clap=clap.concat(programa_social.getNombre()+",");
+        clap=clap.concat(prevision.getNombre()+",");
         if(grupo_fonasa==1){
-            clap.concat("A,");
+            clap=clap.concat("A,");
         }else if(grupo_fonasa==2){
-            clap.concat("B,");
+            clap=clap.concat("B,");
         }else if(grupo_fonasa==3){
-            clap.concat("C,");
+            clap=clap.concat("C,");
         }else if(grupo_fonasa==4){
-            clap.concat("D,");
+            clap=clap.concat("D,");
         }
-        clap.concat(estado_conyugal.getNombre()+",");
-        clap.concat(pueblo_originario.getNombre()+",");
+        clap=clap.concat(estado_conyugal.getNombre()+",");
+        clap=clap.concat(pueblo_originario.getNombre()+",");
+        clap=clap.concat(cesfam.getNombre()+",");
         
         //Datos consulta
         
+        if(control_en==1){
+            clap=clap.concat("Establecimiento educacional,");
+        }else{
+            clap=clap.concat("Establecimiento de salud,");
+        }
+               
+        clap=clap.concat(hcn+",");
+        clap=clap.concat(establecimiento_educacional+",");
+        clap=clap.concat(fecha_consulta.toString()+",");
+        clap=clap.concat(edad+",");
+        clap=clap.concat(acompanante+",");
+        clap=clap.concat(motivo_consulta_adolescente_1+",");
+        clap=clap.concat(motivo_consulta_adolescente_2+",");
+        clap=clap.concat(motivo_consulta_adolescente_3+",");
+        clap=clap.concat(motivo_consulta_acompanante_1+",");
+        clap=clap.concat(motivo_consulta_acompanante_2+",");
+        clap=clap.concat(motivo_consulta_acompanante_3+",");
+        clap=clap.concat(descripcion_motivo_consulta+",");
         
+        //Antecedentes personales
+        
+        if(perinatales_normales==1){
+                clap=clap.concat("Si,");
+        }else if(perinatales_normales==2){
+            clap=clap.concat("no sé,");
+        }else if(perinatales_normales==3){
+            clap=clap.concat("No,");
+        }
+        
+        if(alergias_normales==1){
+                clap=clap.concat("Si,");
+        }else if(alergias_normales==2){
+            clap=clap.concat("no sé,");
+        }else if(alergias_normales==3){
+            clap=clap.concat("No,");
+        }
+        
+        if(vacunas_completas==1){
+                clap=clap.concat("Si,");
+        }else if(vacunas_completas==2){
+            clap=clap.concat("no sé,");
+        }else if(vacunas_completas==3){
+            clap=clap.concat("No,");
+        }
+        
+        if(enfermedades_importantes==1){
+                clap=clap.concat("Si,");
+        }else if(enfermedades_importantes==2){
+            clap=clap.concat("no sé,");
+        }else if(enfermedades_importantes==3){
+            clap=clap.concat("No,");
+        }
+        
+        if(discapacidad==1){
+                clap=clap.concat("Si,");
+        }else if(discapacidad==2){
+            clap=clap.concat("no sé,");
+        }else if(discapacidad==3){
+            clap=clap.concat("No,");
+        }
+        
+        if(accidentes_relevantes==1){
+                clap=clap.concat("Si,");
+        }else if(accidentes_relevantes==2){
+            clap=clap.concat("no sé,");
+        }else if(accidentes_relevantes==3){
+            clap=clap.concat("No,");
+        }
+        
+        if(cirugia_hospitalizaciones==1){
+                clap=clap.concat("Si,");
+        }else if(cirugia_hospitalizaciones==2){
+            clap=clap.concat("no sé,");
+        }else if(cirugia_hospitalizaciones==3){
+            clap=clap.concat("No,");
+        }
+        
+        if(uso_medicamentos){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(problemas_salud_mental==1){
+                clap=clap.concat("Si,");
+        }else if(problemas_salud_mental==2){
+            clap=clap.concat("no sé,");
+        }else if(problemas_salud_mental==3){
+            clap=clap.concat("No,");
+        }
+        
+        if(violencia==1){
+                clap=clap.concat("Si,");
+        }else if(violencia==2){
+            clap=clap.concat("no sé,");
+        }else if(violencia==3){
+            clap=clap.concat("No,");
+        }
+        
+        if(antecedentes_judiciales==1){
+                clap=clap.concat("Si,");
+        }else if(antecedentes_judiciales==2){
+            clap=clap.concat("no sé,");
+        }else if(antecedentes_judiciales==3){
+            clap=clap.concat("No,");
+        }
+        
+        if(otros==1){
+                clap=clap.concat("Si,");
+        }else if(otros==2){
+            clap=clap.concat("no sé,");
+        }else if(otros==3){
+            clap=clap.concat("No,");
+        }
+        
+        clap=clap.concat(observaciones_antecdentes_personales+",");
+           
+        //Antecedentes familiares
+        
+        if(enfermedades_importantes_familia==1){
+                clap=clap.concat("Si,");
+        }else if(enfermedades_importantes_familia==2){
+            clap=clap.concat("no sé,");
+        }else if(enfermedades_importantes_familia==3){
+            clap=clap.concat("No,");
+        }
+        
+        if(obesidad_familia==1){
+                clap=clap.concat("Si,");
+        }else if(obesidad_familia==2){
+            clap=clap.concat("no sé,");
+        }else if(obesidad_familia==3){
+            clap=clap.concat("No,");
+        }
+        
+        if(problemas_salud_mental_familia==1){
+                clap=clap.concat("Si,");
+        }else if(problemas_salud_mental_familia==2){
+            clap=clap.concat("no sé,");
+        }else if(problemas_salud_mental_familia==3){
+            clap=clap.concat("No,");
+        }
+        
+        if(violencia_intrafamiliar==1){
+                clap=clap.concat("Si,");
+        }else if(violencia_intrafamiliar==2){
+            clap=clap.concat("no sé,");
+        }else if(violencia_intrafamiliar==3){
+            clap=clap.concat("No,");
+        }
+        
+        if(alcohol_y_otras_drogas==1){
+                clap=clap.concat("Si,");
+        }else if(alcohol_y_otras_drogas==2){
+            clap=clap.concat("no sé,");
+        }else if(alcohol_y_otras_drogas==3){
+            clap=clap.concat("No,");
+        }
+        
+        if(padre_adolescente==1){
+                clap=clap.concat("Si,");
+        }else if(padre_adolescente==2){
+            clap=clap.concat("no sé,");
+        }else if(padre_adolescente==3){
+            clap=clap.concat("No,");
+        }
+        
+        if(judiciales==1){
+                clap=clap.concat("Si,");
+        }else if(judiciales==2){
+            clap=clap.concat("no sé,");
+        }else if(judiciales==3){
+            clap=clap.concat("No,");
+        }
+        
+        if(otros_antecedentes_familiares==1){
+                clap=clap.concat("Si,");
+        }else if(otros_antecedentes_familiares==2){
+            clap=clap.concat("no sé,");
+        }else if(otros_antecedentes_familiares==3){
+            clap=clap.concat("No,");
+        }
+        
+        clap=clap.concat(observaciones_antecedentes_familiares+",");
+
+        //Familia
+        
+        if(vive_con_solo){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(vive_con_madre){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(vive_con_padre){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(vive_en_institucion){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(vive_con_otros){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        clap=clap.concat(vive_con_especificacion+",");
+        
+        if(comparte_cama){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        clap=clap.concat(especificacion_comparte_cama+",");
+        
+        if(nivel_instruccion_madre==1){
+                clap=clap.concat("Ninguna,");
+        }else if(nivel_instruccion_madre==2){
+            clap=clap.concat("Básica,");
+        }else if(nivel_instruccion_madre==3){
+            clap=clap.concat("Media,");
+        }else if(nivel_instruccion_madre==4){
+            clap=clap.concat("Superior,");
+        }
+        
+        if(nivel_instruccion_padre==1){
+                clap=clap.concat("Ninguna,");
+        }else if(nivel_instruccion_padre==2){
+            clap=clap.concat("Básica,");
+        }else if(nivel_instruccion_padre==3){
+            clap=clap.concat("Media,");
+        }else if(nivel_instruccion_padre==4){
+            clap=clap.concat("Superior,");
+        }
+        
+        if(nivel_instruccion_pareja==1){
+                clap=clap.concat("Ninguna,");
+        }else if(nivel_instruccion_pareja==2){
+                clap=clap.concat("Básica,");
+        }else if(nivel_instruccion_pareja==3){
+            clap=clap.concat("Media,");
+        }else if(nivel_instruccion_pareja==4){
+            clap=clap.concat("Superior,");
+        }
+        
+        clap=clap.concat(ocupacion_madre+",");
+        clap=clap.concat(ocupacion_padre+",");
+        clap=clap.concat(ocupacion_pareja+",");
+        
+        if(percepcion_familia==1){
+                clap=clap.concat("Buena,");
+        }else if(percepcion_familia==2){
+            clap=clap.concat("Regular,");
+        }else if(percepcion_familia==3){
+            clap=clap.concat("Mala,");
+        }else if(percepcion_familia==4){
+            clap=clap.concat("No hay relación,");
+        }
+        
+        clap=clap.concat(observaciones_familia+",");
+    
+        //Vivienda
+        
+        if(condiciones_sanitarias){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(hacinamiento){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        clap=clap.concat(observaciones_vivienda+",");
+               
+        //Educacion
+        
+        if(estudia){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(nivel_educacion==1){
+                clap=clap.concat("No escolarizado,");
+        }else if(nivel_educacion==2){
+            clap=clap.concat("Básica,");
+        }else if(nivel_educacion==3){
+            clap=clap.concat("Media,");
+        }else if(nivel_educacion==4){
+            clap=clap.concat("Superior,");
+        }
+        
+        clap=clap.concat(curso+",");
+        clap=clap.concat(anos_repetidos+",");
+        clap=clap.concat(causa_anos_repetidos+",");
+        
+        if(problemas_escuela){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(violencia_escolar){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(desercion_exclusion){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        clap=clap.concat(causa_desercion_exclusion+",");
+        
+        if(percepcion_rendimiento==1){
+                clap=clap.concat("Buena,");
+        }else if(percepcion_rendimiento==2){
+            clap=clap.concat("Regular,");
+        }else if(percepcion_rendimiento==3){
+            clap=clap.concat("Mala,");
+        }
+        
+        clap=clap.concat(observaciones_educacion+",");
+        
+        //Trabajo
+        
+        
+        
+//    @Column(name="trabaja_clap")
+//    private boolean trabaja;
+//    
+//    @Column(name="horas_trabajo_clap")
+//    private int horas_trabajo;
+//    
+//    @Column(name="trabajo_infantil_clap")
+//    private boolean trabajo_infantil;
+//    
+//    @Column(name="trabajo_juvenil_clap")
+//    private boolean trabajo_juvenil;
+//    
+//    @Column(name="peores_formas_clap")
+//    private boolean peores_formas;
+//    
+//    @Column(name="ser_dom_no_remu_peligroso_clap")
+//    private boolean ser_dom_no_remu_peligroso;
+//    
+//    @Column(name="razon_de_trabajo_clap")
+//    private int razon_de_trabajo;
+//    
+//    @Column(name="legalizado_clap")
+//    private int legalizado;
+//    
+//    @Column(name="tipo_de_trabajo_clap")
+//    private String tipo_de_trabajo;
+//    
+//    @Column(name="observaciones_trabajo_clap",columnDefinition = "TEXT")
+//    private String observaciones_trabajo;
+//    
+//    //vida social
+//    
+//    @Column(name="aceptacion_clap")
+//    private int aceptacion;
+//    
+//    @Column(name="pareja_clap")
+//    private boolean pareja;
+//    
+//    @Column(name="edad_pareja_clap")
+//    private int edad_pareja;
+//    
+//    @Column(name="violencia_pareja_clap")
+//    private boolean violencia_pareja;
+//    
+//    @Column(name="amigos_clap")
+//    private boolean amigos;
+//    
+//    @Column(name="suicidalidad_amigos_clap")
+//    private boolean suicidalidad_amigos;
+//    
+//    @Column(name="horas_actividad_fisica_clap")
+//    private int horas_actividad_fisica;
+//    
+//    @Column(name="horas_tv_clap")
+//    private int horas_tv;
+//    
+//    @Column(name="horas_computador_consola_clap")
+//    private int horas_computador_consola;
+//    
+//    @Column(name="cyberbulling_clap")
+//    private boolean cyberbulling;
+//    
+//    @Column(name="grooming_clap")
+//    private boolean grooming;
+//    
+//    @Column(name="otras_actividades_clap")
+//    private boolean otras_actividades;
+//    
+//    @Column(name="especificacion_otras_actividades_clap")
+//    private String especificacion_otras_actividades;
+//    
+//    @Column(name="observaciones_vida_social_clap",columnDefinition = "TEXT")
+//    private String observaciones_vida_social;
+//    
+//    //habitos y consumo
+//    
+//    @Column(name="sueno_normal_clap")
+//    private boolean sueno_normal;
+//    
+//    @Column(name="horas_sueno_clap")
+//    private int horas_sueno;
+//    
+//    @Column(name="alimentacion_adecuada_clap")
+//    private boolean alimentacion_adecuada;
+//    
+//    @Column(name="comidas_familia_clap")
+//    private int comidas_familia;
+//    
+//    @Column(name="alimentacion_especial_clap")
+//    private boolean alimentacion_especial;
+//    
+//    @Column(name="espeficicacion_alimentacion_especial_clap")
+//    private String especificacion_alimentacion_especial;
+//    
+//    @Column(name="tabaco_clap")
+//    private boolean tabaco;
+//    
+//    @Column(name="cigarros_dia_clap")
+//    private int cigarros_dia;
+//    
+//    @Column(name="consumo_alcohol_clap")
+//    private boolean consumo_alcohol;
+//    
+//    @Column(name="consumo_marihuana_clap")
+//    private boolean consumo_marihuana;
+//    
+//    @Column(name="consumo_otra_sustancia_clap")
+//    private boolean consumo_otra_sustancia;
+// 
+//    @Column(name="especificacion_consumo_otra_sustancia_clap")
+//    private String especificacion_consumo_otra_sustancia;
+//    
+//    @Column(name="seguridad_vial_clap")
+//    private boolean seguridad_vial;
+//    
+//    @Column(name="observaciones_habitos_consumo_clap",columnDefinition = "TEXT")
+//    private String observaciones_habitos_consumo;
+//    
         
         return clap;
     }
