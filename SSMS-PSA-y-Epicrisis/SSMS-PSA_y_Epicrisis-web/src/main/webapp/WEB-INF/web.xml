@@ -59,6 +59,7 @@
             <web-resource-name>admin-area</web-resource-name>
             <url-pattern>/faces/usuario/*</url-pattern>
             <url-pattern>/faces/rol/*</url-pattern>
+            <url-pattern>/faces/parametros/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description></description>
