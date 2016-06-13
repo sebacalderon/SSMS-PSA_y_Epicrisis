@@ -5,7 +5,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions">
 
     <ui:composition template="/template.xhtml">
 
@@ -59,7 +60,7 @@
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_calle_direccion}" for="calle_direccion" />
                         <p:inputText id="calle_direccion" value="#{pacienteController.selected.calle_direccion}" title="#{bundle.CreatepacienteTitle_calle_direccion}" maxlength="50" required="true" />
                         <p:outputLabel value="Número:" for="numero_direccion" />
-                        <p:inputText id="numero_direccion" value="#{pacienteController.selected.numero_direccion}" title="#{bundle.CreatepacienteTitle_numero_direccion}" maxlength="8" required="true"/>
+                        <pe:inputNumber id="numero_direccion" value="#{pacienteController.selected.numero_direccion}" style="campo-numerico" minValue="0" maxValue="100000" title="#{bundle.CreatepacienteTitle_numero_direccion}" maxlength="8" required="true"/>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_resto_direccion}" for="resto_direccion" />
                         <p:inputText id="resto_direccion" value="#{pacienteController.selected.resto_direccion}" title="#{bundle.CreatepacienteTitle_resto_direccion}" maxlength="50" />
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_fecha_nacimiento}" for="fecha_nacimiento" />

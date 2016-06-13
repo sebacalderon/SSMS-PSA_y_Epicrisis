@@ -692,7 +692,7 @@ public class clapController implements Serializable {
 
     public void anular() {
         selected.setEstado("Anulado");
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioDeleted"));
+        persist(PersistAction.UPDATE, "Clap Anulado");
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
