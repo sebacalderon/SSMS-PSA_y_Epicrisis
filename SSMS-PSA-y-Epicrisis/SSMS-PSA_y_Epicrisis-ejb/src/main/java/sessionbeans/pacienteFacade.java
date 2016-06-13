@@ -57,4 +57,12 @@ public class pacienteFacade extends AbstractFacade<paciente> implements paciente
                 setParameter("estado", estado).setParameter("fecha", fecha);
         return query.getResultList();
     }
+    
+    @Override
+    public List<paciente> findbyRUNCesfam(int RUN, cesfam cesfam) {
+        Query query;
+        query = em.createNamedQuery("paciente.findbyRUNCesfam").
+                setParameter("RUN", RUN).setParameter("cesfam", cesfam);
+        return query.getResultList();
+    }
 }

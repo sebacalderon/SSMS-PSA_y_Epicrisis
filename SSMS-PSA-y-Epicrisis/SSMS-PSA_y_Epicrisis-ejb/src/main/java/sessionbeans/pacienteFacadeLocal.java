@@ -37,4 +37,6 @@ public interface pacienteFacadeLocal {
     List<paciente> findbyEstadoCesfamFecha(String estado, cesfam cesfam, Date fecha);
     
     List<paciente> findbyEstadoFecha(String estado, Date fecha);
+    
+    List<paciente> findbyRUNCesfam(int RUN, cesfam cesfam);
 }

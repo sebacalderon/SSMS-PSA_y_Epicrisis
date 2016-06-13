@@ -102,37 +102,10 @@ public class pacienteController implements Serializable {
     public paciente prepareCreate() {
         selected = new paciente();
         initializeEmbeddableKey();
-        selected.setNombres("Sebastian");
-        selected.setPrimer_apellido("Calderon");
-        selected.setSegundo_apellido("Diaz");
-        selected.setCalle_direccion("sadas");
-        selected.setNumero_direccion("123");
-        selected.setFecha_nacimiento(new java.util.Date());
-        selected.setRUN(18293486);
-        selected.setDV("1");
-        selected.setCorreo("sebastian@algo.com");
-        selected.setSexo(1);
-        region Region = new region();
-        long id = 1;
-        Region.setId(id);
-        Region.setNombre("Región de Tarapacá");
-        selected.setRegion_residencia(Region);
-        comuna Comuna = new comuna();
-        id = 1101;
-        Comuna.setId(id);
-        Comuna.setNombre("Iquique");
-        Comuna.setRegion(Region);
-        selected.setComuna_residencia(Comuna);
-        prevision Prevision = new prevision();
-        id = 2;
-        Prevision.setId(id);
-        Prevision.setNombre("Isapre");
-        selected.setPrevision(Prevision);
-        nacionalidad Nacionalidad = new nacionalidad();
-        id = 213;
-        Nacionalidad.setId(id);        
-        Nacionalidad.setNombre("Chile");
-        selected.setNacionalidad(Nacionalidad);
+        selected.setRUN(RUN);
+        selected.setDV(DV);
+        //Cesfam correspondiente al funcionario que realiza el registro
+        selected.setCesfam(loginCtrl.getUsuarioLogueado().getCESFAM());
         return selected;
     }
 
@@ -403,14 +376,42 @@ public class pacienteController implements Serializable {
     }
     
     public String buscarPorRUN(){
-        List<paciente> pacientes = getFacade().findbyRUN(RUN);
-        if (pacientes.size() == 0) {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no Encontrado. Buscar en Fonasa",  null);
+        selected = new paciente();
+        selected.setRUN(RUN);
+        selected.setDV(DV);
+        boolean flag = verificaRun();
+        selected = null;
+        if (!flag) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "RUN Invalido",  null);
             FacesContext.getCurrentInstance().addMessage(null, message);
             return "/faces/paciente/Buscar.xhtml";
+        }
+        List<paciente> pacientes = getFacade().findbyRUN(RUN);;      
+        if (pacientes.isEmpty()) {
             /////////////////
             //PARTE DE FONASA
             /////////////////
+            //Si no encuentra en Fonasa, se crea desde 0
+            if (true) {
+            //Si es funcionario o encargado se puede crear
+                if (loginCtrl.esFuncionario() || loginCtrl.esEncargadoPrograma()) {
+                    prepareCreate();
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no Encontrado. Cree el registro",  null);
+                    FacesContext.getCurrentInstance().addMessage(null, message);
+                    return "/faces/paciente/Create.xhtml";
+                //Si es SuperUsuario, no puede crear
+                }else{
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no Encontrado",  null);
+                    FacesContext.getCurrentInstance().addMessage(null, message);
+                    return "/faces/paciente/Buscar.xhtml";
+                }       
+            }else{
+                //Si encuentra en fonasa
+                selected = new paciente();
+                initializeEmbeddableKey();
+                return "/faces/paciente/Create.xhtml"; 
+            }
+            
         }else{
             paciente paciente = pacientes.get(0);
             if (!paciente.getDV().equals(DV)) {
@@ -431,7 +432,7 @@ public class pacienteController implements Serializable {
                         selected = paciente;
                         return "/faces/paciente/View.xhtml";
                     }else{
-                        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario es de otro CESFAM",  null);
+                        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario pertenece a otro CESFAM",  null);
                         FacesContext.getCurrentInstance().addMessage(null, message);
                         return "/faces/paciente/Buscar.xhtml";
                     }

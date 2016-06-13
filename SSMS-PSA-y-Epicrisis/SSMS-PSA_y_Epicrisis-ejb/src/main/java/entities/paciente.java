@@ -32,7 +32,8 @@ import javax.validation.constraints.Pattern;
 @NamedQueries({
     @NamedQuery(name="paciente.findbyRUN",query="SELECT p FROM paciente p WHERE p.RUN=:RUN"),
     @NamedQuery(name="paciente.findbyEstadoFecha",query="SELECT p FROM paciente p WHERE p.estado=:estado AND p.fecha_estado >= :fecha"),
-    @NamedQuery(name="paciente.findbyEstadoCesfamFecha",query="SELECT p FROM paciente p WHERE p.estado=:estado AND p.cesfam=:cesfam AND p.fecha_estado >= :fecha")
+    @NamedQuery(name="paciente.findbyEstadoCesfamFecha",query="SELECT p FROM paciente p WHERE p.estado=:estado AND p.cesfam=:cesfam AND p.fecha_estado >= :fecha"),
+    @NamedQuery(name="paciente.findbyRUNCesfam",query="SELECT p FROM paciente p WHERE p.RUN=:RUN AND p.cesfam=:cesfam")
 })
 public class paciente implements Serializable {
 

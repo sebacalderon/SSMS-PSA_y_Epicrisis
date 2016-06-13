@@ -14,6 +14,14 @@
         </ui:define>
         
         <ui:define name="body">
+            <h:form>
+            <p:breadCrumb>
+                <p:menuitem value="Categories" url="/faces/home.xhtml" />
+                <p:menuitem value="Usuarios"/>
+                <p:menuitem value="Búsqueda por RUN" url="/faces/paciente/Buscar.xhtml" />
+            </p:breadCrumb>
+            </h:form>
+            <br/>
             <b:panel title="Búsqueda de Usuario por RUN" look="info">
                 <h:form id="buscar">
                     
@@ -32,9 +40,7 @@
                         <b:commandButton value="Buscar" id="withIcon" action="#{pacienteController.buscarPorRUN}"/>
                        </p:column>
                 </h:form>
-                <h:form>
-                    <b:commandButton icon="ui-icon-plus"   value="Crear Nuevo Usuario" actionListener="#{pacienteController.prepareCreate}" action="/paciente/Create?faces-redirect=true" rendered="#{loginController.esFuncionario()}"/>                    
-                </h:form>
+                
             </b:panel>    
         </ui:define>
         
