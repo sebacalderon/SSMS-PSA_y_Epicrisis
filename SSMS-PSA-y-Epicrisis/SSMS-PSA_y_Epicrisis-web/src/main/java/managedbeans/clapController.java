@@ -465,6 +465,10 @@ public class clapController implements Serializable {
             selected.setEstado("Incompleto");
             completo=false;
         }
+        
+        if(selected.getTalla()!= 0 && selected.getPeso()!=0){
+            selected.setImc((float) (selected.getPeso()/Math.pow((float)selected.getTalla()/100,2)));
+        }
 //        System.out.println(
 //        (selected.getPerinatales_normales()!=0)+"\n"+
 //            (selected.getAlergias_normales()!=0)+"\n"+

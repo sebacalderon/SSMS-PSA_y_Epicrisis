@@ -2047,7 +2047,7 @@
                                 <b:row>
                                     <b:column col-xs="8">
                                         <pe:inputNumber id="peso" value="#{clapController.selected.peso}" minValue="0" maxValue="250" title="#{bundle.CreateclapTitle_peso}" >
-                                            <p:ajax event="keyup"  listener="#{clapController.setIMC}" immediate="true" update="imc" ></p:ajax>
+                                            <p:ajax event="blur"  listener="#{clapController.setIMC}" immediate="true" update="imc" ></p:ajax>
                                         </pe:inputNumber>
                                     </b:column>
                                     <b:column col-xs="4">
@@ -2069,7 +2069,7 @@
                                 <b:row>
                                     <b:column col-xs="8">
                                         <pe:inputNumber id="talla" value="#{clapController.selected.talla}" minValue="0" maxValue="250" >
-                                            <p:ajax event="keyup"  listener="#{clapController.setIMC}" immediate="true" update="imc" ></p:ajax>
+                                            <p:ajax event="blur"  listener="#{clapController.setIMC}" immediate="true" update="imc" ></p:ajax>
                                         </pe:inputNumber>
                                     </b:column>
                                     <b:column col-xs="4">
@@ -2105,7 +2105,6 @@
                                 <b:row>
                                     <b:column col-xs="8">
                                         <pe:inputNumber disabled="true" id="imc" value="#{clapController.selected.imc}">
-                                            <p:ajax event="blur" immediate="true"/>                                                                
                                         </pe:inputNumber>
                                     </b:column>
                                     <b:column col-xs="4">
