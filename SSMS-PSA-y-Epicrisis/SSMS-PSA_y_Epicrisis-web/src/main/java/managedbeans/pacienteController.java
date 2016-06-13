@@ -136,9 +136,8 @@ public class pacienteController implements Serializable {
     public void riesgosNoTratados() {
         selected.setEstado("Riesgos no Tratados");
         selected.setFecha_estado(new java.util.Date());
-        clapCtrl.setActividadElegida(true);
+        clapCtrl.setActividadElegida(false);
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
-        return "/faces/paciente/View.xhtml";
     }
 
     public void tratarRiesgo(){

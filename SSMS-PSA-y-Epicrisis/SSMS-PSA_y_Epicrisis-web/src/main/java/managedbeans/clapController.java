@@ -275,6 +275,11 @@ public class clapController implements Serializable {
     
     public clap prepareRiesgos(){
         selected = getSelected();
+        if (selected.getEstado().equals("Vigente") && pacienteCtrl.getSelected().getEstado().equals("Riesgos no Tratados")) {
+            setActividadElegida(false);
+        }else{
+            setActividadElegida(true);
+        }
         return selected;
     }
     

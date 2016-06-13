@@ -32,7 +32,7 @@
                 <h3 align="center">No es posible ver los riesgos de una ficha CLAP no terminada</h3>
             </b:row>
             <br/><br/><br/>
-            <h:form rendered="#{not clapController.esIncompleto()}">
+            <h:form  id="form">
             <b:row>
                 <div id="cardio">
                  <b:column offset="3" col-xs="12" col-md="6">
@@ -43,7 +43,7 @@
                         <b:row>
                         <b:column offset="8" col-xs="4">
                             <p:commandButton style="color:red;" disabled="#{clapController.isActividadElegida()}" value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_cardiovascular(true)}" rendered="#{not loginController.esSuperUsuario()}">
-                                <p:ajax event="click" update="cardio"/>
+                                <p:ajax event="click" update="form" immediate="true"/>
                             </p:commandButton>
                         </b:column>
                         </b:row>
@@ -70,7 +70,7 @@
                         <b:row>
                         <b:column offset="8" col-xs="4">
                             <p:commandButton style="color:red;" disabled="#{clapController.isActividadElegida()}" value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_nutricional(true)}" rendered="#{not loginController.esSuperUsuario()}">
-                                <p:ajax event="click" update="nutri"/>
+                                <p:ajax event="click" update="form" immediate="true"/>
                             </p:commandButton>
                         </b:column>
                         </b:row>
@@ -98,7 +98,7 @@
                         <b:row>
                         <b:column offset="8" col-xs="4">
                             <p:commandButton style="color:red;" disabled="#{clapController.isActividadElegida()}" value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_social(true)}" rendered="#{not loginController.esSuperUsuario()}">
-                                <p:ajax event="click" update="social" />
+                                <p:ajax event="click" update="form" immediate="true"/>
                             </p:commandButton>
                         </b:column>
                         </b:row>
@@ -125,7 +125,7 @@
                         <b:row>
                         <b:column offset="8" col-xs="4">
                             <p:commandButton style="color:red;" disabled="#{clapController.isActividadElegida()}" value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_salud_mental(true)}" rendered="#{not loginController.esSuperUsuario()}">
-                                <p:ajax event="click" update="mental"/>
+                                <p:ajax event="click" update="form" immediate="true"/>
                             </p:commandButton>
                         </b:column>
                         </b:row>
@@ -152,7 +152,7 @@
                         <b:row>
                         <b:column offset="8" col-xs="4">
                             <p:commandButton style="color:red;" value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_oh_drogas(true)}" disabled="#{clapController.isActividadElegida()}" rendered="#{not loginController.esSuperUsuario()}">
-                                <p:ajax event="click" update="alcohol"/>
+                                <p:ajax event="click" update="form" immediate="true"/>
                             </p:commandButton> 
                         </b:column>
                         </b:row>
@@ -179,7 +179,7 @@
                         <b:row>
                         <b:column offset="8" col-xs="4">
                             <p:commandButton style="color:red;" value="Reportar Riesgo" actionListener="#{clapController.selected.setRiesgo_ssr(true)}" disabled="#{clapController.isActividadElegida()}" rendered="#{not loginController.esSuperUsuario()}">
-                                <p:ajax event="click" update="ssr"/>
+                                <p:ajax event="click" update="form" immediate="true"/>
                             </p:commandButton>
                         </b:column>
                         </b:row>
@@ -196,7 +196,7 @@
                 </div>
             </b:row>
             </h:form>
-            <b:row rendered="#{not clapController.esIncompleto() and not loginController.esSuperUsuario()}">
+            <b:row rendered="#{not loginController.esSuperUsuario()}">
                   <h2 align="center">Actividades de intervención</h2>
                   
                  <h:form id="actividadListForm">
@@ -204,11 +204,10 @@
                                   selectionMode="single" selection="#{actividadController.selected}"
                                   rowKey="#{item.id}"
                                   >
-                         <p:ajax event="rowSelect"   update="createButton agendarButton" />
-                         <p:ajax event="rowUnselect" update="createButton agendarButton"/>
+                         <p:ajax event="rowSelect"   update="createButton " />
+                         <p:ajax event="rowUnselect" update="createButton "/>
                          <f:facet name="footer">
                              <p:commandButton id="createButton" icon="ui-icon-plus"   value="Ahora" actionListener="#{actividadController.prepareCreate}" update=":actividadCreateForm" oncomplete="PF('actividadCreateDialog').show()" disabled="#{clapController.isActividadElegida()}"/>
-                             <p:commandButton id="agendarButton" icon="ui-icon-plus"   value="Despues" action="#{pacienteController.agendarActividad()}" oncomplete="/paciente/List" disabled="#{clapController.isActividadElegida()}"/>
                          </f:facet>
                      </p:dataTable>
                  </h:form>
