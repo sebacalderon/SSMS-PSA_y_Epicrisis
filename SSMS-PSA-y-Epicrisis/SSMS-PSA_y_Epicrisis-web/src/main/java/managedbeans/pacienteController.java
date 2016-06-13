@@ -136,7 +136,6 @@ public class pacienteController implements Serializable {
     public void riesgosNoTratados() {
         selected.setEstado("Riesgos no Tratados");
         selected.setFecha_estado(new java.util.Date());
-        clapCtrl.setActividadElegida(false);
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
     }
 
@@ -144,6 +143,7 @@ public class pacienteController implements Serializable {
         selected.setEstado("Riesgos tratados o en tratamiento");
         selected.setFecha_estado(new java.util.Date());
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
+        clapCtrl.setActividadElegida(true);
     }
     
     public void sinRiesgo(){
