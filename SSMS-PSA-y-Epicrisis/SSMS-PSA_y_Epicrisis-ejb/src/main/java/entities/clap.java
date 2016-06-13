@@ -3357,9 +3357,9 @@ public class clap implements Serializable {
         }
         
         if(riesgo_social){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No");
         }
         
         

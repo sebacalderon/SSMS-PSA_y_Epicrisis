@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import managedbeans.util.JsfUtil;
@@ -289,6 +290,33 @@ public class clapController implements Serializable {
         return chart;
     }
 
+    private void generateCsvFile(String fileName)
+    {
+        try
+        {
+            FileWriter writer = new FileWriter(fileName);
+            List<clap> items=getFacade().findAll();;
+             
+            //Nombre de las columnas
+             
+            writer.append("Email");
+            writer.append(',');
+            writer.append("Name");
+            writer.append('\n');
+
+            for (int i =0;i<items.size();i++) {
+                clap item=items.get(i);
+                writer.append(item.toString());
+                writer.append('\n');
+            }
+
+            writer.flush();
+            writer.close();
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     public String create() {
         selected = new clap();
         initializeEmbeddableKey();
