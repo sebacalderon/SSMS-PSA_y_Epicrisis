@@ -2451,6 +2451,7 @@ public class clap implements Serializable {
         //Datos consulta
         
         
+        
         return clap;
     }
     

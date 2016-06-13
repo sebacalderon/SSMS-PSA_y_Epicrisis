@@ -40,18 +40,23 @@
             </b:navbarLinks>
             <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
 
-            <b:navbarLinks pull="right">
-                <b:dropMenu value="Perfil #{loginController.getUsuarioLogueado().nombres} #{loginController.getUsuarioLogueado().primer_apellido}" rendered="#{loginController.getUsuarioLogueado()!=null}">
+            <b:navbarLinks pull="right" rendered="#{loginController.getUsuarioLogueado()!=null}">
+                <b:dropMenu value="Perfil #{loginController.getUsuarioLogueado().RUT} (SU)" rendered="#{loginController.esSuperUsuario()}">
                     <b:navLink value="Cambio de contraseña" outcome="/perfilUsuario/cambio_pass.xhtml" />
                 </b:dropMenu>
-                    <b:column col-xs="6">
-                        <h:form rendered="#{loginController.verifyLogin()}">
-                            <div style="padding-top: 8px">
-                                <b:commandButton size="large" look="Info" value="${bundle.submit_logout}" style="vertical-align: central;" action="#{loginController.logout}"  icon="glyphicon glyphicon-off" />
-                            </div>
-                        </h:form>
-                    </b:column>
-                
+                <b:dropMenu value="Perfil #{loginController.getUsuarioLogueado().RUT} (F)" rendered="#{loginController.esFuncionario()}">
+                    <b:navLink value="Cambio de contraseña" outcome="/perfilUsuario/cambio_pass.xhtml" />
+                </b:dropMenu>
+                <b:dropMenu value="Perfil #{loginController.getUsuarioLogueado().RUT} (EP)" rendered="#{loginController.esEmpleadoMunicipal()}">
+                    <b:navLink value="Cambio de contraseña" outcome="/perfilUsuario/cambio_pass.xhtml" />
+                </b:dropMenu>
+                <b:column col-xs="3">
+                    <h:form rendered="#{loginController.verifyLogin()}">
+                        <div style="padding-top: 8px">
+                            <b:commandButton size="large" look="Info" value="${bundle.submit_logout}" style="vertical-align: central;" action="#{loginController.logout}"  icon="glyphicon glyphicon-off" />
+                        </div>
+                    </h:form>
+                </b:column> 
             </b:navbarLinks>
         </b:navBar>
     </h:head>
