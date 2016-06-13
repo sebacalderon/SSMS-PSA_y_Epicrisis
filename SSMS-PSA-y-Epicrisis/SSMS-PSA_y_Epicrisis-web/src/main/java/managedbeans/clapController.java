@@ -654,7 +654,7 @@ public class clapController implements Serializable {
         ////////////////
         //Imagen
         ////////////////
-        if (imagen!=null && selected.getDiagrama_familiar()!=null) {
+        if (imagen!=null && selected.getDiagrama_familiar()==null) {
             
             Path folder = Paths.get("C:/genogramas");
             String filename = "Clap "+selected.getId();

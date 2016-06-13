@@ -45,7 +45,6 @@
 
                     </p:panelGrid>
                     <p:commandButton actionListener="#{actividadController.create}" value="#{bundle.Save}" update="display,:actividadListForm:datalist,:growl" oncomplete="handleSubmit(args,'actividadCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="actividadCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

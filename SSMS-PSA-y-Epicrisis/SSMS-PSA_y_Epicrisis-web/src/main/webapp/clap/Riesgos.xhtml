@@ -208,7 +208,7 @@
                          <p:ajax event="rowUnselect" update="createButton agendarButton"/>
                          <f:facet name="footer">
                              <p:commandButton id="createButton" icon="ui-icon-plus"   value="Ahora" actionListener="#{actividadController.prepareCreate}" update=":actividadCreateForm" oncomplete="PF('actividadCreateDialog').show()" disabled="#{clapController.isActividadElegida()}"/>
-                             <p:commandButton id="agendarButton" icon="ui-icon-plus"  value="Despues" actionListener="#{pacienteController.agendarActividad()}"  update=":growl,datalist" disabled="#{clapController.isActividadElegida()}" action="/faces/paciente/View.xhtml"/>
+                             <p:commandButton id="agendarButton" icon="ui-icon-plus"   value="Despues" action="#{pacienteController.agendarActividad()}" oncomplete="/paciente/List" disabled="#{clapController.isActividadElegida()}"/>
                          </f:facet>
                      </p:dataTable>
                  </h:form>
