@@ -133,7 +133,7 @@ public class pacienteController implements Serializable {
         }
     }
 
-    public String riesgosNoTratados() {
+    public void riesgosNoTratados() {
         selected.setEstado("Riesgos no Tratados");
         selected.setFecha_estado(new java.util.Date());
         clapCtrl.setActividadElegida(false);
