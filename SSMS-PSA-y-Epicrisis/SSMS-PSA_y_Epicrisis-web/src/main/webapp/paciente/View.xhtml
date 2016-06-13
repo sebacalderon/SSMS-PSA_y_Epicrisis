@@ -221,7 +221,7 @@
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":actividadViewForm" oncomplete="PF('actividadViewDialog').show()" disabled="#{empty actividadController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":actividadEditForm" oncomplete="PF('actividadEditDialog').show()" disabled="#{empty actividadController.selected}" rendered="#{loginController.esFuncionario() || loginController.esEmpleadoMunicipal()}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":actividadEditForm" oncomplete="PF('actividadEditDialog').show()" disabled="#{empty actividadController.selected}" rendered="#{loginController.esFuncionario() || loginController.esEncargadoPrograma()}"/>
                         </f:facet>
                 </p:dataTable>
                 </h:panelGroup>

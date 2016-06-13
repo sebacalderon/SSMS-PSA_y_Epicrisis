@@ -38,7 +38,6 @@
                         </p:column>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{actividadController.update}" value="#{bundle.Save}" update="display,:actividadListForm:datalist,:growl" oncomplete="handleSubmit(args, 'actividadEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="actividadEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

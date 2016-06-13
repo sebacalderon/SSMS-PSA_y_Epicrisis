@@ -465,6 +465,10 @@ public class clapController implements Serializable {
             selected.setEstado("Incompleto");
             completo=false;
         }
+        
+        if(selected.getTalla()!= 0 && selected.getPeso()!=0){
+            selected.setImc((float) (selected.getPeso()/Math.pow((float)selected.getTalla()/100,2)));
+        }
 //        System.out.println(
 //        (selected.getPerinatales_normales()!=0)+"\n"+
 //            (selected.getAlergias_normales()!=0)+"\n"+
@@ -654,7 +658,7 @@ public class clapController implements Serializable {
         ////////////////
         //Imagen
         ////////////////
-        if (imagen!=null && selected.getDiagrama_familiar()!=null) {
+        if (imagen!=null && selected.getDiagrama_familiar()==null) {
             
             Path folder = Paths.get("C:/genogramas");
             String filename = "Clap "+selected.getId();
@@ -692,7 +696,7 @@ public class clapController implements Serializable {
 
     public void anular() {
         selected.setEstado("Anulado");
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioDeleted"));
+        persist(PersistAction.UPDATE, "Clap Anulado");
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
