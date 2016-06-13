@@ -47,7 +47,7 @@
                 <b:dropMenu value="Perfil #{loginController.getUsuarioLogueado().RUT} (F)" rendered="#{loginController.esFuncionario()}">
                     <b:navLink value="Cambio de contraseña" outcome="/perfilUsuario/cambio_pass.xhtml" />
                 </b:dropMenu>
-                <b:dropMenu value="Perfil #{loginController.getUsuarioLogueado().RUT} (EP)" rendered="#{loginController.esEmpleadoMunicipal()}">
+                <b:dropMenu value="Perfil #{loginController.getUsuarioLogueado().RUT} (EP)" rendered="#{loginController.esEncargadoPrograma()}">
                     <b:navLink value="Cambio de contraseña" outcome="/perfilUsuario/cambio_pass.xhtml" />
                 </b:dropMenu>
                 <b:column col-xs="3">

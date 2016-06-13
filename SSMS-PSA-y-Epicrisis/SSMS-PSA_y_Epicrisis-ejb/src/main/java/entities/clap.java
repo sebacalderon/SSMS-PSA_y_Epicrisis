@@ -2794,126 +2794,574 @@ public class clap implements Serializable {
         
         //Trabajo
         
+        if(trabaja){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        clap=clap.concat(horas_trabajo+",");
+        
+        if(trabajo_infantil){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(trabajo_juvenil){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(peores_formas){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(ser_dom_no_remu_peligroso){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(razon_de_trabajo==1){
+                clap=clap.concat("economía,");
+        }else if(razon_de_trabajo==2){
+            clap=clap.concat("autonomía,");
+        }else if(razon_de_trabajo==3){
+            clap=clap.concat("me gusta,");
+        }else if(razon_de_trabajo==4){
+            clap=clap.concat("otra,");
+        }else if(razon_de_trabajo==5){
+            clap=clap.concat("n/c,");
+        }
+        
+        if(legalizado==1){
+                clap=clap.concat("Si,");
+        }else if(legalizado==2){
+            clap=clap.concat("No,");
+        }else if(legalizado==3){
+            clap=clap.concat("n/c,");
+        }
+        
+        clap=clap.concat(tipo_de_trabajo+",");
+        
+        clap=clap.concat(observaciones_trabajo+",");
+        
+        //vida social
+        
+        if(aceptacion==1){
+                clap=clap.concat("aceptado,");
+        }else if(aceptacion==2){
+            clap=clap.concat("rechazado,");
+        }else if(aceptacion==3){
+            clap=clap.concat("ignorado,");
+        }else if(aceptacion==4){
+            clap=clap.concat("no sabe,");
+        }
+        
+        if(pareja){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        clap=clap.concat(edad_pareja+",");
+        
+        if(violencia_pareja){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(amigos){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(suicidalidad_amigos){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        clap=clap.concat(horas_actividad_fisica+",");
+        
+        clap=clap.concat(horas_tv+",");
+        
+        clap=clap.concat(horas_computador_consola+",");
+        
+        if(cyberbulling){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(grooming){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(otras_actividades){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        clap=clap.concat(especificacion_otras_actividades+",");
+        
+        clap=clap.concat(observaciones_vida_social+",");
+              
+        //habitos y consumo
+        
+        if(sueno_normal){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        clap=clap.concat(horas_sueno+",");
+        
+        if(alimentacion_adecuada){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        clap=clap.concat(comidas_familia+",");
+        
+        if(alimentacion_especial){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        clap=clap.concat(especificacion_alimentacion_especial+",");
+      
+        if(tabaco){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        clap=clap.concat(cigarros_dia+",");
+        
+        if(consumo_alcohol){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(consumo_marihuana){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(consumo_otra_sustancia){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        clap=clap.concat(especificacion_consumo_otra_sustancia+",");
+        
+        if(seguridad_vial){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        clap=clap.concat(observaciones_habitos_consumo+",");
+        
+        //gineco/urólogo
+        
+        clap=clap.concat(edad_menarca_espermarca+",");
+        
+        clap=clap.concat(fecha_ultima_menstruacion.toString()+",");
+        
+        if(no_conoce_fecha_ultima_menstruacion){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(ciclos_regulares==1){
+                clap=clap.concat("Si,");
+        }else if(ciclos_regulares==2){
+            clap=clap.concat("No,");
+        }else if(ciclos_regulares==3){
+            clap=clap.concat("n/s,");
+        }else if(ciclos_regulares==4){
+            clap=clap.concat("n/c,");
+        }
+        
+        if(dismenorrea==1){
+                clap=clap.concat("Si,");
+        }else if(dismenorrea==2){
+            clap=clap.concat("No,");
+        }else if(dismenorrea==3){
+            clap=clap.concat("n/c,");
+        }
+        
+        if(flujo_secrecion_patologico){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(its_vih){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        clap=clap.concat(especificacion_its_vih+",");
+        
+        if(tratamiento==1){
+                clap=clap.concat("Si,");
+        }else if(tratamiento==2){
+            clap=clap.concat("No,");
+        }else if(tratamiento==3){
+            clap=clap.concat("n/s,");
+        }
+        
+        if(tratamiento_contactos==1){
+                clap=clap.concat("Si,");
+        }else if(tratamiento_contactos==2){
+            clap=clap.concat("No,");
+        }else if(tratamiento_contactos==3){
+            clap=clap.concat("n/s,");
+        }
+        
+        clap=clap.concat(embarazos+",");
+        clap=clap.concat(hijos+",");
+        clap=clap.concat(abortos+",");
+        clap=clap.concat(observaciones_gineco_urologico+",");
+               
+        //sexualidad
+        
+        if(orientacion_sexual==1){
+                clap=clap.concat("Heterosexual,");
+        }else if(orientacion_sexual==2){
+            clap=clap.concat("Homosexual,");
+        }else if(orientacion_sexual==3){
+            clap=clap.concat("Bisexual,");
+        }else if(orientacion_sexual==4){
+            clap=clap.concat("n/r,");
+        } 
+        
+        clap=clap.concat(especificacion_orientacion_sexual+",");
+        
+        if(conducta_sexual==1){
+                clap=clap.concat("Postergadora,");
+        }else if(conducta_sexual==2){
+            clap=clap.concat("Anticipadora,");
+        }else if(conducta_sexual==3){
+            clap=clap.concat("Activa,");
+        }
+        
+        clap=clap.concat(edad_inicio_conducta_sexual+",");
+        
+        if(relaciones_sexuales==1){
+                clap=clap.concat("Distinto sexo,");
+        }else if(relaciones_sexuales==2){
+            clap=clap.concat("Mismo sexo,");
+        }else if(relaciones_sexuales==3){
+            clap=clap.concat("Ambos sexos,");
+        }else if(relaciones_sexuales==4){
+            clap=clap.concat("n/c,");
+        }
+        
+        if(pareja_sexual==1){
+                clap=clap.concat("única ambos,");
+        }else if(pareja_sexual==2){
+            clap=clap.concat("varias,");
+        }else if(pareja_sexual==3){
+            clap=clap.concat("n/c,");
+        }
+        
+        if(dificultades_sexuales==1){
+                clap=clap.concat("Si,");
+        }else if(dificultades_sexuales==2){
+            clap=clap.concat("No,");
+        }else if(dificultades_sexuales==3){
+            clap=clap.concat("n/c,");
+        }
+        
+        if(anticoncepcion==1){
+                clap=clap.concat("siempre,");
+        }else if(anticoncepcion==2){
+            clap=clap.concat("a veces,");
+        }else if(anticoncepcion==3){
+            clap=clap.concat("nunca,");
+        }
+        
+        if(doble_proteccion){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        clap=clap.concat(especificacion_uso_mac+",");
+        
+        if(uso_mac==1){
+                clap=clap.concat("Si,");
+        }else if(uso_mac==2){
+            clap=clap.concat("No,");
+        }else if(uso_mac==3){
+            clap=clap.concat("a veces,");
+        }
+        
+        clap=clap.concat(especificacion_uso_mac+",");
+        
+        clap=clap.concat(razon_no_uso_mac+",");
+        
+        if(consejeria_uso_mac){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(aco_emergencia){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(abuso_sexual){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(reparacion_abuso_sexual){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        clap=clap.concat(observaciones_sexualidad+",");
+        
+        //Situación psico_emocinoal
+        
+        if(imagen_corporal==1){
+                clap=clap.concat("conforme,");
+        }else if(imagen_corporal==2){
+            clap=clap.concat("crea preocupación,");
+        }else if(imagen_corporal==3){
+            clap=clap.concat("impide relación con los demás,");
+        }
+        
+        if(bienestar_emocional==1){
+                clap=clap.concat("normal,");
+        }else if(bienestar_emocional==2){
+            clap=clap.concat("deprimido/bajoneado,");
+        }else if(bienestar_emocional==3){
+            clap=clap.concat("irritable,");
+        }else if(bienestar_emocional==4){
+            clap=clap.concat("desesperanzado,");
+        }else if(bienestar_emocional==5){
+            clap=clap.concat("poco interes o placer,");
+        }else if(bienestar_emocional==6){
+            clap=clap.concat("eufórico,");
+        }else if(bienestar_emocional==7){
+            clap=clap.concat("ansioso/angustiado,");
+        }else if(bienestar_emocional==8){
+            clap=clap.concat("alta impulsividad,");
+        }else if(bienestar_emocional==9){
+            clap=clap.concat("autoagresiones,");
+        }
+        
+        if(vida_proyecto==1){
+                clap=clap.concat("claro,");
+        }else if(vida_proyecto==2){
+            clap=clap.concat("confuso,");
+        }else if(vida_proyecto==3){
+            clap=clap.concat("ausente,");
+        }
+        
+        if(suicidalidad_amigos){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(ideacion_suicida){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(intento_suicida){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(referente_adulto==1){
+                clap=clap.concat("padre,");
+        }else if(referente_adulto==2){
+            clap=clap.concat("madre,");
+        }else if(referente_adulto==3){
+            clap=clap.concat("familiar,");
+        }else if(referente_adulto==4){
+            clap=clap.concat("otro,");
+        }else if(referente_adulto==5){
+            clap=clap.concat("ninguno,");
+        }
+        
+        clap=clap.concat(nombre_referente_adulto+",");
+        clap=clap.concat(telefono_referente_adulto+",");
+        clap=clap.concat(observaciones_psico_emocional+",");
+        
+        //Examen físico
+        
+        clap=clap.concat(peso+",");
+        clap=clap.concat(de_peso+",");
+        clap=clap.concat(talla+",");
+        clap=clap.concat(de_talla+",");
+        clap=clap.concat(perimetro_abdominal+",");
+        clap=clap.concat(imc+",");
+        clap=clap.concat(de_imc+",");
+        clap=clap.concat(presion_arterial_sistolica+",");
+        clap=clap.concat(presion_arterial_diastolica+",");
+        
+        if(aspecto_general){
+            clap=clap.concat("Normal,");
+        }else{
+            clap=clap.concat("Anormal,");
+        }
+        
+        if(agudeza_visual){
+            clap=clap.concat("Normal,");
+        }else{
+            clap=clap.concat("Anormal,");
+        }
+        
+        if(agudeza_auditiva){
+            clap=clap.concat("Normal,");
+        }else{
+            clap=clap.concat("Anormal,");
+        }
+        
+        if(salud_bucal){
+            clap=clap.concat("Normal,");
+        }else{
+            clap=clap.concat("Anormal,");
+        }
+        
+        if(tiroides){
+            clap=clap.concat("Normal,");
+        }else{
+            clap=clap.concat("Anormal,");
+        }
+        
+        if(cardio_pulmonar){
+            clap=clap.concat("Normal,");
+        }else{
+            clap=clap.concat("Anormal,");
+        }
+        
+        if(abdomen){
+            clap=clap.concat("Normal,");
+        }else{
+            clap=clap.concat("Anormal,");
+        }
+        
+        if(columna){
+            clap=clap.concat("Normal,");
+        }else{
+            clap=clap.concat("Anormal,");
+        }
         
         
-//    @Column(name="trabaja_clap")
-//    private boolean trabaja;
-//    
-//    @Column(name="horas_trabajo_clap")
-//    private int horas_trabajo;
-//    
-//    @Column(name="trabajo_infantil_clap")
-//    private boolean trabajo_infantil;
-//    
-//    @Column(name="trabajo_juvenil_clap")
-//    private boolean trabajo_juvenil;
-//    
-//    @Column(name="peores_formas_clap")
-//    private boolean peores_formas;
-//    
-//    @Column(name="ser_dom_no_remu_peligroso_clap")
-//    private boolean ser_dom_no_remu_peligroso;
-//    
-//    @Column(name="razon_de_trabajo_clap")
-//    private int razon_de_trabajo;
-//    
-//    @Column(name="legalizado_clap")
-//    private int legalizado;
-//    
-//    @Column(name="tipo_de_trabajo_clap")
-//    private String tipo_de_trabajo;
-//    
-//    @Column(name="observaciones_trabajo_clap",columnDefinition = "TEXT")
-//    private String observaciones_trabajo;
-//    
-//    //vida social
-//    
-//    @Column(name="aceptacion_clap")
-//    private int aceptacion;
-//    
-//    @Column(name="pareja_clap")
-//    private boolean pareja;
-//    
-//    @Column(name="edad_pareja_clap")
-//    private int edad_pareja;
-//    
-//    @Column(name="violencia_pareja_clap")
-//    private boolean violencia_pareja;
-//    
-//    @Column(name="amigos_clap")
-//    private boolean amigos;
-//    
-//    @Column(name="suicidalidad_amigos_clap")
-//    private boolean suicidalidad_amigos;
-//    
-//    @Column(name="horas_actividad_fisica_clap")
-//    private int horas_actividad_fisica;
-//    
-//    @Column(name="horas_tv_clap")
-//    private int horas_tv;
-//    
-//    @Column(name="horas_computador_consola_clap")
-//    private int horas_computador_consola;
-//    
-//    @Column(name="cyberbulling_clap")
-//    private boolean cyberbulling;
-//    
-//    @Column(name="grooming_clap")
-//    private boolean grooming;
-//    
-//    @Column(name="otras_actividades_clap")
-//    private boolean otras_actividades;
-//    
-//    @Column(name="especificacion_otras_actividades_clap")
-//    private String especificacion_otras_actividades;
-//    
-//    @Column(name="observaciones_vida_social_clap",columnDefinition = "TEXT")
-//    private String observaciones_vida_social;
-//    
-//    //habitos y consumo
-//    
-//    @Column(name="sueno_normal_clap")
-//    private boolean sueno_normal;
-//    
-//    @Column(name="horas_sueno_clap")
-//    private int horas_sueno;
-//    
-//    @Column(name="alimentacion_adecuada_clap")
-//    private boolean alimentacion_adecuada;
-//    
-//    @Column(name="comidas_familia_clap")
-//    private int comidas_familia;
-//    
-//    @Column(name="alimentacion_especial_clap")
-//    private boolean alimentacion_especial;
-//    
-//    @Column(name="espeficicacion_alimentacion_especial_clap")
-//    private String especificacion_alimentacion_especial;
-//    
-//    @Column(name="tabaco_clap")
-//    private boolean tabaco;
-//    
-//    @Column(name="cigarros_dia_clap")
-//    private int cigarros_dia;
-//    
-//    @Column(name="consumo_alcohol_clap")
-//    private boolean consumo_alcohol;
-//    
-//    @Column(name="consumo_marihuana_clap")
-//    private boolean consumo_marihuana;
-//    
-//    @Column(name="consumo_otra_sustancia_clap")
-//    private boolean consumo_otra_sustancia;
-// 
-//    @Column(name="especificacion_consumo_otra_sustancia_clap")
-//    private String especificacion_consumo_otra_sustancia;
-//    
-//    @Column(name="seguridad_vial_clap")
-//    private boolean seguridad_vial;
-//    
-//    @Column(name="observaciones_habitos_consumo_clap",columnDefinition = "TEXT")
-//    private String observaciones_habitos_consumo;
-//    
+        if(extremidades){
+            clap=clap.concat("Normal,");
+        }else{
+            clap=clap.concat("Anormal,");
+        }
+        
+        
+        if(tanner_con_foto){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(tanner_mama==1){
+            clap=clap.concat("I,");
+        }else if(tanner_mama==2){
+            clap=clap.concat("II,");
+        }else if(tanner_mama==3){
+            clap=clap.concat("III,");
+        }else if(tanner_mama==4){
+            clap=clap.concat("IV,");
+        }else if(tanner_mama==5){
+            clap=clap.concat("V,");
+        }
+        
+        if(tanner_genital==1){
+            clap=clap.concat("I,");
+        }else if(tanner_genital==2){
+            clap=clap.concat("II,");
+        }else if(tanner_genital==3){
+            clap=clap.concat("III,");
+        }else if(tanner_genital==4){
+            clap=clap.concat("IV,");
+        }else if(tanner_genital==5){
+            clap=clap.concat("V,");
+        }
+        
+        clap=clap.concat(observaciones_examen_fisico+",");
+        
+        //final
+        
+        clap=clap.concat(impresion_diagnostica+",");
+        clap=clap.concat(indicaciones_interconsultas+",");
+        clap=clap.concat(funcionario.getRUT()+",");
+        
+        
+        if(riesgo_cardiovascular){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(riesgo_ssr){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(riesgo_salud_mental){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(riesgo_oh_drogas){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(riesgo_nutricional){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
+        if(riesgo_social){
+            clap=clap.concat("Si,");
+        }else{
+            clap=clap.concat("No,");
+        }
+        
         
         return clap;
     }

@@ -196,6 +196,29 @@
                             <h:outputText value="#{item.usuario.RUT}">
                             </h:outputText>
                         </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Actividades realizadas"/>
+                            </f:facet>
+                            <h:outputText rendered="#{item.consejeria_actividad_fisica}" value="Consejeria en Actividad Fisica" escape="false" />
+                            <h:outputText rendered="#{item.consejeria_alimentacion_saludable}" value="Consejería en alimentación saludable " escape="false"/>
+                            <h:outputText rendered="#{item.consejeria_consumo_drogas}" value="Consejería en consumo de Drogas " escape="false"/>
+                            <h:outputText rendered="#{item.consejeria_familiares}" value="Consejerias familiares " escape="false"/>
+                            <h:outputText rendered="#{item.consejeria_motivacional}" value="Entrevista Motivacional " escape="false"/>
+                            <h:outputText rendered="#{item.consejeria_regulacion_fecundidad}" value="Consejería en Regulación de Fecundidad " escape="false"/>
+                            <h:outputText rendered="#{item.consejeria_salud_mental}" value="Consejería Salud Mental " escape="false"/>
+                            <h:outputText rendered="#{item.consejeria_ssr}" value="Consejeria en Salud Sexual y Reproductiva" escape="false"/>
+                            <h:outputText rendered="#{item.consejeria_tabaquismo}" value="Consejería en Tabaquismo " escape="false"/>
+                            <h:outputText rendered="#{item.consejeria_vih_its}" value="Consejería en Prevención de VIH e ITS " escape="false"/>
+                            <h:outputText rendered="#{item.ingreso_control_prenatal}" value="Ingreso a Control Prenatal " escape="false"/>
+                            <h:outputText rendered="#{item.ingreso_programa_cardiovascular}" value="Ingreso a Programa Cariovascular" escape="false"/>
+                            <h:outputText rendered="#{item.ingreso_programa_intervencion}" value="Ingreso a Programas de Intervencion " escape="false"/>
+                            <h:outputText rendered="#{item.ingreso_regulacion_fecundidad}" value="Ingreso a Regulacion de Fecundidad " escape="false"/>
+                            <h:outputText rendered="#{item.ingreso_salud_mental}" value="Ingreso a salud Mental" escape="false"/>
+                            <h:outputText rendered="#{item.nivelacion_estudios}" value="Nivelación  de estudios " escape="false"/>
+                            <h:outputText rendered="#{item.vinculacion_beneficios_sociales}" value="Vinculacion de beneficios sociales " escape="false"/>
+                            
+                        </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":actividadViewForm" oncomplete="PF('actividadViewDialog').show()" disabled="#{empty actividadController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":actividadEditForm" oncomplete="PF('actividadEditDialog').show()" disabled="#{empty actividadController.selected}" rendered="#{loginController.esFuncionario() || loginController.esEmpleadoMunicipal()}"/>

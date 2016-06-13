@@ -600,7 +600,7 @@ public class clapController implements Serializable {
 
         if(completo){
             if(selected.isRiesgo_cardiovascular()||selected.isRiesgo_nutricional()||selected.isRiesgo_oh_drogas()||selected.isRiesgo_salud_mental()||selected.isRiesgo_social()||selected.isRiesgo_ssr()){
-                pacienteCtrl.riesgosSinResolver();
+                pacienteCtrl.riesgosNoTratados();
             }else{
                 pacienteCtrl.sinRiesgo();
             }

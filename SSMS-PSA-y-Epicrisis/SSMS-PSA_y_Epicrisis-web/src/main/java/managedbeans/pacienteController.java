@@ -133,7 +133,7 @@ public class pacienteController implements Serializable {
         }
     }
 
-    public void agendarActividad() {
+    public void riesgosNoTratados() {
         selected.setEstado("Riesgos no Tratados");
         selected.setFecha_estado(new java.util.Date());
         clapCtrl.setActividadElegida(true);
@@ -295,11 +295,6 @@ public class pacienteController implements Serializable {
         return flag;
     }
 
-    public void riesgosSinResolver() {
-        selected.setEstado("Riesgos sin resolver");
-        selected.setFecha_estado(new java.util.Date());
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
-    }
     
     @FacesConverter(forClass = paciente.class)
     public static class pacienteControllerConverter implements Converter {
