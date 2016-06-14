@@ -719,7 +719,7 @@
                             <h4>Genograma</h4>
                             <p:fileUpload id="genograma" fileUploadListener="#{clapController.upload}" label="Elegir Imagen" update="messages" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1" invalidFileMessage="Tipo de Archivo Inválido" cancelLabel="Cancelar" skinSimple="false" auto="false" uploadLabel="Subir" rendered="#{clapController.selected.diagrama_familiar == null}"/>        
                             <p:commandButton value="Ver Imagen" onclick="PF('dlg2').show();" type="button" rendered="#{clapController.selected.diagrama_familiar != null}"/>
-                            <p:dialog header="Imagen de Genograma" widgetVar="dlg2" modal="true" height="450" width="450">
+                            <p:dialog header="Imagen de Genograma" widgetVar="dlg2" modal="true" height="200" width="350">
                                 <p:graphicImage value="#{clapController.cargarImagen()}" rendered="#{clapController.selected.diagrama_familiar != null}"/>
                             </p:dialog>
                             <p:growl id="messages" showDetail="true"/>
