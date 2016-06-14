@@ -5,8 +5,7 @@
  */
 package sessionbeans;
 
-import entities.Crafft;
-import entities.clap;
+import entities.parametros;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -15,21 +14,19 @@ import javax.ejb.Local;
  * @author Seba
  */
 @Local
-public interface CrafftFacadeLocal {
+public interface parametrosFacadeLocal {
 
-    void create(Crafft crafft);
+    void create(parametros parametros);
 
-    void edit(Crafft crafft);
+    void edit(parametros parametros);
 
-    void remove(Crafft crafft);
+    void remove(parametros parametros);
 
-    Crafft find(Object id);
+    parametros find(Object id);
 
-    List<Crafft> findAll();
+    List<parametros> findAll();
 
-    List<Crafft> findRange(int[] range);
-    
-    List<Crafft> findbyClap(clap clap);
+    List<parametros> findRange(int[] range);
 
     int count();
     

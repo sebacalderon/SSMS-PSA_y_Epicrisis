@@ -5,20 +5,17 @@
  */
 package sessionbeans;
 
-import entities.audit;
-import entities.clap;
-import java.util.List;
+import entities.parametros;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 /**
  *
  * @author Seba
  */
 @Stateless
-public class auditFacade extends AbstractFacade<audit> implements auditFacadeLocal {
+public class parametrosFacade extends AbstractFacade<parametros> implements parametrosFacadeLocal {
 
     @PersistenceContext(unitName = "cl.diinf_SSMS-PSA_y_Epicrisis-ejb_ejb_1.0PU")
     private EntityManager em;
@@ -28,15 +25,8 @@ public class auditFacade extends AbstractFacade<audit> implements auditFacadeLoc
         return em;
     }
 
-    public auditFacade() {
-        super(audit.class);
+    public parametrosFacade() {
+        super(parametros.class);
     }
     
-    @Override
-    public List<audit> findbyClap(clap clap) {
-        Query query;
-        query = em.createNamedQuery("audit.findbyClap").
-                setParameter("clap",clap);
-        return query.getResultList();
-    } 
 }

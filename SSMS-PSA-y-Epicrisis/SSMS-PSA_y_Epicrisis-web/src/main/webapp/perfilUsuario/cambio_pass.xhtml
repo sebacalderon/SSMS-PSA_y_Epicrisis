@@ -33,6 +33,10 @@ and open the template in the editor.
                                 <b:column col-xs="6"><p:password id="new-password" value="#{usuarioController.new_password}" title="#{bundle.EditUsuarioTitle_password}" required="true" /></b:column>
                             </b:row>
                             <br/>
+                            <b:row>
+                                <b:column col-xs="6"><p:outputLabel value="Repita contraseña:" for="rep-password" /></b:column>
+                                <b:column col-xs="6"><p:password id="rep-password" value="#{usuarioController.rep_password}" title="#{bundle.EditUsuarioTitle_password}" required="true" /></b:column>
+                            </b:row>
                             <f:facet name="footer">
                                 <b:row>
                                     <b:column offset="4">

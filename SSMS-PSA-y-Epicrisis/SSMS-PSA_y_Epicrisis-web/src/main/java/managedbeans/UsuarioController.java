@@ -37,6 +37,7 @@ public class UsuarioController implements Serializable {
     private Usuario antiguovalor;
     private String old_password = "";
     private String new_password = "";
+    private String rep_password = "";
     private String pass_repeat;
     private String pass;
     
@@ -87,6 +88,14 @@ public class UsuarioController implements Serializable {
 
     public void setNew_password(String new_password) {
         this.new_password = new_password;
+    }
+
+    public String getRep_password() {
+        return rep_password;
+    }
+
+    public void setRep_password(String rep_password) {
+        this.rep_password = rep_password;
     }
 
     public Usuario getAntiguovalor() {
@@ -171,6 +180,10 @@ public class UsuarioController implements Serializable {
     
     public void cambioPassword(){
         
+        if (!rep_password.equals(new_password)) {
+            JsfUtil.addErrorMessage("Las contraseñas coinciden");
+        }
+        
         if (new_password.length() > 0) {
             selected=new Usuario(loginCtrl.getUsuarioLogueado());
             boolean success = selected.cambiarPassword(old_password, new_password);
@@ -180,7 +193,7 @@ public class UsuarioController implements Serializable {
                 persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
 
             } else {
-                JsfUtil.addErrorMessage("No se pudo cambiar la contraseña");
+                JsfUtil.addErrorMessage("La contraseña antigua es incorrecta");
             }
         }
     }
