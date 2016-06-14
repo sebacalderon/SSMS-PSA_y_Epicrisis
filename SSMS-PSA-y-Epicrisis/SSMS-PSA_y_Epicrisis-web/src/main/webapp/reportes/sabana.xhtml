@@ -22,11 +22,13 @@ and open the template in the editor.
                 <b:column offset="4" col-xs="4">
                     <b:panel title="Sábana de datos" look="info">
                         <b:row>
-                        <i>Esta sección permite generar un archivo con extension ".csv" con todos los datdos de todas las fichas CLAP almacenadas.</i>
+                        <b:column>
+                            <i>Esta sección permite generar un archivo con extension ".csv" con todos los datdos de todas las fichas CLAP almacenadas.</i>
+                        </b:column>
                         </b:row>
                         <b:row>
                         <h:form>
-                            <b:commandButton look="primary" value="Generar CSV" actionListener="#{clapController.generarCSV()}"/>
+                            <b:commandButton look="primary" value="Generar CSV" actionListener="#{clapController.generarCSV()}" rendered="#{clapController.items.size()>0}"/>
                         </h:form>
                         </b:row>
                     </b:panel>

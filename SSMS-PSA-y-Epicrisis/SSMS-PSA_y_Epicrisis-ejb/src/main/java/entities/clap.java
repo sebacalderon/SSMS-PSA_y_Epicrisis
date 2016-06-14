@@ -2411,7 +2411,6 @@ public class clap implements Serializable {
             clap=clap.concat("No,");
         }
         clap=clap.concat(telefono_movil+",");
-        clap=clap.concat(recados+",");
         if(recados==true){
             clap=clap.concat("Si,");
         }else{
@@ -2432,7 +2431,7 @@ public class clap implements Serializable {
         }else if(sexo==4){
             clap=clap.concat("No determinado,");
         }
-        clap=clap.concat(nacionalidad+",");
+        clap=clap.concat(nacionalidad.getNombre()+",");
         clap=clap.concat(correo+",");
         if(programa_social!=null){
             clap=clap.concat(programa_social.getNombre()+",");
