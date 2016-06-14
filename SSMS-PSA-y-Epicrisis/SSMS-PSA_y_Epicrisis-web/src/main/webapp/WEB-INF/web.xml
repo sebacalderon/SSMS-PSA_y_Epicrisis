@@ -75,7 +75,8 @@
             <url-pattern>/faces/audit/*</url-pattern>
             <url-pattern>/faces/home.xhtml</url-pattern>
             <url-pattern>/faces/perfilUsuario/*</url-pattern>
-            
+            <url-pattern>/faces/actividad/*</url-pattern>
+            <url-pattern>/faces/resources/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description></description>
