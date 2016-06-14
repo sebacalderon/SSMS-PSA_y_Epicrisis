@@ -682,7 +682,7 @@ public class clapController implements Serializable {
         List<parametros> parametrosLista = parametrosCtrl.getItems();
         parametros parametros;
         String ruta;
-        if (parametrosLista.isEmpty() && imagen != null) {
+        if (parametrosLista.isEmpty()) {
             JsfUtil.addErrorMessage("No existe una ruta para guardar la imagen. Contacte al administrador");
             return "/faces/paciente/View.xhtml";
         }else{
