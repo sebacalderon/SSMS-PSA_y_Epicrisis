@@ -24,9 +24,11 @@
             <br/>
             <b:panel title="Búsqueda de Usuario por RUN" look="info">
                 <h:form id="buscar">
-                    
-                    <p:outputLabel value="Ingrese RUN: " for="RUN" />    
-                    <p:column>
+                <b:row>
+                    <b:column col-xs="2">
+                        <p:outputLabel value="Ingrese RUN: " for="RUN" />    
+                    </b:column>
+                    <b:column col-xs="2">
                         <p:inputText id="RUN" value="#{pacienteController.RUN}" style="max-width: 100px;" title="#{bundle.CreatepacienteTitle_RUN}" required="true">
                         <p:ajax event="blur" />
                         </p:inputText>
@@ -34,11 +36,12 @@
                         <p:inputText id="DV" value="#{pacienteController.DV}" title="#{bundle.CreatepacienteTitle_DV}" style="max-width: 20px;" required="true">
                         <p:ajax event="blur" />
                         </p:inputText>
-                    </p:column>
+                    </b:column>
                     
-                    <p:column>
-                        <b:commandButton value="Buscar" id="withIcon" action="#{pacienteController.buscarPorRUN}"/>
-                       </p:column>
+                    <b:column col-xs="1">
+                        <b:commandButton value="Buscar" id="withIcon" look="primary" action="#{pacienteController.buscarPorRUN}"/>
+                    </b:column>
+                </b:row>
                 </h:form>
                 
             </b:panel>    

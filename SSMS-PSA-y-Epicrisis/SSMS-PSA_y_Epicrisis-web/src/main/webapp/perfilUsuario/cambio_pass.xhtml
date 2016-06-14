@@ -19,9 +19,10 @@ and open the template in the editor.
 
         <ui:define name="body">
             <b:row>
+                <h:form id="CambioPassForm">
+                <p:growl id="message" showDetail="true" />
                 <b:column offset="3" col-md="6">
                     <b:panel title="Cambio de contraseña" look="info">
-                        <h:form id="CambioPassForm">
                             <b:row>
                                 <b:column col-xs="6"><p:outputLabel value="Contraseña actual:" for="old-password" /></b:column>
                                 <b:column col-xs="6"><p:password id="old-password" value="#{usuarioController.old_password}" title="#{bundle.EditUsuarioTitle_password}" required="true" /></b:column>
@@ -32,20 +33,23 @@ and open the template in the editor.
                                 <b:column col-xs="6"><p:password id="new-password" value="#{usuarioController.new_password}" title="#{bundle.EditUsuarioTitle_password}" required="true" /></b:column>
                             </b:row>
                             <br/>
-                            <b:column offset="5">
-                            <p:growl id="message" showDetail="true" />
-                            <p:commandButton action="#{usuarioController.cambioPassword()}" value="Guardar cambios" update="message">
-                                <p:confirm header="Confirme la edición de datos" message="Esta segur@ de guardar cambiar la contraseña?" icon="ui-icon-alert" />
-                            </p:commandButton>
-                            <p:commandButton value="Volver" action="/faces/home?faces-redirect=true"/>
-                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                            </p:confirmDialog>
-                            </b:column>
-                        </h:form>
+                            <f:facet name="footer">
+                                <b:row>
+                                    <b:column offset="4">
+                                        <p:commandButton style="background-color: lightblue;" action="#{usuarioController.cambioPassword()}" value="Guardar cambios" update="message">
+                                            <p:confirm header="Confirme la edición de datos" message="Esta segur@ de guardar cambiar la contraseña?" icon="ui-icon-alert" />
+                                        </p:commandButton>
+                                        <p:commandButton value="Volver" action="/faces/home?faces-redirect=true"/>
+                                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                        </p:confirmDialog>
+                                    </b:column>
+                                </b:row>
+                             </f:facet>
                     </b:panel>
                 </b:column>
+                </h:form>
             </b:row>
         </ui:define>
         
