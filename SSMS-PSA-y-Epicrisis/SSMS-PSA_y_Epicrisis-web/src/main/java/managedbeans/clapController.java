@@ -1,6 +1,7 @@
 package managedbeans;
 
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.AcroFields;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
@@ -999,9 +1000,9 @@ public class clapController implements Serializable {
     }
 
     private BufferedImage resizeImage(BufferedImage bimg, int type) {
-        BufferedImage resizedImage = new BufferedImage(400, 400, type);
+        BufferedImage resizedImage = new BufferedImage(310, 184, type);
 	Graphics2D g = resizedImage.createGraphics();
-	g.drawImage(bimg, 0, 0, 400, 400, null);
+	g.drawImage(bimg, 0, 0, 310, 184, null);
 	g.dispose();
 		
 	return resizedImage;
@@ -1992,8 +1993,11 @@ public class clapController implements Serializable {
         form.setField("menarca_espermarca", Integer.toString(selected.getEdad_menarca_espermarca()));
 
         //fecha ultima menstruacion
-        date = simpleDateFormat.format(selected.getFecha_ultima_menstruacion());
-        form.setField("fecha_menstruacion", date);
+        if (selected.getFecha_ultima_menstruacion()!=null) {
+            date = simpleDateFormat.format(selected.getFecha_ultima_menstruacion());
+            form.setField("fecha_menstruacion", date);
+        }
+        
         boolean menstruacion= selected.isNo_conoce_fecha_ultima_menstruacion();
         if (menstruacion==true) {
             form.setField("menstruacion_no_conoce", "Yes");
@@ -2485,6 +2489,12 @@ public class clapController implements Serializable {
             } 
         }else{
             form.setField("", "Yes");
+        }
+        
+        if (selected.getDiagrama_familiar() != null) {
+            Image img = Image.getInstance(selected.getDiagrama_familiar());
+            img.setAbsolutePosition(298, 164);
+            stamper.getOverContent(1).addImage(img);
         }
         
         
