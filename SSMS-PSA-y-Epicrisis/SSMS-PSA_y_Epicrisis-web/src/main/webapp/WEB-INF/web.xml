@@ -74,6 +74,8 @@
             <url-pattern>/faces/crafft/*</url-pattern>
             <url-pattern>/faces/audit/*</url-pattern>
             <url-pattern>/faces/home.xhtml</url-pattern>
+            <url-pattern>/faces/perfilUsuario/*</url-pattern>
+            
         </web-resource-collection>
         <auth-constraint>
             <description></description>
