@@ -162,6 +162,7 @@
                                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                             </p:confirmDialog>
                             <p:commandButton id="viewRiesgosButton"   icon="ui-icon-search" value="Ver Riesgos" actionListener="#{clapController.prepareRiesgos}" action="/clap/Riesgos?faces-redirect=true" disabled="#{empty clapController.selected || clapController.esIncompleto() || clapController.esAnulado()}" rendered="#{loginController.esFuncionario() || loginController.esSuperUsuario()}"/>                      
+                            <p:commandButton actionListener="#{clapController.createPDF}" icon="ui-icon-arrowthickstop-1-s" value="Crear PDF" ajax="false" update="display,:clapViewForm:datalist,:growl" disabled="#{empty clapController.selected}"/>
                         </f:facet>
                 </p:dataTable>
                 </h:panelGroup>
