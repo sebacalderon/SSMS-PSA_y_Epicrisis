@@ -588,6 +588,8 @@ public class clapController implements Serializable {
         selected.setPueblo_originario(Paciente.getPueblo_originario());
         selected.setFecha_consulta(new java.util.Date());
         selected.setEdad(selected.getFecha_consulta().getYear()-Paciente.getFecha_nacimiento().getYear());
+        selected.setRecados(Paciente.isRecados());
+        selected.setDomicilio(Paciente.isDomicilio());
         puntajeACrafft = 0;
         isAudit = false;
         isCrafft = false;

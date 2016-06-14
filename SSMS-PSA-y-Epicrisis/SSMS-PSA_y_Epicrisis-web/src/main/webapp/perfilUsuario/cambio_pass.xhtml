@@ -43,7 +43,7 @@ and open the template in the editor.
                                         <p:commandButton style="background-color: lightblue;" action="#{usuarioController.cambioPassword()}" value="Guardar cambios" update="message">
                                             <p:confirm header="Confirme la edición de datos" message="Esta segur@ de guardar cambiar la contraseña?" icon="ui-icon-alert" />
                                         </p:commandButton>
-                                        <p:commandButton value="Volver" action="/faces/home?faces-redirect=true"/>
+                                        <p:button value="#{bundle.Cancel}" outcome="/home" />
                                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                                             <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                                             <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
