@@ -181,19 +181,20 @@ public class UsuarioController implements Serializable {
     public void cambioPassword(){
         
         if (!rep_password.equals(new_password)) {
-            JsfUtil.addErrorMessage("Las contraseñas coinciden");
-        }
+            JsfUtil.addErrorMessage("Las contraseñas no coinciden");
+        }else{
         
-        if (new_password.length() > 0) {
-            selected=new Usuario(loginCtrl.getUsuarioLogueado());
-            boolean success = selected.cambiarPassword(old_password, new_password);
+            if (new_password.length() > 0) {
+                selected=new Usuario(loginCtrl.getUsuarioLogueado());
+                boolean success = selected.cambiarPassword(old_password, new_password);
 
-            if (success) {
-                JsfUtil.addSuccessMessage("Contraseña cambiada con éxito");
-                persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
+                if (success) {
+                    JsfUtil.addSuccessMessage("Contraseña cambiada con éxito");
+                    persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
 
-            } else {
-                JsfUtil.addErrorMessage("La contraseña antigua es incorrecta");
+                } else {
+                    JsfUtil.addErrorMessage("La contraseña antigua es incorrecta");
+                }
             }
         }
     }
