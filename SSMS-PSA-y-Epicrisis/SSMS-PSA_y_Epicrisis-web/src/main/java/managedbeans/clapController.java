@@ -10,6 +10,7 @@ import entities.cesfam;
 import entities.clap;
 import entities.comuna;
 import entities.paciente;
+import entities.parametros;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -95,6 +96,9 @@ public class clapController implements Serializable {
     
     @Inject
     private CrafftController crafftCtrl;
+    
+    @Inject
+    private parametrosController parametrosCtrl;
     
     public clapController() {
     }
@@ -450,6 +454,16 @@ public class clapController implements Serializable {
     }
     
     public String update() throws IOException {
+        List<parametros> parametrosLista = parametrosCtrl.getItems();
+        parametros parametros;
+        String ruta;
+        if (parametrosLista.isEmpty() && imagen != null) {
+            JsfUtil.addErrorMessage("No existe una ruta para guardar la imagen. Contacte al administrador");
+            return "/faces/paciente/View.xhtml";
+        }else{
+            parametros = parametrosCtrl.getItems().get(parametrosCtrl.getItems().size()-1);
+            ruta = parametros.getRuta();
+        }
         boolean completo=false;
         //Verifica si completa el clap
         if( selected.getPerinatales_normales()!=0&&
@@ -703,7 +717,7 @@ public class clapController implements Serializable {
         ////////////////
         if (imagen!=null && selected.getDiagrama_familiar()==null) {
             
-            Path folder = Paths.get("C:/genogramas");
+            Path folder = Paths.get(ruta);
             String filename = "Clap "+selected.getId();
             String extension = FilenameUtils.getExtension(imagen.getFileName());
             Path file = Files.createTempFile(folder, filename + "-", "." + extension);
@@ -712,14 +726,14 @@ public class clapController implements Serializable {
 
             try (InputStream input = imagen.getInputstream()) {
                 Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
-                selected.setDiagrama_familiar("C:/genogramas/"+file.getFileName());
+                selected.setDiagrama_familiar(ruta+"/"+file.getFileName());
                 getFacade().edit(selected);
             }
-            File img = new File("C:/genogramas/"+file.getFileName());
+            File img = new File(ruta+"/"+file.getFileName());
             BufferedImage bimg = ImageIO.read(img);
             int type = bimg.getType() == 0? BufferedImage.TYPE_INT_ARGB : bimg.getType();            
             BufferedImage resizeImagePng = resizeImage(bimg, type);
-            ImageIO.write(resizeImagePng, "jpg", new File("C:/genogramas/"+file.getFileName())); 
+            ImageIO.write(resizeImagePng, "png", new File(ruta+"/"+file.getFileName())); 
         }
         
         if(completo){
