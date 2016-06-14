@@ -740,7 +740,7 @@
                         <b:column col-md="6">
                             <h4>Genograma</h4>
                             <p:commandButton value="Ver Imagen" onclick="PF('dlg2').show();" type="button" disabled="#{clapController.selected.diagrama_familiar == null}"/>
-                            <p:dialog header="Imagen de Genograma" widgetVar="dlg2" modal="true" height="450" width="450">
+                            <p:dialog header="Imagen de Genograma" widgetVar="dlg2" modal="true" height="350" width="200">
                                 <p:graphicImage value="#{clapController.cargarImagen()}" rendered="#{clapController.selected.diagrama_familiar != null}"/>
                             </p:dialog>
                         </b:column>
