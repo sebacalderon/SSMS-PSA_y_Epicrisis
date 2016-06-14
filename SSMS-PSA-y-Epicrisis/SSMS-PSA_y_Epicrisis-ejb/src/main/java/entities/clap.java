@@ -2434,8 +2434,16 @@ public class clap implements Serializable {
         }
         clap=clap.concat(nacionalidad+",");
         clap=clap.concat(correo+",");
-        clap=clap.concat(programa_social.getNombre()+",");
-        clap=clap.concat(prevision.getNombre()+",");
+        if(programa_social!=null){
+            clap=clap.concat(programa_social.getNombre()+",");
+        }else{
+            clap=clap.concat(",");
+        }
+        if(prevision!=null){
+            clap=clap.concat(prevision.getNombre()+",");
+        }else{
+            clap=clap.concat(",");
+        }
         if(grupo_fonasa==1){
             clap=clap.concat("A,");
         }else if(grupo_fonasa==2){
@@ -2445,11 +2453,23 @@ public class clap implements Serializable {
         }else if(grupo_fonasa==4){
             clap=clap.concat("D,");
         }
-        clap=clap.concat(estado_conyugal.getNombre()+",");
-        clap=clap.concat(pueblo_originario.getNombre()+",");
-        clap=clap.concat(cesfam.getNombre()+",");
-        
+        if(estado_conyugal!=null){
+            clap=clap.concat(estado_conyugal.getNombre()+",");
+        }else{
+            clap=clap.concat(",");
+        }
+        if(pueblo_originario!=null){
+            clap=clap.concat(pueblo_originario.getNombre()+",");
+        }else{
+            clap=clap.concat(",");
+        }
+        if(cesfam!=null){
+            clap=clap.concat(cesfam.getNombre()+",");
+        }else{
+            clap=clap.concat(",");
+        }
         //Datos consulta
+        
         
         if(control_en==1){
             clap=clap.concat("Establecimiento educacional,");
@@ -2981,8 +3001,11 @@ public class clap implements Serializable {
         //gineco/urólogo
         
         clap=clap.concat(edad_menarca_espermarca+",");
-        
-        clap=clap.concat(fecha_ultima_menstruacion.toString()+",");
+        if(fecha_ultima_menstruacion!=null){
+            clap=clap.concat(fecha_ultima_menstruacion.toString()+",");
+        }else{
+            clap=clap.concat(",");
+        }
         
         if(no_conoce_fecha_ultima_menstruacion){
             clap=clap.concat("Si,");
@@ -3316,15 +3339,18 @@ public class clap implements Serializable {
         }else if(tanner_genital==5){
             clap=clap.concat("V,");
         }
-        
+          
         clap=clap.concat(observaciones_examen_fisico+",");
         
         //final
         
         clap=clap.concat(impresion_diagnostica+",");
         clap=clap.concat(indicaciones_interconsultas+",");
-        clap=clap.concat(funcionario.getRUT()+",");
-        
+        if(funcionario!=null){
+            clap=clap.concat(funcionario.getRUT()+",");
+        }else{
+            clap=clap.concat(",");
+        }
         
         if(riesgo_cardiovascular){
             clap=clap.concat("Si,");

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+    <ui:composition template="/template.xhtml">
+
+        <ui:define name="title">
+            <h:outputText value="Sábana de datos"></h:outputText>
+        </ui:define> 
+
+        <ui:define name="body">
+            <b:row>
+                <b:column offset="4" col-xs="4">
+                    <b:panel title="Sábana de datos" look="info">
+                        <b:row>
+                        <i>Esta sección permite generar un archivo con extension ".csv" con todos los datdos de todas las fichas CLAP almacenadas.</i>
+                        </b:row>
+                        <b:row>
+                        <h:form>
+                            <b:commandButton look="primary" value="Generar CSV" actionListener="#{clapController.generarCSV()}"/>
+                        </h:form>
+                        </b:row>
+                    </b:panel>
+                </b:column>
+            </b:row>
+        </ui:define>
+        
+    </ui:composition>
+</html>
