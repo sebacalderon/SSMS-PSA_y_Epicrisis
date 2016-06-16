@@ -683,17 +683,18 @@ public class clapController implements Serializable {
     }
     
     public String update() throws IOException {
+        boolean completo=false;
+        boolean parametro_imagen = true;
         List<parametros> parametrosLista = parametrosCtrl.getItems();
         parametros parametros;
         String ruta;
         if (parametrosLista.isEmpty()) {
             JsfUtil.addErrorMessage("No existe una ruta para guardar la imagen. Contacte al administrador");
-            return "/faces/paciente/View.xhtml";
+            parametro_imagen = false;
         }else{
             parametros = parametrosCtrl.getItems().get(parametrosCtrl.getItems().size()-1);
             ruta = parametros.getRuta();
         }
-        boolean completo=false;
         //Verifica si completa el clap
         if( selected.getPerinatales_normales()!=0&&
             selected.getAlergias_normales()!=0&&
@@ -743,7 +744,8 @@ public class clapController implements Serializable {
             selected.getPresion_arterial_sistolica()!=0&&
             selected.getPerimetro_abdominal()!=0&&
             selected.getTanner_mama()!=0&&
-            selected.getTanner_genital()!=0
+            selected.getTanner_genital()!=0 &&
+            parametro_imagen
             ){
             selected.setEstado("Nuevo");
             completo=true;
@@ -944,8 +946,9 @@ public class clapController implements Serializable {
         ////////////////
         //Imagen
         ////////////////
-        if (imagen!=null && selected.getDiagrama_familiar()==null) {
-            
+        if (imagen!=null && selected.getDiagrama_familiar()==null && !parametrosLista.isEmpty()) {
+            parametros = parametrosCtrl.getItems().get(parametrosCtrl.getItems().size()-1);
+            ruta = parametros.getRuta();
             Path folder = Paths.get(ruta);
             String filename = "Clap "+selected.getId();
             String extension = FilenameUtils.getExtension(imagen.getFileName());
@@ -2740,7 +2743,9 @@ public class clapController implements Serializable {
     }
     
     public void onTabChange(TabChangeEvent event) {
-        FacesMessage msg = new FacesMessage("Tab Changed", "Active Tab: " + event.getTab().getTitle());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+        
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
     }
+
+    
 }
