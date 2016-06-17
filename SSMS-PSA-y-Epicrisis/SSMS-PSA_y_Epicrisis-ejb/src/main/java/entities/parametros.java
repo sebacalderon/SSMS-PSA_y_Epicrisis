@@ -24,8 +24,6 @@ public class parametros implements Serializable {
     private Long id;
 
     private String ruta;
-    
-    private int minutos;
 
     public String getRuta() {
         return ruta;
@@ -33,14 +31,6 @@ public class parametros implements Serializable {
 
     public void setRuta(String ruta) {
         this.ruta = ruta;
-    }
-
-    public int getMinutos() {
-        return minutos;
-    }
-
-    public void setMinutos(int minutos) {
-        this.minutos = minutos;
     }
     
     public Long getId() {

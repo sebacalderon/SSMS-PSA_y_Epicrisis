@@ -152,7 +152,7 @@
                                 <b:row>
                                     <p:autoComplete id="comuna_residencia" value="#{clapController.selected.comuna_residencia}" completeMethod="#{clapController.completeComuna}"
                                                     var="comuna" itemLabel="#{comuna.nombre}" itemValue="#{comuna}" placeholder="Comuna de residencia" converter="entityConverter" forceSelection="true" required="true" >
-                                    <p:ajax event="blur"/>
+                                    <p:ajax event="itemSelect"/> 
                                     </p:autoComplete>                         
                                 </b:row>
                             </b:column>
@@ -224,7 +224,7 @@
                                 <b:row>
                                     <p:autoComplete id="nacionalidad" value="#{clapController.selected.nacionalidad}" completeMethod="#{nacionalidadController.completeNacionalidad}"
                                                     var="nacionalidad" itemLabel="#{nacionalidad.nombre}" itemValue="#{nacionalidad}" converter="entityConverter" forceSelection="true" >
-                                    <p:ajax event="blur"/>
+                                    <p:ajax event="itemSelect"/>
                                     </p:autoComplete>
                                 </b:row>
                             </b:column>
@@ -553,6 +553,90 @@
                 </b:panel>
                     </p:tab>
                     <p:tab title="Familia">
+                        <b:panel title="Antecedentes familiares" style="margin-left:3%;width: 95%; " look="info">
+                <p:panelGrid columns="2" style="width:98%;border:10px;" rendered="#{clapController.selected != null}">
+                    <p:column rowspan="2">
+                        <p:outputLabel value="#{bundle.CreateclapLabel_enfermedades_importantes_familia}" for="enfermedades_importantes_familia" />
+                        <p:selectOneRadio id="enfermedades_importantes_familia" style="width:13em;" value="#{clapController.selected.enfermedades_importantes_familia}" layout="grid" columns="3">
+                            <f:selectItem itemLabel="sí" itemValue="1" />
+                            <f:selectItem itemLabel="no sé" itemValue="2" />
+                            <f:selectItem itemLabel="no" itemValue="3" />
+                            <f:ajax event="valueChange"></f:ajax>
+                        </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_obesidad_familia}" for="obesidad_familia" />
+                    <p:selectOneRadio id="obesidad_familia" style="width:13em;" value="#{clapController.selected.obesidad_familia}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                        <f:ajax event="valueChange"></f:ajax>
+                    </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_problemas_salud_mental_familia}" for="problemas_salud_mental_familia" />
+                    <p:selectOneRadio id="problemas_salud_mental_familia" style="width:13em;" value="#{clapController.selected.problemas_salud_mental_familia}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                        <f:ajax event="valueChange"></f:ajax>
+                    </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_violencia_intrafamiliar}" for="violencia_intrafamiliar" />
+                    <p:selectOneRadio id="violencia_intrafamiliar" style="width:13em;" value="#{clapController.selected.violencia_intrafamiliar}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                        <f:ajax event="valueChange"></f:ajax>
+                    </p:selectOneRadio>
+                    </p:column>
+                    
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_alcohol_y_otras_drogas}" for="alcohol_y_otras_drogas" />
+                    <p:selectOneRadio id="alcohol_y_otras_drogas" style="width:13em;" value="#{clapController.selected.alcohol_y_otras_drogas}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                        <f:ajax event="valueChange"></f:ajax>
+                    </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="Madre y/o padre adolescente" for="padre_adolescente" />
+                    <p:selectOneRadio id="padre_adolescente" style="width:13em;" value="#{clapController.selected.padre_adolescente}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                        <f:ajax event="valueChange"></f:ajax>
+                    </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_judiciales}" for="judiciales" />
+                    <p:selectOneRadio id="judiciales" style="width:13em;" value="#{clapController.selected.judiciales}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                        <f:ajax event="valueChange"></f:ajax>
+                    </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_otros_antecedentes_familiares}" for="otros_antecedentes_familiares" />
+                    <p:selectOneRadio id="otros_antecedentes_familiares" style="width:13em;" value="#{clapController.selected.otros_antecedentes_familiares}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                        <f:ajax event="valueChange"></f:ajax>
+                    </p:selectOneRadio>
+                    </p:column>
+                </p:panelGrid>
+                    <facet name="footer">
+                        <p:row>
+                            <b:inputText id="observaciones_antecedentes_familiares" value="#{clapController.selected.observaciones_antecedentes_familiares}" label="#{bundle.CreateclapTitle_observaciones_antecedentes_familiares}" >
+                            <f:ajax event="valueChange"></f:ajax>
+                            </b:inputText>              
+                        </p:row>
+                    </facet>
+                </b:panel>
                         <b:panel title="Familia" style="margin-left:3%;width: 95%; " look="info">
                     <p:panelGrid columns="2" style="width:98%;border:10px;" rendered="#{clapController.selected != null}">
                         <b:column id="vive_con" col-md="6" col-xs="12">
@@ -1964,7 +2048,6 @@
                                     </b:column>
                                     <b:column col-xs="4">
                                         <pe:inputNumber id="de_peso" value="#{clapController.selected.de_peso}" minValue="0" maxValue="1000" style="max-width: 50px;">
-                                        <p:ajax event="blur"/>
                                         </pe:inputNumber>
                                     </b:column>
                                 </b:row>
@@ -1986,7 +2069,6 @@
                                     </b:column>
                                     <b:column col-xs="4">
                                         <pe:inputNumber id="de_talla" value="#{clapController.selected.de_talla}"  minValue="0" maxValue="1000"  style="max-width: 50px;">
-                                        <p:ajax event="blur"/>
                                         </pe:inputNumber>
                                     </b:column>
                                 </b:row>
@@ -1997,7 +2079,6 @@
                                 </b:row>
                                 <b:row>
                                     <pe:inputNumber minValue="0" maxValue="1000"  id="perimetro_abdominal" value="#{clapController.selected.perimetro_abdominal}">
-                                    <p:ajax event="blur"/>
                                     </pe:inputNumber>
                                 </b:row>
                             </b:column>
@@ -2021,7 +2102,6 @@
                                     </b:column>
                                     <b:column col-xs="4">
                                         <pe:inputNumber id="de_imc" minValue="0" maxValue="1000" value="#{clapController.selected.de_imc}" style="max-width: 50px;" title="DE">
-                                        <p:ajax event="blur"/>
                                         </pe:inputNumber>
                                     </b:column>
                                 </b:row>
@@ -2032,11 +2112,9 @@
                                 </b:row>
                                 <b:row>
                                     <b:column col-xs="5"><pe:inputNumber id="presion_arterial"  minValue="0" maxValue="1000" value="#{clapController.selected.presion_arterial_sistolica}" >
-                                        <p:ajax event="blur"/>
                                         </pe:inputNumber></b:column>
                                     <b:column col-xs="1"> / </b:column> 
                                     <b:column col-xs="5"><pe:inputNumber  minValue="0" maxValue="1000" value="#{clapController.selected.presion_arterial_diastolica}" >
-                                        <p:ajax event="blur"/>
                                         </pe:inputNumber></b:column>
                                 </b:row>
                             </b:column>
@@ -2164,6 +2242,7 @@
                                 </b:row>
                                 <b:row>
                                     <p:selectBooleanCheckbox value="#{clapController.selected.tanner_con_foto}" itemLabel="con foto" >
+                                        <f:ajax event="change"></f:ajax>                                    
                                     </p:selectBooleanCheckbox>
                                 </b:row>
                                 <b:row>
@@ -2214,7 +2293,7 @@
                     </b:inputText>
                 </b:row>
                 <b:column offset-xs="5">
-                     <p:commandButton action="#{clapController.update}" value="#{bundle.Save}" oncomplete="/paciente/List"/>
+                     <p:commandButton action="#{clapController.update}" value="#{bundle.Save}" oncomplete="/paciente/View"/>
                      <p:button  value="#{bundle.Cancel}" outcome="/paciente/View" /> 
                      <br/><br/>
                 </b:column>
