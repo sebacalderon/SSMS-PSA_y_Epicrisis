@@ -616,7 +616,7 @@ public class clapController implements Serializable {
         
         int size = getFacade().findbyPaciente(Paciente.getRUN()).size();
         selected = getFacade().findbyPaciente(Paciente.getRUN()).get(size-1);
-        return "/faces/clap/Edit2.xhtml";
+        return "/faces/clap/Edit.xhtml";
         
     }
 
