@@ -42,7 +42,7 @@
                         <f:facet name="footer">
                         <b:row>
                         <b:column offset="8" col-xs="4">
-                            <p:commandButton style="color:red;" value="Reportar Riesgo" disabled="#{clapController.isActividadElegida()}" actionListener="#{clapController.selected.setRiesgo_cardiovascular(true)}" rendered="#{not loginController.esSuperUsuario()}">
+                            <p:commandButton style="background-color: #AE203D;color:#e5e5e5" value="Reportar Riesgo" disabled="#{clapController.isActividadElegida()}" actionListener="#{clapController.selected.setRiesgo_cardiovascular(true)}" rendered="#{not loginController.esSuperUsuario()}">
                                 <p:ajax event="click" update="form" immediate="true"/>
                             </p:commandButton>
                         </b:column>
@@ -69,7 +69,7 @@
                         <f:facet name="footer">
                         <b:row>
                         <b:column offset="8" col-xs="4">
-                            <p:commandButton style="color:red;" value="Reportar Riesgo" disabled="#{clapController.isActividadElegida()}" actionListener="#{clapController.selected.setRiesgo_nutricional(true)}" rendered="#{not loginController.esSuperUsuario()}">
+                            <p:commandButton style="background-color: #AE203D;color:#e5e5e5" value="Reportar Riesgo" disabled="#{clapController.isActividadElegida()}" actionListener="#{clapController.selected.setRiesgo_nutricional(true)}" rendered="#{not loginController.esSuperUsuario()}">
                                 <p:ajax event="click" update="form" immediate="true"/>
                             </p:commandButton>
                         </b:column>
@@ -97,7 +97,7 @@
                         <f:facet name="footer">
                         <b:row>
                         <b:column offset="8" col-xs="4">
-                            <p:commandButton style="color:red;" value="Reportar Riesgo" disabled="#{clapController.isActividadElegida()}" actionListener="#{clapController.selected.setRiesgo_social(true)}" rendered="#{not loginController.esSuperUsuario()}">
+                            <p:commandButton style="background-color: #AE203D;color:#e5e5e5" value="Reportar Riesgo" disabled="#{clapController.isActividadElegida()}" actionListener="#{clapController.selected.setRiesgo_social(true)}" rendered="#{not loginController.esSuperUsuario()}">
                                 <p:ajax event="click" update="form" immediate="true"/>
                             </p:commandButton>
                         </b:column>
@@ -124,7 +124,7 @@
                         <f:facet name="footer">
                         <b:row>
                         <b:column offset="8" col-xs="4">
-                            <p:commandButton style="color:red;" value="Reportar Riesgo" disabled="#{clapController.isActividadElegida()}" actionListener="#{clapController.selected.setRiesgo_salud_mental(true)}" rendered="#{not loginController.esSuperUsuario()}">
+                            <p:commandButton style="background-color: #AE203D;color:#e5e5e5" value="Reportar Riesgo" disabled="#{clapController.isActividadElegida()}" actionListener="#{clapController.selected.setRiesgo_salud_mental(true)}" rendered="#{not loginController.esSuperUsuario()}">
                                 <p:ajax event="click" update="form" immediate="true"/>
                             </p:commandButton>
                         </b:column>
@@ -151,7 +151,7 @@
                         <f:facet name="footer">
                         <b:row>
                         <b:column offset="8" col-xs="4">
-                            <p:commandButton style="color:red;" value="Reportar Riesgo" disabled="#{clapController.isActividadElegida()}" actionListener="#{clapController.selected.setRiesgo_oh_drogas(true)}" rendered="#{not loginController.esSuperUsuario()}">
+                            <p:commandButton style="background-color: #AE203D;color:#e5e5e5" value="Reportar Riesgo" disabled="#{clapController.isActividadElegida()}" actionListener="#{clapController.selected.setRiesgo_oh_drogas(true)}" rendered="#{not loginController.esSuperUsuario()}">
                                 <p:ajax event="click" update="form" immediate="true"/>
                             </p:commandButton> 
                         </b:column>
@@ -178,7 +178,7 @@
                         <f:facet name="footer">
                         <b:row>
                         <b:column offset="8" col-xs="4">
-                            <p:commandButton style="color:red;" value="Reportar Riesgo" disabled="#{clapController.isActividadElegida()}" actionListener="#{clapController.selected.setRiesgo_ssr(true)}" rendered="#{not loginController.esSuperUsuario()}">
+                            <p:commandButton style="background-color: #AE203D;color:#e5e5e5" value="Reportar Riesgo" disabled="#{clapController.isActividadElegida()}" actionListener="#{clapController.selected.setRiesgo_ssr(true)}" rendered="#{not loginController.esSuperUsuario()}">
                                 <p:ajax event="click" update="form" immediate="true"/>
                             </p:commandButton>
                         </b:column>
@@ -206,9 +206,16 @@
                                   >
                          <p:ajax event="rowSelect"   update="createButton " />
                          <p:ajax event="rowUnselect" update="createButton "/>
-                         <f:facet name="footer">
-                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="Ahora" actionListener="#{actividadController.prepareCreate}" update=":actividadCreateForm" oncomplete="PF('actividadCreateDialog').show()" disabled="#{clapController.isActividadElegida()}"/>
-                         </f:facet>
+                        <f:facet name="footer">
+                        <b:row>
+                            <b:column>
+                                <p:commandButton id="createButton" icon="ui-icon-plus" style="width:100px;height:50px;"   value="Ahora" actionListener="#{actividadController.prepareCreate}" update=":actividadCreateForm" oncomplete="PF('actividadCreateDialog').show()" disabled="#{clapController.isActividadElegida()}"/>
+                            </b:column>
+                            <b:column>
+                                <p:commandButton value="Despues" style="width:100px;height:50px;" action="/faces/paciente/View.xhtml?faces-redirect=true"/>
+                            </b:column>
+                        </b:row>
+                        </f:facet>
                      </p:dataTable>
                  </h:form>
             </b:row>

@@ -123,7 +123,7 @@ public class paciente implements Serializable {
     + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
     message = "Debe ser un mail valido")
     @NotNull(message="Debe ingresar un correo de contacto")
-    @Column(name="correo_paciente")
+    @Column(name="correo_paciente",unique=true)
     private String correo;
     
     @NotNull(message="Debe ingresar un tipo de previsión")

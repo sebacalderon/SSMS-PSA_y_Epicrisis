@@ -2416,11 +2416,23 @@ public class clap implements Serializable {
         }else{
             clap=clap.concat("No,");
         }
+        
         clap=clap.concat(region_residencia.getNombre()+",");
         clap=clap.concat(comuna_residencia.getNombre()+",");
         clap=clap.concat(calle_direccion+",");
-        clap=clap.concat(numero_direccion+",");
-        clap=clap.concat(resto_direccion+",");
+        
+        if(numero_direccion!=null){
+            clap=clap.concat(numero_direccion+",");
+        }else{
+            clap=clap.concat(",");
+        }
+        
+        if(resto_direccion!=null){
+            clap=clap.concat(resto_direccion+",");
+        }else{
+            clap=clap.concat(",");
+        }
+        
         clap=clap.concat(fecha_nacimiento.toString()+",");
         if(sexo==1){
             clap=clap.concat("Hombre,");
@@ -2433,16 +2445,19 @@ public class clap implements Serializable {
         }
         clap=clap.concat(nacionalidad.getNombre()+",");
         clap=clap.concat(correo+",");
+        
         if(programa_social!=null){
             clap=clap.concat(programa_social.getNombre()+",");
         }else{
             clap=clap.concat(",");
         }
+        
         if(prevision!=null){
             clap=clap.concat(prevision.getNombre()+",");
         }else{
             clap=clap.concat(",");
         }
+        
         if(grupo_fonasa==1){
             clap=clap.concat("A,");
         }else if(grupo_fonasa==2){
@@ -2451,43 +2466,91 @@ public class clap implements Serializable {
             clap=clap.concat("C,");
         }else if(grupo_fonasa==4){
             clap=clap.concat("D,");
+        }else{
+            clap=clap.concat(",");
         }
+       
         if(estado_conyugal!=null){
             clap=clap.concat(estado_conyugal.getNombre()+",");
         }else{
             clap=clap.concat(",");
         }
+        
         if(pueblo_originario!=null){
             clap=clap.concat(pueblo_originario.getNombre()+",");
         }else{
             clap=clap.concat(",");
         }
+        
         if(cesfam!=null){
             clap=clap.concat(cesfam.getNombre()+",");
         }else{
             clap=clap.concat(",");
         }
-        //Datos consulta
         
+        //Datos consulta
         
         if(control_en==1){
             clap=clap.concat("Establecimiento educacional,");
         }else{
             clap=clap.concat("Establecimiento de salud,");
         }
-               
+        
         clap=clap.concat(hcn+",");
-        clap=clap.concat(establecimiento_educacional+",");
+        if(establecimiento_educacional!=null){
+            clap=clap.concat(establecimiento_educacional+",");
+        }else{
+            clap=clap.concat(",");
+        }
         clap=clap.concat(fecha_consulta.toString()+",");
         clap=clap.concat(edad+",");
-        clap=clap.concat(acompanante+",");
-        clap=clap.concat(motivo_consulta_adolescente_1+",");
-        clap=clap.concat(motivo_consulta_adolescente_2+",");
-        clap=clap.concat(motivo_consulta_adolescente_3+",");
-        clap=clap.concat(motivo_consulta_acompanante_1+",");
-        clap=clap.concat(motivo_consulta_acompanante_2+",");
-        clap=clap.concat(motivo_consulta_acompanante_3+",");
-        clap=clap.concat(descripcion_motivo_consulta+",");
+        
+        if(acompanante!=null){
+            clap=clap.concat(acompanante+",");
+        }else{
+            clap=clap.concat(",");
+        }
+        if(motivo_consulta_adolescente_2!=null){
+            clap=clap.concat(motivo_consulta_adolescente_1+",");
+        }else{
+            clap=clap.concat(",");
+        }
+        
+        if(motivo_consulta_adolescente_2!=null){
+            clap=clap.concat(motivo_consulta_adolescente_2+",");
+        }else{
+            clap=clap.concat(",");
+        }
+        
+        if(motivo_consulta_adolescente_3!=null){
+            clap=clap.concat(motivo_consulta_adolescente_3+",");
+        }else{
+            clap=clap.concat(",");
+        }
+        
+        if(motivo_consulta_acompanante_1!=null){
+            clap=clap.concat(motivo_consulta_acompanante_1+",");
+        }else{
+            clap=clap.concat(",");
+        }
+        
+        if(motivo_consulta_acompanante_2!=null){
+            clap=clap.concat(motivo_consulta_acompanante_2+",");
+        }else{
+            clap=clap.concat(",");
+        }
+        
+        if(motivo_consulta_acompanante_3!=null){
+            clap=clap.concat(motivo_consulta_acompanante_3+",");
+        }else{
+            clap=clap.concat(",");
+        }
+        
+        if(descripcion_motivo_consulta!=null){
+            clap=clap.concat(descripcion_motivo_consulta+",");
+        }else{
+            clap=clap.concat(",");
+        }
         
         //Antecedentes personales
         
@@ -2497,6 +2560,8 @@ public class clap implements Serializable {
             clap=clap.concat("no sé,");
         }else if(perinatales_normales==3){
             clap=clap.concat("No,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(alergias_normales==1){
@@ -2505,6 +2570,8 @@ public class clap implements Serializable {
             clap=clap.concat("no sé,");
         }else if(alergias_normales==3){
             clap=clap.concat("No,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(vacunas_completas==1){
@@ -2513,6 +2580,8 @@ public class clap implements Serializable {
             clap=clap.concat("no sé,");
         }else if(vacunas_completas==3){
             clap=clap.concat("No,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(enfermedades_importantes==1){
@@ -2521,6 +2590,8 @@ public class clap implements Serializable {
             clap=clap.concat("no sé,");
         }else if(enfermedades_importantes==3){
             clap=clap.concat("No,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(discapacidad==1){
@@ -2529,6 +2600,8 @@ public class clap implements Serializable {
             clap=clap.concat("no sé,");
         }else if(discapacidad==3){
             clap=clap.concat("No,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(accidentes_relevantes==1){
@@ -2537,6 +2610,8 @@ public class clap implements Serializable {
             clap=clap.concat("no sé,");
         }else if(accidentes_relevantes==3){
             clap=clap.concat("No,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(cirugia_hospitalizaciones==1){
@@ -2545,11 +2620,13 @@ public class clap implements Serializable {
             clap=clap.concat("no sé,");
         }else if(cirugia_hospitalizaciones==3){
             clap=clap.concat("No,");
+        }else{
+            clap=clap.concat(",");
         }
         
-        if(uso_medicamentos){
+        if(uso_medicamentos==true){
             clap=clap.concat("Si,");
-        }else{
+        }else if(uso_medicamentos==false){
             clap=clap.concat("No,");
         }
         
@@ -2559,6 +2636,8 @@ public class clap implements Serializable {
             clap=clap.concat("no sé,");
         }else if(problemas_salud_mental==3){
             clap=clap.concat("No,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(violencia==1){
@@ -2567,6 +2646,8 @@ public class clap implements Serializable {
             clap=clap.concat("no sé,");
         }else if(violencia==3){
             clap=clap.concat("No,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(antecedentes_judiciales==1){
@@ -2575,6 +2656,8 @@ public class clap implements Serializable {
             clap=clap.concat("no sé,");
         }else if(antecedentes_judiciales==3){
             clap=clap.concat("No,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(otros==1){
@@ -2583,11 +2666,18 @@ public class clap implements Serializable {
             clap=clap.concat("no sé,");
         }else if(otros==3){
             clap=clap.concat("No,");
+        }else{
+            clap=clap.concat(",");
         }
         
-        clap=clap.concat(observaciones_antecdentes_personales+",");
+        if(observaciones_antecdentes_personales!=null){
+            clap=clap.concat(observaciones_antecdentes_personales+",");
+        }else{
+            clap=clap.concat(",");
+        }
            
         //Antecedentes familiares
+        
         
         if(enfermedades_importantes_familia==1){
                 clap=clap.concat("Si,");
@@ -2595,6 +2685,8 @@ public class clap implements Serializable {
             clap=clap.concat("no sé,");
         }else if(enfermedades_importantes_familia==3){
             clap=clap.concat("No,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(obesidad_familia==1){
@@ -2603,6 +2695,8 @@ public class clap implements Serializable {
             clap=clap.concat("no sé,");
         }else if(obesidad_familia==3){
             clap=clap.concat("No,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(problemas_salud_mental_familia==1){
@@ -2611,6 +2705,8 @@ public class clap implements Serializable {
             clap=clap.concat("no sé,");
         }else if(problemas_salud_mental_familia==3){
             clap=clap.concat("No,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(violencia_intrafamiliar==1){
@@ -2619,6 +2715,8 @@ public class clap implements Serializable {
             clap=clap.concat("no sé,");
         }else if(violencia_intrafamiliar==3){
             clap=clap.concat("No,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(alcohol_y_otras_drogas==1){
@@ -2627,6 +2725,8 @@ public class clap implements Serializable {
             clap=clap.concat("no sé,");
         }else if(alcohol_y_otras_drogas==3){
             clap=clap.concat("No,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(padre_adolescente==1){
@@ -2635,6 +2735,8 @@ public class clap implements Serializable {
             clap=clap.concat("no sé,");
         }else if(padre_adolescente==3){
             clap=clap.concat("No,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(judiciales==1){
@@ -2643,6 +2745,8 @@ public class clap implements Serializable {
             clap=clap.concat("no sé,");
         }else if(judiciales==3){
             clap=clap.concat("No,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(otros_antecedentes_familiares==1){
@@ -2651,10 +2755,15 @@ public class clap implements Serializable {
             clap=clap.concat("no sé,");
         }else if(otros_antecedentes_familiares==3){
             clap=clap.concat("No,");
+        }else{
+            clap=clap.concat(",");
         }
         
-        clap=clap.concat(observaciones_antecedentes_familiares+",");
-
+        if(observaciones_antecedentes_familiares!=null){
+            clap=clap.concat(observaciones_antecedentes_familiares+",");
+        }else{
+            clap=clap.concat(",");
+        }
         //Familia
         
         if(vive_con_solo){
@@ -2687,15 +2796,22 @@ public class clap implements Serializable {
             clap=clap.concat("No,");
         }
         
-        clap=clap.concat(vive_con_especificacion+",");
-        
+        if(vive_con_especificacion!=null){
+            clap=clap.concat(vive_con_especificacion+",");
+        }else{
+            clap=clap.concat(",");
+        }
         if(comparte_cama){
             clap=clap.concat("Si,");
         }else{
             clap=clap.concat("No,");
         }
         
-        clap=clap.concat(especificacion_comparte_cama+",");
+        if(especificacion_comparte_cama!=null){
+            clap=clap.concat(especificacion_comparte_cama+",");
+        }else{
+            clap=clap.concat(",");
+        }
         
         if(nivel_instruccion_madre==1){
                 clap=clap.concat("Ninguna,");
@@ -2705,6 +2821,8 @@ public class clap implements Serializable {
             clap=clap.concat("Media,");
         }else if(nivel_instruccion_madre==4){
             clap=clap.concat("Superior,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(nivel_instruccion_padre==1){
@@ -2715,6 +2833,8 @@ public class clap implements Serializable {
             clap=clap.concat("Media,");
         }else if(nivel_instruccion_padre==4){
             clap=clap.concat("Superior,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(nivel_instruccion_pareja==1){
@@ -2725,11 +2845,26 @@ public class clap implements Serializable {
             clap=clap.concat("Media,");
         }else if(nivel_instruccion_pareja==4){
             clap=clap.concat("Superior,");
+        }else{
+            clap=clap.concat(",");
         }
         
-        clap=clap.concat(ocupacion_madre+",");
-        clap=clap.concat(ocupacion_padre+",");
-        clap=clap.concat(ocupacion_pareja+",");
+        if(ocupacion_madre!=null){
+            clap=clap.concat(ocupacion_madre+",");
+        }else{
+            clap=clap.concat(",");
+        }
+        
+        if(ocupacion_padre!=null){
+            clap=clap.concat(ocupacion_padre+",");
+        }else{
+            clap=clap.concat(",");
+        }
+        if(ocupacion_pareja!=null){
+            clap=clap.concat(ocupacion_pareja+",");
+        }else{
+            clap=clap.concat(",");
+        }
         
         if(percepcion_familia==1){
                 clap=clap.concat("Buena,");
@@ -2739,10 +2874,15 @@ public class clap implements Serializable {
             clap=clap.concat("Mala,");
         }else if(percepcion_familia==4){
             clap=clap.concat("No hay relación,");
+        }else{
+            clap=clap.concat(",");
         }
         
-        clap=clap.concat(observaciones_familia+",");
-    
+        if(observaciones_familia!=null){
+            clap=clap.concat(observaciones_familia+",");
+        }else{
+            clap=clap.concat(",");
+        }
         //Vivienda
         
         if(condiciones_sanitarias){
@@ -2757,8 +2897,11 @@ public class clap implements Serializable {
             clap=clap.concat("No,");
         }
         
-        clap=clap.concat(observaciones_vivienda+",");
-               
+        if(observaciones_vivienda!=null){
+            clap=clap.concat(observaciones_vivienda+",");
+        }else{
+            clap=clap.concat(",");
+        }
         //Educacion
         
         if(estudia){
@@ -2775,12 +2918,22 @@ public class clap implements Serializable {
             clap=clap.concat("Media,");
         }else if(nivel_educacion==4){
             clap=clap.concat("Superior,");
+        }else{
+            clap=clap.concat(",");
         }
         
-        clap=clap.concat(curso+",");
-        clap=clap.concat(anos_repetidos+",");
-        clap=clap.concat(causa_anos_repetidos+",");
+        if(curso!=null){
+            clap=clap.concat(curso+",");
+        }else{
+            clap=clap.concat(",");
+        }
         
+        clap=clap.concat(anos_repetidos+",");
+        if(causa_anos_repetidos!=null){
+            clap=clap.concat(causa_anos_repetidos+",");
+        }else{
+            clap=clap.concat(",");
+        }
         if(problemas_escuela){
             clap=clap.concat("Si,");
         }else{
@@ -2799,18 +2952,26 @@ public class clap implements Serializable {
             clap=clap.concat("No,");
         }
         
-        clap=clap.concat(causa_desercion_exclusion+",");
-        
+        if(causa_desercion_exclusion!=null){
+            clap=clap.concat(causa_desercion_exclusion+",");
+        }else{
+            clap=clap.concat(",");
+        }
         if(percepcion_rendimiento==1){
                 clap=clap.concat("Buena,");
         }else if(percepcion_rendimiento==2){
             clap=clap.concat("Regular,");
         }else if(percepcion_rendimiento==3){
             clap=clap.concat("Mala,");
+        }else{
+            clap=clap.concat(",");
         }
         
-        clap=clap.concat(observaciones_educacion+",");
-        
+        if(observaciones_educacion!=null){
+            clap=clap.concat(observaciones_educacion+",");
+        }else{
+            clap=clap.concat(",");
+        }
         //Trabajo
         
         if(trabaja){
@@ -2820,7 +2981,7 @@ public class clap implements Serializable {
         }
         
         clap=clap.concat(horas_trabajo+",");
-        
+
         if(trabajo_infantil){
             clap=clap.concat("Si,");
         }else{
@@ -2855,6 +3016,8 @@ public class clap implements Serializable {
             clap=clap.concat("otra,");
         }else if(razon_de_trabajo==5){
             clap=clap.concat("n/c,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(legalizado==1){
@@ -2863,12 +3026,20 @@ public class clap implements Serializable {
             clap=clap.concat("No,");
         }else if(legalizado==3){
             clap=clap.concat("n/c,");
+        }else{
+            clap=clap.concat(",");
         }
         
-        clap=clap.concat(tipo_de_trabajo+",");
-        
-        clap=clap.concat(observaciones_trabajo+",");
-        
+        if(tipo_de_trabajo!=null){
+            clap=clap.concat(tipo_de_trabajo+",");
+        }else{
+            clap=clap.concat(",");
+        }
+        if(observaciones_trabajo!=null){
+            clap=clap.concat(observaciones_trabajo+",");
+        }else{
+            clap=clap.concat(",");
+        }
         //vida social
         
         if(aceptacion==1){
@@ -2879,6 +3050,8 @@ public class clap implements Serializable {
             clap=clap.concat("ignorado,");
         }else if(aceptacion==4){
             clap=clap.concat("no sabe,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(pareja){
@@ -2931,10 +3104,17 @@ public class clap implements Serializable {
             clap=clap.concat("No,");
         }
         
-        clap=clap.concat(especificacion_otras_actividades+",");
+        if(especificacion_otras_actividades!=null){
+            clap=clap.concat(especificacion_otras_actividades+",");
+        }else{
+            clap=clap.concat(",");
+        }
         
+        if(observaciones_vida_social!=null){
         clap=clap.concat(observaciones_vida_social+",");
-              
+        }else{
+            clap=clap.concat(",");
+        }      
         //habitos y consumo
         
         if(sueno_normal){
@@ -2959,8 +3139,12 @@ public class clap implements Serializable {
             clap=clap.concat("No,");
         }
         
-        clap=clap.concat(especificacion_alimentacion_especial+",");
-      
+        if(especificacion_alimentacion_especial!=null){
+            clap=clap.concat(especificacion_alimentacion_especial+",");
+        }else{
+            clap=clap.concat(",");
+        }
+        
         if(tabaco){
             clap=clap.concat("Si,");
         }else{
@@ -2987,7 +3171,11 @@ public class clap implements Serializable {
             clap=clap.concat("No,");
         }
         
-        clap=clap.concat(especificacion_consumo_otra_sustancia+",");
+        if(especificacion_consumo_otra_sustancia!=null){
+            clap=clap.concat(especificacion_consumo_otra_sustancia+",");
+        }else{
+            clap=clap.concat(",");
+        }
         
         if(seguridad_vial){
             clap=clap.concat("Si,");
@@ -2995,8 +3183,11 @@ public class clap implements Serializable {
             clap=clap.concat("No,");
         }
         
+        if(observaciones_habitos_consumo!=null){
         clap=clap.concat(observaciones_habitos_consumo+",");
-        
+        }else{
+            clap=clap.concat(",");
+        }
         //gineco/urólogo
         
         clap=clap.concat(edad_menarca_espermarca+",");
@@ -3020,6 +3211,8 @@ public class clap implements Serializable {
             clap=clap.concat("n/s,");
         }else if(ciclos_regulares==4){
             clap=clap.concat("n/c,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(dismenorrea==1){
@@ -3028,6 +3221,8 @@ public class clap implements Serializable {
             clap=clap.concat("No,");
         }else if(dismenorrea==3){
             clap=clap.concat("n/c,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(flujo_secrecion_patologico){
@@ -3042,7 +3237,11 @@ public class clap implements Serializable {
             clap=clap.concat("No,");
         }
         
-        clap=clap.concat(especificacion_its_vih+",");
+        if(especificacion_its_vih!=null){
+            clap=clap.concat(especificacion_its_vih+",");
+        }else{
+            clap=clap.concat(",");
+        }
         
         if(tratamiento==1){
                 clap=clap.concat("Si,");
@@ -3050,6 +3249,8 @@ public class clap implements Serializable {
             clap=clap.concat("No,");
         }else if(tratamiento==3){
             clap=clap.concat("n/s,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(tratamiento_contactos==1){
@@ -3058,13 +3259,19 @@ public class clap implements Serializable {
             clap=clap.concat("No,");
         }else if(tratamiento_contactos==3){
             clap=clap.concat("n/s,");
+        }else{
+            clap=clap.concat(",");
         }
         
         clap=clap.concat(embarazos+",");
         clap=clap.concat(hijos+",");
         clap=clap.concat(abortos+",");
-        clap=clap.concat(observaciones_gineco_urologico+",");
-               
+        
+        if(observaciones_gineco_urologico!=null){
+            clap=clap.concat(observaciones_gineco_urologico+",");
+        }else{
+            clap=clap.concat(",");
+        }       
         //sexualidad
         
         if(orientacion_sexual==1){
@@ -3075,16 +3282,23 @@ public class clap implements Serializable {
             clap=clap.concat("Bisexual,");
         }else if(orientacion_sexual==4){
             clap=clap.concat("n/r,");
-        } 
+        }else{
+            clap=clap.concat(",");
+        }
         
-        clap=clap.concat(especificacion_orientacion_sexual+",");
-        
+        if(especificacion_orientacion_sexual!=null){
+            clap=clap.concat(especificacion_orientacion_sexual+",");
+        }else{
+            clap=clap.concat(",");
+        }
         if(conducta_sexual==1){
                 clap=clap.concat("Postergadora,");
         }else if(conducta_sexual==2){
             clap=clap.concat("Anticipadora,");
         }else if(conducta_sexual==3){
             clap=clap.concat("Activa,");
+        }else{
+            clap=clap.concat(",");
         }
         
         clap=clap.concat(edad_inicio_conducta_sexual+",");
@@ -3097,6 +3311,8 @@ public class clap implements Serializable {
             clap=clap.concat("Ambos sexos,");
         }else if(relaciones_sexuales==4){
             clap=clap.concat("n/c,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(pareja_sexual==1){
@@ -3105,6 +3321,8 @@ public class clap implements Serializable {
             clap=clap.concat("varias,");
         }else if(pareja_sexual==3){
             clap=clap.concat("n/c,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(dificultades_sexuales==1){
@@ -3113,6 +3331,8 @@ public class clap implements Serializable {
             clap=clap.concat("No,");
         }else if(dificultades_sexuales==3){
             clap=clap.concat("n/c,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(anticoncepcion==1){
@@ -3121,6 +3341,8 @@ public class clap implements Serializable {
             clap=clap.concat("a veces,");
         }else if(anticoncepcion==3){
             clap=clap.concat("nunca,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(doble_proteccion){
@@ -3129,19 +3351,27 @@ public class clap implements Serializable {
             clap=clap.concat("No,");
         }
         
-        clap=clap.concat(especificacion_uso_mac+",");
-        
         if(uso_mac==1){
                 clap=clap.concat("Si,");
         }else if(uso_mac==2){
             clap=clap.concat("No,");
         }else if(uso_mac==3){
             clap=clap.concat("a veces,");
+        }else{
+            clap=clap.concat(",");
         }
         
-        clap=clap.concat(especificacion_uso_mac+",");
+        if(especificacion_uso_mac!=null){
+            clap=clap.concat(especificacion_uso_mac+",");
+        }else{
+            clap=clap.concat(",");
+        }
         
-        clap=clap.concat(razon_no_uso_mac+",");
+        if(razon_no_uso_mac!=null){
+            clap=clap.concat(razon_no_uso_mac+",");
+        }else{
+            clap=clap.concat(",");
+        }
         
         if(consejeria_uso_mac){
             clap=clap.concat("Si,");
@@ -3167,8 +3397,11 @@ public class clap implements Serializable {
             clap=clap.concat("No,");
         }
         
-        clap=clap.concat(observaciones_sexualidad+",");
-        
+        if(observaciones_sexualidad!=null){
+            clap=clap.concat(observaciones_sexualidad+",");
+        }else{
+            clap=clap.concat(",");
+        }
         //Situación psico_emocinoal
         
         if(imagen_corporal==1){
@@ -3177,6 +3410,8 @@ public class clap implements Serializable {
             clap=clap.concat("crea preocupación,");
         }else if(imagen_corporal==3){
             clap=clap.concat("impide relación con los demás,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(bienestar_emocional==1){
@@ -3197,6 +3432,8 @@ public class clap implements Serializable {
             clap=clap.concat("alta impulsividad,");
         }else if(bienestar_emocional==9){
             clap=clap.concat("autoagresiones,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(vida_proyecto==1){
@@ -3205,6 +3442,8 @@ public class clap implements Serializable {
             clap=clap.concat("confuso,");
         }else if(vida_proyecto==3){
             clap=clap.concat("ausente,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(suicidalidad_amigos){
@@ -3235,12 +3474,26 @@ public class clap implements Serializable {
             clap=clap.concat("otro,");
         }else if(referente_adulto==5){
             clap=clap.concat("ninguno,");
+        }else{
+            clap=clap.concat(",");
         }
         
+        if(nombre_referente_adulto!=null){
         clap=clap.concat(nombre_referente_adulto+",");
+        }else{
+            clap=clap.concat(",");
+        }
+        if(telefono_referente_adulto!=null){
         clap=clap.concat(telefono_referente_adulto+",");
-        clap=clap.concat(observaciones_psico_emocional+",");
+        }else{
+            clap=clap.concat(",");
+        }
         
+        if(observaciones_psico_emocional!=null){
+        clap=clap.concat(observaciones_psico_emocional+",");
+        }else{
+            clap=clap.concat(",");
+        }
         //Examen físico
         
         clap=clap.concat(peso+",");
@@ -3325,6 +3578,8 @@ public class clap implements Serializable {
             clap=clap.concat("IV,");
         }else if(tanner_mama==5){
             clap=clap.concat("V,");
+        }else{
+            clap=clap.concat(",");
         }
         
         if(tanner_genital==1){
@@ -3337,14 +3592,28 @@ public class clap implements Serializable {
             clap=clap.concat("IV,");
         }else if(tanner_genital==5){
             clap=clap.concat("V,");
+        }else{
+            clap=clap.concat(",");
         }
-          
-        clap=clap.concat(observaciones_examen_fisico+",");
         
+        if(observaciones_examen_fisico!=null){
+        clap=clap.concat(observaciones_examen_fisico+",");
+        }else{
+            clap=clap.concat(",");
+        }
         //final
         
+        if(impresion_diagnostica!=null){
         clap=clap.concat(impresion_diagnostica+",");
-        clap=clap.concat(indicaciones_interconsultas+",");
+        }else{
+            clap=clap.concat(",");
+        }
+        
+        if(indicaciones_interconsultas!=null){
+            clap=clap.concat(indicaciones_interconsultas+",");
+        }else{
+            clap=clap.concat(",");
+        }
         if(funcionario!=null){
             clap=clap.concat(funcionario.getRUT()+",");
         }else{

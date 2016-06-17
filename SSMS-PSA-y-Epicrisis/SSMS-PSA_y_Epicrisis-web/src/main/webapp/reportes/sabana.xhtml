@@ -26,9 +26,12 @@ and open the template in the editor.
                             <i>Esta sección permite generar un archivo con extension ".csv" con todos los datdos de todas las fichas CLAP almacenadas.</i>
                         </b:column>
                         </b:row>
+                        <br/><br/>
                         <b:row>
                         <h:form>
-                            <b:commandButton look="primary" value="Generar CSV" actionListener="#{clapController.generarCSV()}" rendered="#{clapController.items.size()>0}"/>
+                            <b:column offset="3" col-xs="4">
+                                <b:commandButton look="primary" value="Descargar sábana" actionListener="#{clapController.generarCSV()}" rendered="#{clapController.items.size()>0}"/>
+                            </b:column>
                         </h:form>
                         </b:row>
                     </b:panel>

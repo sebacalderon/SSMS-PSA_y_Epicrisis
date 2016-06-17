@@ -293,10 +293,10 @@ public class clapController implements Serializable {
     
     public clap prepareRiesgos(){
         selected = getSelected();
-        if (selected.getEstado().equals("Vigente") && pacienteCtrl.getSelected().getEstado().equals("Riesgos no Tratados")) {
-            setActividadElegida(false);
-        }else{
+        if (pacienteCtrl.getSelected().getEstado().equals("Riesgos tratados o en tratamiento")) {
             setActividadElegida(true);
+        }else{
+            setActividadElegida(false);
         }
         return selected;
     }
@@ -470,6 +470,7 @@ public class clapController implements Serializable {
             output.write("ITS o VIH,".getBytes());
             output.write("Especificacion de ITS o VIH,".getBytes());
             output.write("Tratamiento,".getBytes());
+            output.write("Tratamiento contactos,".getBytes());
             output.write("Embarazos,".getBytes());
             output.write("Hijos,".getBytes());
             output.write("Abortos,".getBytes());
@@ -484,7 +485,6 @@ public class clapController implements Serializable {
             output.write("Dificultades sexuales,".getBytes());
             output.write("Anticoncepcion,".getBytes());
             output.write("Doble proteccion,".getBytes());
-            output.write("Especificacion uso MAC,".getBytes());
             output.write("Uso MAC,".getBytes());
             output.write("Especificacion de uso MAC,".getBytes());
             output.write("Razon de no uso MAC,".getBytes());
@@ -714,23 +714,16 @@ public class clapController implements Serializable {
             selected.getOtros_antecedentes_familiares()!=0&&
             selected.getPercepcion_familia()!=0&&
             selected.getNivel_educacion()!=0&&
-            !selected.getCurso().equals("")&&
             selected.getPercepcion_rendimiento()!=0&&
             selected.getAceptacion()!=0&&
-            selected.getHoras_actividad_fisica()!=0&&
-            selected.getHoras_tv()!=0&&
-            selected.getHoras_computador_consola()!=0&&
+            (selected.getHoras_actividad_fisica()!=0||
+            selected.getHoras_tv()!=0||
+            selected.getHoras_computador_consola()!=0)&&
             selected.getHoras_sueno()!=0 &&
-            selected.getEdad_menarca_espermarca()!=0&&
-            selected.getCiclos_regulares()!=0&&
             selected.getDismenorrea()!=0&&
             selected.getOrientacion_sexual()!=0&&
             selected.getConducta_sexual()!=0&&
-            selected.getRelaciones_sexuales()!=0&&
             selected.getPareja_sexual()!=0&&
-            selected.getDificultades_sexuales()!=0&&
-            selected.getAnticoncepcion()!=0&&
-            selected.getUso_mac()!=0&&
             selected.getImagen_corporal()!=0&&
             selected.getBienestar_emocional()!=0&&
             selected.getVida_proyecto()!=0&&
@@ -1051,7 +1044,9 @@ public class clapController implements Serializable {
     public void autosave() {
         boolean completo=false;
         //Verifica si completa el clap
-        if( selected.getPerinatales_normales()!=0&&
+        if( (selected.getCesfam()!=null||selected.getEstablecimiento_educacional()!=null)&&
+            selected.getAcompanante()!=null&&
+            selected.getPerinatales_normales()!=0&&
             selected.getAlergias_normales()!=0&&
             selected.getVacunas_completas()!=0&&
             selected.getEnfermedades_importantes()!=0&&
@@ -1072,7 +1067,6 @@ public class clapController implements Serializable {
             selected.getOtros_antecedentes_familiares()!=0&&
             selected.getPercepcion_familia()!=0&&
             selected.getNivel_educacion()!=0&&
-            !selected.getCurso().equals("")&&
             selected.getPercepcion_rendimiento()!=0&&
             selected.getAceptacion()!=0&&
             selected.getHoras_actividad_fisica()!=0&&
@@ -1098,8 +1092,8 @@ public class clapController implements Serializable {
             selected.getPresion_arterial_diastolica()!=0&&
             selected.getPresion_arterial_sistolica()!=0&&
             selected.getPerimetro_abdominal()!=0&&
-            selected.getTanner_mama()!=0&&
-            selected.getTanner_genital()!=0
+            (selected.getTanner_mama()!=0||
+            selected.getTanner_genital()!=0)
             ){
             selected.setEstado("Nuevo");
             completo=true;
