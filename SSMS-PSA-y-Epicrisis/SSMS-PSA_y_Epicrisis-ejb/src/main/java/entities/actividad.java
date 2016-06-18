@@ -96,6 +96,12 @@ public class actividad implements Serializable {
     @Column(name="nivelacion_estudios_actividad")
     private boolean nivelacion_estudios;
     
+    @Column(name="intervencion_breve_alcohol_actividad")
+    private boolean intervencion_breve_alcohol;
+    
+    @Column(name="observaciones_actividad")
+    private String Observaciones;
+    
     @JoinColumn(name = "paciente_actividad", referencedColumnName = "codigo_paciente")
     @NotNull(message="Debe ingresar un usuario")
     @ManyToOne(fetch = FetchType.LAZY)
@@ -111,6 +117,22 @@ public class actividad implements Serializable {
 
     public Usuario getUsuario() {
         return usuario;
+    }
+
+    public String getObservaciones() {
+        return Observaciones;
+    }
+
+    public void setObservaciones(String Observaciones) {
+        this.Observaciones = Observaciones;
+    }
+
+    public boolean isIntervencion_breve_alcohol() {
+        return intervencion_breve_alcohol;
+    }
+
+    public void setIntervencion_breve_alcohol(boolean intervencion_breve_alcohol) {
+        this.intervencion_breve_alcohol = intervencion_breve_alcohol;
     }
 
     public void setUsuario(Usuario usuario) {

@@ -733,7 +733,6 @@ public class clapController implements Serializable {
             selected.getPresion_arterial_diastolica()!=0&&
             selected.getPresion_arterial_sistolica()!=0&&
             selected.getPerimetro_abdominal()!=0&&
-            selected.getTanner_mama()!=0&&
             selected.getTanner_genital()!=0
             ){
             selected.setEstado("Nuevo");

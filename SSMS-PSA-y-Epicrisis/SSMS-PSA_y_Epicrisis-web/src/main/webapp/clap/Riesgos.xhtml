@@ -26,7 +26,7 @@
                 <br />
             </h:form>
             <b:row>
-                <h2 align="center">Riesgos Paciente #{clapController.selected.paciente.RUN}-#{clapController.selected.paciente.DV} CLAP #{clapController.selected.id}</h2>
+                <h2 align="center">Riesgos Usuario #{clapController.selected.paciente.RUN}-#{clapController.selected.paciente.DV} CLAP #{clapController.selected.id}</h2>
             </b:row>
             <b:row rendered="#{clapController.esIncompleto()}">
                 <h3 align="center">No es posible ver los riesgos de una ficha CLAP no terminada</h3>
@@ -37,7 +37,7 @@
                 <div id="cardio">
                  <b:column offset="3" col-xs="12" col-md="6">
                     <b:panel
-                        title="El paciente no posee Riesgo Cardiovascular"
+                        title="El Usuario no posee Riesgo Cardiovascular"
                         look="success" rendered="#{not clapController.selected.riesgo_cardiovascular}">
                         <f:facet name="footer">
                         <b:row>
@@ -52,7 +52,7 @@
                 </b:column>
                  <b:column offset="3" col-xs="12" col-md="6">
                     <b:panel
-                        title="El paciente posee Riesgo Cardiovascular"
+                        title="El Usuario posee Riesgo Cardiovascular"
                         look="danger" rendered="#{clapController.selected.riesgo_cardiovascular}">
                         <i>Debe realizarse una actividad de intervención para mitigar dicho riesgo</i>
                     </b:panel>
@@ -64,7 +64,7 @@
                 <div id="nutri">
                  <b:column offset="3" col-xs="12" col-md="6">
                     <b:panel
-                        title="El paciente no posee Riesgo Nutricional"
+                        title="El usuario no posee Riesgo Nutricional"
                         look="success" rendered="#{not clapController.selected.riesgo_nutricional}">
                         <f:facet name="footer">
                         <b:row>
@@ -79,7 +79,7 @@
                 </b:column>
                  <b:column offset="3" col-xs="12" col-md="6">
                     <b:panel
-                        title="El paciente posee Riesgo Nuticional"
+                        title="El usuario posee Riesgo Nuticional"
                         look="danger" rendered="#{clapController.selected.riesgo_nutricional}">
                         <i>Debe realizarse una actividad de intervención para mitigar dicho riesgo</i>
                     </b:panel>
@@ -92,7 +92,7 @@
                 <div id="social">
                  <b:column offset="3" col-xs="12" col-md="6">
                     <b:panel
-                        title="El paciente no posee Riesgo Social"
+                        title="El usuario no posee Riesgo Social"
                         look="success" rendered="#{not clapController.selected.riesgo_social}">
                         <f:facet name="footer">
                         <b:row>
@@ -107,7 +107,7 @@
                 </b:column>
                 <b:column offset="3" col-xs="12" col-md="6">
                     <b:panel
-                        title="El paciente posee Riesgo Social"
+                        title="El usuario posee Riesgo Social"
                         look="danger" rendered="#{clapController.selected.riesgo_social}">
                         <i>Debe realizarse una actividad de intervención para mitigar dicho riesgo</i>
                     </b:panel>
@@ -119,7 +119,7 @@
                 <div id="mental">
                 <b:column offset="3" col-xs="12" col-md="6">
                     <b:panel
-                        title="El paciente no posee riesgo de Salud Mental"
+                        title="El usuario no posee riesgo de Salud Mental"
                         look="success" rendered="#{not clapController.selected.riesgo_salud_mental}">
                         <f:facet name="footer">
                         <b:row>
@@ -134,7 +134,7 @@
                 </b:column>
                 <b:column offset="3" col-xs="12" col-md="6">
                     <b:panel
-                        title="El paciente posee riesgo de Salud Mental"
+                        title="El usuario posee riesgo de Salud Mental"
                         look="danger" rendered="#{clapController.selected.riesgo_salud_mental}">
                         <i>Debe realizarse una actividad de intervención para mitigar dicho riesgo</i>
                     </b:panel> 
@@ -161,7 +161,7 @@
                 </b:column>
                 <b:column offset="3" col-xs="12" col-md="6">
                     <b:panel
-                        title="El paciente no posee riesgo de Alcohol y drogas"
+                        title="El usuario no posee riesgo de Alcohol y drogas"
                         look="danger" rendered="#{clapController.selected.riesgo_oh_drogas}">
                         <i>Debe realizarse una actividad de intervención para mitigar dicho riesgo</i>
                     </b:panel> 
@@ -173,7 +173,7 @@
                 <div id="ssr">
                 <b:column offset="3" col-xs="12" col-md="6">
                     <b:panel
-                        title="El paciente no posee riesgo de Salud Sexual y Reproductiva"
+                        title="El usuario no posee riesgo de Salud Sexual y Reproductiva"
                         look="success" rendered="#{not clapController.selected.riesgo_ssr}">
                         <f:facet name="footer">
                         <b:row>
@@ -188,7 +188,7 @@
                 </b:column>
                 <b:column offset="3" col-xs="12" col-md="6">
                     <b:panel
-                        title="El paciente posee riesgo de Salud Sexual y Reproductiva"
+                        title="El usuario posee riesgo de Salud Sexual y Reproductiva"
                         look="danger" rendered="#{clapController.selected.riesgo_ssr}">
                         <i>Debe realizarse una actividad de intervención para mitigar dicho riesgo</i>
                     </b:panel>
