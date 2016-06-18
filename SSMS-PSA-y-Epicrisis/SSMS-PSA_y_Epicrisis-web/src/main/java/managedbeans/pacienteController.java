@@ -104,8 +104,6 @@ public class pacienteController implements Serializable {
         initializeEmbeddableKey();
         selected.setRUN(RUN);
         selected.setDV(DV);
-        //Cesfam correspondiente al funcionario que realiza el registro
-        selected.setCesfam(loginCtrl.getUsuarioLogueado().getCESFAM());
         return selected;
     }
 
@@ -188,7 +186,7 @@ public class pacienteController implements Serializable {
            }   
         }else{
             if (num == 1) {
-                itemsRiesgo = getFacade().findbyEstadoCesfamFecha("Riesgos no Tratados", loginCtrl.getUsuarioLogueado().getCESFAM(),fecha);
+                itemsRiesgo = getFacade().findbyEstadoFecha("Riesgos no Tratados",fecha);
                 return itemsRiesgo;
             }else{
                 return itemsRiesgo;
@@ -414,24 +412,10 @@ public class pacienteController implements Serializable {
                 FacesContext.getCurrentInstance().addMessage(null, message);
                 return "/faces/paciente/Buscar.xhtml";
             }else{
-                if (loginCtrl.esSuperUsuario()) {
-                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario Encontrado",  null);
-                    FacesContext.getCurrentInstance().addMessage(null, message);
-                    selected = paciente;
-                    return "/faces/paciente/View.xhtml";    
-                }else{
-                    //Si no es super usuario, se muestra la informacion solo si es del CESFAM que le corresponde
-                    if (loginCtrl.getUsuarioLogueado().getCESFAM().getId() == paciente.getCesfam().getId()) {
-                        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario Encontrado",  null);
-                        FacesContext.getCurrentInstance().addMessage(null, message);
-                        selected = paciente;
-                        return "/faces/paciente/View.xhtml";
-                    }else{
-                        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario pertenece a otro CESFAM",  null);
-                        FacesContext.getCurrentInstance().addMessage(null, message);
-                        return "/faces/paciente/Buscar.xhtml";
-                    }
-                }
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario Encontrado",  null);
+                FacesContext.getCurrentInstance().addMessage(null, message);
+                selected = paciente;
+                return "/faces/paciente/View.xhtml";
             }
         }
     }

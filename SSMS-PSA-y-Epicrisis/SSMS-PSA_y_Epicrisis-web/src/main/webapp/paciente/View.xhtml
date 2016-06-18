@@ -52,11 +52,35 @@
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>                        
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_cesfam}" for="cesfam" />
-                        <h:outputText id="cesfam" value="#{pacienteController.selected.cesfam.nombre}" title="#{bundle.ViewpacienteTitle_cesfam}"/>                        
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_telefono_fijo}" for="telefono_fijo" />
-                        <h:outputText id="telefono_fijo" value="#{pacienteController.selected.telefono_fijo}" title="#{bundle.ViewpacienteTitle_telefono_fijo}"/>
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_teléfono_movil}" for="telefono_movil" />
-                        <h:outputText id="telefono_movil" value="#{pacienteController.selected.telefono_movil}" title="#{bundle.ViewpacienteTitle_telefono_movil}"/>
+                        <h:outputText id="cesfam" value="#{pacienteController.selected.cesfam.nombre}" title="#{bundle.ViewpacienteTitle_cesfam}"/>  
+                        <p:outputLabel value="#{bundle.CreatepacienteTitle_telefono_fijo}" />
+                        <p:column>
+                            <b:row>
+                                <b:column col-xs="8">
+                                    <h:outputText  value="#{pacienteController.selected.telefono_fijo}"/>
+                                </b:column>
+                                <b:column col-xs="4">
+                                    <h:outputText rendered="#{pacienteController.selected.domicilio}" value="Domicilio"/>
+                                </b:column>
+                            </b:row>
+                        </p:column>
+                        <p:outputLabel value="#{bundle.CreatepacienteLabel_teléfono_movil}"/>
+                        <p:column>
+                            <b:row>
+                                <b:column col-xs="8">
+                                    <h:outputText value="#{pacienteController.selected.telefono_movil}" />
+                                </b:column>
+                                <b:column col-xs="4">
+                                    <h:outputText rendered="#{pacienteController.selected.recados}" value="Recados"/>
+                                </b:column>
+                            </b:row>
+                        </p:column>
+                        <p:outputLabel value="Otro teléfono movil" />
+                        <h:outputText value="#{pacienteController.selected.otro_telefono_movil}"  />
+                        <p:outputLabel value="Teléfono colegio"  />
+                        <h:outputText value="#{pacienteController.selected.telefono_colegio}"/>
+                        <p:outputLabel value="Teléfono adulto responsable"  />
+                        <h:outputText value="#{pacienteController.selected.telefono_responsable}" />
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_correo}" for="correo" />
                         <h:outputText id="correo" value="#{pacienteController.selected.correo}" title="#{bundle.ViewpacienteTitle_correo}"/>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_sexo}" for="sexo1" />
@@ -219,6 +243,8 @@
                             <h:outputText rendered="#{item.nivelacion_estudios}" value="Nivelación  de estudios &lt;br /&gt;" escape="false"/>
                             <h:outputText rendered="#{item.vinculacion_beneficios_sociales}" value="Vinculacion de beneficios sociales &lt;br /&gt;" escape="false"/>
                             <h:outputText rendered="#{item.intervencion_breve_alcohol}" value="Intervención breve en alcohol &lt;br /&gt;" escape="false"/>
+                            <h:outputText rendered="#{item.derivacion_colegio}" value="Derivación a colegio &lt;br /&gt;" escape="false"/>
+                            <h:outputText rendered="#{item.derivacion_otra_comuna}" value="Derivación a otra comuna &lt;br /&gt;" escape="false"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":actividadViewForm" oncomplete="PF('actividadViewDialog').show()" disabled="#{empty actividadController.selected}"/>

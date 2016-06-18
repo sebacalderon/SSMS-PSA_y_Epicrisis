@@ -68,13 +68,35 @@
                             <f:selectItems value="#{cesfamController.items}" var="cesfam" itemLabel="#{cesfam.nombre}" itemValue="#{cesfam}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_telefono_fijo}" for="telefono_fijo" />
-                        <p:inputMask id="telefono_fijo" value="#{pacienteController.selected.telefono_fijo}" title="#{bundle.CreatepacienteTitle_telefono_fijo}" mask="(99) 999-9999" />
-                        
+                        <p:column>
+                            <b:row>
+                                <b:column col-xs="8">
+                                    <p:inputMask id="telefono_fijo" value="#{pacienteController.selected.telefono_fijo}" mask="(99) 999-9999" />
+                                </b:column>
+                                <b:column col-xs="4">
+                                    <p:selectBooleanCheckbox value="#{pacienteController.selected.domicilio}" itemLabel="Domicilio"/>
+                                </b:column>
+                            </b:row>
+                        </p:column>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_teléfono_movil}" for="telefono_movil" />
-                        <p:inputMask id="telefono_movil" value="#{pacienteController.selected.telefono_movil}" title="#{bundle.CreatepacienteTitle_teléfono_movil}" mask="(+569) 9999-9999" />
-                        
+                        <p:column>
+                            <b:row>
+                                <b:column col-xs="8">
+                                    <p:inputMask id="telefono_movil" value="#{pacienteController.selected.telefono_movil}" title="#{bundle.CreatepacienteTitle_telefono_fijo}" mask="(569) 999-999-99" />
+                                </b:column>
+                                <b:column col-xs="4">
+                                    <p:selectBooleanCheckbox value="#{pacienteController.selected.recados}" itemLabel="Recados"/>
+                                </b:column>
+                            </b:row>
+                        </p:column>
+                        <p:outputLabel value="Otro teléfono movil:" for="otro_telefono_movil" />
+                        <p:inputMask id="otro_telefono_movil" value="#{pacienteController.selected.otro_telefono_movil}" mask="(569) 999-999-99" />
+                        <p:outputLabel value="Teléfono colegio:" for="telefono_colegio" />
+                        <p:inputMask id="telefono_colegio" value="#{pacienteController.selected.telefono_colegio}" mask="(99) 999-9999" />
+                        <p:outputLabel value="Teléfono adulto responsable:" for="telefono_adulto_responsable" />
+                        <p:inputMask id="telefono_adulto_responsable" value="#{pacienteController.selected.telefono_responsable}" mask="(569) 999-999-99" />
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_correo}" for="correo" />
-                        <p:inputText id="correo" value="#{pacienteController.selected.correo}" title="#{bundle.CreatepacienteTitle_correo}" required="true" />
+                        <p:inputText id="correo" value="#{pacienteController.selected.correo}" title="#{bundle.CreatepacienteTitle_correo}"/>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_sexo}" for="sexo" />
                         <p:selectOneMenu id="sexo" value="#{pacienteController.selected.sexo}" required="true" >
                             <f:selectItem itemLabel="Seleccione una opción" itemValue="" noSelectionOption="true" />
@@ -90,7 +112,7 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_prevision}" for="prevision" />
                         
-                        <p:selectOneMenu id="prevision" value="#{pacienteController.selected.prevision}"  required="true">
+                        <p:selectOneMenu id="prevision" value="#{pacienteController.selected.prevision}">
                             <f:selectItem itemLabel="Seleccione un opción" itemValue="" noSelectionOption="true" />
                             <f:selectItems value="#{previsionController.items}" var="prevision" itemLabel="#{prevision.nombre}" itemValue="#{prevision}"/>
                             <f:ajax event="valueChange" immediate="true" render="grupo_fonasa" ></f:ajax>

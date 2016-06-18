@@ -93,8 +93,11 @@
                                 </b:column>
                             </b:row>
                         </p:column>
+                        <p:inputMask id="otro_telefono_movil" value="#{pacienteController.selected.otro_telefono_movil}" mask="(569) 999-999-99" />
+                        <p:inputMask id="telefono_colegio" value="#{pacienteController.selected.telefono_colegio}" mask="(99) 999-9999" />
+                        <p:inputMask id="telefono_adulto_responsable" value="#{pacienteController.selected.telefono_responsable}" mask="(569) 999-999-99" />
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_correo}" for="correo" />
-                        <p:inputText id="correo" value="#{pacienteController.selected.correo}" title="#{bundle.CreatepacienteTitle_correo}" required="true" />
+                        <p:inputText id="correo" value="#{pacienteController.selected.correo}" title="#{bundle.CreatepacienteTitle_correo}" />
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_sexo}" for="sexo" />
                         <p:selectOneMenu id="sexo" value="#{pacienteController.selected.sexo}" required="true" >
                             <f:selectItem itemLabel="Seleccione una opción" itemValue="" noSelectionOption="true" />
@@ -110,7 +113,7 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_prevision}" for="prevision" />
                         
-                        <p:selectOneMenu id="prevision" value="#{pacienteController.selected.prevision}"  required="true">
+                        <p:selectOneMenu id="prevision" value="#{pacienteController.selected.prevision}">
                             <f:selectItem itemLabel="Seleccione un opción" itemValue="" noSelectionOption="true" />
                             <f:selectItems value="#{previsionController.items}" var="prevision" itemLabel="#{prevision.nombre}" itemValue="#{prevision}"/>
                             <f:ajax event="valueChange" immediate="true" render="grupo_fonasa" ></f:ajax>

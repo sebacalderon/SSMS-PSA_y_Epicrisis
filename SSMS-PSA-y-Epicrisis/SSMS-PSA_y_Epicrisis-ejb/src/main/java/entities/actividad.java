@@ -99,6 +99,12 @@ public class actividad implements Serializable {
     @Column(name="intervencion_breve_alcohol_actividad")
     private boolean intervencion_breve_alcohol;
     
+    @Column(name="derivacion_colegio_actividad")
+    private boolean derivacion_colegio;
+    
+    @Column(name="derivacion_otra_comuna_actividad")
+    private boolean derivacion_otra_comuna;
+    
     @Column(name="observaciones_actividad")
     private String Observaciones;
     
@@ -121,6 +127,22 @@ public class actividad implements Serializable {
 
     public String getObservaciones() {
         return Observaciones;
+    }
+
+    public boolean isDerivacion_colegio() {
+        return derivacion_colegio;
+    }
+
+    public void setDerivacion_colegio(boolean derivacion_colegio) {
+        this.derivacion_colegio = derivacion_colegio;
+    }
+
+    public boolean isDerivacion_otra_comuna() {
+        return derivacion_otra_comuna;
+    }
+
+    public void setDerivacion_otra_comuna(boolean derivacion_otra_comuna) {
+        this.derivacion_otra_comuna = derivacion_otra_comuna;
     }
 
     public void setObservaciones(String Observaciones) {

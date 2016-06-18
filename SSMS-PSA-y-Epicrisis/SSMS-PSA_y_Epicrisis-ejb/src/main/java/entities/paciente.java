@@ -32,8 +32,6 @@ import javax.validation.constraints.Pattern;
 @NamedQueries({
     @NamedQuery(name="paciente.findbyRUN",query="SELECT p FROM paciente p WHERE p.RUN=:RUN"),
     @NamedQuery(name="paciente.findbyEstadoFecha",query="SELECT p FROM paciente p WHERE p.estado=:estado AND p.fecha_estado >= :fecha"),
-    @NamedQuery(name="paciente.findbyEstadoCesfamFecha",query="SELECT p FROM paciente p WHERE p.estado=:estado AND p.cesfam=:cesfam AND p.fecha_estado >= :fecha"),
-    @NamedQuery(name="paciente.findbyRUNCesfam",query="SELECT p FROM paciente p WHERE p.RUN=:RUN AND p.cesfam=:cesfam")
 })
 public class paciente implements Serializable {
 
@@ -90,11 +88,7 @@ public class paciente implements Serializable {
     
     @NotNull(message="Debe ingresar un dígito verificador")
     @Column(name="dv_paciente",length=1)
-    private String DV;
-
-    @ManyToOne
-    @JoinColumn(name="cesfam_paciente")
-    private cesfam cesfam;      
+    private String DV;    
     
     @Column(name="telefono_fijo_paciente")
     private String telefono_fijo;
@@ -110,6 +104,15 @@ public class paciente implements Serializable {
     @Column(name="recados_paciente")
     private boolean recados;
     
+    @Column(name="telefono_colegio_paciente")
+    private String telefono_colegio;
+    
+    @Column(name="telefono_responsable_paciente")
+    private String telefono_responsable;
+    
+    @Column(name="otro_telefono_movil_paciente")
+    private String otro_telefono_movil;
+    
     @NotNull(message="Debe ingresar un sexo")
     @Column(name="sexo_usuario")
     private int sexo;
@@ -122,11 +125,9 @@ public class paciente implements Serializable {
     + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
     + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
     message = "Debe ser un mail valido")
-    @NotNull(message="Debe ingresar un correo de contacto")
     @Column(name="correo_paciente",unique=true)
     private String correo;
     
-    @NotNull(message="Debe ingresar un tipo de previsión")
     @ManyToOne
     @JoinColumn(name="prevision_paciente")
     private prevision prevision;
@@ -146,6 +147,10 @@ public class paciente implements Serializable {
     @ManyToOne
     @JoinColumn(name="pueblo_originario_paciente")
     private pueblo_originario pueblo_originario;
+    
+    @ManyToOne
+    @JoinColumn(name="cesfam_paciente")
+    private cesfam cesfam;
     
     @Column(name="estado_paciente")
     private String estado;
@@ -167,6 +172,38 @@ public class paciente implements Serializable {
     
     public String getNombre_social() {
         return nombre_social;
+    }
+
+    public String getTelefono_colegio() {
+        return telefono_colegio;
+    }
+
+    public void setTelefono_colegio(String telefono_colegio) {
+        this.telefono_colegio = telefono_colegio;
+    }
+
+    public String getTelefono_responsable() {
+        return telefono_responsable;
+    }
+
+    public cesfam getCesfam() {
+        return cesfam;
+    }
+
+    public void setCesfam(cesfam cesfam) {
+        this.cesfam = cesfam;
+    }
+
+    public void setTelefono_responsable(String telefono_responsable) {
+        this.telefono_responsable = telefono_responsable;
+    }
+
+    public String getOtro_telefono_movil() {
+        return otro_telefono_movil;
+    }
+
+    public void setOtro_telefono_movil(String otro_telefono_movil) {
+        this.otro_telefono_movil = otro_telefono_movil;
     }
     
     public void setNombre_social(String nombre_social) {
@@ -365,13 +402,7 @@ public class paciente implements Serializable {
         this.pueblo_originario = pueblo_originario;
     }
 
-    public cesfam getCesfam() {
-        return cesfam;
-    }
 
-    public void setCesfam(cesfam cesfam) {
-        this.cesfam = cesfam;
-    }
 
     public String getCorreo() {
         return correo;

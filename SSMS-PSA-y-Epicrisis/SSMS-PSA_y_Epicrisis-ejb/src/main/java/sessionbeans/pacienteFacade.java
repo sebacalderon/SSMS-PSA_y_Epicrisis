@@ -42,13 +42,13 @@ public class pacienteFacade extends AbstractFacade<paciente> implements paciente
         return query.getResultList();
     }
     
-    @Override
-    public List<paciente> findbyEstadoCesfamFecha(String estado, cesfam cesfam, Date fecha){
-        Query query;
-        query = em.createNamedQuery("paciente.findbyEstadoCesfamFecha").
-                setParameter("estado", estado).setParameter("cesfam", cesfam).setParameter("fecha", fecha);
-        return query.getResultList();
-    }
+//    @Override
+//    public List<paciente> findbyEstadoCesfamFecha(String estado, cesfam cesfam, Date fecha){
+//        Query query;
+//        query = em.createNamedQuery("paciente.findbyEstadoCesfamFecha").
+//                setParameter("estado", estado).setParameter("cesfam", cesfam).setParameter("fecha", fecha);
+//        return query.getResultList();
+//    }
     
     @Override
     public List<paciente> findbyEstadoFecha(String estado, Date fecha) {
@@ -58,11 +58,11 @@ public class pacienteFacade extends AbstractFacade<paciente> implements paciente
         return query.getResultList();
     }
     
-    @Override
-    public List<paciente> findbyRUNCesfam(int RUN, cesfam cesfam) {
-        Query query;
-        query = em.createNamedQuery("paciente.findbyRUNCesfam").
-                setParameter("RUN", RUN).setParameter("cesfam", cesfam);
-        return query.getResultList();
-    }
+//    @Override
+//    public List<paciente> findbyRUNCesfam(int RUN, cesfam cesfam) {
+//        Query query;
+//        query = em.createNamedQuery("paciente.findbyRUNCesfam").
+//                setParameter("RUN", RUN).setParameter("cesfam", cesfam);
+//        return query.getResultList();
+//    }
 }
