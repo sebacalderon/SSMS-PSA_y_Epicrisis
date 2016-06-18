@@ -93,8 +93,11 @@
                                 </b:column>
                             </b:row>
                         </p:column>
+                        <p:outputLabel value="Otro teléfono movil:" for="otro_telefono_movil" />
                         <p:inputMask id="otro_telefono_movil" value="#{pacienteController.selected.otro_telefono_movil}" mask="(569) 999-999-99" />
+                        <p:outputLabel value="Teléfono colegio:" for="telefono_colegio" />
                         <p:inputMask id="telefono_colegio" value="#{pacienteController.selected.telefono_colegio}" mask="(99) 999-9999" />
+                        <p:outputLabel value="Teléfono adulto responsable:" for="telefono_adulto_responsable" />
                         <p:inputMask id="telefono_adulto_responsable" value="#{pacienteController.selected.telefono_responsable}" mask="(569) 999-999-99" />
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_correo}" for="correo" />
                         <p:inputText id="correo" value="#{pacienteController.selected.correo}" title="#{bundle.CreatepacienteTitle_correo}" />
