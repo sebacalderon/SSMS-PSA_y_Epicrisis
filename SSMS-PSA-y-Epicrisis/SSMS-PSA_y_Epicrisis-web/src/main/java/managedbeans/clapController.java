@@ -1046,7 +1046,6 @@ public class clapController implements Serializable {
 	Graphics2D g = resizedImage.createGraphics();
 	g.drawImage(bimg, 0, 0, 310, 184, null);
 	g.dispose();
-            selected.getPerinatales_normales()!=0&&
 		
 	return resizedImage;
     }
