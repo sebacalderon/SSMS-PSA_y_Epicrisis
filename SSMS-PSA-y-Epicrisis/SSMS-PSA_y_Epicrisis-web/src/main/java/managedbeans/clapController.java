@@ -19,12 +19,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import managedbeans.util.JsfUtil;
 import managedbeans.util.JsfUtil.PersistAction;
 import sessionbeans.clapFacadeLocal;
@@ -46,7 +43,6 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -616,7 +612,7 @@ public class clapController implements Serializable {
         
         int size = getFacade().findbyPaciente(Paciente.getRUN()).size();
         selected = getFacade().findbyPaciente(Paciente.getRUN()).get(size-1);
-        return "/faces/clap/Edit.xhtml";
+        return "/faces/clap/edit/usuario.xhtml";
         
     }
 
@@ -2569,11 +2565,44 @@ public class clapController implements Serializable {
         IOUtils.copy(input, output);
         fc.responseComplete();
     }
-    
-    public void onTabChange(TabChangeEvent event) {
-        
+
+    public String aUsuario(){
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        return "/faces/clap/edit/usuario.xhtml";
+    }
+    
+    public String aDatos(){
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        return "/faces/clap/edit/datos_antecedentes.xhtml";
+    }
+    
+    public String aVivienda(){
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        return "/faces/clap/edit/vivienda_educacion.xhtml";
+    }
+    
+    public String aFamilia(){
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        return "/faces/clap/edit/familia.xhtml";
+    }
+    
+    public String aTrabajo(){
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        return "/faces/clap/edit/trabajo_vidasocial.xhtml";
     }
 
+    public String aHabitos(){
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        return "/faces/clap/edit/habitos_gineco.xhtml";
+    }
     
+    public String aSexualidad(){
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        return "/faces/clap/edit/sexualidad_psicoemocional.xhtml";
+    }
+    
+    public String aExamen(){
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        return "/faces/clap/edit/examen_fisico.xhtml";
+    }
 }

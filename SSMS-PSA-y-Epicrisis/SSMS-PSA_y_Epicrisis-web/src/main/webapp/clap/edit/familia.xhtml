@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions" >
+    
+    <ui:composition template="/template.xhtml">
+        
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditclapTitle}"></h:outputText>
+        </ui:define> 
+
+        <ui:define name="body">
+            <h:form>
+            <p:breadCrumb>
+                <p:menuitem value="Categories" url="/faces/home.xhtml" />
+                <p:menuitem value="Usuarios"/>
+                <p:menuitem value="Población bajo control" url="/faces/paciente/List.xhtml" />
+                <p:menuitem value="#{clapController.selected.paciente.RUN}-#{clapController.selected.paciente.DV}" rendered="#{clapController.selected != null}" url="/faces/paciente/View.xhtml"/>
+                <p:menuitem value="Editar CLAP" />
+                <p:menuitem value="CLAP #{clapController.selected.id}" rendered="#{clapController.selected != null}"/>
+                <p:menuitem value="Antecedentes Familiares y Familia" rendered="#{clapController.selected != null}" url="/faces/clap//edit/familia.xhtml"/>
+
+            </p:breadCrumb>
+            </h:form>
+            <br />
+            <b:row>
+                <h2 align="center">#{bundle.EditclapTitle}</h2>
+            </b:row>
+            <h:form id="clapEditForm" rendered="#{clapController.selected != null}">
+                <b:panel title="Antecedentes familiares" style="margin-left:3%;width: 95%; " look="info">
+                <p:panelGrid columns="2" style="width:98%;border:10px;" rendered="#{clapController.selected != null}">
+                    <p:column rowspan="2">
+                        <p:outputLabel value="#{bundle.CreateclapLabel_enfermedades_importantes_familia}" for="enfermedades_importantes_familia" />
+                        <p:selectOneRadio id="enfermedades_importantes_familia" style="width:13em;" value="#{clapController.selected.enfermedades_importantes_familia}" layout="grid" columns="3">
+                            <f:selectItem itemLabel="sí" itemValue="1" />
+                            <f:selectItem itemLabel="no sé" itemValue="2" />
+                            <f:selectItem itemLabel="no" itemValue="3" />
+                        </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_obesidad_familia}" for="obesidad_familia" />
+                    <p:selectOneRadio id="obesidad_familia" style="width:13em;" value="#{clapController.selected.obesidad_familia}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                    </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_problemas_salud_mental_familia}" for="problemas_salud_mental_familia" />
+                    <p:selectOneRadio id="problemas_salud_mental_familia" style="width:13em;" value="#{clapController.selected.problemas_salud_mental_familia}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                    </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_violencia_intrafamiliar}" for="violencia_intrafamiliar" />
+                    <p:selectOneRadio id="violencia_intrafamiliar" style="width:13em;" value="#{clapController.selected.violencia_intrafamiliar}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                    </p:selectOneRadio>
+                    </p:column>
+                    
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_alcohol_y_otras_drogas}" for="alcohol_y_otras_drogas" />
+                    <p:selectOneRadio id="alcohol_y_otras_drogas" style="width:13em;" value="#{clapController.selected.alcohol_y_otras_drogas}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                    </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="Madre y/o padre adolescente" for="padre_adolescente" />
+                    <p:selectOneRadio id="padre_adolescente" style="width:13em;" value="#{clapController.selected.padre_adolescente}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                    </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_judiciales}" for="judiciales" />
+                    <p:selectOneRadio id="judiciales" style="width:13em;" value="#{clapController.selected.judiciales}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                    </p:selectOneRadio>
+                    </p:column>
+                    <p:column rowspan="2">
+                    <p:outputLabel value="#{bundle.CreateclapLabel_otros_antecedentes_familiares}" for="otros_antecedentes_familiares" />
+                    <p:selectOneRadio id="otros_antecedentes_familiares" style="width:13em;" value="#{clapController.selected.otros_antecedentes_familiares}" layout="grid" columns="3">
+                        <f:selectItem itemLabel="sí" itemValue="1" />
+                        <f:selectItem itemLabel="no sé" itemValue="2" />
+                        <f:selectItem itemLabel="no" itemValue="3" />
+                    </p:selectOneRadio>
+                    </p:column>
+                </p:panelGrid>
+                    <facet name="footer">
+                        <p:row>
+                            <b:inputText id="observaciones_antecedentes_familiares" value="#{clapController.selected.observaciones_antecedentes_familiares}" label="#{bundle.CreateclapTitle_observaciones_antecedentes_familiares}" >
+                            </b:inputText>              
+                        </p:row>
+                    </facet>
+                </b:panel>
+
+                <b:panel title="Familia" style="margin-left:3%;width: 95%; " look="info">
+                    <p:panelGrid columns="2" style="width:98%;border:10px;" rendered="#{clapController.selected != null}">
+                        <b:column id="vive_con" col-md="6" col-xs="12">
+                            <h4>Vive con</h4>
+                            <b:row>
+                                <b:column col-xs="4"><p:outputLabel value="solo/a" for="vive_solo" /></b:column>
+                                <b:column col-xs="8"><p:selectOneRadio id="vive_solo" style="width:13em;" value="#{clapController.selected.vive_con_solo}" layout="grid" columns="2">
+                                    <f:selectItem itemLabel="Si" itemValue="true" />
+                                    <f:selectItem itemLabel="No" itemValue="false" />
+                                    <p:ajax event="valueChange"  listener="#{clapController.setViveCon}" immediate="true" update="vive_con" ></p:ajax>
+                                </p:selectOneRadio>
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column col-md="4"><p:outputLabel value="madre" for="vive_con_madre" /></b:column>
+                                <b:column col-md="8"><p:selectOneRadio id="vive_con_madre" style="width:13em;" value="#{clapController.selected.vive_con_madre}" layout="grid" columns="2">
+                                <f:selectItem itemLabel="Si" itemValue="true" />
+                                <f:selectItem itemLabel="No" itemValue="false" />
+                                <p:ajax event="valueChange"  listener="#{clapController.setViveCon}" immediate="true" update="vive_con" ></p:ajax>
+                            </p:selectOneRadio></b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column col-md="4"><p:outputLabel value="padre" for="vive_con_padre" /></b:column>
+                            <b:column col-md="8"><p:selectOneRadio id="vive_con_padre" style="width:13em;" value="#{clapController.selected.vive_con_padre}" layout="grid" columns="2">
+                                <f:selectItem itemLabel="Si" itemValue="true" />
+                                <f:selectItem itemLabel="No" itemValue="false" />
+                                <p:ajax event="valueChange"  listener="#{clapController.setViveCon}" immediate="true" update="vive_con" ></p:ajax>
+                                </p:selectOneRadio></b:column>
+                            
+                            </b:row>
+                            <b:row>
+                                <b:column col-md="4"><p:outputLabel value="en institución" for="vive_en_institucion" />
+                                </b:column>
+                                <b:column col-md="8"><p:selectOneRadio id="vive_en_institucion" style="width:13em;" value="#{clapController.selected.vive_en_institucion}" layout="grid" columns="2">
+                                    <f:selectItem itemLabel="Si" itemValue="true" />
+                                    <f:selectItem itemLabel="No" itemValue="false" />
+                                    <p:ajax event="valueChange"  listener="#{clapController.setViveCon}" immediate="true" update="vive_con" ></p:ajax>
+                                </p:selectOneRadio></b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column col-md="4"><p:outputLabel value="con otros" for="vive_con_otros" /></b:column>
+                                <b:column col-md="8"><p:selectOneRadio id="vive_con_otros" style="width:13em;" value="#{clapController.selected.vive_con_otros}" layout="grid" columns="2">
+                                    <f:selectItem itemLabel="Si" itemValue="true" />
+                                    <f:selectItem itemLabel="No" itemValue="false" />
+                                    <p:ajax event="valueChange"  listener="#{clapController.setViveCon}" immediate="true" update="vive_con" ></p:ajax>
+                                </p:selectOneRadio></b:column>
+                            </b:row>
+                            <b:row style="margin-left:20px;">
+                                <p:inputText placeholder="Especifique" id="vive_con_especificacion" value="#{clapController.selected.vive_con_especificacion}" title="#{bundle.CreateclapTitle_vive_con_especificación}">
+                                </p:inputText>
+                            </b:row>
+                        </b:column>
+
+                        <b:column col-md="6" col-xs="12">
+                            <p:outputLabel value="Comparte cama" for="comparte_cama" />
+                            <p:selectOneRadio id="comparte_cama" style="width:13em;" value="#{clapController.selected.comparte_cama}" layout="grid" columns="2">
+                                <f:selectItem itemLabel="Si" itemValue="true" />
+                                <f:selectItem itemLabel="No" itemValue="false" />
+                            </p:selectOneRadio>      
+                            <p:outputLabel value="¿Con quién?" for="especificacion_comparte_cama" />
+                            <p:inputText id="especificacion_comparte_cama" value="#{clapController.selected.especificacion_comparte_cama}" title="#{bundle.CreateclapTitle_especificacion_comparte_cama}">
+                            </p:inputText>
+                        </b:column>
+                        <b:column col-md="6" col-xs="12">
+                            <h4>Nivel instrucción</h4>
+                            <b:row>
+                                <b:column offset="3" col-md="3">ninguna</b:column>
+                                <b:column col-md="2">básica</b:column>
+                                <b:column col-md="2">media</b:column>
+                                <b:column col-md="2">superior</b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column col-md="4">
+                                    <p:outputLabel value="madre o sustituta" for="nivel_instruccion_madre" />
+                                </b:column>
+                                <b:column col-md="8">
+                                    <p:selectOneRadio id="nivel_instruccion_madre" style="width:17em;" value="#{clapController.selected.nivel_instruccion_madre}" layout="grid" columns="4">
+                                        <f:selectItem  itemValue="1" />
+                                        <f:selectItem  itemValue="2" />
+                                        <f:selectItem  itemValue="3" />
+                                        <f:selectItem  itemValue="4" />
+                                    </p:selectOneRadio>
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column col-md="4">
+                                    <p:outputLabel value="padre o sustituto" for="nivel_instruccion_padre" />
+                                </b:column>
+                                <b:column col-md="8">
+                                    <p:selectOneRadio id="nivel_instruccion_padre" style="width:17em;" value="#{clapController.selected.nivel_instruccion_padre}" layout="grid" columns="4">
+                                        <f:selectItem  itemValue="1" />
+                                        <f:selectItem  itemValue="2" />
+                                        <f:selectItem itemValue="3" />
+                                        <f:selectItem  itemValue="4" />
+                                    </p:selectOneRadio>  
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column col-md="4">
+                                    <p:outputLabel value="pareja" for="nivel_instruccion_pareja" />
+                                </b:column>
+                                <b:column col-md="8">
+                                    <p:selectOneRadio id="nivel_instruccion_pareja" style="width:17em;" value="#{clapController.selected.nivel_instruccion_pareja}" layout="grid" columns="4">
+                                        <f:selectItem itemValue="1" />
+                                        <f:selectItem itemValue="2" />
+                                        <f:selectItem itemValue="3" />
+                                        <f:selectItem itemValue="4" />
+                                    </p:selectOneRadio>
+                                </b:column>
+                            </b:row>
+
+
+                        </b:column>
+                        <b:column col-md="6">
+                            <h4>Ocupación</h4>
+                            <b:row><p:outputLabel value="madre o sustituta" for="ocupacion_madre" /></b:row>
+                            <b:row><p:inputText id="ocupacion_madre" value="#{clapController.selected.ocupacion_madre}" title="#{bundle.CreateclapTitle_ocupacion_madre}" >
+                                </p:inputText>
+                            </b:row>
+                            <b:row><p:outputLabel value="padre o sustituto" for="ocupacion_padre" /></b:row>
+                            <b:row><p:inputText id="ocupacion_padre" value="#{clapController.selected.ocupacion_padre}" title="#{bundle.CreateclapTitle_ocupacion_padre}">
+                                </p:inputText>
+                            </b:row>
+                            <b:row><p:outputLabel value="pareja" for="ocupacion_pareja" /></b:row>
+                            <b:row><p:inputText id="ocupacion_pareja" value="#{clapController.selected.ocupacion_pareja}" title="#{bundle.CreateclapTitle_ocupacion_pareja}" >
+                                </p:inputText></b:row>
+                        </b:column>
+                        <b:column col-md="6">
+                            <p:outputLabel value="Percepción del adolescente sobre su familia" for="percepcion_familia" />
+                            <p:selectOneRadio id="percepcion_familia" style="width:18em;" value="#{clapController.selected.percepcion_familia}" layout="grid" columns="2">
+                                <f:selectItem itemLabel="buena" itemValue="1" />
+                                <f:selectItem itemLabel="regular" itemValue="2" />
+                                <f:selectItem itemLabel="mala" itemValue="3" />
+                                <f:selectItem itemLabel="no hay relación" itemValue="4" />
+                            </p:selectOneRadio>
+                        </b:column>
+                        <b:column col-md="6">
+                            <h4>Genograma</h4>
+                            <p:fileUpload id="genograma" fileUploadListener="#{clapController.upload}" label="Elegir Imagen" update="messages" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1" invalidFileMessage="Tipo de Archivo Inválido" cancelLabel="Cancelar" skinSimple="false" auto="false" uploadLabel="Subir" rendered="#{clapController.selected.diagrama_familiar == null}"/>        
+                            <p:commandButton value="Ver Imagen" onclick="PF('dlg2').show();" type="button" rendered="#{clapController.selected.diagrama_familiar != null}"/>
+                            <p:dialog header="Imagen de Genograma" widgetVar="dlg2" modal="true" height="200" width="350">
+                                <p:graphicImage value="#{clapController.cargarImagen()}" rendered="#{clapController.selected.diagrama_familiar != null}"/>
+                            </p:dialog>
+                            <p:growl id="messages" showDetail="true"/>
+                        </b:column>
+                    </p:panelGrid>
+                    <facet name="footer">
+                        <p:row>
+                            <b:inputText id="observaciones_familia" value="#{clapController.selected.observaciones_familia}" label="#{bundle.CreateclapTitle_observaciones_familia}">
+                            </b:inputText>
+                        </p:row>
+                    </facet>
+                </b:panel>
+                <b:column offset-xs="5">
+                    <p:commandButton action="#{clapController.aDatos}" value="Anterior" oncomplete="/clap/View"/> 
+                    <p:commandButton action="#{clapController.aVivienda}" value="Siguiente" oncomplete="/clap/View"/> 
+                    <br/><br/>
+                </b:column>
+            </h:form>
+            </ui:define>
+    </ui:composition>
+</html>

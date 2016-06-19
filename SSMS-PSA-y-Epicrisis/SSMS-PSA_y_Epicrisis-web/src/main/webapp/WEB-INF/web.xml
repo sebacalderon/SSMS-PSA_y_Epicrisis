@@ -78,6 +78,7 @@
             <url-pattern>/faces/actividad/*</url-pattern>
             <url-pattern>/faces/resources/css/*</url-pattern>
             <url-pattern>/faces/resources/ezcomp/*</url-pattern>
+            <url-pattern>/faces/clap/edit/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description></description>

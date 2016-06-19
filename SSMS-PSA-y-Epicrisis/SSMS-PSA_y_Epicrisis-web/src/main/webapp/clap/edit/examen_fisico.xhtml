@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions" >
+    
+    <ui:composition template="/template.xhtml">
+        
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditclapTitle}"></h:outputText>
+        </ui:define> 
+
+        <ui:define name="body">
+            <h:form>
+            <p:breadCrumb>
+                <p:menuitem value="Categories" url="/faces/home.xhtml" />
+                <p:menuitem value="Usuarios"/>
+                <p:menuitem value="Población bajo control" url="/faces/paciente/List.xhtml" />
+                <p:menuitem value="#{clapController.selected.paciente.RUN}-#{clapController.selected.paciente.DV}" rendered="#{clapController.selected != null}" url="/faces/paciente/View.xhtml"/>
+                <p:menuitem value="Editar CLAP" />
+                <p:menuitem value="CLAP #{clapController.selected.id}" rendered="#{clapController.selected != null}"/>
+                <p:menuitem value="Examen Físico" rendered="#{clapController.selected != null}" url="/faces/clap/edit/examen_fisico.xhtml"/>
+            </p:breadCrumb>
+            </h:form>
+            <br />
+            <b:row>
+                <h2 align="center">#{bundle.EditclapTitle}</h2>
+            </b:row>
+            <h:form id="clapEditForm" rendered="#{clapController.selected != null}">                
+                <b:panel title="Examen físico" style="margin-left:3%;width: 95%; " look="info">
+                    <div style="margin-left: 20px;">
+                        <b:row>
+                            <b:column col-md="4" col-xs="6">
+                                <b:row>
+                                    <b:column col-xs="8">
+                                        <p:outputLabel value="Peso (Kg)" for="peso" />
+                                    </b:column>
+                                    <b:column col-xs="4">
+                                        <p:outputLabel value="DE" for="de_peso"/>
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column col-xs="8">
+                                        <pe:inputNumber id="peso" value="#{clapController.selected.peso}" minValue="0" maxValue="250" title="#{bundle.CreateclapTitle_peso}" >
+                                            <p:ajax event="blur"  listener="#{clapController.setIMC}" immediate="true" update="imc" ></p:ajax>
+                                        </pe:inputNumber>
+                                    </b:column>
+                                    <b:column col-xs="4">
+                                        <pe:inputNumber id="de_peso" value="#{clapController.selected.de_peso}" minValue="0" maxValue="1000" style="max-width: 50px;">
+                                        </pe:inputNumber>
+                                    </b:column>
+                                </b:row>
+                            </b:column>
+                            <b:column col-md="4" col-xs="6">
+                                <b:row>
+                                    <b:column col-xs="8">
+                                        <p:outputLabel value="Talla (cm)" for="talla" />
+                                    </b:column>
+                                    <b:column col-xs="4">
+                                        <p:outputLabel for="de_talla" value="DE" />
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column col-xs="8">
+                                        <pe:inputNumber id="talla" value="#{clapController.selected.talla}" minValue="0" maxValue="250" >
+                                            <p:ajax event="blur"  listener="#{clapController.setIMC}" immediate="true" update="imc" ></p:ajax>
+                                        </pe:inputNumber>
+                                    </b:column>
+                                    <b:column col-xs="4">
+                                        <pe:inputNumber id="de_talla" value="#{clapController.selected.de_talla}"  minValue="0" maxValue="1000"  style="max-width: 50px;">
+                                        </pe:inputNumber>
+                                    </b:column>
+                                </b:row>
+                            </b:column>
+                            <b:column col-md="4" col-xs="6">
+                                <b:row>
+                                    <p:outputLabel value="Perímetro abdominal" for="perimetro_abdominal" />
+                                </b:row>
+                                <b:row>
+                                    <pe:inputNumber minValue="0" maxValue="1000"  id="perimetro_abdominal" value="#{clapController.selected.perimetro_abdominal}">
+                                    </pe:inputNumber>
+                                </b:row>
+                            </b:column>
+                        </b:row>
+                        <br/>
+                        <b:row>
+                            <b:column col-md="4" col-xs="6">
+                                <b:row>
+                                    <b:column col-xs="8">
+                                        <p:outputLabel value="IMC" for="imc" >
+                                        </p:outputLabel>
+                                    </b:column>
+                                    <b:column col-xs="4">
+                                        <p:outputLabel for="de_imc" value="DE" />
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column col-xs="8">
+                                        <pe:inputNumber disabled="true" id="imc" value="#{clapController.selected.imc}">
+                                        </pe:inputNumber>
+                                    </b:column>
+                                    <b:column col-xs="4">
+                                        <pe:inputNumber id="de_imc" minValue="0" maxValue="1000" value="#{clapController.selected.de_imc}" style="max-width: 50px;" title="DE">
+                                        </pe:inputNumber>
+                                    </b:column>
+                                </b:row>
+                            </b:column>
+                            <b:column col-md="4" col-xs="6">
+                                <b:row>
+                                    <p:outputLabel value="Presion arterial" for="presion_arterial" />
+                                </b:row>
+                                <b:row>
+                                    <b:column col-xs="5"><pe:inputNumber id="presion_arterial"  minValue="0" maxValue="1000" value="#{clapController.selected.presion_arterial_sistolica}" >
+                                        </pe:inputNumber></b:column>
+                                    <b:column col-xs="1"> / </b:column> 
+                                    <b:column col-xs="5"><pe:inputNumber  minValue="0" maxValue="1000" value="#{clapController.selected.presion_arterial_diastolica}" >
+                                        </pe:inputNumber></b:column>
+                                </b:row>
+                            </b:column>
+                            <b:column col-md="4" col-xs="6">
+                                <b:row>
+                                    <p:outputLabel value="Aspecto general" for="aspecto_general" />
+                                </b:row>
+                                <b:row>
+                                    <p:selectOneRadio id="aspecto_general" style="width:15em;" value="#{clapController.selected.aspecto_general}" layout="grid" columns="3">
+                                        <f:selectItem itemLabel="normal" itemValue="true" />
+                                        <f:selectItem itemLabel="anormal" itemValue="false" />
+                                    </p:selectOneRadio>
+                                </b:row>
+                            </b:column>
+                        </b:row>
+                        <br/>
+                        <b:row>
+                            <b:column col-md="4" col-xs="6">
+                                <b:row>
+                                    <p:outputLabel value="Agudeza visual" for="agudeza_visual" />
+                                </b:row>
+                                <b:row>
+                                    <p:selectOneRadio id="agudeza_visual" style="width:15em;" value="#{clapController.selected.agudeza_visual}" layout="grid" columns="2">
+                                        <f:selectItem itemLabel="normal" itemValue="true" />
+                                        <f:selectItem itemLabel="anormal" itemValue="false" />
+                                    </p:selectOneRadio>
+                                </b:row>
+                            </b:column>
+                            <b:column col-md="4" col-xs="6">
+                                <b:row>
+                                    <p:outputLabel value="Agudeza auditiva" for="agudeza_auditiva" />
+                                </b:row>
+                                <b:row>
+                                    <p:selectOneRadio id="agudeza_auditiva" style="width:15em;" value="#{clapController.selected.agudeza_auditiva}" layout="grid" columns="2">
+                                        <f:selectItem itemLabel="normal" itemValue="true" />
+                                        <f:selectItem itemLabel="anormal" itemValue="false" />
+                                    </p:selectOneRadio>
+                                </b:row>
+                            </b:column>
+                            <b:column col-md="4" col-xs="6">
+                                <b:row>
+                                    <p:outputLabel value="Salud bucal" for="salud_bucal" />
+                                </b:row>
+                                <b:row>
+                                    <p:selectOneRadio id="salud_bucal" style="width:15em;" value="#{clapController.selected.salud_bucal}" layout="grid" columns="2">
+                                        <f:selectItem itemLabel="normal" itemValue="true" />
+                                        <f:selectItem itemLabel="anormal" itemValue="false" />
+                                    </p:selectOneRadio>
+                                </b:row>
+                            </b:column>
+                        </b:row>
+                        <br/>
+                        <b:row>
+                            <b:column col-md="4" col-xs="6">
+                                <b:row>
+                                    <p:outputLabel value="Tiroides" for="tiroides" />
+                                </b:row>
+                                <b:row>
+                                    <p:selectOneRadio id="tiroides" style="width:15em;" value="#{clapController.selected.tiroides}" layout="grid" columns="2">
+                                        <f:selectItem itemLabel="normal" itemValue="true" />
+                                        <f:selectItem itemLabel="anormal" itemValue="false" />
+                                    </p:selectOneRadio>
+                                </b:row>
+                            </b:column>
+                            <b:column col-md="4" col-xs="6">
+                                <b:row>
+                                    <p:outputLabel value="Cardio pulmonar" for="cardio_pulmonar" />
+                                </b:row>
+                                <b:row>
+                                    <p:selectOneRadio id="cardio_pulmonar" style="width:15em;" value="#{clapController.selected.cardio_pulmonar}" layout="grid" columns="2">
+                                        <f:selectItem itemLabel="normal" itemValue="true" />
+                                        <f:selectItem itemLabel="anormal" itemValue="false" />
+                                    </p:selectOneRadio>
+                                </b:row>
+                            </b:column>
+                            <b:column col-md="4" col-xs="6">
+                                <b:row>
+                                    <p:outputLabel value="Abdomen" for="abdomen" />
+                                </b:row>
+                                <b:row>
+                                    <p:selectOneRadio id="abdomen" style="width:15em;" value="#{clapController.selected.abdomen}" layout="grid" columns="3">
+                                        <f:selectItem itemLabel="normal" itemValue="true" />
+                                        <f:selectItem itemLabel="anormal" itemValue="false" />
+                                    </p:selectOneRadio>
+                                </b:row>
+                            </b:column>
+                        </b:row>
+                        <br/>
+                        <b:row>
+                            <b:column col-md="4" col-xs="6">
+                                <b:row>
+                                    <p:outputLabel value="Columna" for="columna" />
+                                </b:row>
+                                <b:row>
+                                    <p:selectOneRadio id="columna" style="width:15em;" value="#{clapController.selected.columna}" layout="grid" columns="3">
+                                        <f:selectItem itemLabel="normal" itemValue="true" />
+                                        <f:selectItem itemLabel="anormal" itemValue="false" />
+                                    </p:selectOneRadio>
+                                </b:row>
+                            </b:column>
+                            <b:column col-md="4" col-xs="6">
+                                <b:row>
+                                    <p:outputLabel value="Extremidades" for="extremidades" />
+                                </b:row>
+                                <b:row>
+                                    <p:selectOneRadio id="extremidades" style="width:15em;" value="#{clapController.selected.extremidades}" layout="grid" columns="3">
+                                        <f:selectItem itemLabel="normal" itemValue="true" />
+                                        <f:selectItem itemLabel="anormal" itemValue="false" />
+                                    </p:selectOneRadio>
+                                </b:row>
+                            </b:column>
+                            <b:column col-md="4" col-xs="6">
+                                <b:row>
+                                    <b>Tanner</b>
+                                    <br/>
+                                </b:row>
+                                <b:row>
+                                    <p:selectBooleanCheckbox value="#{clapController.selected.tanner_con_foto}" itemLabel="con foto" >
+                                    </p:selectBooleanCheckbox>
+                                </b:row>
+                                <b:row>
+                                    <b:column col-md="4"><b>mama</b></b:column>
+                                    <b:column col-md="8">
+                                        <p:selectOneMenu id="tanner_mama" style="width:9em;" value="#{clapController.selected.tanner_mama}">
+                                            <f:selectItem itemLabel="I" itemValue="1" />
+                                            <f:selectItem itemLabel="II" itemValue="2" />
+                                            <f:selectItem itemLabel="III" itemValue="3" />
+                                            <f:selectItem itemLabel="IV" itemValue="4" />
+                                            <f:selectItem itemLabel="V" itemValue="5" />
+                                        </p:selectOneMenu>
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column col-md="4"><b>genital</b></b:column>
+                                    <b:column col-md="8">
+                                        <p:selectOneMenu id="tanner_genital" style="width:9em;" value="#{clapController.selected.tanner_genital}">
+                                            <f:selectItem itemLabel="I" itemValue="1" />
+                                            <f:selectItem itemLabel="II" itemValue="2" />
+                                            <f:selectItem itemLabel="III" itemValue="3" />
+                                            <f:selectItem itemLabel="IV" itemValue="4" />
+                                            <f:selectItem itemLabel="V" itemValue="5" />
+                                        </p:selectOneMenu>
+                                    </b:column>
+                                </b:row>
+                            </b:column>
+                        </b:row>
+                    </div>
+                    <facet name="footer">
+                        <p:row>
+                            <b:inputText id="observaciones_examen_fisico" value="#{clapController.selected.observaciones_examen_fisico}" label="#{bundle.CreateclapTitle_observaciones_examen_fisico}">
+                            </b:inputText>
+                        </p:row>
+                    </facet>
+                </b:panel>
+                <b:row>
+                    <b:inputText id="impresion_diagnostica" value="#{clapController.selected.impresion_diagnostica}" label="#{bundle.CreateclapTitle_impresion_diagnostica}">
+                    </b:inputText>
+                </b:row>
+                <b:row>
+                    <b:inputText id="indicaciones_interconsultas" value="#{clapController.selected.indicaciones_interconsultas}" label="#{bundle.CreateclapTitle_indicaciones_interconsultas}">
+                    </b:inputText>
+                </b:row>
+                <b:column offset-xs="5">
+                     <p:commandButton action="#{clapController.aSexualidad}" value="Volver" oncomplete="/clap/View"/>                    
+                     <p:commandButton action="#{clapController.update}" value="Terminar" oncomplete="/clap/View"/>
+                     <br/><br/>
+                </b:column>
+            </h:form>
+            </ui:define>
+    </ui:composition>
+</html>
