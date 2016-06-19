@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions" >
+    
+    <ui:composition template="/template.xhtml">
+        
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditclapTitle}"></h:outputText>
+        </ui:define> 
+
+        <ui:define name="body">
+            <h:form>
+            <p:breadCrumb>
+                <p:menuitem value="Categories" url="/faces/home.xhtml" />
+                <p:menuitem value="Usuarios"/>
+                <p:menuitem value="Población bajo control" url="/faces/paciente/List.xhtml" />
+                <p:menuitem value="#{clapController.selected.paciente.RUN}-#{clapController.selected.paciente.DV}" rendered="#{clapController.selected != null}" url="/faces/paciente/View.xhtml"/>
+                <p:menuitem value="Editar CLAP" />
+                <p:menuitem value="CLAP #{clapController.selected.id}" rendered="#{clapController.selected != null}"/>
+                <p:menuitem value="Ficha Personal del Usuario" rendered="#{clapController.selected != null}" url="/faces/clap/edit/usuario.xhtml"/>
+            </p:breadCrumb>
+            </h:form>
+            <br />
+            <b:row>
+                <h2 align="center">#{bundle.EditclapTitle}</h2>
+            </b:row>
+            <h:form id="clapEditForm" rendered="#{clapController.selected != null}">
+                <b:commandButton value="Ficha Personal del Usuario" ajax="false" action="#{clapController.aUsuario()}" oncomplete="/clap/View"/>#{" "}
+                <b:commandButton value="Datos Generales y Ant. Personales" ajax="false" action="#{clapController.aDatos()}" oncomplete="/clap/View" look="primary"/>#{" "}
+                <b:commandButton value="Familia y Antecedentes Familiares" ajax="false" action="#{clapController.aFamilia()}" oncomplete="/clap/View" look="primary"/>#{" "}
+                <b:commandButton value="Vivienda y Educación" ajax="false" action="#{clapController.aVivienda()}" oncomplete="/clap/View" look="primary"/>#{" "}
+                <b:commandButton value="Trabajo y Vida Social" ajax="false" action="#{clapController.aTrabajo()}" oncomplete="/clap/View" look="primary"/>#{" "}
+                <b:commandButton value="Hábitos/consumo y Gineco/urológico" ajax="false" action="#{clapController.aHabitos()}" oncomplete="/clap/View" look="primary"/>#{" "}<br />
+                <b:commandButton value="Sexualidad y Sit. Psicoemocional" ajax="false" action="#{clapController.aSexualidad()}" oncomplete="/clap/View" look="primary"/>#{" "}
+                <b:commandButton value="Examen Físico" ajax="false" action="#{clapController.aExamen()}" oncomplete="/clap/View" look="primary"/>
+                <br/>
+                <br />
+                <b:panel id="panel1" title="Ficha personal del paciente" style="margin-left:3%;width: 95%;" look="info">
+                    <div style="margin-left:20px;">
+                        <b:row>
+                            <b:column col-md="6" col-xs="12">
+                                <b:row>
+                                    <p:outputLabel value="#{bundle.CreatepacienteTitle_RUN}" for="RUN" />    
+                                </b:row>
+                                <b:row>
+                                    <p:column>
+                                        
+                                        <p:autoComplete id="RUN" value="#{clapController.selected.paciente}" completeMethod="#{pacienteController.completePaciente}"
+                                        var="paciente" itemLabel="#{paciente.RUN}" itemValue="#{paciente.RUN}" converter="entityConverter" forceSelection="true" required="true" disabled="true">
+                                        </p:autoComplete>
+                                        
+                                        <p:inputText id="DV" value="#{clapController.selected.DV}" title="#{bundle.CreatepacienteTitle_DV}" maxlength="1" style="max-width: 20px;" required="true" disabled="true" />
+                                    </p:column>
+                                </b:row>
+                            </b:column>
+                        </b:row>
+                        <b:row>
+                            <b:column col-md="6" col-xs="12">
+                                <b:row>
+                                    <p:outputLabel value="#{bundle.CreatepacienteTitle_nombres}" for="nombres" />
+                                </b:row>
+                                <b:row>  
+                                <p:inputText id="nombres" value="#{clapController.selected.nombres}" placeholder="#{bundle.CreatepacienteTitle_nombres}" maxlength="50" required="true">
+                                    </p:inputText>     
+                                </b:row>
+                            </b:column>
+                            <b:column col-md="6" col-xs="12">
+                                <b:row>
+                                    <p:outputLabel value="#{bundle.CreatepacienteTitle_nombre_social}" for="nombre_social" />
+                                </b:row>
+                                <b:row>  
+                                 <p:inputText id="nombre_social" value="#{clapController.selected.nombre_social}" placeholder="#{bundle.CreatepacienteTitle_nombre_social}">
+                                    </p:inputText>
+                                </b:row>
+                            </b:column>
+                        </b:row>
+                        <br/>
+                        <b:row>
+                            <b:column col-md="3" col-xs="12">
+                                <b:row>
+                                    <p:outputLabel value="#{bundle.CreatepacienteTitle_primer_apellido}" for="primer_apellido" />
+                                </b:row>
+                                <b:row>
+                                    <p:inputText id="primer_apellido" value="#{clapController.selected.primer_apellido}" placeholder="#{bundle.CreatepacienteTitle_primer_apellido}" maxlength="30" required="true">
+                                    </p:inputText>
+                                </b:row>
+                            </b:column>
+                            <b:column col-md="3" col-xs="12">
+                                <b:row>
+                                    <p:outputLabel value="#{bundle.CreatepacienteTitle_segundo_apellido}" for="segundo_apellido" />
+                                </b:row>
+                                <b:row>
+                                    <p:inputText id="segundo_apellido" value="#{clapController.selected.segundo_apellido}" placeholder="#{bundle.CreatepacienteTitle_segundo_apellido}" maxlength="30" required="true">
+                                    </p:inputText>
+                                </b:row>
+                            </b:column>
+                            <b:column col-md="3" col-xs="12">
+                                <b:row>
+                                    <p:outputLabel value="#{bundle.CreatepacienteTitle_telefono_fijo}" for="telefono_fijo" />
+                                </b:row>
+                                <b:row>
+                                    <b:column col-xs="8">
+                                    <p:inputMask id="telefono_fijo" value="#{clapController.selected.telefono_fijo}" placeholder="#{bundle.CreatepacienteTitle_telefono_fijo}" mask="(99) 999-9999">
+                                    </p:inputMask>    
+                                    </b:column>
+                                    <b:column col-xs="4">
+                                        <p:selectBooleanCheckbox value="#{clapController.selected.domicilio}" itemLabel="Domicilio">
+                                        </p:selectBooleanCheckbox>
+                                    </b:column>
+                                </b:row>
+                            </b:column>
+                            <b:column col-md="3" col-xs="12">
+                                <b:row>
+                                    <p:outputLabel value="#{bundle.CreatepacienteTitle_teléfono_movil}" for="telefono_movil" />
+                                </b:row>
+                                <b:row>
+                                    <b:column col-xs="8">
+                                        <p:inputMask id="telefono_movil" value="#{clapController.selected.telefono_movil}" placeholder="#{bundle.CreatepacienteTitle_teléfono_movil}"  mask="(+56) 9999-9999">
+                                    </p:inputMask>
+                                    </b:column>
+                                    <b:column col-xs="4">
+                                        <p:selectBooleanCheckbox value="#{clapController.selected.recados}" itemLabel="Recados">
+                                        </p:selectBooleanCheckbox>
+                                    </b:column>
+                                </b:row>
+                            </b:column>
+                        </b:row>
+                        <br/>
+                        <b:row>
+                            <b:column col-md="6" col-xs="12">
+                                <b:row>
+                                    <p:outputLabel value="#{bundle.CreatepacienteTitle_region_residencia}" for="region_residencia" />
+                                </b:row>
+                                <b:row>
+                                    <p:selectOneMenu id="region_residencia" value="#{clapController.selected.region_residencia}" required="true" >
+                                        <f:selectItem itemLabel="Seleccione una región" itemValue="#{null}" noSelectionOption="true" />
+                                        <f:selectItems value="#{regionController.items}" var="region" itemLabel="#{region.nombre}" itemValue="#{region}" />
+                                        <f:ajax event="valueChange" immediate="true" render="comuna_residencia" ></f:ajax>
+                                    </p:selectOneMenu>                            
+                                </b:row>
+                            </b:column>
+                            <b:column col-md="6" col-xs="12">
+                                <b:row>
+                                    <p:outputLabel value="#{bundle.CreatepacienteTitle_comuna_residencia}" for="comuna_residencia" />
+                                </b:row>
+                                <b:row>
+                                    <p:autoComplete id="comuna_residencia" value="#{clapController.selected.comuna_residencia}" completeMethod="#{clapController.completeComuna}"
+                                                    var="comuna" itemLabel="#{comuna.nombre}" itemValue="#{comuna}" placeholder="Comuna de residencia" converter="entityConverter" forceSelection="true" required="true" >
+                                    </p:autoComplete>                         
+                                </b:row>
+                            </b:column>
+                        </b:row>
+                        <br/>
+                        <b:row>
+                            <b:column col-md="6" col-xs="12">
+                                <b:row>
+                                    <p:outputLabel value="#{bundle.CreatepacienteTitle_calle_direccion}" for="calle_direccion" />
+                                </b:row>
+                                <b:row>
+                                <p:inputText id="calle_direccion" value="#{clapController.selected.calle_direccion}" placeholder="#{bundle.CreatepacienteTitle_calle_direccion}" maxlength="50" required="true">
+                                    </p:inputText>    
+                                </b:row>
+                            </b:column>
+                            <b:column col-md="3" col-xs="12">
+                                <b:row>
+                                    <p:outputLabel value="Número:" for="numero_direccion" />
+                                </b:row>
+                                <b:row>
+                                <pe:inputNumber id="numero_direccion" value="#{clapController.selected.numero_direccion}" style="campo-numerico" minValue="0" maxValue="10000" title="#{bundle.CreatepacienteTitle_numero_direccion}" maxlength="8" required="true">
+                                    </pe:inputNumber>    
+                                </b:row>
+                            </b:column>
+                            <b:column col-md="3" col-xs="12">
+                                <b:row>
+                                    <p:outputLabel value="#{bundle.CreatepacienteTitle_resto_direccion}" for="resto_direccion" />
+                                </b:row>
+                                <b:row>
+                                    <p:inputText id="resto_direccion" value="#{clapController.selected.resto_direccion}" placeholder="#{bundle.CreatepacienteTitle_resto_direccion}" maxlength="50">
+                                    </p:inputText>
+                                </b:row>
+                            </b:column>
+                        </b:row>
+                        <br/>
+                        <b:row>
+                            <b:column col-md="6" col-xs="12">
+                                <b:row>
+                                    <p:outputLabel value="#{bundle.CreatepacienteTitle_fecha_nacimiento}" for="fecha_nacimiento" />
+                                </b:row>
+                                <b:row>
+                                    <p:calendar  id="fecha_nacimiento" value="#{clapController.selected.fecha_nacimiento}" placeholder="#{bundle.CreatepacienteTitle_fecha_nacimiento}" pattern="dd/MM/yyyy" navigator="true" required="true">
+                                    </p:calendar>
+                                </b:row>
+                            </b:column>
+                            <b:column col-md="3" col-xs="6">
+                                <b:row>
+                                    <p:outputLabel value="#{bundle.CreatepacienteTitle_sexo}" for="sexo" />
+                                </b:row>
+                                <b:row>
+                                    <p:selectOneMenu id="sexo" value="#{clapController.selected.sexo}" required="true" >
+                                        <f:selectItem itemLabel="Seleccione una opción" itemValue="" noSelectionOption="true" />
+                                        <f:selectItem itemLabel="Hombre" itemValue="1" noSelectionOption="false" />
+                                        <f:selectItem itemLabel="Mujer" itemValue="2" noSelectionOption="false" />
+                                        <f:selectItem itemLabel="No definido" itemValue="3" noSelectionOption="false" />
+                                        <f:selectItem itemLabel="No determinado" itemValue="4" noSelectionOption="false" />     
+                                    </p:selectOneMenu>
+                                </b:row>
+                            </b:column>
+                            <b:column col-md="3" col-xs="6">
+                                <b:row>
+                                    <p:outputLabel value="Pais" for="nacionalidad" />
+                                </b:row>
+                                <b:row>
+                                    <p:autoComplete id="nacionalidad" value="#{clapController.selected.nacionalidad}" completeMethod="#{nacionalidadController.completeNacionalidad}"
+                                                    var="nacionalidad" itemLabel="#{nacionalidad.nombre}" itemValue="#{nacionalidad}" converter="entityConverter" forceSelection="true" >
+                                    </p:autoComplete>
+                                </b:row>
+                            </b:column>
+                        </b:row>
+                        <br/>
+                        <b:row>
+                            <b:column col-md="6" col-xs="12">
+                                <b:row>
+                                    <p:outputLabel value="#{bundle.CreatepacienteTitle_correo}" for="correo" />
+                                </b:row>
+                                <b:row>
+                                    <p:inputText id="correo" value="#{clapController.selected.correo}" placeholder="#{bundle.CreatepacienteTitle_correo}" required="true">
+                                    </p:inputText>
+                                </b:row>
+                            </b:column>
+                        </b:row>
+                        <br/>
+                        <b:row>
+                            <b:column col-md="6" col-xs="12">
+                                <b:row>
+                                    <p:outputLabel value="#{bundle.CreatepacienteTitle_programa_social}" for="programa_social"  />
+                                </b:row>
+                                <b:row>
+                                    <p:selectOneMenu id="programa_social" value="#{clapController.selected.programa_social}" >
+                                        <f:selectItem itemLabel="Seleccione un programa social" itemValue="" noSelectionOption="true" />
+                                        <f:selectItems value="#{ley_socialController.items}" var="ley_social" itemLabel="#{ley_social.nombre}" itemValue="#{ley_social}"/>
+                                    </p:selectOneMenu>
+                                </b:row>
+                            </b:column>
+                        </b:row>
+                        <br/>
+                        <b:row>
+                            <b:column col-md="6" col-xs="12">
+                                <b:row>
+                                    <p:outputLabel value="#{bundle.CreatepacienteTitle_prevision}" for="prevision" />
+                                </b:row>
+                                <b:row>
+                                    <p:selectOneMenu id="prevision" value="#{clapController.selected.prevision}"  required="true">
+                                       <f:selectItem itemLabel="Seleccione un opción" itemValue="" noSelectionOption="true" />
+                                       <f:selectItems value="#{previsionController.items}" var="prevision" itemLabel="#{prevision.nombre}" itemValue="#{prevision}"/>
+                                   </p:selectOneMenu>
+                                </b:row>
+                            </b:column>
+                            <b:column col-md="6" col-xs="12">
+                                <b:row>
+                                    <p:outputLabel value="#{bundle.CreatepacienteTitle_grupo_fonasa}" for="grupo_fonasa" />
+                                </b:row>
+                                <b:row>
+                                    <p:selectOneMenu id="grupo_fonasa" value="#{clapController.selected.grupo_fonasa}" disabled="#{!clapController.esFONASA()}">
+                                        <f:selectItem itemLabel="Seleccione un opción" itemValue="" noSelectionOption="true" />
+                                        <f:selectItem itemLabel="A" itemValue="1" noSelectionOption="false" />
+                                        <f:selectItem itemLabel="B" itemValue="2" noSelectionOption="false" />
+                                        <f:selectItem itemLabel="C" itemValue="3" noSelectionOption="false" />
+                                        <f:selectItem itemLabel="D" itemValue="4" noSelectionOption="false" />
+                                    </p:selectOneMenu>
+                                </b:row>
+                            </b:column>
+                        </b:row>
+                        <br/>
+                        <b:row>
+                            <b:column col-md="6" col-xs="12">
+                                <b:row>
+                                    <p:outputLabel value="#{bundle.CreatepacienteLabel_estado_conyugal}" for="estado_conyugal" />
+                                </b:row>
+                                <b:row>
+                                    <p:selectOneMenu id="estado_conyugal" value="#{clapController.selected.estado_conyugal}" >
+                                        <f:selectItem itemLabel="Seleccione un opción" itemValue="" noSelectionOption="true" />
+                                        <f:selectItems value="#{estado_civilController.items}" var="estado_civil" itemLabel="#{estado_civil.nombre}" itemValue="#{estado_civil}"/>
+                                    </p:selectOneMenu>
+                                </b:row>
+                            </b:column>
+                            <b:column col-md="6" col-xs="12">
+                                <b:row>
+                                    <p:outputLabel value="#{bundle.CreatepacienteLabel_pueblo_originario}" for="pueblo_originario" />
+                                </b:row>
+                                <b:row>
+                                    <p:selectOneMenu id="pueblo_originario" value="#{clapController.selected.pueblo_originario}" >
+                                        <f:selectItem itemLabel="Seleccione un pueblo originario" itemValue="" noSelectionOption="true" />
+                                        <f:selectItems value="#{pueblo_originarioController.items}" var="pueblo_originario" itemLabel="#{pueblo_originario.nombre}" itemValue="#{pueblo_originario}"/>
+                                    </p:selectOneMenu>
+                                </b:row>
+                            </b:column>
+                        </b:row>
+                    </div>
+                </b:panel>
+                <b:column offset-xs="5">
+                    <p:button  value="Volver" outcome="/paciente/View" />
+                    <p:commandButton action="#{clapController.aDatos}" value="Siguiente" oncomplete="/clap/View"/> 
+                    <br/><br/>
+                </b:column>
+            </h:form>
+            </ui:define>
+    </ui:composition>
+</html>
+

@@ -14,8 +14,6 @@
                     <p:panelGrid columns="2" rendered="#{parametrosController.selected != null}">
                         <p:outputLabel value="Ruta para Imágenes" for="ruta" />
                         <p:inputText id="ruta" value="#{parametrosController.selected.ruta}" title="#{bundle.CreateparametrosTitle_ruta}" />
-                        <p:outputLabel value="Minutos para autoguardado" for="minutos" />
-                        <p:inputText id="minutos" value="#{parametrosController.selected.minutos}" title="#{bundle.CreateparametrosTitle_minutos}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{parametrosController.create}" value="#{bundle.Save}" update="display,:parametrosListForm:datalist,:growl" oncomplete="handleSubmit(args,'parametrosCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="parametrosCreateDialog.hide()"/>

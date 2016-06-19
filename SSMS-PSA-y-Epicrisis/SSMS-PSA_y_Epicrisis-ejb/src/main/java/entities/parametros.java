@@ -26,24 +26,14 @@ public class parametros implements Serializable {
     
     @Column(name="ruta_parametros")
     private String ruta;
-    
-    @Column(name="minutos_parametros")
-    private int minutos;
 
+    @Column(name="minutos_parametros")
     public String getRuta() {
         return ruta;
     }
 
     public void setRuta(String ruta) {
         this.ruta = ruta;
-    }
-
-    public int getMinutos() {
-        return minutos;
-    }
-
-    public void setMinutos(int minutos) {
-        this.minutos = minutos;
     }
     
     public Long getId() {

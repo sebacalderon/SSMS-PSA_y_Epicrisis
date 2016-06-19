@@ -19,12 +19,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import managedbeans.util.JsfUtil;
 import managedbeans.util.JsfUtil.PersistAction;
 import sessionbeans.clapFacadeLocal;
@@ -602,7 +599,7 @@ public class clapController implements Serializable {
         selected.setRiesgo_salud_mental(false);
         selected.setRiesgo_social(false);
         selected.setRiesgo_ssr(false);
-         
+        setImagen(null);
         //Guarda localmente el clap selected
         clap nuevoClap = getSelected();
 
@@ -614,7 +611,7 @@ public class clapController implements Serializable {
         
         int size = getFacade().findbyPaciente(Paciente.getRUN()).size();
         selected = getFacade().findbyPaciente(Paciente.getRUN()).get(size-1);
-        return "/faces/clap/Edit.xhtml";
+        return "/faces/clap/edit/usuario.xhtml";
         
     }
 
@@ -681,17 +678,15 @@ public class clapController implements Serializable {
     }
     
     public String update() throws IOException {
+        boolean completo=false;
+        boolean parametro_imagen = true;
         List<parametros> parametrosLista = parametrosCtrl.getItems();
         parametros parametros;
         String ruta;
-        if (parametrosLista.isEmpty()) {
+        if (parametrosLista.isEmpty() && imagen!=null) {
             JsfUtil.addErrorMessage("No existe una ruta para guardar la imagen. Contacte al administrador");
-            return "/faces/paciente/View.xhtml";
-        }else{
-            parametros = parametrosCtrl.getItems().get(parametrosCtrl.getItems().size()-1);
-            ruta = parametros.getRuta();
+            parametro_imagen = false;
         }
-        boolean completo=false;
         //Verifica si completa el clap
         if( selected.getPerinatales_normales()!=0&&
             selected.getAlergias_normales()!=0&&
@@ -733,7 +728,8 @@ public class clapController implements Serializable {
             selected.getPresion_arterial_diastolica()!=0&&
             selected.getPresion_arterial_sistolica()!=0&&
             selected.getPerimetro_abdominal()!=0&&
-            selected.getTanner_genital()!=0
+            selected.getTanner_genital()!=0 &&
+            selected.getDiagrama_familiar()!=null
             ){
             selected.setEstado("Nuevo");
             completo=true;
@@ -897,18 +893,21 @@ public class clapController implements Serializable {
                     if(claps.get(i).getEstado().equals("Vigente")){
                         setSelected(claps.get(i));
                         selected.setEstado("Antiguo");
-                        persist(PersistAction.UPDATE,"");
+                        getFacade().edit(selected);
+                        //persist(PersistAction.UPDATE,"");
                     } else if(claps.get(i).getEstado().equals("Nuevo")){
                         setSelected(claps.get(i));
                         selected.setEstado("Vigente");
-                        persist(PersistAction.UPDATE,"");
+                        getFacade().edit(selected);
+                        //persist(PersistAction.UPDATE,"");
                     }
                 }
             }
             else{
                 System.out.println("Primer clap ingresado");
                 selected.setEstado("Vigente");
-                persist(PersistAction.UPDATE,"");
+                getFacade().edit(selected);
+                //persist(PersistAction.UPDATE,"");
             }
         }
        
@@ -929,13 +928,15 @@ public class clapController implements Serializable {
             crafftCtrl.setSelected(crafft);
             crafftCtrl.update();
         }
+        
         List<clap> claps = getItemsPorPaciente(pacienteCtrl.getSelected().getRUN());
         selected = claps.get(claps.size()-1);
         ////////////////
         //Imagen
         ////////////////
-        if (imagen!=null && selected.getDiagrama_familiar()==null) {
-            
+        if (imagen!=null && selected.getDiagrama_familiar()==null && parametro_imagen == true){
+            parametros = parametrosCtrl.getItems().get(parametrosCtrl.getItems().size()-1);
+            ruta = parametros.getRuta();
             Path folder = Paths.get(ruta);
             String filename = "Clap "+selected.getId();
             String extension = FilenameUtils.getExtension(imagen.getFileName());
@@ -1040,163 +1041,47 @@ public class clapController implements Serializable {
         return getFacade().findAll();
     }
 
-    public void autosave() {
-        boolean completo=false;
-        //Verifica si completa el clap
-        if( (selected.getCesfam()!=null||selected.getEstablecimiento_educacional()!=null)&&
-            selected.getAcompanante()!=null&&
+    private BufferedImage resizeImage(BufferedImage bimg, int type) {
+        BufferedImage resizedImage = new BufferedImage(310, 184, type);
+	Graphics2D g = resizedImage.createGraphics();
+	g.drawImage(bimg, 0, 0, 310, 184, null);
+	g.dispose();
             selected.getPerinatales_normales()!=0&&
-            selected.getAlergias_normales()!=0&&
-            selected.getVacunas_completas()!=0&&
-            selected.getEnfermedades_importantes()!=0&&
-            selected.getDiscapacidad()!=0&&
-            selected.getAccidentes_relevantes()!=0&&
-            selected.getCirugia_hospitalizaciones()!=0&&
-            selected.getProblemas_salud_mental()!=0&&
-            selected.getViolencia()!=0&&
-            selected.getAntecedentes_judiciales()!=0&&
-            selected.getOtros()!=0&&
-            selected.getEnfermedades_importantes_familia()!=0&&
-            selected.getObesidad_familia()!=0&&
-            selected.getProblemas_salud_mental_familia()!=0&&
-            selected.getViolencia_intrafamiliar()!=0&&
-            selected.getAlcohol_y_otras_drogas()!=0&&
-            selected.getPadre_adolescente()!=0&&
-            selected.getJudiciales()!=0&&
-            selected.getOtros_antecedentes_familiares()!=0&&
-            selected.getPercepcion_familia()!=0&&
-            selected.getNivel_educacion()!=0&&
-            selected.getPercepcion_rendimiento()!=0&&
-            selected.getAceptacion()!=0&&
-            selected.getHoras_actividad_fisica()!=0&&
-            selected.getHoras_tv()!=0&&
-            selected.getHoras_computador_consola()!=0&&
-            selected.getHoras_sueno()!=0 &&
-            selected.getEdad_menarca_espermarca()!=0&&
-            selected.getCiclos_regulares()!=0&&
-            selected.getDismenorrea()!=0&&
-            selected.getOrientacion_sexual()!=0&&
-            selected.getConducta_sexual()!=0&&
-            selected.getRelaciones_sexuales()!=0&&
-            selected.getPareja_sexual()!=0&&
-            selected.getDificultades_sexuales()!=0&&
-            selected.getAnticoncepcion()!=0&&
-            selected.getUso_mac()!=0&&
-            selected.getImagen_corporal()!=0&&
-            selected.getBienestar_emocional()!=0&&
-            selected.getVida_proyecto()!=0&&
-            selected.getReferente_adulto()!=0&&
-            selected.getPeso()!=0&&
-            selected.getTalla()!=0&&
-            selected.getPresion_arterial_diastolica()!=0&&
-            selected.getPresion_arterial_sistolica()!=0&&
-            selected.getPerimetro_abdominal()!=0&&
-            (selected.getTanner_mama()!=0||
-            selected.getTanner_genital()!=0)
-            ){
-            selected.setEstado("Nuevo");
-            completo=true;
+		
+	return resizedImage;
+    }
+
+    private void creaImagen() throws IOException {
+        List<parametros> parametrosLista = parametrosCtrl.getItems();
+        parametros parametros;
+        String ruta;
+        if (imagen!=null && selected.getDiagrama_familiar()==null && !parametrosLista.isEmpty()){
+            parametros = parametrosCtrl.getItems().get(parametrosCtrl.getItems().size()-1);
+            ruta = parametros.getRuta();
+            Path folder = Paths.get(ruta);
+            String filename = "Clap "+selected.getId();
+            String extension = FilenameUtils.getExtension(imagen.getFileName());
+            Path file = Files.createTempFile(folder, filename + "-", "." + extension);
+            
+            try (InputStream input = imagen.getInputstream()) {
+                Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
+                selected.setDiagrama_familiar(ruta+"/"+file.getFileName());
+            }
+            File img = new File(ruta+"/"+file.getFileName());
+            BufferedImage bimg = ImageIO.read(img);
+            int type = bimg.getType() == 0? BufferedImage.TYPE_INT_ARGB : bimg.getType();            
+            BufferedImage resizeImagePng = resizeImage(bimg, type);
+            ImageIO.write(resizeImagePng, "png", new File(ruta+"/"+file.getFileName()));
+            JsfUtil.addSuccessMessage("Imagen Creada");
         }else{
-            selected.setEstado("Incompleto");
-            completo=false;
-        }
-        
-        selected.setRiesgo_cardiovascular(false);
-        selected.setRiesgo_nutricional(false);
-        selected.setRiesgo_oh_drogas(false);
-        selected.setRiesgo_salud_mental(false);
-        selected.setRiesgo_social(false);
-        selected.setRiesgo_ssr(false);
-        
-        //cardiovascular nutricional
-        if(selected.getImc()<24){
-            selected.setRiesgo_cardiovascular(true);
-            selected.setRiesgo_nutricional(true);
-        }
-        if(selected.isCardio_pulmonar()){
-            selected.setRiesgo_cardiovascular(true);
-        }
-        if(selected.getPresion_arterial_sistolica()>=120||selected.getPresion_arterial_diastolica()>=80){
-            selected.setRiesgo_cardiovascular(true);
-        }
-        if(selected.getPerimetro_abdominal()>88&&selected.getSexo()==2||selected.getPerimetro_abdominal()>102&&selected.getSexo()==3){
-            selected.setRiesgo_cardiovascular(true);
-            selected.setRiesgo_nutricional(true);
-        }
-        if(selected.isAlimentacion_adecuada()){
-            selected.setRiesgo_nutricional(true);
-        }
-        //ssr
-        if(selected.getConducta_sexual()==3||selected.getEdad_inicio_conducta_sexual()< 14){
-            selected.setRiesgo_ssr(true);
-        }
-        if(selected.getDificultades_sexuales()==2){
-            selected.setRiesgo_ssr(true);
-        }
-        if(selected.getCiclos_regulares()==2||selected.getDismenorrea()==2||selected.isFlujo_secrecion_patologico()){
-            selected.setRiesgo_ssr(true);
-        }
-        if(selected.isIts_vih()||selected.getTratamiento()>1||selected.getTratamiento_contactos()>1){
-            selected.setRiesgo_ssr(true);
-        }
-        if(selected.getEmbarazos()>0||selected.getHijos()>0||selected.getAbortos()>0){
-            selected.setRiesgo_ssr(true);
-        }
-        if(selected.getUso_mac()>1||selected.getAnticoncepcion()>1||selected.isAbuso_sexual()){
-            selected.setRiesgo_ssr(true);
-        }
-        
-        //Salud mental
-        
-        if(selected.getImagen_corporal()>1||selected.getBienestar_emocional()>1){
-            selected.setRiesgo_salud_mental(true);
-        }
-        if(selected.getVida_proyecto()==3||selected.isIntento_suicida()||selected.isIdeacion_suicida()){
-            selected.setRiesgo_salud_mental(true);
-        }
-        
-        //Drogas
-        
-        if(selected.isTabaco()||selected.isConsumo_alcohol()||selected.isConsumo_marihuana()||selected.isConsumo_otra_sustancia()){
-            selected.setRiesgo_oh_drogas(true);
-        }
-        
-        //riesgo social
-        
-        if(selected.getReferente_adulto()==5||selected.getAceptacion()==2||selected.getAceptacion()==3||selected.isAmigos()==false||selected.isSuicidalidad_amigos()==true){
-            selected.setRiesgo_social(true);
-        }
-        if(selected.isCyberbulling()|selected.isGrooming()||selected.isViolencia_escolar()||selected.isViolencia_pareja()){
-            selected.setRiesgo_social(true);
-        }
-        if(selected.isVive_con_solo()||selected.isVive_en_institucion()||selected.getPercepcion_familia()>2||selected.isDesercion_exclusion()){
-            selected.setRiesgo_social(true);
-        }   
-        
-        persist(PersistAction.UPDATE,"Autoguardado");
-        if(selected.getEstado().equals("Nuevo")){
-            List<clap> claps = getItemsPorPaciente(pacienteCtrl.getSelected().getRUN());
-            if(claps.size()>1){
-                System.out.println("Eziste mas de 1 clap");
-                for(int i=0;i<claps.size();i++){
-                    if(claps.get(i).getEstado().equals("Vigente")){
-                        setSelected(claps.get(i));
-                        selected.setEstado("Antiguo");
-                        persist(PersistAction.UPDATE,"");
-                    } else if(claps.get(i).getEstado().equals("Nuevo")){
-                        setSelected(claps.get(i));
-                        selected.setEstado("Vigente");
-                        persist(PersistAction.UPDATE,"");
-                    }
-                }
-            }
-            else{
-                System.out.println("Primer clap ingresado");
-                selected.setEstado("Vigente");
-                persist(PersistAction.UPDATE,"");
+            if (imagen!=null && parametrosLista.isEmpty()) {
+                JsfUtil.addErrorMessage("No existe una ruta para guardar la imagen. Contacte al administrador");
             }
         }
-       
+        setImagen(null);
+    }
+
+    private void actualizaCrafftAudit() {
         if (selected.getAudit()!= null) {
             audit audit = auditCtrl.getItemsPorClap(selected).get(0);
             Long id = auditCtrl.getItemsPorClap(selected).get(0).getId();
@@ -1214,17 +1099,6 @@ public class clapController implements Serializable {
             crafftCtrl.setSelected(crafft);
             crafftCtrl.update();
         }
-        
-        
-    }
-
-    private BufferedImage resizeImage(BufferedImage bimg, int type) {
-        BufferedImage resizedImage = new BufferedImage(310, 184, type);
-	Graphics2D g = resizedImage.createGraphics();
-	g.drawImage(bimg, 0, 0, 310, 184, null);
-	g.dispose();
-		
-	return resizedImage;
     }
 
     @FacesConverter(forClass = clap.class)
@@ -1545,6 +1419,7 @@ public class clapController implements Serializable {
         }
         //Condicional Acompañante
         String acomp = selected.getAcompanante();
+        if (acomp!=null){
         if (acomp.equals("solo")) {
             form.setField("solo", "Yes");
         }else if(acomp.equals("madre")){
@@ -1562,6 +1437,8 @@ public class clapController implements Serializable {
         }else{
             form.setField("otro", "Yes");
         }
+        }
+        
         form.setField("motivo_adolescente_1", selected.getMotivo_consulta_adolescente_1());
         form.setField("motivo_adolescente_2", selected.getMotivo_consulta_adolescente_2());
         form.setField("motivo_adolescente_3", selected.getMotivo_consulta_adolescente_3());
@@ -2728,5 +2605,61 @@ public class clapController implements Serializable {
         OutputStream output = ec.getResponseOutputStream();
         IOUtils.copy(input, output);
         fc.responseComplete();
+    }
+
+    public String aUsuario() throws IOException{
+        creaImagen();
+        actualizaCrafftAudit();
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        return "/faces/clap/edit/usuario.xhtml";
+    }
+    
+    public String aDatos() throws IOException{
+        creaImagen();
+        actualizaCrafftAudit();
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        return "/faces/clap/edit/datos_antecedentes.xhtml";
+    }
+    
+    public String aVivienda() throws IOException{
+        creaImagen();
+        actualizaCrafftAudit();
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        return "/faces/clap/edit/vivienda_educacion.xhtml";
+    }
+    
+    public String aFamilia() throws IOException{
+        creaImagen();
+        actualizaCrafftAudit();
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        return "/faces/clap/edit/familia.xhtml";
+    }
+    
+    public String aTrabajo() throws IOException{
+        creaImagen();
+        actualizaCrafftAudit();
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        return "/faces/clap/edit/trabajo_vidasocial.xhtml";
+    }
+
+    public String aHabitos() throws IOException{
+        creaImagen();
+        actualizaCrafftAudit();
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        return "/faces/clap/edit/habitos_gineco.xhtml";
+    }
+    
+    public String aSexualidad() throws IOException{
+        creaImagen();
+        actualizaCrafftAudit();
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        return "/faces/clap/edit/sexualidad_psicoemocional.xhtml";
+    }
+    
+    public String aExamen() throws IOException{
+        creaImagen();
+        actualizaCrafftAudit();
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        return "/faces/clap/edit/examen_fisico.xhtml";
     }
 }
