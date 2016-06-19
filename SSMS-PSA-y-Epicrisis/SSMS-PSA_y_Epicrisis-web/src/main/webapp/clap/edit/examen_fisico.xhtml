@@ -31,6 +31,14 @@
                 <h2 align="center">#{bundle.EditclapTitle}</h2>
             </b:row>
             <h:form id="clapEditForm" rendered="#{clapController.selected != null}">                
+                <b:commandButton value="Ficha Personal del Usuario" ajax="false" action="#{clapController.aUsuario()}" oncomplete="/clap/View" look="primary"/>#{" "}
+                <b:commandButton value="Datos Generales y Ant. Personales" ajax="false" action="#{clapController.aDatos()}" oncomplete="/clap/View" look="primary"/>#{" "}
+                <b:commandButton value="Familia y Antecedentes Familiares" ajax="false" action="#{clapController.aFamilia()}" oncomplete="/clap/View" look="primary"/>#{" "}
+                <b:commandButton value="Vivienda y Educación" ajax="false" action="#{clapController.aVivienda()}" oncomplete="/clap/View" look="primary"/>#{" "}
+                <b:commandButton value="Trabajo y Vida Social" ajax="false" action="#{clapController.aTrabajo()}" oncomplete="/clap/View" look="primary"/>#{" "}
+                <b:commandButton value="Hábitos/consumo y Gineco/urológico" ajax="false" action="#{clapController.aHabitos()}" oncomplete="/clap/View" look="primary"/>#{" "}<br />
+                <b:commandButton value="Sexualidad y Sit. Psicoemocional" ajax="false" action="#{clapController.aSexualidad()}" oncomplete="/clap/View"  look="primary"/>#{" "}
+                <b:commandButton value="Examen Físico" ajax="false" action="#{clapController.aExamen()}" oncomplete="/clap/View"/>
                 <b:panel title="Examen físico" style="margin-left:3%;width: 95%; " look="info">
                     <div style="margin-left: 20px;">
                         <b:row>
