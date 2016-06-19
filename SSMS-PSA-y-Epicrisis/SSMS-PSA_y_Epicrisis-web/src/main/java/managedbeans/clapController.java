@@ -54,7 +54,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.event.TabChangeEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
@@ -600,7 +599,7 @@ public class clapController implements Serializable {
         selected.setRiesgo_salud_mental(false);
         selected.setRiesgo_social(false);
         selected.setRiesgo_ssr(false);
-         
+        setImagen(null);
         //Guarda localmente el clap selected
         clap nuevoClap = getSelected();
 
@@ -684,7 +683,7 @@ public class clapController implements Serializable {
         List<parametros> parametrosLista = parametrosCtrl.getItems();
         parametros parametros;
         String ruta;
-        if (parametrosLista.isEmpty()) {
+        if (parametrosLista.isEmpty() && imagen!=null) {
             JsfUtil.addErrorMessage("No existe una ruta para guardar la imagen. Contacte al administrador");
             parametro_imagen = false;
         }
@@ -738,8 +737,7 @@ public class clapController implements Serializable {
             selected.getPerimetro_abdominal()!=0&&
             selected.getTanner_mama()!=0&&
             selected.getTanner_genital()!=0 &&
-            parametro_imagen==true &&
-            imagen!=null
+            selected.getDiagrama_familiar()!=null
             ){
             selected.setEstado("Nuevo");
             completo=true;
@@ -1058,6 +1056,56 @@ public class clapController implements Serializable {
 	g.dispose();
 		
 	return resizedImage;
+    }
+
+    private void creaImagen() throws IOException {
+        List<parametros> parametrosLista = parametrosCtrl.getItems();
+        parametros parametros;
+        String ruta;
+        if (imagen!=null && selected.getDiagrama_familiar()==null && !parametrosLista.isEmpty()){
+            parametros = parametrosCtrl.getItems().get(parametrosCtrl.getItems().size()-1);
+            ruta = parametros.getRuta();
+            Path folder = Paths.get(ruta);
+            String filename = "Clap "+selected.getId();
+            String extension = FilenameUtils.getExtension(imagen.getFileName());
+            Path file = Files.createTempFile(folder, filename + "-", "." + extension);
+            
+            try (InputStream input = imagen.getInputstream()) {
+                Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
+                selected.setDiagrama_familiar(ruta+"/"+file.getFileName());
+            }
+            File img = new File(ruta+"/"+file.getFileName());
+            BufferedImage bimg = ImageIO.read(img);
+            int type = bimg.getType() == 0? BufferedImage.TYPE_INT_ARGB : bimg.getType();            
+            BufferedImage resizeImagePng = resizeImage(bimg, type);
+            ImageIO.write(resizeImagePng, "png", new File(ruta+"/"+file.getFileName()));
+            JsfUtil.addSuccessMessage("Imagen Creada");
+        }else{
+            if (imagen!=null && parametrosLista.isEmpty()) {
+                JsfUtil.addErrorMessage("No existe una ruta para guardar la imagen. Contacte al administrador");
+            }
+        }
+        setImagen(null);
+    }
+
+    private void actualizaCrafftAudit() {
+        if (selected.getAudit()!= null) {
+            audit audit = auditCtrl.getItemsPorClap(selected).get(0);
+            Long id = auditCtrl.getItemsPorClap(selected).get(0).getId();
+            audit = selected.getAudit();
+            audit.setId(id);
+            auditCtrl.setSelected(audit);
+            auditCtrl.update();
+        }
+        
+        if (selected.getCrafft()!= null) {
+            Crafft crafft = crafftCtrl.getItemsPorClap(selected).get(0);
+            Long id = crafftCtrl.getItemsPorClap(selected).get(0).getId();
+            crafft = selected.getCrafft();
+            crafft.setId(id);
+            crafftCtrl.setSelected(crafft);
+            crafftCtrl.update();
+        }
     }
 
     @FacesConverter(forClass = clap.class)
@@ -2566,42 +2614,58 @@ public class clapController implements Serializable {
         fc.responseComplete();
     }
 
-    public String aUsuario(){
+    public String aUsuario() throws IOException{
+        creaImagen();
+        actualizaCrafftAudit();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
         return "/faces/clap/edit/usuario.xhtml";
     }
     
-    public String aDatos(){
+    public String aDatos() throws IOException{
+        creaImagen();
+        actualizaCrafftAudit();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
         return "/faces/clap/edit/datos_antecedentes.xhtml";
     }
     
-    public String aVivienda(){
+    public String aVivienda() throws IOException{
+        creaImagen();
+        actualizaCrafftAudit();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
         return "/faces/clap/edit/vivienda_educacion.xhtml";
     }
     
-    public String aFamilia(){
+    public String aFamilia() throws IOException{
+        creaImagen();
+        actualizaCrafftAudit();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
         return "/faces/clap/edit/familia.xhtml";
     }
     
-    public String aTrabajo(){
+    public String aTrabajo() throws IOException{
+        creaImagen();
+        actualizaCrafftAudit();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
         return "/faces/clap/edit/trabajo_vidasocial.xhtml";
     }
 
-    public String aHabitos(){
+    public String aHabitos() throws IOException{
+        creaImagen();
+        actualizaCrafftAudit();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
         return "/faces/clap/edit/habitos_gineco.xhtml";
     }
     
-    public String aSexualidad(){
+    public String aSexualidad() throws IOException{
+        creaImagen();
+        actualizaCrafftAudit();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
         return "/faces/clap/edit/sexualidad_psicoemocional.xhtml";
     }
     
-    public String aExamen(){
+    public String aExamen() throws IOException{
+        creaImagen();
+        actualizaCrafftAudit();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
         return "/faces/clap/edit/examen_fisico.xhtml";
     }
