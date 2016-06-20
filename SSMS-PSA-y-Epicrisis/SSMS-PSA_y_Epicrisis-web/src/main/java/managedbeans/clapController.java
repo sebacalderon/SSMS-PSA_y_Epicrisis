@@ -2592,7 +2592,6 @@ public class clapController implements Serializable {
             stamper.getOverContent(1).addImage(img);
         }
         
-        
         stamper.close();
         pdfTemplate.close();
         
@@ -2660,5 +2659,25 @@ public class clapController implements Serializable {
         actualizaCrafftAudit();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
         return "/faces/clap/edit/examen_fisico.xhtml";
+    }
+    
+    public String elimImagen(){
+        List<parametros> parametrosLista = parametrosCtrl.getItems();
+        if (parametrosLista.isEmpty()) {
+            JsfUtil.addErrorMessage("No existe una ruta para las imagenes. Contacte al administrador");
+        }else{
+            File fichero = new File(selected.getDiagrama_familiar());
+            fichero.delete();
+            selected.setDiagrama_familiar(null);
+            getFacade().edit(selected);
+            JsfUtil.addSuccessMessage("Imagen borrada satisfactoriamente");
+//            if (fichero.delete()){
+//                selected.setDiagrama_familiar(null);
+//                getFacade().edit(selected);
+//                JsfUtil.addSuccessMessage("Imagen borrada satisfactoriamente");
+//            }else
+//                JsfUtil.addErrorMessage("No existe una ruta para las imagenes. Contacte al administrador"); 
+        }
+        return "/faces/clap/edit/familia.xhtml";
     }
 }
