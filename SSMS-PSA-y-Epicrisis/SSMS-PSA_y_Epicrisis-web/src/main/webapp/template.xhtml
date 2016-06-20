@@ -26,7 +26,6 @@
                 <b:dropMenu value="Usuarios">
                     <b:navLink value="Búsqueda por RUN" outcome="/paciente/Buscar.xhtml" />
                 </b:dropMenu>
-                <b:navLink value="#{bundle.seccion3}" outcome="/en_construccion.xhtml" rendered="#{loginController.esFuncionario()}" />
                 <b:dropMenu value="#{bundle.seccion4}" rendered="#{loginController.esEncargadoPrograma() || loginController.esSuperUsuario()}">
                     <b:navLink value="Sábana de Fichas CLAP" outcome="/reportes/sabana.xhtml" />
                     <b:navLink value="Reportes" outcome="/en_construccion.xhtml" />
@@ -35,6 +34,7 @@
                     <b:navLink value="Control de sesiones" outcome="/usuario/List.xhtml" />
                     <b:navLink value="Auditoría" outcome="/en_construccion.xhtml" />
                     <b:navLink value="Modificación de parámetros" outcome="/parametros/List.xhtml" />
+                    <b:navLink value="Control de Centros de Salud" outcome="/cesfam/List.xhtml" />
                 </b:dropMenu>
             </b:navbarLinks>
             <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
