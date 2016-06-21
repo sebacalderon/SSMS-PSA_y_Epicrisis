@@ -1,11 +1,13 @@
 package managedbeans;
 
 import entities.cesfam;
+import entities.comuna;
 import managedbeans.util.JsfUtil;
 import managedbeans.util.JsfUtil.PersistAction;
 import sessionbeans.cesfamFacadeLocal;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -18,6 +20,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
 @Named("cesfamController")
 @SessionScoped
@@ -27,6 +30,9 @@ public class cesfamController implements Serializable {
     private sessionbeans.cesfamFacadeLocal ejbFacade;
     private List<cesfam> items = null;
     private cesfam selected;
+    
+    @Inject
+    comunaController comunaCtrl;
 
     public cesfamController() {
     }
@@ -160,6 +166,20 @@ public class cesfamController implements Serializable {
             }
         }
 
+    }
+    
+    public List<comuna> completeComuna(String query) {
+        List<comuna> allComunas = comunaCtrl.getItems();
+        List<comuna> filteredComunas = new ArrayList<comuna>();
+         
+        for (int i = 0; i < allComunas.size(); i++) {
+            comuna Comuna = allComunas.get(i);
+            if(Comuna.getNombre().toLowerCase().startsWith(query.toLowerCase())) {
+                filteredComunas.add(Comuna);
+            }
+        }
+         
+        return filteredComunas;
     }
 
 }

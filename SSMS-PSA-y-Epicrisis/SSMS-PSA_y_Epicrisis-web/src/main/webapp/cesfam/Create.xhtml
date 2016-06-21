@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="cesfamCreateDlg" widgetVar="cesfamCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatecesfamTitle}">
+            <h:form id="cesfamCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cesfamController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatecesfamLabel_comuna}" for="comuna" />
+                        <p:autoComplete id="comuna" value="#{cesfamController.selected.comuna}" completeMethod="#{cesfamController.completeComuna}"
+                                        var="comuna" itemLabel="#{comuna.nombre}" itemValue="#{comuna}" converter="entityConverter" forceSelection="true" required="true"/>       
+                        <p:outputLabel value="Tipo" for="nombre_tipo" />
+                        <p:inputText id="nombre_tipo" value="#{cesfamController.selected.nombre_tipo}" title="#{bundle.CreatecesfamTitle_nombre_tipo}" />
+                        <p:outputLabel value="#{bundle.CreatecesfamLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{cesfamController.selected.nombre}" title="#{bundle.CreatecesfamTitle_nombre}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{cesfamController.create}" value="#{bundle.Save}" update="display,:cesfamListForm:datalist,:growl" oncomplete="handleSubmit(args,'cesfamCreateDialog');"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

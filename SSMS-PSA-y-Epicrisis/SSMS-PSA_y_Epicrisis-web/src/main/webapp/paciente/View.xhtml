@@ -189,7 +189,7 @@
                             <p:commandButton actionListener="#{clapController.createPDF}" icon="ui-icon-arrowthickstop-1-s" value="Crear PDF" ajax="false" update="display,:clapViewForm:datalist,:growl" disabled="#{empty clapController.selected}"/>
                             <p:confirmDialog message="Esta de segur@ de crear una ficha CLAP ?" header="Crear Ficha CLAP" severity="alert" widgetVar="cd2">
                                 <p:commandButton value="Si" action="#{clapController.create()}" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="/clap/View"/>
-                                <p:commandButton value="No" type="button" onclick="PF('cd').hide()" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                <p:commandButton value="No" type="button" onclick="PF('cd2').hide()" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                             </p:confirmDialog>
                         </f:facet>
                 </p:dataTable>
