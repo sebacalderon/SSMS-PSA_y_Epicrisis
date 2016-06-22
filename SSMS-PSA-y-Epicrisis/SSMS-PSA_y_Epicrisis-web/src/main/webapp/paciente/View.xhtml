@@ -131,12 +131,6 @@
                         <p:ajax event="rowUnselect" update="viewButton editButton createClap viewRiesgosButton desactivateButton"/>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListclapTitle_numero_consulta}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListclapTitle_fecha_consulta}"/>
                             </f:facet>
                             <h:outputText value="#{item.fecha_consulta}">
@@ -174,6 +168,25 @@
                             </f:facet>
                             <h:outputText value="#{item.estado}"/>
                         </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Secciones Incompletas"/>
+                            </f:facet>
+                            <h:outputText value="Usuario &lt;br /&gt;" rendered="#{!item.seccion_usuario}" escape="false"/>
+                            <h:outputText value="Datos Generales &lt;br /&gt;" rendered="#{!item.seccion_datosgenerales}" escape="false"/>
+                            <h:outputText value="Antecedentes Personales &lt;br /&gt;" rendered="#{!item.seccion_antecedentes_personales}" escape="false"/>
+                            <h:outputText value="Antecedentes Familiares &lt;br /&gt;" rendered="#{!item.seccion_antecedentes_familiares}" escape="false"/>
+                            <h:outputText value="Familia &lt;br /&gt;" rendered="#{!item.seccion_familia}" escape="false"/>
+                            <h:outputText value="Vivienda &lt;br /&gt;" rendered="#{!item.seccion_vivienda}" escape="false"/>
+                            <h:outputText value="Educación &lt;br /&gt;" rendered="#{!item.seccion_educacion}" escape="false"/>
+                            <h:outputText value="Trabajo &lt;br /&gt;" rendered="#{!item.seccion_trabajo}" escape="false"/>
+                            <h:outputText value="Vida Social &lt;br /&gt;" rendered="#{!item.seccion_vida_social}" escape="false"/>
+                            <h:outputText value="Hábitos/consumo &lt;br /&gt;" rendered="#{!item.seccion_habitos}" escape="false"/>
+                            <h:outputText value="Gineco/urológico &lt;br /&gt;" rendered="#{!item.seccion_gineco}" escape="false"/>
+                            <h:outputText value="Sexualidad &lt;br /&gt;" rendered="#{!item.seccion_sexualidad}" escape="false"/>
+                            <h:outputText value="Situación Psicoemocional &lt;br /&gt;" rendered="#{!item.seccion_psicoemocional}" escape="false"/>
+                            <h:outputText value="Examen Físico &lt;br /&gt;" rendered="#{!item.seccion_examen_fisico}" escape="false"/>
+                        </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createClap" icon="ui-icon-plus"   value="Crear Clap" rendered="#{loginController.esFuncionario() or loginController.esEncargadoPrograma()}" onclick="PF('cd2').show()"/>
                             <p:commandButton id="viewButton" icon="ui-icon-search" value="#{bundle.View}" disabled="#{empty clapController.selected || clapController.selected.id == null}" action="/clap/View?faces-redirect=true"/>
@@ -200,10 +213,10 @@
             <b:panel id="pacienteActividadViewDlg" title="Actividades de Intervención del Usuario">
             <h:form id="actividadListForm">
                 <h:panelGroup id="display2">                   
-                    <p:dataTable id="datalist" value="#{actividadController.getItemsPorPaciente(pacienteController.selected)}" var="item"
+                    <p:dataTable id="datalist" value="#{actividadController.getItemsPorPaciente(pacienteController.selected)}" var="item2"
                                  selectionMode="single" selection="#{actividadController.selected}"
                                  paginator="true"
-                                 rowKey="#{item.id}"
+                                 rowKey="#{item2.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >      
@@ -214,7 +227,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListactividadTitle_fecha_realizacion}"/>
                             </f:facet>
-                            <h:outputText value="#{item.fecha_realizacion}">
+                            <h:outputText value="#{item2.fecha_realizacion}">
                                 <f:convertDateTime pattern="dd/MM/yyyy" />
                             </h:outputText>
                         </p:column>
@@ -222,33 +235,33 @@
                             <f:facet name="header">
                                 <h:outputText value="Funcionario PSA a cargo"/>
                             </f:facet>
-                            <h:outputText value="#{item.usuario.RUT}">
+                            <h:outputText value="#{item2.usuario.RUT}">
                             </h:outputText>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Actividades realizadas"/>
                             </f:facet>
-                            <h:outputText rendered="#{item.consejeria_actividad_fisica}" value="Consejeria en Actividad Fisica  &lt;br /&gt;" escape="false" />
-                            <h:outputText rendered="#{item.consejeria_alimentacion_saludable}" value="Consejería en alimentación saludable  &lt;br /&gt;" escape="false"/>
-                            <h:outputText rendered="#{item.consejeria_consumo_drogas}" value="Consejería en consumo de Drogas  &lt;br /&gt;" escape="false"/>
-                            <h:outputText rendered="#{item.consejeria_familiares}" value="Consejerias familiares &lt;br /&gt;" escape="false"/>
-                            <h:outputText rendered="#{item.consejeria_motivacional}" value="Entrevista Motivacional &lt;br /&gt;" escape="false"/>
-                            <h:outputText rendered="#{item.consejeria_regulacion_fecundidad}" value="Consejería en Regulación de Fecundidad &lt;br /&gt;" escape="false"/>
-                            <h:outputText rendered="#{item.consejeria_salud_mental}" value="Consejería Salud Mental &lt;br /&gt;" escape="false"/>
-                            <h:outputText rendered="#{item.consejeria_ssr}" value="Consejeria en Salud Sexual y Reproductiva &lt;br /&gt;" escape="false"/>
-                            <h:outputText rendered="#{item.consejeria_tabaquismo}" value="Consejería en Tabaquismo &lt;br /&gt;" escape="false"/>
-                            <h:outputText rendered="#{item.consejeria_vih_its}" value="Consejería en Prevención de VIH e ITS &lt;br /&gt;" escape="false"/>
-                            <h:outputText rendered="#{item.ingreso_control_prenatal}" value="Ingreso a Control Prenatal &lt;br /&gt;" escape="false"/>
-                            <h:outputText rendered="#{item.ingreso_programa_cardiovascular}" value="Ingreso a Programa Cariovascular &lt;br /&gt;" escape="false"/>
-                            <h:outputText rendered="#{item.ingreso_programa_intervencion}" value="Ingreso a Programas de Intervencion &lt;br /&gt;" escape="false"/>
-                            <h:outputText rendered="#{item.ingreso_regulacion_fecundidad}" value="Ingreso a Regulacion de Fecundidad &lt;br /&gt;" escape="false"/>
-                            <h:outputText rendered="#{item.ingreso_salud_mental}" value="Ingreso a salud Mental &lt;br /&gt;" escape="false"/>
-                            <h:outputText rendered="#{item.nivelacion_estudios}" value="Nivelación  de estudios &lt;br /&gt;" escape="false"/>
-                            <h:outputText rendered="#{item.vinculacion_beneficios_sociales}" value="Vinculacion de beneficios sociales &lt;br /&gt;" escape="false"/>
-                            <h:outputText rendered="#{item.intervencion_breve_alcohol}" value="Intervención breve en alcohol &lt;br /&gt;" escape="false"/>
-                            <h:outputText rendered="#{item.derivacion_colegio}" value="Derivación a colegio &lt;br /&gt;" escape="false"/>
-                            <h:outputText rendered="#{item.derivacion_otra_comuna}" value="Derivación a otra comuna &lt;br /&gt;" escape="false"/>
+                            <h:outputText rendered="#{item2.consejeria_actividad_fisica}" value="Consejeria en Actividad Fisica  &lt;br /&gt;" escape="false" />
+                            <h:outputText rendered="#{item2.consejeria_alimentacion_saludable}" value="Consejería en alimentación saludable  &lt;br /&gt;" escape="false"/>
+                            <h:outputText rendered="#{item2.consejeria_consumo_drogas}" value="Consejería en consumo de Drogas  &lt;br /&gt;" escape="false"/>
+                            <h:outputText rendered="#{item2.consejeria_familiares}" value="Consejerias familiares &lt;br /&gt;" escape="false"/>
+                            <h:outputText rendered="#{item2.consejeria_motivacional}" value="Entrevista Motivacional &lt;br /&gt;" escape="false"/>
+                            <h:outputText rendered="#{item2.consejeria_regulacion_fecundidad}" value="Consejería en Regulación de Fecundidad &lt;br /&gt;" escape="false"/>
+                            <h:outputText rendered="#{item2.consejeria_salud_mental}" value="Consejería Salud Mental &lt;br /&gt;" escape="false"/>
+                            <h:outputText rendered="#{item2.consejeria_ssr}" value="Consejeria en Salud Sexual y Reproductiva &lt;br /&gt;" escape="false"/>
+                            <h:outputText rendered="#{item2.consejeria_tabaquismo}" value="Consejería en Tabaquismo &lt;br /&gt;" escape="false"/>
+                            <h:outputText rendered="#{item2.consejeria_vih_its}" value="Consejería en Prevención de VIH e ITS &lt;br /&gt;" escape="false"/>
+                            <h:outputText rendered="#{item2.ingreso_control_prenatal}" value="Ingreso a Control Prenatal &lt;br /&gt;" escape="false"/>
+                            <h:outputText rendered="#{item2.ingreso_programa_cardiovascular}" value="Ingreso a Programa Cariovascular &lt;br /&gt;" escape="false"/>
+                            <h:outputText rendered="#{item2.ingreso_programa_intervencion}" value="Ingreso a Programas de Intervencion &lt;br /&gt;" escape="false"/>
+                            <h:outputText rendered="#{item2.ingreso_regulacion_fecundidad}" value="Ingreso a Regulacion de Fecundidad &lt;br /&gt;" escape="false"/>
+                            <h:outputText rendered="#{item2.ingreso_salud_mental}" value="Ingreso a salud Mental &lt;br /&gt;" escape="false"/>
+                            <h:outputText rendered="#{item2.nivelacion_estudios}" value="Nivelación  de estudios &lt;br /&gt;" escape="false"/>
+                            <h:outputText rendered="#{item2.vinculacion_beneficios_sociales}" value="Vinculacion de beneficios sociales &lt;br /&gt;" escape="false"/>
+                            <h:outputText rendered="#{item2.intervencion_breve_alcohol}" value="Intervención breve en alcohol &lt;br /&gt;" escape="false"/>
+                            <h:outputText rendered="#{item2.derivacion_colegio}" value="Derivación a colegio &lt;br /&gt;" escape="false"/>
+                            <h:outputText rendered="#{item2.derivacion_otra_comuna}" value="Derivación a otra comuna &lt;br /&gt;" escape="false"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":actividadViewForm" oncomplete="PF('actividadViewDialog').show()" disabled="#{empty actividadController.selected}"/>

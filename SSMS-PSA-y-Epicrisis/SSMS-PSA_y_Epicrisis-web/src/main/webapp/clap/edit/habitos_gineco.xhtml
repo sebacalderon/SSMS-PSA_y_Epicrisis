@@ -80,11 +80,12 @@
                                         <f:selectItem itemValue="false" />
                                         <f:selectItem itemValue="true" />
                                         <f:ajax event="valueChange"  listener="#{clapController.AuditCrafft(clapController.selected.consumo_otra_sustancia)}" immediate="true" render="habitos" ></f:ajax>
+                                        <p:ajax event="valueChange"  immediate="true" update="especificacion_consumo_otra_sustancia" ></p:ajax>                                                                     
                                     </p:selectOneRadio>
                                 </b:column>
                             </b:row>
                             <b:row>
-                                <p:inputText id="especificacion_consumo_otra_sustancia" placeholder="¿Cuál?¿Cuáles?" value="#{clapController.selected.especificacion_consumo_otra_sustancia}" >
+                                <p:inputText id="especificacion_consumo_otra_sustancia" placeholder="¿Cuál?¿Cuáles?" value="#{clapController.selected.especificacion_consumo_otra_sustancia}" disabled="#{!clapController.selected.consumo_otra_sustancia}">
                                 </p:inputText> 
                             </b:row>
                         </b:column>
@@ -134,10 +135,11 @@
                                 <p:selectOneRadio id="alimentacion_especial" style="width:13em;" value="#{clapController.selected.alimentacion_especial}" layout="grid" columns="2">
                                     <f:selectItem itemLabel="si" itemValue="true" />
                                     <f:selectItem itemLabel="no" itemValue="false" />
+                                    <p:ajax event="valueChange"  immediate="true" update="especificacion_alimentacion_especial" ></p:ajax>                                                                                                         
                                 </p:selectOneRadio>
                             </b:row>
                             <b:row>
-                                <p:inputText id="especificacion_alimentacion_especial" value="#{clapController.selected.especificacion_alimentacion_especial}" placeholder="¿Cuál?" >
+                                <p:inputText id="especificacion_alimentacion_especial" value="#{clapController.selected.especificacion_alimentacion_especial}" placeholder="¿Cuál?" disabled="#{!clapController.selected.alimentacion_especial}">
                                 </p:inputText>
                             </b:row>
                         </b:column>
@@ -149,10 +151,11 @@
                                 <p:selectOneRadio id="tabaco" style="width:13em;" value="#{clapController.selected.tabaco}" layout="grid" columns="2">
                                     <f:selectItem itemLabel="si" itemValue="true" />
                                     <f:selectItem itemLabel="no" itemValue="false" />
+                                    <p:ajax event="valueChange"  immediate="true" update="cigarros_dia" ></p:ajax>                                                                                                         
                                 </p:selectOneRadio>
                             </b:row>
                             <b:row>
-                                <b:column col-xs="3"><pe:inputNumber styleClass="campo-numerico" id="cigarros_dia" minValue="0" maxValue="100" value="#{clapController.selected.cigarros_dia}" title="#{bundle.CreateclapTitle_cigarros_dia}" >
+                                <b:column col-xs="3"><pe:inputNumber styleClass="campo-numerico" id="cigarros_dia" minValue="0" maxValue="100" value="#{clapController.selected.cigarros_dia}" title="#{bundle.CreateclapTitle_cigarros_dia}" disabled="#{!clapController.selected.tabaco}">
                                     </pe:inputNumber></b:column> promedio cigarros/día
                             </b:row>
                         </b:column>
@@ -391,11 +394,11 @@
                                     <p:outputLabel value="#{bundle.CreateclapLabel_fecha_ultima_menstruacion}" for="fecha_ultima_menstruacion" />
                                 </b:row>
                                 <b:row>
-                                    <p:calendar id="fecha_ultima_menstruacion" pattern="dd/MM/yyyy" value="#{clapController.selected.fecha_ultima_menstruacion}" showOn="button">
+                                    <p:calendar id="fecha_ultima_menstruacion" pattern="dd/MM/yyyy" value="#{clapController.selected.fecha_ultima_menstruacion}" showOn="button" disabled="#{clapController.selected.sexo == 1}">
                                     </p:calendar>
                                 </b:row>
                                 <b:row>
-                                    <p:selectOneRadio id="no_conoce_fecha_ultima_menstruacion" style="width:13em;" value="#{clapController.selected.no_conoce_fecha_ultima_menstruacion}" layout="grid" columns="2">
+                                    <p:selectOneRadio id="no_conoce_fecha_ultima_menstruacion" style="width:13em;" value="#{clapController.selected.no_conoce_fecha_ultima_menstruacion}" layout="grid" columns="2" disabled="#{clapController.selected.sexo == 1}">
                                         <f:selectItem itemLabel="no conoce" itemValue="true" />
                                         <f:selectItem itemLabel="n/c" itemValue="false" />
                                     </p:selectOneRadio>
@@ -406,7 +409,7 @@
                                     <p:outputLabel value="#{bundle.CreateclapLabel_ciclos_regulares}" for="ciclos_regulares" />
                                 </b:row>
                                 <b:row>
-                                    <p:selectOneRadio id="ciclos_regulares" style="width:13em;" value="#{clapController.selected.ciclos_regulares}" layout="grid" columns="2">
+                                    <p:selectOneRadio id="ciclos_regulares" style="width:13em;" value="#{clapController.selected.ciclos_regulares}" layout="grid" columns="2" disabled="#{clapController.selected.sexo == 1}">
                                         <f:selectItem itemLabel="si" itemValue="1" />
                                         <f:selectItem itemLabel="no" itemValue="2" />
                                         <f:selectItem itemLabel="n/s" itemValue="3" />
@@ -422,7 +425,7 @@
                                     <p:outputLabel value="#{bundle.CreateclapLabel_dismenorrea}" for="dismenorrea" />
                                 </b:row>
                                 <b:row>
-                                    <p:selectOneRadio id="dismenorrea" style="width:13em;" value="#{clapController.selected.dismenorrea}" layout="grid" columns="2">
+                                    <p:selectOneRadio id="dismenorrea" style="width:13em;" value="#{clapController.selected.dismenorrea}" layout="grid" columns="2" disabled="#{clapController.selected.sexo == 1}">
                                         <f:selectItem itemLabel="si" itemValue="1" />
                                         <f:selectItem itemLabel="no" itemValue="2" />
                                         <f:selectItem itemLabel="n/c" itemValue="3" />
@@ -445,10 +448,11 @@
                                     <p:selectOneRadio id="its_vih" style="width:13em;" value="#{clapController.selected.its_vih}" layout="grid" columns="2">
                                         <f:selectItem itemLabel="si" itemValue="true" />
                                         <f:selectItem itemLabel="no" itemValue="false" />
+                                        <p:ajax event="valueChange"  immediate="true" update="especificacion_its_vih"></p:ajax>                                                                     
                                     </p:selectOneRadio>
                                 </b:row>
                                 <b:row>
-                                    <p:inputText id="especificacion_its_vih" value="#{clapController.selected.especificacion_its_vih}" placeholder="¿Cuáles?" >
+                                    <p:inputText id="especificacion_its_vih" value="#{clapController.selected.especificacion_its_vih}" placeholder="¿Cuáles?" disabled="#{!clapController.selected.its_vih}">
                                     </p:inputText>
                                 </b:row>
                                 <br/>
