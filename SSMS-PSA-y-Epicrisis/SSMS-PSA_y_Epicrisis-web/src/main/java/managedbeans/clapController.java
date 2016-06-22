@@ -1078,7 +1078,8 @@ public class clapController implements Serializable {
 //        System.out.println("Riesgo social: "+selected.isRiesgo_social());
 //        System.out.println("Riesgo ssr: "+selected.isRiesgo_ssr());
 //        
-
+        
+        pacienteCtrl.setSelected(selected.getPaciente());
         if(completo){
             if(selected.isRiesgo_cardiovascular()||selected.isRiesgo_nutricional()||selected.isRiesgo_oh_drogas()||selected.isRiesgo_salud_mental()||selected.isRiesgo_social()||selected.isRiesgo_ssr()){
                 pacienteCtrl.riesgosNoTratados();
@@ -1287,21 +1288,32 @@ public class clapController implements Serializable {
 
     private void actualizaCrafftAudit() {
         if (selected.getAudit()!= null) {
-            audit audit = auditCtrl.getItemsPorClap(selected).get(0);
-            Long id = auditCtrl.getItemsPorClap(selected).get(0).getId();
-            audit = selected.getAudit();
-            audit.setId(id);
-            auditCtrl.setSelected(audit);
-            auditCtrl.update();
+            if (auditCtrl.getItemsPorClap(selected).isEmpty()) {
+                auditCtrl.setSelected(selected.getAudit());
+                auditCtrl.create();
+            }else{
+                audit audit = auditCtrl.getItemsPorClap(selected).get(0);
+                Long id = auditCtrl.getItemsPorClap(selected).get(0).getId();
+                audit = selected.getAudit();
+                audit.setId(id);
+                auditCtrl.setSelected(audit);
+                auditCtrl.update();
+            }
+
         }
         
         if (selected.getCrafft()!= null) {
-            Crafft crafft = crafftCtrl.getItemsPorClap(selected).get(0);
-            Long id = crafftCtrl.getItemsPorClap(selected).get(0).getId();
-            crafft = selected.getCrafft();
-            crafft.setId(id);
-            crafftCtrl.setSelected(crafft);
-            crafftCtrl.update();
+            if (crafftCtrl.getItemsPorClap(selected).isEmpty()) {
+                crafftCtrl.setSelected(selected.getCrafft());
+                crafftCtrl.create();
+            }else{
+                Crafft crafft = crafftCtrl.getItemsPorClap(selected).get(0);
+                Long id = crafftCtrl.getItemsPorClap(selected).get(0).getId();
+                crafft = selected.getCrafft();
+                crafft.setId(id);
+                crafftCtrl.setSelected(crafft);
+                crafftCtrl.update();
+            }
         }
     }
 
@@ -1437,7 +1449,7 @@ public class clapController implements Serializable {
             }
         }else{
             if (auditCrafft == false) {
-                if (selected.getEdad() > 9 && selected.getEdad() < 15) {
+                if (selected.getEdad() > 18 ) {
                     if (selected.getAudit() == null) {
                         audit audit = new audit();
                         audit.setClap(selected);
@@ -1448,7 +1460,7 @@ public class clapController implements Serializable {
                     isCrafft = false;
                     auditCrafft = true;
                 }
-                if (selected.getEdad() > 14 && selected.getEdad() < 20) {
+                if (selected.getEdad() > 9 && selected.getEdad() < 19) {
                     if (selected.getCrafft()== null) {
                         Crafft crafft = new Crafft();
                         crafft.setClap(selected);
