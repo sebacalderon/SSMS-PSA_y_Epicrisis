@@ -104,6 +104,10 @@ public class clap implements Serializable {
     @JoinColumn(name="cesfam_clap")
     private cesfam cesfam;      
     
+    @ManyToOne
+    @JoinColumn(name="cesfam_clap2")
+    private cesfam cesfam_clap;
+    
     @Column(name="telefono_fijo_clap")
     private String telefono_fijo;
     
@@ -727,6 +731,160 @@ public class clap implements Serializable {
     @Column(name="riesgo_social_clap")
     private boolean riesgo_social;
 
+    @Column(name="seccion_usuario_clap")
+    private boolean seccion_usuario;
+    
+    @Column(name="seccion_datos_clap")
+    private boolean seccion_datosgenerales;
+    
+    @Column(name="seccion_antecedentesp_clap")
+    private boolean seccion_antecedentes_personales;
+    
+    @Column(name="seccion_antecedentesf_clap")
+    private boolean seccion_antecedentes_familiares;
+    
+    @Column(name="seccion_familia_clap")
+    private boolean seccion_familia;
+    
+    @Column(name="seccion_vivienda_clap")
+    private boolean seccion_vivienda;
+    
+    @Column(name="seccion_educacion_clap")
+    private boolean seccion_educacion;
+    
+    @Column(name="seccion_trabajo_clap")
+    private boolean seccion_trabajo;
+    
+    @Column(name="seccion_vidasocial_clap")
+    private boolean seccion_vida_social;
+    
+    @Column(name="seccion_habitos_clap")
+    private boolean seccion_habitos;
+    
+    @Column(name="seccion_gineco_clap")
+    private boolean seccion_gineco;
+    
+    @Column(name="seccion_sexualidad_clap")
+    private boolean seccion_sexualidad;
+    
+    @Column(name="seccion_psicoemocional_clap")
+    private boolean seccion_psicoemocional;
+    
+    @Column(name="seccion_efisico_clap")
+    private boolean seccion_examen_fisico;
+
+    public boolean isSeccion_datosgenerales() {
+        return seccion_datosgenerales;
+    }
+
+    public void setSeccion_datosgenerales(boolean seccion_datosgenerales) {
+        this.seccion_datosgenerales = seccion_datosgenerales;
+    }
+
+    public boolean isSeccion_usuario() {
+        return seccion_usuario;
+    }
+
+    public void setSeccion_usuario(boolean seccion_usuario) {
+        this.seccion_usuario = seccion_usuario;
+    }
+
+    public boolean isSeccion_antecedentes_personales() {
+        return seccion_antecedentes_personales;
+    }
+
+    public void setSeccion_antecedentes_personales(boolean seccion_antecedentes_personales) {
+        this.seccion_antecedentes_personales = seccion_antecedentes_personales;
+    }
+
+    public boolean isSeccion_antecedentes_familiares() {
+        return seccion_antecedentes_familiares;
+    }
+
+    public void setSeccion_antecedentes_familiares(boolean seccion_antecedentes_familiares) {
+        this.seccion_antecedentes_familiares = seccion_antecedentes_familiares;
+    }
+
+    public boolean isSeccion_familia() {
+        return seccion_familia;
+    }
+
+    public void setSeccion_familia(boolean seccion_familia) {
+        this.seccion_familia = seccion_familia;
+    }
+
+    public boolean isSeccion_vivienda() {
+        return seccion_vivienda;
+    }
+
+    public void setSeccion_vivienda(boolean seccion_vivienda) {
+        this.seccion_vivienda = seccion_vivienda;
+    }
+
+    public boolean isSeccion_educacion() {
+        return seccion_educacion;
+    }
+
+    public void setSeccion_educacion(boolean seccion_educacion) {
+        this.seccion_educacion = seccion_educacion;
+    }
+
+    public boolean isSeccion_trabajo() {
+        return seccion_trabajo;
+    }
+
+    public void setSeccion_trabajo(boolean seccion_trabajo) {
+        this.seccion_trabajo = seccion_trabajo;
+    }
+
+    public boolean isSeccion_vida_social() {
+        return seccion_vida_social;
+    }
+
+    public void setSeccion_vida_social(boolean seccion_vida_social) {
+        this.seccion_vida_social = seccion_vida_social;
+    }
+
+    public boolean isSeccion_habitos() {
+        return seccion_habitos;
+    }
+
+    public void setSeccion_habitos(boolean seccion_habitos) {
+        this.seccion_habitos = seccion_habitos;
+    }
+
+    public boolean isSeccion_gineco() {
+        return seccion_gineco;
+    }
+
+    public void setSeccion_gineco(boolean seccion_gineco) {
+        this.seccion_gineco = seccion_gineco;
+    }
+
+    public boolean isSeccion_sexualidad() {
+        return seccion_sexualidad;
+    }
+
+    public void setSeccion_sexualidad(boolean seccion_sexualidad) {
+        this.seccion_sexualidad = seccion_sexualidad;
+    }
+
+    public boolean isSeccion_psicoemocional() {
+        return seccion_psicoemocional;
+    }
+
+    public void setSeccion_psicoemocional(boolean seccion_psicoemocional) {
+        this.seccion_psicoemocional = seccion_psicoemocional;
+    }
+
+    public boolean isSeccion_examen_fisico() {
+        return seccion_examen_fisico;
+    }
+
+    public void setSeccion_examen_fisico(boolean seccion_examen_fisico) {
+        this.seccion_examen_fisico = seccion_examen_fisico;
+    }
+    
     public audit getAudit() {
         return audit;
     }
@@ -2358,6 +2516,14 @@ public class clap implements Serializable {
         this.pueblo_originario = pueblo_originario;
     }
 
+    public cesfam getCesfam_clap() {
+        return cesfam_clap;
+    }
+
+    public void setCesfam_clap(cesfam cesfam_clap) {
+        this.cesfam_clap = cesfam_clap;
+    }
+    
     public cesfam getCesfam() {
         return cesfam;
     }

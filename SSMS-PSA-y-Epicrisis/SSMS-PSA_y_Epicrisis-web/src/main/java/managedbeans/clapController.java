@@ -688,7 +688,32 @@ public class clapController implements Serializable {
             parametro_imagen = false;
         }
         //Verifica si completa el clap
-        if( selected.getPerinatales_normales()!=0&&
+        //Seccion usuario
+        selected.setSeccion_usuario(true);
+        boolean seccion = true;
+        //Seccion antecedentes generales
+        switch (selected.getControl_en()) {
+            case 1:
+                if (selected.getEstablecimiento_educacional().equals("")) {
+                    seccion = false;
+                }   break;
+            case 2:
+                if (selected.getCesfam_clap()== null) {
+                    seccion = false;
+                }   break;
+            default:
+                seccion = false;
+                break;
+        }
+        if (selected.getAcompanante()==null) {
+            seccion = false;
+        }
+        System.out.println("Seccion antecedentes generales: "+ seccion);
+        selected.setSeccion_datosgenerales(seccion);
+        seccion = false;
+        
+        //Seccion Antecedentes Personales
+        if(selected.getPerinatales_normales()!=0&&
             selected.getAlergias_normales()!=0&&
             selected.getVacunas_completas()!=0&&
             selected.getEnfermedades_importantes()!=0&&
@@ -698,45 +723,225 @@ public class clapController implements Serializable {
             selected.getProblemas_salud_mental()!=0&&
             selected.getViolencia()!=0&&
             selected.getAntecedentes_judiciales()!=0&&
-            selected.getOtros()!=0&&
-            selected.getEnfermedades_importantes_familia()!=0&&
+            selected.getOtros()!=0){
+            seccion = true;
+        }
+        System.out.println("Seccion antecedentes personales: "+ seccion);
+        selected.setSeccion_antecedentes_personales(seccion);
+        seccion = false;
+        //Seccion Antecedentes Familiares
+        if(selected.getEnfermedades_importantes_familia()!=0&&
             selected.getObesidad_familia()!=0&&
             selected.getProblemas_salud_mental_familia()!=0&&
             selected.getViolencia_intrafamiliar()!=0&&
             selected.getAlcohol_y_otras_drogas()!=0&&
             selected.getPadre_adolescente()!=0&&
             selected.getJudiciales()!=0&&
-            selected.getOtros_antecedentes_familiares()!=0&&
-            selected.getPercepcion_familia()!=0&&
-            selected.getNivel_educacion()!=0&&
-            selected.getPercepcion_rendimiento()!=0&&
-            selected.getAceptacion()!=0&&
-            (selected.getHoras_actividad_fisica()!=0||
-            selected.getHoras_tv()!=0||
-            selected.getHoras_computador_consola()!=0)&&
-            selected.getHoras_sueno()!=0 &&
-            selected.getDismenorrea()!=0&&
-            selected.getOrientacion_sexual()!=0&&
-            selected.getConducta_sexual()!=0&&
-            selected.getPareja_sexual()!=0&&
-            selected.getImagen_corporal()!=0&&
-            selected.getBienestar_emocional()!=0&&
-            selected.getVida_proyecto()!=0&&
-            selected.getReferente_adulto()!=0&&
-            selected.getPeso()!=0&&
-            selected.getTalla()!=0&&
-            selected.getPresion_arterial_diastolica()!=0&&
-            selected.getPresion_arterial_sistolica()!=0&&
-            selected.getPerimetro_abdominal()!=0&&
-            selected.getTanner_genital()!=0 &&
-            selected.getDiagrama_familiar()!=null
-            ){
+            selected.getOtros_antecedentes_familiares()!=0){
+            seccion = true;
+        }
+        selected.setSeccion_antecedentes_familiares(seccion);
+        System.out.println("Seccion Antecedentes Familiares: "+selected.isSeccion_antecedentes_familiares());
+        
+        seccion = true;
+        //Seccion Familia
+        if (selected.isVive_con_solo()==false && selected.isVive_con_madre()==false && selected.isVive_con_padre()==false && selected.isVive_en_institucion()==false && selected.isVive_con_otros()==false) {
+            seccion = false;
+        }
+        if (selected.isVive_con_otros()) {
+            if (selected.getVive_con_especificacion().equals("")) {
+                seccion = false;
+            }
+        }
+        if (selected.getNivel_instruccion_madre() == 0 || selected.getNivel_instruccion_padre()==0 || selected.getNivel_instruccion_pareja()==0 || selected.getPercepcion_familia()==0 || selected.getDiagrama_familiar() == null) {
+            seccion = false;
+        }
+        selected.setSeccion_familia(seccion);
+        System.out.println("Seccion familia: "+ selected.isSeccion_familia());
+        //Seccion Vivienda
+        selected.setSeccion_vivienda(true);
+        seccion = true;
+        //Seccion Educacion
+        if (selected.getNivel_educacion()==0 || selected.getPercepcion_rendimiento()==0) {
+            seccion = false;
+        }
+        if (selected.getNivel_educacion()> 1) {
+            if (selected.getCurso() == null) {
+                seccion = false;
+            }
+        }
+        selected.setSeccion_educacion(seccion);
+        System.out.println("Seccion Educacion: "+ selected.isSeccion_educacion());
+        
+        //Seccion Trabajo
+        seccion = true;
+        if (selected.isTrabaja()) {
+            if (selected.getHoras_trabajo() == 0 || selected.getRazon_de_trabajo() == 0) {
+                seccion = false;
+            }
+        }
+        if (selected.getLegalizado() == 0) {
+            seccion = false;
+        }
+        selected.setSeccion_trabajo(seccion);
+        System.out.println("Seccion Trabajo: "+ selected.isSeccion_trabajo());
+        seccion = true;
+        //Seccion Vida Social
+        if (selected.getAceptacion()==0) {
+            seccion = false;
+        }
+        if (selected.isPareja()) {
+            if (selected.getEdad_pareja() == 0) {
+                seccion = false;
+            }
+        }
+        selected.setSeccion_vida_social(seccion);
+        System.out.println("Seccion Vida Social: "+ selected.isSeccion_vida_social());
+        seccion = true;
+        //Seccion Habitos/consumo
+        if (selected.isConsumo_otra_sustancia()) {
+            if (selected.getEspecificacion_consumo_otra_sustancia().equals("")) {
+                seccion = false;
+            }
+        }
+        if (selected.getHoras_sueno() == 0) {
+            seccion = false;
+        }
+        if (selected.isAlimentacion_especial()) {
+            if (selected.getEspecificacion_alimentacion_especial().equals("")) {
+                seccion =  false;
+            }
+        }
+        if (selected.isTabaco()) {
+            if (selected.getCigarros_dia() == 0) {
+                seccion = false;
+            }
+        }
+        selected.setSeccion_habitos(seccion);
+        System.out.println("Seccion Habitos: "+ selected.isSeccion_habitos());
+        seccion = true;
+        
+        //Seccion Gineco
+        if (selected.isIts_vih()) {
+            if (selected.getEspecificacion_its_vih().equals("")) {
+                seccion = false;
+            }
+        }
+        if (selected.getTratamiento() == 0 || selected.getTratamiento_contactos() == 0) {
+            seccion = false;
+        }
+        
+        if (selected.getSexo() == 2) {
+            if (selected.getCiclos_regulares() == 0 || selected.getDismenorrea() == 0) {
+                seccion = false;
+            }
+        }
+        
+        selected.setSeccion_gineco(seccion);
+        System.out.println("Seccion Gineco: "+ selected.isSeccion_gineco());
+        seccion = true;
+        //Seccion Sexualidad
+        System.out.println("Orientacion Sexual: "+ selected.getOrientacion_sexual());
+        if (selected.getOrientacion_sexual()==0) {
+            System.out.println(selected.getEspecificacion_orientacion_sexual());
+            if (selected.getEspecificacion_orientacion_sexual()== null) {
+                seccion = false;
+            }
+        }
+        if (selected.getConducta_sexual() == 0) {
+            seccion = false;
+        }else{
+            if (selected.getConducta_sexual() != 1) {
+                if (selected.getEdad_inicio_conducta_sexual() == 0 || selected.getRelaciones_sexuales() == 0 || selected.getPareja_sexual() == 0 || selected.getDificultades_sexuales() == 0 || selected.getAnticoncepcion() == 0 || selected.getUso_mac() == 0) {
+                    seccion = false;
+                }
+            }
+            
+        }
+        selected.setSeccion_sexualidad(seccion);
+        System.out.println("Seccion Sexualidad: "+ selected.isSeccion_sexualidad());
+        seccion = true;
+        
+        //Seccion Psicoemocional
+        if (selected.getImagen_corporal() == 0 || selected.getBienestar_emocional() == 0 || selected.getVida_proyecto()==0 || selected.getReferente_adulto() == 0) {
+            seccion = false;
+        }else{
+            if (selected.getReferente_adulto()!=5) {
+                if (selected.getNombre_referente_adulto().equals("") || selected.getTelefono_referente_adulto().equals("")) {
+                    seccion = false;
+                }
+            }
+        }
+        selected.setSeccion_psicoemocional(seccion);
+        System.out.println("Seccion Psicoemocional: "+ selected.isSeccion_psicoemocional());
+        seccion = true;
+        
+        if (selected.getPeso() == 0 || selected.getTalla() == 0 || selected.getPerimetro_abdominal() == 0 || selected.getPresion_arterial_diastolica() == 0 || selected.getPresion_arterial_sistolica() == 0) {
+            seccion = false; 
+        }
+        
+        selected.setSeccion_examen_fisico(seccion);
+        System.out.println("Seccion Examen Fisico: "+ selected.isSeccion_examen_fisico());
+        
+        if (selected.isSeccion_antecedentes_familiares() && selected.isSeccion_antecedentes_personales() && selected.isSeccion_datosgenerales() &&
+            selected.isSeccion_educacion() && selected.isSeccion_examen_fisico() && selected.isSeccion_familia() && selected.isSeccion_gineco() &&
+            selected.isSeccion_habitos() && selected.isSeccion_psicoemocional() && selected.isSeccion_sexualidad() && selected.isSeccion_trabajo() &&
+            selected.isSeccion_usuario() && selected.isSeccion_vida_social() && selected.isSeccion_vivienda()) {
             selected.setEstado("Nuevo");
             completo=true;
         }else{
             selected.setEstado("Incompleto");
             completo=false;
         }
+//        if( selected.getPerinatales_normales()!=0&&
+//            selected.getAlergias_normales()!=0&&
+//            selected.getVacunas_completas()!=0&&
+//            selected.getEnfermedades_importantes()!=0&&
+//            selected.getDiscapacidad()!=0&&
+//            selected.getAccidentes_relevantes()!=0&&
+//            selected.getCirugia_hospitalizaciones()!=0&&
+//            selected.getProblemas_salud_mental()!=0&&
+//            selected.getViolencia()!=0&&
+//            selected.getAntecedentes_judiciales()!=0&&
+//            selected.getOtros()!=0&&
+//            selected.getEnfermedades_importantes_familia()!=0&&
+//            selected.getObesidad_familia()!=0&&
+//            selected.getProblemas_salud_mental_familia()!=0&&
+//            selected.getViolencia_intrafamiliar()!=0&&
+//            selected.getAlcohol_y_otras_drogas()!=0&&
+//            selected.getPadre_adolescente()!=0&&
+//            selected.getJudiciales()!=0&&
+//            selected.getOtros_antecedentes_familiares()!=0&&
+//            selected.getPercepcion_familia()!=0&&
+//            selected.getNivel_educacion()!=0&&
+//            selected.getPercepcion_rendimiento()!=0&&
+//            selected.getAceptacion()!=0&&
+//            (selected.getHoras_actividad_fisica()!=0||
+//            selected.getHoras_tv()!=0||
+//            selected.getHoras_computador_consola()!=0)&&
+//            selected.getHoras_sueno()!=0 &&
+//            selected.getDismenorrea()!=0&&
+//            selected.getOrientacion_sexual()!=0&&
+//            selected.getConducta_sexual()!=0&&
+//            selected.getPareja_sexual()!=0&&
+//            selected.getImagen_corporal()!=0&&
+//            selected.getBienestar_emocional()!=0&&
+//            selected.getVida_proyecto()!=0&&
+//            selected.getReferente_adulto()!=0&&
+//            selected.getPeso()!=0&&
+//            selected.getTalla()!=0&&
+//            selected.getPresion_arterial_diastolica()!=0&&
+//            selected.getPresion_arterial_sistolica()!=0&&
+//            selected.getPerimetro_abdominal()!=0&&
+//            selected.getTanner_genital()!=0 &&
+//            selected.getDiagrama_familiar()!=null
+//            ){
+//            selected.setEstado("Nuevo");
+//            completo=true;
+//        }else{
+//            selected.setEstado("Incompleto");
+//            completo=false;
+//        }
         
         if(selected.getTalla()!= 0 && selected.getPeso()!=0){
             selected.setImc((float) (selected.getPeso()/Math.pow((float)selected.getTalla()/100,2)));
@@ -2680,4 +2885,5 @@ public class clapController implements Serializable {
         }
         return "/faces/clap/edit/familia.xhtml";
     }
+    
 }

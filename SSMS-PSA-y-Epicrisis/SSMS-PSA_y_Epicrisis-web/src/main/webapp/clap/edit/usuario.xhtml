@@ -41,7 +41,7 @@
                 <b:commandButton value="Examen Físico" ajax="false" action="#{clapController.aExamen()}" oncomplete="/clap/View" look="primary"/>
                 <br/>
                 <br />
-                <b:panel id="panel1" title="Ficha personal del paciente" style="margin-left:3%;width: 95%;" look="info">
+                <b:panel id="panel1" title="Ficha personal del usuario" style="margin-left:3%;width: 95%;" look="info">
                     <div style="margin-left:20px;">
                         <b:row>
                             <b:column col-md="6" col-xs="12">
@@ -229,7 +229,7 @@
                                     <p:outputLabel value="#{bundle.CreatepacienteTitle_correo}" for="correo" />
                                 </b:row>
                                 <b:row>
-                                    <p:inputText id="correo" value="#{clapController.selected.correo}" placeholder="#{bundle.CreatepacienteTitle_correo}" required="true">
+                                    <p:inputText id="correo" value="#{clapController.selected.correo}" placeholder="#{bundle.CreatepacienteTitle_correo}">
                                     </p:inputText>
                                 </b:row>
                             </b:column>

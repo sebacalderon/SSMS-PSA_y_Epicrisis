@@ -78,11 +78,12 @@
                                 <f:selectItem itemLabel=" básica " itemValue="2" />
                                 <f:selectItem itemLabel=" media " itemValue="3" />
                                 <f:selectItem itemLabel=" superior " itemValue="4" />
+                                <p:ajax event="valueChange"  immediate="true" update="curso" ></p:ajax>                                                            
                             </p:selectOneRadio> 
                         </b:column>
                         <b:column col-md="4">
                             <b:row><p:outputLabel value="#{bundle.CreateclapLabel_curso}" for="curso" /></b:row>
-                            <b:row><p:selectOneMenu id="curso" value="#{clapController.selected.curso}">
+                            <b:row><p:selectOneMenu id="curso" value="#{clapController.selected.curso}" disabled="#{clapController.selected.nivel_educacion == 1 || clapController.selected.nivel_educacion == 0}">
                                 <f:selectItem itemLabel="Seleccione un curso" noSelectionOption="true" />
                                 <f:selectItem itemLabel="1° básico" itemValue="1 basico" noSelectionOption="false" />
                                 <f:selectItem itemLabel="2° básico" itemValue="2 basico" noSelectionOption="false" />
@@ -105,10 +106,11 @@
                             <b:row>
                                 <b:column col-xs="6"><p:outputLabel value="#{bundle.CreateclapLabel_anos_repetidos}" for="anos_repetidos" /></b:column>
                                 <b:column col-xs="4"><pe:inputNumber id="anos_repetidos" value="#{clapController.selected.anos_repetidos}" minValue="0" maxValue="10" styleClass="campo-numerico" title="#{bundle.CreateclapTitle_anos_repetidos}">
-                                </pe:inputNumber></b:column>
+                                        <p:ajax event="blur" immediate="true" update="causa_anos_repetidos" ></p:ajax>
+                                    </pe:inputNumber></b:column>
                             </b:row>
                             <b:row>
-                                <b:column col-xs="12"><p:inputText id="causa_anos_repetidos" placeholder="Causa"  value="#{clapController.selected.causa_anos_repetidos}" title="#{bundle.CreateclapTitle_causa_anos_repetidos}" >
+                                <b:column col-xs="12"><p:inputText id="causa_anos_repetidos" placeholder="Causa"  value="#{clapController.selected.causa_anos_repetidos}" title="#{bundle.CreateclapTitle_causa_anos_repetidos}" disabled="#{clapController.selected.anos_repetidos == 0}">
                                 </p:inputText></b:column>
                             </b:row>
                         </b:column>
@@ -134,8 +136,9 @@
                             <p:selectOneRadio id="desercion" style="width:13em;" value="#{clapController.selected.desercion_exclusion}" layout="grid" columns="2">
                                 <f:selectItem itemLabel="Si" itemValue="true" />
                                 <f:selectItem itemLabel="No" itemValue="false" />
+                                <p:ajax event="valueChange"  immediate="true" update="causa_desercion_exclusion" ></p:ajax>                            
                             </p:selectOneRadio>
-                            <p:inputText id="causa_desercion_exclusion" placeholder="Causa" value="#{clapController.selected.causa_desercion_exclusion}" title="#{bundle.CreateclapTitle_causa_desercion_exclusion}" >
+                            <p:inputText id="causa_desercion_exclusion" placeholder="Causa" value="#{clapController.selected.causa_desercion_exclusion}" title="#{bundle.CreateclapTitle_causa_desercion_exclusion}" disabled="#{!clapController.selected.desercion_exclusion}">
                             </p:inputText>
                         </b:column>
                         <b:column col-md="4">

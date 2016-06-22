@@ -26,21 +26,7 @@
                 <h1 align="center">Bienvenido/a #{loginController.getUsuarioLogueado().nombres} #{loginController.getUsuarioLogueado().primer_apellido}</h1>
             <h2 align="center ">al sistema del Programa Social Adolescente.</h2>
             </h:form>
-            <h:form rendered="#{loginController.usuarioLogueado != null and loginController.getUsuarioLogueado().login_uno}">
-            <h4 align="center">Al ser éste su primer acceso al sistema, debe cambiar la contraseña que se le asignó por defecto (4 primeros dígitos de su RUN):</h4>
-                <h:panelGroup id="display" >
-                    <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
-                    
-                    <p:outputLabel value="#{bundle.CreateUsuarioLabel_password}" for="password" />
-                    <p:password id="password" value="#{usuarioController.pass}" title="#{bundle.CreateUsuarioTitle_password}" required="true" />    
-                    
-                    <p:outputLabel value="Repita Contraseña" for="repeat" />
-                    <p:password id="repeat" value="#{usuarioController.pass_repeat}" title="#{bundle.CreateUsuarioTitle_password}" required="true" />    
-                    
-                    </p:panelGrid>
-                    <b:commandButton actionListener="#{usuarioController.login_uno}" value="#{bundle.Save}"/>
-                </h:panelGroup>
-            </h:form>
+            
             <h:form rendered="#{loginController.usuarioLogueado == null}">
                 <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
                 <b:row ></b:row>

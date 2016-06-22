@@ -27,7 +27,6 @@ public class parametros implements Serializable {
     @Column(name="ruta_parametros")
     private String ruta;
 
-    @Column(name="minutos_parametros")
     public String getRuta() {
         return ruta;
     }
