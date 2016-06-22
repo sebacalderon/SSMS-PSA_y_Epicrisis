@@ -208,10 +208,10 @@
                          <p:ajax event="rowUnselect" update="createButton "/>
                         <f:facet name="footer">
                         <b:row>
-                            <b:column>
+                            <b:column offset="3" col-xs="3">
                                 <p:commandButton id="createButton" icon="ui-icon-plus" style="width:100px;height:50px;"   value="Ahora" actionListener="#{actividadController.prepareCreate}" update=":actividadCreateForm" oncomplete="PF('actividadCreateDialog').show()" disabled="#{clapController.isActividadElegida()}"/>
                             </b:column>
-                            <b:column>
+                            <b:column col-xs="3">
                                 <p:commandButton value="Despues" style="width:100px;height:50px;" action="/faces/paciente/View.xhtml?faces-redirect=true"/>
                             </b:column>
                         </b:row>

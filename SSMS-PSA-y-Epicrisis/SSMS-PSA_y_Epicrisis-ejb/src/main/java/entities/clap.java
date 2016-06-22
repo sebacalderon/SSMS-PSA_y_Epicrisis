@@ -1,6 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this license header; choose License Headers in Project Properties.
+ * To change this template file; choose Tools | Templates
  * and open the template in the editor.
  */
 package entities;
@@ -2564,1256 +2564,1256 @@ public class clap implements Serializable {
     public String toString() {
         String clap=new String();
         //Datos paciente
-        clap=clap.concat(id+",");
-        clap=clap.concat(RUN+"-"+DV+",");
-        clap=clap.concat(nombres+",");
-        clap=clap.concat(primer_apellido+",");
-        clap=clap.concat(segundo_apellido+",");
-        clap=clap.concat(nombre_social+",");
-        clap=clap.concat(telefono_fijo+",");
+        clap=clap.concat(id+";");
+        clap=clap.concat(RUN+"-"+DV+";");
+        clap=clap.concat(nombres+";");
+        clap=clap.concat(primer_apellido+";");
+        clap=clap.concat(segundo_apellido+";");
+        clap=clap.concat(nombre_social+";");
+        clap=clap.concat(telefono_fijo+";");
         if(domicilio==true){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
-        clap=clap.concat(telefono_movil+",");
+        clap=clap.concat(telefono_movil+";");
         if(recados==true){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
-        clap=clap.concat(region_residencia.getNombre()+",");
-        clap=clap.concat(comuna_residencia.getNombre()+",");
-        clap=clap.concat(calle_direccion+",");
+        clap=clap.concat(region_residencia.getNombre()+";");
+        clap=clap.concat(comuna_residencia.getNombre()+";");
+        clap=clap.concat(calle_direccion+";");
         
         if(numero_direccion!=null){
-            clap=clap.concat(numero_direccion+",");
+            clap=clap.concat(numero_direccion+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(resto_direccion!=null){
-            clap=clap.concat(resto_direccion+",");
+            clap=clap.concat(resto_direccion+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
-        clap=clap.concat(fecha_nacimiento.toString()+",");
+        clap=clap.concat(fecha_nacimiento.toString()+";");
         if(sexo==1){
-            clap=clap.concat("Hombre,");
+            clap=clap.concat("Hombre;");
         }else if(sexo==2){
-            clap=clap.concat("Mujer,");
+            clap=clap.concat("Mujer;");
         }else if(sexo==3){
-            clap=clap.concat("No definido,");
+            clap=clap.concat("No definido;");
         }else if(sexo==4){
-            clap=clap.concat("No determinado,");
+            clap=clap.concat("No determinado;");
         }
-        clap=clap.concat(nacionalidad.getNombre()+",");
-        clap=clap.concat(correo+",");
+        clap=clap.concat(nacionalidad.getNombre()+";");
+        clap=clap.concat(correo+";");
         
         if(programa_social!=null){
-            clap=clap.concat(programa_social.getNombre()+",");
+            clap=clap.concat(programa_social.getNombre()+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(prevision!=null){
-            clap=clap.concat(prevision.getNombre()+",");
+            clap=clap.concat(prevision.getNombre()+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(grupo_fonasa==1){
-            clap=clap.concat("A,");
+            clap=clap.concat("A;");
         }else if(grupo_fonasa==2){
-            clap=clap.concat("B,");
+            clap=clap.concat("B;");
         }else if(grupo_fonasa==3){
-            clap=clap.concat("C,");
+            clap=clap.concat("C;");
         }else if(grupo_fonasa==4){
-            clap=clap.concat("D,");
+            clap=clap.concat("D;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
        
         if(estado_conyugal!=null){
-            clap=clap.concat(estado_conyugal.getNombre()+",");
+            clap=clap.concat(estado_conyugal.getNombre()+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(pueblo_originario!=null){
-            clap=clap.concat(pueblo_originario.getNombre()+",");
+            clap=clap.concat(pueblo_originario.getNombre()+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(cesfam!=null){
-            clap=clap.concat(cesfam.getNombre()+",");
+            clap=clap.concat(cesfam.getNombre()+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         //Datos consulta
         
         if(control_en==1){
-            clap=clap.concat("Establecimiento educacional,");
+            clap=clap.concat("Establecimiento educacional;");
         }else{
-            clap=clap.concat("Establecimiento de salud,");
+            clap=clap.concat("Establecimiento de salud;");
         }
         
-        clap=clap.concat(hcn+",");
+        clap=clap.concat(hcn+";");
         if(establecimiento_educacional!=null){
-            clap=clap.concat(establecimiento_educacional+",");
+            clap=clap.concat(establecimiento_educacional+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
-        clap=clap.concat(fecha_consulta.toString()+",");
-        clap=clap.concat(edad+",");
+        clap=clap.concat(fecha_consulta.toString()+";");
+        clap=clap.concat(edad+";");
         
         if(acompanante!=null){
-            clap=clap.concat(acompanante+",");
+            clap=clap.concat(acompanante+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         if(motivo_consulta_adolescente_2!=null){
-            clap=clap.concat(motivo_consulta_adolescente_1+",");
+            clap=clap.concat(motivo_consulta_adolescente_1+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(motivo_consulta_adolescente_2!=null){
-            clap=clap.concat(motivo_consulta_adolescente_2+",");
+            clap=clap.concat(motivo_consulta_adolescente_2+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(motivo_consulta_adolescente_3!=null){
-            clap=clap.concat(motivo_consulta_adolescente_3+",");
+            clap=clap.concat(motivo_consulta_adolescente_3+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(motivo_consulta_acompanante_1!=null){
-            clap=clap.concat(motivo_consulta_acompanante_1+",");
+            clap=clap.concat(motivo_consulta_acompanante_1+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(motivo_consulta_acompanante_2!=null){
-            clap=clap.concat(motivo_consulta_acompanante_2+",");
+            clap=clap.concat(motivo_consulta_acompanante_2+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(motivo_consulta_acompanante_3!=null){
-            clap=clap.concat(motivo_consulta_acompanante_3+",");
+            clap=clap.concat(motivo_consulta_acompanante_3+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(descripcion_motivo_consulta!=null){
-            clap=clap.concat(descripcion_motivo_consulta+",");
+            clap=clap.concat(descripcion_motivo_consulta+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         //Antecedentes personales
         
         if(perinatales_normales==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(perinatales_normales==2){
-            clap=clap.concat("no sé,");
+            clap=clap.concat("no sé;");
         }else if(perinatales_normales==3){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(alergias_normales==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(alergias_normales==2){
-            clap=clap.concat("no sé,");
+            clap=clap.concat("no sé;");
         }else if(alergias_normales==3){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(vacunas_completas==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(vacunas_completas==2){
-            clap=clap.concat("no sé,");
+            clap=clap.concat("no sé;");
         }else if(vacunas_completas==3){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(enfermedades_importantes==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(enfermedades_importantes==2){
-            clap=clap.concat("no sé,");
+            clap=clap.concat("no sé;");
         }else if(enfermedades_importantes==3){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(discapacidad==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(discapacidad==2){
-            clap=clap.concat("no sé,");
+            clap=clap.concat("no sé;");
         }else if(discapacidad==3){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(accidentes_relevantes==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(accidentes_relevantes==2){
-            clap=clap.concat("no sé,");
+            clap=clap.concat("no sé;");
         }else if(accidentes_relevantes==3){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(cirugia_hospitalizaciones==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(cirugia_hospitalizaciones==2){
-            clap=clap.concat("no sé,");
+            clap=clap.concat("no sé;");
         }else if(cirugia_hospitalizaciones==3){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(uso_medicamentos==true){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else if(uso_medicamentos==false){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(problemas_salud_mental==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(problemas_salud_mental==2){
-            clap=clap.concat("no sé,");
+            clap=clap.concat("no sé;");
         }else if(problemas_salud_mental==3){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(violencia==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(violencia==2){
-            clap=clap.concat("no sé,");
+            clap=clap.concat("no sé;");
         }else if(violencia==3){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(antecedentes_judiciales==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(antecedentes_judiciales==2){
-            clap=clap.concat("no sé,");
+            clap=clap.concat("no sé;");
         }else if(antecedentes_judiciales==3){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(otros==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(otros==2){
-            clap=clap.concat("no sé,");
+            clap=clap.concat("no sé;");
         }else if(otros==3){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(observaciones_antecdentes_personales!=null){
-            clap=clap.concat(observaciones_antecdentes_personales+",");
+            clap=clap.concat(observaciones_antecdentes_personales+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
            
         //Antecedentes familiares
         
         
         if(enfermedades_importantes_familia==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(enfermedades_importantes_familia==2){
-            clap=clap.concat("no sé,");
+            clap=clap.concat("no sé;");
         }else if(enfermedades_importantes_familia==3){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(obesidad_familia==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(obesidad_familia==2){
-            clap=clap.concat("no sé,");
+            clap=clap.concat("no sé;");
         }else if(obesidad_familia==3){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(problemas_salud_mental_familia==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(problemas_salud_mental_familia==2){
-            clap=clap.concat("no sé,");
+            clap=clap.concat("no sé;");
         }else if(problemas_salud_mental_familia==3){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(violencia_intrafamiliar==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(violencia_intrafamiliar==2){
-            clap=clap.concat("no sé,");
+            clap=clap.concat("no sé;");
         }else if(violencia_intrafamiliar==3){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(alcohol_y_otras_drogas==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(alcohol_y_otras_drogas==2){
-            clap=clap.concat("no sé,");
+            clap=clap.concat("no sé;");
         }else if(alcohol_y_otras_drogas==3){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(padre_adolescente==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(padre_adolescente==2){
-            clap=clap.concat("no sé,");
+            clap=clap.concat("no sé;");
         }else if(padre_adolescente==3){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(judiciales==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(judiciales==2){
-            clap=clap.concat("no sé,");
+            clap=clap.concat("no sé;");
         }else if(judiciales==3){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(otros_antecedentes_familiares==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(otros_antecedentes_familiares==2){
-            clap=clap.concat("no sé,");
+            clap=clap.concat("no sé;");
         }else if(otros_antecedentes_familiares==3){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(observaciones_antecedentes_familiares!=null){
-            clap=clap.concat(observaciones_antecedentes_familiares+",");
+            clap=clap.concat(observaciones_antecedentes_familiares+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         //Familia
         
         if(vive_con_solo){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(vive_con_madre){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(vive_con_padre){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(vive_en_institucion){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(vive_con_otros){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(vive_con_especificacion!=null){
-            clap=clap.concat(vive_con_especificacion+",");
+            clap=clap.concat(vive_con_especificacion+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         if(comparte_cama){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(especificacion_comparte_cama!=null){
-            clap=clap.concat(especificacion_comparte_cama+",");
+            clap=clap.concat(especificacion_comparte_cama+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(nivel_instruccion_madre==1){
-                clap=clap.concat("Ninguna,");
+                clap=clap.concat("Ninguna;");
         }else if(nivel_instruccion_madre==2){
-            clap=clap.concat("Básica,");
+            clap=clap.concat("Básica;");
         }else if(nivel_instruccion_madre==3){
-            clap=clap.concat("Media,");
+            clap=clap.concat("Media;");
         }else if(nivel_instruccion_madre==4){
-            clap=clap.concat("Superior,");
+            clap=clap.concat("Superior;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(nivel_instruccion_padre==1){
-                clap=clap.concat("Ninguna,");
+                clap=clap.concat("Ninguna;");
         }else if(nivel_instruccion_padre==2){
-            clap=clap.concat("Básica,");
+            clap=clap.concat("Básica;");
         }else if(nivel_instruccion_padre==3){
-            clap=clap.concat("Media,");
+            clap=clap.concat("Media;");
         }else if(nivel_instruccion_padre==4){
-            clap=clap.concat("Superior,");
+            clap=clap.concat("Superior;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(nivel_instruccion_pareja==1){
-                clap=clap.concat("Ninguna,");
+                clap=clap.concat("Ninguna;");
         }else if(nivel_instruccion_pareja==2){
-                clap=clap.concat("Básica,");
+                clap=clap.concat("Básica;");
         }else if(nivel_instruccion_pareja==3){
-            clap=clap.concat("Media,");
+            clap=clap.concat("Media;");
         }else if(nivel_instruccion_pareja==4){
-            clap=clap.concat("Superior,");
+            clap=clap.concat("Superior;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(ocupacion_madre!=null){
-            clap=clap.concat(ocupacion_madre+",");
+            clap=clap.concat(ocupacion_madre+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(ocupacion_padre!=null){
-            clap=clap.concat(ocupacion_padre+",");
+            clap=clap.concat(ocupacion_padre+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         if(ocupacion_pareja!=null){
-            clap=clap.concat(ocupacion_pareja+",");
+            clap=clap.concat(ocupacion_pareja+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(percepcion_familia==1){
-                clap=clap.concat("Buena,");
+                clap=clap.concat("Buena;");
         }else if(percepcion_familia==2){
-            clap=clap.concat("Regular,");
+            clap=clap.concat("Regular;");
         }else if(percepcion_familia==3){
-            clap=clap.concat("Mala,");
+            clap=clap.concat("Mala;");
         }else if(percepcion_familia==4){
-            clap=clap.concat("No hay relación,");
+            clap=clap.concat("No hay relación;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(observaciones_familia!=null){
-            clap=clap.concat(observaciones_familia+",");
+            clap=clap.concat(observaciones_familia+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         //Vivienda
         
         if(condiciones_sanitarias){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(hacinamiento){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(observaciones_vivienda!=null){
-            clap=clap.concat(observaciones_vivienda+",");
+            clap=clap.concat(observaciones_vivienda+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         //Educacion
         
         if(estudia){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(nivel_educacion==1){
-                clap=clap.concat("No escolarizado,");
+                clap=clap.concat("No escolarizado;");
         }else if(nivel_educacion==2){
-            clap=clap.concat("Básica,");
+            clap=clap.concat("Básica;");
         }else if(nivel_educacion==3){
-            clap=clap.concat("Media,");
+            clap=clap.concat("Media;");
         }else if(nivel_educacion==4){
-            clap=clap.concat("Superior,");
+            clap=clap.concat("Superior;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(curso!=null){
-            clap=clap.concat(curso+",");
+            clap=clap.concat(curso+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
-        clap=clap.concat(anos_repetidos+",");
+        clap=clap.concat(anos_repetidos+";");
         if(causa_anos_repetidos!=null){
-            clap=clap.concat(causa_anos_repetidos+",");
+            clap=clap.concat(causa_anos_repetidos+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         if(problemas_escuela){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(violencia_escolar){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(desercion_exclusion){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(causa_desercion_exclusion!=null){
-            clap=clap.concat(causa_desercion_exclusion+",");
+            clap=clap.concat(causa_desercion_exclusion+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         if(percepcion_rendimiento==1){
-                clap=clap.concat("Buena,");
+                clap=clap.concat("Buena;");
         }else if(percepcion_rendimiento==2){
-            clap=clap.concat("Regular,");
+            clap=clap.concat("Regular;");
         }else if(percepcion_rendimiento==3){
-            clap=clap.concat("Mala,");
+            clap=clap.concat("Mala;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(observaciones_educacion!=null){
-            clap=clap.concat(observaciones_educacion+",");
+            clap=clap.concat(observaciones_educacion+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         //Trabajo
         
         if(trabaja){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
-        clap=clap.concat(horas_trabajo+",");
+        clap=clap.concat(horas_trabajo+";");
 
         if(trabajo_infantil){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(trabajo_juvenil){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(peores_formas){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(ser_dom_no_remu_peligroso){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(razon_de_trabajo==1){
-                clap=clap.concat("economía,");
+                clap=clap.concat("economía;");
         }else if(razon_de_trabajo==2){
-            clap=clap.concat("autonomía,");
+            clap=clap.concat("autonomía;");
         }else if(razon_de_trabajo==3){
-            clap=clap.concat("me gusta,");
+            clap=clap.concat("me gusta;");
         }else if(razon_de_trabajo==4){
-            clap=clap.concat("otra,");
+            clap=clap.concat("otra;");
         }else if(razon_de_trabajo==5){
-            clap=clap.concat("n/c,");
+            clap=clap.concat("n/c;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(legalizado==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(legalizado==2){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else if(legalizado==3){
-            clap=clap.concat("n/c,");
+            clap=clap.concat("n/c;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(tipo_de_trabajo!=null){
-            clap=clap.concat(tipo_de_trabajo+",");
+            clap=clap.concat(tipo_de_trabajo+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         if(observaciones_trabajo!=null){
-            clap=clap.concat(observaciones_trabajo+",");
+            clap=clap.concat(observaciones_trabajo+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         //vida social
         
         if(aceptacion==1){
-                clap=clap.concat("aceptado,");
+                clap=clap.concat("aceptado;");
         }else if(aceptacion==2){
-            clap=clap.concat("rechazado,");
+            clap=clap.concat("rechazado;");
         }else if(aceptacion==3){
-            clap=clap.concat("ignorado,");
+            clap=clap.concat("ignorado;");
         }else if(aceptacion==4){
-            clap=clap.concat("no sabe,");
+            clap=clap.concat("no sabe;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(pareja){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
-        clap=clap.concat(edad_pareja+",");
+        clap=clap.concat(edad_pareja+";");
         
         if(violencia_pareja){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(amigos){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(suicidalidad_amigos){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
-        clap=clap.concat(horas_actividad_fisica+",");
+        clap=clap.concat(horas_actividad_fisica+";");
         
-        clap=clap.concat(horas_tv+",");
+        clap=clap.concat(horas_tv+";");
         
-        clap=clap.concat(horas_computador_consola+",");
+        clap=clap.concat(horas_computador_consola+";");
         
         if(cyberbulling){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(grooming){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(otras_actividades){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(especificacion_otras_actividades!=null){
-            clap=clap.concat(especificacion_otras_actividades+",");
+            clap=clap.concat(especificacion_otras_actividades+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(observaciones_vida_social!=null){
-        clap=clap.concat(observaciones_vida_social+",");
+        clap=clap.concat(observaciones_vida_social+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }      
         //habitos y consumo
         
         if(sueno_normal){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
-        clap=clap.concat(horas_sueno+",");
+        clap=clap.concat(horas_sueno+";");
         
         if(alimentacion_adecuada){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
-        clap=clap.concat(comidas_familia+",");
+        clap=clap.concat(comidas_familia+";");
         
         if(alimentacion_especial){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(especificacion_alimentacion_especial!=null){
-            clap=clap.concat(especificacion_alimentacion_especial+",");
+            clap=clap.concat(especificacion_alimentacion_especial+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(tabaco){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
-        clap=clap.concat(cigarros_dia+",");
+        clap=clap.concat(cigarros_dia+";");
         
         if(consumo_alcohol){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(consumo_marihuana){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(consumo_otra_sustancia){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(especificacion_consumo_otra_sustancia!=null){
-            clap=clap.concat(especificacion_consumo_otra_sustancia+",");
+            clap=clap.concat(especificacion_consumo_otra_sustancia+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(seguridad_vial){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(observaciones_habitos_consumo!=null){
-        clap=clap.concat(observaciones_habitos_consumo+",");
+        clap=clap.concat(observaciones_habitos_consumo+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         //gineco/urólogo
         
-        clap=clap.concat(edad_menarca_espermarca+",");
+        clap=clap.concat(edad_menarca_espermarca+";");
         if(fecha_ultima_menstruacion!=null){
-            clap=clap.concat(fecha_ultima_menstruacion.toString()+",");
+            clap=clap.concat(fecha_ultima_menstruacion.toString()+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(no_conoce_fecha_ultima_menstruacion){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(ciclos_regulares==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(ciclos_regulares==2){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else if(ciclos_regulares==3){
-            clap=clap.concat("n/s,");
+            clap=clap.concat("n/s;");
         }else if(ciclos_regulares==4){
-            clap=clap.concat("n/c,");
+            clap=clap.concat("n/c;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(dismenorrea==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(dismenorrea==2){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else if(dismenorrea==3){
-            clap=clap.concat("n/c,");
+            clap=clap.concat("n/c;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(flujo_secrecion_patologico){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(its_vih){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(especificacion_its_vih!=null){
-            clap=clap.concat(especificacion_its_vih+",");
+            clap=clap.concat(especificacion_its_vih+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(tratamiento==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(tratamiento==2){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else if(tratamiento==3){
-            clap=clap.concat("n/s,");
+            clap=clap.concat("n/s;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(tratamiento_contactos==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(tratamiento_contactos==2){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else if(tratamiento_contactos==3){
-            clap=clap.concat("n/s,");
+            clap=clap.concat("n/s;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
-        clap=clap.concat(embarazos+",");
-        clap=clap.concat(hijos+",");
-        clap=clap.concat(abortos+",");
+        clap=clap.concat(embarazos+";");
+        clap=clap.concat(hijos+";");
+        clap=clap.concat(abortos+";");
         
         if(observaciones_gineco_urologico!=null){
-            clap=clap.concat(observaciones_gineco_urologico+",");
+            clap=clap.concat(observaciones_gineco_urologico+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }       
         //sexualidad
         
         if(orientacion_sexual==1){
-                clap=clap.concat("Heterosexual,");
+                clap=clap.concat("Heterosexual;");
         }else if(orientacion_sexual==2){
-            clap=clap.concat("Homosexual,");
+            clap=clap.concat("Homosexual;");
         }else if(orientacion_sexual==3){
-            clap=clap.concat("Bisexual,");
+            clap=clap.concat("Bisexual;");
         }else if(orientacion_sexual==4){
-            clap=clap.concat("n/r,");
+            clap=clap.concat("n/r;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(especificacion_orientacion_sexual!=null){
-            clap=clap.concat(especificacion_orientacion_sexual+",");
+            clap=clap.concat(especificacion_orientacion_sexual+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         if(conducta_sexual==1){
-                clap=clap.concat("Postergadora,");
+                clap=clap.concat("Postergadora;");
         }else if(conducta_sexual==2){
-            clap=clap.concat("Anticipadora,");
+            clap=clap.concat("Anticipadora;");
         }else if(conducta_sexual==3){
-            clap=clap.concat("Activa,");
+            clap=clap.concat("Activa;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
-        clap=clap.concat(edad_inicio_conducta_sexual+",");
+        clap=clap.concat(edad_inicio_conducta_sexual+";");
         
         if(relaciones_sexuales==1){
-                clap=clap.concat("Distinto sexo,");
+                clap=clap.concat("Distinto sexo;");
         }else if(relaciones_sexuales==2){
-            clap=clap.concat("Mismo sexo,");
+            clap=clap.concat("Mismo sexo;");
         }else if(relaciones_sexuales==3){
-            clap=clap.concat("Ambos sexos,");
+            clap=clap.concat("Ambos sexos;");
         }else if(relaciones_sexuales==4){
-            clap=clap.concat("n/c,");
+            clap=clap.concat("n/c;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(pareja_sexual==1){
-                clap=clap.concat("única ambos,");
+                clap=clap.concat("única ambos;");
         }else if(pareja_sexual==2){
-            clap=clap.concat("varias,");
+            clap=clap.concat("varias;");
         }else if(pareja_sexual==3){
-            clap=clap.concat("n/c,");
+            clap=clap.concat("n/c;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(dificultades_sexuales==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(dificultades_sexuales==2){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else if(dificultades_sexuales==3){
-            clap=clap.concat("n/c,");
+            clap=clap.concat("n/c;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(anticoncepcion==1){
-                clap=clap.concat("siempre,");
+                clap=clap.concat("siempre;");
         }else if(anticoncepcion==2){
-            clap=clap.concat("a veces,");
+            clap=clap.concat("a veces;");
         }else if(anticoncepcion==3){
-            clap=clap.concat("nunca,");
+            clap=clap.concat("nunca;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(doble_proteccion){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(uso_mac==1){
-                clap=clap.concat("Si,");
+                clap=clap.concat("Si;");
         }else if(uso_mac==2){
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }else if(uso_mac==3){
-            clap=clap.concat("a veces,");
+            clap=clap.concat("a veces;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(especificacion_uso_mac!=null){
-            clap=clap.concat(especificacion_uso_mac+",");
+            clap=clap.concat(especificacion_uso_mac+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(razon_no_uso_mac!=null){
-            clap=clap.concat(razon_no_uso_mac+",");
+            clap=clap.concat(razon_no_uso_mac+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(consejeria_uso_mac){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(aco_emergencia){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(abuso_sexual){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(reparacion_abuso_sexual){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(observaciones_sexualidad!=null){
-            clap=clap.concat(observaciones_sexualidad+",");
+            clap=clap.concat(observaciones_sexualidad+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         //Situación psico_emocinoal
         
         if(imagen_corporal==1){
-                clap=clap.concat("conforme,");
+                clap=clap.concat("conforme;");
         }else if(imagen_corporal==2){
-            clap=clap.concat("crea preocupación,");
+            clap=clap.concat("crea preocupación;");
         }else if(imagen_corporal==3){
-            clap=clap.concat("impide relación con los demás,");
+            clap=clap.concat("impide relación con los demás;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(bienestar_emocional==1){
-                clap=clap.concat("normal,");
+                clap=clap.concat("normal;");
         }else if(bienestar_emocional==2){
-            clap=clap.concat("deprimido/bajoneado,");
+            clap=clap.concat("deprimido/bajoneado;");
         }else if(bienestar_emocional==3){
-            clap=clap.concat("irritable,");
+            clap=clap.concat("irritable;");
         }else if(bienestar_emocional==4){
-            clap=clap.concat("desesperanzado,");
+            clap=clap.concat("desesperanzado;");
         }else if(bienestar_emocional==5){
-            clap=clap.concat("poco interes o placer,");
+            clap=clap.concat("poco interes o placer;");
         }else if(bienestar_emocional==6){
-            clap=clap.concat("eufórico,");
+            clap=clap.concat("eufórico;");
         }else if(bienestar_emocional==7){
-            clap=clap.concat("ansioso/angustiado,");
+            clap=clap.concat("ansioso/angustiado;");
         }else if(bienestar_emocional==8){
-            clap=clap.concat("alta impulsividad,");
+            clap=clap.concat("alta impulsividad;");
         }else if(bienestar_emocional==9){
-            clap=clap.concat("autoagresiones,");
+            clap=clap.concat("autoagresiones;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(vida_proyecto==1){
-                clap=clap.concat("claro,");
+                clap=clap.concat("Claro;");
         }else if(vida_proyecto==2){
-            clap=clap.concat("confuso,");
+            clap=clap.concat("Confuso;");
         }else if(vida_proyecto==3){
-            clap=clap.concat("ausente,");
+            clap=clap.concat("Ausente;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(suicidalidad_amigos){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(ideacion_suicida){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(intento_suicida){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(referente_adulto==1){
-                clap=clap.concat("padre,");
+                clap=clap.concat("padre;");
         }else if(referente_adulto==2){
-            clap=clap.concat("madre,");
+            clap=clap.concat("madre;");
         }else if(referente_adulto==3){
-            clap=clap.concat("familiar,");
+            clap=clap.concat("familiar;");
         }else if(referente_adulto==4){
-            clap=clap.concat("otro,");
+            clap=clap.concat("otro;");
         }else if(referente_adulto==5){
-            clap=clap.concat("ninguno,");
+            clap=clap.concat("ninguno;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(nombre_referente_adulto!=null){
-        clap=clap.concat(nombre_referente_adulto+",");
+        clap=clap.concat(nombre_referente_adulto+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         if(telefono_referente_adulto!=null){
-        clap=clap.concat(telefono_referente_adulto+",");
+        clap=clap.concat(telefono_referente_adulto+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(observaciones_psico_emocional!=null){
-        clap=clap.concat(observaciones_psico_emocional+",");
+        clap=clap.concat(observaciones_psico_emocional+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         //Examen físico
         
-        clap=clap.concat(peso+",");
-        clap=clap.concat(de_peso+",");
-        clap=clap.concat(talla+",");
-        clap=clap.concat(de_talla+",");
-        clap=clap.concat(perimetro_abdominal+",");
-        clap=clap.concat(imc+",");
-        clap=clap.concat(de_imc+",");
-        clap=clap.concat(presion_arterial_sistolica+",");
-        clap=clap.concat(presion_arterial_diastolica+",");
+        clap=clap.concat(peso+";");
+        clap=clap.concat(de_peso+";");
+        clap=clap.concat(talla+";");
+        clap=clap.concat(de_talla+";");
+        clap=clap.concat(perimetro_abdominal+";");
+        clap=clap.concat(imc+";");
+        clap=clap.concat(de_imc+";");
+        clap=clap.concat(presion_arterial_sistolica+";");
+        clap=clap.concat(presion_arterial_diastolica+";");
         
         if(aspecto_general){
-            clap=clap.concat("Normal,");
+            clap=clap.concat("Normal;");
         }else{
-            clap=clap.concat("Anormal,");
+            clap=clap.concat("Anormal;");
         }
         
         if(agudeza_visual){
-            clap=clap.concat("Normal,");
+            clap=clap.concat("Normal;");
         }else{
-            clap=clap.concat("Anormal,");
+            clap=clap.concat("Anormal;");
         }
         
         if(agudeza_auditiva){
-            clap=clap.concat("Normal,");
+            clap=clap.concat("Normal;");
         }else{
-            clap=clap.concat("Anormal,");
+            clap=clap.concat("Anormal;");
         }
         
         if(salud_bucal){
-            clap=clap.concat("Normal,");
+            clap=clap.concat("Normal;");
         }else{
-            clap=clap.concat("Anormal,");
+            clap=clap.concat("Anormal;");
         }
         
         if(tiroides){
-            clap=clap.concat("Normal,");
+            clap=clap.concat("Normal;");
         }else{
-            clap=clap.concat("Anormal,");
+            clap=clap.concat("Anormal;");
         }
         
         if(cardio_pulmonar){
-            clap=clap.concat("Normal,");
+            clap=clap.concat("Normal;");
         }else{
-            clap=clap.concat("Anormal,");
+            clap=clap.concat("Anormal;");
         }
         
         if(abdomen){
-            clap=clap.concat("Normal,");
+            clap=clap.concat("Normal;");
         }else{
-            clap=clap.concat("Anormal,");
+            clap=clap.concat("Anormal;");
         }
         
         if(columna){
-            clap=clap.concat("Normal,");
+            clap=clap.concat("Normal;");
         }else{
-            clap=clap.concat("Anormal,");
+            clap=clap.concat("Anormal;");
         }
         
         
         if(extremidades){
-            clap=clap.concat("Normal,");
+            clap=clap.concat("Normal;");
         }else{
-            clap=clap.concat("Anormal,");
+            clap=clap.concat("Anormal;");
         }
         
         
         if(tanner_con_foto){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(tanner_mama==1){
-            clap=clap.concat("I,");
+            clap=clap.concat("I;");
         }else if(tanner_mama==2){
-            clap=clap.concat("II,");
+            clap=clap.concat("II;");
         }else if(tanner_mama==3){
-            clap=clap.concat("III,");
+            clap=clap.concat("III;");
         }else if(tanner_mama==4){
-            clap=clap.concat("IV,");
+            clap=clap.concat("IV;");
         }else if(tanner_mama==5){
-            clap=clap.concat("V,");
+            clap=clap.concat("V;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(tanner_genital==1){
-            clap=clap.concat("I,");
+            clap=clap.concat("I;");
         }else if(tanner_genital==2){
-            clap=clap.concat("II,");
+            clap=clap.concat("II;");
         }else if(tanner_genital==3){
-            clap=clap.concat("III,");
+            clap=clap.concat("III;");
         }else if(tanner_genital==4){
-            clap=clap.concat("IV,");
+            clap=clap.concat("IV;");
         }else if(tanner_genital==5){
-            clap=clap.concat("V,");
+            clap=clap.concat("V;");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(observaciones_examen_fisico!=null){
-        clap=clap.concat(observaciones_examen_fisico+",");
+        clap=clap.concat(observaciones_examen_fisico+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         //final
         
         if(impresion_diagnostica!=null){
-        clap=clap.concat(impresion_diagnostica+",");
+        clap=clap.concat(impresion_diagnostica+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(indicaciones_interconsultas!=null){
-            clap=clap.concat(indicaciones_interconsultas+",");
+            clap=clap.concat(indicaciones_interconsultas+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         if(funcionario!=null){
-            clap=clap.concat(funcionario.getRUT()+",");
+            clap=clap.concat(funcionario.getRUT()+";");
         }else{
-            clap=clap.concat(",");
+            clap=clap.concat(";");
         }
         
         if(riesgo_cardiovascular){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(riesgo_ssr){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(riesgo_salud_mental){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(riesgo_oh_drogas){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(riesgo_nutricional){
-            clap=clap.concat("Si,");
+            clap=clap.concat("Si;");
         }else{
-            clap=clap.concat("No,");
+            clap=clap.concat("No;");
         }
         
         if(riesgo_social){
