@@ -194,7 +194,7 @@
                                 </b:row>
                                 <b:row>
                                     <p:calendar  id="fecha_nacimiento" value="#{clapController.selected.fecha_nacimiento}" placeholder="#{bundle.CreatepacienteTitle_fecha_nacimiento}" pattern="dd/MM/yyyy" navigator="true" required="true">
-                                        <p:ajax event="dateSelect" listener="#{clapController.selected.setEdad(clapController.calculoEdad(clapController.selected.fecha_nacimiento))}" update="msgs" />
+                                        <p:ajax event="dateSelect" listener="#{clapController.edadClap}" />
                                     </p:calendar>
                                 </b:row>
                             </b:column>

@@ -1162,6 +1162,32 @@ public class clapController implements Serializable {
             ImageIO.write(resizeImagePng, "png", new File(ruta+"/"+file.getFileName())); 
         }
         
+        //Actualiza datos de usuario
+        pacienteCtrl.getSelected().setCalle_direccion(selected.getCalle_direccion());
+        pacienteCtrl.getSelected().setCesfam(selected.getCesfam());
+        pacienteCtrl.getSelected().setComuna_residencia(selected.getComuna_residencia());
+        pacienteCtrl.getSelected().setCorreo(selected.getCorreo());
+        pacienteCtrl.getSelected().setDomicilio(selected.isDomicilio());
+        pacienteCtrl.getSelected().setEstado_conyugal(selected.getEstado_conyugal());
+        pacienteCtrl.getSelected().setFecha_nacimiento(selected.getFecha_nacimiento());
+        pacienteCtrl.getSelected().setGrupo_fonasa(selected.getGrupo_fonasa());
+        pacienteCtrl.getSelected().setNacionalidad(selected.getNacionalidad());
+        pacienteCtrl.getSelected().setNombre_social(selected.getNombre_social());
+        pacienteCtrl.getSelected().setNombres(selected.getNombres());
+        pacienteCtrl.getSelected().setNumero_direccion(selected.getNumero_direccion());
+        pacienteCtrl.getSelected().setPrevision(selected.getPrevision());
+        pacienteCtrl.getSelected().setPrimer_apellido(selected.getPrimer_apellido());
+        pacienteCtrl.getSelected().setPrograma_social(selected.getPrograma_social());
+        pacienteCtrl.getSelected().setPueblo_originario(selected.getPueblo_originario());
+        pacienteCtrl.getSelected().setRecados(selected.isRecados());
+        pacienteCtrl.getSelected().setRegion_residencia(selected.getRegion_residencia());
+        pacienteCtrl.getSelected().setResto_direccion(selected.getResto_direccion());
+        pacienteCtrl.getSelected().setSegundo_apellido(selected.getSegundo_apellido());
+        pacienteCtrl.getSelected().setSexo(selected.getSexo());
+        pacienteCtrl.getSelected().setTelefono_fijo(selected.getTelefono_fijo());
+        pacienteCtrl.getSelected().setTelefono_movil(selected.getTelefono_movil());
+        pacienteCtrl.update();
+        
         if(completo){
             return "/faces/clap/Riesgos.xhtml";
         }else{
@@ -2897,5 +2923,10 @@ public class clapController implements Serializable {
         }
         return "/faces/clap/edit/familia.xhtml";
     }
-    
+ 
+    public void edadClap(){
+        int edad = calculoEdad(selected.getFecha_nacimiento());
+        System.out.println(edad);
+        selected.setEdad(edad);
+    }
 }
