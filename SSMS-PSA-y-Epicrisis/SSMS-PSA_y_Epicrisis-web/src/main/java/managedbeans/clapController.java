@@ -2923,4 +2923,23 @@ public class clapController implements Serializable {
         System.out.println(edad);
         selected.setEdad(edad);
     }
+    
+    public String prepareView(){
+        if (selected.getAudit()==null) {
+            isAudit = false;
+        }else{
+            isAudit = true;
+        }
+        if (selected.getCrafft()==null) {
+            isCrafft = false;
+        }else{
+            isCrafft = true;
+        }
+        if (!isAudit && !isCrafft) {
+            auditCrafft = false;
+        }else{
+            auditCrafft = true;
+        }
+        return "/faces/clap/View.xhtml";
+    }
 }

@@ -189,7 +189,7 @@
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createClap" icon="ui-icon-plus"   value="Crear Clap" rendered="#{loginController.esFuncionario() or loginController.esEncargadoPrograma()}" onclick="PF('cd2').show()"/>
-                            <p:commandButton id="viewButton" icon="ui-icon-search" value="#{bundle.View}" disabled="#{empty clapController.selected || clapController.selected.id == null}" action="/clap/View?faces-redirect=true"/>
+                            <p:commandButton id="viewButton" icon="ui-icon-search" value="#{bundle.View}" disabled="#{empty clapController.selected || clapController.selected.id == null}" action="#{clapController.prepareView()}" oncomplete="/clap/View"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{clapController.prepareEdit}" action="/clap/edit/usuario?faces-redirect=true" disabled="#{empty clapController.selected ||  not clapController.esIncompleto() || clapController.selected.id == null}" rendered="#{loginController.esFuncionario() or loginController.esEncargadoPrograma()}"/>
                             <p:commandButton id="desactivateButton" icon="ui-icon-cancel"  value="Anular" actionListener="#{clapController.anular}" update=":growl,datalist"  disabled="#{clapController.esAnulado() || empty clapController.selected || clapController.selected.id == null}" rendered="#{loginController.esFuncionario() or loginController.esEncargadoPrograma()}">
                                 <p:confirm header="Confirme Anulación" message="Esta segur@ de anular la ficha CLAP?" icon="ui-icon-alert" />
