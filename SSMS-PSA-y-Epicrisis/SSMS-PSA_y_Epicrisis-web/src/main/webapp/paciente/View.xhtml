@@ -188,7 +188,7 @@
                             <h:outputText value="Examen Físico &lt;br /&gt;" rendered="#{!item.seccion_examen_fisico}" escape="false"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createClap" icon="ui-icon-plus"   value="Crear Clap" rendered="#{loginController.esFuncionario() or loginController.esEncargadoPrograma()}" onclick="PF('cd2').show()"/>
+                            <p:commandButton id="createClap" icon="ui-icon-plus"   value="Crear Clap" rendered="#{loginController.esFuncionario() or loginController.esEncargadoPrograma()}" onclick="PF('cd2').show()" disabled="#{clapController.limiteVigente()}"/>
                             <p:commandButton id="viewButton" icon="ui-icon-search" value="#{bundle.View}" disabled="#{empty clapController.selected || clapController.selected.id == null}" action="#{clapController.prepareView()}" oncomplete="/clap/View"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{clapController.prepareEdit}" action="/clap/edit/usuario?faces-redirect=true" disabled="#{empty clapController.selected ||  not clapController.esIncompleto() || clapController.selected.id == null}" rendered="#{loginController.esFuncionario() or loginController.esEncargadoPrograma()}"/>
                             <p:commandButton id="desactivateButton" icon="ui-icon-cancel"  value="Anular" actionListener="#{clapController.anular}" update=":growl,datalist"  disabled="#{clapController.esAnulado() || empty clapController.selected || clapController.selected.id == null}" rendered="#{loginController.esFuncionario() or loginController.esEncargadoPrograma()}">

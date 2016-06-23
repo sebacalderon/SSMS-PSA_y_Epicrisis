@@ -147,9 +147,24 @@ public class clapController implements Serializable {
             if (clap.getFecha_consulta().before(fecha)) {
                 clap.setEstado("Anulado");
                 selected = clap;
-                persist(PersistAction.UPDATE,"");
+                getFacade().edit(selected);
+                //persist(PersistAction.UPDATE,"");
             }
         }
+        List<clap> itemVigente = getFacade().findbyPacienteEstado(RUN, "Vigente");
+        if (!itemVigente.isEmpty()) {
+            fecha = new java.util.Date();
+            c = Calendar.getInstance();
+            c.setTime(fecha);
+            c.add(Calendar.DATE, -365);
+            fecha = c.getTime();
+            if (itemVigente.get(0).getFecha_consulta().before(fecha)) {
+                itemVigente.get(0).setEstado("Vencido");
+                selected = itemVigente.get(0);
+                getFacade().edit(selected);
+            }
+        }
+        
         return itemsPorPaciente;
     }
     
@@ -2941,5 +2956,22 @@ public class clapController implements Serializable {
             auditCrafft = true;
         }
         return "/faces/clap/View.xhtml";
+    }
+    
+    public boolean limiteVigente(){
+        Date fecha = new java.util.Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(fecha);
+        c.add(Calendar.DATE, -300);
+        fecha = c.getTime();
+        System.out.println(fecha);
+        if (!getFacade().findbyPacienteEstado(pacienteCtrl.getSelected().getRUN(), "Vigente").isEmpty()) {
+            clap clap = getFacade().findbyPacienteEstado(pacienteCtrl.getSelected().getRUN(), "Vigente").get(0);
+            if (clap.getFecha_consulta().after(fecha)) {
+                return true;
+            }    
+        }
+        return false;
+        
     }
 }
