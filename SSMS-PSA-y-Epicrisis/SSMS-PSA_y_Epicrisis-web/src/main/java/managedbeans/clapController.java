@@ -921,7 +921,7 @@ public class clapController implements Serializable {
         }else{
             pacienteCtrl.clapIncompleto();
         }
-        
+        selected.setFuncionario(loginCtrl.getUsuarioLogueado());
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
         if(selected.getEstado().equals("Nuevo")){
             List<clap> claps = getItemsPorPaciente(pacienteCtrl.getSelected().getRUN());
@@ -2668,6 +2668,7 @@ public class clapController implements Serializable {
         creaImagen();
         actualizaCrafftAudit();
         verificaSecciones();
+        selected.setFuncionario(loginCtrl.getUsuarioLogueado());
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
         return "/faces/clap/edit/usuario.xhtml";
     }
@@ -2676,6 +2677,7 @@ public class clapController implements Serializable {
         creaImagen();
         actualizaCrafftAudit();
         verificaSecciones();
+        selected.setFuncionario(loginCtrl.getUsuarioLogueado());
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
         return "/faces/clap/edit/datos_antecedentes.xhtml";
     }
@@ -2684,6 +2686,7 @@ public class clapController implements Serializable {
         creaImagen();
         actualizaCrafftAudit();
         verificaSecciones();
+        selected.setFuncionario(loginCtrl.getUsuarioLogueado());
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
         return "/faces/clap/edit/vivienda_educacion.xhtml";
     }
@@ -2692,6 +2695,7 @@ public class clapController implements Serializable {
         creaImagen();
         actualizaCrafftAudit();
         verificaSecciones();
+        selected.setFuncionario(loginCtrl.getUsuarioLogueado());
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
         return "/faces/clap/edit/familia.xhtml";
     }
@@ -2700,6 +2704,7 @@ public class clapController implements Serializable {
         creaImagen();
         actualizaCrafftAudit();
         verificaSecciones();
+        selected.setFuncionario(loginCtrl.getUsuarioLogueado());
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
         return "/faces/clap/edit/trabajo_vidasocial.xhtml";
     }
@@ -2708,6 +2713,7 @@ public class clapController implements Serializable {
         creaImagen();
         actualizaCrafftAudit();
         verificaSecciones();
+        selected.setFuncionario(loginCtrl.getUsuarioLogueado());
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
         return "/faces/clap/edit/habitos_gineco.xhtml";
     }
@@ -2716,6 +2722,7 @@ public class clapController implements Serializable {
         creaImagen();
         actualizaCrafftAudit();
         verificaSecciones();
+        selected.setFuncionario(loginCtrl.getUsuarioLogueado());
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
         return "/faces/clap/edit/sexualidad_psicoemocional.xhtml";
     }
@@ -2724,6 +2731,7 @@ public class clapController implements Serializable {
         creaImagen();
         actualizaCrafftAudit();
         verificaSecciones();
+        selected.setFuncionario(loginCtrl.getUsuarioLogueado());
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
         return "/faces/clap/edit/examen_fisico.xhtml";
     }
