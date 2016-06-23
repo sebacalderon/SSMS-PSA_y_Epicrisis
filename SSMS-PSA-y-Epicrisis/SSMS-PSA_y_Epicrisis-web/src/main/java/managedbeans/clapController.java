@@ -263,11 +263,15 @@ public class clapController implements Serializable {
             isAudit = false;
         }else{
             isAudit = true;
+            auditCtrl.setSelected(auditCtrl.getItemsPorClap(selected).get(0));
+            selected.setAudit(auditCtrl.getItemsPorClap(selected).get(0));
         }
         if (selected.getCrafft()==null) {
             isCrafft = false;
         }else{
             isCrafft = true;
+            crafftCtrl.setSelected(crafftCtrl.getItemsPorClap(selected).get(0));
+            selected.setCrafft(crafftCtrl.getItemsPorClap(selected).get(0));
             puntajeACrafft = 0;
             if (selected.getCrafft().isA1()) {
                 puntajeACrafft +=1;
@@ -1315,12 +1319,8 @@ public class clapController implements Serializable {
             if (auditCtrl.getItemsPorClap(selected).isEmpty()) {
                 auditCtrl.setSelected(selected.getAudit());
                 auditCtrl.create();
+                selected.setAudit(auditCtrl.getItemsPorClap(selected).get(0));
             }else{
-                audit audit = auditCtrl.getItemsPorClap(selected).get(0);
-                Long id = auditCtrl.getItemsPorClap(selected).get(0).getId();
-                audit = selected.getAudit();
-                audit.setId(id);
-                auditCtrl.setSelected(audit);
                 auditCtrl.update();
             }
 
@@ -1330,12 +1330,8 @@ public class clapController implements Serializable {
             if (crafftCtrl.getItemsPorClap(selected).isEmpty()) {
                 crafftCtrl.setSelected(selected.getCrafft());
                 crafftCtrl.create();
+                selected.setCrafft(crafftCtrl.getItemsPorClap(selected).get(0));
             }else{
-                Crafft crafft = crafftCtrl.getItemsPorClap(selected).get(0);
-                Long id = crafftCtrl.getItemsPorClap(selected).get(0).getId();
-                crafft = selected.getCrafft();
-                crafft.setId(id);
-                crafftCtrl.setSelected(crafft);
                 crafftCtrl.update();
             }
         }
