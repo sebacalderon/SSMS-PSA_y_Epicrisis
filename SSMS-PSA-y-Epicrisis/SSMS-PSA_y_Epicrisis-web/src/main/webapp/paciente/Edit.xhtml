@@ -71,7 +71,7 @@
                         <p:column>
                             <b:row>
                                 <b:column col-xs="8">
-                                    <p:inputMask id="telefono_fijo" value="#{pacienteController.selected.telefono_fijo}" mask="(99) 999-9999" />
+                                    <p:inputText id="telefono_fijo" value="#{pacienteController.selected.telefono_fijo}" />
                                 </b:column>
                                 <b:column col-xs="4">
                                     <p:selectBooleanCheckbox value="#{pacienteController.selected.domicilio}" itemLabel="Domicilio"/>
@@ -82,7 +82,7 @@
                         <p:column>
                             <b:row>
                                 <b:column col-xs="8">
-                                    <p:inputMask id="telefono_movil" value="#{pacienteController.selected.telefono_movil}" title="#{bundle.CreatepacienteTitle_telefono_fijo}" mask="(569) 999-999-99" />
+                                    <p:inputText id="telefono_movil" value="#{pacienteController.selected.telefono_movil}" title="#{bundle.CreatepacienteTitle_telefono_fijo}" />
                                 </b:column>
                                 <b:column col-xs="4">
                                     <p:selectBooleanCheckbox value="#{pacienteController.selected.recados}" itemLabel="Recados"/>
@@ -90,11 +90,11 @@
                             </b:row>
                         </p:column>
                         <p:outputLabel value="Otro teléfono movil:" for="otro_telefono_movil" />
-                        <p:inputMask id="otro_telefono_movil" value="#{pacienteController.selected.otro_telefono_movil}" mask="(569) 999-999-99" />
+                        <p:inputText id="otro_telefono_movil" value="#{pacienteController.selected.otro_telefono_movil}"/>
                         <p:outputLabel value="Teléfono colegio:" for="telefono_colegio" />
-                        <p:inputMask id="telefono_colegio" value="#{pacienteController.selected.telefono_colegio}" mask="(99) 999-9999" />
+                        <p:inputText id="telefono_colegio" value="#{pacienteController.selected.telefono_colegio}" />
                         <p:outputLabel value="Teléfono adulto responsable:" for="telefono_adulto_responsable" />
-                        <p:inputMask id="telefono_adulto_responsable" value="#{pacienteController.selected.telefono_responsable}" mask="(569) 999-999-99" />
+                        <p:inputText id="telefono_adulto_responsable" value="#{pacienteController.selected.telefono_responsable}"/>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_correo}" for="correo" />
                         <p:inputText id="correo" value="#{pacienteController.selected.correo}" title="#{bundle.CreatepacienteTitle_correo}"/>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_sexo}" for="sexo" />
