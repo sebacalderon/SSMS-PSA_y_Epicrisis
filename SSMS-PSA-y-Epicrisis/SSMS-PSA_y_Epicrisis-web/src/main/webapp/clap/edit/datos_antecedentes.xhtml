@@ -20,10 +20,10 @@
                 <p:menuitem value="Categories" url="/faces/home.xhtml" />
                 <p:menuitem value="Usuarios"/>
                 <p:menuitem value="Población bajo control" url="/faces/paciente/List.xhtml" />
-                <p:menuitem value="#{clapController.selected.paciente.RUN}-#{clapController.selected.paciente.DV}" rendered="#{clapController.selected != null}" url="/faces/paciente/View.xhtml"/>
+                <p:menuitem value="#{pacienteController.selected.RUN}-#{pacienteController.selected.DV}" rendered="#{pacienteController.selected.id != null}" url="/faces/paciente/View.xhtml"/>
                 <p:menuitem value="Editar CLAP" />
-                <p:menuitem value="CLAP #{clapController.selected.id}" rendered="#{clapController.selected != null}"/>
-                <p:menuitem value="Datos Generales y Antecedentes Personales" rendered="#{clapController.selected != null}" url="/faces/clap/edit/datos_antecedentes.xhtml"/>
+                <p:menuitem value="CLAP #{clapController.selected.id}" rendered="#{pacienteController.selected.id != null}"/>
+                <p:menuitem value="Datos Generales y Antecedentes Personales" rendered="#{clapController.selected.id != null}" url="/faces/clap/edit/datos_antecedentes.xhtml"/>
 
             </p:breadCrumb>
             </h:form>
@@ -31,7 +31,7 @@
             <b:row>
                 <h2 align="center">#{bundle.EditclapTitle}</h2>
             </b:row>
-            <h:form id="clapEditForm" rendered="#{clapController.selected != null}">
+            <h:form id="clapEditForm" rendered="#{clapController.selected.id != null and pacienteController.selected.id != null and clapController.esIncompleto()}">
                 <b:commandButton value="Ficha Personal del Usuario" ajax="false" action="#{clapController.aUsuario()}" oncomplete="/clap/View" look="primary"/>#{" "}
                 <b:commandButton value="Datos Generales y Ant. Personales" ajax="false" action="#{clapController.aDatos()}" oncomplete="/clap/View"/>#{" "}
                 <b:commandButton value="Familia y Antecedentes Familiares" ajax="false" action="#{clapController.aFamilia()}" oncomplete="/clap/View" look="primary"/>#{" "}
@@ -256,6 +256,12 @@
                     <p:commandButton action="#{clapController.aFamilia}" value="Siguiente" oncomplete="/clap/View"/> 
                     <br/><br/>
                 </b:column>
+            </h:form>
+            <h:form rendered="#{pacienteController.selected.id == null}">
+                <h2 align="center ">No existe registro del RUN. No puede realizar un CLAP</h2>
+            </h:form>
+            <h:form rendered="#{!clapController.esIncompleto()}">
+                <h2 align="center ">Solo pueden modificarse CLAPS incompletos</h2>
             </h:form>
             </ui:define>
     </ui:composition>

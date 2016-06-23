@@ -24,7 +24,10 @@
             </p:breadCrumb>
             </h:form>
             <br />
-        <b:panel id="pacienteCreateDlg" title="#{bundle.CreatepacienteTitle}">
+            <h:form rendered="#{loginController.esSuperUsuario()}">
+                <h2 align="center ">Super Usuario no puede crear Usuarios.</h2>
+            </h:form>
+            <b:panel id="pacienteCreateDlg" title="#{bundle.CreatepacienteTitle}" rendered="#{(loginController.esEncargadoPrograma() || loginController.esFuncionario()) and pacienteController.selected.id == null}">
             <h:form id="pacienteCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="4" rendered="#{pacienteController.selected != null}">
@@ -155,6 +158,9 @@
                 </h:panelGroup>
             </h:form>
         </b:panel>
+            <h:form rendered="#{pacienteController.selected.id != null}">
+                <h2 align="center ">Busque Usuario por RUN para poder CREAR.</h2>
+        </h:form>
     </ui:define>
     </ui:composition>
 </html>

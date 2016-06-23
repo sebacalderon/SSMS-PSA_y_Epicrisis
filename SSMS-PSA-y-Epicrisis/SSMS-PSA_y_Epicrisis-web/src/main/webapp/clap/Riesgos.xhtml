@@ -19,20 +19,23 @@
                 <p:menuitem value="Categories" url="/faces/home.xhtml" />
                 <p:menuitem value="Usuarios"/>
                 <p:menuitem value="Población bajo control" url="/faces/paciente/List.xhtml" />
-                <p:menuitem value="#{clapController.selected.paciente.RUN}-#{clapController.selected.paciente.DV}" rendered="#{clapController.selected != null}" url="/faces/paciente/View.xhtml"/>
-                <p:menuitem value="CLAP #{clapController.selected.id}" url="/faces/clap/View.xhtml" rendered="#{clapController.selected != null}"/>
+                <p:menuitem value="#{pacienteController.selected.RUN}-#{pacienteController.selected.DV}" rendered="#{pacienteController.selected.id != null}" url="/faces/paciente/View.xhtml"/>
+                <p:menuitem value="CLAP #{clapController.selected.id}" url="/faces/clap/View.xhtml" rendered="#{clapController.selected.id != null}"/>
                 <p:menuitem value="Riesgos" />
             </p:breadCrumb>
                 <br />
             </h:form>
-            <b:row>
+            <b:row rendered="#{clapController.selected.id != null}">
                 <h2 align="center">Riesgos Usuario #{clapController.selected.paciente.RUN}-#{clapController.selected.paciente.DV} CLAP #{clapController.selected.id}</h2>
             </b:row>
-            <b:row rendered="#{clapController.esIncompleto()}">
+            <b:row rendered="#{clapController.esIncompleto() and clapController.selected.id != null}">
                 <h3 align="center">No es posible ver los riesgos de una ficha CLAP no terminada</h3>
             </b:row>
+            <b:row rendered="#{clapController.selected.id == null}">
+                <h3 align="center">Cree una ficha CLAP para poder ver los riesgos asociados</h3>
+            </b:row>
             <br/><br/><br/>
-            <h:form  id="form">
+            <h:form  id="form" rendered="#{clapController.selected.id != null and !clapController.esIncompleto()}">
             <b:row>
                 <div id="cardio">
                  <b:column offset="3" col-xs="12" col-md="6">
@@ -196,7 +199,7 @@
                 </div>
             </b:row>
             </h:form>
-            <b:row rendered="#{not loginController.esSuperUsuario()}">
+            <b:row rendered="#{not loginController.esSuperUsuario() and clapController.selected.id != null and !clapController.esIncompleto()}">
                   <h2 align="center">Actividades de intervención</h2>
                   
                  <h:form id="actividadListForm">

@@ -19,15 +19,15 @@
                 <p:menuitem value="Categories" url="/faces/home.xhtml" />
                 <p:menuitem value="Usuarios"/>
                 <p:menuitem value="Población bajo control" url="/faces/paciente/List.xhtml" />
-                <p:menuitem value="#{clapController.selected.paciente.RUN}-#{clapController.selected.paciente.DV}" rendered="#{clapController.selected != null}" url="/faces/paciente/View.xhtml"/>
-                <p:menuitem value="Ver CLAP #{clapController.selected.id}" rendered="#{clapController.selected != null}"/>
+                <p:menuitem value="#{pacienteController.selected.RUN}-#{pacienteController.selected.DV}" rendered="#{pacienteController.selected.id != null}" url="/faces/paciente/View.xhtml"/>
+                <p:menuitem value="Ver CLAP #{clapController.selected.id}" rendered="#{clapController.selected.id != null}"/>
             </p:breadCrumb>
             </h:form>
             <br />
-            <b:row>
+            <b:row rendered="#{clapController.selected.id != null}">
                 <h2 align="center">Ficha CLAP n°#{clapController.selected.id}</h2>
             </b:row>
-            <h:form id="clapViewForm" rendered="#{clapController.selected != null}">
+            <h:form id="clapViewForm" rendered="#{clapController.selected.id != null}">
                 <b:panel id="panel1" title="Ficha personal del paciente" style="margin-left:3%;width: 95%;" look="info">
                     <div style="margin-left:20px;">
                         <b:row>
@@ -2144,6 +2144,9 @@
                     <p:button  value="Volver" outcome="/paciente/View" /> 
                     <br/><br/>
                 </b:column>
+            </h:form>
+            <h:form rendered="#{clapController.selected.id == null}">
+                <h2 align="center ">Seleccione un CLAP para poder visualizarlo</h2>
             </h:form>
         </ui:define>
     </ui:composition>

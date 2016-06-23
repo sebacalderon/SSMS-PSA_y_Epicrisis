@@ -23,7 +23,7 @@
             </p:breadCrumb>
             </h:form>
             <br />
-        <b:panel id="pacienteViewDlg" title="#{bundle.ViewpacienteTitle}">
+            <b:panel id="pacienteViewDlg" title="#{bundle.ViewpacienteTitle}" rendered="#{pacienteController.selected.id !=null}">
             <h:form id="pacienteViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="4" style="width:100%;" rendered="#{pacienteController.selected != null}">
@@ -110,13 +110,13 @@
                         <h:outputText id="pueblo_originario" value="#{pacienteController.selected.pueblo_originario.nombre}" title="#{bundle.ViewpacienteTitle_pueblo_originario}"/>                     
                         
                         <f:facet name="footer">
-                            <p:commandButton id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{pacienteController.prepareEdit}" action="/paciente/Edit?faces-redirect=true" disabled="#{empty pacienteController.selected}" rendered="#{loginController.esFuncionario()}"/>
+                            <p:commandButton id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{pacienteController.prepareEdit}" action="/paciente/Edit?faces-redirect=true" disabled="#{empty pacienteController.selected}" rendered="#{loginController.esFuncionario() || loginController.esEncargadoPrograma()}"/>
                         </f:facet>
                     </p:panelGrid>
                 </h:panelGroup>
             </h:form>
         </b:panel>
-            <b:panel id="pacienteClapViewDlg" title="CLAPS del Usuario">
+            <b:panel id="pacienteClapViewDlg" title="CLAPS del Usuario" rendered="#{pacienteController.selected.id !=null}">
             <h:form id="clapViewForm">
                 <h:panelGroup id="display">
                     
@@ -210,7 +210,7 @@
             </h:form>
         </b:panel>
             <br/>
-            <b:panel id="pacienteActividadViewDlg" title="Actividades de Intervención del Usuario">
+            <b:panel id="pacienteActividadViewDlg" title="Actividades de Intervención del Usuario" rendered="#{pacienteController.selected.id !=null}">
             <h:form id="actividadListForm">
                 <h:panelGroup id="display2">                   
                     <p:dataTable id="datalist" value="#{actividadController.getItemsPorPaciente(pacienteController.selected)}" var="item2"
@@ -273,6 +273,9 @@
                 <ui:include src="/actividad/Edit.xhtml"/>
                 <ui:include src="/actividad/View.xhtml"/>
         </b:panel>
+        <h:form rendered="#{pacienteController.selected.id == null}">
+            <h2 align="center ">No existe registro del RUN. Realize una búsqueda, ingrese los datos, y presione el botón guardar</h2>
+        </h:form>
         </ui:define>
     </ui:composition>
 </html>
