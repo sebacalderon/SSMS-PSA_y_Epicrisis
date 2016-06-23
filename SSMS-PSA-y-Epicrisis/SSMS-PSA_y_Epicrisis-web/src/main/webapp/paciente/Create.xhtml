@@ -117,7 +117,6 @@
                             <f:selectItem itemLabel="Seleccione un programa social" itemValue="" noSelectionOption="true" />
                             <f:selectItems value="#{ley_socialController.items}" var="ley_social" itemLabel="#{ley_social.nombre}" itemValue="#{ley_social}"/>
                         </p:selectOneMenu>
-                        
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_prevision}" for="prevision" />
                         
                         <p:selectOneMenu id="prevision" value="#{pacienteController.selected.prevision}">
