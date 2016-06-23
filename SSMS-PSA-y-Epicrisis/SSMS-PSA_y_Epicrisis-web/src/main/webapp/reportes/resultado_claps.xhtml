@@ -27,7 +27,7 @@
                 <h:form id="buscar3">
                 <b:row>
                     <b:column col-xs="2">
-                        <p:outputLabel value="Número de CLAPS: " for="claps" />    
+                        <p:outputLabel value="Número de CLAPS #{clapController.estado}: " for="claps" />    
                     </b:column>
                     <b:column col-xs="1">
                         <h:outputText id="claps" value="#{clapController.itemsReporteClaps.size()}"/>
@@ -39,13 +39,13 @@
                 </h:form>
             </b:panel>
             <b:panel title="Reporte de CLAPS en #{loginController.usuarioLogueado.CESFAM.nombre}" look="info" rendered="#{loginController.esEncargadoPrograma()}">
-                <h:form id="buscar3">
+                <h:form id="buscar4">
                 <b:row>
                     <b:column col-xs="2">
-                        <p:outputLabel value="Número de CLAPS: " for="claps" />    
+                        <p:outputLabel value="Número de CLAPS #{clapController.estado}: " for="claps2" />    
                     </b:column>
                     <b:column col-xs="1">
-                        <h:outputText id="claps" value="#{clapController.itemsReporteClaps.size()}"/>
+                        <h:outputText id="claps2" value="#{clapController.itemsReporteClaps.size()}"/>
                     </b:column>
                     <b:column col-xs="1">
                         <b:commandButton look="primary" value="Descargar Datos" actionListener="#{pacienteController.generarCSV(2)}" rendered="#{pacienteController.itemsCESFAM.size()>0}"/>
