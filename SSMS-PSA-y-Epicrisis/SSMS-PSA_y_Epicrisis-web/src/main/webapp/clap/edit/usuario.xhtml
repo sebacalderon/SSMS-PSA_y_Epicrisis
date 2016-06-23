@@ -106,8 +106,7 @@
                                 </b:row>
                                 <b:row>
                                     <b:column col-xs="8">
-                                    <p:inputMask id="telefono_fijo" value="#{clapController.selected.telefono_fijo}" placeholder="#{bundle.CreatepacienteTitle_telefono_fijo}" mask="(99) 999-9999">
-                                    </p:inputMask>    
+                                        <p:inputText id="telefono_fijo" value="#{clapController.selected.telefono_fijo}" placeholder="#{bundle.CreatepacienteTitle_telefono_fijo}" />
                                     </b:column>
                                     <b:column col-xs="4">
                                         <p:selectBooleanCheckbox value="#{clapController.selected.domicilio}" itemLabel="Domicilio">
@@ -121,8 +120,7 @@
                                 </b:row>
                                 <b:row>
                                     <b:column col-xs="8">
-                                        <p:inputMask id="telefono_movil" value="#{clapController.selected.telefono_movil}" placeholder="#{bundle.CreatepacienteTitle_teléfono_movil}"  mask="(+56) 9999-9999">
-                                    </p:inputMask>
+                                        <p:inputText id="telefono_movil" value="#{clapController.selected.telefono_movil}" placeholder="#{bundle.CreatepacienteTitle_teléfono_movil}" />
                                     </b:column>
                                     <b:column col-xs="4">
                                         <p:selectBooleanCheckbox value="#{clapController.selected.recados}" itemLabel="Recados">
