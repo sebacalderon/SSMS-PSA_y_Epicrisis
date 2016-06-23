@@ -194,7 +194,7 @@
                                 </b:row>
                                 <b:row>
                                     <p:calendar  id="fecha_nacimiento" value="#{clapController.selected.fecha_nacimiento}" placeholder="#{bundle.CreatepacienteTitle_fecha_nacimiento}" pattern="dd/MM/yyyy" navigator="true" required="true">
-                                        <p:ajax event="dateSelect" listener="#{clapController.edadClap}" />
+                                        <p:ajax event="blur" listener="#{clapController.edadClap}" />
                                     </p:calendar>
                                 </b:row>
                             </b:column>
@@ -259,7 +259,8 @@
                                     <p:selectOneMenu id="prevision" value="#{clapController.selected.prevision}"  required="true">
                                        <f:selectItem itemLabel="Seleccione un opción" itemValue="" noSelectionOption="true" />
                                        <f:selectItems value="#{previsionController.items}" var="prevision" itemLabel="#{prevision.nombre}" itemValue="#{prevision}"/>
-                                   </p:selectOneMenu>
+                                       <p:ajax event="valueChange" immediate="true" update="grupo_fonasa"/>
+                                    </p:selectOneMenu>
                                 </b:row>
                             </b:column>
                             <b:column col-md="6" col-xs="12">
