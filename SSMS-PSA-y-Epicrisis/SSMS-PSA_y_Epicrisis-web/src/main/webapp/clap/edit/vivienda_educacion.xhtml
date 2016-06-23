@@ -83,7 +83,7 @@
                         </b:column>
                         <b:column col-md="4">
                             <b:row><p:outputLabel value="#{bundle.CreateclapLabel_curso}" for="curso" /></b:row>
-                            <b:row><p:selectOneMenu id="curso" value="#{clapController.selected.curso}" disabled="#{clapController.selected.nivel_educacion == 1 || clapController.selected.nivel_educacion == 0}">
+                            <b:row><p:selectOneMenu id="curso" value="#{clapController.selected.curso}" disabled="#{clapController.selected.nivel_educacion == 1 || clapController.selected.nivel_educacion == 0 || clapController.selected.nivel_educacion == 4}">
                                 <f:selectItem itemLabel="Seleccione un curso" noSelectionOption="true" />
                                 <f:selectItem itemLabel="1° básico" itemValue="1 basico" noSelectionOption="false" />
                                 <f:selectItem itemLabel="2° básico" itemValue="2 basico" noSelectionOption="false" />

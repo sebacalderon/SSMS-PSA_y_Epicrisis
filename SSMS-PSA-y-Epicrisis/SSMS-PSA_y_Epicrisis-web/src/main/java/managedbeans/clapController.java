@@ -2929,8 +2929,10 @@ public class clapController implements Serializable {
             seccion = false;
         }
         if (selected.getNivel_educacion()> 1) {
-            if (selected.getCurso() == null) {
-                seccion = false;
+            if (selected.getNivel_educacion() != 4) {
+                if (selected.getCurso() == null) {
+                    seccion = false;
+                }
             }
         }
         selected.setSeccion_educacion(seccion);
