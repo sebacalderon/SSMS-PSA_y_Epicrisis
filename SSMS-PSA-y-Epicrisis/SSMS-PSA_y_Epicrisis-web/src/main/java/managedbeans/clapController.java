@@ -80,10 +80,12 @@ public class clapController implements Serializable {
     boolean vive_con_madre=false;
     boolean vive_con_padre=false;
     boolean vive_con_otros=false;
-    
+    cesfam cesfam = null;
     boolean actividadElegida=false;
-
-    private int minutos = 10;
+    Date fecha1;
+    Date fecha2;
+    String estado;
+    
     
     @Inject
     private pacienteController pacienteCtrl;
@@ -103,10 +105,27 @@ public class clapController implements Serializable {
     public clapController() {
     }
 
+    public cesfam getCesfam() {
+        return cesfam;
+    }
+
+    public void setCesfam(cesfam cesfam) {
+        this.cesfam = cesfam;
+    }
+
     public StreamedContent getChart() {
         return chart;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    
     public void setChart(StreamedContent chart) {
         this.chart = chart;
     }
@@ -194,6 +213,22 @@ public class clapController implements Serializable {
         }
     }
 
+    public Date getFecha1() {
+        return fecha1;
+    }
+
+    public void setFecha1(Date fecha1) {
+        this.fecha1 = fecha1;
+    }
+
+    public Date getFecha2() {
+        return fecha2;
+    }
+
+    public void setFecha2(Date fecha2) {
+        this.fecha2 = fecha2;
+    }
+    
     public void setItemsPorPaciente(List<clap> itemsPorPaciente) {
         this.itemsPorPaciente = itemsPorPaciente;
     }
@@ -229,14 +264,6 @@ public class clapController implements Serializable {
     
     public clap getSelected() {
         return selected;
-    }
-
-    public int getMinutos() {
-        return minutos;
-    }
-
-    public void setMinutos(int minutos) {
-        this.minutos = minutos;
     }
     
     public void setSelected(clap selected) {

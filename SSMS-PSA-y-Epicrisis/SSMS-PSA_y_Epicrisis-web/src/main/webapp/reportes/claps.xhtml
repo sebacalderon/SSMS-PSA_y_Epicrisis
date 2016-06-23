@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">  
+    
+    <ui:composition template="/template.xhtml">
+
+        <ui:define name="title">
+            <h:outputText value="Población Bajo Control"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form>
+                <p:breadCrumb>
+                    <p:menuitem value="Categories" url="/faces/home.xhtml" />
+                    <p:menuitem value="Explotación de Datos"/>
+                    <p:menuitem value="Reporte de CLAPS" url="/faces/reportes/claps.xhtml" />
+                </p:breadCrumb>
+                <br />
+            </h:form>
+            
+            <b:panel title="CLAPS por CESFAM" look="info" rendered="#{loginController.esSuperUsuario()}">
+                <h:form id="buscar">
+                <b:row>
+                    <b:column col-xs="3">
+                        <p:outputLabel value="Seleccione CESFAM:" for="cesfam" />    
+                    </b:column>
+                    <b:column col-xs="2">
+                        <p:selectOneMenu id="cesfam" value="#{pacienteController.cesfam}" >
+                            <f:selectItem itemLabel="Seleccione un CESFAM" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{cesfamController.items}" var="cesfam" itemLabel="#{cesfam.nombre}" itemValue="#{cesfam}"/>
+                        </p:selectOneMenu>
+                    </b:column>
+                </b:row>
+                    <br/>
+                <b:row>
+                    <b:column col-xs="3">
+                        <p:outputLabel value="Seleccione rango de fechas:" for="fecha1" />    
+                    </b:column>
+                    <b:column col-xs="2">
+                        <p:calendar id="fecha1" value="#{clapController.fecha1}" locale="es" navigator="true" pattern="dd/MM/yyyy" />
+                    </b:column>
+                    <b:column col-xs="1">
+                        <p:outputLabel value="y " for="fecha2" />    
+                    </b:column>
+                    <b:column col-xs="2">
+                        <p:calendar id="fecha2" value="#{clapController.fecha2}" locale="es" navigator="true" pattern="dd/MM/yyyy" />
+                    </b:column>
+                </b:row>
+                <br/>
+                <b:row>
+                    <b:column col-xs="3">
+                        <p:outputLabel value="Estado:" for="estado" />    
+                    </b:column>
+                    <b:column col-xs="2">
+                        <p:selectOneMenu id="estado" value="#{clapController.estado}" required="true" >
+                            <f:selectItem itemLabel="Vigente" itemValue="Vigente" noSelectionOption="false" />
+                            <f:selectItem itemLabel="Vencido" itemValue="Vencido" noSelectionOption="false" />
+                            <f:selectItem itemLabel="Antiguo" itemValue="Antiguo" noSelectionOption="false" />
+                            <f:selectItem itemLabel="Anulado" itemValue="Anulado" noSelectionOption="false" />                            
+                        </p:selectOneMenu>
+                    </b:column>
+                </b:row>
+                <br/>
+                <b:row>    
+                    <b:column col-xs="1" offset-xs="1">
+                        <b:commandButton value="Buscar" id="withIcon" look="primary" action="#{clapController.reporteCLAPS()}"/>
+                        <p:tooltip id="toolTipFade2" for="withIcon" value="Filtra por CESFAM"/>
+                    </b:column>
+                    <b:column col-xs="1">
+                        <b:commandButton value="Descargar Todo" id="desc" look="primary" action="#{clapController.generarCSV(0)}"/>
+                        <p:tooltip id="toolTipFade" for="desc" value="Descargar informacion sin filtrar por CESFAM" />
+                    </b:column>
+                </b:row>
+                </h:form>
+            </b:panel>
+            
+        </ui:define>
+        
+    </ui:composition>
+</html>

@@ -8,6 +8,37 @@
 
     
     <h:head>
+        <script>
+
+
+        PrimeFaces.locales['es'] = {
+                closeText: 'Cerrar',
+                prevText: 'Anterior',
+                nextText: 'Siguiente',
+                monthNames: ['Enero','Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+                dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+                dayNamesShort: ['Dom','Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                dayNamesMin: ['D','L','M','M','J','V','S'],
+                weekHeader: 'Semana',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Sólo hora',
+                timeText: 'Tiempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                currentText: 'Fecha actual',
+                ampm: false,
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+                allDayText : 'Todo el día'
+        };
+       
+        </script>
         <title><ui:insert name="title">SSMS</ui:insert></title>
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
         <h:outputScript library="js" name="jsfcrud.js"/>
@@ -28,7 +59,8 @@
                 </b:dropMenu>
                 <b:dropMenu value="#{bundle.seccion4}" rendered="#{loginController.esEncargadoPrograma() || loginController.esSuperUsuario()}">
                     <b:navLink value="Sábana de Fichas CLAP" outcome="/reportes/sabana.xhtml" />
-                    <b:navLink value="Reportes" outcome="/en_construccion.xhtml" />
+                    <b:navLink value="Población Bajo Control" outcome="/reportes/poblacion.xhtml" />
+                    <b:navLink value="Reporte de CLAPS" outcome="/reportes/claps.xhtml" />
                 </b:dropMenu>
                 <b:dropMenu value="#{bundle.seccion5}" rendered="#{loginController.esSuperUsuario()}">
                     <b:navLink value="Control de sesiones" outcome="/usuario/List.xhtml" />

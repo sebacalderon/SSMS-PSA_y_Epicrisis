@@ -2,10 +2,9 @@ package managedbeans;
 
 import entities.cesfam;
 import entities.comuna;
-import entities.nacionalidad;
 import entities.paciente;
-import entities.prevision;
-import entities.region;
+import java.io.IOException;
+import java.io.OutputStream;
 import managedbeans.util.JsfUtil;
 import managedbeans.util.JsfUtil.PersistAction;
 import sessionbeans.pacienteFacadeLocal;
@@ -28,6 +27,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 
 @Named("pacienteController")
 @SessionScoped
@@ -39,7 +39,9 @@ public class pacienteController implements Serializable {
     private paciente selected;
     private int RUN;
     private String DV;
+    private cesfam cesfam = null;
     private List<paciente> itemsRiesgo = null;
+    private List<paciente> itemsCESFAM = null;
     
     @Inject
     private LoginController loginCtrl;
@@ -66,7 +68,23 @@ public class pacienteController implements Serializable {
     public void setDV(String DV) {
         this.DV = DV;
     }
+
+    public List<paciente> getItemsCESFAM() {
+        return itemsCESFAM;
+    }
+
+    public void setItemsCESFAM(List<paciente> itemsCESFAM) {
+        this.itemsCESFAM = itemsCESFAM;
+    }
     
+    public cesfam getCesfam() {
+        return cesfam;
+    }
+
+    public void setCesfam(cesfam cesfam) {
+        this.cesfam = cesfam;
+    }
+ 
     public paciente getSelected() {
         return selected;
     }
@@ -423,5 +441,78 @@ public class pacienteController implements Serializable {
     public String pacienteClap(paciente paciente){
         setSelected(paciente);
         return "/paciente/View?faces-redirect=true";
+    }
+    
+    public String reporteCESFAM(){
+        setItemsCESFAM(getFacade().findbyCESFAM(cesfam));
+        return "/faces/reportes/resultado_poblacion.xhtml";
+    }
+    
+    public int getTamano(){
+        if (itemsCESFAM==null) {
+            itemsCESFAM = getFacade().findbyCESFAM(loginCtrl.getUsuarioLogueado().getCESFAM());
+        }
+        return itemsCESFAM.size();        
+    }
+    
+    public void generarCSV(int condicion)
+    {
+        String nombreCesfam;
+        String title;
+        if (condicion == 0 ) {
+            title = "poblacion.csv";
+        }else{
+            if (cesfam == null) {
+                nombreCesfam = loginCtrl.getUsuarioLogueado().getCESFAM().getNombre();
+                title = nombreCesfam+".csv";
+            }else{
+                nombreCesfam = getCesfam().getNombre();
+                title = nombreCesfam+".csv";
+            }
+        }
+        
+        try
+        {
+            
+            FacesContext fc = FacesContext.getCurrentInstance();
+            HttpServletResponse response = (HttpServletResponse) fc.getExternalContext().getResponse();
+
+            response.reset();
+            response.setContentType("text/comma-separated-values");
+            response.setHeader("Content-Disposition", "attachment; filename=\"" + title + "\"");
+            
+            OutputStream output = response.getOutputStream();
+            
+            //Nombre de las columnas
+            output.write("RUN;".getBytes());
+            output.write("Nombre".getBytes());
+            output.write("\n".getBytes());
+            
+            if (condicion == 0) {
+                items = getItems();
+                for (int i =0;i<items.size();i++) {
+                    paciente item =items.get(i);
+                    String fila = item.getRUN()+"-"+item.getDV()+";"+item.getNombres()+" "+item.getPrimer_apellido()+" "+item.getSegundo_apellido();
+                    output.write(fila.getBytes());
+                    output.write("\n".getBytes());
+                }
+            }else{
+                for (int i =0;i<itemsCESFAM.size();i++) {
+                    paciente item =itemsCESFAM.get(i);
+                    String fila = item.getRUN()+"-"+item.getDV()+";"+item.getNombres()+" "+item.getPrimer_apellido()+" "+item.getSegundo_apellido();
+                    output.write(fila.getBytes());
+                    output.write("\n".getBytes());
+                }
+            }
+
+            output.flush();
+            output.close();
+            
+            fc.responseComplete();
+
+            
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 }

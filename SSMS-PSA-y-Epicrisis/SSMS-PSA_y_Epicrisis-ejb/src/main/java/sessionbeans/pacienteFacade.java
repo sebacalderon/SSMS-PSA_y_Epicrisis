@@ -58,6 +58,14 @@ public class pacienteFacade extends AbstractFacade<paciente> implements paciente
         return query.getResultList();
     }
     
+    @Override
+    public List<paciente> findbyCESFAM(cesfam cesfam) {
+        Query query;
+        query = em.createNamedQuery("paciente.findbyCESFAM").
+                setParameter("cesfam", cesfam);
+        return query.getResultList();
+    }
+    
 //    @Override
 //    public List<paciente> findbyRUNCesfam(int RUN, cesfam cesfam) {
 //        Query query;
