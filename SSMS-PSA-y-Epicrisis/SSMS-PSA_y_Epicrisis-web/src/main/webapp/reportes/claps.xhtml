@@ -30,7 +30,7 @@
                         <p:outputLabel value="Seleccione CESFAM:" for="cesfam" />    
                     </b:column>
                     <b:column col-xs="2">
-                        <p:selectOneMenu id="cesfam" value="#{pacienteController.cesfam}" >
+                        <p:selectOneMenu id="cesfam" value="#{clapController.cesfam}" >
                             <f:selectItem itemLabel="Seleccione un CESFAM" itemValue="" noSelectionOption="true" />
                             <f:selectItems value="#{cesfamController.items}" var="cesfam" itemLabel="#{cesfam.nombre}" itemValue="#{cesfam}"/>
                         </p:selectOneMenu>
@@ -42,13 +42,13 @@
                         <p:outputLabel value="Seleccione rango de fechas:" for="fecha1" />    
                     </b:column>
                     <b:column col-xs="2">
-                        <p:calendar id="fecha1" value="#{clapController.fecha1}" locale="es" navigator="true" pattern="dd/MM/yyyy" />
+                        <p:calendar id="fecha1" value="#{clapController.fecha1}" locale="es" navigator="true" pattern="dd/MM/yyyy" required="true"/>
                     </b:column>
                     <b:column col-xs="1">
                         <p:outputLabel value="y " for="fecha2" />    
                     </b:column>
                     <b:column col-xs="2">
-                        <p:calendar id="fecha2" value="#{clapController.fecha2}" locale="es" navigator="true" pattern="dd/MM/yyyy" />
+                        <p:calendar id="fecha2" value="#{clapController.fecha2}" locale="es" navigator="true" pattern="dd/MM/yyyy" required="true"/>
                     </b:column>
                 </b:row>
                 <br/>
@@ -62,6 +62,7 @@
                             <f:selectItem itemLabel="Vencido" itemValue="Vencido" noSelectionOption="false" />
                             <f:selectItem itemLabel="Antiguo" itemValue="Antiguo" noSelectionOption="false" />
                             <f:selectItem itemLabel="Anulado" itemValue="Anulado" noSelectionOption="false" />                            
+                            <f:selectItem itemLabel="Incompleto" itemValue="Incompleto" noSelectionOption="false" />                            
                         </p:selectOneMenu>
                     </b:column>
                 </b:row>
@@ -72,8 +73,48 @@
                         <p:tooltip id="toolTipFade2" for="withIcon" value="Filtra por CESFAM"/>
                     </b:column>
                     <b:column col-xs="1">
-                        <b:commandButton value="Descargar Todo" id="desc" look="primary" action="#{clapController.generarCSV(0)}"/>
+                        <b:commandButton value="Descargar Todo" id="desc" look="primary" action="#{clapController.generarCSV(1)}"/>
                         <p:tooltip id="toolTipFade" for="desc" value="Descargar informacion sin filtrar por CESFAM" />
+                    </b:column>
+                </b:row>
+                </h:form>
+            </b:panel>
+            
+            <b:panel title="CLAPS para #{loginController.usuarioLogueado.CESFAM.nombre}" look="info" rendered="#{loginController.esEncargadoPrograma()}">
+                <h:form id="buscar4">
+                <b:row>
+                    <b:column col-xs="3">
+                        <p:outputLabel value="Seleccione rango de fechas:" for="fecha3" />    
+                    </b:column>
+                    <b:column col-xs="2">
+                        <p:calendar id="fecha3" value="#{clapController.fecha1}" locale="es" navigator="true" pattern="dd/MM/yyyy" required="true"/>
+                    </b:column>
+                    <b:column col-xs="1">
+                        <p:outputLabel value="y " for="fecha4" />    
+                    </b:column>
+                    <b:column col-xs="2">
+                        <p:calendar id="fecha4" value="#{clapController.fecha2}" locale="es" navigator="true" pattern="dd/MM/yyyy" required="true"/>
+                    </b:column>
+                </b:row>
+                <br/>
+                <b:row>
+                    <b:column col-xs="3">
+                        <p:outputLabel value="Estado:" for="estado2" />    
+                    </b:column>
+                    <b:column col-xs="2">
+                        <p:selectOneMenu id="estado2" value="#{clapController.estado}" required="true" >
+                            <f:selectItem itemLabel="Vigente" itemValue="Vigente" noSelectionOption="false" />
+                            <f:selectItem itemLabel="Vencido" itemValue="Vencido" noSelectionOption="false" />
+                            <f:selectItem itemLabel="Antiguo" itemValue="Antiguo" noSelectionOption="false" />
+                            <f:selectItem itemLabel="Anulado" itemValue="Anulado" noSelectionOption="false" />                            
+                            <f:selectItem itemLabel="Incompleto" itemValue="Incompleto" noSelectionOption="false" />                            
+                        </p:selectOneMenu>
+                    </b:column>
+                </b:row>
+                <br/>
+                <b:row>    
+                    <b:column col-xs="1" offset-xs="1">
+                        <b:commandButton value="Buscar" id="withIcon" look="primary" action="#{clapController.reporteCLAPS()}"/>
                     </b:column>
                 </b:row>
                 </h:form>

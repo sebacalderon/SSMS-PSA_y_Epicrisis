@@ -67,6 +67,7 @@ public class clapController implements Serializable {
     private List<clap> items = null;
     private List<clap> itemsPorPaciente = null;
     private List<clap> itemsNoTerminados = null;
+    private List<clap> itemsReporteClaps = null;
     private clap selected;
     private paciente Paciente = null;
     private boolean auditCrafft = false;
@@ -105,6 +106,14 @@ public class clapController implements Serializable {
     public clapController() {
     }
 
+    public List<clap> getItemsReporteClaps() {
+        return itemsReporteClaps;
+    }
+
+    public void setItemsReporteClaps(List<clap> itemsReporteClaps) {
+        this.itemsReporteClaps = itemsReporteClaps;
+    }
+    
     public cesfam getCesfam() {
         return cesfam;
     }
@@ -165,6 +174,7 @@ public class clapController implements Serializable {
         for (clap clap : itemsIncompletos) {
             if (clap.getFecha_consulta().before(fecha)) {
                 clap.setEstado("Anulado");
+                clap.setFecha_estado(new java.util.Date());
                 selected = clap;
                 getFacade().edit(selected);
                 //persist(PersistAction.UPDATE,"");
@@ -179,6 +189,7 @@ public class clapController implements Serializable {
             fecha = c.getTime();
             if (itemVigente.get(0).getFecha_consulta().before(fecha)) {
                 itemVigente.get(0).setEstado("Vencido");
+                itemVigente.get(0).setFecha_estado(new java.util.Date());
                 selected = itemVigente.get(0);
                 getFacade().edit(selected);
             }
@@ -285,19 +296,19 @@ public class clapController implements Serializable {
         return ejbFacade;
     }
 
-    public clap prepareCreate() {
-        selected = new clap();
-        selected.setRiesgo_cardiovascular(false);
-        selected.setRiesgo_nutricional(false);
-        selected.setRiesgo_oh_drogas(false);
-        selected.setRiesgo_salud_mental(false);
-        selected.setRiesgo_social(false);
-        selected.setRiesgo_ssr(false);
-        selected.setEstado("Incompleto");
-        auditCrafft = false;
-        initializeEmbeddableKey();
-        return selected;
-    }
+//    public clap prepareCreate() {
+//        selected = new clap();
+//        selected.setRiesgo_cardiovascular(false);
+//        selected.setRiesgo_nutricional(false);
+//        selected.setRiesgo_oh_drogas(false);
+//        selected.setRiesgo_salud_mental(false);
+//        selected.setRiesgo_social(false);
+//        selected.setRiesgo_ssr(false);
+//        selected.setEstado("Incompleto");
+//        auditCrafft = false;
+//        initializeEmbeddableKey();
+//        return selected;
+//    }
     
     public clap prepareEdit() throws FileNotFoundException{
         selected = getSelected();
@@ -350,252 +361,295 @@ public class clapController implements Serializable {
         return chart;
     }
 
-    public void generarCSV()
+    public void generarCSV(int cond)
     {
-        String title = "sabana_de_datos.csv";
-        try
-        {
-            
-            FacesContext fc = FacesContext.getCurrentInstance();
-            HttpServletResponse response = (HttpServletResponse) fc.getExternalContext().getResponse();
+        String title;
+        String pattern = "dd/MM/yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String sFecha1;
+        String sFecha2;
 
-            response.reset();
-            response.setContentType("text/comma-separated-values");
-            response.setHeader("Content-Disposition", "attachment; filename=\"" + title + "\"");
-            
-            OutputStream output = response.getOutputStream();
-            
-            items=getItems();
-            //Nombre de las columnas
-            output.write("Numero de CLAP;".getBytes());
-            output.write("RUN;".getBytes());
-            output.write("Nombres;".getBytes());
-            output.write("Primer apellido;".getBytes());
-            output.write("Segundo apellido;".getBytes());
-            output.write("Nombre social;".getBytes());
-            output.write("Telefono fijo;".getBytes());
-            output.write("Domicilio;".getBytes());
-            output.write("Telefono movil;".getBytes());
-            output.write("Recados;".getBytes());
-            output.write("Region de residencia;".getBytes());
-            output.write("Comuna de residencia;".getBytes());
-            output.write("Calle direccion;".getBytes());
-            output.write("Numero direccion;".getBytes());
-            output.write("Resto direccion;".getBytes());
-            output.write("Fecha de nacimiento;".getBytes());
-            output.write("Sexo;".getBytes());
-            output.write("Nacionalidad;".getBytes());
-            output.write("Correo;".getBytes());
-            output.write("Programa social;".getBytes());
-            output.write("Prevision;".getBytes());
-            output.write("Grupo de FONASA;".getBytes());
-            output.write("Estado conyugal;".getBytes());
-            output.write("Pueblo originario;".getBytes());
-            output.write("CESFAM;".getBytes());
-            output.write("Lugar de la consulta;".getBytes());
-            output.write("H.C.N;".getBytes());
-            output.write("Establecimiento educacional;".getBytes());
-            output.write("Fecha consulta;".getBytes());
-            output.write("Edad;".getBytes());
-            output.write("Acompanyante;".getBytes());
-            output.write("Motivo de consulta segun adolescente 1;".getBytes());
-            output.write("Motivo de consulta segun adolescente 2;".getBytes());
-            output.write("Motivo de consulta segun adolescente 3;".getBytes());
-            output.write("Motivo de consulta segun acompanante 1;".getBytes());
-            output.write("Motivo de consulta segun acompanante 2;".getBytes());
-            output.write("Motivo de consulta segun acompanante 3;".getBytes());
-            output.write("Descripcion motivo de consulta;".getBytes());
-            
-            output.write("Perinatales normales;".getBytes());
-            output.write("Alergias normales;".getBytes());
-            output.write("Vacunas completas;".getBytes());
-            output.write("Enfermedades importantes;".getBytes());
-            output.write("Discapacidad;".getBytes());
-            output.write("Accidentes relevantes;".getBytes());
-            output.write("Cirugia u hospitalizaciones;".getBytes());
-            output.write("Uso medicamentos;".getBytes());
-            output.write("Problemas de salud mental;".getBytes());
-            output.write("Violencia;".getBytes());
-            output.write("Antecedentes judiales;".getBytes());
-            output.write("Otros antecedentes personales;".getBytes());
-            output.write("Observaciones antecedentes personales;".getBytes());
+        switch (cond) {
+            case 0:
+                items=getItems();
+                title = "sabana_de_datos.csv";
+                break;
+            case 1:
+                if (estado.equals("Vencido")) {
+                    List<clap> aux = getFacade().findbyEstado("Vigente");
+                    Date fecha = new java.util.Date();
+                    Calendar c = Calendar.getInstance();
+                    c.setTime(fecha);
+                    c.add(Calendar.DATE, -365);
+                    fecha = c.getTime();
+                    for (clap clap : aux) {
+                        if (clap.getFecha_estado().before(fecha)) {
+                            clap.setEstado("Vencido");
+                            clap.setFecha_estado(new java.util.Date());
+                            selected = clap;
+                            getFacade().edit(selected);
+                            //persist(PersistAction.UPDATE,"");
+                        }
+                    }
+                }
+                items = getFacade().findbyEstadoEntreFechas(fecha1, fecha2, estado);
+                sFecha1 = simpleDateFormat.format(fecha1);
+                sFecha2 = simpleDateFormat.format(fecha2);
+                title = estado+" "+sFecha1+"-"+sFecha2+".csv";
+                break;
+            default:
+                items = itemsReporteClaps;
+                sFecha1 = simpleDateFormat.format(fecha1);
+                sFecha2 = simpleDateFormat.format(fecha2);
+                title = estado+" "+sFecha1+"-"+sFecha2+" "+cesfam.getNombre()+".csv";
+                break;
+        }
+        if (items.size()==0) {
+            JsfUtil.addErrorMessage("No se encontraron datos para generar el archivo");
+        }else{
+            try
+            {
 
-            output.write("Enfermedades importantes familia;".getBytes());
-            output.write("Obesidad familia;".getBytes());
-            output.write("Problemas salud mental familia;".getBytes());
-            output.write("Violencia intrafamiliar;".getBytes());
-            output.write("Alcohol y otras drogas;".getBytes());
-            output.write("Padre adolescente;".getBytes());
-            output.write("Judiciales;".getBytes());
-            output.write("Otros antecedentes familiares;".getBytes());
-            output.write("Observaciones antecedentes familiares;".getBytes());
-            
-            output.write("Vive solo;".getBytes());
-            output.write("Vive con madre;".getBytes());
-            output.write("Vive con padre;".getBytes());
-            output.write("Vive en institucion;".getBytes());
-            output.write("Vive con otros;".getBytes());
-            output.write("Especificacion con quien vive;".getBytes());
-            output.write("Comparte cama;".getBytes());
-            output.write("Especificacion comparte cama;".getBytes());
-            output.write("Nivel de instruccion madre;".getBytes());
-            output.write("Nivel de instruccion padre;".getBytes());
-            output.write("Nivel de instruccion pareja;".getBytes());
-            output.write("Ocupacion madre;".getBytes());
-            output.write("Ocupacion padre;".getBytes());
-            output.write("Ocupacion pareja;".getBytes());
-            output.write("Percepcion familia;".getBytes());
-            output.write("Observaciones familia;".getBytes());
-            
-            output.write("Condiciones sanitarias;".getBytes());
-            output.write("Hacinamiento;".getBytes());
-            output.write("Observaciones vivienda;".getBytes());
+                FacesContext fc = FacesContext.getCurrentInstance();
+                HttpServletResponse response = (HttpServletResponse) fc.getExternalContext().getResponse();
 
-            output.write("Estudia;".getBytes());
-            output.write("Nivel de educacion;".getBytes());
-            output.write("Curso;".getBytes());
-            output.write("Anyos repetidos;".getBytes());
-            output.write("Causa de los anyos repetidos;".getBytes());
-            output.write("Problemas en la escuela;".getBytes());
-            output.write("Violencia escolar;".getBytes());
-            output.write("Desercion o exclusion;".getBytes());
-            output.write("Causa desercion exclusion;".getBytes());
-            output.write("Percepcion rendimiento;".getBytes());
-            output.write("Observaciones educacion;".getBytes());
-            
-            output.write("Trabaja;".getBytes());
-            output.write("Horas de trabajo;".getBytes());
-            output.write("Trabajo infantil;".getBytes());
-            output.write("Trabajo juvenil;".getBytes());
-            output.write("Peores formas;".getBytes());
-            output.write("Servicio domestico no remunerado peligroso;".getBytes());
-            output.write("Razon de trabajo;".getBytes());
-            output.write("Legalizado;".getBytes());
-            output.write("Tipo de trabajo;".getBytes());
-            output.write("Observaciones trabajo;".getBytes());
-            
-            output.write("Aceptacion;".getBytes());
-            output.write("Pareja;".getBytes());
-            output.write("Edad pareja;".getBytes());
-            output.write("Violencia en la pareja;".getBytes());
-            output.write("Amigos;".getBytes());
-            output.write("Suicidalidad amigos;".getBytes());
-            output.write("Horas de actividad fisica;".getBytes());
-            output.write("Horas de TV;".getBytes());
-            output.write("Horas de computador o consola;".getBytes());
-            output.write("Cyberbulling;".getBytes());
-            output.write("Grooming;".getBytes());
-            output.write("Otras actividades;".getBytes());
-            output.write("Especificacion de otras actividades;".getBytes());
-            output.write("Observaciones de vida social;".getBytes());
-            
-            output.write("Suenyo normal;".getBytes());
-            output.write("Horas de suenyo;".getBytes());
-            output.write("Alimentacion adecuada;".getBytes());
-            output.write("Comidas familia;".getBytes());
-            output.write("Alimentacion especial;".getBytes());
-            output.write("Especificacion de alimentacion especial;".getBytes());
-            output.write("Tabaco;".getBytes());
-            output.write("Cigarros al dia;".getBytes());
-            output.write("Consumo de alcohol;".getBytes());
-            output.write("Consumo de marihuana;".getBytes());
-            output.write("Consumo de otra suscancia;".getBytes());
-            output.write("Especificacion consumo otra sustancia;".getBytes());
-            output.write("Seguridad vial;".getBytes());
-            output.write("Observaciones de habitos y consumo;".getBytes());
-            
-            output.write("Edad menarca o espermarca;".getBytes());
-            output.write("Fecha de ultima menstruacion;".getBytes());
-            output.write("No conoce fecha ultima menstruacion;".getBytes());
-            output.write("Ciclos regulares;".getBytes());
-            output.write("Dismenorrea;".getBytes());
-            output.write("Flujo secrecion patologico;".getBytes());
-            output.write("ITS o VIH;".getBytes());
-            output.write("Especificacion de ITS o VIH;".getBytes());
-            output.write("Tratamiento;".getBytes());
-            output.write("Tratamiento contactos;".getBytes());
-            output.write("Embarazos;".getBytes());
-            output.write("Hijos;".getBytes());
-            output.write("Abortos;".getBytes());
-            output.write("Observaciones gineco urologico;".getBytes());
-            
-            output.write("Orientacion sexual;".getBytes());
-            output.write("Especificacion de orientacion sexual;".getBytes());
-            output.write("Conducta sexual;".getBytes());
-            output.write("Edad de inicio de conducta sexual;".getBytes());
-            output.write("Relaciones sexuales;".getBytes());
-            output.write("Pareja sexual;".getBytes());
-            output.write("Dificultades sexuales;".getBytes());
-            output.write("Anticoncepcion;".getBytes());
-            output.write("Doble proteccion;".getBytes());
-            output.write("Uso MAC;".getBytes());
-            output.write("Especificacion de uso MAC;".getBytes());
-            output.write("Razon de no uso MAC;".getBytes());
-            output.write("Consejeria de uso MAC;".getBytes());
-            output.write("ACO de emergencia;".getBytes());
-            output.write("Violencia sexual;".getBytes());
-            output.write("Reparacion de abuso sexual;".getBytes());
-            output.write("Observaciones sexualidad;".getBytes());
-            
-            output.write("Imagen corporal;".getBytes());
-            output.write("Bienestar emocional;".getBytes());
-            output.write("Vida proyecto;".getBytes());
-            output.write("Suicidalidad en amigos;".getBytes());
-            output.write("Ideacion suicida;".getBytes());
-            output.write("Intento suicida;".getBytes());
-            output.write("Referente adulto;".getBytes());
-            output.write("Nombre referente adulto;".getBytes());
-            output.write("Telefono referente adulto;".getBytes());
-            output.write("Observacion psico emocional;".getBytes());
-            
-            output.write("Peso;".getBytes());
-            output.write("DE peso;".getBytes());
-            output.write("Talla;".getBytes());
-            output.write("De talla;".getBytes());
-            output.write("Perimetro abdominal;".getBytes());
-            output.write("IMC;".getBytes());
-            output.write("DE IMC;".getBytes());
-            output.write("Presion arterial sistolica;".getBytes());
-            output.write("Presion arterial diastolica;".getBytes());
-            output.write("Aspecto general;".getBytes());
-            output.write("Agudeza visual;".getBytes());
-            output.write("Agudeza auditiva;".getBytes());
-            output.write("Salud bucal;".getBytes());
-            output.write("Tiroides;".getBytes());
-            output.write("Cardio pulomones;".getBytes());
-            output.write("Abdomen;".getBytes());
-            output.write("Columna;".getBytes());
-            output.write("Extremidades;".getBytes());
-            output.write("Tanner con foto;".getBytes());
-            output.write("Tanner mama;".getBytes());
-            output.write("Tanner genital;".getBytes());
-            output.write("Observaciones examen fisico;".getBytes());
-            
-            output.write("Impresion diagnostica;".getBytes());
-            output.write("Indicaciones interconsultas;".getBytes());
-            output.write("Funcionario;".getBytes());
-            output.write("Riesgo cardiovascular;".getBytes());
-            output.write("Riesgo SSR;".getBytes());
-            output.write("Riesgo salud mental;".getBytes());
-            output.write("Riesgo alcohol y drogas;".getBytes());
-            output.write("Riesgo nutricional;".getBytes());
-            output.write("Riesgo social\n".getBytes());
-            
-            //claps
-            for (int i =0;i<items.size();i++) {
-                clap item=items.get(i);
-                output.write(item.toString().getBytes());
-                output.write("\n".getBytes());
+                response.reset();
+                response.setContentType("text/comma-separated-values");
+                response.setHeader("Content-Disposition", "attachment; filename=\"" + title + "\"");
+
+                OutputStream output = response.getOutputStream();
+
+                //Nombre de las columnas
+                output.write("Numero de CLAP;".getBytes());
+                output.write("RUN;".getBytes());
+                output.write("Nombres;".getBytes());
+                output.write("Primer apellido;".getBytes());
+                output.write("Segundo apellido;".getBytes());
+                output.write("Nombre social;".getBytes());
+                output.write("Telefono fijo;".getBytes());
+                output.write("Domicilio;".getBytes());
+                output.write("Telefono movil;".getBytes());
+                output.write("Recados;".getBytes());
+                output.write("Region de residencia;".getBytes());
+                output.write("Comuna de residencia;".getBytes());
+                output.write("Calle direccion;".getBytes());
+                output.write("Numero direccion;".getBytes());
+                output.write("Resto direccion;".getBytes());
+                output.write("Fecha de nacimiento;".getBytes());
+                output.write("Sexo;".getBytes());
+                output.write("Nacionalidad;".getBytes());
+                output.write("Correo;".getBytes());
+                output.write("Programa social;".getBytes());
+                output.write("Prevision;".getBytes());
+                output.write("Grupo de FONASA;".getBytes());
+                output.write("Estado conyugal;".getBytes());
+                output.write("Pueblo originario;".getBytes());
+                output.write("CESFAM;".getBytes());
+                output.write("Lugar de la consulta;".getBytes());
+                output.write("H.C.N;".getBytes());
+                output.write("Establecimiento educacional;".getBytes());
+                output.write("Fecha consulta;".getBytes());
+                output.write("Edad;".getBytes());
+                output.write("Acompanyante;".getBytes());
+                output.write("Motivo de consulta segun adolescente 1;".getBytes());
+                output.write("Motivo de consulta segun adolescente 2;".getBytes());
+                output.write("Motivo de consulta segun adolescente 3;".getBytes());
+                output.write("Motivo de consulta segun acompanante 1;".getBytes());
+                output.write("Motivo de consulta segun acompanante 2;".getBytes());
+                output.write("Motivo de consulta segun acompanante 3;".getBytes());
+                output.write("Descripcion motivo de consulta;".getBytes());
+
+                output.write("Perinatales normales;".getBytes());
+                output.write("Alergias normales;".getBytes());
+                output.write("Vacunas completas;".getBytes());
+                output.write("Enfermedades importantes;".getBytes());
+                output.write("Discapacidad;".getBytes());
+                output.write("Accidentes relevantes;".getBytes());
+                output.write("Cirugia u hospitalizaciones;".getBytes());
+                output.write("Uso medicamentos;".getBytes());
+                output.write("Problemas de salud mental;".getBytes());
+                output.write("Violencia;".getBytes());
+                output.write("Antecedentes judiales;".getBytes());
+                output.write("Otros antecedentes personales;".getBytes());
+                output.write("Observaciones antecedentes personales;".getBytes());
+
+                output.write("Enfermedades importantes familia;".getBytes());
+                output.write("Obesidad familia;".getBytes());
+                output.write("Problemas salud mental familia;".getBytes());
+                output.write("Violencia intrafamiliar;".getBytes());
+                output.write("Alcohol y otras drogas;".getBytes());
+                output.write("Padre adolescente;".getBytes());
+                output.write("Judiciales;".getBytes());
+                output.write("Otros antecedentes familiares;".getBytes());
+                output.write("Observaciones antecedentes familiares;".getBytes());
+
+                output.write("Vive solo;".getBytes());
+                output.write("Vive con madre;".getBytes());
+                output.write("Vive con padre;".getBytes());
+                output.write("Vive en institucion;".getBytes());
+                output.write("Vive con otros;".getBytes());
+                output.write("Especificacion con quien vive;".getBytes());
+                output.write("Comparte cama;".getBytes());
+                output.write("Especificacion comparte cama;".getBytes());
+                output.write("Nivel de instruccion madre;".getBytes());
+                output.write("Nivel de instruccion padre;".getBytes());
+                output.write("Nivel de instruccion pareja;".getBytes());
+                output.write("Ocupacion madre;".getBytes());
+                output.write("Ocupacion padre;".getBytes());
+                output.write("Ocupacion pareja;".getBytes());
+                output.write("Percepcion familia;".getBytes());
+                output.write("Observaciones familia;".getBytes());
+
+                output.write("Condiciones sanitarias;".getBytes());
+                output.write("Hacinamiento;".getBytes());
+                output.write("Observaciones vivienda;".getBytes());
+
+                output.write("Estudia;".getBytes());
+                output.write("Nivel de educacion;".getBytes());
+                output.write("Curso;".getBytes());
+                output.write("Anyos repetidos;".getBytes());
+                output.write("Causa de los anyos repetidos;".getBytes());
+                output.write("Problemas en la escuela;".getBytes());
+                output.write("Violencia escolar;".getBytes());
+                output.write("Desercion o exclusion;".getBytes());
+                output.write("Causa desercion exclusion;".getBytes());
+                output.write("Percepcion rendimiento;".getBytes());
+                output.write("Observaciones educacion;".getBytes());
+
+                output.write("Trabaja;".getBytes());
+                output.write("Horas de trabajo;".getBytes());
+                output.write("Trabajo infantil;".getBytes());
+                output.write("Trabajo juvenil;".getBytes());
+                output.write("Peores formas;".getBytes());
+                output.write("Servicio domestico no remunerado peligroso;".getBytes());
+                output.write("Razon de trabajo;".getBytes());
+                output.write("Legalizado;".getBytes());
+                output.write("Tipo de trabajo;".getBytes());
+                output.write("Observaciones trabajo;".getBytes());
+
+                output.write("Aceptacion;".getBytes());
+                output.write("Pareja;".getBytes());
+                output.write("Edad pareja;".getBytes());
+                output.write("Violencia en la pareja;".getBytes());
+                output.write("Amigos;".getBytes());
+                output.write("Suicidalidad amigos;".getBytes());
+                output.write("Horas de actividad fisica;".getBytes());
+                output.write("Horas de TV;".getBytes());
+                output.write("Horas de computador o consola;".getBytes());
+                output.write("Cyberbulling;".getBytes());
+                output.write("Grooming;".getBytes());
+                output.write("Otras actividades;".getBytes());
+                output.write("Especificacion de otras actividades;".getBytes());
+                output.write("Observaciones de vida social;".getBytes());
+
+                output.write("Suenyo normal;".getBytes());
+                output.write("Horas de suenyo;".getBytes());
+                output.write("Alimentacion adecuada;".getBytes());
+                output.write("Comidas familia;".getBytes());
+                output.write("Alimentacion especial;".getBytes());
+                output.write("Especificacion de alimentacion especial;".getBytes());
+                output.write("Tabaco;".getBytes());
+                output.write("Cigarros al dia;".getBytes());
+                output.write("Consumo de alcohol;".getBytes());
+                output.write("Consumo de marihuana;".getBytes());
+                output.write("Consumo de otra suscancia;".getBytes());
+                output.write("Especificacion consumo otra sustancia;".getBytes());
+                output.write("Seguridad vial;".getBytes());
+                output.write("Observaciones de habitos y consumo;".getBytes());
+
+                output.write("Edad menarca o espermarca;".getBytes());
+                output.write("Fecha de ultima menstruacion;".getBytes());
+                output.write("No conoce fecha ultima menstruacion;".getBytes());
+                output.write("Ciclos regulares;".getBytes());
+                output.write("Dismenorrea;".getBytes());
+                output.write("Flujo secrecion patologico;".getBytes());
+                output.write("ITS o VIH;".getBytes());
+                output.write("Especificacion de ITS o VIH;".getBytes());
+                output.write("Tratamiento;".getBytes());
+                output.write("Tratamiento contactos;".getBytes());
+                output.write("Embarazos;".getBytes());
+                output.write("Hijos;".getBytes());
+                output.write("Abortos;".getBytes());
+                output.write("Observaciones gineco urologico;".getBytes());
+
+                output.write("Orientacion sexual;".getBytes());
+                output.write("Especificacion de orientacion sexual;".getBytes());
+                output.write("Conducta sexual;".getBytes());
+                output.write("Edad de inicio de conducta sexual;".getBytes());
+                output.write("Relaciones sexuales;".getBytes());
+                output.write("Pareja sexual;".getBytes());
+                output.write("Dificultades sexuales;".getBytes());
+                output.write("Anticoncepcion;".getBytes());
+                output.write("Doble proteccion;".getBytes());
+                output.write("Uso MAC;".getBytes());
+                output.write("Especificacion de uso MAC;".getBytes());
+                output.write("Razon de no uso MAC;".getBytes());
+                output.write("Consejeria de uso MAC;".getBytes());
+                output.write("ACO de emergencia;".getBytes());
+                output.write("Violencia sexual;".getBytes());
+                output.write("Reparacion de abuso sexual;".getBytes());
+                output.write("Observaciones sexualidad;".getBytes());
+
+                output.write("Imagen corporal;".getBytes());
+                output.write("Bienestar emocional;".getBytes());
+                output.write("Vida proyecto;".getBytes());
+                output.write("Suicidalidad en amigos;".getBytes());
+                output.write("Ideacion suicida;".getBytes());
+                output.write("Intento suicida;".getBytes());
+                output.write("Referente adulto;".getBytes());
+                output.write("Nombre referente adulto;".getBytes());
+                output.write("Telefono referente adulto;".getBytes());
+                output.write("Observacion psico emocional;".getBytes());
+
+                output.write("Peso;".getBytes());
+                output.write("DE peso;".getBytes());
+                output.write("Talla;".getBytes());
+                output.write("De talla;".getBytes());
+                output.write("Perimetro abdominal;".getBytes());
+                output.write("IMC;".getBytes());
+                output.write("DE IMC;".getBytes());
+                output.write("Presion arterial sistolica;".getBytes());
+                output.write("Presion arterial diastolica;".getBytes());
+                output.write("Aspecto general;".getBytes());
+                output.write("Agudeza visual;".getBytes());
+                output.write("Agudeza auditiva;".getBytes());
+                output.write("Salud bucal;".getBytes());
+                output.write("Tiroides;".getBytes());
+                output.write("Cardio pulomones;".getBytes());
+                output.write("Abdomen;".getBytes());
+                output.write("Columna;".getBytes());
+                output.write("Extremidades;".getBytes());
+                output.write("Tanner con foto;".getBytes());
+                output.write("Tanner mama;".getBytes());
+                output.write("Tanner genital;".getBytes());
+                output.write("Observaciones examen fisico;".getBytes());
+
+                output.write("Impresion diagnostica;".getBytes());
+                output.write("Indicaciones interconsultas;".getBytes());
+                output.write("Funcionario;".getBytes());
+                output.write("Riesgo cardiovascular;".getBytes());
+                output.write("Riesgo SSR;".getBytes());
+                output.write("Riesgo salud mental;".getBytes());
+                output.write("Riesgo alcohol y drogas;".getBytes());
+                output.write("Riesgo nutricional;".getBytes());
+                output.write("Riesgo social\n".getBytes());
+
+                //claps
+                for (int i =0;i<items.size();i++) {
+                    clap item=items.get(i);
+                    output.write(item.toString().getBytes());
+                    output.write("\n".getBytes());
+                }
+
+                output.flush();
+                output.close();
+
+                fc.responseComplete();
+
+
+            } catch(IOException e) {
+                e.printStackTrace();
             }
-
-            output.flush();
-            output.close();
-            
-            fc.responseComplete();
-
-            
-        } catch(IOException e) {
-            e.printStackTrace();
         }
     }
     
@@ -937,6 +991,7 @@ public class clapController implements Serializable {
             completo=true;
         }else{
             selected.setEstado("Incompleto");
+            selected.setFecha_estado(new java.util.Date());
             completo=false;
         }
 //        if( selected.getPerinatales_normales()!=0&&
@@ -1182,6 +1237,7 @@ public class clapController implements Serializable {
             else{
                 System.out.println("Primer clap ingresado");
                 selected.setEstado("Vigente");
+                selected.setFecha_estado(new java.util.Date());
                 getFacade().edit(selected);
                 //persist(PersistAction.UPDATE,"");
             }
@@ -1249,6 +1305,7 @@ public class clapController implements Serializable {
 
     public void anular() {
         selected.setEstado("Anulado");
+        selected.setFecha_estado(new java.util.Date());
         persist(PersistAction.UPDATE, "Clap Anulado");
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
@@ -3000,5 +3057,57 @@ public class clapController implements Serializable {
         }
         return false;
         
+    }
+    
+    public String reporteCLAPS(){
+        if (loginCtrl.esSuperUsuario()) {
+            if (cesfam == null) {
+                JsfUtil.addErrorMessage("Ingrese CESFAM");
+                return "/faces/reportes/claps.xhtml";
+            }else if (fecha1.after(fecha2)){    
+                JsfUtil.addErrorMessage("Ingrese correctamente las fechas");
+                return "/faces/reportes/claps.xhtml";
+            }else{
+                if (estado.equals("Vencido")) {
+                    List<clap> aux = getFacade().findbyEstadoCesfam("Vigente", cesfam);
+                    Date fecha = new java.util.Date();
+                    Calendar c = Calendar.getInstance();
+                    c.setTime(fecha);
+                    c.add(Calendar.DATE, -365);
+                    fecha = c.getTime();
+                    for (clap clap : aux) {
+                        if (clap.getFecha_estado().before(fecha)) {
+                            clap.setEstado("Vencido");
+                            clap.setFecha_estado(new java.util.Date());
+                            selected = clap;
+                            getFacade().edit(selected);
+                            //persist(PersistAction.UPDATE,"");
+                        }
+                    }
+                }
+                itemsReporteClaps = getFacade().findbyEstadoEntreFechasCesfam(fecha1, fecha2, estado, cesfam);
+                return "/faces/reportes/resultado_claps.xhtml";
+            }
+        }else{
+             if (estado.equals("Vencido")) {
+                List<clap> aux = getFacade().findbyEstadoCesfam("Vigente", loginCtrl.getUsuarioLogueado().getCESFAM());
+                Date fecha = new java.util.Date();
+                Calendar c = Calendar.getInstance();
+                c.setTime(fecha);
+                c.add(Calendar.DATE, -365);
+                fecha = c.getTime();
+                for (clap clap : aux) {
+                    if (clap.getFecha_estado().before(fecha)) {
+                        clap.setEstado("Vencido");
+                        clap.setFecha_estado(new java.util.Date());
+                        selected = clap;
+                        getFacade().edit(selected);
+                        //persist(PersistAction.UPDATE,"");
+                    }
+                }
+            }
+            itemsReporteClaps = getFacade().findbyEstadoEntreFechasCesfam(fecha1, fecha2, estado, loginCtrl.getUsuarioLogueado().getCESFAM());
+            return "/faces/reportes/resultado_claps.xhtml";
+        }
     }
 }

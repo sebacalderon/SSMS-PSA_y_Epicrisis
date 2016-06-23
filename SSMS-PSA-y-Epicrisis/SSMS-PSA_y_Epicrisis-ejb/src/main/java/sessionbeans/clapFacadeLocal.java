@@ -40,4 +40,9 @@ public interface clapFacadeLocal {
 
     List<clap> findbyEstadoCesfamFecha(String estado, cesfam cesfam, Date fecha);
     
+    List<clap> findbyEstadoEntreFechas(Date fecha1, Date fecha2, String estado);
+    
+    List<clap> findbyEstadoEntreFechasCesfam(Date fecha1, Date fecha2, String estado, cesfam cesfam); 
+    List<clap> findbyEstado(String estado); 
+    List<clap> findbyEstadoCesfam(String estado, cesfam cesfam); 
 }

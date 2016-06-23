@@ -32,8 +32,11 @@ import javax.validation.constraints.Pattern;
     @NamedQuery(name="clap.findbyPaciente",query="SELECT p FROM clap p WHERE p.RUN=:RUN"),
     @NamedQuery(name="clap.findbyEstadoFecha",query="SELECT p FROM clap p WHERE p.estado=:estado AND p.fecha_consulta >= :fecha"),
     @NamedQuery(name="clap.findbyEstadoCesfamFecha",query="SELECT p FROM clap p WHERE p.estado=:estado AND p.cesfam=:cesfam AND p.fecha_consulta >= :fecha"),
-    @NamedQuery(name="clap.findbyPacienteEstado",query="SELECT p FROM clap p WHERE p.estado=:estado AND p.RUN=:RUN")
-        
+    @NamedQuery(name="clap.findbyPacienteEstado",query="SELECT p FROM clap p WHERE p.estado=:estado AND p.RUN=:RUN"),
+    @NamedQuery(name="clap.findbyEstadoEntreFechas",query="SELECT p FROM clap p WHERE p.estado=:estado AND p.fecha_estado BETWEEN :fecha1 AND :fecha2"),
+    @NamedQuery(name="clap.findbyEstadoEntreFechasCesfam",query="SELECT p FROM clap p WHERE p.estado=:estado AND p.cesfam_clap=:cesfam AND p.fecha_estado BETWEEN :fecha1 AND :fecha2"),
+    @NamedQuery(name="clap.findbyEstado",query="SELECT p FROM clap p WHERE p.estado=:estado"),
+    @NamedQuery(name="clap.findbyEstadoCesfam",query="SELECT p FROM clap p WHERE p.estado=:estado AND p.cesfam_clap=:cesfam")
 })
 public class clap implements Serializable {
 
@@ -182,6 +185,10 @@ public class clap implements Serializable {
     @Temporal(TemporalType.DATE)
     @Column(name="fecha_consulta_clap")
     private java.util.Date fecha_consulta;
+    
+    @Temporal(TemporalType.DATE)
+    @Column(name="fecha_cambio_estado")
+    private java.util.Date fecha_estado;
     
     @NotNull
     @Column(name="edad_clap")
@@ -2466,6 +2473,14 @@ public class clap implements Serializable {
 
     public void setTelefono_fijo(String telefono_fijo) {
         this.telefono_fijo = telefono_fijo;
+    }
+
+    public Date getFecha_estado() {
+        return fecha_estado;
+    }
+
+    public void setFecha_estado(Date fecha_estado) {
+        this.fecha_estado = fecha_estado;
     }
 
     public String getTelefono_movil() {
