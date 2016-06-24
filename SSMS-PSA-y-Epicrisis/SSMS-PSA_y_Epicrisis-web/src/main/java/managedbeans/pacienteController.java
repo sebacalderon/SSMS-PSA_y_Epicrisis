@@ -35,6 +35,10 @@ import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
+//fonasa
+import ws.cl.gov.fonasa.certificadorprevisional.WsBuscarCmdFoService;
+import model.CmdDatosFo;
+
 @Named("pacienteController")
 @SessionScoped
 public class pacienteController implements Serializable {

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://certificadorprevisional.fonasa.gov.cl.ws" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://certificadorprevisional.fonasa.gov.cl.ws" xmlns:intf="http://certificadorprevisional.fonasa.gov.cl.ws" xmlns:tns1="http://model" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://certificadorprevisional.fonasa.gov.cl.ws" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://model"/>
+   <element name="buscarDatosBeneficiarios">
+    <complexType>
+     <sequence>
+      <element name="iRut" type="xsd:int"/>
+      <element name="sDv" type="xsd:string"/>
+      <element name="iEmp" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="buscarDatosBeneficiariosResponse">
+    <complexType>
+     <sequence>
+      <element name="buscarDatosBeneficiariosReturn" type="tns1:CmdDatosFo"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://model" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="CmdDatosFo">
+    <sequence>
+     <element name="apell1" nillable="true" type="xsd:string"/>
+     <element name="apell2" nillable="true" type="xsd:string"/>
+     <element name="cdgComuna" nillable="true" type="xsd:string"/>
+     <element name="cdgEstado" nillable="true" type="xsd:string"/>
+     <element name="cdgIsapre" nillable="true" type="xsd:string"/>
+     <element name="cdgNacionalidad" nillable="true" type="xsd:string"/>
+     <element name="codcybl" nillable="true" type="xsd:string"/>
+     <element name="coddesc" nillable="true" type="xsd:string"/>
+     <element name="codigoprais" nillable="true" type="xsd:string"/>
+     <element name="desComuna" nillable="true" type="xsd:string"/>
+     <element name="desEstado" nillable="true" type="xsd:string"/>
+     <element name="desIsapre" nillable="true" type="xsd:string"/>
+     <element name="desNacionalidad" nillable="true" type="xsd:string"/>
+     <element name="descprais" nillable="true" type="xsd:string"/>
+     <element name="dgvbenef" nillable="true" type="xsd:string"/>
+     <element name="direccion" nillable="true" type="xsd:string"/>
+     <element name="edad" type="xsd:int"/>
+     <element name="errorM" nillable="true" type="xsd:string"/>
+     <element name="estado" nillable="true" type="xsd:int"/>
+     <element name="estadoFallecido" nillable="true" type="xsd:string"/>
+     <element name="fecha" nillable="true" type="xsd:string"/>
+     <element name="fechaFallecimiento" nillable="true" type="xsd:string"/>
+     <element name="fechaNacimiento" nillable="true" type="xsd:string"/>
+     <element name="genero" nillable="true" type="xsd:string"/>
+     <element name="generoDes" nillable="true" type="xsd:string"/>
+     <element name="nombres" nillable="true" type="xsd:string"/>
+     <element name="rutbenef" type="xsd:int"/>
+     <element name="telefono" nillable="true" type="xsd:string"/>
+     <element name="tramoFo" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="buscarDatosBeneficiariosResponse">
+
+      <wsdl:part element="impl:buscarDatosBeneficiariosResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="buscarDatosBeneficiariosRequest">
+
+      <wsdl:part element="impl:buscarDatosBeneficiarios" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="WsBuscarCmdFo">
+
+      <wsdl:operation name="buscarDatosBeneficiarios">
+
+         <wsdl:input message="impl:buscarDatosBeneficiariosRequest" name="buscarDatosBeneficiariosRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:buscarDatosBeneficiariosResponse" name="buscarDatosBeneficiariosResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="WsBuscarCmdFoSoapBinding" type="impl:WsBuscarCmdFo">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="buscarDatosBeneficiarios">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="buscarDatosBeneficiariosRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="buscarDatosBeneficiariosResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="WsBuscarCmdFoService">
+
+      <wsdl:port binding="impl:WsBuscarCmdFoSoapBinding" name="WsBuscarCmdFo">
+
+         <wsdlsoap:address location="http://10.6.105.219:8080/CliFonasa/services/WsBuscarCmdFo"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
