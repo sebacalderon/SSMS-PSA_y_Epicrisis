@@ -2,7 +2,11 @@ package managedbeans;
 
 import entities.cesfam;
 import entities.comuna;
+import entities.ley_social;
+import entities.nacionalidad;
 import entities.paciente;
+import entities.prevision;
+import entities.region;
 import java.io.IOException;
 import java.io.OutputStream;
 import managedbeans.util.JsfUtil;
@@ -10,6 +14,8 @@ import managedbeans.util.JsfUtil.PersistAction;
 import sessionbeans.pacienteFacadeLocal;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -49,6 +55,20 @@ public class pacienteController implements Serializable {
     @Inject
     private clapController clapCtrl;
     
+    @Inject
+    private comunaController comunaCtrl;
+    
+    @Inject
+    private previsionController previsionCtrl;
+    
+    @Inject
+    private nacionalidadController nacionalidadCtrl;
+    
+    @Inject
+    private regionController regionCtrl;
+    
+    @Inject
+    private ley_socialController ley_socialCtrl;
     
     public pacienteController() {
     }
@@ -386,6 +406,7 @@ public class pacienteController implements Serializable {
         return filteredPacientes;
     }
     
+
     public String buscarPorRUN(){
         selected = new paciente();
         selected.setRUN(RUN);
@@ -397,32 +418,208 @@ public class pacienteController implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, message);
             return "/faces/paciente/Buscar.xhtml";
         }
-        List<paciente> pacientes = getFacade().findbyRUN(RUN);;      
+
+        List<paciente> pacientes = getFacade().findbyRUN(RUN);      
+        //Si no existe el paciente en el sistema, primero se busca en FONASA
         if (pacientes.isEmpty()) {
+            CmdDatosFo datos = null;
+            WsBuscarCmdFoService mifo = new WsBuscarCmdFoService();
+            datos = mifo.getWsBuscarCmdFo().buscarDatosBeneficiarios(RUN, DV, 4);
             /////////////////
             //PARTE DE FONASA
-            /////////////////
-            //Si no encuentra en Fonasa, se crea desde 0
-            if (true) {
-            //Si es funcionario o encargado se puede crear
-                if (loginCtrl.esFuncionario() || loginCtrl.esEncargadoPrograma()) {
-                    prepareCreate();
-                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no Encontrado. Cree el registro",  null);
-                    FacesContext.getCurrentInstance().addMessage(null, message);
-                    return "/faces/paciente/Create.xhtml";
-                //Si es SuperUsuario, no puede crear
-                }else{
-                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no Encontrado",  null);
+            ////////////////
+            FacesMessage message;
+            int estado = datos.getEstado();
+            System.out.println("El cod de estado es: "+estado);
+            switch (estado) {
+                //Fallo Ataque
+                case -21:
+                    message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error Fonasa: Fallo Ataque",  null);
                     FacesContext.getCurrentInstance().addMessage(null, message);
                     return "/faces/paciente/Buscar.xhtml";
-                }       
-            }else{
-                //Si encuentra en fonasa
-                selected = new paciente();
-                initializeEmbeddableKey();
-                return "/faces/paciente/Create.xhtml"; 
+                //Fallo Llamada
+                case -22:
+                    message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error Fonasa: Fallo Llamada",  null);
+                    FacesContext.getCurrentInstance().addMessage(null, message);
+                    return "/faces/paciente/Buscar.xhtml";
+                //Fallo Conexión
+                case -23:
+                    message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error Fonasa: Fallo Conexión",  null);
+                    FacesContext.getCurrentInstance().addMessage(null, message);
+                    return "/faces/paciente/Buscar.xhtml";
+                //Fallo Autenticación 
+                case -31:
+                    message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error Fonasa: Fallo Autenticación",  null);
+                    FacesContext.getCurrentInstance().addMessage(null, message);
+                    return "/faces/paciente/Buscar.xhtml";
+                //Fallo Numero de Peticiones
+                case -32:
+                    message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error Fonasa: Fallo Número de Peticiones",  null);
+                    FacesContext.getCurrentInstance().addMessage(null, message);
+                    return "/faces/paciente/Buscar.xhtml";
+                //Fallo de Horario    
+                case -33:
+                    message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error Fonasa: Fallo de Horario",  null);
+                    FacesContext.getCurrentInstance().addMessage(null, message);
+                    return "/faces/paciente/Buscar.xhtml";
+                //Exito en la ejecucion    
+                case 0:
+                    
+                    if (datos.getEstadoFallecido().equals("2") || datos.getCodcybl().equals("1902")) {
+                        message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario Fallecido.",  null);
+                        FacesContext.getCurrentInstance().addMessage(null, message);
+                        return "/faces/paciente/Buscar.xhtml";
+                    }else{
+                    //Se setean datos del usuario encontrado
+                        prepareCreate();
+                        selected.setNombres(datos.getNombres());
+                        selected.setPrimer_apellido(datos.getApell1());
+                        selected.setSegundo_apellido(datos.getApell2());
+                        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+                        String fecha_nacimiento = datos.getFechaNacimiento();
+                        try {
+                            Date fecha = formatoDelTexto.parse(fecha_nacimiento);
+                            selected.setFecha_nacimiento(fecha);
+                        }catch (ParseException ex) {
+                            ex.printStackTrace();
+                        }
+                        long l = Long.parseLong(datos.getCdgComuna().trim());
+                        // System.out.println("Comuna codigo: "+datos.getCdgComuna());
+                        System.out.println("Comuna codigo: "+ l);
+
+
+                        System.out.println("Comuna : "+datos.getDesComuna());
+                        comuna comuna = comunaCtrl.getcomuna(l);
+                        if (comuna != null) {
+                            selected.setComuna_residencia(comuna);
+                        }
+
+                        if (datos.getGenero().equals("M")) {
+                            selected.setSexo(1);
+                        }else{
+                            selected.setSexo(2);
+                        }
+
+                       //fonasa
+                        if (datos.getTramoFo()!=null||datos.getCodcybl().equals("00131") || datos.getCodcybl().equals("00110")) {
+                            System.out.println("Tramo "+datos.getTramoFo());
+                            if (datos.getTramoFo().trim().equals("A")) {
+                                selected.setGrupo_fonasa(1);
+                            }else if (datos.getTramoFo().trim().equals("B")){
+                                selected.setGrupo_fonasa(2);                    
+                            }else if (datos.getTramoFo().trim().equals("C")){
+                                selected.setGrupo_fonasa(3);
+                            }else if (datos.getTramoFo().trim().equals("D")){
+                                selected.setGrupo_fonasa(4);
+                            }
+                            prevision prevision = previsionCtrl.getprevision(Long.parseLong("999".trim()));
+                            selected.setPrevision(prevision);
+                        }
+                        //isapre
+                        
+                        if(datos.getCodcybl().equals("01901")){
+                            System.out.println("Codigo Prevision: "+datos.getCdgIsapre());
+                            prevision prevision = previsionCtrl.getprevision(Long.parseLong(datos.getCdgIsapre().trim()));
+                            selected.setPrevision(prevision);
+                        }
+                        //capredena
+                        if(datos.getCodcybl().equals("01911")){
+                            prevision prevision = previsionCtrl.getprevision(Long.parseLong("998".trim()));
+                            selected.setPrevision(prevision);
+                        }
+
+                        // dipreca -bh -i
+                         if(datos.getCodcybl().equals("01972")){
+                            System.out.println("Codigo Prevision: "+datos.getCdgIsapre());
+                            prevision prevision = previsionCtrl.getprevision(Long.parseLong("997".trim()));
+                            selected.setPrevision(prevision);
+                        }
+                         
+                        //otros casos - asignar otros 
+                        if(datos.getCodcybl().equals(" ")||datos.getCodcybl()==null||datos.getCodcybl().equals("01903")){
+                            prevision prevision = previsionCtrl.getprevision(Long.parseLong("1000".trim()));
+                            selected.setPrevision(prevision);
+                        }
+                        
+                        
+                        
+                        l = Long.parseLong(datos.getCdgNacionalidad().trim());
+                        System.out.println("Nacionalidad codigo: "+datos.getCdgNacionalidad());
+                        System.out.println("Nacionalidad : "+datos.getDesNacionalidad());
+                        nacionalidad nacionalidad = nacionalidadCtrl.getnacionalidad(l);
+                        if (nacionalidad != null) {
+                            selected.setNacionalidad(nacionalidad);
+                        }
+
+                        //prais
+                        if(datos.getCodigoprais().trim().equals("111")){
+                            ley_social ley_social = ley_socialCtrl.getley_social(Long.parseLong("5".trim()));
+                            selected.setPrograma_social(ley_social);
+                        }else{ //por ahora se asigna 10 como otro
+                            ley_social ley_social = ley_socialCtrl.getley_social(Long.parseLong("10".trim()));
+                            selected.setPrograma_social(ley_social);
+                        }
+                        
+                        selected.setCalle_direccion(datos.getDireccion());
+
+                        //l = Long.parseLong(datos.getCdgRegion().trim()); 
+                        l=new Long(13);
+                        region region = regionCtrl.getregion(l);
+                        selected.setRegion_residencia(region);
+
+                        System.out.println(datos.getTelefono());
+
+                        System.out.println("Prevision: "+datos.getDesIsapre());
+                        System.out.println("Codigo Prevision: "+datos.getCdgIsapre());
+                        System.out.println("Tramo: "+datos.getTramoFo());
+                        System.out.println("CYBL: "+datos.getCodcybl());
+                        System.out.println("COD DESC: "+datos.getCoddesc());
+                        System.out.println("PRAIS: "+datos.getDescprais());
+                        
+
+                        message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario Encontrado en FONASA.",  null);
+                        FacesContext.getCurrentInstance().addMessage(null, message);
+                        return "/faces/paciente/Create.xhtml";
+                    }
+                //XML no valido
+                case 1:
+                    message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error Fonasa: XML no válido",  null);
+                    FacesContext.getCurrentInstance().addMessage(null, message);
+                    return "/faces/paciente/Buscar.xhtml";
+                //Error del servicio
+                case 9:
+                    message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error Fonasa: Error del Servicio",  null);
+                    FacesContext.getCurrentInstance().addMessage(null, message);
+                    return "/faces/paciente/Buscar.xhtml";
+                //Error en conectividad con servicio externo
+                case -1:
+                    message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error Fonasa: Error en conectividad con servicio externo",  null);
+                    FacesContext.getCurrentInstance().addMessage(null, message);
+                    return "/faces/paciente/Buscar.xhtml";
+                //Error interno    
+                case -2:
+                    message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error Fonasa: Error interno",  null);
+                    FacesContext.getCurrentInstance().addMessage(null, message);
+                    return "/faces/paciente/Buscar.xhtml";
+                //El rut no es beneficiario
+                case -3:
+                    //Si no es beneficiario, existen datos ??
+                    return "";
+                //-4 No existe rut en la bd    
+                default:
+                    //Si es funcionario o encargado se puede crear
+                    if (loginCtrl.esFuncionario() || loginCtrl.esEncargadoPrograma()) {
+                        prepareCreate();
+                        message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no Encontrado en FONASA. Cree el registro",  null);
+                        FacesContext.getCurrentInstance().addMessage(null, message);
+                        return "/faces/paciente/Create.xhtml";
+                    //Si es SuperUsuario, no puede crear
+                    }else{
+                        message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no Encontrado",  null);
+                        FacesContext.getCurrentInstance().addMessage(null, message);
+                        return "/faces/paciente/Buscar.xhtml";
+                    }
             }
-            
         }else{
             paciente paciente = pacientes.get(0);
             if (!paciente.getDV().equals(DV)) {
@@ -430,10 +627,10 @@ public class pacienteController implements Serializable {
                 FacesContext.getCurrentInstance().addMessage(null, message);
                 return "/faces/paciente/Buscar.xhtml";
             }else{
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario Encontrado",  null);
-                FacesContext.getCurrentInstance().addMessage(null, message);
-                selected = paciente;
-                return "/faces/paciente/View.xhtml";
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario Encontrado",  null);
+                    FacesContext.getCurrentInstance().addMessage(null, message);
+                    selected = paciente;
+                    return "/faces/paciente/View.xhtml";    
             }
         }
     }
@@ -515,4 +712,5 @@ public class pacienteController implements Serializable {
             e.printStackTrace();
         }
     }
+    
 }

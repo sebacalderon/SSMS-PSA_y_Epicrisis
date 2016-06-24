@@ -122,7 +122,40 @@ public class nacionalidadController implements Serializable {
     }
 
     public nacionalidad getnacionalidad(java.lang.Long id) {
-        return getFacade().find(id);
+        System.out.println("ID_Nacionalidad: "+id);
+        switch(id.intValue()){
+            case 1:
+                return getFacade().find(new Long(242));
+            case 2:
+                return getFacade().find(new Long(204));
+            case 3:
+                return getFacade().find(new Long(210));
+            case 4:
+                return getFacade().find(new Long(414));
+            case 5:
+                return getFacade().find(new Long(241));
+            case 6:
+                return getFacade().find(new Long(218));
+            case 7:
+                return getFacade().find(new Long(214));
+            case 8:
+                return getFacade().find(new Long(402));
+            case 9:
+                return getFacade().find(new Long(411));
+            case 11:
+                return getFacade().find(new Long(441));
+            case 12:
+                return getFacade().find(new Long(433));
+            case 13:
+                return getFacade().find(new Long(442));
+            case 14:
+                return getFacade().find(new Long(212));
+            case 56:
+                return getFacade().find(new Long(213));
+            default:
+                return getFacade().find(new Long(999));
+            
+        }
     }
 
     public List<nacionalidad> getItemsAvailableSelectMany() {

@@ -110,7 +110,11 @@ public class regionController implements Serializable {
     }
 
     public region getregion(java.lang.Long id) {
-        return getFacade().find(id);
+        if(id==0||id==null){
+            return getFacade().find(99);
+        }else{
+            return getFacade().find(id);
+        }
     }
 
     public List<region> getItemsAvailableSelectMany() {
