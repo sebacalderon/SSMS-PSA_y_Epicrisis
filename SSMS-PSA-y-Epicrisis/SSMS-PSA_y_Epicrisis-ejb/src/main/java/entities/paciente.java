@@ -122,10 +122,10 @@ public class paciente implements Serializable {
     @JoinColumn(name="programa_social_paciente")
     private ley_social programa_social;
     
-    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
-    + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
-    + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
-    message = "Debe ser un mail valido")
+//    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
+//    + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
+//    + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+//    message = "Debe ser un mail valido")
     @Column(name="correo_paciente",unique=true)
     private String correo;
     

@@ -572,6 +572,7 @@ public class pacienteController implements Serializable {
                         selected.setRegion_residencia(region);
 
                         System.out.println(datos.getTelefono());
+                        selected.setTelefono_fijo(datos.getTelefono());
 
                         System.out.println("Prevision: "+datos.getDesIsapre());
                         System.out.println("Codigo Prevision: "+datos.getCdgIsapre());
