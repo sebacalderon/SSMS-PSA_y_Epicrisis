@@ -1891,6 +1891,7 @@ public class clapController implements Serializable {
         }
         
         //Grado o Curso
+        form.setField("curso", selected.getCurso());
         
         //Años Repetidos
         form.setField("anios_repetidos", Integer.toString(selected.getAnos_repetidos()));
@@ -2124,6 +2125,16 @@ public class clapController implements Serializable {
         }else{
             form.setField("alimentacion_especial_no", "Yes");
         }
+        
+        //Tabaco
+        boolean tabaco= selected.isTabaco();
+        if (tabaco==true) {
+            form.setField("tabaco_si", "Yes");
+        }else{
+            form.setField("tabaco_no", "Yes");
+        }
+	//Promedio de tabaco
+	form.setField("prom_cigarro", selected.getCigarros_dia());
         
         //Alcohol y otras drogas
         //alcohol
@@ -2537,12 +2548,12 @@ public class clapController implements Serializable {
         }
         
         //agudeza auditiva
-        /*boolean agud_auditiva= selected.is;
+        boolean agud_auditiva= selected.is;
         if (aspecto_general==true) {
             form.setField("agud_auditiva_normal", "Yes");
         }else{
             form.setField("agud_auditiva_anormal", "Yes");
-        }*/
+        }
         
         //salud bucal
         boolean salud_bucal= selected.isSalud_bucal();
@@ -2553,12 +2564,12 @@ public class clapController implements Serializable {
         }
         
         //tiroides
-        /*boolean tiroides= selected.is;
-        if (aspecto_general==true) {
-            form.setField("aspecto_general_normal", "Yes");
+        boolean tiroides= selected.isTiroides();
+        if (tiroides==true) {
+            form.setField("tiroides_normal", "Yes");
         }else{
-            form.setField("aspecto_general_anormal", "Yes");
-        }*/
+            form.setField("tiroides_anormal", "Yes");
+        }
         
         //cardio pulmonar
         boolean cardiopulmonar= selected.isCardio_pulmonar();
