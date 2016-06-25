@@ -26,7 +26,18 @@ public class parametros implements Serializable {
     
     @Column(name="ruta_parametros")
     private String ruta;
+    
+    @Column(name="tamano_imagen_parametros")
+    private int tamano_imagen;
 
+    public int getTamano_imagen() {
+        return tamano_imagen;
+    }
+
+    public void setTamano_imagen(int tamano_imagen) {
+        this.tamano_imagen = tamano_imagen;
+    }
+    
     public String getRuta() {
         return ruta;
     }

@@ -749,6 +749,6 @@ INSERT INTO nacionalidad(codigo_nacionalidad, nombre_nacionalidad)VALUES (534, '
 INSERT INTO nacionalidad(codigo_nacionalidad, nombre_nacionalidad)VALUES (535, 'Tuvalu')
 INSERT INTO nacionalidad(codigo_nacionalidad, nombre_nacionalidad)VALUES (536, 'Vanuatu')
 INSERT INTO nacionalidad(codigo_nacionalidad, nombre_nacionalidad)VALUES (999, 'Otros')
-INSERT INTO parametros(ruta_parametros) VALUES ('C:/genogramas')
+INSERT INTO parametros(ruta_parametros, tamano_imagen) VALUES ('C:/genogramas', 5)
 --INSERT INTO parametros(ruta_parametros) VALUES ('/opt/genograma')
 --INSERT INTO parametros(ruta_parametros) VALUES ('/home/seba/genogramas')

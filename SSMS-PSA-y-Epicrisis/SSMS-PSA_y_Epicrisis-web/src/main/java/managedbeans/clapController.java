@@ -676,6 +676,16 @@ public class clapController implements Serializable {
     }
     
     public String create() {
+        if (parametrosCtrl.getItems().isEmpty()) {
+            JsfUtil.addErrorMessage("No existen parametros de sistema. Contacte al administrador");
+            return "/faces/paciente/View.xhtml";
+        }else{
+            parametrosCtrl.setSelected(parametrosCtrl.getItems().get(parametrosCtrl.getItems().size()-1));
+            if (parametrosCtrl.getSelected().getTamano_imagen() == 0) {
+                JsfUtil.addErrorMessage("Tamaño de Imagen máximo es 0. Contacte al administrador");
+            }       
+        }
+        
         selected = new clap();
         initializeEmbeddableKey();
         Paciente = pacienteCtrl.getSelected();
