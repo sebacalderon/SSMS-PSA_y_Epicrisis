@@ -447,7 +447,7 @@
                                     <p:selectOneRadio id="its_vih" style="width:13em;" value="#{clapController.selected.its_vih}" layout="grid" columns="2">
                                         <f:selectItem itemLabel="si" itemValue="true" />
                                         <f:selectItem itemLabel="no" itemValue="false" />
-                                        <p:ajax event="valueChange"  immediate="true" update="especificacion_its_vih"></p:ajax>                                                                     
+                                        <p:ajax event="valueChange"  immediate="true" update="especificacion_its_vih tratamiento tratamiento_contactos"></p:ajax>                                                                     
                                     </p:selectOneRadio>
                                 </b:row>
                                 <b:row>
@@ -457,7 +457,7 @@
                                 <br/>
                                 <b:row>
                                     <p:outputLabel value="#{bundle.CreateclapLabel_tratamiento}" for="tratamiento" />
-                                    <p:selectOneRadio id="tratamiento" style="width:13em;" value="#{clapController.selected.tratamiento}" layout="grid" columns="3">
+                                    <p:selectOneRadio id="tratamiento" style="width:13em;" value="#{clapController.selected.tratamiento}" layout="grid" columns="3" disabled="#{!clapController.selected.its_vih}">
                                         <f:selectItem itemLabel="si" itemValue="1" />
                                         <f:selectItem itemLabel="no" itemValue="2" />
                                         <f:selectItem itemLabel="n/s" itemValue="3" />
@@ -466,7 +466,7 @@
                                 <br/>
                                 <b:row>
                                     <p:outputLabel value="#{bundle.CreateclapLabel_tratamiento_contactos}" for="tratamiento_contactos" />
-                                    <p:selectOneRadio id="tratamiento_contactos" style="width:13em;" value="#{clapController.selected.tratamiento_contactos}" layout="grid" columns="3">
+                                    <p:selectOneRadio id="tratamiento_contactos" style="width:13em;" value="#{clapController.selected.tratamiento_contactos}" layout="grid" columns="3" disabled="#{!clapController.selected.its_vih}">
                                         <f:selectItem itemLabel="si" itemValue="1" />
                                         <f:selectItem itemLabel="no" itemValue="2" />
                                         <f:selectItem itemLabel="n/s" itemValue="3" />

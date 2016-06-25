@@ -103,7 +103,7 @@ public class clapController implements Serializable {
     
     @Inject
     private parametrosController parametrosCtrl;
-    
+   
     public clapController() {
     }
 
@@ -832,86 +832,7 @@ public class clapController implements Serializable {
             selected.setImc((float) (selected.getPeso()/Math.pow((float)selected.getTalla()/100,2)));
         }
      
-        //Riesgos
-        
-        selected.setRiesgo_cardiovascular(false);
-        selected.setRiesgo_nutricional(false);
-        selected.setRiesgo_oh_drogas(false);
-        selected.setRiesgo_salud_mental(false);
-        selected.setRiesgo_social(false);
-        selected.setRiesgo_ssr(false);
-        
-        //cardiovascular nutricional
-        if(selected.getImc()<24){
-            selected.setRiesgo_cardiovascular(true);
-            selected.setRiesgo_nutricional(true);
-        }
-        if(selected.isCardio_pulmonar()){
-            selected.setRiesgo_cardiovascular(true);
-        }
-        if(selected.getPresion_arterial_sistolica()>=120||selected.getPresion_arterial_diastolica()>=80){
-            selected.setRiesgo_cardiovascular(true);
-        }
-        if(selected.getPerimetro_abdominal()>88&&selected.getSexo()==2||selected.getPerimetro_abdominal()>102&&selected.getSexo()==3){
-            selected.setRiesgo_cardiovascular(true);
-            selected.setRiesgo_nutricional(true);
-        }
-        if(selected.isAlimentacion_adecuada()){
-            selected.setRiesgo_nutricional(true);
-        }
-        //ssr
-        if(selected.getConducta_sexual()==3||selected.getEdad_inicio_conducta_sexual()< 14){
-            selected.setRiesgo_ssr(true);
-        }
-        if(selected.getDificultades_sexuales()==2){
-            selected.setRiesgo_ssr(true);
-        }
-        if(selected.getCiclos_regulares()==2||selected.getDismenorrea()==2||selected.isFlujo_secrecion_patologico()){
-            selected.setRiesgo_ssr(true);
-        }
-        if(selected.isIts_vih()||selected.getTratamiento()>1||selected.getTratamiento_contactos()>1){
-            selected.setRiesgo_ssr(true);
-        }
-        if(selected.getEmbarazos()>0||selected.getHijos()>0||selected.getAbortos()>0){
-            selected.setRiesgo_ssr(true);
-        }
-        if(selected.getUso_mac()>1||selected.getAnticoncepcion()>1||selected.isAbuso_sexual()){
-            selected.setRiesgo_ssr(true);
-        }
-        
-        //Salud mental
-        
-        if(selected.getImagen_corporal()>1||selected.getBienestar_emocional()>1){
-            selected.setRiesgo_salud_mental(true);
-        }
-        if(selected.getVida_proyecto()==3||selected.isIntento_suicida()||selected.isIdeacion_suicida()){
-            selected.setRiesgo_salud_mental(true);
-        }
-        
-        //Drogas
-        
-        if(selected.isTabaco()||selected.isConsumo_alcohol()||selected.isConsumo_marihuana()||selected.isConsumo_otra_sustancia()){
-            selected.setRiesgo_oh_drogas(true);
-        }
-        
-        //riesgo social
-        
-        if(selected.getReferente_adulto()==5||selected.getAceptacion()==2||selected.getAceptacion()==3||selected.isAmigos()==false||selected.isSuicidalidad_amigos()==true){
-            selected.setRiesgo_social(true);
-        }
-        if(selected.isCyberbulling()|selected.isGrooming()||selected.isViolencia_escolar()||selected.isViolencia_pareja()){
-            selected.setRiesgo_social(true);
-        }
-        if(selected.isVive_con_solo()||selected.isVive_en_institucion()||selected.getPercepcion_familia()>2||selected.isDesercion_exclusion()){
-            selected.setRiesgo_social(true);
-        }
-//        System.out.println("Riesgo cardiovascular: "+selected.isRiesgo_cardiovascular());
-//        System.out.println("Riesgo nutricional: "+selected.isRiesgo_nutricional());
-//        System.out.println("Riesgo OH drogas: "+selected.isRiesgo_oh_drogas());
-//        System.out.println("Riesgo salud mental: "+selected.isRiesgo_salud_mental());
-//        System.out.println("Riesgo social: "+selected.isRiesgo_social());
-//        System.out.println("Riesgo ssr: "+selected.isRiesgo_ssr());
-//        
+        verificaRiesgos();  
         
         pacienteCtrl.setSelected(selected.getPaciente());
         //Actualiza datos de usuario
@@ -3024,9 +2945,9 @@ public class clapController implements Serializable {
             if (selected.getEspecificacion_its_vih().equals("")) {
                 seccion = false;
             }
-        }
-        if (selected.getTratamiento() == 0 || selected.getTratamiento_contactos() == 0) {
-            seccion = false;
+            if (selected.getTratamiento() == 0 || selected.getTratamiento_contactos() == 0) {
+                seccion = false;
+            }
         }
         
         if (selected.getSexo() == 2) {
@@ -3098,9 +3019,86 @@ public class clapController implements Serializable {
         }
     }
     
-    public void conOtros(){
-        if (!selected.isVive_con_otros()) {
-            selected.setVive_con_especificacion(null);
+    public void verificaRiesgos(){
+        //Riesgos
+        selected.setRiesgo_cardiovascular(false);
+        selected.setRiesgo_nutricional(false);
+        selected.setRiesgo_oh_drogas(false);
+        selected.setRiesgo_salud_mental(false);
+        selected.setRiesgo_social(false);
+        selected.setRiesgo_ssr(false);
+        
+        //cardiovascular nutricional
+        if(selected.getImc()<24){
+            selected.setRiesgo_cardiovascular(true);
+            selected.setRiesgo_nutricional(true);
         }
+        if(selected.isCardio_pulmonar()){
+            selected.setRiesgo_cardiovascular(true);
+        }
+        if(selected.getPresion_arterial_sistolica()>=120||selected.getPresion_arterial_diastolica()>=80){
+            selected.setRiesgo_cardiovascular(true);
+        }
+        if(selected.getPerimetro_abdominal()>88&&selected.getSexo()==2||selected.getPerimetro_abdominal()>102&&selected.getSexo()==3){
+            selected.setRiesgo_cardiovascular(true);
+            selected.setRiesgo_nutricional(true);
+        }
+        if(!selected.isAlimentacion_adecuada()){
+            selected.setRiesgo_nutricional(true);
+        }
+        
+        //ssr
+        if(selected.getConducta_sexual()==3||selected.getEdad_inicio_conducta_sexual()< 14){
+            selected.setRiesgo_ssr(true);
+        }
+        if(selected.getDificultades_sexuales()==2){
+            selected.setRiesgo_ssr(true);
+        }
+        if(selected.getCiclos_regulares()==2||selected.getDismenorrea()==2||selected.isFlujo_secrecion_patologico()){
+            selected.setRiesgo_ssr(true);
+        }
+        if(selected.isIts_vih()||selected.getTratamiento()>1||selected.getTratamiento_contactos()>1){
+            selected.setRiesgo_ssr(true);
+        }
+        if(selected.getEmbarazos()>0||selected.getHijos()>0||selected.getAbortos()>0){
+            selected.setRiesgo_ssr(true);
+        }
+        if(selected.getUso_mac()>1||selected.getAnticoncepcion()>1||selected.isAbuso_sexual()){
+            selected.setRiesgo_ssr(true);
+        }
+        
+        //Salud mental
+        
+        if(selected.getImagen_corporal()>1||selected.getBienestar_emocional()>1){
+            selected.setRiesgo_salud_mental(true);
+        }
+        if(selected.getVida_proyecto()==3||selected.isIntento_suicida()||selected.isIdeacion_suicida()){
+            selected.setRiesgo_salud_mental(true);
+        }
+        
+        //Drogas
+        
+        if(selected.isTabaco()||selected.isConsumo_alcohol()||selected.isConsumo_marihuana()||selected.isConsumo_otra_sustancia()){
+            selected.setRiesgo_oh_drogas(true);
+        }
+        
+        //riesgo social
+        
+        if(selected.getReferente_adulto()==5||selected.getAceptacion()==2||selected.getAceptacion()==3||selected.isAmigos()==false||selected.isSuicidalidad_amigos()==true){
+            selected.setRiesgo_social(true);
+        }
+        if(selected.isCyberbulling()|selected.isGrooming()||selected.isViolencia_escolar()||selected.isViolencia_pareja()){
+            selected.setRiesgo_social(true);
+        }
+        if(selected.isVive_con_solo()||selected.isVive_en_institucion()||selected.getPercepcion_familia()>2||selected.isDesercion_exclusion()){
+            selected.setRiesgo_social(true);
+        }
+//        System.out.println("Riesgo cardiovascular: "+selected.isRiesgo_cardiovascular());
+//        System.out.println("Riesgo nutricional: "+selected.isRiesgo_nutricional());
+//        System.out.println("Riesgo OH drogas: "+selected.isRiesgo_oh_drogas());
+//        System.out.println("Riesgo salud mental: "+selected.isRiesgo_salud_mental());
+//        System.out.println("Riesgo social: "+selected.isRiesgo_social());
+//        System.out.println("Riesgo ssr: "+selected.isRiesgo_ssr());
+//      
     }
 }

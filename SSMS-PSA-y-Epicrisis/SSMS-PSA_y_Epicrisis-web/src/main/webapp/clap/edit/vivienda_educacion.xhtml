@@ -78,7 +78,7 @@
                                 <f:selectItem itemLabel=" básica " itemValue="2" />
                                 <f:selectItem itemLabel=" media " itemValue="3" />
                                 <f:selectItem itemLabel=" superior " itemValue="4" />
-                                <p:ajax event="valueChange"  immediate="true" update="curso" ></p:ajax>                                                            
+                                <p:ajax event="valueChange"  immediate="true" update="curso anos_repetidos causa_anos_repetidos problemas_escuela violencia_escolar desercion causa_desercion_exclusion percepcion_rendimiento"></p:ajax>                                                            
                             </p:selectOneRadio> 
                         </b:column>
                         <b:column col-md="4">
@@ -105,7 +105,7 @@
                         <b:column col-md="4">
                             <b:row>
                                 <b:column col-xs="6"><p:outputLabel value="#{bundle.CreateclapLabel_anos_repetidos}" for="anos_repetidos" /></b:column>
-                                <b:column col-xs="4"><pe:inputNumber id="anos_repetidos" value="#{clapController.selected.anos_repetidos}" minValue="0" maxValue="10" styleClass="campo-numerico" title="#{bundle.CreateclapTitle_anos_repetidos}">
+                                <b:column col-xs="4"><pe:inputNumber id="anos_repetidos" value="#{clapController.selected.anos_repetidos}" minValue="0" maxValue="10" styleClass="campo-numerico" title="#{bundle.CreateclapTitle_anos_repetidos}" disabled="#{clapController.selected.nivel_educacion == 1}">
                                         <p:ajax event="blur" immediate="true" update="causa_anos_repetidos" ></p:ajax>
                                     </pe:inputNumber></b:column>
                             </b:row>
@@ -116,14 +116,14 @@
                         </b:column>
                         <b:column col-md="4">
                             <p:outputLabel value="Problemas en la escuela" for="problemas_escuela" />
-                            <p:selectOneRadio id="problemas_escuela" style="width:13em;" value="#{clapController.selected.problemas_escuela}" layout="grid" columns="2">
+                            <p:selectOneRadio id="problemas_escuela" style="width:13em;" value="#{clapController.selected.problemas_escuela}" layout="grid" columns="2" disabled="#{clapController.selected.nivel_educacion == 1}">
                                 <f:selectItem itemLabel="Si" itemValue="true" />
                                 <f:selectItem itemLabel="No" itemValue="false" />
                             </p:selectOneRadio>
                         </b:column>
                         <b:column col-md="4">
                             <p:outputLabel value="Violencia escolar" for="violencia_escolar" />
-                            <p:selectOneRadio id="violencia_escolar" style="width:13em;" value="#{clapController.selected.violencia_escolar}" layout="grid" columns="2">
+                            <p:selectOneRadio id="violencia_escolar" style="width:13em;" value="#{clapController.selected.violencia_escolar}" layout="grid" columns="2" disabled="#{clapController.selected.nivel_educacion == 1}">
                                 <f:selectItem itemLabel="Si" itemValue="true" />
                                 <f:selectItem itemLabel="No" itemValue="false" />
                             </p:selectOneRadio>
@@ -133,17 +133,17 @@
                     <b:row>
                         <b:column col-md="4">
                             <p:outputLabel value="Deserción/Exclusión" for="desercion" />
-                            <p:selectOneRadio id="desercion" style="width:13em;" value="#{clapController.selected.desercion_exclusion}" layout="grid" columns="2">
+                            <p:selectOneRadio id="desercion" style="width:13em;" value="#{clapController.selected.desercion_exclusion}" layout="grid" columns="2" disabled="#{clapController.selected.nivel_educacion == 1}">
                                 <f:selectItem itemLabel="Si" itemValue="true" />
                                 <f:selectItem itemLabel="No" itemValue="false" />
                                 <p:ajax event="valueChange"  immediate="true" update="causa_desercion_exclusion" ></p:ajax>                            
                             </p:selectOneRadio>
-                            <p:inputText id="causa_desercion_exclusion" placeholder="Causa" value="#{clapController.selected.causa_desercion_exclusion}" title="#{bundle.CreateclapTitle_causa_desercion_exclusion}" disabled="#{!clapController.selected.desercion_exclusion}">
+                            <p:inputText id="causa_desercion_exclusion" placeholder="Causa" value="#{clapController.selected.causa_desercion_exclusion}" title="#{bundle.CreateclapTitle_causa_desercion_exclusion}" disabled="#{!clapController.selected.desercion_exclusion}" >
                             </p:inputText>
                         </b:column>
                         <b:column col-md="4">
                             <p:outputLabel value="Percepción de redimiento con respecto a la mayoría de sus compañeros" style="max-width:200px;" for="percepcion_rendimiento" />
-                            <p:selectOneRadio id="percepcion_rendimiento" style="width:13em;" value="#{clapController.selected.percepcion_rendimiento}" layout="grid" columns="3">
+                            <p:selectOneRadio id="percepcion_rendimiento" style="width:13em;" value="#{clapController.selected.percepcion_rendimiento}" layout="grid" columns="3" disabled="#{clapController.selected.nivel_educacion == 1}">
                                 <f:selectItem itemLabel="Mejor" itemValue="1" />
                                 <f:selectItem itemLabel="Peor" itemValue="2" />
                                 <f:selectItem itemLabel="Igual" itemValue="3" />
