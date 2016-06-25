@@ -1375,15 +1375,11 @@ public class clapController implements Serializable {
         boolean domicilio = selected.isDomicilio();
         if (domicilio == true) {
             form.setField("tel_fijo_domicilio", "Yes");
-        }else{
-            form.setField("", "Yes");            
         }
         
         boolean recado = selected.isRecados();
         if (recado==true) {
             form.setField("cel_recados", "Yes");
-        }else{
-            form.setField("", "Yes");            
         }
         /////////////////////////////////////////
         
@@ -2369,7 +2365,7 @@ public class clapController implements Serializable {
         if (imagen_corporal==1) {
             form.setField("imagen_corporal_conforme", "Yes");
         }else if(2==imagen_corporal){
-            form.setField("imagen_corporal_crea_preocupacione", "Yes");
+            form.setField("imagen_corporal_crea_preocupaciones", "Yes");
         }else if(3==imagen_corporal){
             form.setField("imagen_corporal_impide", "Yes");
         }else{
