@@ -14,7 +14,7 @@
                     <p:panelGrid columns="2" rendered="#{parametrosController.selected != null}">
                         <p:outputLabel value="Ruta para Imágenes" for="ruta"/>
                         <p:inputText id="ruta" value="#{parametrosController.selected.ruta}" title="#{bundle.CreateparametrosTitle_ruta}" required="true"/>
-                        <p:outputLabel value="Tamaño de imagen" for="tamano" />
+                        <p:outputLabel value="Tamaño de imagen (en MB)" for="tamano" />
                         <p:inputText id="tamano" value="#{parametrosController.selected.tamano_imagen}" title="#{bundle.CreateparametrosTitle_ruta}" required="true"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{parametrosController.create}" value="#{bundle.Save}" update="display,:parametrosListForm:datalist,:growl" oncomplete="handleSubmit(args,'parametrosCreateDialog');"/>
