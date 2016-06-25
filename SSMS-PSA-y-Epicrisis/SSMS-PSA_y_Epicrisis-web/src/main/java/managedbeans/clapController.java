@@ -88,7 +88,54 @@ public class clapController implements Serializable {
     Date fecha2;
     String estado;
     
-    
+    //booleanos de preguntas para riesgos
+    //cardio y nutricional
+    boolean imcmayor24=false; //c y n
+    boolean cardiopulmonar=false; //c
+    boolean presionsistolicamayor120=false; //c
+    boolean presiondiastolicamayor80=false; //c
+    boolean perimetroabdominalmayor88=false; //mujer c y n
+    boolean perimetroabdominalmayor102=false; //hombre c y n
+    boolean alimentacionadecuada=false; //n
+    //ssr
+    boolean conductasexualactiva=false;
+    boolean edadiniciosexualmenor14=false;
+    boolean dificultadessexuales=false;
+    boolean ciclosregulares=false;
+    boolean dismenorrea=false;
+    boolean flujosecrecionanormal=false;
+    boolean vihits=false;
+    boolean embarazos=false;
+    boolean hijos=false;
+    boolean abortos=false;
+    boolean usomacnegativo=false;
+    boolean anticoncepcionnegativo=false;
+    boolean abusosexualpositivo=false;
+    //salud mental
+    boolean imagencorporal=false;
+    boolean bienestaremocional=false;
+    boolean vidaproyecto=false;
+    boolean intentosuicida=false;
+    boolean ideacionsuicida=false;
+    //drogas
+    boolean tabaco=false;
+    boolean consumoalcohol=false;
+    boolean consumomarihuana=false;
+    boolean consumootrasustancia=false;
+    //social
+    boolean refernteadultoninguno=false;
+    boolean aceptacion=false;
+    boolean amigos=false;
+    boolean suicidalidad=false;
+    boolean cyberbullyng=false;
+    boolean grooming=false;
+    boolean violenciaescolar=false;
+    boolean violenciapareja=false;
+    boolean vivesolo=false;
+    boolean viveeninstitucion=false;
+    boolean percepcionfamiliamala=false;
+    boolean desercionexclusion=false;    
+        
     @Inject
     private pacienteController pacienteCtrl;
     
@@ -314,6 +361,430 @@ public class clapController implements Serializable {
 
     private clapFacadeLocal getFacade() {
         return ejbFacade;
+    }
+
+    public clapFacadeLocal getEjbFacade() {
+        return ejbFacade;
+    }
+
+    public void setEjbFacade(clapFacadeLocal ejbFacade) {
+        this.ejbFacade = ejbFacade;
+    }
+
+    public List<clap> getItemsNoTerminados() {
+        return itemsNoTerminados;
+    }
+
+    public void setItemsNoTerminados(List<clap> itemsNoTerminados) {
+        this.itemsNoTerminados = itemsNoTerminados;
+    }
+
+    public boolean isVive_solo() {
+        return vive_solo;
+    }
+
+    public void setVive_solo(boolean vive_solo) {
+        this.vive_solo = vive_solo;
+    }
+
+    public boolean isVive_en_institucion() {
+        return vive_en_institucion;
+    }
+
+    public void setVive_en_institucion(boolean vive_en_institucion) {
+        this.vive_en_institucion = vive_en_institucion;
+    }
+
+    public boolean isVive_con_madre() {
+        return vive_con_madre;
+    }
+
+    public void setVive_con_madre(boolean vive_con_madre) {
+        this.vive_con_madre = vive_con_madre;
+    }
+
+    public boolean isVive_con_padre() {
+        return vive_con_padre;
+    }
+
+    public void setVive_con_padre(boolean vive_con_padre) {
+        this.vive_con_padre = vive_con_padre;
+    }
+
+    public boolean isVive_con_otros() {
+        return vive_con_otros;
+    }
+
+    public void setVive_con_otros(boolean vive_con_otros) {
+        this.vive_con_otros = vive_con_otros;
+    }
+
+    public boolean isImcmayor24() {
+        return imcmayor24;
+    }
+
+    public void setImcmayor24(boolean imcmayor24) {
+        this.imcmayor24 = imcmayor24;
+    }
+
+    public boolean isCardiopulmonar() {
+        return cardiopulmonar;
+    }
+
+    public void setCardiopulmonar(boolean cardiopulmonar) {
+        this.cardiopulmonar = cardiopulmonar;
+    }
+
+    public boolean isPresionsistolicamayor120() {
+        return presionsistolicamayor120;
+    }
+
+    public void setPresionsistolicamayor120(boolean presionsistolicamayor120) {
+        this.presionsistolicamayor120 = presionsistolicamayor120;
+    }
+
+    public boolean isPresiondiastolicamayor80() {
+        return presiondiastolicamayor80;
+    }
+
+    public void setPresiondiastolicamayor80(boolean presiondiastolicamayor80) {
+        this.presiondiastolicamayor80 = presiondiastolicamayor80;
+    }
+
+    public boolean isPerimetroabdominalmayor88() {
+        return perimetroabdominalmayor88;
+    }
+
+    public void setPerimetroabdominalmayor88(boolean perimetroabdominalmayor88) {
+        this.perimetroabdominalmayor88 = perimetroabdominalmayor88;
+    }
+
+    public boolean isPerimetroabdominalmayor102() {
+        return perimetroabdominalmayor102;
+    }
+
+    public void setPerimetroabdominalmayor102(boolean perimetroabdominalmayor102) {
+        this.perimetroabdominalmayor102 = perimetroabdominalmayor102;
+    }
+
+    public boolean isAlimentacionadecuada() {
+        return alimentacionadecuada;
+    }
+
+    public void setAlimentacionadecuada(boolean alimentacionadecuada) {
+        this.alimentacionadecuada = alimentacionadecuada;
+    }
+
+    public boolean isConductasexualactiva() {
+        return conductasexualactiva;
+    }
+
+    public void setConductasexualactiva(boolean conductasexualactiva) {
+        this.conductasexualactiva = conductasexualactiva;
+    }
+
+    public boolean isEdadiniciosexualmenor14() {
+        return edadiniciosexualmenor14;
+    }
+
+    public void setEdadiniciosexualmenor14(boolean edadiniciosexualmenor14) {
+        this.edadiniciosexualmenor14 = edadiniciosexualmenor14;
+    }
+
+    public boolean isDificultadessexuales() {
+        return dificultadessexuales;
+    }
+
+    public void setDificultadessexuales(boolean dificultadessexuales) {
+        this.dificultadessexuales = dificultadessexuales;
+    }
+
+    public boolean isCiclosregulares() {
+        return ciclosregulares;
+    }
+
+    public void setCiclosregulares(boolean ciclosregulares) {
+        this.ciclosregulares = ciclosregulares;
+    }
+
+    public boolean isDismenorrea() {
+        return dismenorrea;
+    }
+
+    public void setDismenorrea(boolean dismenorrea) {
+        this.dismenorrea = dismenorrea;
+    }
+
+    public boolean isFlujosecrecionanormal() {
+        return flujosecrecionanormal;
+    }
+
+    public void setFlujosecrecionanormal(boolean flujosecrecionanormal) {
+        this.flujosecrecionanormal = flujosecrecionanormal;
+    }
+
+    public boolean isVihits() {
+        return vihits;
+    }
+
+    public void setVihits(boolean vihits) {
+        this.vihits = vihits;
+    }
+
+    public boolean isEmbarazos() {
+        return embarazos;
+    }
+
+    public void setEmbarazos(boolean embarazos) {
+        this.embarazos = embarazos;
+    }
+
+    public boolean isHijos() {
+        return hijos;
+    }
+
+    public void setHijos(boolean hijos) {
+        this.hijos = hijos;
+    }
+
+    public boolean isAbortos() {
+        return abortos;
+    }
+
+    public void setAbortos(boolean abortos) {
+        this.abortos = abortos;
+    }
+
+    public boolean isUsomacnegativo() {
+        return usomacnegativo;
+    }
+
+    public void setUsomacnegativo(boolean usomacnegativo) {
+        this.usomacnegativo = usomacnegativo;
+    }
+
+    public boolean isAnticoncepcionnegativo() {
+        return anticoncepcionnegativo;
+    }
+
+    public void setAnticoncepcionnegativo(boolean anticoncepcionnegativo) {
+        this.anticoncepcionnegativo = anticoncepcionnegativo;
+    }
+
+    public boolean isAbusosexualpositivo() {
+        return abusosexualpositivo;
+    }
+
+    public void setAbusosexualpositivo(boolean abusosexualpositivo) {
+        this.abusosexualpositivo = abusosexualpositivo;
+    }
+
+    public boolean isImagencorporal() {
+        return imagencorporal;
+    }
+
+    public void setImagencorporal(boolean imagencorporal) {
+        this.imagencorporal = imagencorporal;
+    }
+
+    public boolean isBienestaremocional() {
+        return bienestaremocional;
+    }
+
+    public void setBienestaremocional(boolean bienestaremocional) {
+        this.bienestaremocional = bienestaremocional;
+    }
+
+    public boolean isVidaproyecto() {
+        return vidaproyecto;
+    }
+
+    public void setVidaproyecto(boolean vidaproyecto) {
+        this.vidaproyecto = vidaproyecto;
+    }
+
+    public boolean isIntentosuicida() {
+        return intentosuicida;
+    }
+
+    public void setIntentosuicida(boolean intentosuicida) {
+        this.intentosuicida = intentosuicida;
+    }
+
+    public boolean isIdeacionsuicida() {
+        return ideacionsuicida;
+    }
+
+    public void setIdeacionsuicida(boolean ideacionsuicida) {
+        this.ideacionsuicida = ideacionsuicida;
+    }
+
+    public boolean isTabaco() {
+        return tabaco;
+    }
+
+    public void setTabaco(boolean tabaco) {
+        this.tabaco = tabaco;
+    }
+
+    public boolean isConsumoalcohol() {
+        return consumoalcohol;
+    }
+
+    public void setConsumoalcohol(boolean consumoalcohol) {
+        this.consumoalcohol = consumoalcohol;
+    }
+
+    public boolean isConsumomarihuana() {
+        return consumomarihuana;
+    }
+
+    public void setConsumomarihuana(boolean consumomarihuana) {
+        this.consumomarihuana = consumomarihuana;
+    }
+
+    public boolean isConsumootrasustancia() {
+        return consumootrasustancia;
+    }
+
+    public void setConsumootrasustancia(boolean consumootrasustancia) {
+        this.consumootrasustancia = consumootrasustancia;
+    }
+
+    public boolean isRefernteadultoninguno() {
+        return refernteadultoninguno;
+    }
+
+    public void setRefernteadultoninguno(boolean refernteadultoninguno) {
+        this.refernteadultoninguno = refernteadultoninguno;
+    }
+
+    public boolean isAceptacion() {
+        return aceptacion;
+    }
+
+    public void setAceptacion(boolean aceptacion) {
+        this.aceptacion = aceptacion;
+    }
+
+    public boolean isAmigos() {
+        return amigos;
+    }
+
+    public void setAmigos(boolean amigos) {
+        this.amigos = amigos;
+    }
+
+    public boolean isSuicidalidad() {
+        return suicidalidad;
+    }
+
+    public void setSuicidalidad(boolean suicidalidad) {
+        this.suicidalidad = suicidalidad;
+    }
+
+    public boolean isCyberbullyng() {
+        return cyberbullyng;
+    }
+
+    public void setCyberbullyng(boolean cyberbullyng) {
+        this.cyberbullyng = cyberbullyng;
+    }
+
+    public boolean isGrooming() {
+        return grooming;
+    }
+
+    public void setGrooming(boolean grooming) {
+        this.grooming = grooming;
+    }
+
+    public boolean isViolenciaescolar() {
+        return violenciaescolar;
+    }
+
+    public void setViolenciaescolar(boolean violenciaescolar) {
+        this.violenciaescolar = violenciaescolar;
+    }
+
+    public boolean isViolenciapareja() {
+        return violenciapareja;
+    }
+
+    public void setViolenciapareja(boolean violenciapareja) {
+        this.violenciapareja = violenciapareja;
+    }
+
+    public boolean isVivesolo() {
+        return vivesolo;
+    }
+
+    public void setVivesolo(boolean vivesolo) {
+        this.vivesolo = vivesolo;
+    }
+
+    public boolean isViveeninstitucion() {
+        return viveeninstitucion;
+    }
+
+    public void setViveeninstitucion(boolean viveeninstitucion) {
+        this.viveeninstitucion = viveeninstitucion;
+    }
+
+    public boolean isPercepcionfamiliamala() {
+        return percepcionfamiliamala;
+    }
+
+    public void setPercepcionfamiliamala(boolean percepcionfamiliamala) {
+        this.percepcionfamiliamala = percepcionfamiliamala;
+    }
+
+    public boolean isDesercionexclusion() {
+        return desercionexclusion;
+    }
+
+    public void setDesercionexclusion(boolean desercionexclusion) {
+        this.desercionexclusion = desercionexclusion;
+    }
+
+    public pacienteController getPacienteCtrl() {
+        return pacienteCtrl;
+    }
+
+    public void setPacienteCtrl(pacienteController pacienteCtrl) {
+        this.pacienteCtrl = pacienteCtrl;
+    }
+
+    public LoginController getLoginCtrl() {
+        return loginCtrl;
+    }
+
+    public void setLoginCtrl(LoginController loginCtrl) {
+        this.loginCtrl = loginCtrl;
+    }
+
+    public auditController getAuditCtrl() {
+        return auditCtrl;
+    }
+
+    public void setAuditCtrl(auditController auditCtrl) {
+        this.auditCtrl = auditCtrl;
+    }
+
+    public CrafftController getCrafftCtrl() {
+        return crafftCtrl;
+    }
+
+    public void setCrafftCtrl(CrafftController crafftCtrl) {
+        this.crafftCtrl = crafftCtrl;
+    }
+
+    public parametrosController getParametrosCtrl() {
+        return parametrosCtrl;
+    }
+
+    public void setParametrosCtrl(parametrosController parametrosCtrl) {
+        this.parametrosCtrl = parametrosCtrl;
     }
 
 //    public clap prepareCreate() {
@@ -3044,66 +3515,178 @@ public class clapController implements Serializable {
         if(selected.getImc()<24){
             selected.setRiesgo_cardiovascular(true);
             selected.setRiesgo_nutricional(true);
+            imcmayor24=true;
         }
         if(selected.isCardio_pulmonar()){
             selected.setRiesgo_cardiovascular(true);
+            cardiopulmonar=true;
         }
         if(selected.getPresion_arterial_sistolica()>=120||selected.getPresion_arterial_diastolica()>=80){
             selected.setRiesgo_cardiovascular(true);
+            if(selected.getPresion_arterial_sistolica()>=120){
+                presionsistolicamayor120=true;
+            }
+            if(selected.getPresion_arterial_diastolica()>=80){
+                presiondiastolicamayor80=true;
+            }
         }
-        if(selected.getPerimetro_abdominal()>88&&selected.getSexo()==2||selected.getPerimetro_abdominal()>102&&selected.getSexo()==3){
+        if(selected.getPerimetro_abdominal()>88&&selected.getSexo()==2){
             selected.setRiesgo_cardiovascular(true);
             selected.setRiesgo_nutricional(true);
+            perimetroabdominalmayor88=true;
+        }
+        if(selected.getPerimetro_abdominal()>102&&selected.getSexo()==1){
+            selected.setRiesgo_cardiovascular(true);
+            selected.setRiesgo_nutricional(true);
+            perimetroabdominalmayor102=true;
         }
         if(!selected.isAlimentacion_adecuada()){
             selected.setRiesgo_nutricional(true);
+            alimentacionadecuada=true;
         }
         
         //ssr
-        if(selected.getConducta_sexual()==3||selected.getEdad_inicio_conducta_sexual()< 14){
+        if(selected.getConducta_sexual()==3){
             selected.setRiesgo_ssr(true);
+            conductasexualactiva=true;
         }
-        if(selected.getDificultades_sexuales()==2){
+        if(selected.getEdad_inicio_conducta_sexual()< 14){
             selected.setRiesgo_ssr(true);
+            edadiniciosexualmenor14=true;
         }
-        if(selected.getCiclos_regulares()==2||selected.getDismenorrea()==2||selected.isFlujo_secrecion_patologico()){
+        if(selected.getDificultades_sexuales()==2&&selected.getEdad_inicio_conducta_sexual()!=0){
             selected.setRiesgo_ssr(true);
+            dificultadessexuales=true;
         }
-        if(selected.isIts_vih()||selected.getTratamiento()>1||selected.getTratamiento_contactos()>1){
-            selected.setRiesgo_ssr(true);
+        if(selected.getSexo()==2){
+            if(selected.getCiclos_regulares()==2){
+                selected.setRiesgo_ssr(true);
+                ciclosregulares=true;
+            }
+            if(selected.getDismenorrea()==2){
+                selected.setRiesgo_ssr(true);
+                dismenorrea=true;
+            }
         }
-        if(selected.getEmbarazos()>0||selected.getHijos()>0||selected.getAbortos()>0){
+        if(selected.isFlujo_secrecion_patologico()){
             selected.setRiesgo_ssr(true);
+            flujosecrecionanormal=true;
         }
-        if(selected.getUso_mac()>1||selected.getAnticoncepcion()>1||selected.isAbuso_sexual()){
+        if(selected.isIts_vih()){
             selected.setRiesgo_ssr(true);
+            vihits=true;
+        }
+        if(selected.getEmbarazos()>0){
+            selected.setRiesgo_ssr(true);
+            embarazos=true;
+        }
+        if (selected.getHijos() > 0) {
+            selected.setRiesgo_ssr(true);
+            hijos=true;
+        }
+        if(selected.getAbortos()>0){
+            selected.setRiesgo_ssr(true);
+            abortos=true;
+        }
+        if(selected.getUso_mac()>1){
+            selected.setRiesgo_ssr(true);
+            usomacnegativo=true;
+        }
+        if(selected.getAnticoncepcion()>1){
+            selected.setRiesgo_ssr(true);
+            anticoncepcionnegativo=true;
+        }
+        if(selected.isAbuso_sexual()){
+            selected.setRiesgo_ssr(true);
+            abusosexualpositivo=true;
         }
         
         //Salud mental
         
-        if(selected.getImagen_corporal()>1||selected.getBienestar_emocional()>1){
+        if(selected.getImagen_corporal()>1){
             selected.setRiesgo_salud_mental(true);
         }
-        if(selected.getVida_proyecto()==3||selected.isIntento_suicida()||selected.isIdeacion_suicida()){
+        if(selected.getBienestar_emocional()>1){
+            selected.setRiesgo_salud_mental(true);
+        }
+        if(selected.getVida_proyecto()==3){
+            selected.setRiesgo_salud_mental(true);
+        }
+        if(selected.isIntento_suicida()){
+            selected.setRiesgo_salud_mental(true);
+        }
+        if(selected.isIdeacion_suicida()){
             selected.setRiesgo_salud_mental(true);
         }
         
         //Drogas
         
-        if(selected.isTabaco()||selected.isConsumo_alcohol()||selected.isConsumo_marihuana()||selected.isConsumo_otra_sustancia()){
+        if(selected.isTabaco()){
             selected.setRiesgo_oh_drogas(true);
+            tabaco=true;
+        }
+        if(selected.isConsumo_alcohol()){
+            selected.setRiesgo_oh_drogas(true);
+            consumoalcohol=true;
+        }
+        if(selected.isConsumo_marihuana()){
+            selected.setRiesgo_oh_drogas(true);
+            consumomarihuana=true;
+        }
+        if(selected.isConsumo_otra_sustancia()){
+            selected.setRiesgo_oh_drogas(true);
+            consumootrasustancia=true;
         }
         
         //riesgo social
         
-        if(selected.getReferente_adulto()==5||selected.getAceptacion()==2||selected.getAceptacion()==3||selected.isAmigos()==false||selected.isSuicidalidad_amigos()==true){
+        if(selected.getReferente_adulto()==5){
             selected.setRiesgo_social(true);
+            refernteadultoninguno=true;
         }
-        if(selected.isCyberbulling()|selected.isGrooming()||selected.isViolencia_escolar()||selected.isViolencia_pareja()){
+        if(selected.getAceptacion()==2||selected.getAceptacion()==3){
             selected.setRiesgo_social(true);
+            aceptacion=true;
         }
-        if(selected.isVive_con_solo()||selected.isVive_en_institucion()||selected.getPercepcion_familia()>2||selected.isDesercion_exclusion()){
+        if(selected.isAmigos()==false){
             selected.setRiesgo_social(true);
+            amigos=true;
+        }
+        if(selected.isSuicidalidad_amigos()==true){
+            selected.setRiesgo_social(true);
+            suicidalidad=true;
+        }
+        if(selected.isCyberbulling()){
+            selected.setRiesgo_social(true);
+            cyberbullyng=true;
+        }
+        if(selected.isGrooming()){
+            selected.setRiesgo_social(true);
+            grooming=true;
+        }
+        if(selected.isViolencia_escolar()){
+            selected.setRiesgo_social(true);
+            violenciaescolar=true;
+        }
+        if(selected.isViolencia_pareja()){
+            selected.setRiesgo_social(true);
+            violenciapareja=true;
+        }
+        if(selected.isVive_con_solo()){
+            selected.setRiesgo_social(true);
+            vivesolo=true;
+        }
+        if(selected.isVive_en_institucion()){
+            selected.setRiesgo_social(true);
+            viveeninstitucion=true;
+        }
+        if(selected.getPercepcion_familia()>2){
+            selected.setRiesgo_social(true);
+            percepcionfamiliamala=true;
+        }
+        if(selected.isDesercion_exclusion()){
+            selected.setRiesgo_social(true);
+            desercionexclusion=true;
         }
 //        System.out.println("Riesgo cardiovascular: "+selected.isRiesgo_cardiovascular());
 //        System.out.println("Riesgo nutricional: "+selected.isRiesgo_nutricional());

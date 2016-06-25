@@ -8,6 +8,8 @@
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
       <!--<property name="javax.persistence.sql-load-script-source" value="META-INF/poblado.sql"/>-->
       <property name="javax.persistence.sql-load-script-source" value="META-INF/poblado.sql"/>
+      <property name="hibernate.connection.useUnicode" value="true" />
+      <property name="hibernate.connection.characterEncoding" value="UTF-8" />
     </properties>
   </persistence-unit>
 </persistence>
