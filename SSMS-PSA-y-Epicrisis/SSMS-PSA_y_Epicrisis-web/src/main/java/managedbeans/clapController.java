@@ -74,6 +74,7 @@ public class clapController implements Serializable {
     private boolean isAudit = false;
     private boolean isCrafft = false;
     private int puntajeACrafft;
+    private int control_en;
     private UploadedFile imagen = null;
     private StreamedContent chart;
     boolean vive_solo=false;
@@ -102,7 +103,7 @@ public class clapController implements Serializable {
     
     @Inject
     private parametrosController parametrosCtrl;
-    
+   
     public clapController() {
     }
 
@@ -130,6 +131,14 @@ public class clapController implements Serializable {
         return estado;
     }
 
+    public int getControl_en() {
+        return control_en;
+    }
+
+    public void setControl_en(int control_en) {
+        this.control_en = control_en;
+    }
+    
     public void setEstado(String estado) {
         this.estado = estado;
     }
@@ -205,8 +214,19 @@ public class clapController implements Serializable {
         c.setTime(fecha);
         c.add(Calendar.DATE, -60);
         fecha = c.getTime();
-        
+        List<clap> itemsAnular = getFacade().findbyEstadoFecha2("Incompleto", fecha);
+        if (!itemsAnular.isEmpty()) {
+            for (clap clap : itemsAnular) {
+                clap.setEstado("Anulado");
+                clap.setFecha_estado(new java.util.Date());
+                selected = clap;
+                getFacade().edit(selected);
+                //persist(PersistAction.UPDATE,"");                        
+            }
+            selected = null;
+        }
         if (loginCtrl.esSuperUsuario()) {
+            
             // 1 = Incompleto
             if (num == 1) {
                itemsNoTerminados = getFacade().findbyEstadoFecha("Incompleto", fecha);
@@ -368,41 +388,45 @@ public class clapController implements Serializable {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String sFecha1;
         String sFecha2;
-
-        switch (cond) {
-            case 0:
-                items=getItems();
-                title = "sabana_de_datos.csv";
-                break;
-            case 1:
-                if (estado.equals("Vencido")) {
-                    List<clap> aux = getFacade().findbyEstado("Vigente");
-                    Date fecha = new java.util.Date();
-                    Calendar c = Calendar.getInstance();
-                    c.setTime(fecha);
-                    c.add(Calendar.DATE, -365);
-                    fecha = c.getTime();
-                    for (clap clap : aux) {
-                        if (clap.getFecha_estado().before(fecha)) {
-                            clap.setEstado("Vencido");
-                            clap.setFecha_estado(new java.util.Date());
-                            selected = clap;
-                            getFacade().edit(selected);
-                            //persist(PersistAction.UPDATE,"");
+        if (control_en == 1 && cond == 1) {
+            title = "CLAPS Establecimientos Educacionales.csv";
+            items = getFacade().findbyEducacional(1);
+        }else{
+            switch (cond) {
+                case 0:
+                    items=getItems();
+                    title = "sabana_de_datos.csv";
+                    break;
+                case 1:
+                    if (estado.equals("Vencido")) {
+                        List<clap> aux = getFacade().findbyEstado("Vigente");
+                        Date fecha = new java.util.Date();
+                        Calendar c = Calendar.getInstance();
+                        c.setTime(fecha);
+                        c.add(Calendar.DATE, -365);
+                        fecha = c.getTime();
+                        for (clap clap : aux) {
+                            if (clap.getFecha_estado().before(fecha)) {
+                                clap.setEstado("Vencido");
+                                clap.setFecha_estado(new java.util.Date());
+                                selected = clap;
+                                getFacade().edit(selected);
+                                //persist(PersistAction.UPDATE,"");
+                            }
                         }
                     }
-                }
-                items = getFacade().findbyEstadoEntreFechas(fecha1, fecha2, estado);
-                sFecha1 = simpleDateFormat.format(fecha1);
-                sFecha2 = simpleDateFormat.format(fecha2);
-                title = estado+" "+sFecha1+"-"+sFecha2+".csv";
-                break;
-            default:
-                items = itemsReporteClaps;
-                sFecha1 = simpleDateFormat.format(fecha1);
-                sFecha2 = simpleDateFormat.format(fecha2);
-                title = estado+" "+sFecha1+"-"+sFecha2+" "+cesfam.getNombre()+".csv";
-                break;
+                    items = getFacade().findbyEstadoEntreFechas(fecha1, fecha2, estado);
+                    sFecha1 = simpleDateFormat.format(fecha1);
+                    sFecha2 = simpleDateFormat.format(fecha2);
+                    title = estado+" "+sFecha1+"-"+sFecha2+".csv";
+                    break;
+                default:
+                    items = itemsReporteClaps;
+                    sFecha1 = simpleDateFormat.format(fecha1);
+                    sFecha2 = simpleDateFormat.format(fecha2);
+                    title = estado+" "+sFecha1+"-"+sFecha2+" "+cesfam.getNombre()+".csv";
+                    break;
+            }
         }
         if (items.size()==0) {
             JsfUtil.addErrorMessage("No se encontraron datos para generar el archivo");
@@ -433,8 +457,6 @@ public class clapController implements Serializable {
                 output.write("Region de residencia;".getBytes());
                 output.write("Comuna de residencia;".getBytes());
                 output.write("Calle direccion;".getBytes());
-                output.write("Numero direccion;".getBytes());
-                output.write("Resto direccion;".getBytes());
                 output.write("Fecha de nacimiento;".getBytes());
                 output.write("Sexo;".getBytes());
                 output.write("Nacionalidad;".getBytes());
@@ -659,7 +681,9 @@ public class clapController implements Serializable {
         Paciente = pacienteCtrl.getSelected();
         selected.setAudit(null);
         selected.setCrafft(null);
-        selected.setPaciente(Paciente);
+        selected.setRazon_de_trabajo(5);
+        selected.setLegalizado(3);
+        selected.setPaciente(pacienteCtrl.getSelected());
         selected.setRUN(Paciente.getRUN());
         selected.setDV(Paciente.getDV());
         selected.setNombres(Paciente.getNombres());
@@ -671,16 +695,20 @@ public class clapController implements Serializable {
         selected.setRegion_residencia(Paciente.getRegion_residencia());
         selected.setComuna_residencia(Paciente.getComuna_residencia());
         selected.setCalle_direccion(Paciente.getCalle_direccion());
-        selected.setNumero_direccion(Paciente.getNumero_direccion());
-        selected.setResto_direccion(Paciente.getResto_direccion());
         selected.setFecha_nacimiento(Paciente.getFecha_nacimiento());
-        selected.setCesfam(Paciente.getCesfam());
+        if (Paciente.getCesfam()!=null) {
+            selected.setCesfam(Paciente.getCesfam());        
+        }
         selected.setSexo(Paciente.getSexo());
         selected.setNacionalidad(Paciente.getNacionalidad());
         selected.setCorreo(Paciente.getCorreo());
         selected.setPrograma_social(Paciente.getPrograma_social());
-        selected.setPrevision(Paciente.getPrevision());
-        selected.setGrupo_fonasa(Paciente.getGrupo_fonasa());
+        if (Paciente.getPrevision()!=null) {
+            selected.setPrevision(Paciente.getPrevision());
+            if (Paciente.getPrevision().getNombre().equals("FONASA") ) {
+                selected.setGrupo_fonasa(Paciente.getGrupo_fonasa());
+            }
+        }
         selected.setEstado_conyugal(Paciente.getEstado_conyugal());
         selected.setPueblo_originario(Paciente.getPueblo_originario());
         selected.setFecha_consulta(new java.util.Date());
@@ -701,9 +729,7 @@ public class clapController implements Serializable {
         selected.setRiesgo_ssr(false);
         setImagen(null);
         //Guarda localmente el clap selected
-        clap nuevoClap = getSelected();
 
-        setSelected(nuevoClap);
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("clapCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -806,86 +832,7 @@ public class clapController implements Serializable {
             selected.setImc((float) (selected.getPeso()/Math.pow((float)selected.getTalla()/100,2)));
         }
      
-        //Riesgos
-        
-        selected.setRiesgo_cardiovascular(false);
-        selected.setRiesgo_nutricional(false);
-        selected.setRiesgo_oh_drogas(false);
-        selected.setRiesgo_salud_mental(false);
-        selected.setRiesgo_social(false);
-        selected.setRiesgo_ssr(false);
-        
-        //cardiovascular nutricional
-        if(selected.getImc()<24){
-            selected.setRiesgo_cardiovascular(true);
-            selected.setRiesgo_nutricional(true);
-        }
-        if(selected.isCardio_pulmonar()){
-            selected.setRiesgo_cardiovascular(true);
-        }
-        if(selected.getPresion_arterial_sistolica()>=120||selected.getPresion_arterial_diastolica()>=80){
-            selected.setRiesgo_cardiovascular(true);
-        }
-        if(selected.getPerimetro_abdominal()>88&&selected.getSexo()==2||selected.getPerimetro_abdominal()>102&&selected.getSexo()==3){
-            selected.setRiesgo_cardiovascular(true);
-            selected.setRiesgo_nutricional(true);
-        }
-        if(selected.isAlimentacion_adecuada()){
-            selected.setRiesgo_nutricional(true);
-        }
-        //ssr
-        if(selected.getConducta_sexual()==3||selected.getEdad_inicio_conducta_sexual()< 14){
-            selected.setRiesgo_ssr(true);
-        }
-        if(selected.getDificultades_sexuales()==2){
-            selected.setRiesgo_ssr(true);
-        }
-        if(selected.getCiclos_regulares()==2||selected.getDismenorrea()==2||selected.isFlujo_secrecion_patologico()){
-            selected.setRiesgo_ssr(true);
-        }
-        if(selected.isIts_vih()||selected.getTratamiento()>1||selected.getTratamiento_contactos()>1){
-            selected.setRiesgo_ssr(true);
-        }
-        if(selected.getEmbarazos()>0||selected.getHijos()>0||selected.getAbortos()>0){
-            selected.setRiesgo_ssr(true);
-        }
-        if(selected.getUso_mac()>1||selected.getAnticoncepcion()>1||selected.isAbuso_sexual()){
-            selected.setRiesgo_ssr(true);
-        }
-        
-        //Salud mental
-        
-        if(selected.getImagen_corporal()>1||selected.getBienestar_emocional()>1){
-            selected.setRiesgo_salud_mental(true);
-        }
-        if(selected.getVida_proyecto()==3||selected.isIntento_suicida()||selected.isIdeacion_suicida()){
-            selected.setRiesgo_salud_mental(true);
-        }
-        
-        //Drogas
-        
-        if(selected.isTabaco()||selected.isConsumo_alcohol()||selected.isConsumo_marihuana()||selected.isConsumo_otra_sustancia()){
-            selected.setRiesgo_oh_drogas(true);
-        }
-        
-        //riesgo social
-        
-        if(selected.getReferente_adulto()==5||selected.getAceptacion()==2||selected.getAceptacion()==3||selected.isAmigos()==false||selected.isSuicidalidad_amigos()==true){
-            selected.setRiesgo_social(true);
-        }
-        if(selected.isCyberbulling()|selected.isGrooming()||selected.isViolencia_escolar()||selected.isViolencia_pareja()){
-            selected.setRiesgo_social(true);
-        }
-        if(selected.isVive_con_solo()||selected.isVive_en_institucion()||selected.getPercepcion_familia()>2||selected.isDesercion_exclusion()){
-            selected.setRiesgo_social(true);
-        }
-//        System.out.println("Riesgo cardiovascular: "+selected.isRiesgo_cardiovascular());
-//        System.out.println("Riesgo nutricional: "+selected.isRiesgo_nutricional());
-//        System.out.println("Riesgo OH drogas: "+selected.isRiesgo_oh_drogas());
-//        System.out.println("Riesgo salud mental: "+selected.isRiesgo_salud_mental());
-//        System.out.println("Riesgo social: "+selected.isRiesgo_social());
-//        System.out.println("Riesgo ssr: "+selected.isRiesgo_ssr());
-//        
+        verificaRiesgos();  
         
         pacienteCtrl.setSelected(selected.getPaciente());
         //Actualiza datos de usuario
@@ -900,14 +847,12 @@ public class clapController implements Serializable {
         pacienteCtrl.getSelected().setNacionalidad(selected.getNacionalidad());
         pacienteCtrl.getSelected().setNombre_social(selected.getNombre_social());
         pacienteCtrl.getSelected().setNombres(selected.getNombres());
-        pacienteCtrl.getSelected().setNumero_direccion(selected.getNumero_direccion());
         pacienteCtrl.getSelected().setPrevision(selected.getPrevision());
         pacienteCtrl.getSelected().setPrimer_apellido(selected.getPrimer_apellido());
         pacienteCtrl.getSelected().setPrograma_social(selected.getPrograma_social());
         pacienteCtrl.getSelected().setPueblo_originario(selected.getPueblo_originario());
         pacienteCtrl.getSelected().setRecados(selected.isRecados());
         pacienteCtrl.getSelected().setRegion_residencia(selected.getRegion_residencia());
-        pacienteCtrl.getSelected().setResto_direccion(selected.getResto_direccion());
         pacienteCtrl.getSelected().setSegundo_apellido(selected.getSegundo_apellido());
         pacienteCtrl.getSelected().setSexo(selected.getSexo());
         pacienteCtrl.getSelected().setTelefono_fijo(selected.getTelefono_fijo());
@@ -1218,8 +1163,6 @@ public class clapController implements Serializable {
         selected.setRegion_residencia(Paciente.getRegion_residencia());
         selected.setComuna_residencia(Paciente.getComuna_residencia());
         selected.setCalle_direccion(Paciente.getCalle_direccion());
-        selected.setNumero_direccion(Paciente.getNumero_direccion());
-        selected.setResto_direccion(Paciente.getResto_direccion());
         selected.setFecha_nacimiento(Paciente.getFecha_nacimiento());
         selected.setCesfam(Paciente.getCesfam());
         selected.setSexo(Paciente.getSexo());
@@ -1396,27 +1339,38 @@ public class clapController implements Serializable {
         //////////////////////
         form.setField("nombres", selected.getNombres());
         form.setField("apellidos", selected.getPrimer_apellido()+" "+selected.getSegundo_apellido()); 
-        form.setField("domicilio", selected.getCalle_direccion()+" "+selected.getNumero_direccion()+", "+selected.getComuna_residencia().getNombre()); 
+        form.setField("domicilio", selected.getCalle_direccion()+", "+selected.getComuna_residencia().getNombre()); 
         form.setField("nombre_social", selected.getNombre_social()); 
         form.setField("centro_salud", selected.getCesfam().getNombre()); 
-        form.setField("codigo", "");
+        form.setField("codigo", String.valueOf(selected.getCesfam_clap().getId()));
         
         //Formato Nuevo
         //Condicional de establecimiento educacional o de salud
-        if (true) {
-             form.setField("control_educacional", "Yes");
-        }else{
+        int control = selected.getControl_en();
+        if (control == 1) {
+            form.setField("control_educacional", "Yes");
+            form.setField("establecimiento_educacional", selected.getEstablecimiento_educacional());
+        }else if(control == 2){
             form.setField("control_salud", "Yes");
+        }else{
+            form.setField("", "Yes");            
         }
+        
         //Formato nuevo
-        form.setField("establecimiento_educacional", "");
-        form.setField("hcn", "");
+        form.setField("hcn", Integer.toString(selected.getHcn()));
        //Condicional domicilio
-        if (true) {
+        boolean domicilio = selected.isDomicilio();
+        if (domicilio == true) {
             form.setField("tel_fijo_domicilio", "Yes");
+        }else{
+            form.setField("", "Yes");            
         }
-        if (true) {
+        
+        boolean recado = selected.isRecados();
+        if (recado==true) {
             form.setField("cel_recados", "Yes");
+        }else{
+            form.setField("", "Yes");            
         }
         /////////////////////////////////////////
         
@@ -1436,11 +1390,12 @@ public class clapController implements Serializable {
         }
         //Formato Nuevo
         //Condicional de beneficiario
-        if (true) {
+        /*boolean beneficiario = true;
+        if (beneficiario==true) {
             form.setField("beneficiario_si", "Yes");
         }else{
             form.setField("beneficiario_no", "Yes");
-        }
+        }*/
         ////////////////
         form.setField("correo", selected.getCorreo());
         form.setField("id_consulta", ""+selected.getId());
@@ -1871,6 +1826,7 @@ public class clapController implements Serializable {
         }
         
         //Grado o Curso
+        form.setField("curso", selected.getCurso());
         
         //Años Repetidos
         form.setField("anios_repetidos", Integer.toString(selected.getAnos_repetidos()));
@@ -2105,6 +2061,16 @@ public class clapController implements Serializable {
             form.setField("alimentacion_especial_no", "Yes");
         }
         
+        //Tabaco
+        boolean tabaco= selected.isTabaco();
+        if (tabaco==true) {
+            form.setField("tabaco_si", "Yes");
+        }else{
+            form.setField("tabaco_no", "Yes");
+        }
+	//Promedio de tabaco
+	form.setField("prom_cigarro", Integer.toString(selected.getCigarros_dia()));
+        
         //Alcohol y otras drogas
         //alcohol
         boolean alcohol= selected.isConsumo_alcohol();
@@ -2326,12 +2292,12 @@ public class clapController implements Serializable {
         }
         
         //doble proteccion 
-        /*boolean doble_proteccion= true;
+        boolean doble_proteccion= selected.isDoble_proteccion();
         if (doble_proteccion==true) {
             form.setField("doble_proteccion_si", "Yes");
         }else{
             form.setField("doble_proteccion_no", "Yes");
-        }*/
+        }
         
         //uso mac
         int uso_mac= selected.getUso_mac();
@@ -2517,12 +2483,12 @@ public class clapController implements Serializable {
         }
         
         //agudeza auditiva
-        /*boolean agud_auditiva= selected.is;
+        boolean agud_auditiva= selected.isAgudeza_auditiva();
         if (aspecto_general==true) {
             form.setField("agud_auditiva_normal", "Yes");
         }else{
             form.setField("agud_auditiva_anormal", "Yes");
-        }*/
+        }
         
         //salud bucal
         boolean salud_bucal= selected.isSalud_bucal();
@@ -2533,12 +2499,12 @@ public class clapController implements Serializable {
         }
         
         //tiroides
-        /*boolean tiroides= selected.is;
-        if (aspecto_general==true) {
-            form.setField("aspecto_general_normal", "Yes");
+        boolean tiroides= selected.isTiroides();
+        if (tiroides==true) {
+            form.setField("tiroides_normal", "Yes");
         }else{
-            form.setField("aspecto_general_anormal", "Yes");
-        }*/
+            form.setField("tiroides_anormal", "Yes");
+        }
         
         //cardio pulmonar
         boolean cardiopulmonar= selected.isCardio_pulmonar();
@@ -2991,9 +2957,9 @@ public class clapController implements Serializable {
             if (selected.getEspecificacion_its_vih().equals("")) {
                 seccion = false;
             }
-        }
-        if (selected.getTratamiento() == 0 || selected.getTratamiento_contactos() == 0) {
-            seccion = false;
+            if (selected.getTratamiento() == 0 || selected.getTratamiento_contactos() == 0) {
+                seccion = false;
+            }
         }
         
         if (selected.getSexo() == 2) {
@@ -3047,5 +3013,104 @@ public class clapController implements Serializable {
         
         selected.setSeccion_examen_fisico(seccion);
         System.out.println("Seccion Examen Fisico: "+ selected.isSeccion_examen_fisico());
+    }
+    
+    public void noTrabaja(){
+        if (!selected.isTrabaja()) {
+            selected.setRazon_de_trabajo(5);
+            selected.setLegalizado(3);
+        }
+    }
+    
+    public void control(){
+        if (selected.getControl_en() == 2) {
+            selected.setCesfam_clap(loginCtrl.getUsuarioLogueado().getCESFAM());
+            selected.setEstablecimiento_educacional(null);
+        }else{
+            selected.setCesfam_clap(null);
+        }
+    }
+    
+    public void verificaRiesgos(){
+        //Riesgos
+        selected.setRiesgo_cardiovascular(false);
+        selected.setRiesgo_nutricional(false);
+        selected.setRiesgo_oh_drogas(false);
+        selected.setRiesgo_salud_mental(false);
+        selected.setRiesgo_social(false);
+        selected.setRiesgo_ssr(false);
+        
+        //cardiovascular nutricional
+        if(selected.getImc()<24){
+            selected.setRiesgo_cardiovascular(true);
+            selected.setRiesgo_nutricional(true);
+        }
+        if(selected.isCardio_pulmonar()){
+            selected.setRiesgo_cardiovascular(true);
+        }
+        if(selected.getPresion_arterial_sistolica()>=120||selected.getPresion_arterial_diastolica()>=80){
+            selected.setRiesgo_cardiovascular(true);
+        }
+        if(selected.getPerimetro_abdominal()>88&&selected.getSexo()==2||selected.getPerimetro_abdominal()>102&&selected.getSexo()==3){
+            selected.setRiesgo_cardiovascular(true);
+            selected.setRiesgo_nutricional(true);
+        }
+        if(!selected.isAlimentacion_adecuada()){
+            selected.setRiesgo_nutricional(true);
+        }
+        
+        //ssr
+        if(selected.getConducta_sexual()==3||selected.getEdad_inicio_conducta_sexual()< 14){
+            selected.setRiesgo_ssr(true);
+        }
+        if(selected.getDificultades_sexuales()==2){
+            selected.setRiesgo_ssr(true);
+        }
+        if(selected.getCiclos_regulares()==2||selected.getDismenorrea()==2||selected.isFlujo_secrecion_patologico()){
+            selected.setRiesgo_ssr(true);
+        }
+        if(selected.isIts_vih()||selected.getTratamiento()>1||selected.getTratamiento_contactos()>1){
+            selected.setRiesgo_ssr(true);
+        }
+        if(selected.getEmbarazos()>0||selected.getHijos()>0||selected.getAbortos()>0){
+            selected.setRiesgo_ssr(true);
+        }
+        if(selected.getUso_mac()>1||selected.getAnticoncepcion()>1||selected.isAbuso_sexual()){
+            selected.setRiesgo_ssr(true);
+        }
+        
+        //Salud mental
+        
+        if(selected.getImagen_corporal()>1||selected.getBienestar_emocional()>1){
+            selected.setRiesgo_salud_mental(true);
+        }
+        if(selected.getVida_proyecto()==3||selected.isIntento_suicida()||selected.isIdeacion_suicida()){
+            selected.setRiesgo_salud_mental(true);
+        }
+        
+        //Drogas
+        
+        if(selected.isTabaco()||selected.isConsumo_alcohol()||selected.isConsumo_marihuana()||selected.isConsumo_otra_sustancia()){
+            selected.setRiesgo_oh_drogas(true);
+        }
+        
+        //riesgo social
+        
+        if(selected.getReferente_adulto()==5||selected.getAceptacion()==2||selected.getAceptacion()==3||selected.isAmigos()==false||selected.isSuicidalidad_amigos()==true){
+            selected.setRiesgo_social(true);
+        }
+        if(selected.isCyberbulling()|selected.isGrooming()||selected.isViolencia_escolar()||selected.isViolencia_pareja()){
+            selected.setRiesgo_social(true);
+        }
+        if(selected.isVive_con_solo()||selected.isVive_en_institucion()||selected.getPercepcion_familia()>2||selected.isDesercion_exclusion()){
+            selected.setRiesgo_social(true);
+        }
+//        System.out.println("Riesgo cardiovascular: "+selected.isRiesgo_cardiovascular());
+//        System.out.println("Riesgo nutricional: "+selected.isRiesgo_nutricional());
+//        System.out.println("Riesgo OH drogas: "+selected.isRiesgo_oh_drogas());
+//        System.out.println("Riesgo salud mental: "+selected.isRiesgo_salud_mental());
+//        System.out.println("Riesgo social: "+selected.isRiesgo_social());
+//        System.out.println("Riesgo ssr: "+selected.isRiesgo_ssr());
+//      
     }
 }

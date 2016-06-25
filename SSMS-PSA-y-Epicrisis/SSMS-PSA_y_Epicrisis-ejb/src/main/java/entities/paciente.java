@@ -71,13 +71,6 @@ public class paciente implements Serializable {
     @Column(name="calle_direccion_paciente",length = 50)
     private String calle_direccion;
     
-    @NotNull(message="Debe ingresar el numero de dirección de residencia")
-    @Column(name="numero_direccion_paciente",length = 8)
-    private String numero_direccion;
-    
-    @Column(name="resto_direccion_paciente",length = 50)
-    private String resto_direccion;
-    
     @NotNull(message="Debe ingresar una fecha de nacimiento")
     @Temporal(TemporalType.DATE)
     @Column(name="fecha_nacimiento_paciente")
@@ -126,7 +119,7 @@ public class paciente implements Serializable {
 //    + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
 //    + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
 //    message = "Debe ser un mail valido")
-    @Column(name="correo_paciente",unique=true)
+    @Column(name="correo_paciente")
     private String correo;
     
     @ManyToOne
@@ -329,22 +322,6 @@ public class paciente implements Serializable {
 
     public void setCalle_direccion(String calle_direccion) {
         this.calle_direccion = calle_direccion;
-    }
-
-    public String getNumero_direccion() {
-        return numero_direccion;
-    }
-
-    public void setNumero_direccion(String numero_direccion) {
-        this.numero_direccion = numero_direccion;
-    }
-
-    public String getResto_direccion() {
-        return resto_direccion;
-    }
-
-    public void setResto_direccion(String resto_direccion) {
-        this.resto_direccion = resto_direccion;
     }
 
     public String getTelefono_fijo() {

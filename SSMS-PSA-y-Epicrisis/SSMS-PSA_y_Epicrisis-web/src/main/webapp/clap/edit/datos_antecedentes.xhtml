@@ -52,7 +52,7 @@
                                 <p:selectOneRadio id="control_en" style="width:15em !important;" value="#{clapController.selected.control_en}" layout="grid" columns="2">
                                     <f:selectItem itemLabel="educacional" itemValue="1" />
                                     <f:selectItem itemLabel="de salud" itemValue="2" />
-                                    <p:ajax update="cesfam establecimiento_educacional" event="change"/>
+                                    <p:ajax update="cesfam establecimiento_educacional" event="change" listener="#{clapController.control}"/>
                                 </p:selectOneRadio>
                             </b:row>
                         </b:column>

@@ -43,10 +43,6 @@
                         <h:outputText id="comuna_residencia" value="#{pacienteController.selected.comuna_residencia.nombre}" title="#{bundle.ViewpacienteTitle_comuna_residencia}"/>                                                                    
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_calle_direccion}" for="calle_direccion" />
                         <h:outputText id="calle_direccion" value="#{pacienteController.selected.calle_direccion}" title="#{bundle.ViewpacienteTitle_calle_direccion}"/>                                              
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_numero_direccion}" for="numero_direccion" />
-                        <h:outputText id="numero_direccion" value="#{pacienteController.selected.numero_direccion}" title="#{bundle.ViewpacienteTitle_numero_direccion}"/>                                              
-                        <p:outputLabel value="#{bundle.CreatepacienteLabel_resto_direccion}" for="resto_direccion" />
-                        <h:outputText id="resto_direccion" value="#{pacienteController.selected.resto_direccion}" title="#{bundle.ViewpacienteTitle_resto_direccion}"/>                                                                      
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_fecha_nacimiento}" for="fecha_nacimiento" />
                         <h:outputText id="fecha_nacimiento" value="#{pacienteController.selected.fecha_nacimiento}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
@@ -199,7 +195,7 @@
                                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                             </p:confirmDialog>
                             <p:commandButton id="viewRiesgosButton"   icon="ui-icon-search" value="Ver Riesgos" actionListener="#{clapController.prepareRiesgos}" action="/clap/Riesgos?faces-redirect=true" disabled="#{empty clapController.selected || clapController.esIncompleto() || clapController.esAnulado()}"/>                      
-                            <p:commandButton actionListener="#{clapController.createPDF}" icon="ui-icon-arrowthickstop-1-s" value="Crear PDF" ajax="false" update="display,:clapViewForm:datalist,:growl" disabled="#{empty clapController.selected}"/>
+                            <p:commandButton actionListener="#{clapController.createPDF}" icon="ui-icon-arrowthickstop-1-s" value="Crear PDF" ajax="false" update="display,:clapViewForm:datalist,:growl" disabled="#{empty clapController.selected || clapController.selected.id == null}"/>
                             <p:confirmDialog message="Esta de segur@ de crear una ficha CLAP ?" header="Crear Ficha CLAP" severity="alert" widgetVar="cd2">
                                 <p:commandButton value="Si" action="#{clapController.create()}" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="/clap/View"/>
                                 <p:commandButton value="No" type="button" onclick="PF('cd2').hide()" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
