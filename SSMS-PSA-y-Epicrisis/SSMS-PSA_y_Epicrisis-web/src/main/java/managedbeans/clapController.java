@@ -681,6 +681,8 @@ public class clapController implements Serializable {
         Paciente = pacienteCtrl.getSelected();
         selected.setAudit(null);
         selected.setCrafft(null);
+        selected.setRazon_de_trabajo(5);
+        selected.setLegalizado(3);
         selected.setPaciente(pacienteCtrl.getSelected());
         selected.setRUN(Paciente.getRUN());
         selected.setDV(Paciente.getDV());
@@ -3071,8 +3073,23 @@ public class clapController implements Serializable {
     
     public void noTrabaja(){
         if (!selected.isTrabaja()) {
-            selected.setRazon_de_trabajo(4);
+            selected.setRazon_de_trabajo(5);
             selected.setLegalizado(3);
+        }
+    }
+    
+    public void control(){
+        if (selected.getControl_en() == 2) {
+            selected.setCesfam_clap(loginCtrl.getUsuarioLogueado().getCESFAM());
+            selected.setEstablecimiento_educacional(null);
+        }else{
+            selected.setCesfam_clap(null);
+        }
+    }
+    
+    public void conOtros(){
+        if (!selected.isVive_con_otros()) {
+            selected.setVive_con_especificacion(null);
         }
     }
 }
