@@ -1342,24 +1342,35 @@ public class clapController implements Serializable {
         form.setField("domicilio", selected.getCalle_direccion()+", "+selected.getComuna_residencia().getNombre()); 
         form.setField("nombre_social", selected.getNombre_social()); 
         form.setField("centro_salud", selected.getCesfam().getNombre()); 
-        form.setField("codigo", "");
+        form.setField("codigo", selected.getCesfam_clap().getId());
         
         //Formato Nuevo
         //Condicional de establecimiento educacional o de salud
-        if (true) {
-             form.setField("control_educacional", "Yes");
-        }else{
+        int control = selected.getControl_en();
+        if (control == 1) {
+            form.setField("control_educacional", "Yes");
+            form.setField("establecimiento_educacional", selected.getEstablecimiento_educacional());
+        }else if(control == 2){
             form.setField("control_salud", "Yes");
+        }else{
+            form.setField("", "Yes");            
         }
+        
         //Formato nuevo
-        form.setField("establecimiento_educacional", "");
-        form.setField("hcn", "");
+        form.setField("hcn", selected.getHcn());
        //Condicional domicilio
-        if (true) {
+        boolean domicilio = selected.isDomicilio();
+        if (domicilio == true) {
             form.setField("tel_fijo_domicilio", "Yes");
+        }else{
+            form.setField("", "Yes");            
         }
-        if (true) {
+        
+        boolean recado = selected.isRecados();
+        if (recado==true) {
             form.setField("cel_recados", "Yes");
+        }else{
+            form.setField("", "Yes");            
         }
         /////////////////////////////////////////
         
@@ -1379,11 +1390,12 @@ public class clapController implements Serializable {
         }
         //Formato Nuevo
         //Condicional de beneficiario
-        if (true) {
+        /*boolean beneficiario = true;
+        if (beneficiario==true) {
             form.setField("beneficiario_si", "Yes");
         }else{
             form.setField("beneficiario_no", "Yes");
-        }
+        }*/
         ////////////////
         form.setField("correo", selected.getCorreo());
         form.setField("id_consulta", ""+selected.getId());
@@ -2280,12 +2292,12 @@ public class clapController implements Serializable {
         }
         
         //doble proteccion 
-        /*boolean doble_proteccion= true;
+        boolean doble_proteccion= selected.isDoble_proteccion();
         if (doble_proteccion==true) {
             form.setField("doble_proteccion_si", "Yes");
         }else{
             form.setField("doble_proteccion_no", "Yes");
-        }*/
+        }
         
         //uso mac
         int uso_mac= selected.getUso_mac();
