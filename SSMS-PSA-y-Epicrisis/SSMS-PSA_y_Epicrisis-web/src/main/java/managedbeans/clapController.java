@@ -1147,6 +1147,16 @@ public class clapController implements Serializable {
     }
     
     public String create() {
+        if (parametrosCtrl.getItems().isEmpty()) {
+            JsfUtil.addErrorMessage("No existen parametros de sistema. Contacte al administrador");
+            return "/faces/paciente/View.xhtml";
+        }else{
+            parametrosCtrl.setSelected(parametrosCtrl.getItems().get(parametrosCtrl.getItems().size()-1));
+            if (parametrosCtrl.getSelected().getTamano_imagen() == 0) {
+                JsfUtil.addErrorMessage("Tamaño de Imagen máximo es 0. Contacte al administrador");
+            }       
+        }
+        
         selected = new clap();
         initializeEmbeddableKey();
         Paciente = pacienteCtrl.getSelected();
@@ -1812,8 +1822,11 @@ public class clapController implements Serializable {
         form.setField("apellidos", selected.getPrimer_apellido()+" "+selected.getSegundo_apellido()); 
         form.setField("domicilio", selected.getCalle_direccion()+", "+selected.getComuna_residencia().getNombre()); 
         form.setField("nombre_social", selected.getNombre_social()); 
-        form.setField("centro_salud", selected.getCesfam().getNombre()); 
-        form.setField("codigo", String.valueOf(selected.getCesfam_clap().getId()));
+        if (selected.getCesfam_clap()!= null) {
+            form.setField("centro_salud", selected.getCesfam().getNombre()); 
+            form.setField("codigo", String.valueOf(selected.getCesfam_clap().getId()));
+        }
+        
         
         //Formato Nuevo
         //Condicional de establecimiento educacional o de salud
@@ -1833,15 +1846,11 @@ public class clapController implements Serializable {
         boolean domicilio = selected.isDomicilio();
         if (domicilio == true) {
             form.setField("tel_fijo_domicilio", "Yes");
-        }else{
-            form.setField("", "Yes");            
         }
         
         boolean recado = selected.isRecados();
         if (recado==true) {
             form.setField("cel_recados", "Yes");
-        }else{
-            form.setField("", "Yes");            
         }
         /////////////////////////////////////////
         
@@ -2827,7 +2836,7 @@ public class clapController implements Serializable {
         if (imagen_corporal==1) {
             form.setField("imagen_corporal_conforme", "Yes");
         }else if(2==imagen_corporal){
-            form.setField("imagen_corporal_crea_preocupacione", "Yes");
+            form.setField("imagen_corporal_crea_preocupaciones", "Yes");
         }else if(3==imagen_corporal){
             form.setField("imagen_corporal_impide", "Yes");
         }else{

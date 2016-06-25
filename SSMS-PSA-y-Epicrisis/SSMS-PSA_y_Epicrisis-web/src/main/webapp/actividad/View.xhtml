@@ -16,30 +16,30 @@
                         <p:outputLabel value="Actividades realizadas:" />
                         <p:column>
                             <p:panelGrid columns="2">
-                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_actividad_fisica}" itemLabel="Consejeria en Actividad Fisica" />
-                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_alimentacion_saludable}" itemLabel="Consejería en alimentación saludable "/>
-                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_consumo_drogas}" itemLabel="Consejería en consumo de Drogas "/>
-                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_familiares}" itemLabel="Consejerias familiares "/>
-                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_motivacional}" itemLabel="Entrevista Motivacional "/>
-                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_regulacion_fecundidad}" itemLabel="Consejería en Regulación de Fecundidad "/>
-                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_salud_mental}" itemLabel="Consejería Salud Mental "/>
-                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_ssr}" itemLabel="Consejeria en Salud Sexual y Reproductiva"/>
-                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_tabaquismo}" itemLabel="Consejería en Tabaquismo "/>
-                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_vih_its}" itemLabel="Consejería en Prevención de VIH e ITS "/>
-                                <p:selectBooleanCheckbox value="#{actividadController.selected.ingreso_control_prenatal}" itemLabel="Ingreso a Control Prenatal "/>
-                                <p:selectBooleanCheckbox value="#{actividadController.selected.ingreso_programa_cardiovascular}" itemLabel="Ingreso a Programa Cardiovascular"/>
-                                <p:selectBooleanCheckbox value="#{actividadController.selected.ingreso_programa_intervencion}" itemLabel="Ingreso a Programas de Intervención "/>
-                                <p:selectBooleanCheckbox value="#{actividadController.selected.ingreso_regulacion_fecundidad}" itemLabel="Ingreso a Regulacion de Fecundidad "/>
-                                <p:selectBooleanCheckbox value="#{actividadController.selected.ingreso_salud_mental}" itemLabel="Ingreso a salud Mental"/>
-                                <p:selectBooleanCheckbox value="#{actividadController.selected.nivelacion_estudios}" itemLabel="Nivelación  de estudios "/>
-                                <p:selectBooleanCheckbox value="#{actividadController.selected.vinculacion_beneficios_sociales}" itemLabel="Vinculacion de beneficios sociales "/>
-                                <p:selectBooleanCheckbox value="#{actividadController.selected.intervencion_breve_alcohol}" itemLabel="Intervención breve en alcohol"/>
-                                <p:selectBooleanCheckbox value="#{actividadController.selected.derivacion_colegio}" itemLabel="Derivación a Establecimiento Educacional"/>
-                                <p:selectBooleanCheckbox value="#{actividadController.selected.derivacion_otra_comuna}" itemLabel="Derivación a otra comuna"/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_actividad_fisica}" itemLabel="Consejeria en Actividad Fisica" disabled="true"/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_alimentacion_saludable}" itemLabel="Consejería en alimentación saludable " disabled="true"/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_consumo_drogas}" itemLabel="Consejería en consumo de Drogas " disabled="true"/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_familiares}" itemLabel="Consejerias familiares " disabled="true"/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_motivacional}" itemLabel="Entrevista Motivacional " disabled="true"/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_regulacion_fecundidad}" itemLabel="Consejería en Regulación de Fecundidad " disabled="true"/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_salud_mental}" itemLabel="Consejería Salud Mental " disabled="true"/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_ssr}" itemLabel="Consejeria en Salud Sexual y Reproductiva" disabled="true"/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_tabaquismo}" itemLabel="Consejería en Tabaquismo " disabled="true"/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.consejeria_vih_its}" itemLabel="Consejería en Prevención de VIH e ITS " disabled="true"/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.ingreso_control_prenatal}" itemLabel="Ingreso a Control Prenatal " disabled="true"/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.ingreso_programa_cardiovascular}" itemLabel="Ingreso a Programa Cardiovascular" disabled="true"/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.ingreso_programa_intervencion}" itemLabel="Ingreso a Programas de Intervención " disabled="true"/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.ingreso_regulacion_fecundidad}" itemLabel="Ingreso a Regulacion de Fecundidad " disabled="true"/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.ingreso_salud_mental}" itemLabel="Ingreso a salud Mental" disabled="true"/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.nivelacion_estudios}" itemLabel="Nivelación  de estudios " disabled="true"/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.vinculacion_beneficios_sociales}" itemLabel="Vinculacion de beneficios sociales " disabled="true"/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.intervencion_breve_alcohol}" itemLabel="Intervención breve en alcohol" disabled="true"/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.derivacion_colegio}" itemLabel="Derivación a Establecimiento Educacional" disabled="true"/>
+                                <p:selectBooleanCheckbox value="#{actividadController.selected.derivacion_otra_comuna}" itemLabel="Derivación a otra comuna" disabled="true"/>
                             </p:panelGrid>
                         </p:column>
                         <p:outputLabel value="Observaciones:" />
-                        <b:inputText id="paciente" value="#{actividadController.selected.observaciones}" />
+                        <b:inputText id="paciente" value="#{actividadController.selected.observaciones}" disabled="true"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="actividadViewDialog.hide()"/>
                 </h:panelGroup>

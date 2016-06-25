@@ -33,6 +33,12 @@
                             </f:facet>
                             <h:outputText value="#{item.ruta}"/>
                         </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Tamaño máximo de imagen de genograma"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tamano_imagen}"/>
+                        </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{parametrosController.prepareCreate}" update=":parametrosCreateForm" oncomplete="PF('parametrosCreateDialog').show()"/>
                         </f:facet>
