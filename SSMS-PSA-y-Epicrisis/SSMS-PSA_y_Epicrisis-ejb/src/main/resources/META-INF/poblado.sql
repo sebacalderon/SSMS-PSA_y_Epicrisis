@@ -453,6 +453,7 @@ INSERT INTO ley_social(codigo_p_social, nombre_p_social)VALUES (7, 'Chile Crece 
 INSERT INTO ley_social(codigo_p_social, nombre_p_social)VALUES (8, 'Otro Programa social')
 INSERT INTO ley_social(codigo_p_social, nombre_p_social)VALUES (9, 'GES')
 INSERT INTO ley_social(codigo_p_social, nombre_p_social)VALUES (10, 'Sin programa social')
+INSERT INTO ley_social(codigo_p_social, nombre_p_social)VALUES (11, 'No Sabe/No Contesta')
 
 
 INSERT INTO prevision(codigo_prevision, nombre_prevision)VALUES (999, 'FONASA')
@@ -488,6 +489,7 @@ INSERT INTO prevision(codigo_prevision, nombre_prevision)VALUES (1001, 'Sin prev
 INSERT INTO prevision(codigo_prevision, nombre_prevision)VALUES (998, 'CAPREDENA')
 INSERT INTO prevision(codigo_prevision, nombre_prevision)VALUES (997, 'DIPRECA')
 INSERT INTO prevision(codigo_prevision, nombre_prevision)VALUES (1000, 'Otra')
+INSERT INTO prevision(codigo_prevision, nombre_prevision)VALUES (1002, 'No sabe/No contesta')
 
 
 INSERT INTO pueblo_originario(codigo_pueblo_originario, nombre_pueblo_originario)VALUES (1, 'Alacalufe o Kawashkar')

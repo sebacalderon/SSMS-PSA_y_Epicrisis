@@ -3068,4 +3068,11 @@ public class clapController implements Serializable {
         selected.setSeccion_examen_fisico(seccion);
         System.out.println("Seccion Examen Fisico: "+ selected.isSeccion_examen_fisico());
     }
+    
+    public void noTrabaja(){
+        if (!selected.isTrabaja()) {
+            selected.setRazon_de_trabajo(4);
+            selected.setLegalizado(3);
+        }
+    }
 }

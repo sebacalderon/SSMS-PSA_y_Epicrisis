@@ -122,6 +122,7 @@ public class pacienteController implements Serializable {
         initializeEmbeddableKey();
         selected.setRUN(RUN);
         selected.setDV(DV);
+        selected.setCesfam(loginCtrl.getUsuarioLogueado().getCESFAM());
         return selected;
     }
 
@@ -138,10 +139,12 @@ public class pacienteController implements Serializable {
             persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("pacienteCreated"));
             if (!JsfUtil.isValidationFailed()) {
                 items = null;    // Invalidate list of items to trigger re-query.
+                selected = getFacade().findbyRUN(selected.getRUN()).get(0);
+                clapCtrl.setSelected(null);
+                return "/faces/paciente/View.xhtml";
+            }else{
+                return "/faces/paciente/Create.xhtml";
             }
-            selected = getFacade().findbyRUN(selected.getRUN()).get(0);
-            clapCtrl.setSelected(null);
-            return "/faces/paciente/View.xhtml";
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: el RUN ingresado no es válido",  "El rut ingresado no es válido.") );
             return "/faces/paciente/Create.xhtml";

@@ -51,7 +51,7 @@
                             <p:selectOneRadio id="trabaja" style="width:13em;" value="#{clapController.selected.trabaja}" layout="grid" columns="2">
                                 <f:selectItem itemLabel="Si" itemValue="true" />
                                 <f:selectItem itemLabel="No" itemValue="false" />
-                                <p:ajax event="valueChange"  immediate="true" update="horas_trabajo razon_de_trabajo" ></p:ajax>                                                            
+                                <p:ajax event="valueChange"  immediate="true" update="horas_trabajo razon_de_trabajo trabajo_infantil trabajo_juvenil peores_formas ser_dom_no_remu_peligroso legalizado tipo_de_trabajo" listener="#{clapController.noTrabaja}"></p:ajax>                                                            
                             </p:selectOneRadio>
                         </b:row>
                         <b:row>
@@ -73,7 +73,7 @@
                         <b:row>
                             <b:column col-md="4"><p:outputLabel value="Infantil" for="trabajo_infantil" /></b:column>
                             <b:column col-md="8">
-                                <p:selectOneRadio id="trabajo_infantil" style="width:12em;" value="#{clapController.selected.trabajo_infantil}" layout="grid" columns="2">
+                                <p:selectOneRadio id="trabajo_infantil" style="width:12em;" value="#{clapController.selected.trabajo_infantil}" layout="grid" columns="2" disabled="#{!clapController.selected.trabaja}">
                                     <f:selectItem itemValue="true" />
                                     <f:selectItem itemValue="false" />
                                 </p:selectOneRadio>
@@ -82,7 +82,7 @@
                         <b:row>
                             <b:column col-md="4"><p:outputLabel value="Juvenil" for="trabajo_juvenil" /></b:column>
                             <b:column col-md="8">
-                                <p:selectOneRadio id="trabajo_juvenil" style="width:12em" value="#{clapController.selected.trabajo_juvenil}" layout="grid" columns="2">
+                                <p:selectOneRadio id="trabajo_juvenil" style="width:12em" value="#{clapController.selected.trabajo_juvenil}" layout="grid" columns="2" disabled="#{!clapController.selected.trabaja}">
                                     <f:selectItem itemValue="true" />
                                     <f:selectItem itemValue="false" />
                                 </p:selectOneRadio>
@@ -94,7 +94,7 @@
                             <p:outputLabel value="Peores formas" for="peores_formas" />
                         </b:row>
                         <b:row>
-                            <p:selectOneRadio id="peores_formas" style="width:13em;" value="#{clapController.selected.peores_formas}" layout="grid" columns="2">
+                            <p:selectOneRadio id="peores_formas" style="width:13em;" value="#{clapController.selected.peores_formas}" layout="grid" columns="2" disabled="#{!clapController.selected.trabaja}">
                                 <f:selectItem itemLabel="Si" itemValue="true" />
                                 <f:selectItem itemLabel="No" itemValue="false" />
                             </p:selectOneRadio>
@@ -105,7 +105,7 @@
                             <p:outputLabel value="Servicio doméstico no remunerado peligroso" for="ser_dom_no_remu_peligroso" />
                         </b:row>
                         <b:row>
-                            <p:selectOneRadio id="ser_dom_no_remu_peligroso" style="width:13em;" value="#{clapController.selected.ser_dom_no_remu_peligroso}" layout="grid" columns="2">
+                            <p:selectOneRadio id="ser_dom_no_remu_peligroso" style="width:13em;" value="#{clapController.selected.ser_dom_no_remu_peligroso}" layout="grid" columns="2" disabled="#{!clapController.selected.trabaja}">
                                 <f:selectItem itemLabel="Si" itemValue="true" />
                                 <f:selectItem itemLabel="No" itemValue="false" />
                             </p:selectOneRadio>
@@ -133,7 +133,7 @@
                         <p:outputLabel value="#{bundle.CreateclapLabel_legalizado}" for="legalizado" />
                         </b:row>
                         <b:row>
-                            <p:selectOneRadio id="legalizado" style="width:13em;" value="#{clapController.selected.legalizado}" layout="grid" columns="3">
+                            <p:selectOneRadio id="legalizado" style="width:13em;" value="#{clapController.selected.legalizado}" layout="grid" columns="3" disabled="#{!clapController.selected.trabaja}">
                                 <f:selectItem itemLabel="sí" itemValue="1" />
                                 <f:selectItem itemLabel="no" itemValue="2" />
                                 <f:selectItem itemLabel="n/c" itemValue="3" />
@@ -145,7 +145,7 @@
                             <p:outputLabel value="#{bundle.CreateclapLabel_tipo_de_trabajo}" for="tipo_de_trabajo" />
                         </b:row>
                         <b:row>
-                            <p:inputText id="tipo_de_trabajo" value="#{clapController.selected.tipo_de_trabajo}" title="#{bundle.CreateclapTitle_tipo_de_trabajo}">
+                            <p:inputText id="tipo_de_trabajo" value="#{clapController.selected.tipo_de_trabajo}" title="#{bundle.CreateclapTitle_tipo_de_trabajo}" disabled="#{!clapController.selected.trabaja}">
                             </p:inputText>
                         </b:row>
                     </b:column>

@@ -195,7 +195,7 @@
                                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                             </p:confirmDialog>
                             <p:commandButton id="viewRiesgosButton"   icon="ui-icon-search" value="Ver Riesgos" actionListener="#{clapController.prepareRiesgos}" action="/clap/Riesgos?faces-redirect=true" disabled="#{empty clapController.selected || clapController.esIncompleto() || clapController.esAnulado()}"/>                      
-                            <p:commandButton actionListener="#{clapController.createPDF}" icon="ui-icon-arrowthickstop-1-s" value="Crear PDF" ajax="false" update="display,:clapViewForm:datalist,:growl" disabled="#{empty clapController.selected}"/>
+                            <p:commandButton actionListener="#{clapController.createPDF}" icon="ui-icon-arrowthickstop-1-s" value="Crear PDF" ajax="false" update="display,:clapViewForm:datalist,:growl" disabled="#{empty clapController.selected || clapController.selected.id == null}"/>
                             <p:confirmDialog message="Esta de segur@ de crear una ficha CLAP ?" header="Crear Ficha CLAP" severity="alert" widgetVar="cd2">
                                 <p:commandButton value="Si" action="#{clapController.create()}" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="/clap/View"/>
                                 <p:commandButton value="No" type="button" onclick="PF('cd2').hide()" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />

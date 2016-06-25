@@ -109,20 +109,20 @@
                             <f:selectItem itemLabel="No determinado" itemValue="4" noSelectionOption="false" />                            
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_programa_social}" for="programa_social"  />
-                        <p:selectOneMenu id="programa_social" value="#{pacienteController.selected.programa_social}" >
+                        <p:selectOneMenu id="programa_social" value="#{pacienteController.selected.programa_social}" required="true">
                             <f:selectItem itemLabel="Seleccione un programa social" itemValue="" noSelectionOption="true" />
                             <f:selectItems value="#{ley_socialController.items}" var="ley_social" itemLabel="#{ley_social.nombre}" itemValue="#{ley_social}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_prevision}" for="prevision" />
                         
-                        <p:selectOneMenu id="prevision" value="#{pacienteController.selected.prevision}">
+                        <p:selectOneMenu id="prevision" value="#{pacienteController.selected.prevision}" required="true">
                             <f:selectItem itemLabel="Seleccione un opción" itemValue="" noSelectionOption="true" />
                             <f:selectItems value="#{previsionController.items}" var="prevision" itemLabel="#{prevision.nombre}" itemValue="#{prevision}"/>
                             <f:ajax event="valueChange" immediate="true" render="grupo_fonasa" ></f:ajax>
                         </p:selectOneMenu>
                         
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_grupo_fonasa}" for="grupo_fonasa" />
-                        <p:selectOneMenu id="grupo_fonasa" value="#{pacienteController.selected.grupo_fonasa}" disabled="#{!pacienteController.esFONASA()}">
+                        <p:selectOneMenu id="grupo_fonasa" value="#{pacienteController.selected.grupo_fonasa}" disabled="#{!pacienteController.esFONASA()}" required="true">
                             <f:selectItem itemLabel="Seleccione un opción" itemValue="" noSelectionOption="true" />
                             <f:selectItem itemLabel="A" itemValue="1" noSelectionOption="false" />
                             <f:selectItem itemLabel="B" itemValue="2" noSelectionOption="false" />
@@ -136,12 +136,12 @@
                         
                         
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_estado_conyugal}" for="estado_conyugal" />
-                        <p:selectOneMenu id="estado_conyugal" value="#{pacienteController.selected.estado_conyugal}" >
+                        <p:selectOneMenu id="estado_conyugal" value="#{pacienteController.selected.estado_conyugal}" required="true">
                             <f:selectItem itemLabel="Seleccione un opción" itemValue="" noSelectionOption="true" />
                             <f:selectItems value="#{estado_civilController.items}" var="estado_civil" itemLabel="#{estado_civil.nombre}" itemValue="#{estado_civil}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_pueblo_originario}" for="pueblo_originario" />
-                        <p:selectOneMenu id="pueblo_originario" value="#{pacienteController.selected.pueblo_originario}" >
+                        <p:selectOneMenu id="pueblo_originario" value="#{pacienteController.selected.pueblo_originario}" required="true">
                             <f:selectItem itemLabel="Seleccione un pueblo originario" itemValue="" noSelectionOption="true" />
                             <f:selectItems value="#{pueblo_originarioController.items}" var="pueblo_originario" itemLabel="#{pueblo_originario.nombre}" itemValue="#{pueblo_originario}"/>
                         </p:selectOneMenu>                        

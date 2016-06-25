@@ -119,7 +119,7 @@ public class paciente implements Serializable {
 //    + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
 //    + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
 //    message = "Debe ser un mail valido")
-    @Column(name="correo_paciente",unique=true)
+    @Column(name="correo_paciente")
     private String correo;
     
     @ManyToOne
