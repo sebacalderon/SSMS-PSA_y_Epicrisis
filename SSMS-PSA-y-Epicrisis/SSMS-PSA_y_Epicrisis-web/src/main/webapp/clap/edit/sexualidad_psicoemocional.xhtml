@@ -79,7 +79,7 @@
                                 <b:row>
                                     <p:outputLabel value="Edad de inicio" for="edad_inicio_conducta_sexual" />
                                     <pe:inputNumber id="edad_inicio_conducta_sexual" minValue="0" maxValue="70" styleClass="campo-numerico" value="#{clapController.selected.edad_inicio_conducta_sexual}" title="#{bundle.CreateclapTitle_edad_inicio_conducta_sexual}" disabled="#{clapController.selected.conducta_sexual == 1}">
-                                    <p:ajax event="blur"  immediate="true" update="relaciones_sexuales pareja_sexual dificultades_sexuales anticoncepcion doble_proteccion especificacion_uso_mac uso_mac razon_no_uso_mac consejeria_uso_mac aco_emergencia abuso_sexual reparacion_abuso_sexual" ></p:ajax>
+                                    <p:ajax event="blur"  immediate="true" update="relaciones_sexuales pareja_sexual dificultades_sexuales anticoncepcion doble_proteccion especificacion_uso_mac uso_mac razon_no_uso_mac consejeria_uso_mac aco_emergencia abuso_sexual" ></p:ajax>
                                     </pe:inputNumber> años
                                 </b:row>
                             </b:column>
@@ -180,7 +180,7 @@
                                     <p:outputLabel value="#{bundle.CreateclapLabel_consejeria_uso_mac}" for="consejeria_uso_mac" />
                                 </b:row>
                                 <b:row>
-                                    <p:selectOneRadio id="consejeria_uso_mac" style="width:15em;" value="#{clapController.selected.consejeria_uso_mac}" layout="grid" columns="3" disabled="#{clapController.selected.conducta_sexual == 1}">
+                                    <p:selectOneRadio id="consejeria_uso_mac" style="width:15em;" value="#{clapController.selected.consejeria_uso_mac}" layout="grid" columns="3" disabled="#{clapController.selected.edad_inicio_conducta_sexual == 0 }">
                                         <f:selectItem itemLabel="si" itemValue="true" />
                                         <f:selectItem itemLabel="no" itemValue="false" />
                                     </p:selectOneRadio>
@@ -194,7 +194,7 @@
                                     <p:outputLabel value="ACO de emergencia" for="aco_emergencia" />
                                 </b:row>
                                 <b:row>
-                                    <p:selectOneRadio id="aco_emergencia" style="width:15em;" value="#{clapController.selected.aco_emergencia}" layout="grid" columns="3" disabled="#{clapController.selected.conducta_sexual == 1}">
+                                    <p:selectOneRadio id="aco_emergencia" style="width:15em;" value="#{clapController.selected.aco_emergencia}" layout="grid" columns="3" disabled="#{clapController.selected.edad_inicio_conducta_sexual == 0}">
                                         <f:selectItem itemLabel="si" itemValue="true" />
                                         <f:selectItem itemLabel="no" itemValue="false" />
                                     </p:selectOneRadio>
@@ -217,7 +217,7 @@
                                     <p:outputLabel value="Reparación" for="reparacion_abuso_sexual" />
                                 </b:row>
                                 <b:row>
-                                    <p:selectOneRadio id="reparacion_abuso_sexual" style="width:15em;" value="#{clapController.selected.reparacion_abuso_sexual}" layout="grid" columns="3" disabled="#{clapController.selected.conducta_sexual == 1 || !clapController.selected.abuso_sexual}">
+                                    <p:selectOneRadio id="reparacion_abuso_sexual" style="width:15em;" value="#{clapController.selected.reparacion_abuso_sexual}" layout="grid" columns="3" disabled="#{!clapController.selected.abuso_sexual}">
                                         <f:selectItem itemLabel="si" itemValue="true" />
                                         <f:selectItem itemLabel="no" itemValue="false" />
                                     </p:selectOneRadio>
