@@ -1342,7 +1342,7 @@ public class clapController implements Serializable {
         form.setField("domicilio", selected.getCalle_direccion()+", "+selected.getComuna_residencia().getNombre()); 
         form.setField("nombre_social", selected.getNombre_social()); 
         form.setField("centro_salud", selected.getCesfam().getNombre()); 
-        form.setField("codigo", selected.getCesfam_clap().getId());
+        form.setField("codigo", String.valueOf(selected.getCesfam_clap().getId()));
         
         //Formato Nuevo
         //Condicional de establecimiento educacional o de salud
@@ -1357,7 +1357,7 @@ public class clapController implements Serializable {
         }
         
         //Formato nuevo
-        form.setField("hcn", selected.getHcn());
+        form.setField("hcn", Integer.toString(selected.getHcn()));
        //Condicional domicilio
         boolean domicilio = selected.isDomicilio();
         if (domicilio == true) {
