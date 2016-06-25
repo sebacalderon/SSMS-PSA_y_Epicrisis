@@ -32,9 +32,12 @@ public interface clapFacadeLocal {
     
     List<clap> findbyPaciente(int RUN);
     
+    List<clap> findbyEducacional(int control);
+    
     List<clap> findbyPacienteEstado(int RUN, String estado);
     
     List<clap> findbyEstadoFecha(String estado, Date fecha);
+    List<clap> findbyEstadoFecha2(String estado, Date fecha);
     
     int count();
 

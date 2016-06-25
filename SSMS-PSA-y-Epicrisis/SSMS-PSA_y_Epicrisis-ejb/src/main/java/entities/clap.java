@@ -31,12 +31,14 @@ import javax.validation.constraints.Pattern;
 @NamedQueries({
     @NamedQuery(name="clap.findbyPaciente",query="SELECT p FROM clap p WHERE p.RUN=:RUN"),
     @NamedQuery(name="clap.findbyEstadoFecha",query="SELECT p FROM clap p WHERE p.estado=:estado AND p.fecha_consulta >= :fecha"),
+    @NamedQuery(name="clap.findbyEstadoFecha2",query="SELECT p FROM clap p WHERE p.estado=:estado AND p.fecha_consulta < :fecha"),
     @NamedQuery(name="clap.findbyEstadoCesfamFecha",query="SELECT p FROM clap p WHERE p.estado=:estado AND p.cesfam=:cesfam AND p.fecha_consulta >= :fecha"),
     @NamedQuery(name="clap.findbyPacienteEstado",query="SELECT p FROM clap p WHERE p.estado=:estado AND p.RUN=:RUN"),
     @NamedQuery(name="clap.findbyEstadoEntreFechas",query="SELECT p FROM clap p WHERE p.estado=:estado AND p.fecha_estado BETWEEN :fecha1 AND :fecha2"),
     @NamedQuery(name="clap.findbyEstadoEntreFechasCesfam",query="SELECT p FROM clap p WHERE p.estado=:estado AND p.cesfam_clap=:cesfam AND p.fecha_estado BETWEEN :fecha1 AND :fecha2"),
     @NamedQuery(name="clap.findbyEstado",query="SELECT p FROM clap p WHERE p.estado=:estado"),
-    @NamedQuery(name="clap.findbyEstadoCesfam",query="SELECT p FROM clap p WHERE p.estado=:estado AND p.cesfam_clap=:cesfam")
+    @NamedQuery(name="clap.findbyEstadoCesfam",query="SELECT p FROM clap p WHERE p.estado=:estado AND p.cesfam_clap=:cesfam"),
+    @NamedQuery(name="clap.findbyEducacional",query="SELECT p FROM clap p WHERE p.control_en=:control")
 })
 public class clap implements Serializable {
 
@@ -65,7 +67,6 @@ public class clap implements Serializable {
     @Column(name="segundo_apellido_clap",length=30)
     private String segundo_apellido;
     
-    @NotNull(message="Debe ingresar un nombre social o apodo")
     @Column(name="nombre_social_clap")
     private String nombre_social;
     
@@ -82,13 +83,6 @@ public class clap implements Serializable {
     @NotNull(message="Debe ingresar una calle o avenida o pasaje de residencia")
     @Column(name="calle_direccion_clap",length = 50)
     private String calle_direccion;
-    
-    @NotNull(message="Debe ingresar el numero de dirección de residencia")
-    @Column(name="numero_direccion_clap",length = 8)
-    private String numero_direccion;
-    
-    @Column(name="resto_direccion_clap",length = 50)
-    private String resto_direccion;
     
     @Temporal(TemporalType.DATE)
     @NotNull(message="Debe ingresar una fecha de nacimiento")
@@ -133,11 +127,10 @@ public class clap implements Serializable {
     @JoinColumn(name="programa_social_clap")
     private ley_social programa_social;
     
-    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
-            + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
-            + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
-            message = "Debe ser un mail valido")
-    @NotNull(message="Debe ingresar un correo de contacto")
+//    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
+//            + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
+//            + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+//            message = "Debe ser un mail valido")
     @Column(name="correo_clap")
     private String correo;
     
@@ -2451,22 +2444,6 @@ public class clap implements Serializable {
         this.calle_direccion = calle_direccion;
     }
 
-    public String getNumero_direccion() {
-        return numero_direccion;
-    }
-
-    public void setNumero_direccion(String numero_direccion) {
-        this.numero_direccion = numero_direccion;
-    }
-
-    public String getResto_direccion() {
-        return resto_direccion;
-    }
-
-    public void setResto_direccion(String resto_direccion) {
-        this.resto_direccion = resto_direccion;
-    }
-
     public String getTelefono_fijo() {
         return telefono_fijo;
     }
@@ -2601,18 +2578,6 @@ public class clap implements Serializable {
         clap=clap.concat(region_residencia.getNombre()+";");
         clap=clap.concat(comuna_residencia.getNombre()+";");
         clap=clap.concat(calle_direccion+";");
-        
-        if(numero_direccion!=null){
-            clap=clap.concat(numero_direccion+";");
-        }else{
-            clap=clap.concat(";");
-        }
-        
-        if(resto_direccion!=null){
-            clap=clap.concat(resto_direccion+";");
-        }else{
-            clap=clap.concat(";");
-        }
         
         clap=clap.concat(fecha_nacimiento.toString()+";");
         if(sexo==1){

@@ -74,6 +74,7 @@ public class clapController implements Serializable {
     private boolean isAudit = false;
     private boolean isCrafft = false;
     private int puntajeACrafft;
+    private int control_en;
     private UploadedFile imagen = null;
     private StreamedContent chart;
     boolean vive_solo=false;
@@ -130,6 +131,14 @@ public class clapController implements Serializable {
         return estado;
     }
 
+    public int getControl_en() {
+        return control_en;
+    }
+
+    public void setControl_en(int control_en) {
+        this.control_en = control_en;
+    }
+    
     public void setEstado(String estado) {
         this.estado = estado;
     }
@@ -205,8 +214,19 @@ public class clapController implements Serializable {
         c.setTime(fecha);
         c.add(Calendar.DATE, -60);
         fecha = c.getTime();
-        
+        List<clap> itemsAnular = getFacade().findbyEstadoFecha2("Incompleto", fecha);
+        if (!itemsAnular.isEmpty()) {
+            for (clap clap : itemsAnular) {
+                clap.setEstado("Anulado");
+                clap.setFecha_estado(new java.util.Date());
+                selected = clap;
+                getFacade().edit(selected);
+                //persist(PersistAction.UPDATE,"");                        
+            }
+            selected = null;
+        }
         if (loginCtrl.esSuperUsuario()) {
+            
             // 1 = Incompleto
             if (num == 1) {
                itemsNoTerminados = getFacade().findbyEstadoFecha("Incompleto", fecha);
@@ -368,41 +388,45 @@ public class clapController implements Serializable {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String sFecha1;
         String sFecha2;
-
-        switch (cond) {
-            case 0:
-                items=getItems();
-                title = "sabana_de_datos.csv";
-                break;
-            case 1:
-                if (estado.equals("Vencido")) {
-                    List<clap> aux = getFacade().findbyEstado("Vigente");
-                    Date fecha = new java.util.Date();
-                    Calendar c = Calendar.getInstance();
-                    c.setTime(fecha);
-                    c.add(Calendar.DATE, -365);
-                    fecha = c.getTime();
-                    for (clap clap : aux) {
-                        if (clap.getFecha_estado().before(fecha)) {
-                            clap.setEstado("Vencido");
-                            clap.setFecha_estado(new java.util.Date());
-                            selected = clap;
-                            getFacade().edit(selected);
-                            //persist(PersistAction.UPDATE,"");
+        if (control_en == 1 && cond == 1) {
+            title = "CLAPS Establecimientos Educacionales.csv";
+            items = getFacade().findbyEducacional(1);
+        }else{
+            switch (cond) {
+                case 0:
+                    items=getItems();
+                    title = "sabana_de_datos.csv";
+                    break;
+                case 1:
+                    if (estado.equals("Vencido")) {
+                        List<clap> aux = getFacade().findbyEstado("Vigente");
+                        Date fecha = new java.util.Date();
+                        Calendar c = Calendar.getInstance();
+                        c.setTime(fecha);
+                        c.add(Calendar.DATE, -365);
+                        fecha = c.getTime();
+                        for (clap clap : aux) {
+                            if (clap.getFecha_estado().before(fecha)) {
+                                clap.setEstado("Vencido");
+                                clap.setFecha_estado(new java.util.Date());
+                                selected = clap;
+                                getFacade().edit(selected);
+                                //persist(PersistAction.UPDATE,"");
+                            }
                         }
                     }
-                }
-                items = getFacade().findbyEstadoEntreFechas(fecha1, fecha2, estado);
-                sFecha1 = simpleDateFormat.format(fecha1);
-                sFecha2 = simpleDateFormat.format(fecha2);
-                title = estado+" "+sFecha1+"-"+sFecha2+".csv";
-                break;
-            default:
-                items = itemsReporteClaps;
-                sFecha1 = simpleDateFormat.format(fecha1);
-                sFecha2 = simpleDateFormat.format(fecha2);
-                title = estado+" "+sFecha1+"-"+sFecha2+" "+cesfam.getNombre()+".csv";
-                break;
+                    items = getFacade().findbyEstadoEntreFechas(fecha1, fecha2, estado);
+                    sFecha1 = simpleDateFormat.format(fecha1);
+                    sFecha2 = simpleDateFormat.format(fecha2);
+                    title = estado+" "+sFecha1+"-"+sFecha2+".csv";
+                    break;
+                default:
+                    items = itemsReporteClaps;
+                    sFecha1 = simpleDateFormat.format(fecha1);
+                    sFecha2 = simpleDateFormat.format(fecha2);
+                    title = estado+" "+sFecha1+"-"+sFecha2+" "+cesfam.getNombre()+".csv";
+                    break;
+            }
         }
         if (items.size()==0) {
             JsfUtil.addErrorMessage("No se encontraron datos para generar el archivo");
@@ -433,8 +457,6 @@ public class clapController implements Serializable {
                 output.write("Region de residencia;".getBytes());
                 output.write("Comuna de residencia;".getBytes());
                 output.write("Calle direccion;".getBytes());
-                output.write("Numero direccion;".getBytes());
-                output.write("Resto direccion;".getBytes());
                 output.write("Fecha de nacimiento;".getBytes());
                 output.write("Sexo;".getBytes());
                 output.write("Nacionalidad;".getBytes());
@@ -659,7 +681,7 @@ public class clapController implements Serializable {
         Paciente = pacienteCtrl.getSelected();
         selected.setAudit(null);
         selected.setCrafft(null);
-        selected.setPaciente(Paciente);
+        selected.setPaciente(pacienteCtrl.getSelected());
         selected.setRUN(Paciente.getRUN());
         selected.setDV(Paciente.getDV());
         selected.setNombres(Paciente.getNombres());
@@ -671,16 +693,20 @@ public class clapController implements Serializable {
         selected.setRegion_residencia(Paciente.getRegion_residencia());
         selected.setComuna_residencia(Paciente.getComuna_residencia());
         selected.setCalle_direccion(Paciente.getCalle_direccion());
-        selected.setNumero_direccion(Paciente.getNumero_direccion());
-        selected.setResto_direccion(Paciente.getResto_direccion());
         selected.setFecha_nacimiento(Paciente.getFecha_nacimiento());
-        selected.setCesfam(Paciente.getCesfam());
+        if (Paciente.getCesfam()!=null) {
+            selected.setCesfam(Paciente.getCesfam());        
+        }
         selected.setSexo(Paciente.getSexo());
         selected.setNacionalidad(Paciente.getNacionalidad());
         selected.setCorreo(Paciente.getCorreo());
         selected.setPrograma_social(Paciente.getPrograma_social());
-        selected.setPrevision(Paciente.getPrevision());
-        selected.setGrupo_fonasa(Paciente.getGrupo_fonasa());
+        if (Paciente.getPrevision()!=null) {
+            selected.setPrevision(Paciente.getPrevision());
+            if (Paciente.getPrevision().getNombre().equals("FONASA") ) {
+                selected.setGrupo_fonasa(Paciente.getGrupo_fonasa());
+            }
+        }
         selected.setEstado_conyugal(Paciente.getEstado_conyugal());
         selected.setPueblo_originario(Paciente.getPueblo_originario());
         selected.setFecha_consulta(new java.util.Date());
@@ -701,9 +727,7 @@ public class clapController implements Serializable {
         selected.setRiesgo_ssr(false);
         setImagen(null);
         //Guarda localmente el clap selected
-        clap nuevoClap = getSelected();
 
-        setSelected(nuevoClap);
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("clapCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -900,14 +924,12 @@ public class clapController implements Serializable {
         pacienteCtrl.getSelected().setNacionalidad(selected.getNacionalidad());
         pacienteCtrl.getSelected().setNombre_social(selected.getNombre_social());
         pacienteCtrl.getSelected().setNombres(selected.getNombres());
-        pacienteCtrl.getSelected().setNumero_direccion(selected.getNumero_direccion());
         pacienteCtrl.getSelected().setPrevision(selected.getPrevision());
         pacienteCtrl.getSelected().setPrimer_apellido(selected.getPrimer_apellido());
         pacienteCtrl.getSelected().setPrograma_social(selected.getPrograma_social());
         pacienteCtrl.getSelected().setPueblo_originario(selected.getPueblo_originario());
         pacienteCtrl.getSelected().setRecados(selected.isRecados());
         pacienteCtrl.getSelected().setRegion_residencia(selected.getRegion_residencia());
-        pacienteCtrl.getSelected().setResto_direccion(selected.getResto_direccion());
         pacienteCtrl.getSelected().setSegundo_apellido(selected.getSegundo_apellido());
         pacienteCtrl.getSelected().setSexo(selected.getSexo());
         pacienteCtrl.getSelected().setTelefono_fijo(selected.getTelefono_fijo());
@@ -1218,8 +1240,6 @@ public class clapController implements Serializable {
         selected.setRegion_residencia(Paciente.getRegion_residencia());
         selected.setComuna_residencia(Paciente.getComuna_residencia());
         selected.setCalle_direccion(Paciente.getCalle_direccion());
-        selected.setNumero_direccion(Paciente.getNumero_direccion());
-        selected.setResto_direccion(Paciente.getResto_direccion());
         selected.setFecha_nacimiento(Paciente.getFecha_nacimiento());
         selected.setCesfam(Paciente.getCesfam());
         selected.setSexo(Paciente.getSexo());
@@ -1396,7 +1416,7 @@ public class clapController implements Serializable {
         //////////////////////
         form.setField("nombres", selected.getNombres());
         form.setField("apellidos", selected.getPrimer_apellido()+" "+selected.getSegundo_apellido()); 
-        form.setField("domicilio", selected.getCalle_direccion()+" "+selected.getNumero_direccion()+", "+selected.getComuna_residencia().getNombre()); 
+        form.setField("domicilio", selected.getCalle_direccion()+", "+selected.getComuna_residencia().getNombre()); 
         form.setField("nombre_social", selected.getNombre_social()); 
         form.setField("centro_salud", selected.getCesfam().getNombre()); 
         form.setField("codigo", "");

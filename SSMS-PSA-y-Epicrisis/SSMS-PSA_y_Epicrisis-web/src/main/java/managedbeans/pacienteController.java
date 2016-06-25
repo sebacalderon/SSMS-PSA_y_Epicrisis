@@ -126,7 +126,6 @@ public class pacienteController implements Serializable {
     }
 
     public String create() {
-        Object value = null;
         FacesContext context;
         context = FacesContext.getCurrentInstance();
         FacesMessage message = null; 

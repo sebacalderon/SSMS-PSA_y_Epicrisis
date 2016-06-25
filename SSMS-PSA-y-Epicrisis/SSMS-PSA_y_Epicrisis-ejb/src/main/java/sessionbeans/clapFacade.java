@@ -50,6 +50,14 @@ public class clapFacade extends AbstractFacade<clap> implements clapFacadeLocal 
     }
     
     @Override
+    public List<clap> findbyEstadoFecha2(String estado, Date fecha) {
+        Query query;
+        query = em.createNamedQuery("clap.findbyEstadoFecha2").
+                setParameter("estado", estado).setParameter("fecha", fecha);
+        return query.getResultList();
+    }
+    
+    @Override
     public List<clap> findbyEstadoCesfamFecha(String estado, cesfam cesfam, Date fecha){
         Query query;
         query = em.createNamedQuery("clap.findbyEstadoCesfamFecha").
@@ -92,6 +100,14 @@ public class clapFacade extends AbstractFacade<clap> implements clapFacadeLocal 
         Query query;
         query = em.createNamedQuery("clap.findbyEstadoCesfam").
                 setParameter("estado", estado).setParameter("cesfam", cesfam);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<clap> findbyEducacional(int control) {
+        Query query;
+        query = em.createNamedQuery("clap.findbyEducacional").
+                setParameter("control",control);
         return query.getResultList();
     }
 }
