@@ -3526,7 +3526,7 @@ public class clapController implements Serializable {
             selected.setRiesgo_nutricional(true);
             imcmayor24=true;
         }
-        if(selected.isCardio_pulmonar()){
+        if(selected.isCardio_pulmonar()==false){
             selected.setRiesgo_cardiovascular(true);
             cardiopulmonar=true;
         }
@@ -3563,7 +3563,7 @@ public class clapController implements Serializable {
             selected.setRiesgo_ssr(true);
             edadiniciosexualmenor14=true;
         }
-        if(selected.getDificultades_sexuales()==2&&selected.getEdad_inicio_conducta_sexual()!=0){
+        if(selected.getDificultades_sexuales()==1&&selected.getEdad_inicio_conducta_sexual()!=0){
             selected.setRiesgo_ssr(true);
             dificultadessexuales=true;
         }
