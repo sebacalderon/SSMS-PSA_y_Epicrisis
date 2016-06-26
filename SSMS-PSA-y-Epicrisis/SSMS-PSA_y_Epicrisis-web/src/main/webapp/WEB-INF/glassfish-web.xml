@@ -18,4 +18,5 @@ and open the template in the editor.
         <role-name>Encargado-Programa</role-name>
         <group-name>3</group-name>
     </security-role-mapping>
+    <parameter-encoding default-charset="UTF-8" />
 </glassfish-web-app>
