@@ -1352,7 +1352,7 @@ public class clapController implements Serializable {
         if(selected.getEstado().equals("Nuevo")){
             List<clap> claps = getItemsPorPaciente(pacienteCtrl.getSelected().getRUN());
             if(claps.size()>1){
-                System.out.println("Existe mas de 1 clap");
+                //System.out.println("Existe mas de 1 clap");
                 for(int i=0;i<claps.size();i++){
                     if(claps.get(i).getEstado().equals("Vigente")){
                         setSelected(claps.get(i));
@@ -1370,7 +1370,7 @@ public class clapController implements Serializable {
                 }
             }
             else{
-                System.out.println("Primer clap ingresado");
+                //System.out.println("Primer clap ingresado");
                 selected.setEstado("Vigente");
                 selected.setFecha_estado(new java.util.Date());
                 getFacade().edit(selected);
@@ -1409,7 +1409,7 @@ public class clapController implements Serializable {
             String extension = FilenameUtils.getExtension(imagen.getFileName());
             Path file = Files.createTempFile(folder, filename + "-", "." + extension);
             
-            System.out.println(file.getFileName());
+            //System.out.println(file.getFileName());
 
             try (InputStream input = imagen.getInputstream()) {
                 Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
@@ -1859,7 +1859,7 @@ public class clapController implements Serializable {
         String pattern = "dd-MM-yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String date = simpleDateFormat.format(selected.getFecha_nacimiento());
-        System.out.println(date);
+        //System.out.println(date);
         form.setField("fecha_nacimiento", date);
         form.setField("run", selected.getRUN()+"-"+selected.getDV());
         //Condicional de sexo
@@ -3204,7 +3204,7 @@ public class clapController implements Serializable {
  
     public void edadClap(){
         int edad = calculoEdad(selected.getFecha_nacimiento());
-        System.out.println(edad);
+        //System.out.println(edad);
         selected.setEdad(edad);
     }
     
@@ -3233,7 +3233,7 @@ public class clapController implements Serializable {
         c.setTime(fecha);
         c.add(Calendar.DATE, -300);
         fecha = c.getTime();
-        System.out.println(fecha);
+        //System.out.println(fecha);
         if (!getFacade().findbyPacienteEstado(pacienteCtrl.getSelected().getRUN(), "Vigente").isEmpty()) {
             clap clap = getFacade().findbyPacienteEstado(pacienteCtrl.getSelected().getRUN(), "Vigente").get(0);
             if (clap.getFecha_consulta().after(fecha)) {
@@ -3317,7 +3317,7 @@ public class clapController implements Serializable {
         if (selected.getAcompanante()==null) {
             seccion = false;
         }
-        System.out.println("Seccion antecedentes generales: "+ seccion);
+        //System.out.println("Seccion antecedentes generales: "+ seccion);
         selected.setSeccion_datosgenerales(seccion);
         seccion = false;
         
@@ -3335,7 +3335,7 @@ public class clapController implements Serializable {
             selected.getOtros()!=0){
             seccion = true;
         }
-        System.out.println("Seccion antecedentes personales: "+ seccion);
+        //System.out.println("Seccion antecedentes personales: "+ seccion);
         selected.setSeccion_antecedentes_personales(seccion);
         seccion = false;
         //Seccion Antecedentes Familiares
@@ -3350,7 +3350,7 @@ public class clapController implements Serializable {
             seccion = true;
         }
         selected.setSeccion_antecedentes_familiares(seccion);
-        System.out.println("Seccion Antecedentes Familiares: "+selected.isSeccion_antecedentes_familiares());
+        //System.out.println("Seccion Antecedentes Familiares: "+selected.isSeccion_antecedentes_familiares());
         
         seccion = true;
         //Seccion Familia
@@ -3366,7 +3366,7 @@ public class clapController implements Serializable {
             seccion = false;
         }
         selected.setSeccion_familia(seccion);
-        System.out.println("Seccion familia: "+ selected.isSeccion_familia());
+        //System.out.println("Seccion familia: "+ selected.isSeccion_familia());
         //Seccion Vivienda
         selected.setSeccion_vivienda(true);
         seccion = true;
@@ -3382,7 +3382,7 @@ public class clapController implements Serializable {
             }
         }
         selected.setSeccion_educacion(seccion);
-        System.out.println("Seccion Educacion: "+ selected.isSeccion_educacion());
+        //System.out.println("Seccion Educacion: "+ selected.isSeccion_educacion());
         
         //Seccion Trabajo
         seccion = true;
@@ -3395,7 +3395,7 @@ public class clapController implements Serializable {
             seccion = false;
         }
         selected.setSeccion_trabajo(seccion);
-        System.out.println("Seccion Trabajo: "+ selected.isSeccion_trabajo());
+        //System.out.println("Seccion Trabajo: "+ selected.isSeccion_trabajo());
         seccion = true;
         //Seccion Vida Social
         if (selected.getAceptacion()==0) {
@@ -3407,7 +3407,7 @@ public class clapController implements Serializable {
             }
         }
         selected.setSeccion_vida_social(seccion);
-        System.out.println("Seccion Vida Social: "+ selected.isSeccion_vida_social());
+        //System.out.println("Seccion Vida Social: "+ selected.isSeccion_vida_social());
         seccion = true;
         //Seccion Habitos/consumo
         if (selected.isConsumo_otra_sustancia()) {
@@ -3429,7 +3429,7 @@ public class clapController implements Serializable {
             }
         }
         selected.setSeccion_habitos(seccion);
-        System.out.println("Seccion Habitos: "+ selected.isSeccion_habitos());
+        //System.out.println("Seccion Habitos: "+ selected.isSeccion_habitos());
         seccion = true;
         
         //Seccion Gineco
@@ -3449,12 +3449,12 @@ public class clapController implements Serializable {
         }
         
         selected.setSeccion_gineco(seccion);
-        System.out.println("Seccion Gineco: "+ selected.isSeccion_gineco());
+        //System.out.println("Seccion Gineco: "+ selected.isSeccion_gineco());
         seccion = true;
         //Seccion Sexualidad
-        System.out.println("Orientacion Sexual: "+ selected.getOrientacion_sexual());
+        //System.out.println("Orientacion Sexual: "+ selected.getOrientacion_sexual());
         if (selected.getOrientacion_sexual()==0) {
-            System.out.println(selected.getEspecificacion_orientacion_sexual());
+            //System.out.println(selected.getEspecificacion_orientacion_sexual());
             if (selected.getEspecificacion_orientacion_sexual()== null) {
                 seccion = false;
             }
@@ -3470,7 +3470,7 @@ public class clapController implements Serializable {
             
         }
         selected.setSeccion_sexualidad(seccion);
-        System.out.println("Seccion Sexualidad: "+ selected.isSeccion_sexualidad());
+        //System.out.println("Seccion Sexualidad: "+ selected.isSeccion_sexualidad());
         seccion = true;
         
         //Seccion Psicoemocional
@@ -3484,7 +3484,7 @@ public class clapController implements Serializable {
             }
         }
         selected.setSeccion_psicoemocional(seccion);
-        System.out.println("Seccion Psicoemocional: "+ selected.isSeccion_psicoemocional());
+        //System.out.println("Seccion Psicoemocional: "+ selected.isSeccion_psicoemocional());
         seccion = true;
         
         if (selected.getPeso() == 0 || selected.getTalla() == 0 || selected.getPerimetro_abdominal() == 0 || selected.getPresion_arterial_diastolica() == 0 || selected.getPresion_arterial_sistolica() == 0) {
@@ -3492,7 +3492,7 @@ public class clapController implements Serializable {
         }
         
         selected.setSeccion_examen_fisico(seccion);
-        System.out.println("Seccion Examen Fisico: "+ selected.isSeccion_examen_fisico());
+        //System.out.println("Seccion Examen Fisico: "+ selected.isSeccion_examen_fisico());
     }
     
     public void noTrabaja(){

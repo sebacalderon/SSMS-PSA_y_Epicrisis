@@ -195,19 +195,19 @@ public class auditController implements Serializable {
     public int tipoIntervencion(){
         int puntaje = calculaPuntaje();
         if (puntaje <= 7) {
-            System.out.println("Intervencion Minima");
+            //System.out.println("Intervencion Minima");
             return 0;
         }else if (puntaje >= 8 && puntaje <= 15){
-            System.out.println("Intervencion Breve");
+            //System.out.println("Intervencion Breve");
             return 1;
         }else{
-            System.out.println("Derivacion Asistida");
+            //System.out.println("Derivacion Asistida");
             return 2;
         }
     }
 
     private int calculaPuntaje() {
-        System.out.println(selected.getP1()+selected.getP2()+selected.getP3()+selected.getP4()+selected.getP5()+selected.getP6()+selected.getP7()+selected.getP8()+selected.getP9()+selected.getP10());
+        //System.out.println(selected.getP1()+selected.getP2()+selected.getP3()+selected.getP4()+selected.getP5()+selected.getP6()+selected.getP7()+selected.getP8()+selected.getP9()+selected.getP10());
         return selected.getP1()+selected.getP2()+selected.getP3()+selected.getP4()+selected.getP5()+selected.getP6()+selected.getP7()+selected.getP8()+selected.getP9()+selected.getP10();
     }
 }
