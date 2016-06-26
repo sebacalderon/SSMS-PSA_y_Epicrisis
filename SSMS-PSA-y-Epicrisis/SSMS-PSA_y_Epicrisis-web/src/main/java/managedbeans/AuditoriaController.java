@@ -1,11 +1,14 @@
 package managedbeans;
 
 import entities.Auditoria;
+import entities.Usuario;
 import managedbeans.util.JsfUtil;
 import managedbeans.util.JsfUtil.PersistAction;
 import sessionbeans.AuditoriaFacadeLocal;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -33,9 +36,6 @@ public class AuditoriaController implements Serializable {
     public AuditoriaController() {
     }
 
-    public void ObtenerCorreo(){
-        selected.setCorreo(loginCtrl.getUsuarioLogueado().getCorreo());
-    }
     
     public LoginController getLoginCtrl() {
         return loginCtrl;
@@ -123,6 +123,26 @@ public class AuditoriaController implements Serializable {
         }
     }
 
+    public void auditUsuario(Usuario antiguo, Usuario nuevo, String operacion) {
+        selected=new Auditoria();
+        String string_antiguo,string_nuevo;
+        if(operacion.equals("UPDATE")){
+            string_antiguo = " ( ID: "+antiguo.getId()+" , Nombres: " + antiguo.getNombres() +" , Primer apellido: " + antiguo.getPrimer_apellido()+" , Segundo apellido: " + antiguo.getSegundo_apellido()+ " , Correo: " + antiguo.getCorreo()+" , RUT: " + antiguo.getRUT()+" , Cesfam: " + antiguo.getCESFAM()+ " , Contraseña: " + antiguo.getPassword()+ " , Rol: " + antiguo.getRol()+", Habilitado: "+antiguo.isHabilitado()+ " , Login uno: " + antiguo.isLogin_uno()+" )";
+//            System.out.println(string_antiguo);
+            selected.setAntiguoValor(string_antiguo);
+        }
+        string_nuevo = " ( ID: "+nuevo.getId()+" , Nombres: " + nuevo.getNombres() +" , Primer apellido: " + nuevo.getPrimer_apellido()+" , Segundo apellido: " + nuevo.getSegundo_apellido()+ " , Correo: " + nuevo.getCorreo()+" , RUT: " + nuevo.getRUT()+" , Cesfam: " + nuevo.getCESFAM()+ " , Contraseña: " + nuevo.getPassword()+ " , Rol: " + nuevo.getRol()+", Habilitado: "+nuevo.isHabilitado()+ " , Login uno: " + nuevo.isLogin_uno()+" )";
+        selected.setNuevoValor(string_nuevo);
+        selected.setOperacion(operacion);
+        selected.setTabla("Usuario");
+        selected.setRut_usuario(loginCtrl.getUsuarioLogueado().getRUT());
+        Date date = new Date();
+        long time = date.getTime();
+        Timestamp ts = new Timestamp(time);
+        selected.setFecha(ts);
+        getFacade().create(selected);
+    }
+    
     public Auditoria getAuditoria(java.lang.Long id) {
         return getFacade().find(id);
     }

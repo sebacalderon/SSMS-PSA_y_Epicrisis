@@ -50,10 +50,10 @@
         </p:graphicImage>
         <b:navBar brand="SSMS P.S.I.A." brandAlign="left">
             <b:navbarLinks rendered="#{not loginController.verifyLogin()}">
-                <b:navLink value="#{bundle.Home}" outcome="/index" icon="glyphicon glyphicon-home"/>
+                <b:navLink value="Página de inicio" outcome="/index" icon="glyphicon glyphicon-home"/>
             </b:navbarLinks>
             <b:navbarLinks rendered="#{loginController.verifyLogin()}">
-                <b:navLink  value="#{bundle.Home}" outcome="/home" icon="glyphicon glyphicon-home"/>
+                <b:navLink  value="Página Principal" outcome="/home" icon="glyphicon glyphicon-home"/>
                 <b:dropMenu value="Usuarios">
                     <b:navLink value="Búsqueda por RUN" outcome="/paciente/Buscar.xhtml" />
                 </b:dropMenu>

@@ -70,7 +70,7 @@
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{usuarioController.prepareCreate}" update=":UsuarioCreateForm" oncomplete="PF('UsuarioCreateDialog').show()"/>
                             <p:commandButton id="viewButton"  rendered="false" icon="ui-icon-search" value="#{bundle.View}" update=":UsuarioViewForm" oncomplete="PF('UsuarioViewDialog').show()" disabled="#{empty usuarioController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":UsuarioEditForm" oncomplete="PF('UsuarioEditDialog').show()" disabled="#{empty usuarioController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{usuarioController.prepareUpdate()}" update=":UsuarioEditForm" oncomplete="PF('UsuarioEditDialog').show()" disabled="#{empty usuarioController.selected}"/>
                             <p:commandButton id="desactivateButton" icon="ui-icon-cancel"  value="#{bundle.Delete}" actionListener="#{usuarioController.desactivar}" update=":growl,datalist"  disabled="#{not usuarioController.selected.isHabilitado() or usuarioController.selected.correo.equals(loginController.getUsuarioLogueado().correo)}">
                                 <p:confirm header="Confirme la deshabilitación" message="Esta segur@ ?" icon="ui-icon-alert" />
                             </p:commandButton>
@@ -82,8 +82,8 @@
                                 <p:confirm header="Confirme la habilitación" message="Esta segur@ ?" icon="ui-icon-alert" />
                             </p:commandButton>
                             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update=":growl,datalist" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"  update=":growl,datalist"/>
                             </p:confirmDialog>
                         </f:facet>
                     </p:dataTable>
