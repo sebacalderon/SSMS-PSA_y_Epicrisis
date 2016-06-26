@@ -3363,7 +3363,7 @@ public class clapController implements Serializable {
                 seccion = false;
             }
         }
-        if (selected.getNivel_instruccion_madre() == 0 || selected.getNivel_instruccion_padre()==0 || selected.getNivel_instruccion_pareja()==0 || selected.getPercepcion_familia()==0 || selected.getDiagrama_familiar() == null) {
+        if (selected.getNivel_instruccion_madre() == 0 || selected.getNivel_instruccion_padre()==0 || selected.getPercepcion_familia()==0 || selected.getDiagrama_familiar() == null) {
             seccion = false;
         }
         selected.setSeccion_familia(seccion);
