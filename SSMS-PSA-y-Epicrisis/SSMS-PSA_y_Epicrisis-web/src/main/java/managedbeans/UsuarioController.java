@@ -367,10 +367,13 @@ public class UsuarioController implements Serializable {
         if (pass.equals(pass_repeat)) {
             setOld_password(selected.getPassword());
             setNew_password(pass);
+            Usuario antiguo=(Usuario)selected.clone();
             selected.setLogin_uno(false);
             selected.setPassword(pass);
+            Usuario nuevo=(Usuario)selected.clone();
             JsfUtil.addSuccessMessage("Contraseña cambiada con éxito");
             persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
+            auditoriaCtrl.auditUsuario(antiguo, nuevo, "UPDATE");
         }else{
             context.addMessage(null, new FacesMessage(message.SEVERITY_ERROR, "Error: Las contraseñas no coinciden", ""));
         }

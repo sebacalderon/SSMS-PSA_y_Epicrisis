@@ -44,9 +44,10 @@ public class UsuarioTest {
      */
     @Test
     public void testCambiarPassword() {
-        String old_password = "";
-        String new_password = "1";
+        String old_password = "1234";
+        String new_password = "1324";
         boolean expResult = true;
+        usuario.setRUT("05.893.349-k");
         boolean result = usuario.cambiarPassword(old_password, new_password);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.

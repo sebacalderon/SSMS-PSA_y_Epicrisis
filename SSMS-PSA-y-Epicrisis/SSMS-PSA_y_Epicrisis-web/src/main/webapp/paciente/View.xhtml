@@ -122,6 +122,7 @@
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
+                                 emptyMessage="No hay elementos."
                                  >      
                         <p:ajax event="rowSelect"   update="viewButton editButton createClap viewRiesgosButton desactivateButton"/>
                         <p:ajax event="rowUnselect" update="viewButton editButton createClap viewRiesgosButton desactivateButton"/>
@@ -215,6 +216,7 @@
                                  rowKey="#{item2.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
+                                 emptyMessage="No hay elementos."
                                  >      
                         <p:ajax event="rowSelect"   update="viewButton editButton"/>
                         <p:ajax event="rowUnselect" update="viewButton editButton"/>
