@@ -802,7 +802,8 @@ public class clapController implements Serializable {
 //    }
     
     public clap prepareEdit() throws FileNotFoundException{
-        selected = getSelected();
+        selected = getSelected();        
+        pacienteCtrl.setSelected(selected.getPaciente());
         if (selected.getAudit()==null) {
             isAudit = false;
         }else{
