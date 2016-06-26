@@ -352,4 +352,18 @@ public class actividad implements Serializable {
         return "entities.actividad[ id=" + id + " ]";
     }
     
+    @Override
+    public Object clone()
+    {
+        Object clone = null;
+        try
+        {
+            clone = super.clone();
+        } 
+        catch(CloneNotSupportedException e)
+        {
+            // No deberia suceder
+        }
+        return clone;
+    }
 }

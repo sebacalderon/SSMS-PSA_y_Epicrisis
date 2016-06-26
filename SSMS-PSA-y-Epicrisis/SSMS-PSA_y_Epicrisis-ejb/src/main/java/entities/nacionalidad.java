@@ -69,5 +69,18 @@ public class nacionalidad implements Serializable {
     public String toString() {
         return "entities.nacionalidad[ id=" + id + " ]";
     }
-    
+        @Override
+    public Object clone()
+    {
+        Object clone = null;
+        try
+        {
+            clone = super.clone();
+        } 
+        catch(CloneNotSupportedException e)
+        {
+            // No deberia suceder
+        }
+        return clone;
+    }
 }

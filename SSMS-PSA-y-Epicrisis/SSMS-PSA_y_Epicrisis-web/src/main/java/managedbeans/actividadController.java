@@ -1,6 +1,8 @@
 package managedbeans;
 
 import entities.actividad;
+import entities.audit;
+import entities.clap;
 import entities.paciente;
 import managedbeans.util.JsfUtil;
 import managedbeans.util.JsfUtil.PersistAction;
@@ -29,6 +31,7 @@ public class actividadController implements Serializable {
     private sessionbeans.actividadFacadeLocal ejbFacade;
     private List<actividad> items = null;
     private actividad selected;
+    private actividad antiguo;
     @Inject
     private pacienteController pacienteCtrl;
     @Inject
@@ -36,6 +39,8 @@ public class actividadController implements Serializable {
     @Inject
     private clapController clapCtrl;
     private List<actividad> itemsPorPaciente;
+    
+    @Inject AuditoriaController auditoriaCtrl;
     
     public actividadController() {
     }
@@ -69,15 +74,27 @@ public class actividadController implements Serializable {
 
     public void create() {
         clapCtrl.setActividadElegida(true);
+        actividad nuevo=(actividad) selected.clone();
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("actividadCreated"));
+        auditoriaCtrl.audit((Object) new actividad(), nuevo, "CREATE", "actividad");
+        prepareUpdate();
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
         pacienteCtrl.tratarRiesgo();
     }
 
+    public void prepareUpdate(){
+        if(selected!=null){
+            antiguo=(actividad) selected.clone();
+        }
+    }    
+    
     public void update() {
+        actividad nuevo=(actividad) selected.clone();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("actividadUpdated"));
+        auditoriaCtrl.audit(antiguo, nuevo, "UPDATE", "actividad");
+        prepareUpdate();
     }
 
     public void destroy() {

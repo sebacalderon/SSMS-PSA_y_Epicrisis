@@ -1,7 +1,7 @@
 package managedbeans;
 
-import entities.Auditoria;
-import entities.Usuario;
+import com.google.gson.Gson;
+import entities.*;
 import managedbeans.util.JsfUtil;
 import managedbeans.util.JsfUtil.PersistAction;
 import sessionbeans.AuditoriaFacadeLocal;
@@ -123,18 +123,45 @@ public class AuditoriaController implements Serializable {
         }
     }
 
-    public void auditUsuario(Usuario antiguo, Usuario nuevo, String operacion) {
+//    public void auditUsuario(Usuario antiguo, Usuario nuevo, String operacion) {
+//        selected=new Auditoria();
+//        String string_antiguo,string_nuevo;
+//        if(operacion.equals("UPDATE")){
+//            Gson gson = new Gson();
+//            string_antiguo = gson.toJson(antiguo);
+////            string_antiguo = " ( ID: "+antiguo.getId()+" , Nombres: " + antiguo.getNombres() +" , Primer apellido: " + antiguo.getPrimer_apellido()+" , Segundo apellido: " + antiguo.getSegundo_apellido()+ " , Correo: " + antiguo.getCorreo()+" , RUT: " + antiguo.getRUT()+" , Cesfam: " + antiguo.getCESFAM()+ " , Contraseña: " + antiguo.getPassword()+ " , Rol: " + antiguo.getRol()+", Habilitado: "+antiguo.isHabilitado()+ " , Login uno: " + antiguo.isLogin_uno()+" )";
+////            System.out.println(string_antiguo);
+//            selected.setAntiguoValor(string_antiguo);
+//        }
+////        string_nuevo = " ( ID: "+nuevo.getId()+" , Nombres: " + nuevo.getNombres() +" , Primer apellido: " + nuevo.getPrimer_apellido()+" , Segundo apellido: " + nuevo.getSegundo_apellido()+ " , Correo: " + nuevo.getCorreo()+" , RUT: " + nuevo.getRUT()+" , Cesfam: " + nuevo.getCESFAM()+ " , Contraseña: " + nuevo.getPassword()+ " , Rol: " + nuevo.getRol()+", Habilitado: "+nuevo.isHabilitado()+ " , Login uno: " + nuevo.isLogin_uno()+" )";
+//        Gson gson2 = new Gson();
+//        string_nuevo = gson2.toJson(nuevo);
+//        selected.setNuevoValor(string_nuevo);
+//        selected.setOperacion(operacion);
+//        selected.setTabla("Usuario");
+//        selected.setRut_usuario(loginCtrl.getUsuarioLogueado().getRUT());
+//        Date date = new Date();
+//        long time = date.getTime();
+//        Timestamp ts = new Timestamp(time);
+//        selected.setFecha(ts);
+//        getFacade().create(selected);
+//    }
+
+    
+    public void audit(Object antiguo, Object nuevo, String operacion, String tabla) {
         selected=new Auditoria();
         String string_antiguo,string_nuevo;
         if(operacion.equals("UPDATE")){
-            string_antiguo = " ( ID: "+antiguo.getId()+" , Nombres: " + antiguo.getNombres() +" , Primer apellido: " + antiguo.getPrimer_apellido()+" , Segundo apellido: " + antiguo.getSegundo_apellido()+ " , Correo: " + antiguo.getCorreo()+" , RUT: " + antiguo.getRUT()+" , Cesfam: " + antiguo.getCESFAM()+ " , Contraseña: " + antiguo.getPassword()+ " , Rol: " + antiguo.getRol()+", Habilitado: "+antiguo.isHabilitado()+ " , Login uno: " + antiguo.isLogin_uno()+" )";
-//            System.out.println(string_antiguo);
+            Gson gson = new Gson();
+            string_antiguo = gson.toJson(antiguo);
             selected.setAntiguoValor(string_antiguo);
         }
-        string_nuevo = " ( ID: "+nuevo.getId()+" , Nombres: " + nuevo.getNombres() +" , Primer apellido: " + nuevo.getPrimer_apellido()+" , Segundo apellido: " + nuevo.getSegundo_apellido()+ " , Correo: " + nuevo.getCorreo()+" , RUT: " + nuevo.getRUT()+" , Cesfam: " + nuevo.getCESFAM()+ " , Contraseña: " + nuevo.getPassword()+ " , Rol: " + nuevo.getRol()+", Habilitado: "+nuevo.isHabilitado()+ " , Login uno: " + nuevo.isLogin_uno()+" )";
+        Gson gson2 = new Gson();
+        string_nuevo = gson2.toJson(nuevo);
+        System.out.println("String nuevo: "+string_nuevo);
         selected.setNuevoValor(string_nuevo);
         selected.setOperacion(operacion);
-        selected.setTabla("Usuario");
+        selected.setTabla(tabla);
         selected.setRut_usuario(loginCtrl.getUsuarioLogueado().getRUT());
         Date date = new Date();
         long time = date.getTime();

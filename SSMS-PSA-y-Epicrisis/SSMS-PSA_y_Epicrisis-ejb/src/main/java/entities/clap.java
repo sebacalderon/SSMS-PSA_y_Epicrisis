@@ -3806,4 +3806,18 @@ public class clap implements Serializable {
         return clap;
     }
     
+    @Override
+    public Object clone()
+    {
+        Object clone = null;
+        try
+        {
+            clone = super.clone();
+        } 
+        catch(CloneNotSupportedException e)
+        {
+            // No deberia suceder
+        }
+        return clone;
+    }
 }

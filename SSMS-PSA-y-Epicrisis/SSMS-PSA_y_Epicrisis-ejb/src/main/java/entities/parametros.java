@@ -78,5 +78,18 @@ public class parametros implements Serializable {
     public String toString() {
         return "entities.parametros[ id=" + id + " ]";
     }
-    
+        @Override
+    public Object clone()
+    {
+        Object clone = null;
+        try
+        {
+            clone = super.clone();
+        } 
+        catch(CloneNotSupportedException e)
+        {
+            // No deberia suceder
+        }
+        return clone;
+    }
 }

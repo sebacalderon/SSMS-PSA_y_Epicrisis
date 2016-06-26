@@ -69,6 +69,7 @@ public class clapController implements Serializable {
     private List<clap> itemsNoTerminados = null;
     private List<clap> itemsReporteClaps = null;
     private clap selected;
+    private clap antiguo;
     private paciente Paciente = null;
     private boolean auditCrafft = false;
     private boolean isAudit = false;
@@ -151,6 +152,9 @@ public class clapController implements Serializable {
     @Inject
     private parametrosController parametrosCtrl;
    
+    @Inject
+    private AuditoriaController auditoriaCtrl;
+    
     public clapController() {
     }
 
@@ -169,7 +173,8 @@ public class clapController implements Serializable {
     public void setCesfam(cesfam cesfam) {
         this.cesfam = cesfam;
     }
-
+    
+    
     public StreamedContent getChart() {
         return chart;
     }
@@ -834,11 +839,19 @@ public class clapController implements Serializable {
         }else{
             auditCrafft = true;
         }
+        prepareUpdate();
         return selected;
+    }
+    
+    public void prepareUpdate(){
+        if(selected!=null){
+            antiguo=(clap) selected.clone();
+        }
     }
     
     public clap prepareRiesgos(){
         selected = getSelected();
+        verificaRiesgos();
         if (pacienteCtrl.getSelected().getEstado().equals("Riesgos tratados o en tratamiento")) {
             setActividadElegida(true);
         }else{
@@ -1211,8 +1224,10 @@ public class clapController implements Serializable {
         selected.setRiesgo_ssr(false);
         setImagen(null);
         //Guarda localmente el clap selected
-
+        clap nuevo=(clap) selected.clone();
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("clapCreated"));
+        auditoriaCtrl.audit((Object)new clap(), nuevo, "CREATE", "clap");
+        prepareUpdate();
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
@@ -1349,7 +1364,10 @@ public class clapController implements Serializable {
             pacienteCtrl.clapIncompleto();
         }
         selected.setFuncionario(loginCtrl.getUsuarioLogueado());
+        clap nuevo=(clap) selected.clone();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        auditoriaCtrl.audit(antiguo, nuevo, "UPDATE", "clap");
+        prepareUpdate();
         if(selected.getEstado().equals("Nuevo")){
             List<clap> claps = getItemsPorPaciente(pacienteCtrl.getSelected().getRUN());
             if(claps.size()>1){
@@ -1415,8 +1433,11 @@ public class clapController implements Serializable {
             try (InputStream input = imagen.getInputstream()) {
                 Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
                 selected.setDiagrama_familiar(ruta+"/"+file.getFileName());
+                nuevo=(clap) selected.clone();
                 getFacade().edit(selected);
             }
+            auditoriaCtrl.audit(antiguo, nuevo, "UPDATE", "clap");
+            prepareUpdate();
             File img = new File(ruta+"/"+file.getFileName());
             BufferedImage bimg = ImageIO.read(img);
             int type = bimg.getType() == 0? BufferedImage.TYPE_INT_ARGB : bimg.getType();            
@@ -1440,6 +1461,7 @@ public class clapController implements Serializable {
     }
 
     public void anular() {
+        antiguo=(clap) selected.clone();
         selected.setEstado("Anulado");
         selected.setSeccion_antecedentes_familiares(true);
         selected.setSeccion_antecedentes_personales(true);
@@ -1456,7 +1478,10 @@ public class clapController implements Serializable {
         selected.setSeccion_vida_social(true);
         selected.setSeccion_vivienda(true);
         selected.setFecha_estado(new java.util.Date());
+        clap nuevo=(clap) selected.clone();
         persist(PersistAction.UPDATE, "Clap Anulado");
+        auditoriaCtrl.audit(antiguo, nuevo, "UPDATE", "clap");
+        prepareUpdate();
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
@@ -1572,7 +1597,6 @@ public class clapController implements Serializable {
             }else{
                 auditCtrl.update();
             }
-
         }
         
         if (selected.getCrafft()!= null) {
@@ -3116,7 +3140,10 @@ public class clapController implements Serializable {
         actualizaCrafftAudit();
         verificaSecciones();
         selected.setFuncionario(loginCtrl.getUsuarioLogueado());
+        clap nuevo=(clap) selected.clone();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        auditoriaCtrl.audit(antiguo, nuevo, "UPDATE", "clap");
+        prepareUpdate();
         return "/faces/clap/edit/usuario.xhtml";
     }
     
@@ -3125,7 +3152,10 @@ public class clapController implements Serializable {
         actualizaCrafftAudit();
         verificaSecciones();
         selected.setFuncionario(loginCtrl.getUsuarioLogueado());
+        clap nuevo=(clap) selected.clone();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        auditoriaCtrl.audit(antiguo, nuevo, "UPDATE", "clap");
+        prepareUpdate();
         return "/faces/clap/edit/datos_antecedentes.xhtml";
     }
     
@@ -3134,7 +3164,10 @@ public class clapController implements Serializable {
         actualizaCrafftAudit();
         verificaSecciones();
         selected.setFuncionario(loginCtrl.getUsuarioLogueado());
+        clap nuevo=(clap) selected.clone();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        auditoriaCtrl.audit(antiguo, nuevo, "UPDATE", "clap");
+        prepareUpdate();
         return "/faces/clap/edit/vivienda_educacion.xhtml";
     }
     
@@ -3143,7 +3176,10 @@ public class clapController implements Serializable {
         actualizaCrafftAudit();
         verificaSecciones();
         selected.setFuncionario(loginCtrl.getUsuarioLogueado());
+        clap nuevo=(clap) selected.clone();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        auditoriaCtrl.audit(antiguo, nuevo, "UPDATE", "clap");
+        prepareUpdate();
         return "/faces/clap/edit/familia.xhtml";
     }
     
@@ -3152,16 +3188,24 @@ public class clapController implements Serializable {
         actualizaCrafftAudit();
         verificaSecciones();
         selected.setFuncionario(loginCtrl.getUsuarioLogueado());
+        clap nuevo=(clap) selected.clone();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        auditoriaCtrl.audit(antiguo, nuevo, "UPDATE", "clap");
+        prepareUpdate();
         return "/faces/clap/edit/trabajo_vidasocial.xhtml";
     }
 
     public String aHabitos() throws IOException{
         creaImagen();
         actualizaCrafftAudit();
+        auditCtrl.prepareUpdate();
+        crafftCtrl.prepareUpdate();
         verificaSecciones();
         selected.setFuncionario(loginCtrl.getUsuarioLogueado());
+        clap nuevo=(clap) selected.clone();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        auditoriaCtrl.audit(antiguo, nuevo, "UPDATE", "clap");
+        prepareUpdate();
         return "/faces/clap/edit/habitos_gineco.xhtml";
     }
     
@@ -3170,7 +3214,10 @@ public class clapController implements Serializable {
         actualizaCrafftAudit();
         verificaSecciones();
         selected.setFuncionario(loginCtrl.getUsuarioLogueado());
+        clap nuevo=(clap) selected.clone();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        auditoriaCtrl.audit(antiguo, nuevo, "UPDATE", "clap");
+        prepareUpdate();
         return "/faces/clap/edit/sexualidad_psicoemocional.xhtml";
     }
     
@@ -3179,7 +3226,10 @@ public class clapController implements Serializable {
         actualizaCrafftAudit();
         verificaSecciones();
         selected.setFuncionario(loginCtrl.getUsuarioLogueado());
+        clap nuevo=(clap) selected.clone();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("clapUpdated"));
+        auditoriaCtrl.audit(antiguo, nuevo, "UPDATE", "clap");
+        prepareUpdate();
         return "/faces/clap/edit/examen_fisico.xhtml";
     }
     

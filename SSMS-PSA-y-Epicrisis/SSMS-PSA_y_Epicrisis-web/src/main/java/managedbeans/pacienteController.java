@@ -37,6 +37,7 @@ public class pacienteController implements Serializable {
     private sessionbeans.pacienteFacadeLocal ejbFacade;
     private List<paciente> items = null;
     private paciente selected;
+    private paciente antiguo;
     private int RUN;
     private String DV;
     private cesfam cesfam = null;
@@ -48,6 +49,9 @@ public class pacienteController implements Serializable {
     
     @Inject
     private clapController clapCtrl;
+    
+    @Inject
+    private AuditoriaController auditoriaCtrl;
     
     
     public pacienteController() {
@@ -117,6 +121,12 @@ public class pacienteController implements Serializable {
         return false;
     }
     
+    public void prepareUpdate(){
+        if(selected!=null){
+            antiguo=(paciente) selected.clone();
+        }
+    }
+    
     public paciente prepareCreate() {
         selected = new paciente();
         initializeEmbeddableKey();
@@ -136,7 +146,10 @@ public class pacienteController implements Serializable {
         if (flag) {
             selected.setEstado("Ingresado");
             selected.setFecha_estado(new java.util.Date());
+            paciente nuevo=(paciente) selected.clone();
             persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("pacienteCreated"));
+            auditoriaCtrl.audit((Object) new paciente(), nuevo, "CREATE", "paciente");
+            prepareUpdate();
             if (!JsfUtil.isValidationFailed()) {
                 items = null;    // Invalidate list of items to trigger re-query.
                 selected = getFacade().findbyRUN(selected.getRUN()).get(0);
@@ -152,32 +165,51 @@ public class pacienteController implements Serializable {
     }
 
     public void riesgosNoTratados() {
+        prepareUpdate();
         selected.setEstado("Riesgos no Tratados");
         selected.setFecha_estado(new java.util.Date());
+        paciente nuevo=(paciente) selected.clone();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
+        auditoriaCtrl.audit(antiguo, nuevo, "UPDATE", "paciente");
+        prepareUpdate();
     }
 
     public void tratarRiesgo(){
+        prepareUpdate();
         selected.setEstado("Riesgos tratados o en tratamiento");
         selected.setFecha_estado(new java.util.Date());
+        paciente nuevo=(paciente) selected.clone();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
+        auditoriaCtrl.audit(antiguo, nuevo, "UPDATE", "paciente");
+        prepareUpdate();
         clapCtrl.setActividadElegida(true);
     }
     
     public void sinRiesgo(){
+        prepareUpdate();
         selected.setEstado("Sin riesgo");
         selected.setFecha_estado(new java.util.Date());
+        paciente nuevo=(paciente) selected.clone();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
+        auditoriaCtrl.audit(antiguo, nuevo, "UPDATE", "paciente");
+        prepareUpdate();
     }
     
     public void clapIncompleto(){
+        prepareUpdate();
         selected.setEstado("Clap Incompleto");
         selected.setFecha_estado(new java.util.Date());
+        paciente nuevo=(paciente) selected.clone();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
+        auditoriaCtrl.audit(antiguo, nuevo, "UPDATE", "paciente");
+        prepareUpdate();
     }
     
     public String update() {
+        paciente nuevo=(paciente) selected.clone();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("pacienteUpdated"));
+        auditoriaCtrl.audit(antiguo, nuevo, "UPDATE", "paciente");
+        prepareUpdate();
         return "/faces/paciente/View.xhtml?faces-redirect=true";
     }
 
