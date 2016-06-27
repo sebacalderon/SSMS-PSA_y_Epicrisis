@@ -1937,6 +1937,8 @@ public class clapController implements Serializable {
         //Condicional de pueblo indigena
         if (selected.getPueblo_originario().getId()==10) {
             form.setField("pueblo_indigena_no", "Yes");
+        }else if(selected.getPueblo_originario().getId()==11){
+            form.setField("pueblo_indigena", selected.getPueblo_originario().getNombre());
         }else{
             form.setField("pueblo_indigena_si", "Yes");
             form.setField("pueblo_indigena", selected.getPueblo_originario().getNombre());
