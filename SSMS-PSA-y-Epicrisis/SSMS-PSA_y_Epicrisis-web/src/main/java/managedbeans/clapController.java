@@ -2748,6 +2748,8 @@ public class clapController implements Serializable {
         }else if(3==conducta_sexual){
             form.setField("activa", "Yes");
             form.setField("edad_inicio_sexual", Integer.toString(selected.getEdad_inicio_conducta_sexual()));
+        }else{
+            form.setField("","Yes");
         }
         
         //relaciones sexuales con
