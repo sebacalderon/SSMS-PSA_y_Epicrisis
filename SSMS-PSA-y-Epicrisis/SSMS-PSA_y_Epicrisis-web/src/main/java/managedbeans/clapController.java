@@ -1870,14 +1870,14 @@ public class clapController implements Serializable {
        //Condicional domicilio
         boolean domicilio = selected.isDomicilio();
         if (domicilio == true) {
-            form.setField("tel_fijo_domicilio", "Yes");
+            form.setField("domicilio_casilla", "Yes");
         }else{
             form.setField("", "Yes");            
         }
         
         boolean recado = selected.isRecados();
         if (recado==true) {
-            form.setField("cel_recados", "Yes");
+            form.setField("recados", "Yes");
         }else{
             form.setField("", "Yes");            
         }
