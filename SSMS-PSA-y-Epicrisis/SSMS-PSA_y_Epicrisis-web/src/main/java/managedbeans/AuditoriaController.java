@@ -1,6 +1,7 @@
 package managedbeans;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import entities.*;
 import managedbeans.util.JsfUtil;
 import managedbeans.util.JsfUtil.PersistAction;
@@ -150,15 +151,16 @@ public class AuditoriaController implements Serializable {
     
     public void audit(Object antiguo, Object nuevo, String operacion, String tabla) {
         selected=new Auditoria();
-        String string_antiguo,string_nuevo;
+        String string_antiguo,string_nuevo="";
         if(operacion.equals("UPDATE")){
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().setExclusionStrategies(new MyExclusionStrategy()).create();
             string_antiguo = gson.toJson(antiguo);
             selected.setAntiguoValor(string_antiguo);
+            System.out.println("Largo string antiguo: "+string_antiguo.length());
         }
-        Gson gson2 = new Gson();
+        Gson gson2 = new GsonBuilder().setExclusionStrategies(new MyExclusionStrategy()).create();
         string_nuevo = gson2.toJson(nuevo);
-        System.out.println("String nuevo: "+string_nuevo);
+        System.out.println("Largo string nuevo: "+string_nuevo.length());
         selected.setNuevoValor(string_nuevo);
         selected.setOperacion(operacion);
         selected.setTabla(tabla);

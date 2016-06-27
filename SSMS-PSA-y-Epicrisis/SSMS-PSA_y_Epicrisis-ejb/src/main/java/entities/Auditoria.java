@@ -7,11 +7,14 @@ package entities;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import static javax.persistence.FetchType.LAZY;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 /**
  *
@@ -29,8 +32,12 @@ public class Auditoria implements Serializable {
     private String tabla;
     @Column(name="operacion_audi")
     private String operacion;
+    @Lob
+    @Basic(fetch=LAZY)
     @Column(columnDefinition = "TEXT",name="old_value_audi")
     private String antiguoValor;
+    @Lob
+    @Basic(fetch=LAZY)
     @Column(columnDefinition = "TEXT",name="new_value_audi")
     private String nuevoValor;
     @Column(name="fecha_audi")
