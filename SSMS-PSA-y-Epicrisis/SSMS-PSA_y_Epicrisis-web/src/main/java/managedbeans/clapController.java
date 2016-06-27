@@ -1899,12 +1899,14 @@ public class clapController implements Serializable {
         }
         //Formato Nuevo
         //Condicional de beneficiario
-        /*boolean beneficiario = true;
-        if (beneficiario==true) {
-            form.setField("beneficiario_si", "Yes");
-        }else{
+        if (selected.getPrograma_social().getNombre().equals("Sin programa social")) {
             form.setField("beneficiario_no", "Yes");
-        }*/
+        }else{
+            if (!selected.getPrograma_social().getNombre().equals("No Sabe/No Contesta")) {
+                form.setField("beneficiario_si", "Yes");
+            }
+        }
+        
         ////////////////
         form.setField("correo", selected.getCorreo());
         form.setField("id_consulta", ""+selected.getId());

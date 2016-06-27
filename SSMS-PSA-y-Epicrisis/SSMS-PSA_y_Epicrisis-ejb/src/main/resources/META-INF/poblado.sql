@@ -501,6 +501,7 @@ INSERT INTO prevision(codigo_prevision, nombre_prevision)VALUES (1001, 'Sin prev
 INSERT INTO prevision(codigo_prevision, nombre_prevision)VALUES (998, 'CAPREDENA')
 INSERT INTO prevision(codigo_prevision, nombre_prevision)VALUES (997, 'DIPRECA')
 INSERT INTO prevision(codigo_prevision, nombre_prevision)VALUES (1000, 'Otra')
+INSERT INTO prevision(codigo_prevision, nombre_prevision)VALUES (1003, 'Si/No sabe cuál')
 INSERT INTO prevision(codigo_prevision, nombre_prevision)VALUES (1002, 'No sabe/No contesta')
 
 
