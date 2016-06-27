@@ -1871,11 +1871,15 @@ public class clapController implements Serializable {
         boolean domicilio = selected.isDomicilio();
         if (domicilio == true) {
             form.setField("tel_fijo_domicilio", "Yes");
+        }else{
+            form.setField("", "Yes");            
         }
         
         boolean recado = selected.isRecados();
         if (recado==true) {
             form.setField("cel_recados", "Yes");
+        }else{
+            form.setField("", "Yes");            
         }
         /////////////////////////////////////////
         
