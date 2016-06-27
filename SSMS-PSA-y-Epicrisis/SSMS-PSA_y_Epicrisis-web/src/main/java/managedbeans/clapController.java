@@ -1870,14 +1870,14 @@ public class clapController implements Serializable {
        //Condicional domicilio
         boolean domicilio = selected.isDomicilio();
         if (domicilio == true) {
-            form.setField("tel_fijo_domicilio", "Yes");
+            form.setField("domicilio_casilla", "Yes");
         }else{
             form.setField("", "Yes");            
         }
         
         boolean recado = selected.isRecados();
         if (recado==true) {
-            form.setField("cel_recados", "Yes");
+            form.setField("recados", "Yes");
         }else{
             form.setField("", "Yes");            
         }
@@ -1899,12 +1899,14 @@ public class clapController implements Serializable {
         }
         //Formato Nuevo
         //Condicional de beneficiario
-        /*boolean beneficiario = true;
-        if (beneficiario==true) {
-            form.setField("beneficiario_si", "Yes");
-        }else{
+        if (selected.getPrograma_social().getNombre().equals("Sin programa social")) {
             form.setField("beneficiario_no", "Yes");
-        }*/
+        }else{
+            if (!selected.getPrograma_social().getNombre().equals("No Sabe/No Contesta")) {
+                form.setField("beneficiario_si", "Yes");
+            }
+        }
+        
         ////////////////
         form.setField("correo", selected.getCorreo());
         form.setField("id_consulta", ""+selected.getId());
@@ -1935,6 +1937,8 @@ public class clapController implements Serializable {
         //Condicional de pueblo indigena
         if (selected.getPueblo_originario().getId()==10) {
             form.setField("pueblo_indigena_no", "Yes");
+        }else if(selected.getPueblo_originario().getId()==11){
+            form.setField("pueblo_indigena", selected.getPueblo_originario().getNombre());
         }else{
             form.setField("pueblo_indigena_si", "Yes");
             form.setField("pueblo_indigena", selected.getPueblo_originario().getNombre());
