@@ -223,7 +223,7 @@ public class Usuario implements Serializable {
     public boolean cambiarPassword(String old_password, String new_password) {
         String rutSinPuntos=this.RUT.replace(".", "");
         rutSinPuntos=rutSinPuntos.substring(0,4);
-        if (!sha256(old_password).equals(this.password)&&!new_password.equals(rutSinPuntos)) {
+        if (sha256(old_password).equals(this.password)&&!new_password.equals(rutSinPuntos)) {
             setPassword(new_password);
             return true;
         }
