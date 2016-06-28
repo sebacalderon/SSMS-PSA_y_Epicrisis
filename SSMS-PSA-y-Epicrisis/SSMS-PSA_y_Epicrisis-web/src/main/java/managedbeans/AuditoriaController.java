@@ -156,11 +156,11 @@ public class AuditoriaController implements Serializable {
             Gson gson = new GsonBuilder().setExclusionStrategies(new MyExclusionStrategy()).create();
             string_antiguo = gson.toJson(antiguo);
             selected.setAntiguoValor(string_antiguo);
-            System.out.println("Largo string antiguo: "+string_antiguo.length());
+//            System.out.println("Largo string antiguo: "+string_antiguo.length());
         }
         Gson gson2 = new GsonBuilder().setExclusionStrategies(new MyExclusionStrategy()).create();
         string_nuevo = gson2.toJson(nuevo);
-        System.out.println("Largo string nuevo: "+string_nuevo.length());
+//        System.out.println("Largo string nuevo: "+string_nuevo.length());
         selected.setNuevoValor(string_nuevo);
         selected.setOperacion(operacion);
         selected.setTabla(tabla);

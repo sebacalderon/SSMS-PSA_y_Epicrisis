@@ -39,6 +39,8 @@
                                 <p:selectBooleanCheckbox value="#{actividadController.selected.derivacion_otra_comuna}" disabled="#{actividadController.selected.derivacion_otra_comuna}" itemLabel="Derivación a otra comuna"/>
                             </p:panelGrid>
                         </p:column>
+                        <p:outputLabel value="Otros:" />
+                        <b:inputText id="otros" value="#{actividadController.selected.otros}" />
                         <p:outputLabel value="Observaciones:" />
                         <b:inputText id="paciente" value="#{actividadController.selected.observaciones}" />
                     </p:panelGrid>

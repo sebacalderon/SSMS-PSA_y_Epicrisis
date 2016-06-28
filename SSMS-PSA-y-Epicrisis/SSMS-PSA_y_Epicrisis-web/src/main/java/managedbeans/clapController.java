@@ -6,6 +6,7 @@ import com.itextpdf.text.pdf.AcroFields;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import entities.Crafft;
+import entities.actividad;
 import entities.audit;
 import entities.cesfam;
 import entities.clap;
@@ -154,6 +155,9 @@ public class clapController implements Serializable {
    
     @Inject
     private AuditoriaController auditoriaCtrl;
+    
+    @Inject
+    private actividadController actividadCtrl;
     
     public clapController() {
     }
@@ -868,6 +872,7 @@ public class clapController implements Serializable {
 
     public void generarCSV(int cond)
     {
+        List<actividad> actividades=new ArrayList<actividad>();
         String title;
         String pattern = "dd/MM/yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -881,6 +886,7 @@ public class clapController implements Serializable {
                 case 0:
                     items=getItems();
                     title = "sabana_de_datos.csv";
+                    actividades=actividadCtrl.getItems();
                     break;
                 case 1:
                     if (estado.equals("Vencido")) {
@@ -1139,12 +1145,52 @@ public class clapController implements Serializable {
                 output.write("Riesgo salud mental;".getBytes());
                 output.write("Riesgo alcohol y drogas;".getBytes());
                 output.write("Riesgo nutricional;".getBytes());
-                output.write("Riesgo social\n".getBytes());
+                
+                if(cond==0&&actividades.size()>0){
+                    output.write("Riesgo social;".getBytes());
 
+                    output.write(";".getBytes());    
+                    output.write("Codigo de consulta de actividades de intervencion;".getBytes());    
+                    output.write("Fecha de realizacion;".getBytes());    
+                    output.write("Usuario atendido;".getBytes());    
+                    output.write("Rut del funcionario que la realizo;".getBytes());    
+                    output.write("Consejeria de actividad fisica;".getBytes());    
+                    output.write("Consejeria alimentacion saludable;".getBytes());    
+                    output.write("Consejeria de consumo de drogas;".getBytes());    
+                    output.write("Consejeria familiar;".getBytes());    
+                    output.write("Consejeria motivacional;".getBytes());    
+                    output.write("Consejeria de regulacion de fecundidad;".getBytes());    
+                    output.write("Consejeria de salud mental;".getBytes());    
+                    output.write("Consejeria de ssr;".getBytes());    
+                    output.write("Consejeria de tabaquismo;".getBytes());    
+                    output.write("Consejeria de vih e its;".getBytes());    
+                    output.write("Derivacion a establecimiento educacional;".getBytes());    
+                    output.write("Derivacion a otra comuna;".getBytes());    
+                    output.write("Ingreso a control prenatal;".getBytes());    
+                    output.write("Ingreso a programa cardiovascular;".getBytes());    
+                    output.write("Ingreso a programa de intervencion;".getBytes());    
+                    output.write("Ingreso a regulacion de fecundidad;".getBytes());    
+                    output.write("Ingreso a salud mental;".getBytes());    
+                    output.write("Intervencion breve en alcohol;".getBytes());    
+                    output.write("Nivelacion de estudios;".getBytes());    
+                    output.write("Vinculacion de beneficios sociales;".getBytes());    
+                    output.write("Otros;".getBytes());    
+                    output.write("Observaciones\n".getBytes()); 
+                }else{
+                    output.write("Riesgo social\n".getBytes());
+                }
+                
+                
                 //claps
                 for (int i =0;i<items.size();i++) {
                     clap item=items.get(i);
                     output.write(item.toString().getBytes());
+                    if(cond==0&&i<actividades.size()&&actividades.size()>0){
+                        //imprime las actividades
+                        output.write(";;".getBytes());
+                        actividad itemAct=actividades.get(i);
+                        output.write(itemAct.toString().getBytes());
+                    }
                     output.write("\n".getBytes());
                 }
 
@@ -3523,8 +3569,8 @@ public class clapController implements Serializable {
         if (selected.getConducta_sexual() == 0) {
             seccion = false;
         }else{
-            if (selected.getConducta_sexual() != 1) {
-                if (selected.getEdad_inicio_conducta_sexual() == 0 || selected.getRelaciones_sexuales() == 0 || selected.getPareja_sexual() == 0 || selected.getDificultades_sexuales() == 0 || selected.getAnticoncepcion() == 0 || selected.getUso_mac() == 0) {
+            if (selected.getConducta_sexual() != 1&&selected.getEdad_inicio_conducta_sexual() != 0) {
+                if (selected.getRelaciones_sexuales() == 0 || selected.getPareja_sexual() == 0 || selected.getDificultades_sexuales() == 0 || selected.getAnticoncepcion() == 0 || selected.getUso_mac() == 0) {
                     seccion = false;
                 }
             }
@@ -3582,7 +3628,7 @@ public class clapController implements Serializable {
         selected.setRiesgo_ssr(false);
         
         //cardiovascular nutricional
-        if(selected.getImc()<24){
+        if(selected.getImc()>24.0f){
             selected.setRiesgo_cardiovascular(true);
             selected.setRiesgo_nutricional(true);
             imcmayor24=true;
@@ -3620,7 +3666,7 @@ public class clapController implements Serializable {
             selected.setRiesgo_ssr(true);
             conductasexualactiva=true;
         }
-        if(selected.getEdad_inicio_conducta_sexual()< 14){
+        if(0<selected.getEdad_inicio_conducta_sexual()&&selected.getEdad_inicio_conducta_sexual()< 14){
             selected.setRiesgo_ssr(true);
             edadiniciosexualmenor14=true;
         }
@@ -3632,10 +3678,6 @@ public class clapController implements Serializable {
             if(selected.getCiclos_regulares()==2){
                 selected.setRiesgo_ssr(true);
                 ciclosregulares=true;
-            }
-            if(selected.getDismenorrea()==2){
-                selected.setRiesgo_ssr(true);
-                dismenorrea=true;
             }
         }
         if(selected.isFlujo_secrecion_patologico()){
@@ -3658,11 +3700,11 @@ public class clapController implements Serializable {
             selected.setRiesgo_ssr(true);
             abortos=true;
         }
-        if(selected.getUso_mac()>1){
+        if(selected.getUso_mac()>1&&selected.getEdad_inicio_conducta_sexual()>0){
             selected.setRiesgo_ssr(true);
             usomacnegativo=true;
         }
-        if(selected.getAnticoncepcion()>1){
+        if(selected.getAnticoncepcion()>1&&selected.getEdad_inicio_conducta_sexual()>0){
             selected.setRiesgo_ssr(true);
             anticoncepcionnegativo=true;
         }
