@@ -483,7 +483,9 @@ public class pacienteController implements Serializable {
     }
     
     public int getTamano(){
-        if (itemsCESFAM==null) {
+        if (loginCtrl.esSuperUsuario()) {
+            itemsCESFAM = getFacade().findbyCESFAM(cesfam);
+        }else{
             itemsCESFAM = getFacade().findbyCESFAM(loginCtrl.getUsuarioLogueado().getCESFAM());
         }
         return itemsCESFAM.size();        
@@ -496,11 +498,11 @@ public class pacienteController implements Serializable {
         if (condicion == 0 ) {
             title = "poblacion.csv";
         }else{
-            if (cesfam == null) {
-                nombreCesfam = loginCtrl.getUsuarioLogueado().getCESFAM().getNombre();
+            if (loginCtrl.esSuperUsuario()) {
+                nombreCesfam = getCesfam().getNombre();
                 title = nombreCesfam+".csv";
             }else{
-                nombreCesfam = getCesfam().getNombre();
+                nombreCesfam = loginCtrl.getUsuarioLogueado().getCESFAM().getNombre();
                 title = nombreCesfam+".csv";
             }
         }

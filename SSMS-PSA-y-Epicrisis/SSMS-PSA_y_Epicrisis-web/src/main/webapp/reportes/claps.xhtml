@@ -82,7 +82,7 @@
                 <br/>
                 <b:row>    
                     <b:column col-xs="1" offset-xs="1">
-                        <p:commandButton value="Buscar" id="withIcon" action="#{clapController.reporteCLAPS()}" ajax="true" disabled="#{clapController.control_en == 1}"/>
+                        <b:commandButton value="Buscar" id="withIcon" action="#{clapController.reporteCLAPS()}" disabled="#{clapController.control_en == 1 || clapController.control_en == 0}"/>
                         <p:tooltip id="toolTipFade2" for="withIcon" value="Filtra por CESFAM"/>
                     </b:column>
                     <b:column col-xs="1">

@@ -906,13 +906,16 @@ public class clapController implements Serializable {
                             }
                         }
                     }
+                    System.out.println(estado);
                     items = getFacade().findbyEstadoEntreFechas(fecha1, fecha2, estado);
+                    System.out.println(items.size());
                     sFecha1 = simpleDateFormat.format(fecha1);
                     sFecha2 = simpleDateFormat.format(fecha2);
                     title = estado+" "+sFecha1+"-"+sFecha2+".csv";
                     break;
                 default:
                     items = itemsReporteClaps;
+                    System.out.println("");
                     sFecha1 = simpleDateFormat.format(fecha1);
                     sFecha2 = simpleDateFormat.format(fecha2);
                     title = estado+" "+sFecha1+"-"+sFecha2+" "+cesfam.getNombre()+".csv";
@@ -1261,7 +1264,8 @@ public class clapController implements Serializable {
         isCrafft = false;
         auditCrafft = false;
         selected.setFuncionario(loginCtrl.getUsuarioLogueado());
-        selected.setEstado("Incompleto");        
+        selected.setEstado("Incompleto");
+        selected.setFecha_estado(new java.util.Date());
         selected.setRiesgo_cardiovascular(false);
         selected.setRiesgo_nutricional(false);
         selected.setRiesgo_oh_drogas(false);
@@ -3377,7 +3381,12 @@ public class clapController implements Serializable {
                         }
                     }
                 }
+                System.out.println(estado);
+                System.out.println(cesfam.getNombre());
+                System.out.println(fecha1);
+                System.out.println(fecha2);
                 itemsReporteClaps = getFacade().findbyEstadoEntreFechasCesfam(fecha1, fecha2, estado, cesfam);
+                System.out.println(itemsReporteClaps.size());
                 return "/faces/reportes/resultado_claps.xhtml";
             }
         }else{
