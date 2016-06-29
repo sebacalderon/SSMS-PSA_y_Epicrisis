@@ -3381,12 +3381,7 @@ public class clapController implements Serializable {
                         }
                     }
                 }
-                System.out.println(estado);
-                System.out.println(cesfam.getNombre());
-                System.out.println(fecha1);
-                System.out.println(fecha2);
                 itemsReporteClaps = getFacade().findbyEstadoEntreFechasCesfam(fecha1, fecha2, estado, cesfam);
-                System.out.println(itemsReporteClaps.size());
                 return "/faces/reportes/resultado_claps.xhtml";
             }
         }else{
