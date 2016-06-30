@@ -1,6 +1,7 @@
 package managedbeans;
 
 import entities.audit;
+import entities.cesfam;
 import entities.clap;
 import managedbeans.util.JsfUtil;
 import managedbeans.util.JsfUtil.PersistAction;
@@ -19,6 +20,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
 @Named("auditController")
 @SessionScoped
@@ -28,8 +30,12 @@ public class auditController implements Serializable {
     private sessionbeans.auditFacadeLocal ejbFacade;
     private List<audit> items = null;
     private audit selected;
+    private audit antiguo;
     private int sexo;
 
+    @Inject
+    AuditoriaController auditoriaCtrl;
+    
     public auditController() {
     }
 
@@ -66,14 +72,27 @@ public class auditController implements Serializable {
     }
 
     public void create() {
+        audit nuevo=(audit) selected.clone();
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("auditCreated"));
+        auditoriaCtrl.audit((Object) new audit(), nuevo, "CREATE", "audit");
+        antiguo=(audit) selected.clone();
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
+    public void prepareUpdate(){
+        if(selected!=null){
+            antiguo=(audit) selected.clone();
+        }
+    }
+    
+    
     public void update() {
+        audit nuevo=(audit) selected.clone();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("auditUpdated"));
+        auditoriaCtrl.audit(antiguo, nuevo, "UPDATE", "audit");
+        antiguo=(audit) selected.clone();
     }
 
     public void destroy() {
@@ -195,19 +214,19 @@ public class auditController implements Serializable {
     public int tipoIntervencion(){
         int puntaje = calculaPuntaje();
         if (puntaje <= 7) {
-            System.out.println("Intervencion Minima");
+            //System.out.println("Intervencion Minima");
             return 0;
         }else if (puntaje >= 8 && puntaje <= 15){
-            System.out.println("Intervencion Breve");
+            //System.out.println("Intervencion Breve");
             return 1;
         }else{
-            System.out.println("Derivacion Asistida");
+            //System.out.println("Derivacion Asistida");
             return 2;
         }
     }
 
     private int calculaPuntaje() {
-        System.out.println(selected.getP1()+selected.getP2()+selected.getP3()+selected.getP4()+selected.getP5()+selected.getP6()+selected.getP7()+selected.getP8()+selected.getP9()+selected.getP10());
+        //System.out.println(selected.getP1()+selected.getP2()+selected.getP3()+selected.getP4()+selected.getP5()+selected.getP6()+selected.getP7()+selected.getP8()+selected.getP9()+selected.getP10());
         return selected.getP1()+selected.getP2()+selected.getP3()+selected.getP4()+selected.getP5()+selected.getP6()+selected.getP7()+selected.getP8()+selected.getP9()+selected.getP10();
     }
 }

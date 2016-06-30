@@ -379,10 +379,8 @@ INSERT INTO comuna(codigo_comuna, nombre_comuna, region_comuna)VALUES (13605 ,'P
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13320, 'CESFAM Maipo', 'CESFAM', 13402)
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13333, 'CESFAM Alto Jahuel', 'CESFAM', 13402)
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13390, 'CESFAM Dr. Héctor García', 'CESFAM', 13402)
-
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13321, 'CESFAM Calera de Tango', 'CESFAM', 13403)
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13334, 'CESFAM Bajos de San Agustín', 'CESFAM', 13403)
-
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13312, 'CESFAM Dr. Carlos Lorca', 'CESFAM', 13105)
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13314, 'CESFAM Cóndores Chile', 'CESFAM', 13105)
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13317, 'CESFAM Santa Laura', 'CESFAM', 13105)
@@ -390,24 +388,18 @@ INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesf
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13324, 'CESFAM Dra. Haydeé López Casoou', 'CESFAM', 13105)
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13329, 'CESFAM Canciller  Orlando Letelier', 'CESFAM', 13105)
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13000, 'Alter Joven', 'Centro de Salud Adolescente', 13105)
-
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13311, 'CESFAM  Santa Anselma', 'CESFAM', 13109)
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13326, 'CESFAM Eduardo Frei Montalva', 'CESFAM', 13109)
-
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13307, 'CESFAM Padre Esteban Gumucio Vives', 'CESFAM', 13111)
-
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13308, 'CESFAM Clara Estrella', 'CESFAM', 13116)
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13309, 'CESFAM Julio Acuña Pinzón', 'CESFAM', 13116)
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13310, 'CESFAM Dra. Mariela Salgado Zepeda', 'CESFAM', 13116)
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13396, 'CESFAM Pueblo Lo Espejo', 'CESFAM', 13116)
-
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13318, 'CESFAM Paine', 'CESFAM', 13404)
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13319, 'CESFAM Dr. Raúl Moya Muñoz', 'CESFAM', 13404)
-
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13303, 'CESFAM Dr. Amador Neghme', 'CESFAM', 13121)
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13306, 'CESFAM Padre Pierre Dubois', 'CESFAM', 13121)
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13331, 'CESFAM Edgardo Enríquez Froedden', 'CESFAM', 13121)
-
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13313, 'CESFAM Dr. Raúl Cuevas', 'CESFAM', 13401)
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13315, 'CESFAM  Confraternidad', 'CESFAM', 13401)
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13316, 'CESFAM Carol Urzúa ', 'CESFAM', 13401)
@@ -416,23 +408,43 @@ INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesf
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13332, 'CESFAM Juan Pablo II', 'CESFAM', 13401)
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13394, 'CESFAM El Manzano', 'CESFAM', 13401)
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13001, 'Rucahueche ', 'Centro de Salud Adolescente', 13401)
-
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13301, 'CESFAM San Joaquín', 'CESFAM', 13129)
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13305, 'CESFAM Dr. Arturo Baeza Goñi', 'CESFAM', 13129)
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13322, 'CESFAM Sor Teresa Los Andes', 'CESFAM', 13129)
-
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13300, 'CESFAM Barros Luco', 'CESFAM', 13130)
 INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13302, 'CESFAM Recreo', 'CESFAM', 13130)
+INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13402, 'PSR Linderos', 'Posta de Salud Rural', 13402)
+INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13404, 'PSR Valdivia de Paine', 'Posta de Salud Rural', 13402)
+INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13405, 'PSR Viluco', 'Posta de Salud Rural', 13402)
+INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13406, 'PSR El Recurso', 'Posta de Salud Rural', 13402)
+INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13407, 'PSR Los Morros', 'Posta de Salud Rural', 13402)
+INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13408, 'PSR Pintué', 'Posta de Salud Rural', 13404)
+INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13409, 'PSR Huelquén', 'Posta de Salud Rural', 13404)
+INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13410, 'PSR Rangue', 'Posta de Salud Rural', 13404)
+INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13411, 'PSR Abrantes', 'Posta de Salud Rural', 13404)
+INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13412, 'PSR Chada', 'Posta de Salud Rural', 13404)
+INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13413, 'PSR Santa Inés', 'Posta de Salud Rural', 13403)
+INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13701, 'CECOF Yalta', 'CECOF', 13129)
+INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13702, 'CECOF Sierra Bella', 'CECOF', 13129)
+INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13703, 'CECOF Cooperación', 'CECOF', 13121)
+INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13713, 'CECOF Cerrillos de Nos', 'CECOF', 13401)
+INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13716, 'CECOF Rapa Nui', 'CECOF', 13401)
+INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13717, 'CECOF Santa Laura', 'CECOF', 13105)
+INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13722, 'CECOF Juan Aravena', 'CECOF', 13129)
+INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13728, 'CECOF Lo Herrera', 'CECOF', 13401)
+INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13753, 'CECOF Reverendo Javier Peró', 'CECOF', 13129)
+INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13790, 'CECOF Dr. Héctor García', 'CECOF', 13402)
+INSERT INTO cesfam(codigo_cesfam, nombre_cesfam, nombre_tipo_cesfam, comuna_cesfam) VALUES (13906, 'CECOF Coñimo', 'CECOF', 13129)
 
 INSERT INTO rol(codigo_rol, nombre_rol) VALUES (1, 'Super-Usuario')
 INSERT INTO rol(codigo_rol, nombre_rol) VALUES (2, 'Funcionario')
 INSERT INTO rol(codigo_rol, nombre_rol) VALUES (3, 'Encargado-Programa')
 
-INSERT INTO usuario( codigo_usuario, rut_usuario, correo_usuario, password_usuario, nombres_usuario, primer_apellido_usuario, segundo_apellido_usuario, rol_usuario, cesfam_usuario, habilitado_usuario, primer_login)VALUES (1001, '18.455.374-0', 'pablo.salinasc@usach.cl', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Pablo Javier', 'Salinas', 'Cabañas', 1, 13300, true, true)
-INSERT INTO usuario( codigo_usuario, rut_usuario, correo_usuario, password_usuario, nombres_usuario, primer_apellido_usuario, segundo_apellido_usuario, rol_usuario, cesfam_usuario, habilitado_usuario, primer_login)VALUES (1002, '18.293.486-0', 'sebastian.calderon@usach.cl', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Sebastian Patricio', 'Diaz', 'Calderón', 1, 13301, true, true)
-INSERT INTO usuario( codigo_usuario, rut_usuario, correo_usuario, password_usuario, nombres_usuario, primer_apellido_usuario, segundo_apellido_usuario, rol_usuario, cesfam_usuario, habilitado_usuario, primer_login)VALUES (1003, '10.234.897-2', 'veronica.dominguez@usach.cl', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Veronica', 'Dominguez', 'hola', 1, 13302, true, true)
-INSERT INTO usuario( codigo_usuario, rut_usuario, correo_usuario, password_usuario, nombres_usuario, primer_apellido_usuario, segundo_apellido_usuario, rol_usuario, cesfam_usuario, habilitado_usuario, primer_login)VALUES (1005, '12.394.729-1', 'daniel.morales@usach.cl', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Daniel', 'Morales', 'Aguilera', 1, 13300, true, true)
-INSERT INTO usuario( codigo_usuario, rut_usuario, correo_usuario, password_usuario, nombres_usuario, primer_apellido_usuario, segundo_apellido_usuario, rol_usuario, cesfam_usuario, habilitado_usuario, primer_login)VALUES (1006, '05.893.349-k', 'funcionario@mail.com', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Carlos', 'Perez', 'Rodriguez', 2, 13300, true, true)
+INSERT INTO usuario(rut_usuario, correo_usuario, password_usuario, nombres_usuario, primer_apellido_usuario, segundo_apellido_usuario, rol_usuario, cesfam_usuario, habilitado_usuario, primer_login)VALUES ('18.455.374-0', 'pablo.salinasc@usach.cl', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Pablo Javier', 'Salinas', 'Cabañas', 1, 13300, true, true)
+INSERT INTO usuario(rut_usuario, correo_usuario, password_usuario, nombres_usuario, primer_apellido_usuario, segundo_apellido_usuario, rol_usuario, cesfam_usuario, habilitado_usuario, primer_login)VALUES ('18.293.486-0', 'sebastian.calderon@usach.cl', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Sebastian Patricio', 'Diaz', 'Calderón', 1, 13301, true, true)
+INSERT INTO usuario(rut_usuario, correo_usuario, password_usuario, nombres_usuario, primer_apellido_usuario, segundo_apellido_usuario, rol_usuario, cesfam_usuario, habilitado_usuario, primer_login)VALUES ('10.234.897-2', 'veronica.dominguez@usach.cl', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Veronica', 'Dominguez', 'hola', 1, 13302, true, true)
+INSERT INTO usuario(rut_usuario, correo_usuario, password_usuario, nombres_usuario, primer_apellido_usuario, segundo_apellido_usuario, rol_usuario, cesfam_usuario, habilitado_usuario, primer_login)VALUES ('12.394.729-1', 'daniel.morales@usach.cl', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Daniel', 'Morales', 'Aguilera', 1, 13300, true, true)
+INSERT INTO usuario(rut_usuario, correo_usuario, password_usuario, nombres_usuario, primer_apellido_usuario, segundo_apellido_usuario, rol_usuario, cesfam_usuario, habilitado_usuario, primer_login)VALUES ('05.893.349-k', 'funcionario@mail.com', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Carlos', 'Perez', 'Rodriguez', 2, 13300, true, true)
 
 INSERT INTO estado_civil(codigo_estado_civil, nombre_estado_civil)VALUES (1, 'Soltero')
 INSERT INTO estado_civil(codigo_estado_civil, nombre_estado_civil)VALUES (2, 'Casado')
@@ -489,6 +501,7 @@ INSERT INTO prevision(codigo_prevision, nombre_prevision)VALUES (1001, 'Sin prev
 INSERT INTO prevision(codigo_prevision, nombre_prevision)VALUES (998, 'CAPREDENA')
 INSERT INTO prevision(codigo_prevision, nombre_prevision)VALUES (997, 'DIPRECA')
 INSERT INTO prevision(codigo_prevision, nombre_prevision)VALUES (1000, 'Otra')
+INSERT INTO prevision(codigo_prevision, nombre_prevision)VALUES (1003, 'Si/No sabe cuál')
 INSERT INTO prevision(codigo_prevision, nombre_prevision)VALUES (1002, 'No sabe/No contesta')
 
 
@@ -749,6 +762,7 @@ INSERT INTO nacionalidad(codigo_nacionalidad, nombre_nacionalidad)VALUES (534, '
 INSERT INTO nacionalidad(codigo_nacionalidad, nombre_nacionalidad)VALUES (535, 'Tuvalu')
 INSERT INTO nacionalidad(codigo_nacionalidad, nombre_nacionalidad)VALUES (536, 'Vanuatu')
 INSERT INTO nacionalidad(codigo_nacionalidad, nombre_nacionalidad)VALUES (999, 'Otros')
-INSERT INTO parametros(ruta_parametros) VALUES ('C:/genogramas')
+INSERT INTO parametros(ruta_parametros, tamano_imagen_parametros, dominio_parametros) VALUES ('/opt/genograma', 5, '10.6.105.248:8080')
+ 
 --INSERT INTO parametros(ruta_parametros) VALUES ('/opt/genograma')
 --INSERT INTO parametros(ruta_parametros) VALUES ('/home/seba/genogramas')

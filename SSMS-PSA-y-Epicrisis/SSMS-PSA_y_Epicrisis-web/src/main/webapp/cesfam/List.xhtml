@@ -22,6 +22,7 @@
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
+                                 emptyMessage="No hay elementos."
                                  >
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton"/>
@@ -47,8 +48,8 @@
                         </p:column>
                         
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{cesfamController.prepareCreate}" update=":cesfamCreateForm" oncomplete="PF('cesfamCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":cesfamViewForm" oncomplete="PF('cesfamViewDialog').show()" disabled="#{empty cesfamController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{cesfamController.prepareCreate()}" update=":cesfamCreateForm" oncomplete="PF('cesfamCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" actionListener="#{cesfamController.prepareUpdate()}" update=":cesfamViewForm" oncomplete="PF('cesfamViewDialog').show()" disabled="#{empty cesfamController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":cesfamEditForm" oncomplete="PF('cesfamEditDialog').show()" disabled="#{empty cesfamController.selected}"/>
                         </f:facet>
                     </p:dataTable>

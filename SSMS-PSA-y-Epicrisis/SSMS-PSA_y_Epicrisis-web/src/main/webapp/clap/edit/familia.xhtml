@@ -19,12 +19,11 @@
             <p:breadCrumb>
                 <p:menuitem value="Categories" url="/faces/home.xhtml" />
                 <p:menuitem value="Usuarios"/>
-                <p:menuitem value="Población bajo control" url="/faces/paciente/List.xhtml" />
+                <p:menuitem value="Búsqueda por RUN" url="/faces/paciente/Buscar.xhtml" />
                 <p:menuitem value="#{pacienteController.selected.RUN}-#{pacienteController.selected.DV}" rendered="#{pacienteController.selected.id != null}" url="/faces/paciente/View.xhtml"/>
                 <p:menuitem value="Editar CLAP" />
                 <p:menuitem value="CLAP #{clapController.selected.id}" rendered="#{pacienteController.selected.id != null}"/>
                 <p:menuitem value="Antecedentes Familiares y Familia" rendered="#{clapController.selected.id != null}" url="/faces/clap//edit/familia.xhtml"/>
-
             </p:breadCrumb>
             </h:form>
             <br />
@@ -234,15 +233,15 @@
                         </b:column>
                         <b:column col-md="6">
                             <h4>Ocupación</h4>
-                            <b:row><p:outputLabel value="madre o sustituta" for="ocupacion_madre" /></b:row>
+                            <b:row><p:outputLabel value="Madre o sustituta" for="ocupacion_madre" /></b:row>
                             <b:row><p:inputText id="ocupacion_madre" value="#{clapController.selected.ocupacion_madre}" title="#{bundle.CreateclapTitle_ocupacion_madre}" >
                                 </p:inputText>
                             </b:row>
-                            <b:row><p:outputLabel value="padre o sustituto" for="ocupacion_padre" /></b:row>
+                            <b:row><p:outputLabel value="Padre o sustituto" for="ocupacion_padre" /></b:row>
                             <b:row><p:inputText id="ocupacion_padre" value="#{clapController.selected.ocupacion_padre}" title="#{bundle.CreateclapTitle_ocupacion_padre}">
                                 </p:inputText>
                             </b:row>
-                            <b:row><p:outputLabel value="pareja" for="ocupacion_pareja" /></b:row>
+                            <b:row><p:outputLabel value="Pareja" for="ocupacion_pareja" /></b:row>
                             <b:row><p:inputText id="ocupacion_pareja" value="#{clapController.selected.ocupacion_pareja}" title="#{bundle.CreateclapTitle_ocupacion_pareja}" >
                                 </p:inputText></b:row>
                         </b:column>
@@ -257,7 +256,7 @@
                         </b:column>
                         <b:column col-md="6">
                             <h4>Genograma</h4>
-                            <p:fileUpload id="genograma" fileUploadListener="#{clapController.upload}" label="Elegir Imagen" update="messages" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1" invalidFileMessage="Tipo de Archivo Inválido" cancelLabel="Cancelar" skinSimple="false" auto="false" uploadLabel="Subir" rendered="#{clapController.selected.diagrama_familiar == null}"/>        
+                            <p:fileUpload id="genograma" fileUploadListener="#{clapController.upload}" label="Elegir Imagen" update="messages" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileLimit="1" invalidFileMessage="Tipo de Archivo Inválido" cancelLabel="Cancelar" skinSimple="false" auto="false" uploadLabel="Subir" rendered="#{clapController.selected.diagrama_familiar == null}" sizeLimit="#{parametrosController.selected.tamano_imagen*1000000}" invalidSizeMessage="Tamaño debe ser menor a 5MB"/>        
                             <p:commandButton id="imagen" value="Ver Imagen" onclick="PF('dlg2').show();" type="button" rendered="#{clapController.selected.diagrama_familiar != null}"/>
                             <p:dialog header="Imagen de Genograma" widgetVar="dlg2" modal="true" height="200" width="350">
                                 <p:graphicImage value="#{clapController.cargarImagen()}" rendered="#{clapController.selected.diagrama_familiar != null}"/>

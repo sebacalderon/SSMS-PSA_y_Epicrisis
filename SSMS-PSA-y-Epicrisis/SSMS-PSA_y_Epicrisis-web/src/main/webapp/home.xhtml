@@ -53,6 +53,7 @@
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
+                                 emptyMessage="No hay elementos."
                                  >
 
                         <p:ajax event="rowSelect"   update="viewButton editButton viewUsuarioButton"/>
@@ -99,7 +100,7 @@
             </b:panel>
             </h:form>
             <br />
-            <h:form id="pacienteListForm">
+            <h:form id="pacienteListForm" >
                 <b:panel title="Usuarios en riesgo, con actividades de intervención pendientes " look="danger">
                     <p:dataTable id="datalist2" value="#{pacienteController.getItemsRiesgoHome(1)}" var="item"
                                  selectionMode="single" selection="#{pacienteController.selected}"
@@ -107,9 +108,10 @@
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
+                                 emptyMessage="No hay elementos."
                                  >
-                        <p:ajax event="rowSelect"   update=" viewButton"/>
-                        <p:ajax event="rowUnselect" update=" viewButton"/>
+                        <p:ajax event="rowSelect"   update=" botonVerUsuario"/>
+                        <p:ajax event="rowUnselect" update=" botonVerUsuario"/>
 
                         <p:column>
                             <f:facet name="header">
@@ -146,7 +148,8 @@
                             <h:outputText value="#{item.estado}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="viewButton" icon="ui-icon-search" value="Ver Usuario" disabled="#{empty pacienteController.selected || pacienteController.selected.id == null}" action="/paciente/View?faces-redirect=true"/>
+                            <p:commandButton id="botonVerUsuario" icon="ui-icon-search" value="Ver Usuario" disabled="#{empty pacienteController.selected || pacienteController.selected.id == null}" action="/paciente/View?faces-redirect=true"/>
+                            <p:tooltip id="tooltip" for="botonVerUsuario" value="Ver información detallada del usuario seleccionado"/>
                         </f:facet>
                     </p:dataTable>
                 </b:panel>

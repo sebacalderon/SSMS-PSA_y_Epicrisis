@@ -19,7 +19,7 @@
             <p:breadCrumb>
                 <p:menuitem value="Categories" url="/faces/home.xhtml" />
                 <p:menuitem value="Usuarios"/>
-                <p:menuitem value="Población bajo control" url="/faces/paciente/List.xhtml" />
+                <p:menuitem value="Búsqueda por RUN" url="/faces/paciente/Buscar.xhtml" />
                 <p:menuitem value="#{pacienteController.selected.RUN}-#{pacienteController.selected.DV}" rendered="#{pacienteController.selected.id != null}" url="/faces/paciente/View.xhtml"/>
                 <p:menuitem value="Editar CLAP" />
                 <p:menuitem value="CLAP #{clapController.selected.id}" rendered="#{pacienteController.selected.id != null}"/>
@@ -56,7 +56,7 @@
                                 <b:row>
                                     <b:column col-xs="8">
                                         <pe:inputNumber id="peso" value="#{clapController.selected.peso}" minValue="0" maxValue="250" title="#{bundle.CreateclapTitle_peso}" >
-                                            <p:ajax event="blur"  listener="#{clapController.setIMC}" immediate="true" update="imc" ></p:ajax>
+                                            <p:ajax event="keyup"  listener="#{clapController.setIMC}" immediate="true" update="imc" ></p:ajax>
                                         </pe:inputNumber>
                                     </b:column>
                                     <b:column col-xs="4">
@@ -77,7 +77,7 @@
                                 <b:row>
                                     <b:column col-xs="8">
                                         <pe:inputNumber id="talla" value="#{clapController.selected.talla}" minValue="0" maxValue="250" >
-                                            <p:ajax event="blur"  listener="#{clapController.setIMC}" immediate="true" update="imc" ></p:ajax>
+                                          <p:ajax event="keyup"  listener="#{clapController.setIMC}" immediate="true" update="imc" ></p:ajax>
                                         </pe:inputNumber>
                                     </b:column>
                                     <b:column col-xs="4">
@@ -110,8 +110,7 @@
                                 </b:row>
                                 <b:row>
                                     <b:column col-xs="8">
-                                        <pe:inputNumber disabled="true" id="imc" value="#{clapController.selected.imc}">
-                                        </pe:inputNumber>
+                                        <pe:inputNumber disabled="true" id="imc" value="#{clapController.selected.imc}"/>
                                     </b:column>
                                     <b:column col-xs="4">
                                         <pe:inputNumber id="de_imc" minValue="0" maxValue="1000" value="#{clapController.selected.de_imc}" style="max-width: 50px;" title="DE">

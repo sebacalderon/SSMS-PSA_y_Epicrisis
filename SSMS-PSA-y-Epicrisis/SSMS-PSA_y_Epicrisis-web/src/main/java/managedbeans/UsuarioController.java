@@ -132,27 +132,13 @@ public class UsuarioController implements Serializable {
     }
 
     public void prepareUpdate() {
-        antiguovalor = new Usuario();
-        antiguovalor.setNombres(selected.getNombres());
-        antiguovalor.setCorreo(selected.getCorreo());
-        antiguovalor.setPassword(selected.getPassword());
-        antiguovalor.setRol(selected.getRol());
+        if(selected!=null){
+            antiguovalor = (Usuario) selected.clone();
+        }
     }
     
     
-    public void auditoria(String antiguo, String nuevo, String operacion) {
-        auditoriaCtrl.prepareCreate();
-        auditoriaCtrl.getSelected().setAntiguoValor(antiguo);
-        auditoriaCtrl.getSelected().setNuevoValor(nuevo);
-        auditoriaCtrl.getSelected().setOperacion(operacion);
-        auditoriaCtrl.getSelected().setTabla("Usuario");
-        auditoriaCtrl.ObtenerCorreo();
-        Date date = new Date();
-        long time = date.getTime();
-        Timestamp ts = new Timestamp(time);
-        auditoriaCtrl.getSelected().setFecha(ts);
-        auditoriaCtrl.create();
-    }
+
     
     public String create() {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -166,7 +152,10 @@ public class UsuarioController implements Serializable {
             String pass = new StringBuilder().append(rut.charAt(0)).append(rut.charAt(1)).append(rut.charAt(3)).append(rut.charAt(4)).toString();
             selected.setPassword(pass);
         }
+        Usuario nuevo=(Usuario) selected.clone();
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioCreated"));
+        auditoriaCtrl.audit((Object)new Usuario(), nuevo, "CREATE","Usuario");
+        prepareUpdate();
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
@@ -186,11 +175,14 @@ public class UsuarioController implements Serializable {
         
             if (new_password.length() > 0) {
                 selected=new Usuario(loginCtrl.getUsuarioLogueado());
+                Usuario antiguo=(Usuario)selected.clone();
                 boolean success = selected.cambiarPassword(old_password, new_password);
-
+                Usuario nuevo=(Usuario)selected.clone();
                 if (success) {
                     JsfUtil.addSuccessMessage("Contraseña cambiada con éxito");
                     persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
+                    auditoriaCtrl.audit(antiguo, nuevo, "UPDATE","Usuario");
+                    prepareUpdate();
 
                 } else {
                     JsfUtil.addErrorMessage("La contraseña antigua es incorrecta");
@@ -200,8 +192,10 @@ public class UsuarioController implements Serializable {
     }
 
     public void update() {
-        prepareUpdate();
+        Usuario nuevo=(Usuario) selected.clone();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
+        auditoriaCtrl.audit(antiguovalor, nuevo, "UPDATE","Usuario");
+        prepareUpdate();
     }
 
     public void validaRun(FacesContext context, UIComponent toValidate, Object value) {
@@ -235,8 +229,12 @@ public class UsuarioController implements Serializable {
     
     
     public void desactivar() {
+        Usuario antiguo=(Usuario)selected.clone();
         selected.setHabilitado(false);
+        Usuario nuevo=(Usuario)selected.clone();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioDeleted"));
+        auditoriaCtrl.audit(antiguo, nuevo, "UPDATE","Usuario");
+        prepareUpdate();
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
@@ -244,12 +242,12 @@ public class UsuarioController implements Serializable {
     }
 
     public void activar() {
-        String antiguo,nuevo;
-        nuevo = " ( Nombre: " + selected.getNombres() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+", Activo: "+selected.isHabilitado()+ " )";
+        Usuario antiguo=(Usuario)selected.clone();
         selected.setHabilitado(true);
-        antiguo = " ( Nombre: " + selected.getNombres() + " , Correo: " + selected.getCorreo() + " , Contraseña: " + selected.getPassword()+ " , Rol: " + selected.getRol()+", Activo: "+selected.isHabilitado()+ " )";
-        auditoria(antiguo, nuevo, "Activar");
+        Usuario nuevo=(Usuario)selected.clone();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
+        auditoriaCtrl.audit(antiguo, nuevo, "UPDATE","Usuario");
+        prepareUpdate();
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
@@ -378,10 +376,14 @@ public class UsuarioController implements Serializable {
         if (pass.equals(pass_repeat)) {
             setOld_password(selected.getPassword());
             setNew_password(pass);
+            Usuario antiguo=(Usuario)selected.clone();
             selected.setLogin_uno(false);
             selected.setPassword(pass);
+            Usuario nuevo=(Usuario)selected.clone();
             JsfUtil.addSuccessMessage("Contraseña cambiada con éxito");
             persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
+            auditoriaCtrl.audit(antiguo, nuevo, "UPDATE","Usuario");
+            prepareUpdate();
         }else{
             context.addMessage(null, new FacesMessage(message.SEVERITY_ERROR, "Error: Las contraseñas no coinciden", ""));
         }

@@ -106,7 +106,7 @@
                         <h:outputText id="pueblo_originario" value="#{pacienteController.selected.pueblo_originario.nombre}" title="#{bundle.ViewpacienteTitle_pueblo_originario}"/>                     
                         
                         <f:facet name="footer">
-                            <p:commandButton id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{pacienteController.prepareEdit}" action="/paciente/Edit?faces-redirect=true" disabled="#{empty pacienteController.selected}" rendered="#{loginController.esFuncionario() || loginController.esEncargadoPrograma()}"/>
+                            <p:commandButton id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{pacienteController.prepareUpdate()}" action="/paciente/Edit?faces-redirect=true" disabled="#{empty pacienteController.selected}" rendered="#{loginController.esFuncionario() || loginController.esEncargadoPrograma()}"/>
                         </f:facet>
                     </p:panelGrid>
                 </h:panelGroup>
@@ -122,6 +122,7 @@
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
+                                 emptyMessage="No hay elementos."
                                  >      
                         <p:ajax event="rowSelect"   update="viewButton editButton createClap viewRiesgosButton desactivateButton"/>
                         <p:ajax event="rowUnselect" update="viewButton editButton createClap viewRiesgosButton desactivateButton"/>
@@ -215,6 +216,7 @@
                                  rowKey="#{item2.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
+                                 emptyMessage="No hay elementos."
                                  >      
                         <p:ajax event="rowSelect"   update="viewButton editButton"/>
                         <p:ajax event="rowUnselect" update="viewButton editButton"/>
@@ -261,7 +263,7 @@
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":actividadViewForm" oncomplete="PF('actividadViewDialog').show()" disabled="#{empty actividadController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":actividadEditForm" oncomplete="PF('actividadEditDialog').show()" disabled="#{empty actividadController.selected}" rendered="#{loginController.esFuncionario() || loginController.esEncargadoPrograma()}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{actividadController.prepareUpdate()}" update=":actividadEditForm" oncomplete="PF('actividadEditDialog').show()" disabled="#{empty actividadController.selected}" rendered="#{loginController.esFuncionario() || loginController.esEncargadoPrograma()}"/>
                         </f:facet>
                 </p:dataTable>
                 </h:panelGroup>

@@ -95,4 +95,18 @@ public class cesfam implements Serializable {
         return "entities.CESFAM[ id=" + id + " ]";
     }
     
+    @Override
+    public Object clone()
+    {
+        Object clone = null;
+        try
+        {
+            clone = super.clone();
+        } 
+        catch(CloneNotSupportedException e)
+        {
+            // No deberia suceder
+        }
+        return clone;
+    }
 }

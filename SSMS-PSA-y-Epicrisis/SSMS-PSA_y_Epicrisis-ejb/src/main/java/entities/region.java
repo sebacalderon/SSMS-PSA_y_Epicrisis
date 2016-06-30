@@ -82,5 +82,18 @@ public class region implements Serializable {
     public String toString() {
         return "entities.region[ id=" + id + " ]";
     }
-    
+        @Override
+    public Object clone()
+    {
+        Object clone = null;
+        try
+        {
+            clone = super.clone();
+        } 
+        catch(CloneNotSupportedException e)
+        {
+            // No deberia suceder
+        }
+        return clone;
+    }
 }

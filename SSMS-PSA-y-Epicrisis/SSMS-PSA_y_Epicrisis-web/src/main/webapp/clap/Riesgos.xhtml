@@ -58,6 +58,15 @@
                         title="El Usuario posee Riesgo Cardiovascular"
                         look="danger" rendered="#{clapController.selected.riesgo_cardiovascular}">
                         <i>Debe realizarse una actividad de intervención para mitigar dicho riesgo</i>
+                        <br/>
+                        <p:row><h3>Preguntas asociadas:</h3></p:row>
+                        <p:row rendered="#{clapController.imcmayor24}"><p> IMC mayor a 24.</p></p:row>
+                        <p:row rendered="#{clapController.cardiopulmonar}"><p> Antecedente de problemas cardio-pulmonares.</p></p:row>
+                        <p:row rendered="#{clapController.presionsistolicamayor120}"><p> Presión sistolica alta.</p></p:row>
+                        <p:row rendered="#{clapController.presiondiastolicamayor80}"><p> Presión diastólica alta.</p></p:row>
+                        <p:row rendered="#{clapController.perimetroabdominalmayor102}"><p> Perímetro abdominal mayor a 102.</p></p:row>
+                        <p:row rendered="#{clapController.perimetroabdominalmayor88}"><p> Perímetro abdominal mayor a 88.</p></p:row>
+                        <br/>
                     </b:panel>
                 </b:column>
                 </div>
@@ -85,6 +94,16 @@
                         title="El usuario posee Riesgo Nuticional"
                         look="danger" rendered="#{clapController.selected.riesgo_nutricional}">
                         <i>Debe realizarse una actividad de intervención para mitigar dicho riesgo</i>
+                        <br/>
+                        <p:row><h3>Preguntas asociadas:</h3></p:row>
+                        <p:row rendered="#{clapController.imcmayor24}"><p> IMC mayor a 24.</p></p:row>
+                        <p:row rendered="#{clapController.cardiopulmonar}"><p> Antecedente de problemas cardio-pulmonares.</p></p:row>
+                        <p:row rendered="#{clapController.presionsistolicamayor120}"><p> Presión sistolica alta.</p></p:row>
+                        <p:row rendered="#{clapController.presiondiastolicamayor80}"><p> Presión diastólica alta.</p></p:row>
+                        <p:row rendered="#{clapController.perimetroabdominalmayor102}"><p> Perímetro abdominal mayor a 102.</p></p:row>
+                        <p:row rendered="#{clapController.perimetroabdominalmayor88}"><p> Perímetro abdominal mayor a 88.</p></p:row>
+                        <p:row rendered="#{clapController.alimentacionadecuada}"><p> Alimentación inadecuada.</p></p:row>
+                        <br/>
                     </b:panel>
                 </b:column>
 
@@ -113,6 +132,22 @@
                         title="El usuario posee Riesgo Social"
                         look="danger" rendered="#{clapController.selected.riesgo_social}">
                         <i>Debe realizarse una actividad de intervención para mitigar dicho riesgo</i>
+                        <br/>
+                        <p:row><h3>Preguntas asociadas:</h3></p:row>
+                        <p:row rendered="#{clapController.refernteadultoninguno}"><p> Ningun referente adulto.</p></p:row>
+                        <p:row rendered="#{clapController.aceptacion}"><p> Rechazo social.</p></p:row>
+                        <p:row rendered="#{clapController.amigos}"><p> Sin amigos.</p></p:row>
+                        <p:row rendered="#{clapController.suicidalidad}"><p> Suicidad amigos positiva.</p></p:row>
+                        <p:row rendered="#{clapController.cyberbullyng}"><p> Cyberbulling.</p></p:row>
+                        <p:row rendered="#{clapController.grooming}"><p> Grooming.</p></p:row>
+                        <p:row rendered="#{clapController.violenciaescolar}"><p> Violencia escolar.</p></p:row>
+                        <p:row rendered="#{clapController.violenciapareja}"><p> Violencia en la pareja.</p></p:row>
+                        <p:row rendered="#{clapController.vivesolo}"><p> Vive solo.</p></p:row>
+                        <p:row rendered="#{clapController.viveeninstitucion}"><p> Vive en institución.</p></p:row>
+                        <p:row rendered="#{clapController.percepcionfamiliamala}"><p> Mala percepción de la familia.</p></p:row>
+                        <p:row rendered="#{clapController.desercionexclusion}"><p> Deserción escolar.</p></p:row>
+                        <br/>
+                        
                     </b:panel>
                 </b:column>
                 </div>
@@ -140,6 +175,14 @@
                         title="El usuario posee riesgo de Salud Mental"
                         look="danger" rendered="#{clapController.selected.riesgo_salud_mental}">
                         <i>Debe realizarse una actividad de intervención para mitigar dicho riesgo</i>
+                        <br/>
+                         <p:row><h3>Preguntas asociadas:</h3></p:row>
+                        <p:row rendered="#{clapController.imagencorporal}"><p> Imagen corporal crea preocupacion o impide relacion con los demás.</p></p:row>
+                        <p:row rendered="#{clapController.bienestaremocional}"><p> Bienestar social anormal.</p></p:row>
+                        <p:row rendered="#{clapController.vidaproyecto}"><p> Vida con proyecto confuso o ausente.</p></p:row>
+                        <p:row rendered="#{clapController.intentosuicida}"><p> Intento suicida.</p></p:row>
+                        <p:row rendered="#{clapController.ideacionsuicida}"><p> Ideación suicida.</p></p:row>
+                        <br/>
                     </b:panel> 
                 </b:column>
                 </div>
@@ -167,6 +210,13 @@
                         title="El usuario no posee riesgo de Alcohol y drogas"
                         look="danger" rendered="#{clapController.selected.riesgo_oh_drogas}">
                         <i>Debe realizarse una actividad de intervención para mitigar dicho riesgo</i>
+                        <br/>
+                         <p:row><h3>Preguntas asociadas:</h3></p:row>
+                        <p:row rendered="#{clapController.tabaco}"><p> Consumo de tabaco.</p></p:row>
+                        <p:row rendered="#{clapController.consumoalcohol}"><p> Consumo de Alcohol.</p></p:row>
+                        <p:row rendered="#{clapController.consumomarihuana}"><p> Consumo de Marihuana.</p></p:row>
+                        <p:row rendered="#{clapController.consumootrasustancia}"><p> Consumo de otras sustancias.</p></p:row>
+                        <br/>
                     </b:panel> 
                 </b:column>
                 </div>
@@ -194,6 +244,22 @@
                         title="El usuario posee riesgo de Salud Sexual y Reproductiva"
                         look="danger" rendered="#{clapController.selected.riesgo_ssr}">
                         <i>Debe realizarse una actividad de intervención para mitigar dicho riesgo</i>
+                        <br/>
+                         <p:row><h3>Preguntas asociadas:</h3></p:row>
+                        <p:row rendered="#{clapController.conductasexualactiva}"><p> Conducta sexual activa.</p></p:row>
+                        <p:row rendered="#{clapController.edadiniciosexualmenor14}"><p> Edad inicio de conducta sexual menor a 14 años.</p></p:row>
+                        <p:row rendered="#{clapController.dificultadessexuales}"><p> Dificultades sexuales.</p></p:row>
+                        <p:row rendered="#{clapController.ciclosregulares}"><p> Ciclos irregulares.</p></p:row>
+                        <p:row rendered="#{clapController.dismenorrea}"><p> Dismenorrea.</p></p:row>
+                        <p:row rendered="#{clapController.flujosecrecionanormal}"><p> Flujo o secrecion peneana anormal.</p></p:row>
+                        <p:row rendered="#{clapController.vihits}"><p> VIH positivo o infección de transmisión sexual.</p></p:row>
+                        <p:row rendered="#{clapController.embarazos}"><p> Embarazos mayor a 0.</p></p:row>
+                        <p:row rendered="#{clapController.hijos}"><p> Hijos mayor a 0.</p></p:row>
+                        <p:row rendered="#{clapController.abortos}"><p> Abortos mayor a 0.</p></p:row>
+                        <p:row rendered="#{clapController.usomacnegativo}"><p> Uso de MAC negativo.</p></p:row>
+                        <p:row rendered="#{clapController.anticoncepcionnegativo}"><p> No usa anticonceptivos.</p></p:row>
+                        <p:row rendered="#{clapController.abusosexualpositivo}"><p> Abuso sexual.</p></p:row>
+                        <br/>
                     </b:panel>
                 </b:column>
                 </div>

@@ -67,7 +67,7 @@
                         </p:calendar>
                         <p:outputLabel value="#{bundle.CreatepacienteLabel_cesfam}" for="cesfam" />
                         <p:selectOneMenu id="cesfam" value="#{pacienteController.selected.cesfam}" >
-                            <f:selectItem itemLabel="Seleccione un CESFAM" itemValue="" noSelectionOption="true" />
+                            <f:selectItem itemLabel="Seleccione un Centro de Salud" itemValue="" noSelectionOption="true" />
                             <f:selectItems value="#{cesfamController.items}" var="cesfam" itemLabel="#{cesfam.nombre}" itemValue="#{cesfam}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreatepacienteTitle_telefono_fijo}" for="telefono_fijo" />

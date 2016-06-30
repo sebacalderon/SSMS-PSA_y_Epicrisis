@@ -22,6 +22,7 @@
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
+                                 emptyMessage="No hay elementos."
                                  >
 
                         <p:ajax event="rowSelect"   update="createButton "/>
@@ -32,6 +33,18 @@
                                 <h:outputText value="Ruta para imágenes"/>
                             </f:facet>
                             <h:outputText value="#{item.ruta}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Tamaño máximo de imagen de genograma"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tamano_imagen}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Dominio y puerto del servidor de aplicaciones"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dominio}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{parametrosController.prepareCreate}" update=":parametrosCreateForm" oncomplete="PF('parametrosCreateDialog').show()"/>

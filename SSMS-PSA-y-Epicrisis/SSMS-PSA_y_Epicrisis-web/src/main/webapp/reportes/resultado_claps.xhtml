@@ -33,7 +33,7 @@
                         <h:outputText id="claps" value="#{clapController.itemsReporteClaps.size()}"/>
                     </b:column>
                     <b:column col-xs="1">
-                        <b:commandButton look="primary" value="Descargar Datos" actionListener="#{pacienteController.generarCSV(2)}" rendered="#{pacienteController.itemsCESFAM.size()>0}"/>
+                        <b:commandButton look="primary" value="Descargar Datos" actionListener="#{clapController.generarCSV(2)}" rendered="#{clapController.itemsReporteClaps.size()>0}"/>
                     </b:column>
                 </b:row>
                 </h:form>
@@ -48,7 +48,7 @@
                         <h:outputText id="claps2" value="#{clapController.itemsReporteClaps.size()}"/>
                     </b:column>
                     <b:column col-xs="1">
-                        <b:commandButton look="primary" value="Descargar Datos" actionListener="#{pacienteController.generarCSV(2)}" rendered="#{pacienteController.itemsCESFAM.size()>0}"/>
+                        <b:commandButton look="primary" value="Descargar Datos" actionListener="#{clapController.generarCSV(2)}" rendered="#{clapController.itemsReporteClaps.size()>0}"/>
                     </b:column>
                 </b:row>
                 </h:form>

@@ -19,7 +19,7 @@
             <p:breadCrumb>
                 <p:menuitem value="Categories" url="/faces/home.xhtml" />
                 <p:menuitem value="Usuarios"/>
-                <p:menuitem value="Población bajo control" url="/faces/paciente/List.xhtml" />
+                <p:menuitem value="Búsqueda por RUN" url="/faces/paciente/Buscar.xhtml" />
                 <p:menuitem value="#{pacienteController.selected.RUN}-#{pacienteController.selected.DV}" rendered="#{pacienteController.selected.id != null}" url="/faces/paciente/View.xhtml"/>
                 <p:menuitem value="Editar CLAP" />
                 <p:menuitem value="CLAP #{clapController.selected.id}" rendered="#{pacienteController.selected.id != null}"/>
@@ -70,11 +70,11 @@
                     <b:row>
                         <b:column col-xs="6" style="margin-left: 20px;">
                             <b:row>
-                                <p:outputLabel value="Cesfam" for="cesfam" />
+                                <p:outputLabel value="Centro de Salud" for="cesfam" />
                             </b:row>
                             <b:row>
                                 <p:selectOneMenu id="cesfam" value="#{clapController.selected.cesfam_clap}" disabled="#{clapController.selected.control_en == 1 || clapController.selected.control_en == 0}">
-                                    <f:selectItem itemLabel="Seleccione un CESFAM" itemValue="" noSelectionOption="true" />
+                                    <f:selectItem itemLabel="Seleccione un Centro de Salud" itemValue="" noSelectionOption="true" />
                                     <f:selectItems value="#{cesfamController.items}" var="cesfam" itemLabel="#{cesfam.nombre}" itemValue="#{cesfam}"/>
                                 </p:selectOneMenu>
                             </b:row>

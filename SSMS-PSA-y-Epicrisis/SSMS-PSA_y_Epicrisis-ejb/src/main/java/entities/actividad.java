@@ -41,9 +41,6 @@ public class actividad implements Serializable {
     @Column(name="fecha_realizacion_actividad")
     private java.util.Date fecha_realizacion;
     
-    @Temporal(TemporalType.DATE)
-    @Column(name="fecha_agendamiento_actividad")
-    private java.util.Date fecha_agendamiento;
 
     @Column(name="consejeria_ssr_actividad")
     private boolean consejeria_ssr;
@@ -105,6 +102,9 @@ public class actividad implements Serializable {
     @Column(name="derivacion_otra_comuna_actividad")
     private boolean derivacion_otra_comuna;
     
+    @Column(name="otros_actividad")
+    private String otros;
+    
     @Column(name="observaciones_actividad")
     private String Observaciones;
     
@@ -137,6 +137,14 @@ public class actividad implements Serializable {
         this.derivacion_colegio = derivacion_colegio;
     }
 
+    public String getOtros() {
+        return otros;
+    }
+
+    public void setOtros(String otros) {
+        this.otros = otros;
+    }
+
     public boolean isDerivacion_otra_comuna() {
         return derivacion_otra_comuna;
     }
@@ -163,14 +171,6 @@ public class actividad implements Serializable {
 
     public void setFecha_realizacion(Date fecha_realizacion) {
         this.fecha_realizacion = fecha_realizacion;
-    }
-
-    public Date getFecha_agendamiento() {
-        return fecha_agendamiento;
-    }
-
-    public void setFecha_agendamiento(Date fecha_agendamiento) {
-        this.fecha_agendamiento = fecha_agendamiento;
     }
 
     public boolean isConsejeria_ssr() {
@@ -349,7 +349,130 @@ public class actividad implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.actividad[ id=" + id + " ]";
+        String actividad=new String();
+        
+        actividad=actividad.concat(id+";");
+        actividad=actividad.concat(fecha_realizacion+";");
+        actividad=actividad.concat(paciente.getRUN()+";");
+        actividad=actividad.concat(usuario.getRUT()+";");
+        if(consejeria_actividad_fisica){
+            actividad=actividad.concat("Si;");
+        }else{
+            actividad=actividad.concat("No;");
+        }
+        if(consejeria_alimentacion_saludable){
+            actividad=actividad.concat("Si;");
+        }else{
+            actividad=actividad.concat("No;");
+        }
+        if(consejeria_consumo_drogas){
+            actividad=actividad.concat("Si;");
+        }else{
+            actividad=actividad.concat("No;");
+        }
+        if(consejeria_familiares){
+            actividad=actividad.concat("Si;");
+        }else{
+            actividad=actividad.concat("No;");
+        }
+        if(consejeria_motivacional){
+            actividad=actividad.concat("Si;");
+        }else{
+            actividad=actividad.concat("No;");
+        }
+        if(consejeria_regulacion_fecundidad){
+            actividad=actividad.concat("Si;");
+        }else{
+            actividad=actividad.concat("No;");
+        }
+        if(consejeria_salud_mental){
+            actividad=actividad.concat("Si;");
+        }else{
+            actividad=actividad.concat("No;");
+        }
+        if(consejeria_ssr){
+            actividad=actividad.concat("Si;");
+        }else{
+            actividad=actividad.concat("No;");
+        }
+        if(consejeria_tabaquismo){
+            actividad=actividad.concat("Si;");
+        }else{
+            actividad=actividad.concat("No;");
+        }
+        if(consejeria_vih_its){
+            actividad=actividad.concat("Si;");
+        }else{
+            actividad=actividad.concat("No;");
+        }
+        if(derivacion_colegio){
+            actividad=actividad.concat("Si;");
+        }else{
+            actividad=actividad.concat("No;");
+        }
+        if(derivacion_otra_comuna){
+            actividad=actividad.concat("Si;");
+        }else{
+            actividad=actividad.concat("No;");
+        }
+        if(ingreso_control_prenatal){
+            actividad=actividad.concat("Si;");
+        }else{
+            actividad=actividad.concat("No;");
+        }
+        if(ingreso_programa_cardiovascular){
+            actividad=actividad.concat("Si;");
+        }else{
+            actividad=actividad.concat("No;");
+        }
+        if(ingreso_programa_intervencion){
+            actividad=actividad.concat("Si;");
+        }else{
+            actividad=actividad.concat("No;");
+        }
+        if(ingreso_regulacion_fecundidad){
+            actividad=actividad.concat("Si;");
+        }else{
+            actividad=actividad.concat("No;");
+        }
+        if(ingreso_salud_mental){
+            actividad=actividad.concat("Si;");
+        }else{
+            actividad=actividad.concat("No;");
+        }
+        if(intervencion_breve_alcohol){
+            actividad=actividad.concat("Si;");
+        }else{
+            actividad=actividad.concat("No;");
+        }
+        if(nivelacion_estudios){
+            actividad=actividad.concat("Si;");
+        }else{
+            actividad=actividad.concat("No;");
+        }
+        if(vinculacion_beneficios_sociales){
+            actividad=actividad.concat("Si;");
+        }else{
+            actividad=actividad.concat("No;");
+        }
+        actividad=actividad.concat(otros+";");
+        actividad=actividad.concat(Observaciones);
+        
+        return actividad;
     }
     
+    @Override
+    public Object clone()
+    {
+        Object clone = null;
+        try
+        {
+            clone = super.clone();
+        } 
+        catch(CloneNotSupportedException e)
+        {
+            // No deberia suceder
+        }
+        return clone;
+    }
 }

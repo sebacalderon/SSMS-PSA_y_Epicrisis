@@ -1,7 +1,9 @@
 package managedbeans;
 
 import entities.Crafft;
+import entities.audit;
 import entities.clap;
+import entities.paciente;
 import managedbeans.util.JsfUtil;
 import managedbeans.util.JsfUtil.PersistAction;
 import sessionbeans.CrafftFacadeLocal;
@@ -19,6 +21,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
 @Named("crafftController")
 @SessionScoped
@@ -28,9 +31,13 @@ public class CrafftController implements Serializable {
     private sessionbeans.CrafftFacadeLocal ejbFacade;
     private List<Crafft> items = null;
     private Crafft selected;
+    private Crafft antiguo;
     private int puntajeA;
     private int puntajeB;
 
+    @Inject
+    AuditoriaController auditoriaCtrl;
+    
     public int getPuntajeA() {
         return puntajeA;
     }
@@ -75,14 +82,26 @@ public class CrafftController implements Serializable {
     }
     
     public void create() {
+        Crafft nuevo=(Crafft) selected.clone();
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("CrafftCreated"));
+        auditoriaCtrl.audit((Object) new audit(), nuevo, "CREATE", "Crafft");
+        antiguo=(Crafft) selected.clone();
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-
+    
+    public void prepareUpdate(){
+        if(selected!=null){
+            antiguo=(Crafft) selected.clone();
+        }
+    }
+    
     public void update() {
+        Crafft nuevo=(Crafft) selected.clone();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("CrafftUpdated"));
+        auditoriaCtrl.audit(antiguo, nuevo, "UPDATE", "Crafft");
+        antiguo=(Crafft) selected.clone();
     }
 
     public void destroy() {

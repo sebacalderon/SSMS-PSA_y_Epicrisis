@@ -26,7 +26,29 @@ public class parametros implements Serializable {
     
     @Column(name="ruta_parametros")
     private String ruta;
+    
+    @Column(name="tamano_imagen_parametros")
+    private int tamano_imagen;
+    
+    @Column(name="dominio_parametros")
+    private String dominio;
 
+    public String getDominio() {
+        return dominio;
+    }
+
+    public void setDominio(String dominio) {
+        this.dominio = dominio;
+    }
+
+    public int getTamano_imagen() {
+        return tamano_imagen;
+    }
+
+    public void setTamano_imagen(int tamano_imagen) {
+        this.tamano_imagen = tamano_imagen;
+    }
+    
     public String getRuta() {
         return ruta;
     }
@@ -67,5 +89,18 @@ public class parametros implements Serializable {
     public String toString() {
         return "entities.parametros[ id=" + id + " ]";
     }
-    
+        @Override
+    public Object clone()
+    {
+        Object clone = null;
+        try
+        {
+            clone = super.clone();
+        } 
+        catch(CloneNotSupportedException e)
+        {
+            // No deberia suceder
+        }
+        return clone;
+    }
 }

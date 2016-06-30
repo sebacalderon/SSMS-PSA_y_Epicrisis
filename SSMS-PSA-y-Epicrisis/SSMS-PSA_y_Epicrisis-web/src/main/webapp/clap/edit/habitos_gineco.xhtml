@@ -19,7 +19,7 @@
             <p:breadCrumb>
                 <p:menuitem value="Categories" url="/faces/home.xhtml" />
                 <p:menuitem value="Usuarios"/>
-                <p:menuitem value="Población bajo control" url="/faces/paciente/List.xhtml" />
+                <p:menuitem value="Búsqueda por RUN" url="/faces/paciente/Buscar.xhtml" />
                 <p:menuitem value="#{pacienteController.selected.RUN}-#{pacienteController.selected.DV}" rendered="#{pacienteController.selected.id != null}" url="/faces/paciente/View.xhtml"/>
                 <p:menuitem value="Editar CLAP" />
                 <p:menuitem value="CLAP #{clapController.selected.id}" rendered="#{pacienteController.selected.id != null}"/>
@@ -97,6 +97,10 @@
                                     <f:selectItem itemLabel="si" itemValue="true" />
                                     <f:selectItem itemLabel="no" itemValue="false" />
                                 </p:selectOneRadio>
+                            </b:row>
+                            <br/>
+                            <b:row>
+                                <p:outputLabel value="Horas de sueño" for="horas_sueno" />
                             </b:row>
                             <b:row>
                                 <b:column col-xs="3"><pe:inputNumber minValue="0" maxValue="24" value="#{clapController.selected.horas_sueno}" styleClass="campo-numerico" id="horas_sueno" >

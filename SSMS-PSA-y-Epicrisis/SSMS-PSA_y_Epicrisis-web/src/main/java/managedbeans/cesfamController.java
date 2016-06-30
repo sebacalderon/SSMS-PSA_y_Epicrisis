@@ -30,11 +30,47 @@ public class cesfamController implements Serializable {
     private sessionbeans.cesfamFacadeLocal ejbFacade;
     private List<cesfam> items = null;
     private cesfam selected;
+    private cesfam antiguo;
     
     @Inject
     comunaController comunaCtrl;
+    
+    @Inject
+    AuditoriaController auditoriaCtrl;
 
     public cesfamController() {
+    }
+
+    public cesfamFacadeLocal getEjbFacade() {
+        return ejbFacade;
+    }
+
+    public void setEjbFacade(cesfamFacadeLocal ejbFacade) {
+        this.ejbFacade = ejbFacade;
+    }
+
+    public cesfam getAntiguo() {
+        return antiguo;
+    }
+
+    public void setAntiguo(cesfam antiguo) {
+        this.antiguo = antiguo;
+    }
+
+    public comunaController getComunaCtrl() {
+        return comunaCtrl;
+    }
+
+    public void setComunaCtrl(comunaController comunaCtrl) {
+        this.comunaCtrl = comunaCtrl;
+    }
+
+    public AuditoriaController getAuditoriaCtrl() {
+        return auditoriaCtrl;
+    }
+
+    public void setAuditoriaCtrl(AuditoriaController auditoriaCtrl) {
+        this.auditoriaCtrl = auditoriaCtrl;
     }
 
     public cesfam getSelected() {
@@ -62,14 +98,26 @@ public class cesfamController implements Serializable {
     }
 
     public void create() {
+        cesfam nuevo=(cesfam) selected.clone();
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("cesfamCreated"));
+        auditoriaCtrl.audit((Object) new cesfam(), nuevo, "CREATE", "cesfam");
+        prepareUpdate();
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
+    public void prepareUpdate(){
+        if(selected!=null){
+            antiguo=(cesfam) selected.clone();
+        }
+    }
+    
     public void update() {
+        cesfam nuevo=(cesfam) selected.clone();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("cesfamUpdated"));
+        auditoriaCtrl.audit(antiguo, nuevo, "CREATE", "cesfam");
+        prepareUpdate();
     }
 
     public void destroy() {
