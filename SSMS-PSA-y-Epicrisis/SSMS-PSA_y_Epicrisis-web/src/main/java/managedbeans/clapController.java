@@ -1608,7 +1608,7 @@ public class clapController implements Serializable {
 	return resizedImage;
     }
 
-    private void creaImagen() throws IOException {
+    private void creaImagen(){
         List<parametros> parametrosLista = parametrosCtrl.getItems();
         parametros parametros;
         String ruta;
@@ -1618,18 +1618,25 @@ public class clapController implements Serializable {
             Path folder = Paths.get(ruta);
             String filename = "Clap "+selected.getId();
             String extension = FilenameUtils.getExtension(imagen.getFileName());
-            Path file = Files.createTempFile(folder, filename + "-", "." + extension);
-            
-            try (InputStream input = imagen.getInputstream()) {
-                Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
-                selected.setDiagrama_familiar(ruta+"/"+file.getFileName());
+            Path file;
+            try {
+                    file = Files.createTempFile(folder, filename + "-", "." + extension);
+                    try (InputStream input = imagen.getInputstream()) {
+                    Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
+                    selected.setDiagrama_familiar(ruta+"/"+file.getFileName());
+                }
+                File img = new File(ruta+"/"+file.getFileName());
+                BufferedImage bimg = ImageIO.read(img);
+                int type = bimg.getType() == 0? BufferedImage.TYPE_INT_ARGB : bimg.getType();            
+                BufferedImage resizeImagePng = resizeImage(bimg, type);
+                ImageIO.write(resizeImagePng, "png", new File(ruta+"/"+file.getFileName()));
+                JsfUtil.addSuccessMessage("Imagen Creada");
+            } catch (IOException ex) {
+                JsfUtil.addErrorMessage("La ruta para imágenes esta mal especificada en los parámetros. Contacte al administrador");
+                Logger.getLogger(clapController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            File img = new File(ruta+"/"+file.getFileName());
-            BufferedImage bimg = ImageIO.read(img);
-            int type = bimg.getType() == 0? BufferedImage.TYPE_INT_ARGB : bimg.getType();            
-            BufferedImage resizeImagePng = resizeImage(bimg, type);
-            ImageIO.write(resizeImagePng, "png", new File(ruta+"/"+file.getFileName()));
-            JsfUtil.addSuccessMessage("Imagen Creada");
+            
+            
         }else{
             if (imagen!=null && parametrosLista.isEmpty()) {
                 JsfUtil.addErrorMessage("No existe una ruta para guardar la imagen. Contacte al administrador");
@@ -1879,1320 +1886,1345 @@ public class clapController implements Serializable {
         return false;
     }
     
-    public void createPDF() throws DocumentException, IOException{
-        PdfReader pdfTemplate = new PdfReader("http://localhost:8080/SSMS-PSA_y_Epicrisis-web/faces/resources/otros/template2.pdf");
-        //Document document = new Document();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        //PdfWriter.getInstance(document, baos);
-        String title = "CLAP "+selected.getId()+" "+selected.getRUN()+"-"+selected.getDV()+".pdf";
-        //FileOutputStream fileOutputStream = new FileOutputStream(title);
-        PdfStamper stamper = new PdfStamper(pdfTemplate, baos);
-        
-        AcroFields form = stamper.getAcroFields();
-       
-        ///////////////////////
-        //Seccion de Paciente
-        //////////////////////
-        form.setField("nombres", selected.getNombres());
-        form.setField("apellidos", selected.getPrimer_apellido()+" "+selected.getSegundo_apellido()); 
-        form.setField("domicilio", selected.getCalle_direccion()+", "+selected.getComuna_residencia().getNombre()); 
-        form.setField("nombre_social", selected.getNombre_social()); 
-        if (selected.getCesfam_clap()!= null) {
-            form.setField("centro_salud", selected.getCesfam().getNombre()); 
-            form.setField("codigo", String.valueOf(selected.getCesfam_clap().getId()));
-        }
-        
-        
-        //Formato Nuevo
-        //Condicional de establecimiento educacional o de salud
-        int control = selected.getControl_en();
-        if (control == 1) {
-            form.setField("control_educacional", "Yes");
-            form.setField("establecimiento_educacional", selected.getEstablecimiento_educacional());
-        }else if(control == 2){
-            form.setField("control_salud", "Yes");
+    public void createPDF(){
+        if (parametrosCtrl.getItems().isEmpty()) {
+            JsfUtil.addErrorMessage("No existen parametros de sistema. Contacte al administrador");
         }else{
-            form.setField("", "Yes");            
-        }
-        
-        //Formato nuevo
-        form.setField("hcn", Integer.toString(selected.getHcn()));
-       //Condicional domicilio
-        boolean domicilio = selected.isDomicilio();
-        if (domicilio == true) {
-            form.setField("domicilio_casilla", "Yes");
-        }else{
-            form.setField("", "Yes");            
-        }
-        
-        boolean recado = selected.isRecados();
-        if (recado==true) {
-            form.setField("recados", "Yes");
-        }else{
-            form.setField("", "Yes");            
-        }
-        /////////////////////////////////////////
-        
-        form.setField("tel_fijo", selected.getTelefono_fijo());
-        form.setField("cel", selected.getTelefono_movil());
-        String pattern = "dd-MM-yyyy";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        String date = simpleDateFormat.format(selected.getFecha_nacimiento());
-        //System.out.println(date);
-        form.setField("fecha_nacimiento", date);
-        form.setField("run", selected.getRUN()+"-"+selected.getDV());
-        //Condicional de sexo
-        if (selected.getSexo()== 2) {
-            form.setField("sexo_mujer", "Yes");
-        }else{
-            form.setField("sexo_hombre", "Yes");
-        }
-        //Formato Nuevo
-        //Condicional de beneficiario
-        if (selected.getPrograma_social().getNombre().equals("Sin programa social")) {
-            form.setField("beneficiario_no", "Yes");
-        }else{
-            if (!selected.getPrograma_social().getNombre().equals("No Sabe/No Contesta")) {
-                form.setField("beneficiario_si", "Yes");
-            }
-        }
-        
-        ////////////////
-        form.setField("correo", selected.getCorreo());
-        form.setField("id_consulta", ""+selected.getId());
-        form.setField("fecha", ""+selected.getId());
-        date = simpleDateFormat.format(selected.getFecha_consulta());
-        form.setField("fecha", date);
-        form.setField("anos", ""+selected.getEdad());
-        //Formato Nuevo
-        //CALCULAR MESES
-        form.setField("meses", "");
-        /////////////////////
-        form.setField("pais", selected.getNacionalidad().getNombre());
-        //Condicional de estado civil
-        Long estado_civil = selected.getEstado_conyugal().getId();
-        if (estado_civil == 1) {
-            form.setField("soltero", "Yes");
-        }else if(estado_civil == 2){
-            form.setField("casado", "Yes");
-        }else if(estado_civil == 3){
-            form.setField("viudo", "Yes");
-        }else if(estado_civil == 4){
-            form.setField("separado", "Yes");
-        }else if (estado_civil ==5){   
-            form.setField("conviviente", "Yes");
-        }else{
-            form.setField("divorciado", "Yes");            
-        }
-        //Condicional de pueblo indigena
-        if (selected.getPueblo_originario().getId()==10) {
-            form.setField("pueblo_indigena_no", "Yes");
-        }else if(selected.getPueblo_originario().getId()==11){
-            form.setField("pueblo_indigena", selected.getPueblo_originario().getNombre());
-        }else{
-            form.setField("pueblo_indigena_si", "Yes");
-            form.setField("pueblo_indigena", selected.getPueblo_originario().getNombre());
-        }
-        //Condicional Acompañante
-        String acomp = selected.getAcompanante();
-        if (acomp!=null){
-        if (acomp.equals("solo")) {
-            form.setField("solo", "Yes");
-        }else if(acomp.equals("madre")){
-            form.setField("madre", "Yes");
-        }else if(acomp.equals("padre")){
-            form.setField("padre", "Yes");
-        }else if(acomp.equals("ambos")){
-            form.setField("ambos", "Yes");
-        }else if (acomp.equals("amigo")){   
-            form.setField("amigo", "Yes");
-        }else if (acomp.equals("pareja")){
-            form.setField("pareja", "Yes");            
-        }else if(acomp.equals("pariente")){
-            form.setField("pariente", "Yes");
-        }else{
-            form.setField("otro", "Yes");
-        }
-        }
-        
-        form.setField("motivo_adolescente_1", selected.getMotivo_consulta_adolescente_1());
-        form.setField("motivo_adolescente_2", selected.getMotivo_consulta_adolescente_2());
-        form.setField("motivo_adolescente_3", selected.getMotivo_consulta_adolescente_3());
-        
-        form.setField("motivo_acom_1", selected.getMotivo_consulta_acompanante_1());
-        form.setField("motivo_acom_2", selected.getMotivo_consulta_acompanante_2());
-        form.setField("motivo_acom_3", selected.getMotivo_consulta_acompanante_3());
-        
-        form.setField("descripcion_motivo_consulta", selected.getDescripcion_motivo_consulta());
-        
-		///////////////////////
-        //Seccion de Paciente
-        //////////////////////
-        
-        ///////////////////////
-        //Antecedentes personales
-        //////////////////////
-        //Perinatales
-        int perinatales_normales= selected.getPerinatales_normales();
-        if (perinatales_normales==1) {
-            form.setField("perinatales_si", "Yes");
-        }else if(2==perinatales_normales){
-            form.setField("perinatales_nose", "Yes");
-        }else{
-            form.setField("perinatales_no", "Yes");
-        }
-        
-        //Alergias
-        int alergias= selected.getAlergias_normales();
-        if (alergias==1) {
-            form.setField("alergias_si", "Yes");
-        }else if(2==alergias){
-            form.setField("alergias_nose", "Yes");
-        }else{
-            form.setField("alergias_no", "Yes");
-        }
-        
-        //Vacunas
-        int vacunas= selected.getVacunas_completas();
-        if (vacunas==1) {
-            form.setField("vacunas_si", "Yes");
-        }else if(2==vacunas){
-            form.setField("vacunas_nose", "Yes");
-        }else{
-            form.setField("vacunas_no", "Yes");
-        }
-        
-        //Enfermedades importantes
-        int enf_imp= selected.getEnfermedades_importantes();
-        if (enf_imp==1) {
-            form.setField("enf_imp_si", "Yes");
-        }else if(2==enf_imp){
-            form.setField("enf_imp_nose", "Yes");
-        }else{
-            form.setField("enf_imp_no", "Yes");
-        }
-        
-        //Discapacidad
-        int discapacidad= selected.getDiscapacidad();
-        if (discapacidad==1) {
-            form.setField("discapacidad_si", "Yes");
-        }else if(2==discapacidad){
-            form.setField("discapacidad_nose", "Yes");
-        }else{
-            form.setField("discapacidad_no", "Yes");
-        }
-        
-        //Accidente Relevante
-        int accidente= selected.getAccidentes_relevantes();
-        if (accidente==1) {
-            form.setField("accidente_si", "Yes");
-        }else if(2==accidente){
-            form.setField("accidente_nose", "Yes");
-        }else{
-            form.setField("accidente_no", "Yes");
-        }
-        
-        //Cirugia/hospitalizaciones
-        int cirugia_hosp= selected.getCirugia_hospitalizaciones();
-        if (cirugia_hosp==1) {
-            form.setField("cirugia_hosp_si", "Yes");
-        }else if(2==cirugia_hosp){
-            form.setField("cirugia_hosp_nose", "Yes");
-        }else{
-            form.setField("cirugia_hosp_no", "Yes");
-        }
-        
-        //Uso medicamentos
-        boolean medicamentos= selected.getUso_medicamentos();
-        if (medicamentos==true) {
-            form.setField("medicamentos_si", "Yes");
-        }else{
-            form.setField("medicamentos_no", "Yes");
-        }
-        
-        //Cirugia/hospitalizaciones
-        int salud_mental= selected.getProblemas_salud_mental();
-        if (salud_mental==1) {
-            form.setField("salud_mental_si", "Yes");
-        }else if(2==salud_mental){
-            form.setField("salud_mental_nose", "Yes");
-        }else{
-            form.setField("salud_mental_no", "Yes");
-        }
-        
-        //Violencia
-        int violencia= selected.getViolencia();
-        if (violencia==1) {
-            form.setField("violencia_si", "Yes");
-        }else if(2==violencia){
-            form.setField("violencia_nose", "Yes");
-        }else{
-            form.setField("violencia_no", "Yes");
-        }
-        
-        //Judiciales
-        int judiciales= selected.getJudiciales();
-        if (judiciales==1) {
-            form.setField("judiciales_si", "Yes");
-        }else if(2==judiciales){
-            form.setField("judiciales_nose", "Yes");
-        }else{
-            form.setField("judiciales_no", "Yes");
-        }
-        
-        //Otros
-        int otros= selected.getOtros();
-        if (otros==1) {
-            form.setField("otros_si", "Yes");
-        }else if(2==otros){
-            form.setField("otros_nose", "Yes");
-        }else{
-            form.setField("otros_no", "Yes");
-        }
-        
-        form.setField("ant_personales_obs", selected.getObservaciones_antecdentes_personales());
-        
-        ///////////////////////
-        //Antecedentes familiares
-        //////////////////////
-        //Enfermedades importantes
-        int enf_imp_fam= selected.getEnfermedades_importantes_familia();
-        if (enf_imp_fam==1) {
-            form.setField("enf_imp_fam_si", "Yes");
-        }else if(2==enf_imp_fam){
-            form.setField("enf_imp_fam_nose", "Yes");
-        }else{
-            form.setField("enf_imp_fam_no", "Yes");
-        }
-        
-        //Obesidad
-        int obesidad_fam= selected.getObesidad_familia();
-        if (obesidad_fam==1) {
-            form.setField("obesidad_fam_si", "Yes");
-        }else if(2==obesidad_fam){
-            form.setField("obesidad_fam_nose", "Yes");
-        }else{
-            form.setField("obesidad_fam_no", "Yes");
-        }
-        
-        //Problemas salud mental
-        int salud_mental_fam= selected.getProblemas_salud_mental_familia();
-        if (salud_mental_fam==1) {
-            form.setField("salud_mental_fam_si", "Yes");
-        }else if(2==salud_mental_fam){
-            form.setField("salud_mental_fam_nose", "Yes");
-        }else{
-            form.setField("salud_mental_fam_no", "Yes");
-        }
-        
-        //Violencia intrafamiliar
-        int violencia_intrafam= selected.getViolencia_intrafamiliar();
-        if (violencia_intrafam==1) {
-            form.setField("violencia_intrafam_si", "Yes");
-        }else if(2==violencia_intrafam){
-            form.setField("violencia_intrafam_nose", "Yes");
-        }else{
-            form.setField("violencia_intrafam_no", "Yes");
-        }
-        
-        //Alcohol y otras drogas
-        int alcohol_droga_fam= selected.getAlcohol_y_otras_drogas();
-        if (alcohol_droga_fam==1) {
-            form.setField("alcohol_droga_fam_si", "Yes");
-        }else if(2==alcohol_droga_fam){
-            form.setField("alcohol_droga_fam_nose", "Yes");
-        }else{
-            form.setField("alcohol_droga_fam_no", "Yes");
-        }
-        
-        //Madre y/o padre adolescente
-        int m_p_adolescente_fam= selected.getPadre_adolescente();
-        if (m_p_adolescente_fam==1) {
-            form.setField("m_p_adolescente_fam_si", "Yes");
-        }else if(2==m_p_adolescente_fam){
-            form.setField("m_p_adolescente_fam_nose", "Yes");
-        }else{
-            form.setField("m_p_adolescente_fam_no", "Yes");
-        }
-        
-        //Judiciales
-        int judiciales_fam= 0;//agregar al clap
-        if (judiciales_fam==1) {
-            form.setField("judiciales_fam_si", "Yes");
-        }else if(2==judiciales_fam){
-            form.setField("judiciales_fam_nose", "Yes");
-        }else{
-            form.setField("judiciales_fam_no", "Yes");
-        }
-        
-        int otros_fam= selected.getPadre_adolescente();
-        if (otros_fam==1) {
-            form.setField("otros_fam_si", "Yes");
-        }else if(2==otros_fam){
-            form.setField("otros_fam_nose", "Yes");
-        }else{
-            form.setField("otros_fam_no", "Yes");
-        }
-        
-        form.setField("ant_familiares_obs", selected.getObservaciones_antecedentes_familiares());
-        
-        ///////////////////////
-        //Familia
-        //////////////////////
-        //Vive con
-        boolean solo= selected.isVive_con_solo();
-        if (solo==true) {
-            form.setField("vive_con_solo_si", "Yes");
-        }else{
-            form.setField("vive_con_solo_no", "Yes");
-        }
-        boolean madre= selected.isVive_con_madre();
-        if (madre==true) {
-            form.setField("vive_con_madre_si", "Yes");
-        }else{
-            form.setField("vive_con_madre_no", "Yes");
-        }
-        boolean padre= selected.isVive_con_padre();
-        if (padre==true) {
-            form.setField("vive_con_padre_si", "Yes");
-        }else{
-            form.setField("vive_con_padre_no", "Yes");
-        }
-        boolean institucion= selected.isVive_en_institucion();
-        if (institucion==true) {
-            form.setField("vive_en_institucion_si", "Yes");
-        }else{
-            form.setField("vive_en_institucion_no", "Yes");
-        }
-        boolean con_otros= selected.isVive_con_otros();
-        if (con_otros==true) {
-            form.setField("vive_con_otros_si", "Yes");
-            form.setField("otros_especificacion", selected.getVive_con_especificacion());
+            parametrosCtrl.setSelected(parametrosCtrl.getItems().get(parametrosCtrl.getItems().size()-1));
+            if (parametrosCtrl.getSelected().getDominio() == null) {
+                JsfUtil.addErrorMessage("No existe el dominio en los parámetros. Contacte al Administrador");
+            }else{
+                PdfReader pdfTemplate;
+                try {
+                    parametros parametros;
+                    String dominio;
+                    parametros = parametrosCtrl.getItems().get(parametrosCtrl.getItems().size()-1);
+                    dominio = parametros.getDominio();
+                    pdfTemplate = new PdfReader("http://"+dominio+"/SSMS-PSA_y_Epicrisis-web/faces/resources/otros/template2.pdf");
+                    //Document document = new Document();
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    //PdfWriter.getInstance(document, baos);
+                    String title = "CLAP "+selected.getId()+" "+selected.getRUN()+"-"+selected.getDV()+".pdf";
+                    //FileOutputStream fileOutputStream = new FileOutputStream(title);
+                    PdfStamper stamper;
+                    try {
+                        stamper = new PdfStamper(pdfTemplate, baos);
+                        AcroFields form = stamper.getAcroFields();
 
-        }else{
-            form.setField("vive_con_otros_no", "Yes");
-        }
-        
-        //nivel de instruccion
-        //madre
-        int nivel_instruccion_madre= selected.getNivel_instruccion_madre();
-        if (nivel_instruccion_madre==1) {
-            form.setField("niv_instruc_madre_ninguno", "Yes");
-        }else if(2==nivel_instruccion_madre){
-            form.setField("niv_instruc_madre_basica", "Yes");
-        }else if(3==nivel_instruccion_madre){
-            form.setField("niv_instruc_madre_media", "Yes");
-        }else if(4==nivel_instruccion_madre){
-            form.setField("niv_instruc_madre_superior", "Yes");
-        }else{
-            form.setField("", "Yes");
-        }
-        
-        //padre
-        int nivel_instruccion_padre= selected.getNivel_instruccion_padre();
-        if (nivel_instruccion_padre==1) {
-            form.setField("niv_instruc_padre_ninguno", "Yes");
-        }else if(2==nivel_instruccion_padre){
-            form.setField("niv_instruc_padre_basica", "Yes");
-        }else if(3==nivel_instruccion_padre){
-            form.setField("niv_instruc_padre_media", "Yes");
-        }else if(4==nivel_instruccion_padre){
-            form.setField("niv_instruc_padre_superior", "Yes");
-        }else{
-            form.setField("", "Yes");
-        }
-        
-        //pareja
-        int nivel_instruccion_pareja= selected.getNivel_instruccion_madre();
-        if (nivel_instruccion_pareja==1) {
-            form.setField("niv_instruc_pareja_ninguno", "Yes");
-        }else if(2==nivel_instruccion_pareja){
-            form.setField("niv_instruc_pareja_basica", "Yes");
-        }else if(3==nivel_instruccion_pareja){
-            form.setField("niv_instruc_pareja_media", "Yes");
-        }else if(4==nivel_instruccion_pareja){
-            form.setField("niv_instruc_pareja_superior", "Yes");
-        }else{
-            form.setField("", "Yes");
-        }
-        
-        //Comparte cama
-        boolean comparte_cama= selected.isComparte_cama();
-        if (comparte_cama==true) {
-            form.setField("comparte_cama_si", "Yes");
-            form.setField("comparte_cama_desc", selected.getEspecificacion_comparte_cama());
-        }else{
-            form.setField("comparte_cama_no", "Yes");
-        }
-        
-        //Ocupacion
-        form.setField("ocupacion_madre", selected.getOcupacion_madre());
-        form.setField("ocupacion_padre", selected.getOcupacion_padre());
-        form.setField("ocupacion_pareja", selected.getOcupacion_pareja());
+                        ///////////////////////
+                        //Seccion de Paciente
+                        //////////////////////
+                        form.setField("nombres", selected.getNombres());
+                        form.setField("apellidos", selected.getPrimer_apellido()+" "+selected.getSegundo_apellido()); 
+                        form.setField("domicilio", selected.getCalle_direccion()+", "+selected.getComuna_residencia().getNombre()); 
+                        form.setField("nombre_social", selected.getNombre_social()); 
+                        if (selected.getCesfam_clap()!= null) {
+                            form.setField("centro_salud", selected.getCesfam().getNombre()); 
+                            form.setField("codigo", String.valueOf(selected.getCesfam_clap().getId()));
+                        }
 
-        //Percepcion del adolescente sobre su familia
-        int percepcion_fam= selected.getPercepcion_familia();
-        if (percepcion_fam==1) {
-            form.setField("percepcion_fam_buena", "Yes");
-        }else if(2==percepcion_fam){
-            form.setField("percepcion_fam_regular", "Yes");
-        }else if(3==percepcion_fam){
-            form.setField("percepcion_fam_mala", "Yes");
-        }else if(4==percepcion_fam){
-            form.setField("percepcion_fam_nohay", "Yes");
-        }else{
-            form.setField("", "Yes");
-        }
-        /////////////
-        //Vivienda
-        /////////////
-        //Condiciones sanitarias
-        boolean cond_sanitarias= selected.isCondiciones_sanitarias();
-        if (cond_sanitarias==true) {
-            form.setField("condiciones_sanitarias_si", "Yes");
-        }else{
-            form.setField("condiciones_sanitarias_no", "Yes");
-        }
-        
-        //Hacinamiento
-        boolean hacinamiento_vivienda= selected.isHacinamiento();
-        if (hacinamiento_vivienda==true) {
-            form.setField("hacinamiento_si", "Yes");
-        }else{
-            form.setField("hacinamiento_no", "Yes");
-        }
-        form.setField("vivienda_observacion", selected.getObservaciones_vivienda());
-        
-        /////////////
-        //Educacion
-        /////////////
-        //Estudia
-        boolean estudia= selected.isEstudia();
-        if (estudia==true) {
-            form.setField("estudia_si", "Yes");
-        }else{
-            form.setField("estudia_no", "Yes");
-        }
-        
-        //Nivel
-        int nivel_estudio= selected.getNivel_educacion();
-        if (nivel_estudio==1) {
-            form.setField("nivel_no_escolarizado", "Yes");
-        }else if(2==nivel_estudio){
-            form.setField("nivel_educacion_basica", "Yes");
-        }else if(3==nivel_estudio){
-            form.setField("nivel_educacion_media", "Yes");
-        }else if(4==nivel_estudio){
-            form.setField("nivel_educacion_superior", "Yes");
-        }else{
-            form.setField("", "Yes");
-        }
-        
-        //Grado o Curso
-        form.setField("curso", selected.getCurso());
-        
-        //Años Repetidos
-        form.setField("anios_repetidos", Integer.toString(selected.getAnos_repetidos()));
-        form.setField("causa_repitencia", selected.getCausa_anos_repetidos());
 
-        //problemas en la  escuela
-        boolean problemas_en_escuela= selected.isProblemas_escuela();
-        if (problemas_en_escuela==true) {
-            form.setField("problemas_en_escuela_si", "Yes");
-        }else{
-            form.setField("problemas_en_escuela_no", "Yes");
-        }        
-        
-        //violencia escolar
-        boolean violencia_escolar= selected.isViolencia_escolar();
-        if (violencia_escolar==true) {
-            form.setField("violencia_escolar_si", "Yes");
-        }else{
-            form.setField("violencia_escolar_no", "Yes");
-        } 
-        
-        //desercion/exclusion
-        boolean desercion_exclusion= selected.isDesercion_exclusion();
-        if (desercion_exclusion==true) {
-            form.setField("desercion_exclusion_si", "Yes");
-        }else{
-            form.setField("desercion_exclusion_no", "Yes");
-        } 
-        form.setField("desercion_exclusion_causa", selected.getCausa_desercion_exclusion());
+                        //Formato Nuevo
+                        //Condicional de establecimiento educacional o de salud
+                        int control = selected.getControl_en();
+                        if (control == 1) {
+                            form.setField("control_educacional", "Yes");
+                            form.setField("establecimiento_educacional", selected.getEstablecimiento_educacional());
+                        }else if(control == 2){
+                            form.setField("control_salud", "Yes");
+                        }else{
+                            form.setField("", "Yes");            
+                        }
 
-        
-        //Percecpcion del rendimiento respecto a la mayoria de sus compañeros
-        
-        int percepcion_rendimiento= selected.getNivel_educacion();
-        if (percepcion_rendimiento==1) {
-            form.setField("percepcion_rendimiento_mejor", "Yes");
-        }else if(2==percepcion_rendimiento){
-            form.setField("percepcion_rendimiento_peor", "Yes");
-        }else if(3==percepcion_rendimiento){
-            form.setField("percepcion_rendimiento_igual", "Yes");
-        }else{
-            form.setField("", "Yes");
-        }
-        
-        /////////////
-        //Trabajo
-        /////////////
-        //trabaja
-        boolean trabaja= selected.isTrabaja();
-        if (trabaja==true) {
-            form.setField("trabaja_si", "Yes");
-        }else{
-            form.setField("trabaja_no", "Yes");
-        } 
-        form.setField("trabaja_horas", Integer.toString(selected.getHoras_trabajo()));
+                        //Formato nuevo
+                        form.setField("hcn", Integer.toString(selected.getHcn()));
+                       //Condicional domicilio
+                        boolean domicilio = selected.isDomicilio();
+                        if (domicilio == true) {
+                            form.setField("domicilio_casilla", "Yes");
+                        }else{
+                            form.setField("", "Yes");            
+                        }
 
-        //trabajo
-        boolean trabajo_infantil= selected.isTrabajo_infantil();
-        if (trabajo_infantil==true) {
-            form.setField("trabajo_infantil_si", "Yes");
-        }else{
-            form.setField("trabajo_infantil_no", "Yes");
-        } 
-        boolean trabajo_juvenil= selected.isTrabajo_juvenil();
-        if (trabajo_juvenil==true) {
-            form.setField("trabajo_juvenil_si", "Yes");
-        }else{
-            form.setField("trabajo_juvenil_no", "Yes");
-        }
-        
-        //peores formas
-        boolean peores_formas= selected.isPeores_formas();
-        if (peores_formas==true) {
-            form.setField("peores_formas_si", "Yes");
-        }else{
-            form.setField("peores_formas_no", "Yes");
-        } 
-        
-        //servicio doméstico no remunerado peligroso
-        boolean servicio_domestico= selected.isSer_dom_no_remu_peligroso();
-        if (servicio_domestico==true) {
-            form.setField("serv_domestico_si", "Yes");
-        }else{
-            form.setField("serv_domestico_no", "Yes");
-        }
-        
-        //Razon de trabajo        
-        int razon_trabajo= selected.getRazon_de_trabajo();
-        if (razon_trabajo==1) {
-            form.setField("razon_trabajo_economica", "Yes");
-        }else if(2==razon_trabajo){
-            form.setField("razon_trabajo_autonomia", "Yes");
-        }else if(3==razon_trabajo){
-            form.setField("razon_trabajo_megusta", "Yes");
-        }else if(4==razon_trabajo){
-            form.setField("razon_trabajo_otra", "Yes");
-        }else if(5==razon_trabajo){
-            form.setField("razon_trabajo_nc", "Yes");
-        }else{
-            form.setField("", "Yes");
-        }
-        
-        //legalizado
-        int legalizado= selected.getLegalizado();
-        if (legalizado==1) {
-            form.setField("legalizado_si", "Yes");
-        }else if(2==legalizado){
-            form.setField("legalizado_no", "Yes");
-        }else if(3==legalizado){
-            form.setField("legalizado_nc", "Yes");
-        }else{
-            form.setField("", "Yes");
-        }
-        
-        //Tipo de trabajo
-        form.setField("tipo_trabajo", selected.getTipo_de_trabajo());
-        
-        //Trabajo observaciones
-        form.setField("trabajo_observaciones", selected.getObservaciones_trabajo());
+                        boolean recado = selected.isRecados();
+                        if (recado==true) {
+                            form.setField("recados", "Yes");
+                        }else{
+                            form.setField("", "Yes");            
+                        }
+                        /////////////////////////////////////////
 
-        //////////////////
-        //Vida Social
-        /////////////////
-        //Aceptacion
-        int aceptacion= selected.getLegalizado();
-        if (aceptacion==1) {
-            form.setField("aceptacion_aceptado", "Yes");
-        }else if(2==aceptacion){
-            form.setField("aceptacion_ignorado", "Yes");
-        }else if(3==aceptacion){
-            form.setField("aceptacion_rechazado", "Yes");
-        }else if(4==aceptacion){
-            form.setField("aceptacion_no_sabe", "Yes");
-        }else{
-            form.setField("", "Yes");
-        }
-        
-        //Pareja
-        boolean pareja= selected.isPareja();
-        if (pareja==true) {
-            form.setField("pareja_si", "Yes");
-        }else{
-            form.setField("pareja_no", "Yes");
-        }
-        
-        //edad de pareja en anios y meses(?) faltan los meses
-        form.setField("pareja_edad_anios", Integer.toString(selected.getEdad_pareja()));
+                        form.setField("tel_fijo", selected.getTelefono_fijo());
+                        form.setField("cel", selected.getTelefono_movil());
+                        String pattern = "dd-MM-yyyy";
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+                        String date = simpleDateFormat.format(selected.getFecha_nacimiento());
+                        //System.out.println(date);
+                        form.setField("fecha_nacimiento", date);
+                        form.setField("run", selected.getRUN()+"-"+selected.getDV());
+                        //Condicional de sexo
+                        if (selected.getSexo()== 2) {
+                            form.setField("sexo_mujer", "Yes");
+                        }else{
+                            form.setField("sexo_hombre", "Yes");
+                        }
+                        //Formato Nuevo
+                        //Condicional de beneficiario
+                        if (selected.getPrograma_social().getNombre().equals("Sin programa social")) {
+                            form.setField("beneficiario_no", "Yes");
+                        }else{
+                            if (!selected.getPrograma_social().getNombre().equals("No Sabe/No Contesta")) {
+                                form.setField("beneficiario_si", "Yes");
+                            }
+                        }
 
-        //violencia en la Pareja
-        boolean violencia_pareja= selected.isViolencia_pareja();
-        if (violencia_pareja==true) {
-            form.setField("violencia_pareja_si", "Yes");
-        }else{
-            form.setField("violencia_pareja_no", "Yes");
-        }
-        
-        //amigos
-        boolean amigos= selected.isAmigos();
-        if (amigos==true) {
-            form.setField("amigos_si", "Yes");
-        }else{
-            form.setField("amigos_no", "Yes");
-        }
-        
-        //actividad fisica
-        form.setField("actividad_fisica_horas", Integer.toString(selected.getHoras_actividad_fisica()));
+                        ////////////////
+                        form.setField("correo", selected.getCorreo());
+                        form.setField("id_consulta", ""+selected.getId());
+                        form.setField("fecha", ""+selected.getId());
+                        date = simpleDateFormat.format(selected.getFecha_consulta());
+                        form.setField("fecha", date);
+                        form.setField("anos", ""+selected.getEdad());
+                        //Formato Nuevo
+                        //CALCULAR MESES
+                        form.setField("meses", "");
+                        /////////////////////
+                        form.setField("pais", selected.getNacionalidad().getNombre());
+                        //Condicional de estado civil
+                        Long estado_civil = selected.getEstado_conyugal().getId();
+                        if (estado_civil == 1) {
+                            form.setField("soltero", "Yes");
+                        }else if(estado_civil == 2){
+                            form.setField("casado", "Yes");
+                        }else if(estado_civil == 3){
+                            form.setField("viudo", "Yes");
+                        }else if(estado_civil == 4){
+                            form.setField("separado", "Yes");
+                        }else if (estado_civil ==5){   
+                            form.setField("conviviente", "Yes");
+                        }else{
+                            form.setField("divorciado", "Yes");            
+                        }
+                        //Condicional de pueblo indigena
+                        if (selected.getPueblo_originario().getId()==10) {
+                            form.setField("pueblo_indigena_no", "Yes");
+                        }else if(selected.getPueblo_originario().getId()==11){
+                            form.setField("pueblo_indigena", selected.getPueblo_originario().getNombre());
+                        }else{
+                            form.setField("pueblo_indigena_si", "Yes");
+                            form.setField("pueblo_indigena", selected.getPueblo_originario().getNombre());
+                        }
+                        //Condicional Acompañante
+                        String acomp = selected.getAcompanante();
+                        if (acomp!=null){
+                        if (acomp.equals("solo")) {
+                            form.setField("solo", "Yes");
+                        }else if(acomp.equals("madre")){
+                            form.setField("madre", "Yes");
+                        }else if(acomp.equals("padre")){
+                            form.setField("padre", "Yes");
+                        }else if(acomp.equals("ambos")){
+                            form.setField("ambos", "Yes");
+                        }else if (acomp.equals("amigo")){   
+                            form.setField("amigo", "Yes");
+                        }else if (acomp.equals("pareja")){
+                            form.setField("pareja", "Yes");            
+                        }else if(acomp.equals("pariente")){
+                            form.setField("pariente", "Yes");
+                        }else{
+                            form.setField("otro", "Yes");
+                        }
+                        }
 
-        //tv
-        form.setField("tv_horas", Integer.toString(selected.getHoras_tv()));
+                        form.setField("motivo_adolescente_1", selected.getMotivo_consulta_adolescente_1());
+                        form.setField("motivo_adolescente_2", selected.getMotivo_consulta_adolescente_2());
+                        form.setField("motivo_adolescente_3", selected.getMotivo_consulta_adolescente_3());
 
-        //computador/consola y otros
-        form.setField("pc_horas", Integer.toString(selected.getHoras_computador_consola()));
+                        form.setField("motivo_acom_1", selected.getMotivo_consulta_acompanante_1());
+                        form.setField("motivo_acom_2", selected.getMotivo_consulta_acompanante_2());
+                        form.setField("motivo_acom_3", selected.getMotivo_consulta_acompanante_3());
 
-        //otras actividades
-        boolean otras_actividades= selected.isOtras_actividades();
-        if (otras_actividades==true) {
-            form.setField("otras_actividades_si", "Yes");
-            form.setField("otras_actividades_cuales", selected.getEspecificacion_otras_actividades());
-        }else{
-            form.setField("otras_actividades_no", "Yes");
-        }
-        
-        //grooming
-        boolean grooming= selected.isGrooming();
-        if (grooming==true) {
-            form.setField("grooming_si", "Yes");
-        }else{
-            form.setField("grooming_no", "Yes");
-        }
-        
-        //cyberbullyng
-        boolean cyberbullyng= selected.isCyberbulling();
-        if (cyberbullyng==true) {
-            form.setField("cyberbullyng_si", "Yes");
-        }else{
-            form.setField("cyberbullyng_no", "Yes");
-        }
-        
-        //vida social observaciones
-        form.setField("vida_social_observaciones", selected.getObservaciones_vida_social());
-        
-        //////////////////
-        //Habitos y cosnumo
-        /////////////////
-        //Sueño normal
-        boolean suenio_normal= selected.isSueno_normal();
-        if (suenio_normal==true) {
-            form.setField("suenio_normal_si", "Yes");
-        }else{
-            form.setField("suenio_normal_no", "Yes");
-        }
-        //horas de suenio
-        form.setField("comida_familia", Integer.toString(selected.getHoras_sueno()));
+                        form.setField("descripcion_motivo_consulta", selected.getDescripcion_motivo_consulta());
 
-        //alimentacion adecuada
-        boolean alimentacion= selected.isAlimentacion_adecuada();
-        if (alimentacion==true) {
-            form.setField("alimentacion_adecuada_si", "Yes");
-        }else{
-            form.setField("alimentacion_adecuada_no", "Yes");
-        }
-        
-        //comidas con la familia
-        form.setField("suenio_horas", Integer.toString(selected.getComidas_familia()));
+                                ///////////////////////
+                        //Seccion de Paciente
+                        //////////////////////
 
-        //alimentacion especial
-        boolean alimentacion_especial= selected.isAlimentacion_especial();
-        if (alimentacion_especial==true) {
-            form.setField("alimentacion_especial_si", "Yes");
-            form.setField("alimentacion_especial_cual", selected.getEspecificacion_alimentacion_especial());
-        }else{
-            form.setField("alimentacion_especial_no", "Yes");
-        }
-        
-        //Tabaco
-        boolean tabaco= selected.isTabaco();
-        if (tabaco==true) {
-            form.setField("tabaco_si", "Yes");
-        }else{
-            form.setField("tabaco_no", "Yes");
-        }
-	//Promedio de tabaco
-	form.setField("prom_cigarro", Integer.toString(selected.getCigarros_dia()));
-        
-        //Alcohol y otras drogas
-        //alcohol
-        boolean alcohol= selected.isConsumo_alcohol();
-        if (alcohol==true) {
-            form.setField("alcohol_si", "Yes");
-        }else{
-            form.setField("alcohol_no", "Yes");
-        }
-        //marihuana
-        boolean marihuana= selected.isConsumo_marihuana();
-        if (marihuana==true) {
-            form.setField("marihuana_si", "Yes");
-        }else{
-            form.setField("marihuana_no", "Yes");
-        }
-        //otras sustancias
-        boolean otra_sustancia= selected.isConsumo_otra_sustancia();
-        if (otra_sustancia==true) {
-            form.setField("otra_sustancia_si", "Yes");
-            form.setField("otra_sustancia_cual", selected.getEspecificacion_consumo_otra_sustancia());
-        }else{
-            form.setField("otra_sustancia_no", "Yes");
-        }
-        
-        //seguridad vial
-        boolean seguridad_vial= selected.isSeguridad_vial();
-        if (seguridad_vial==true) {
-            form.setField("seguridad_vial_si", "Yes");
-        }else{
-            form.setField("seguridad_vial_no", "Yes");
-        }
-        
-        //habitos y consumo observaciones
-        form.setField("habitos_consumo_obs", selected.getObservaciones_habitos_consumo());
-        
-        ///////////////////
-        //gineco/urologica
-        ///////////////////
-        //menarca/espermarca
-        form.setField("menarca_espermarca", Integer.toString(selected.getEdad_menarca_espermarca()));
+                        ///////////////////////
+                        //Antecedentes personales
+                        //////////////////////
+                        //Perinatales
+                        int perinatales_normales= selected.getPerinatales_normales();
+                        if (perinatales_normales==1) {
+                            form.setField("perinatales_si", "Yes");
+                        }else if(2==perinatales_normales){
+                            form.setField("perinatales_nose", "Yes");
+                        }else{
+                            form.setField("perinatales_no", "Yes");
+                        }
 
-        //fecha ultima menstruacion
-        if (selected.getFecha_ultima_menstruacion()!=null) {
-            date = simpleDateFormat.format(selected.getFecha_ultima_menstruacion());
-            form.setField("fecha_menstruacion", date);
-        }
-        
-        boolean menstruacion= selected.isNo_conoce_fecha_ultima_menstruacion();
-        if (menstruacion==true) {
-            form.setField("menstruacion_no_conoce", "Yes");
-        }else{
-            form.setField("menstruacion_nc", "Yes");
-        }
-        
-        //Ciclos regulares
-        int ciclo_regular= selected.getCiclos_regulares();
-        if (ciclo_regular==1) {
-            form.setField("ciclo_regular_si", "Yes");
-        }else if(2==aceptacion){
-            form.setField("ciclo_regular_no", "Yes");
-        }else if(3==aceptacion){
-            form.setField("ciclo_regular_ns", "Yes");
-        }else if(4==aceptacion){
-            form.setField("ciclo_regular_nc", "Yes");
-        }else{
-            form.setField("", "Yes");
-        }
-        
-        //dismenorrea
-        int dismenorrea= selected.getCiclos_regulares();
-        if (dismenorrea==1) {
-            form.setField("dismenorrea_si", "Yes");
-        }else if(2==dismenorrea){
-            form.setField("dismenorrea_no", "Yes");
-        }else if(3==dismenorrea){
-            form.setField("dismenorrea_nc", "Yes");
-        }else{
-            form.setField("", "Yes");
-        }
-        
-        //flujo patologico vaginal/secrecion peneana
-        boolean flujo_secrecion= selected.isFlujo_secrecion_patologico();
-        if (flujo_secrecion==true) {
-            form.setField("flujo_secrecion_si", "Yes");
-        }else{
-            form.setField("flujo_secrecion_no", "Yes");
-        }
-        
-        //ITS/VIH
-        boolean its_vih= selected.isIts_vih();
-        if (its_vih==true) {
-            form.setField("its_vih_si", "Yes");
-            form.setField("its_vih_cual", selected.getEspecificacion_its_vih());
-        }else{
-            form.setField("its_vih_no", "Yes");
-        }
-        //Tratamiento
-        int tratamiento= selected.getTratamiento();
-        if (tratamiento==1) {
-            form.setField("its_vih_tratamiento_si", "Yes");
-        }else if(2==tratamiento){
-            form.setField("its_vih_tratamiento_no", "Yes");
-        }else if(3==tratamiento){
-            form.setField("its_vih_tratamiento_ns", "Yes");
-        }else{
-            form.setField("", "Yes");
-        }
-        //Tratamiento contactos
-        int tratamiento_contactos= selected.getTratamiento();
-        if (tratamiento_contactos==1) {
-            form.setField("its_vih_tratamiento_contactos_si", "Yes");
-        }else if(2==tratamiento_contactos){
-            form.setField("its_vih_tratamiento_contactos_no", "Yes");
-        }else if(3==tratamiento_contactos){
-            form.setField("its_vih_tratamiento_contactos_ns", "Yes");
-        }else{
-            form.setField("", "Yes");
-        }
-        
-        //embarazo, hijos. abortos
-        int embarazos= selected.getEmbarazos();
-        if (embarazos>0) {
-            form.setField("embarazos", "Yes");
-        }else{
-            form.setField("", "Yes");
-        }
-        int hijos= selected.getHijos();
-        if (hijos>0) {
-            form.setField("hijos", "Yes");
-        }else{
-            form.setField("", "Yes");
-        }
-        int abortos= selected.getAbortos();
-        if (abortos>0) {
-            form.setField("abortos", "Yes");
-        }else{
-            form.setField("", "Yes");
-        }
-        
-        //observaciones gineco urologicas
-        form.setField("gineco_urologico_obs", selected.getObservaciones_gineco_urologico());
-        
-        //////////////////
-        //Sexualidad
-        /////////////////
-        //orientacion sexual
-        int orient_sexual= selected.getOrientacion_sexual();
-        if (orient_sexual==1) {
-            form.setField("heterosexual", "Yes");
-        }else if(2==orient_sexual){
-            form.setField("homosexual", "Yes");
-        }else if(3==orient_sexual){
-            form.setField("bisexual", "Yes");
-        }else if(4==orient_sexual){
-            form.setField("orient_sexual_nr", "Yes");
-        }else{
-            form.setField("orient_sexual_desc", selected.getEspecificacion_orientacion_sexual());
-        }
-        
-        //intencion o conducta sexual
-        int conducta_sexual= selected.getConducta_sexual();
-        if (conducta_sexual==1) {
-            form.setField("postergadora", "Yes");
-        }else if(2==conducta_sexual){
-            form.setField("anticipadora", "Yes");
-        }else if(3==conducta_sexual){
-            form.setField("activa", "Yes");
-            form.setField("edad_inicio_sexual", Integer.toString(selected.getEdad_inicio_conducta_sexual()));
-        }else{
-            form.setField("","Yes");
-        }
-        
-        //relaciones sexuales con
-        int relaciones_sexuales= selected.getRelaciones_sexuales();
-        if (relaciones_sexuales==1) {
-            form.setField("rel_sex_distinto", "Yes");
-        }else if(2==relaciones_sexuales){
-            form.setField("rel_sex_mismo", "Yes");
-        }else if(3==relaciones_sexuales){
-            form.setField("rel_sex_ambos", "Yes");
-        }else if(4==relaciones_sexuales){
-            form.setField("rel_sex_nc", "Yes");
-        }else{
-            form.setField("","Yes");
-        }
+                        //Alergias
+                        int alergias= selected.getAlergias_normales();
+                        if (alergias==1) {
+                            form.setField("alergias_si", "Yes");
+                        }else if(2==alergias){
+                            form.setField("alergias_nose", "Yes");
+                        }else{
+                            form.setField("alergias_no", "Yes");
+                        }
 
-        //pareja sexual
-        int pareja_sexual= selected.getPareja_sexual();
-        if (pareja_sexual==1) {
-            form.setField("pareja_sexual_unica", "Yes");
-        }else if(2==pareja_sexual){
-            form.setField("pareja_sexual_varias", "Yes");
-        }else if(3==pareja_sexual){
-            form.setField("pareja_sexual_nc", "Yes");
-        }else{
-            form.setField("","Yes");
-        }
-        //dificultades en relaciones sexuales
-        int dificultad_rel_sex= selected.getPareja_sexual();
-        if (dificultad_rel_sex==1) {
-            form.setField("dificultad_rel_sex_si", "Yes");
-        }else if(2==dificultad_rel_sex){
-            form.setField("dificultad_rel_sex_no", "Yes");
-        }else if(3==dificultad_rel_sex){
-            form.setField("dificultad_rel_sex_nc", "Yes");
-        }else{
-            form.setField("","Yes");
-        }
-        
-        //Anticoncepcion
-        //uso condon
-        int anticoncepcion= selected.getAnticoncepcion();
-        if (anticoncepcion==1) {
-            form.setField("condon_siempre", "Yes");
-        }else if(2==anticoncepcion){
-            form.setField("condon_aveces", "Yes");
-        }else if(3==anticoncepcion){
-            form.setField("condon_nunca", "Yes");
-        }else{
-            form.setField("","Yes");
-        }
-        
-        //doble proteccion 
-        boolean doble_proteccion= selected.isDoble_proteccion();
-        if (doble_proteccion==true) {
-            form.setField("doble_proteccion_si", "Yes");
-        }else{
-            form.setField("doble_proteccion_no", "Yes");
-        }
-        
-        //uso mac
-        int uso_mac= selected.getUso_mac();
-        if (uso_mac==1) {
-            form.setField("uso_mac_si", "Yes");
-        }else if(2==uso_mac){
-            form.setField("uso_mac_no", "Yes");
-        }else if(3==uso_mac){
-            form.setField("uso_mac_aveces", "Yes");
-        }else{
-            form.setField("","Yes");
-        }
-        form.setField("uso_mac_cual", selected.getEspecificacion_uso_mac());
-        form.setField("uso_mac_razon", selected.getRazon_no_uso_mac());
-        
-        //consejeria uso mac
-        boolean consejeria= selected.isConsejeria_uso_mac();
-        if (consejeria==true) {
-            form.setField("consejeria_mac_si", "Yes");
-        }else{
-            form.setField("consejeria_mac_no", "Yes");
-        }
-        
-        //aco de emergencia
-        boolean aco_emergencia= selected.isAco_emergencia();
-        if (aco_emergencia==true) {
-            form.setField("aco_emergencia_si", "Yes");
-        }else{
-            form.setField("aco_emergencia_no", "Yes");
-        }
-        
-        //violencia sexual
-        boolean violencia_sexual= selected.isAbuso_sexual();
-        if (violencia_sexual==true) {
-            form.setField("violencia_sexual_si", "Yes");
-        }else{
-            form.setField("violencia_sexual_no", "Yes");
-        }
-        
-        //violencia sexual reparacion
-        boolean reparacion= selected.isReparacion_abuso_sexual();
-        if (reparacion==true) {
-            form.setField("violencia_sexual_reparacion_si", "Yes");
-        }else{
-            form.setField("violencia_sexual_reparacion_no", "Yes");
-        }
-        
-        //sexualidad_observaciones
-        form.setField("sexualidad_observaciones", selected.getObservaciones_sexualidad());
+                        //Vacunas
+                        int vacunas= selected.getVacunas_completas();
+                        if (vacunas==1) {
+                            form.setField("vacunas_si", "Yes");
+                        }else if(2==vacunas){
+                            form.setField("vacunas_nose", "Yes");
+                        }else{
+                            form.setField("vacunas_no", "Yes");
+                        }
 
-        /////////////////
-        //situacion sico-emocional
-        /////////////////
-        //imagen corporal
-        int imagen_corporal= selected.getImagen_corporal();
-        if (imagen_corporal==1) {
-            form.setField("imagen_corporal_conforme", "Yes");
-        }else if(2==imagen_corporal){
-            form.setField("imagen_corporal_crea_preocupaciones", "Yes");
-        }else if(3==imagen_corporal){
-            form.setField("imagen_corporal_impide", "Yes");
-        }else{
-            form.setField("","Yes");
-        }
-        //vida con proyecto
-        int vida_con_proyecto= selected.getVida_proyecto();
-        if (vida_con_proyecto==1) {
-            form.setField("vida_con_proyecto_claro", "Yes");
-        }else if(2==vida_con_proyecto){
-            form.setField("vida_con_proyecto_confuso", "Yes");
-        }else if(3==vida_con_proyecto){
-            form.setField("vida_con_proyecto_ausente", "Yes");
-        }else{
-            form.setField("","Yes");
-        }
-        
-        //bienestar emocional
-        int bienestar_emocional= selected.getBienestar_emocional();
-        if (bienestar_emocional==1) {
-            form.setField("normal", "Yes");
-        }else if(2==bienestar_emocional){
-            form.setField("deprimido", "Yes");
-        }else if(3==bienestar_emocional){
-            form.setField("irritable", "Yes");
-        }else if(4==bienestar_emocional){
-            form.setField("desesperanzado", "Yes");
-        }else if(5==bienestar_emocional){
-            form.setField("poco_interes", "Yes");
-        }else if(6==bienestar_emocional){
-            form.setField("euforico", "Yes");
-        }else if(7==bienestar_emocional){
-            form.setField("ansioso", "Yes");
-        }else if(8==bienestar_emocional){
-            form.setField("alta_impulsividad", "Yes");
-        }else if(9==bienestar_emocional){
-            form.setField("autoagresiones", "Yes");
-        }else{
-            form.setField("","Yes");
-        }
-        
-        //riesgo suicida
-        //suicidalidad
-        boolean suicidalidad= selected.isSuicidalidad_amigos();
-        if (suicidalidad==true) {
-            form.setField("suicidalidad_si", "Yes");
-        }else{
-            form.setField("suicidalidad_no", "Yes");
-        }
-        //ideacion suicida
-        boolean ideacion_suicida= selected.isIdeacion_suicida();
-        if (ideacion_suicida==true) {
-            form.setField("ideacion_suicida_si", "Yes");
-        }else{
-            form.setField("ideacion_suicida_no", "Yes");
-        }
-        //intento suicida
-        boolean intento_suicida= selected.isIntento_suicida();
-        if (intento_suicida==true) {
-            form.setField("intento_suicida_si", "Yes");
-        }else{
-            form.setField("intento_suicida_no", "Yes");
-        }
-        
-        //referente adulto
-        int referente_adulto= selected.getReferente_adulto();
-        if (referente_adulto==1) {
-            form.setField("referente_adulto_padre", "Yes");
-        }else if(2==referente_adulto){
-            form.setField("referente_adulto_madre", "Yes");
-        }else if(3==referente_adulto){
-            form.setField("referente_adulto_familiar", "Yes");
-        }else if(4==referente_adulto){
-            form.setField("referente_adulto_otro", "Yes");
-        }else if(5==referente_adulto){
-            form.setField("referente_adulto_ninguno", "Yes");
-        }else{
-            form.setField("","Yes");
-        }
-        //referente adulto nombre
-        form.setField("referente_adulto_nombre", selected.getNombre_referente_adulto());
+                        //Enfermedades importantes
+                        int enf_imp= selected.getEnfermedades_importantes();
+                        if (enf_imp==1) {
+                            form.setField("enf_imp_si", "Yes");
+                        }else if(2==enf_imp){
+                            form.setField("enf_imp_nose", "Yes");
+                        }else{
+                            form.setField("enf_imp_no", "Yes");
+                        }
 
-        //referente adulto telefono
-        form.setField("referente_adulto_telefono", selected.getTelefono_referente_adulto());
+                        //Discapacidad
+                        int discapacidad= selected.getDiscapacidad();
+                        if (discapacidad==1) {
+                            form.setField("discapacidad_si", "Yes");
+                        }else if(2==discapacidad){
+                            form.setField("discapacidad_nose", "Yes");
+                        }else{
+                            form.setField("discapacidad_no", "Yes");
+                        }
 
-        //situacion sico-emocional observaciones
-        form.setField("situacion_psico_emocional_obs", selected.getObservaciones_psico_emocional());
+                        //Accidente Relevante
+                        int accidente= selected.getAccidentes_relevantes();
+                        if (accidente==1) {
+                            form.setField("accidente_si", "Yes");
+                        }else if(2==accidente){
+                            form.setField("accidente_nose", "Yes");
+                        }else{
+                            form.setField("accidente_no", "Yes");
+                        }
 
-        ////////////////
-        //Examen fisico
-        ///////////////
-        //peso
-        form.setField("peso", Integer.toString(selected.getPeso()));
+                        //Cirugia/hospitalizaciones
+                        int cirugia_hosp= selected.getCirugia_hospitalizaciones();
+                        if (cirugia_hosp==1) {
+                            form.setField("cirugia_hosp_si", "Yes");
+                        }else if(2==cirugia_hosp){
+                            form.setField("cirugia_hosp_nose", "Yes");
+                        }else{
+                            form.setField("cirugia_hosp_no", "Yes");
+                        }
 
-        //talla
-        form.setField("talla", Integer.toString(selected.getTalla()));
-        
-        //p_abdominal
-        form.setField("p_abdominal", Integer.toString(selected.getPerimetro_abdominal()));
-        
-        //imc
-        form.setField("imc", String.valueOf(selected.getImc()));
-        
-        //presion_arterial_1
-        form.setField("presion_arterial_1", Integer.toString(selected.getPresion_arterial_sistolica()));
-        
-        //presion_arterial_2
-        form.setField("presion_arterial_2", Integer.toString(selected.getPresion_arterial_diastolica()));
+                        //Uso medicamentos
+                        boolean medicamentos= selected.getUso_medicamentos();
+                        if (medicamentos==true) {
+                            form.setField("medicamentos_si", "Yes");
+                        }else{
+                            form.setField("medicamentos_no", "Yes");
+                        }
 
-        //aspecto general
-        boolean aspecto_general= selected.isAspecto_general();
-        if (aspecto_general==true) {
-            form.setField("aspecto_general_normal", "Yes");
-        }else{
-            form.setField("aspecto_general_anormal", "Yes");
-        }
-        
-        //agudeza visual
-        boolean agudeza_visual= selected.isAgudeza_visual();
-        if (agudeza_visual==true) {
-            form.setField("agud_visual_normal", "Yes");
-        }else{
-            form.setField("agud_visual_anormal", "Yes");
-        }
-        
-        //agudeza auditiva
-        boolean agud_auditiva= selected.isAgudeza_auditiva();
-        if (aspecto_general==true) {
-            form.setField("agud_auditiva_normal", "Yes");
-        }else{
-            form.setField("agud_auditiva_anormal", "Yes");
-        }
-        
-        //salud bucal
-        boolean salud_bucal= selected.isSalud_bucal();
-        if (salud_bucal==true) {
-            form.setField("salud_bucal_normal", "Yes");
-        }else{
-            form.setField("salud_bucal_anormal", "Yes");
-        }
-        
-        //tiroides
-        boolean tiroides= selected.isTiroides();
-        if (tiroides==true) {
-            form.setField("tiroides_normal", "Yes");
-        }else{
-            form.setField("tiroides_anormal", "Yes");
-        }
-        
-        //cardio pulmonar
-        boolean cardiopulmonar= selected.isCardio_pulmonar();
-        if (cardiopulmonar==true) {
-            form.setField("cardiopulmonar_normal", "Yes");
-        }else{
-            form.setField("cardiopulmonar_anormal", "Yes");
-        }
-        
-        //abdomen
-        boolean abdomen= selected.isAbdomen();
-        if (abdomen==true) {
-            form.setField("abdomen_normal", "Yes");
-        }else{
-            form.setField("abdomen_anormal", "Yes");
-        }
-        
-        //columna
-        boolean columna= selected.isColumna();
-        if (columna==true) {
-            form.setField("columna_normal", "Yes");
-        }else{
-            form.setField("columna_anormal", "Yes");
-        }
-        
-        //extremidades
-        boolean extremidades= selected.isExtremidades();
-        if (extremidades==true) {
-            form.setField("extremidades_normal", "Yes");
-        }else{
-            form.setField("extremidades_anormal", "Yes");
-        }
-        
-        //tanner
-        boolean tanner= selected.isTanner_con_foto();
-        if (tanner==true) {
-            form.setField("tanner_con_foto", "Yes");
-        }else{
-            form.setField("", "Yes");
-        }
-        
-        //tanner mama
-        int tanner_mama= selected.getTanner_mama();
-        if (tanner_mama>0) {
-            form.setField("tanner_mama", "Yes");
-        }else{
-            form.setField("", "Yes");
-        }
-        
-        //tanner genital
-        int tanner_genital= selected.getTanner_genital();
-        if (tanner_genital>0) {
-            form.setField("tanner_genital", "Yes");
-        }else{
-            form.setField("", "Yes");
-        }
-        
-        //examen fisico observacion
-        form.setField("examen_fisico_obs", selected.getObservaciones_examen_fisico());
+                        //Cirugia/hospitalizaciones
+                        int salud_mental= selected.getProblemas_salud_mental();
+                        if (salud_mental==1) {
+                            form.setField("salud_mental_si", "Yes");
+                        }else if(2==salud_mental){
+                            form.setField("salud_mental_nose", "Yes");
+                        }else{
+                            form.setField("salud_mental_no", "Yes");
+                        }
 
-        //impresion diagnostica integral
-        form.setField("impresion_diagnostica_integral", selected.getImpresion_diagnostica());
-        
-        //indicaciones e interconsultas
-        form.setField("indicaciones_interconsultas", selected.getIndicaciones_interconsultas());
-        
-        
-        //Riesgos
-        boolean riesgo_oh_drogas= selected.isRiesgo_oh_drogas();
-        if (riesgo_oh_drogas==true) {
-            form.setField("riesgo_oh_drogas", "Yes");
-        }else{
-            form.setField("", "Yes");
+                        //Violencia
+                        int violencia= selected.getViolencia();
+                        if (violencia==1) {
+                            form.setField("violencia_si", "Yes");
+                        }else if(2==violencia){
+                            form.setField("violencia_nose", "Yes");
+                        }else{
+                            form.setField("violencia_no", "Yes");
+                        }
+
+                        //Judiciales
+                        int judiciales= selected.getJudiciales();
+                        if (judiciales==1) {
+                            form.setField("judiciales_si", "Yes");
+                        }else if(2==judiciales){
+                            form.setField("judiciales_nose", "Yes");
+                        }else{
+                            form.setField("judiciales_no", "Yes");
+                        }
+
+                        //Otros
+                        int otros= selected.getOtros();
+                        if (otros==1) {
+                            form.setField("otros_si", "Yes");
+                        }else if(2==otros){
+                            form.setField("otros_nose", "Yes");
+                        }else{
+                            form.setField("otros_no", "Yes");
+                        }
+
+                        form.setField("ant_personales_obs", selected.getObservaciones_antecdentes_personales());
+
+                        ///////////////////////
+                        //Antecedentes familiares
+                        //////////////////////
+                        //Enfermedades importantes
+                        int enf_imp_fam= selected.getEnfermedades_importantes_familia();
+                        if (enf_imp_fam==1) {
+                            form.setField("enf_imp_fam_si", "Yes");
+                        }else if(2==enf_imp_fam){
+                            form.setField("enf_imp_fam_nose", "Yes");
+                        }else{
+                            form.setField("enf_imp_fam_no", "Yes");
+                        }
+
+                        //Obesidad
+                        int obesidad_fam= selected.getObesidad_familia();
+                        if (obesidad_fam==1) {
+                            form.setField("obesidad_fam_si", "Yes");
+                        }else if(2==obesidad_fam){
+                            form.setField("obesidad_fam_nose", "Yes");
+                        }else{
+                            form.setField("obesidad_fam_no", "Yes");
+                        }
+
+                        //Problemas salud mental
+                        int salud_mental_fam= selected.getProblemas_salud_mental_familia();
+                        if (salud_mental_fam==1) {
+                            form.setField("salud_mental_fam_si", "Yes");
+                        }else if(2==salud_mental_fam){
+                            form.setField("salud_mental_fam_nose", "Yes");
+                        }else{
+                            form.setField("salud_mental_fam_no", "Yes");
+                        }
+
+                        //Violencia intrafamiliar
+                        int violencia_intrafam= selected.getViolencia_intrafamiliar();
+                        if (violencia_intrafam==1) {
+                            form.setField("violencia_intrafam_si", "Yes");
+                        }else if(2==violencia_intrafam){
+                            form.setField("violencia_intrafam_nose", "Yes");
+                        }else{
+                            form.setField("violencia_intrafam_no", "Yes");
+                        }
+
+                        //Alcohol y otras drogas
+                        int alcohol_droga_fam= selected.getAlcohol_y_otras_drogas();
+                        if (alcohol_droga_fam==1) {
+                            form.setField("alcohol_droga_fam_si", "Yes");
+                        }else if(2==alcohol_droga_fam){
+                            form.setField("alcohol_droga_fam_nose", "Yes");
+                        }else{
+                            form.setField("alcohol_droga_fam_no", "Yes");
+                        }
+
+                        //Madre y/o padre adolescente
+                        int m_p_adolescente_fam= selected.getPadre_adolescente();
+                        if (m_p_adolescente_fam==1) {
+                            form.setField("m_p_adolescente_fam_si", "Yes");
+                        }else if(2==m_p_adolescente_fam){
+                            form.setField("m_p_adolescente_fam_nose", "Yes");
+                        }else{
+                            form.setField("m_p_adolescente_fam_no", "Yes");
+                        }
+
+                        //Judiciales
+                        int judiciales_fam= 0;//agregar al clap
+                        if (judiciales_fam==1) {
+                            form.setField("judiciales_fam_si", "Yes");
+                        }else if(2==judiciales_fam){
+                            form.setField("judiciales_fam_nose", "Yes");
+                        }else{
+                            form.setField("judiciales_fam_no", "Yes");
+                        }
+
+                        int otros_fam= selected.getPadre_adolescente();
+                        if (otros_fam==1) {
+                            form.setField("otros_fam_si", "Yes");
+                        }else if(2==otros_fam){
+                            form.setField("otros_fam_nose", "Yes");
+                        }else{
+                            form.setField("otros_fam_no", "Yes");
+                        }
+
+                        form.setField("ant_familiares_obs", selected.getObservaciones_antecedentes_familiares());
+
+                        ///////////////////////
+                        //Familia
+                        //////////////////////
+                        //Vive con
+                        boolean solo= selected.isVive_con_solo();
+                        if (solo==true) {
+                            form.setField("vive_con_solo_si", "Yes");
+                        }else{
+                            form.setField("vive_con_solo_no", "Yes");
+                        }
+                        boolean madre= selected.isVive_con_madre();
+                        if (madre==true) {
+                            form.setField("vive_con_madre_si", "Yes");
+                        }else{
+                            form.setField("vive_con_madre_no", "Yes");
+                        }
+                        boolean padre= selected.isVive_con_padre();
+                        if (padre==true) {
+                            form.setField("vive_con_padre_si", "Yes");
+                        }else{
+                            form.setField("vive_con_padre_no", "Yes");
+                        }
+                        boolean institucion= selected.isVive_en_institucion();
+                        if (institucion==true) {
+                            form.setField("vive_en_institucion_si", "Yes");
+                        }else{
+                            form.setField("vive_en_institucion_no", "Yes");
+                        }
+                        boolean con_otros= selected.isVive_con_otros();
+                        if (con_otros==true) {
+                            form.setField("vive_con_otros_si", "Yes");
+                            form.setField("otros_especificacion", selected.getVive_con_especificacion());
+
+                        }else{
+                            form.setField("vive_con_otros_no", "Yes");
+                        }
+
+                        //nivel de instruccion
+                        //madre
+                        int nivel_instruccion_madre= selected.getNivel_instruccion_madre();
+                        if (nivel_instruccion_madre==1) {
+                            form.setField("niv_instruc_madre_ninguno", "Yes");
+                        }else if(2==nivel_instruccion_madre){
+                            form.setField("niv_instruc_madre_basica", "Yes");
+                        }else if(3==nivel_instruccion_madre){
+                            form.setField("niv_instruc_madre_media", "Yes");
+                        }else if(4==nivel_instruccion_madre){
+                            form.setField("niv_instruc_madre_superior", "Yes");
+                        }else{
+                            form.setField("", "Yes");
+                        }
+
+                        //padre
+                        int nivel_instruccion_padre= selected.getNivel_instruccion_padre();
+                        if (nivel_instruccion_padre==1) {
+                            form.setField("niv_instruc_padre_ninguno", "Yes");
+                        }else if(2==nivel_instruccion_padre){
+                            form.setField("niv_instruc_padre_basica", "Yes");
+                        }else if(3==nivel_instruccion_padre){
+                            form.setField("niv_instruc_padre_media", "Yes");
+                        }else if(4==nivel_instruccion_padre){
+                            form.setField("niv_instruc_padre_superior", "Yes");
+                        }else{
+                            form.setField("", "Yes");
+                        }
+
+                        //pareja
+                        int nivel_instruccion_pareja= selected.getNivel_instruccion_madre();
+                        if (nivel_instruccion_pareja==1) {
+                            form.setField("niv_instruc_pareja_ninguno", "Yes");
+                        }else if(2==nivel_instruccion_pareja){
+                            form.setField("niv_instruc_pareja_basica", "Yes");
+                        }else if(3==nivel_instruccion_pareja){
+                            form.setField("niv_instruc_pareja_media", "Yes");
+                        }else if(4==nivel_instruccion_pareja){
+                            form.setField("niv_instruc_pareja_superior", "Yes");
+                        }else{
+                            form.setField("", "Yes");
+                        }
+
+                        //Comparte cama
+                        boolean comparte_cama= selected.isComparte_cama();
+                        if (comparte_cama==true) {
+                            form.setField("comparte_cama_si", "Yes");
+                            form.setField("comparte_cama_desc", selected.getEspecificacion_comparte_cama());
+                        }else{
+                            form.setField("comparte_cama_no", "Yes");
+                        }
+
+                        //Ocupacion
+                        form.setField("ocupacion_madre", selected.getOcupacion_madre());
+                        form.setField("ocupacion_padre", selected.getOcupacion_padre());
+                        form.setField("ocupacion_pareja", selected.getOcupacion_pareja());
+
+                        //Percepcion del adolescente sobre su familia
+                        int percepcion_fam= selected.getPercepcion_familia();
+                        if (percepcion_fam==1) {
+                            form.setField("percepcion_fam_buena", "Yes");
+                        }else if(2==percepcion_fam){
+                            form.setField("percepcion_fam_regular", "Yes");
+                        }else if(3==percepcion_fam){
+                            form.setField("percepcion_fam_mala", "Yes");
+                        }else if(4==percepcion_fam){
+                            form.setField("percepcion_fam_nohay", "Yes");
+                        }else{
+                            form.setField("", "Yes");
+                        }
+                        /////////////
+                        //Vivienda
+                        /////////////
+                        //Condiciones sanitarias
+                        boolean cond_sanitarias= selected.isCondiciones_sanitarias();
+                        if (cond_sanitarias==true) {
+                            form.setField("condiciones_sanitarias_si", "Yes");
+                        }else{
+                            form.setField("condiciones_sanitarias_no", "Yes");
+                        }
+
+                        //Hacinamiento
+                        boolean hacinamiento_vivienda= selected.isHacinamiento();
+                        if (hacinamiento_vivienda==true) {
+                            form.setField("hacinamiento_si", "Yes");
+                        }else{
+                            form.setField("hacinamiento_no", "Yes");
+                        }
+                        form.setField("vivienda_observacion", selected.getObservaciones_vivienda());
+
+                        /////////////
+                        //Educacion
+                        /////////////
+                        //Estudia
+                        boolean estudia= selected.isEstudia();
+                        if (estudia==true) {
+                            form.setField("estudia_si", "Yes");
+                        }else{
+                            form.setField("estudia_no", "Yes");
+                        }
+
+                        //Nivel
+                        int nivel_estudio= selected.getNivel_educacion();
+                        if (nivel_estudio==1) {
+                            form.setField("nivel_no_escolarizado", "Yes");
+                        }else if(2==nivel_estudio){
+                            form.setField("nivel_educacion_basica", "Yes");
+                        }else if(3==nivel_estudio){
+                            form.setField("nivel_educacion_media", "Yes");
+                        }else if(4==nivel_estudio){
+                            form.setField("nivel_educacion_superior", "Yes");
+                        }else{
+                            form.setField("", "Yes");
+                        }
+
+                        //Grado o Curso
+                        form.setField("curso", selected.getCurso());
+
+                        //Años Repetidos
+                        form.setField("anios_repetidos", Integer.toString(selected.getAnos_repetidos()));
+                        form.setField("causa_repitencia", selected.getCausa_anos_repetidos());
+
+                        //problemas en la  escuela
+                        boolean problemas_en_escuela= selected.isProblemas_escuela();
+                        if (problemas_en_escuela==true) {
+                            form.setField("problemas_en_escuela_si", "Yes");
+                        }else{
+                            form.setField("problemas_en_escuela_no", "Yes");
+                        }        
+
+                        //violencia escolar
+                        boolean violencia_escolar= selected.isViolencia_escolar();
+                        if (violencia_escolar==true) {
+                            form.setField("violencia_escolar_si", "Yes");
+                        }else{
+                            form.setField("violencia_escolar_no", "Yes");
+                        } 
+
+                        //desercion/exclusion
+                        boolean desercion_exclusion= selected.isDesercion_exclusion();
+                        if (desercion_exclusion==true) {
+                            form.setField("desercion_exclusion_si", "Yes");
+                        }else{
+                            form.setField("desercion_exclusion_no", "Yes");
+                        } 
+                        form.setField("desercion_exclusion_causa", selected.getCausa_desercion_exclusion());
+
+
+                        //Percecpcion del rendimiento respecto a la mayoria de sus compañeros
+
+                        int percepcion_rendimiento= selected.getNivel_educacion();
+                        if (percepcion_rendimiento==1) {
+                            form.setField("percepcion_rendimiento_mejor", "Yes");
+                        }else if(2==percepcion_rendimiento){
+                            form.setField("percepcion_rendimiento_peor", "Yes");
+                        }else if(3==percepcion_rendimiento){
+                            form.setField("percepcion_rendimiento_igual", "Yes");
+                        }else{
+                            form.setField("", "Yes");
+                        }
+
+                        /////////////
+                        //Trabajo
+                        /////////////
+                        //trabaja
+                        boolean trabaja= selected.isTrabaja();
+                        if (trabaja==true) {
+                            form.setField("trabaja_si", "Yes");
+                        }else{
+                            form.setField("trabaja_no", "Yes");
+                        } 
+                        form.setField("trabaja_horas", Integer.toString(selected.getHoras_trabajo()));
+
+                        //trabajo
+                        boolean trabajo_infantil= selected.isTrabajo_infantil();
+                        if (trabajo_infantil==true) {
+                            form.setField("trabajo_infantil_si", "Yes");
+                        }else{
+                            form.setField("trabajo_infantil_no", "Yes");
+                        } 
+                        boolean trabajo_juvenil= selected.isTrabajo_juvenil();
+                        if (trabajo_juvenil==true) {
+                            form.setField("trabajo_juvenil_si", "Yes");
+                        }else{
+                            form.setField("trabajo_juvenil_no", "Yes");
+                        }
+
+                        //peores formas
+                        boolean peores_formas= selected.isPeores_formas();
+                        if (peores_formas==true) {
+                            form.setField("peores_formas_si", "Yes");
+                        }else{
+                            form.setField("peores_formas_no", "Yes");
+                        } 
+
+                        //servicio doméstico no remunerado peligroso
+                        boolean servicio_domestico= selected.isSer_dom_no_remu_peligroso();
+                        if (servicio_domestico==true) {
+                            form.setField("serv_domestico_si", "Yes");
+                        }else{
+                            form.setField("serv_domestico_no", "Yes");
+                        }
+
+                        //Razon de trabajo        
+                        int razon_trabajo= selected.getRazon_de_trabajo();
+                        if (razon_trabajo==1) {
+                            form.setField("razon_trabajo_economica", "Yes");
+                        }else if(2==razon_trabajo){
+                            form.setField("razon_trabajo_autonomia", "Yes");
+                        }else if(3==razon_trabajo){
+                            form.setField("razon_trabajo_megusta", "Yes");
+                        }else if(4==razon_trabajo){
+                            form.setField("razon_trabajo_otra", "Yes");
+                        }else if(5==razon_trabajo){
+                            form.setField("razon_trabajo_nc", "Yes");
+                        }else{
+                            form.setField("", "Yes");
+                        }
+
+                        //legalizado
+                        int legalizado= selected.getLegalizado();
+                        if (legalizado==1) {
+                            form.setField("legalizado_si", "Yes");
+                        }else if(2==legalizado){
+                            form.setField("legalizado_no", "Yes");
+                        }else if(3==legalizado){
+                            form.setField("legalizado_nc", "Yes");
+                        }else{
+                            form.setField("", "Yes");
+                        }
+
+                        //Tipo de trabajo
+                        form.setField("tipo_trabajo", selected.getTipo_de_trabajo());
+
+                        //Trabajo observaciones
+                        form.setField("trabajo_observaciones", selected.getObservaciones_trabajo());
+
+                        //////////////////
+                        //Vida Social
+                        /////////////////
+                        //Aceptacion
+                        int aceptacion= selected.getLegalizado();
+                        if (aceptacion==1) {
+                            form.setField("aceptacion_aceptado", "Yes");
+                        }else if(2==aceptacion){
+                            form.setField("aceptacion_ignorado", "Yes");
+                        }else if(3==aceptacion){
+                            form.setField("aceptacion_rechazado", "Yes");
+                        }else if(4==aceptacion){
+                            form.setField("aceptacion_no_sabe", "Yes");
+                        }else{
+                            form.setField("", "Yes");
+                        }
+
+                        //Pareja
+                        boolean pareja= selected.isPareja();
+                        if (pareja==true) {
+                            form.setField("pareja_si", "Yes");
+                        }else{
+                            form.setField("pareja_no", "Yes");
+                        }
+
+                        //edad de pareja en anios y meses(?) faltan los meses
+                        form.setField("pareja_edad_anios", Integer.toString(selected.getEdad_pareja()));
+
+                        //violencia en la Pareja
+                        boolean violencia_pareja= selected.isViolencia_pareja();
+                        if (violencia_pareja==true) {
+                            form.setField("violencia_pareja_si", "Yes");
+                        }else{
+                            form.setField("violencia_pareja_no", "Yes");
+                        }
+
+                        //amigos
+                        boolean amigos= selected.isAmigos();
+                        if (amigos==true) {
+                            form.setField("amigos_si", "Yes");
+                        }else{
+                            form.setField("amigos_no", "Yes");
+                        }
+
+                        //actividad fisica
+                        form.setField("actividad_fisica_horas", Integer.toString(selected.getHoras_actividad_fisica()));
+
+                        //tv
+                        form.setField("tv_horas", Integer.toString(selected.getHoras_tv()));
+
+                        //computador/consola y otros
+                        form.setField("pc_horas", Integer.toString(selected.getHoras_computador_consola()));
+
+                        //otras actividades
+                        boolean otras_actividades= selected.isOtras_actividades();
+                        if (otras_actividades==true) {
+                            form.setField("otras_actividades_si", "Yes");
+                            form.setField("otras_actividades_cuales", selected.getEspecificacion_otras_actividades());
+                        }else{
+                            form.setField("otras_actividades_no", "Yes");
+                        }
+
+                        //grooming
+                        boolean grooming= selected.isGrooming();
+                        if (grooming==true) {
+                            form.setField("grooming_si", "Yes");
+                        }else{
+                            form.setField("grooming_no", "Yes");
+                        }
+
+                        //cyberbullyng
+                        boolean cyberbullyng= selected.isCyberbulling();
+                        if (cyberbullyng==true) {
+                            form.setField("cyberbullyng_si", "Yes");
+                        }else{
+                            form.setField("cyberbullyng_no", "Yes");
+                        }
+
+                        //vida social observaciones
+                        form.setField("vida_social_observaciones", selected.getObservaciones_vida_social());
+
+                        //////////////////
+                        //Habitos y cosnumo
+                        /////////////////
+                        //Sueño normal
+                        boolean suenio_normal= selected.isSueno_normal();
+                        if (suenio_normal==true) {
+                            form.setField("suenio_normal_si", "Yes");
+                        }else{
+                            form.setField("suenio_normal_no", "Yes");
+                        }
+                        //horas de suenio
+                        form.setField("comida_familia", Integer.toString(selected.getHoras_sueno()));
+
+                        //alimentacion adecuada
+                        boolean alimentacion= selected.isAlimentacion_adecuada();
+                        if (alimentacion==true) {
+                            form.setField("alimentacion_adecuada_si", "Yes");
+                        }else{
+                            form.setField("alimentacion_adecuada_no", "Yes");
+                        }
+
+                        //comidas con la familia
+                        form.setField("suenio_horas", Integer.toString(selected.getComidas_familia()));
+
+                        //alimentacion especial
+                        boolean alimentacion_especial= selected.isAlimentacion_especial();
+                        if (alimentacion_especial==true) {
+                            form.setField("alimentacion_especial_si", "Yes");
+                            form.setField("alimentacion_especial_cual", selected.getEspecificacion_alimentacion_especial());
+                        }else{
+                            form.setField("alimentacion_especial_no", "Yes");
+                        }
+
+                        //Tabaco
+                        boolean tabaco= selected.isTabaco();
+                        if (tabaco==true) {
+                            form.setField("tabaco_si", "Yes");
+                        }else{
+                            form.setField("tabaco_no", "Yes");
+                        }
+                        //Promedio de tabaco
+                        form.setField("prom_cigarro", Integer.toString(selected.getCigarros_dia()));
+
+                        //Alcohol y otras drogas
+                        //alcohol
+                        boolean alcohol= selected.isConsumo_alcohol();
+                        if (alcohol==true) {
+                            form.setField("alcohol_si", "Yes");
+                        }else{
+                            form.setField("alcohol_no", "Yes");
+                        }
+                        //marihuana
+                        boolean marihuana= selected.isConsumo_marihuana();
+                        if (marihuana==true) {
+                            form.setField("marihuana_si", "Yes");
+                        }else{
+                            form.setField("marihuana_no", "Yes");
+                        }
+                        //otras sustancias
+                        boolean otra_sustancia= selected.isConsumo_otra_sustancia();
+                        if (otra_sustancia==true) {
+                            form.setField("otra_sustancia_si", "Yes");
+                            form.setField("otra_sustancia_cual", selected.getEspecificacion_consumo_otra_sustancia());
+                        }else{
+                            form.setField("otra_sustancia_no", "Yes");
+                        }
+
+                        //seguridad vial
+                        boolean seguridad_vial= selected.isSeguridad_vial();
+                        if (seguridad_vial==true) {
+                            form.setField("seguridad_vial_si", "Yes");
+                        }else{
+                            form.setField("seguridad_vial_no", "Yes");
+                        }
+
+                        //habitos y consumo observaciones
+                        form.setField("habitos_consumo_obs", selected.getObservaciones_habitos_consumo());
+
+                        ///////////////////
+                        //gineco/urologica
+                        ///////////////////
+                        //menarca/espermarca
+                        form.setField("menarca_espermarca", Integer.toString(selected.getEdad_menarca_espermarca()));
+
+                        //fecha ultima menstruacion
+                        if (selected.getFecha_ultima_menstruacion()!=null) {
+                            date = simpleDateFormat.format(selected.getFecha_ultima_menstruacion());
+                            form.setField("fecha_menstruacion", date);
+                        }
+
+                        boolean menstruacion= selected.isNo_conoce_fecha_ultima_menstruacion();
+                        if (menstruacion==true) {
+                            form.setField("menstruacion_no_conoce", "Yes");
+                        }else{
+                            form.setField("menstruacion_nc", "Yes");
+                        }
+
+                        //Ciclos regulares
+                        int ciclo_regular= selected.getCiclos_regulares();
+                        if (ciclo_regular==1) {
+                            form.setField("ciclo_regular_si", "Yes");
+                        }else if(2==aceptacion){
+                            form.setField("ciclo_regular_no", "Yes");
+                        }else if(3==aceptacion){
+                            form.setField("ciclo_regular_ns", "Yes");
+                        }else if(4==aceptacion){
+                            form.setField("ciclo_regular_nc", "Yes");
+                        }else{
+                            form.setField("", "Yes");
+                        }
+
+                        //dismenorrea
+                        int dismenorrea= selected.getCiclos_regulares();
+                        if (dismenorrea==1) {
+                            form.setField("dismenorrea_si", "Yes");
+                        }else if(2==dismenorrea){
+                            form.setField("dismenorrea_no", "Yes");
+                        }else if(3==dismenorrea){
+                            form.setField("dismenorrea_nc", "Yes");
+                        }else{
+                            form.setField("", "Yes");
+                        }
+
+                        //flujo patologico vaginal/secrecion peneana
+                        boolean flujo_secrecion= selected.isFlujo_secrecion_patologico();
+                        if (flujo_secrecion==true) {
+                            form.setField("flujo_secrecion_si", "Yes");
+                        }else{
+                            form.setField("flujo_secrecion_no", "Yes");
+                        }
+
+                        //ITS/VIH
+                        boolean its_vih= selected.isIts_vih();
+                        if (its_vih==true) {
+                            form.setField("its_vih_si", "Yes");
+                            form.setField("its_vih_cual", selected.getEspecificacion_its_vih());
+                        }else{
+                            form.setField("its_vih_no", "Yes");
+                        }
+                        //Tratamiento
+                        int tratamiento= selected.getTratamiento();
+                        if (tratamiento==1) {
+                            form.setField("its_vih_tratamiento_si", "Yes");
+                        }else if(2==tratamiento){
+                            form.setField("its_vih_tratamiento_no", "Yes");
+                        }else if(3==tratamiento){
+                            form.setField("its_vih_tratamiento_ns", "Yes");
+                        }else{
+                            form.setField("", "Yes");
+                        }
+                        //Tratamiento contactos
+                        int tratamiento_contactos= selected.getTratamiento();
+                        if (tratamiento_contactos==1) {
+                            form.setField("its_vih_tratamiento_contactos_si", "Yes");
+                        }else if(2==tratamiento_contactos){
+                            form.setField("its_vih_tratamiento_contactos_no", "Yes");
+                        }else if(3==tratamiento_contactos){
+                            form.setField("its_vih_tratamiento_contactos_ns", "Yes");
+                        }else{
+                            form.setField("", "Yes");
+                        }
+
+                        //embarazo, hijos. abortos
+                        int embarazos= selected.getEmbarazos();
+                        if (embarazos>0) {
+                            form.setField("embarazos", "Yes");
+                        }else{
+                            form.setField("", "Yes");
+                        }
+                        int hijos= selected.getHijos();
+                        if (hijos>0) {
+                            form.setField("hijos", "Yes");
+                        }else{
+                            form.setField("", "Yes");
+                        }
+                        int abortos= selected.getAbortos();
+                        if (abortos>0) {
+                            form.setField("abortos", "Yes");
+                        }else{
+                            form.setField("", "Yes");
+                        }
+
+                        //observaciones gineco urologicas
+                        form.setField("gineco_urologico_obs", selected.getObservaciones_gineco_urologico());
+
+                        //////////////////
+                        //Sexualidad
+                        /////////////////
+                        //orientacion sexual
+                        int orient_sexual= selected.getOrientacion_sexual();
+                        if (orient_sexual==1) {
+                            form.setField("heterosexual", "Yes");
+                        }else if(2==orient_sexual){
+                            form.setField("homosexual", "Yes");
+                        }else if(3==orient_sexual){
+                            form.setField("bisexual", "Yes");
+                        }else if(4==orient_sexual){
+                            form.setField("orient_sexual_nr", "Yes");
+                        }else{
+                            form.setField("orient_sexual_desc", selected.getEspecificacion_orientacion_sexual());
+                        }
+
+                        //intencion o conducta sexual
+                        int conducta_sexual= selected.getConducta_sexual();
+                        if (conducta_sexual==1) {
+                            form.setField("postergadora", "Yes");
+                        }else if(2==conducta_sexual){
+                            form.setField("anticipadora", "Yes");
+                        }else if(3==conducta_sexual){
+                            form.setField("activa", "Yes");
+                            form.setField("edad_inicio_sexual", Integer.toString(selected.getEdad_inicio_conducta_sexual()));
+                        }else{
+                            form.setField("","Yes");
+                        }
+
+                        //relaciones sexuales con
+                        int relaciones_sexuales= selected.getRelaciones_sexuales();
+                        if (relaciones_sexuales==1) {
+                            form.setField("rel_sex_distinto", "Yes");
+                        }else if(2==relaciones_sexuales){
+                            form.setField("rel_sex_mismo", "Yes");
+                        }else if(3==relaciones_sexuales){
+                            form.setField("rel_sex_ambos", "Yes");
+                        }else if(4==relaciones_sexuales){
+                            form.setField("rel_sex_nc", "Yes");
+                        }else{
+                            form.setField("","Yes");
+                        }
+
+                        //pareja sexual
+                        int pareja_sexual= selected.getPareja_sexual();
+                        if (pareja_sexual==1) {
+                            form.setField("pareja_sexual_unica", "Yes");
+                        }else if(2==pareja_sexual){
+                            form.setField("pareja_sexual_varias", "Yes");
+                        }else if(3==pareja_sexual){
+                            form.setField("pareja_sexual_nc", "Yes");
+                        }else{
+                            form.setField("","Yes");
+                        }
+                        //dificultades en relaciones sexuales
+                        int dificultad_rel_sex= selected.getPareja_sexual();
+                        if (dificultad_rel_sex==1) {
+                            form.setField("dificultad_rel_sex_si", "Yes");
+                        }else if(2==dificultad_rel_sex){
+                            form.setField("dificultad_rel_sex_no", "Yes");
+                        }else if(3==dificultad_rel_sex){
+                            form.setField("dificultad_rel_sex_nc", "Yes");
+                        }else{
+                            form.setField("","Yes");
+                        }
+
+                        //Anticoncepcion
+                        //uso condon
+                        int anticoncepcion= selected.getAnticoncepcion();
+                        if (anticoncepcion==1) {
+                            form.setField("condon_siempre", "Yes");
+                        }else if(2==anticoncepcion){
+                            form.setField("condon_aveces", "Yes");
+                        }else if(3==anticoncepcion){
+                            form.setField("condon_nunca", "Yes");
+                        }else{
+                            form.setField("","Yes");
+                        }
+
+                        //doble proteccion 
+                        boolean doble_proteccion= selected.isDoble_proteccion();
+                        if (doble_proteccion==true) {
+                            form.setField("doble_proteccion_si", "Yes");
+                        }else{
+                            form.setField("doble_proteccion_no", "Yes");
+                        }
+
+                        //uso mac
+                        int uso_mac= selected.getUso_mac();
+                        if (uso_mac==1) {
+                            form.setField("uso_mac_si", "Yes");
+                        }else if(2==uso_mac){
+                            form.setField("uso_mac_no", "Yes");
+                        }else if(3==uso_mac){
+                            form.setField("uso_mac_aveces", "Yes");
+                        }else{
+                            form.setField("","Yes");
+                        }
+                        form.setField("uso_mac_cual", selected.getEspecificacion_uso_mac());
+                        form.setField("uso_mac_razon", selected.getRazon_no_uso_mac());
+
+                        //consejeria uso mac
+                        boolean consejeria= selected.isConsejeria_uso_mac();
+                        if (consejeria==true) {
+                            form.setField("consejeria_mac_si", "Yes");
+                        }else{
+                            form.setField("consejeria_mac_no", "Yes");
+                        }
+
+                        //aco de emergencia
+                        boolean aco_emergencia= selected.isAco_emergencia();
+                        if (aco_emergencia==true) {
+                            form.setField("aco_emergencia_si", "Yes");
+                        }else{
+                            form.setField("aco_emergencia_no", "Yes");
+                        }
+
+                        //violencia sexual
+                        boolean violencia_sexual= selected.isAbuso_sexual();
+                        if (violencia_sexual==true) {
+                            form.setField("violencia_sexual_si", "Yes");
+                        }else{
+                            form.setField("violencia_sexual_no", "Yes");
+                        }
+
+                        //violencia sexual reparacion
+                        boolean reparacion= selected.isReparacion_abuso_sexual();
+                        if (reparacion==true) {
+                            form.setField("violencia_sexual_reparacion_si", "Yes");
+                        }else{
+                            form.setField("violencia_sexual_reparacion_no", "Yes");
+                        }
+
+                        //sexualidad_observaciones
+                        form.setField("sexualidad_observaciones", selected.getObservaciones_sexualidad());
+
+                        /////////////////
+                        //situacion sico-emocional
+                        /////////////////
+                        //imagen corporal
+                        int imagen_corporal= selected.getImagen_corporal();
+                        if (imagen_corporal==1) {
+                            form.setField("imagen_corporal_conforme", "Yes");
+                        }else if(2==imagen_corporal){
+                            form.setField("imagen_corporal_crea_preocupaciones", "Yes");
+                        }else if(3==imagen_corporal){
+                            form.setField("imagen_corporal_impide", "Yes");
+                        }else{
+                            form.setField("","Yes");
+                        }
+                        //vida con proyecto
+                        int vida_con_proyecto= selected.getVida_proyecto();
+                        if (vida_con_proyecto==1) {
+                            form.setField("vida_con_proyecto_claro", "Yes");
+                        }else if(2==vida_con_proyecto){
+                            form.setField("vida_con_proyecto_confuso", "Yes");
+                        }else if(3==vida_con_proyecto){
+                            form.setField("vida_con_proyecto_ausente", "Yes");
+                        }else{
+                            form.setField("","Yes");
+                        }
+
+                        //bienestar emocional
+                        int bienestar_emocional= selected.getBienestar_emocional();
+                        if (bienestar_emocional==1) {
+                            form.setField("normal", "Yes");
+                        }else if(2==bienestar_emocional){
+                            form.setField("deprimido", "Yes");
+                        }else if(3==bienestar_emocional){
+                            form.setField("irritable", "Yes");
+                        }else if(4==bienestar_emocional){
+                            form.setField("desesperanzado", "Yes");
+                        }else if(5==bienestar_emocional){
+                            form.setField("poco_interes", "Yes");
+                        }else if(6==bienestar_emocional){
+                            form.setField("euforico", "Yes");
+                        }else if(7==bienestar_emocional){
+                            form.setField("ansioso", "Yes");
+                        }else if(8==bienestar_emocional){
+                            form.setField("alta_impulsividad", "Yes");
+                        }else if(9==bienestar_emocional){
+                            form.setField("autoagresiones", "Yes");
+                        }else{
+                            form.setField("","Yes");
+                        }
+
+                        //riesgo suicida
+                        //suicidalidad
+                        boolean suicidalidad= selected.isSuicidalidad_amigos();
+                        if (suicidalidad==true) {
+                            form.setField("suicidalidad_si", "Yes");
+                        }else{
+                            form.setField("suicidalidad_no", "Yes");
+                        }
+                        //ideacion suicida
+                        boolean ideacion_suicida= selected.isIdeacion_suicida();
+                        if (ideacion_suicida==true) {
+                            form.setField("ideacion_suicida_si", "Yes");
+                        }else{
+                            form.setField("ideacion_suicida_no", "Yes");
+                        }
+                        //intento suicida
+                        boolean intento_suicida= selected.isIntento_suicida();
+                        if (intento_suicida==true) {
+                            form.setField("intento_suicida_si", "Yes");
+                        }else{
+                            form.setField("intento_suicida_no", "Yes");
+                        }
+
+                        //referente adulto
+                        int referente_adulto= selected.getReferente_adulto();
+                        if (referente_adulto==1) {
+                            form.setField("referente_adulto_padre", "Yes");
+                        }else if(2==referente_adulto){
+                            form.setField("referente_adulto_madre", "Yes");
+                        }else if(3==referente_adulto){
+                            form.setField("referente_adulto_familiar", "Yes");
+                        }else if(4==referente_adulto){
+                            form.setField("referente_adulto_otro", "Yes");
+                        }else if(5==referente_adulto){
+                            form.setField("referente_adulto_ninguno", "Yes");
+                        }else{
+                            form.setField("","Yes");
+                        }
+                        //referente adulto nombre
+                        form.setField("referente_adulto_nombre", selected.getNombre_referente_adulto());
+
+                        //referente adulto telefono
+                        form.setField("referente_adulto_telefono", selected.getTelefono_referente_adulto());
+
+                        //situacion sico-emocional observaciones
+                        form.setField("situacion_psico_emocional_obs", selected.getObservaciones_psico_emocional());
+
+                        ////////////////
+                        //Examen fisico
+                        ///////////////
+                        //peso
+                        form.setField("peso", Integer.toString(selected.getPeso()));
+
+                        //talla
+                        form.setField("talla", Integer.toString(selected.getTalla()));
+
+                        //p_abdominal
+                        form.setField("p_abdominal", Integer.toString(selected.getPerimetro_abdominal()));
+
+                        //imc
+                        form.setField("imc", String.valueOf(selected.getImc()));
+
+                        //presion_arterial_1
+                        form.setField("presion_arterial_1", Integer.toString(selected.getPresion_arterial_sistolica()));
+
+                        //presion_arterial_2
+                        form.setField("presion_arterial_2", Integer.toString(selected.getPresion_arterial_diastolica()));
+
+                        //aspecto general
+                        boolean aspecto_general= selected.isAspecto_general();
+                        if (aspecto_general==true) {
+                            form.setField("aspecto_general_normal", "Yes");
+                        }else{
+                            form.setField("aspecto_general_anormal", "Yes");
+                        }
+
+                        //agudeza visual
+                        boolean agudeza_visual= selected.isAgudeza_visual();
+                        if (agudeza_visual==true) {
+                            form.setField("agud_visual_normal", "Yes");
+                        }else{
+                            form.setField("agud_visual_anormal", "Yes");
+                        }
+
+                        //agudeza auditiva
+                        boolean agud_auditiva= selected.isAgudeza_auditiva();
+                        if (aspecto_general==true) {
+                            form.setField("agud_auditiva_normal", "Yes");
+                        }else{
+                            form.setField("agud_auditiva_anormal", "Yes");
+                        }
+
+                        //salud bucal
+                        boolean salud_bucal= selected.isSalud_bucal();
+                        if (salud_bucal==true) {
+                            form.setField("salud_bucal_normal", "Yes");
+                        }else{
+                            form.setField("salud_bucal_anormal", "Yes");
+                        }
+
+                        //tiroides
+                        boolean tiroides= selected.isTiroides();
+                        if (tiroides==true) {
+                            form.setField("tiroides_normal", "Yes");
+                        }else{
+                            form.setField("tiroides_anormal", "Yes");
+                        }
+
+                        //cardio pulmonar
+                        boolean cardiopulmonar= selected.isCardio_pulmonar();
+                        if (cardiopulmonar==true) {
+                            form.setField("cardiopulmonar_normal", "Yes");
+                        }else{
+                            form.setField("cardiopulmonar_anormal", "Yes");
+                        }
+
+                        //abdomen
+                        boolean abdomen= selected.isAbdomen();
+                        if (abdomen==true) {
+                            form.setField("abdomen_normal", "Yes");
+                        }else{
+                            form.setField("abdomen_anormal", "Yes");
+                        }
+
+                        //columna
+                        boolean columna= selected.isColumna();
+                        if (columna==true) {
+                            form.setField("columna_normal", "Yes");
+                        }else{
+                            form.setField("columna_anormal", "Yes");
+                        }
+
+                        //extremidades
+                        boolean extremidades= selected.isExtremidades();
+                        if (extremidades==true) {
+                            form.setField("extremidades_normal", "Yes");
+                        }else{
+                            form.setField("extremidades_anormal", "Yes");
+                        }
+
+                        //tanner
+                        boolean tanner= selected.isTanner_con_foto();
+                        if (tanner==true) {
+                            form.setField("tanner_con_foto", "Yes");
+                        }else{
+                            form.setField("", "Yes");
+                        }
+
+                        //tanner mama
+                        int tanner_mama= selected.getTanner_mama();
+                        if (tanner_mama>0) {
+                            form.setField("tanner_mama", "Yes");
+                        }else{
+                            form.setField("", "Yes");
+                        }
+
+                        //tanner genital
+                        int tanner_genital= selected.getTanner_genital();
+                        if (tanner_genital>0) {
+                            form.setField("tanner_genital", "Yes");
+                        }else{
+                            form.setField("", "Yes");
+                        }
+
+                        //examen fisico observacion
+                        form.setField("examen_fisico_obs", selected.getObservaciones_examen_fisico());
+
+                        //impresion diagnostica integral
+                        form.setField("impresion_diagnostica_integral", selected.getImpresion_diagnostica());
+
+                        //indicaciones e interconsultas
+                        form.setField("indicaciones_interconsultas", selected.getIndicaciones_interconsultas());
+
+
+                        //Riesgos
+                        boolean riesgo_oh_drogas= selected.isRiesgo_oh_drogas();
+                        if (riesgo_oh_drogas==true) {
+                            form.setField("riesgo_oh_drogas", "Yes");
+                        }else{
+                            form.setField("", "Yes");
+                        }
+                        boolean riesgo_ssr= selected.isRiesgo_ssr();
+                        if (riesgo_ssr==true) {
+                            form.setField("riesgo_ssr", "Yes");
+                        }else{
+                            form.setField("", "Yes");
+                        }
+                        boolean riesgo_nutricional= selected.isRiesgo_nutricional();
+                        if (riesgo_nutricional==true) {
+                            form.setField("riesgo_nutricional", "Yes");
+                        }else{
+                            form.setField("", "Yes");
+                        }
+
+                        boolean riesgo_cardio= selected.isRiesgo_cardiovascular();
+                        boolean riesgo_metal= selected.isRiesgo_salud_mental();
+                        boolean riesgo_social= selected.isRiesgo_social();
+
+                        if (riesgo_cardio==true||riesgo_metal==true||riesgo_social==true) {
+                            form.setField("riesgo_otro", "Yes");
+                            if(riesgo_cardio==true){
+                                form.setField("riesgo_otro_desc", "cardiovascular");
+                            }
+                            if(riesgo_metal==true){
+                                form.setField("riesgo_otro_desc", "salud mental");
+                            }
+                            if(riesgo_social==true){
+                                form.setField("riesgo_otro_desc", "social");
+                            } 
+                        }else{
+                            form.setField("", "Yes");
+                        }
+
+                        if (selected.getDiagrama_familiar() != null) {
+                            Image img = Image.getInstance(selected.getDiagrama_familiar());
+                            img.setAbsolutePosition(298, 164);
+                            stamper.getOverContent(1).addImage(img);
+                        }
+
+                        stamper.close();
+                        pdfTemplate.close();
+
+                        FacesContext fc = FacesContext.getCurrentInstance();
+                        ExternalContext ec = fc.getExternalContext();
+                        ec.responseReset();
+                        ec.setResponseHeader("Content-Disposition", "attachment; filename=\"" + title + "\"");
+                        InputStream input = new ByteArrayInputStream(baos.toByteArray());
+                        OutputStream output = ec.getResponseOutputStream();
+                        IOUtils.copy(input, output);
+                        fc.responseComplete();
+                    } catch (DocumentException ex) {
+                        Logger.getLogger(clapController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                } catch (IOException ex) {
+                    JsfUtil.addErrorMessage("El dominio esta mal especificado en los parámetros. Contacte al adminnistrador");
+                    Logger.getLogger(clapController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }       
         }
-        boolean riesgo_ssr= selected.isRiesgo_ssr();
-        if (riesgo_ssr==true) {
-            form.setField("riesgo_ssr", "Yes");
-        }else{
-            form.setField("", "Yes");
-        }
-        boolean riesgo_nutricional= selected.isRiesgo_nutricional();
-        if (riesgo_nutricional==true) {
-            form.setField("riesgo_nutricional", "Yes");
-        }else{
-            form.setField("", "Yes");
-        }
-        
-        boolean riesgo_cardio= selected.isRiesgo_cardiovascular();
-        boolean riesgo_metal= selected.isRiesgo_salud_mental();
-        boolean riesgo_social= selected.isRiesgo_social();
-        
-        if (riesgo_cardio==true||riesgo_metal==true||riesgo_social==true) {
-            form.setField("riesgo_otro", "Yes");
-            if(riesgo_cardio==true){
-                form.setField("riesgo_otro_desc", "cardiovascular");
-            }
-            if(riesgo_metal==true){
-                form.setField("riesgo_otro_desc", "salud mental");
-            }
-            if(riesgo_social==true){
-                form.setField("riesgo_otro_desc", "social");
-            } 
-        }else{
-            form.setField("", "Yes");
-        }
-        
-        if (selected.getDiagrama_familiar() != null) {
-            Image img = Image.getInstance(selected.getDiagrama_familiar());
-            img.setAbsolutePosition(298, 164);
-            stamper.getOverContent(1).addImage(img);
-        }
-        
-        stamper.close();
-        pdfTemplate.close();
-        
-        FacesContext fc = FacesContext.getCurrentInstance();
-        ExternalContext ec = fc.getExternalContext();
-        ec.responseReset();
-        ec.setResponseHeader("Content-Disposition", "attachment; filename=\"" + title + "\"");
-        InputStream input = new ByteArrayInputStream(baos.toByteArray());
-        OutputStream output = ec.getResponseOutputStream();
-        IOUtils.copy(input, output);
-        fc.responseComplete();
     }
 
     public String aUsuario() throws IOException{

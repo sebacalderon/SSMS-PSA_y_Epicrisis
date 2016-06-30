@@ -29,6 +29,17 @@ public class parametros implements Serializable {
     
     @Column(name="tamano_imagen_parametros")
     private int tamano_imagen;
+    
+    @Column(name="dominio_parametros")
+    private String dominio;
+
+    public String getDominio() {
+        return dominio;
+    }
+
+    public void setDominio(String dominio) {
+        this.dominio = dominio;
+    }
 
     public int getTamano_imagen() {
         return tamano_imagen;

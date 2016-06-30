@@ -70,11 +70,11 @@
                     <b:row>
                         <b:column col-xs="6" style="margin-left: 20px;">
                             <b:row>
-                                <p:outputLabel value="Cesfam" for="cesfam" />
+                                <p:outputLabel value="Centro de Salud" for="cesfam" />
                             </b:row>
                             <b:row>
                                 <p:selectOneMenu id="cesfam" value="#{clapController.selected.cesfam_clap}" disabled="#{clapController.selected.control_en == 1 || clapController.selected.control_en == 0}">
-                                    <f:selectItem itemLabel="Seleccione un CESFAM" itemValue="" noSelectionOption="true" />
+                                    <f:selectItem itemLabel="Seleccione un Centro de Salud" itemValue="" noSelectionOption="true" />
                                     <f:selectItems value="#{cesfamController.items}" var="cesfam" itemLabel="#{cesfam.nombre}" itemValue="#{cesfam}"/>
                                 </p:selectOneMenu>
                             </b:row>

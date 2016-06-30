@@ -40,11 +40,11 @@
                     <br/>
                     <b:row>
                         <b:column col-xs="3">
-                            <p:outputLabel value="Seleccione CESFAM:" for="cesfam" />    
+                            <p:outputLabel value="Seleccione Centro de Salud:" for="cesfam" />    
                         </b:column>
                         <b:column col-xs="2">
                             <p:selectOneMenu id="cesfam" value="#{clapController.cesfam}" disabled="#{clapController.control_en == 1}">
-                                <f:selectItem itemLabel="Seleccione un CESFAM" itemValue="" noSelectionOption="true" />
+                                <f:selectItem itemLabel="Seleccione un Centro de Salud" itemValue="" noSelectionOption="true" />
                                 <f:selectItems value="#{cesfamController.items}" var="cesfam" itemLabel="#{cesfam.nombre}" itemValue="#{cesfam}"/>
                             </p:selectOneMenu>
                         </b:column>
@@ -83,11 +83,11 @@
                 <b:row>    
                     <b:column col-xs="1" offset-xs="1">
                         <b:commandButton value="Buscar" id="withIcon" action="#{clapController.reporteCLAPS()}" disabled="#{clapController.control_en == 1 || clapController.control_en == 0}"/>
-                        <p:tooltip id="toolTipFade2" for="withIcon" value="Filtra por CESFAM"/>
+                        <p:tooltip id="toolTipFade2" for="withIcon" value="Filtra por Centro de Salud"/>
                     </b:column>
                     <b:column col-xs="1">
                         <b:commandButton value="Descargar Todo" id="desc" look="primary" action="#{clapController.generarCSV(1)}"/>
-                        <p:tooltip id="toolTipFade" for="desc" value="Descargar informacion sin filtrar por CESFAM o de todos los Establecimientos Educacionales" />
+                        <p:tooltip id="toolTipFade" for="desc" value="Descargar informacion sin filtrar por Centro de Salud o de todos los Establecimientos Educacionales" />
                     </b:column>
                 </b:row>
                 </h:form>
